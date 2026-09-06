@@ -35,10 +35,7 @@ end
 presets["sn-last-landing"] = preset(false, false)
 presets["sn-brood-frontier"] = preset(false, true)
 presets["sn-quiet-reclamation"] = preset(true, false)
-if enabled then
-  local base = preset(false, false)
-  presets.default.basic_settings, presets.default.advanced_settings = base.basic_settings, base.advanced_settings
-end
+-- Factorio forbids settings on its special default=true preset. Use the named Last Landing preset.
 
 local lander = H.copy("container", "crash-site-spaceship")
 lander.name = "sn-lander"

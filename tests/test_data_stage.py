@@ -185,6 +185,7 @@ def test_desolate_map_controls_and_presets_preserve_resources_and_gleba(stage):
     assert all(stage.raw.tree[name] is None for name in settings.autoplace_settings.entity.settings.keys())
     assert all('rock' in name or 'decal' in name for name in settings.autoplace_settings.decorative.settings.keys())
     presets=stage.raw['map-gen-presets'].default
+    assert presets.default.basic_settings is None and presets.default.advanced_settings is None
     assert presets['sn-last-landing'].advanced_settings.pollution.enabled is True
     assert presets['sn-quiet-reclamation'].basic_settings.peaceful_mode is True
     assert presets['sn-brood-frontier'].basic_settings.autoplace_controls['enemy-base'].size==1.5
