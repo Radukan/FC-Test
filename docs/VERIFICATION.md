@@ -6,9 +6,9 @@ The v0.1 dashboard crash was a real defect. Its permissive GUI double allowed re
 
 ### Recorded engine evidence
 
-**Successful stable run:** [34020350605](https://github.com/Radukan/FC-Test/actions/runs/34020350605), source **`a62c238984f52b333d9e4ee89afe85b353460c4c`**. Both `lua-and-data` and `engine` jobs completed successfully, including the official binary download, save creation and 2,100-tick reload/benchmark. Logs are attached as `stable-engine-logs` (repository access required).
+**Latest successful stable code-validation run:** [34061920694](https://github.com/Radukan/FC-Test/actions/runs/34061920694), source **`d86adabe6d95f32fbcc465c7364b02e0f3d6c470`**. Both `lua-and-data` and `engine` jobs completed successfully, including the official binary download, save creation and 2,100-tick reload/benchmark. Logs are attached as `stable-engine-logs` (repository access required).
 
-That run covered the core Last Landing campaign and 128 offline cases. Final hardening adds two regressions for newly detected hotspots and canceled GUI confirmations, bringing the local suite to **130 passing tests**. Every subsequent push and the release's exact tagged commit rerun the required validator; the publisher refuses to upload if it fails. See the release workflow for the final tagged-commit result rather than assuming that an earlier commit's check proves later edits.
+That run covered the finalized Last Landing code and **130 passing offline cases**, including the new-hotspot and canceled-confirmation safeguards. This ledger was updated after observing that result. The release workflow independently revalidates its exact tagged commit before publishing, and refuses to upload if validation fails. The earlier successful core-engine run is [34020350605](https://github.com/Radukan/FC-Test/actions/runs/34020350605).
 
 ### Checks actually executed
 
