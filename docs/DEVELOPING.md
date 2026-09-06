@@ -99,7 +99,11 @@ Do not create a single ambiguous “2.0 and 2.1” metadata file. Factorio requi
 
 Installable archives and their SHA-256 sidecars are uploaded to [GitHub Releases](https://github.com/Radukan/FC-Test/releases), rather than stored in the Git history. Version 0.1.0 uses the prerelease tags `v0.1.0-factorio-2.0` and `v0.1.0-factorio-2.1`, both targeting the same source commit. Separate releases keep the canonical `second-nature_0.1.0.zip` filename without asset-name collisions or a manual renaming step. The automatically generated GitHub source archives are not installable mod packages.
 
-Repository visibility also applies to releases: private-repository downloads require GitHub sign-in and repository access. After publishing, re-download both uploaded ZIPs and checksum sidecars with `gh release download` and verify they match the local builds.
+Repository visibility also applies to releases: private-repository downloads require GitHub sign-in and repository access.
+
+The **Publish Second Nature** workflow runs when a release is published. It reuses the complete validation workflow, checks that the tag matches `info.json` and the requested Factorio branch, and builds the ZIP from the release's exact source commit. GitHub's runner uploads the ZIP and SHA-256 sidecar, then re-downloads both with `gh release download` and checks the checksum and byte-for-byte equality. This avoids depending on the authoring sandbox's access to GitHub's binary-upload/download hosts.
+
+To publish, first push and validate the source commit, then create two GitHub prereleases targeting that commit, using tags `vVERSION-factorio-2.0` and `vVERSION-factorio-2.1`. Wait for each publishing workflow to pass before advertising its download link. The release notes must retain the alpha/engine-verification caveat until the verification ledger records real engine tests.
 
 ## Version adaptation
 

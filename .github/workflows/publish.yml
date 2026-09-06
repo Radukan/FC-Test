@@ -1,0 +1,76 @@
+name: Publish Second Nature
+on:
+  release:
+    types: [published]
+permissions:
+  contents: read
+jobs:
+  validate:
+    uses: ./.github/workflows/validate.yml
+  publish:
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      RELEASE_TAG: ${{ github.event.release.tag_name }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Match the release tag to the source version
+        id: package
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          info = json.loads(Path('second-nature/info.json').read_text())
+          targets = {f"v{info['version']}-factorio-{target}": target for target in ('2.0', '2.1')}
+          tag = os.environ['RELEASE_TAG']
+          if tag not in targets:
+              raise SystemExit(f'Unexpected release tag: {tag!r}; expected one of {list(targets)}')
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as out:
+              out.write(f"target={targets[tag]}\n")
+              out.write(f"archive={info['name']}_{info['version']}.zip\n")
+          PY
+      - name: Build the installable archive
+        env:
+          TARGET: ${{ steps.package.outputs.target }}
+        run: python tools/package.py --target "$TARGET"
+      - name: Upload the mod and checksum
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          TARGET: ${{ steps.package.outputs.target }}
+          ARCHIVE: ${{ steps.package.outputs.archive }}
+        run: |
+          gh release upload "$RELEASE_TAG" \
+            "artifacts/factorio-$TARGET/$ARCHIVE" \
+            "artifacts/factorio-$TARGET/$ARCHIVE.sha256" \
+            --clobber
+      - name: Re-download and verify the published assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          TARGET: ${{ steps.package.outputs.target }}
+          ARCHIVE: ${{ steps.package.outputs.archive }}
+        run: |
+          destination="$RUNNER_TEMP/second-nature-release"
+          gh release download "$RELEASE_TAG" --dir "$destination" \
+            --pattern "$ARCHIVE" --pattern "$ARCHIVE.sha256"
+          (cd "$destination" && sha256sum --check "$ARCHIVE.sha256")
+          cmp "artifacts/factorio-$TARGET/$ARCHIVE" "$destination/$ARCHIVE"
+          cmp "artifacts/factorio-$TARGET/$ARCHIVE.sha256" "$destination/$ARCHIVE.sha256"
+          {
+            echo "## Factorio $TARGET release uploaded and verified"
+            echo
+            echo "[$RELEASE_TAG]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/releases/tag/$RELEASE_TAG)"
+            echo
+            echo '```text'
+            cat "$destination/$ARCHIVE.sha256"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
