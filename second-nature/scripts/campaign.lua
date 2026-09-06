@@ -103,7 +103,7 @@ function Campaign.tick()
           player.set_controller({type = defines.controllers.cutscene,
             start_position = {camp.position.x + 32, camp.position.y - 24}, start_zoom = 0.6,
             waypoints = {{position = camp.position, transition_time = 180, time_to_wait = 60, zoom = 1.3}}})
-          player.gui.screen.add({type = "label", name = "sn_landing_skip", caption = {"sn-campaign.landing-pan"}})
+          player.gui.screen.add({type = "label", name = "sn_landing_skip", caption = {"", {"sn-campaign.landing-pan"}, "  ", {"skip-cutscene"}}})
         end
       end
     end

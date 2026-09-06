@@ -1,146 +1,159 @@
-![Second Nature — Build a factory. Grow a world.](docs/assets/cover.png)
+![Second Nature / Last Landing — original main-menu illustration](second-nature/graphics/menu/last-landing.jpg)
 
-# Second Nature
-### A planetary-restoration overhaul for Factorio: Space Age
+# Second Nature · Last Landing
+### A stable Factorio 2.0 / Space Age planetary-restoration overhaul
 
-**The next megaproject is not an escape route. It is a living world.**
+**You can build another rocket. First, give this world a reason to live.**
 
-Restore five planets through a real industrial economy: pioneer cultures, engineered soils, atmospheric treatment, watersheds, clean chemistry, closed waste loops and interplanetary biodiversity. Borrow from the future with dirty shortcuts—or build a factory that can sustain its home. Native broods resist ecological change even as your pollution falls.
+Your expedition lands on a stripped, smog-filled Nauvis. The descent engine is spent. The lander holds emergency equipment; two loaded turrets cover the camp. There are no natural forests or fish. Only the broods remain—and the pollution blanket that sustains their tolerance of your industry.
 
-**v0.1.0 alpha · 22 machines · 88 recipes · 20 technologies · 3 new sciences · 5 planetary campaigns**
+Build mineral biology, close your waste loops, restore five worlds and defend the machines that bring life back. Dirty industry buys temporary calm, not a healthy planet. When Nauvis finally recovers, decide whether its natives should become peaceful flowering life or disappear.
 
-> **Verification, not hype:** 109 automated tests pass. The complete data-stage scripts run against Wube's **2.0.77** and **2.1.17** source definitions in Lua 5.2, in both progression modes. **Factorio's actual engine, graphical client, multiplayer synchronization and a full campaign have not been playtested here.** The official binary download is blocked in this environment. An opt-in real-engine smoke test is included; this is an alpha to test on a fresh save, not a certified production release.
+**v0.2.0 alpha · stable 2.0.77 · 22 production/monitor machines · 88 recipes · 20 technologies · 3 new sciences · 5 planets**
 
-## Install
+## Download and install
 
-Choose **one** archive matching your game branch:
+### [Download Second Nature 0.2.0 for stable Factorio 2.0](https://github.com/Radukan/FC-Test/releases/download/v0.2.0-factorio-2.0/second-nature_0.2.0.zip)
 
-| Factorio branch | Installable build |
+[Release notes and SHA-256 checksum](https://github.com/Radukan/FC-Test/releases/tag/v0.2.0-factorio-2.0). **This repository is private: sign in to GitHub with repository access before downloading.** Do not install the automatically generated “Source code” archives.
+
+1. Use **Factorio 2.0.77** with **Space Age**, **Quality** and **Elevated Rails** enabled.
+2. Back up saves. Replace the old Second Nature ZIP/source folder with **`second-nature_0.2.0.zip`**, still zipped, in your `mods` folder.
+3. For the intended campaign, start **new Space Age freeplay** and select **Second Nature / Last Landing** in the map presets.
+4. Leave **Desolate Nauvis landing**, **Pollution-fed Nauvis broods** and the other default mod settings enabled. Keep pollution enabled in the map settings.
+5. Press **Shift + T** or the leaf shortcut for the field station. **Ctrl + Shift + P** toggles the local smog overlay.
+
+Windows: `%APPDATA%\Factorio\mods` · Linux: `~/.factorio/mods` · macOS: `~/Library/Application Support/factorio/mods`.
+
+**Stable only from 0.2 onward.** Experimental 2.1 builds are discontinued. A fresh save is required for the new landing and barren map generation. Upgrading an existing 0.1 save preserves its factories, ecological values and terrain: it does **not** erase forests or grant another lander.
+
+## What changed in 0.2
+
+- **Dashboard crash fixed.** All named GUI children are prefixed; `tabs`, `value`, `text`, `state` and other engine member names cannot collide. The runtime test double now rejects those names. A failed dashboard construction is caught instead of terminating the factory.
+- **Real-engine fixes.** Monitor registration no longer calls crafting-only APIs on a constant combinator. Runtime utilities are loaded explicitly, and module imports happen during control parsing, not event callbacks. The special built-in default map preset is left structurally intact.
+- **Last Landing.** A shared cargo lander, a short arrival camera pan, two preloaded turrets and starter wall segments. No starting platform or orbital teleport. Build and launch a normal Nauvis rocket; afterward the hull becomes salvageable.
+- **Desolate Nauvis.** No generated trees/fish, barren earth in place of fresh grass, and configurable legacy smog. Ores, rocks, cliffs and water remain.
+- **Inverted Nauvis pressure.** Pollution-driven biter attack recruitment/evolution is replaced by restoration-driven raids. Actual local pollution suppresses warnings, reduces wave size and can send tracked raiders home.
+- **Air & natives.** Planet-wide pollution inventory, trend, rolling hotspots, local reading, a private local overlay and two new circuit outputs.
+- **Pollution gates life.** Dirty local air blocks soil/biodiversity bonuses; global contamination constrains biodiversity and prevents final planetary completion.
+- **A visible recovery front.** Early gardens stay near machines. Living Nauvis gradually greens across generated chunks, with sparse trees, browning under heavy smog, and reversible water discoloration.
+- **A permanent native choice.** Symbiosis brings original, animated **Bloomback grazers** and flowering gardens. Eradication removes native populations. Both policies cover existing and subsequently discovered colonies.
+- **Menu presentation.** The original Last Landing illustration replaces vanilla menu simulations, with a startup option to restore the vanilla menu.
+
+## The landing economy
+
+The lander is one shared grant **per force**, not per player/reconnect. Its hull initially cannot be mined or destroyed. Cargo includes:
+
+| Supplies | Starting quantities |
 |---|---|
-| **2.1.17 experimental** — newest release checked | [Download Second Nature for 2.1](https://github.com/Radukan/FC-Test/releases/download/v0.1.0-factorio-2.1/second-nature_0.1.0.zip) |
-| **2.0.77 stable** | [Download Second Nature for 2.0](https://github.com/Radukan/FC-Test/releases/download/v0.1.0-factorio-2.0/second-nature_0.1.0.zip) |
+| Bulk materials | 200 iron plates, 100 copper plates, 40 steel, 120 stone, 160 coal, 40 wood |
+| Factory components | 40 gears, 40 circuits, 100 belts, 20 inserters, 20 small poles, 40 pipes |
+| Production and power | 4 burner drills, 6 stone furnaces, 1 offshore pump, 1 boiler, 2 steam engines |
+| Reserve defense | 100 magazines, 20 repair packs, 40 walls |
+| Deployed defense | 2 gun turrets with 75 magazines each; 10 short wall segments |
 
-Installable ZIPs and SHA-256 checksums are hosted on [GitHub Releases](https://github.com/Radukan/FC-Test/releases), not committed as generated binaries. Each Factorio branch has a separate alpha prerelease so both downloads retain the required `second-nature_0.1.0.zip` filename. **While the repository is private, sign in to GitHub with an account that has repository access to download.** Do not use GitHub's automatically generated “Source code” archives as installable mods.
+If terrain prevents placing a defensive item, it is retained in the lander cargo instead.
 
-To build from a checkout, run `python3 tools/package.py` (Python 3.11+, no extra packages needed), or use the `second-nature/` source folder directly with Factorio 2.0.77.
+Each crew member starts with a pistol and 20 magazines. Use the poles and finite wood carefully; the biological bootstrap needs **no natural tree or seed**. Timber cultivation provides renewable wood later. Resources are not limitless, and the camp is not an instant automated factory.
 
-1. Put the chosen archive, **still zipped**, in your Factorio `mods` directory. Do not install both builds together.
-2. Enable **Space Age**, **Quality**, **Elevated Rails**, and **Second Nature**.
-3. Start a **new Space Age freeplay** game. Default settings are the intended campaign.
-4. Press **Shift + T** or click the leaf shortcut for the planetary dashboard and field guide.
+### First steps
 
-Mod directories: Windows `%APPDATA%\Factorio\mods`; Linux `~/.factorio/mods`; macOS `~/Library/Application Support/factorio/mods`.
+1. Recover the lander cargo. Establish mining, smelting, water and steam power; keep turrets loaded.
+2. **Stone → silica → glass.** Silica is hand-craftable. Red science also needs glass in overhaul mode.
+3. **Pioneer biology → nutrients → culture → algae.** Supply water and electricity.
+4. **Compost, biochar and living substrate.** Green science also consumes compost.
+5. **Soil station → ecological samples → ecology science.** Samples still emerge when smog blocks the living-soil bonus, so the cleanup technology is not locked behind clean air.
+6. Supply **scrubbers** and clear the local chunk to **≤ 10** pollution before expecting living-soil and biodiversity gains. Buffer early waste until closed-loop processing is unlocked.
+7. Expand into watersheds, forests, thermal balancing and detoxification. Defend your cleanup perimeter before removing the smog that was calming nearby broods.
 
-## The campaign
+## Pollution: a real compromise
 
-| World | Restoration problem | Signature industry | What stays dangerous |
-|---|---|---|---|
-| **Nauvis** | Fragmented soils and a polluted atmosphere | Pioneer biology, forests and clean chemistry | Biters attack ecological change, not just emissions |
-| **Vulcanus** | Extreme heat, unstable air, little viable water | Basalt weathering and thermophile cultures | Lava and demolisher territories are untouched |
-| **Fulgora** | Legacy heavy metals and thin, dry soils | Scrap remediation and holmium biocatalysts | Lightning, islands and oil oceans remain |
-| **Gleba** | Invasive dominance rather than stable symbiosis | Spore balancing and sheltered agriculture | Spoilage, fertile-soil logistics and pentapods remain |
-| **Aquilo** | Cold, fragile water cycles and imported biology | Heated cryogenic gardens | Heat pipes, ice support and interplanetary supplies remain essential |
+### Global versus local
 
-Each world has five **0–100 fitness axes**: atmosphere, thermal balance, water cycle, living soil and biodiversity. **Toxicity** constrains recovery. **Native resistance** responds to ecological change. Six stages take a planet from **Hostile** to **Self-sustaining**.
+The **global** inventory comes from Factorio's `get_total_pollution()` and covers the **whole surface**, including uncharted and pollution-only engine chunks—not only the area around registered machines. The hotspot survey covers fully generated terrain. Totals refresh roughly every ten seconds. A bounded survey visits **four chunks per second total**, shared between visited worlds, to report hotspots.
 
-### Production earns recovery
+The **local** reading is pollution in the chunk at your current position. The optional overlay covers a 5 × 5 chunk neighborhood:
 
-- A placed or powered-but-idle machine earns **nothing**. Only completed recipes count.
-- Biodiversity cannot outgrow its supporting atmosphere, heat, water and soil. The dashboard exposes its exact ceiling.
-- Scrubbers remove real local pollution/spores, while capturing spent cartridges that need processing. Ordinary pollution is enabled on Vulcanus, Fulgora and Aquilo too; Gleba keeps its native spores.
-- Dirty retorts and forcing stacks are fast and economical up front, but create sludge and measurable toxic debt.
-- Established ecosystems unlock efficient cultivation and late-game research through actual **surface conditions**.
-- Recovery gently regresses without maintenance; mature worlds are more resilient. Untouched worlds do not decay off-screen.
+- **Green: ≤ 10** — local living growth is possible.
+- **Amber: > 10** — soil/biodiversity bonuses are blocked.
+- **Magenta: ≥ 200** — heavy contamination, sufficient to suppress a Nauvis restoration raid at its target or supporting nest.
 
-### Close the loops
+Use the map's native pollution display for a wider spatial view. The overlay never generates terrain or reveals a fake infinite planet.
 
-```text
-Stone + iron + water → pioneer culture + mineral feed → algae
-                                                       ↓
-                           compost + biofilm + biochar → living soil
-                                                       ↓
-                         restored ecosystems → samples → ecology science
+### Why biters attack green industry
 
-Biochar → carbon filters → scrubbers / clean water → spent filters
-               ↑                                        ↓
-               └────────── reclamation ←────────────────┘
-                                ↓
-                       contaminated effluent
-                                ↓
-                   water + sludge → vitrified aggregate → concrete
+With **Pollution-fed Nauvis broods** enabled, Nauvis nests no longer absorb pollution to recruit attack parties, and ordinary pollution no longer drives evolution. Scripted raids choose **recently productive clean restoration installations**, never dirty retorts or forcing towers.
 
-Thermal buffers → climate work → depleted buffers → powered recharge
+A raid still requires a **real nest 96–512 tiles away**, gives **45 seconds of warning**, and respects peaceful mode and diplomacy. Balanced settings provide **20 minutes of grace after first ecological work**, an **eight-minute cooldown**, a **40-unit maximum** and at most **three tracked groups per world**. Clean progress sets a lower bound on scripted wave strength. Pentapod groups are smaller.
 
-Vulcanus thermophiles + Fulgoran catalysts + Gleban symbionts
-                                ↓
-                       biodiversity matrices
-                                ↓
-                   sanctuaries + Aquilo gardens
-                                ↓
-                        Gaia beacon network
-```
+Pollution reduces effective pressure and wave size. At 200 units in the target or nest chunk, a warned wave is suppressed. A tracked wave whose target becomes heavily polluted turns back. But pollution is **not invulnerability**: proximity aggression, retaliation, territorial expansion and obstruction combat still exist. Gleba retains ordinary spore behavior; pollution does not soothe pentapods.
 
-### Clean does not mean safe
+Dirty processing also creates toxic debt and physical waste. You must dismantle, clean up or contain that compromise to finish the planet.
 
-On **Nauvis and Gleba**, rapid restoration can provoke native organisms even with little pollution. Scripted responses require a **real existing nest 96–512 tiles away**, give **45 seconds of warning**, and target restoration installations. Balanced mode has a **20-minute local grace period**, **8-minute cooldown**, **40-unit cap** with smaller pentapod groups, and at most three tracked waves per world.
+## Restore a world, then choose its native future
 
-Clear the perimeter, defend your installations, or supply pheromone dampeners. No nearby nests means no scripted waves. Peaceful mode is respected. Other planets do **not** get arbitrary biter invasions.
+Every world has five **0–100 fitness scores**: atmosphere, thermal balance, water, soil and biodiversity. Toxicity limits recovery. These are ecological suitability scores, **not rewrites of the engine's pressure, temperature or heating mechanics**.
 
-### Win by sustaining, not just building
+Stages progress from **Hostile → Conditioned → Rooted → Recovering → Living → Self-sustaining**. Final status requires:
 
-Research **Second Nature**, bring **all five worlds to stage 5**, and sustain your force's beacon network for **10 uninterrupted game minutes**:
+- Every fitness axis **≥ 90**.
+- Toxicity **≤ 8**.
+- Measured planetary pollution/spores **≤ 500**.
+- A completed rolling survey with peak chunk pollution **≤ 10**.
 
-- Every fitness axis **≥ 90** on every world.
-- Toxicity **≤ 8** on every world.
-- At least one of **your force's** beacons on every world must complete a real production cycle at least every **90 seconds**.
+After **two uninterrupted clean minutes** at Nauvis stage 5, the **Air & natives** tab offers a two-step, irreversible choice:
 
-A broken condition resets the timer. After victory, keep building and research repeatable ecological lab productivity. In standard freeplay, this goal replaces the escape victory while the corresponding setting is enabled.
-
-## First hour: the critical path
-
-1. **Stone → silica → glass.** Silica is hand-craftable; glass is smelted. Red science now consumes one glass. The separate silica feedstock avoids the stone-brick furnace ambiguity.
-2. **Pioneer biology.** Power a bioreactor and supply water. Make mineral nutrients and pioneer culture, then algae. No irreplaceable starter culture, tree or seed is required.
-3. **The living substrate.** Compost algae and produce biochar. Green science now needs compost. Make living soil substrate.
-4. **Field ecology.** Supply a soil restoration station. Turn its ecological samples into ecology science; feed ordinary labs.
-5. **Atmosphere → water → forests.** Add scrubbers and water treatment, then watersheds and seed dispersers. Buffer early waste until closed-loop technology is available.
-6. **Nothing left behind.** Reclaim filters, recharge thermal buffers, treat effluent, vitrify sludge, and use the aggregate in concrete before scaling planetary work.
-
-Need help? The in-game field guide covers startup, waste loops, resistance, planetary specialties, circuit examples and the endgame. Full recipes are also in the [catalog](docs/CATALOG.md).
-
-## Controls and customization
-
-| Control | Purpose |
+| Symbiosis | Eradication |
 |---|---|
-| **Shift + T**, leaf shortcut, `/second-nature` | Open the field station |
-| **Ecology circuit monitor** | Wire 0–100 fitness/toxicity/resistance/stability and 0–5 stage signals into factory control |
-| `/sn-status` | Read-only status report, including headless consoles |
-| `/sn-reindex` | Administrator-only machine rescan; preserves ecological progress |
+| Biters/spitters become peaceful **Bloombacks**, with original eight-direction walking sprites. Nests and worms become flowering gardens. | Biters, spitters, worms and nests are removed. Their former habitat is free for construction. |
+| Friendly to every force; no attack damage or expansion. Living gardens retain space on the map. | No imported replacement enemies or forced return of the broods. |
 
-Startup: toggle vanilla progression integration. Runtime: restoration speed, resistance difficulty, local grace period, safe terrain recovery, sparse tree growth and network victory. The monitor's **first section is reserved** for telemetry; it never shares a named logistic group across worlds.
+A one-time entity index and bounded workers handle existing populations, including moving units. Chunk and spawning events enforce the policy on later colonies. The choice affects **Nauvis only**. Multiplayer requires an administrator, because ecology is shared. Optional pre-game mod settings can choose an automatic outcome instead.
 
-## Compatibility and safety
+Neither choice makes future pollution harmless. A neglected restored factory can still damage its ecology. “Planetary restoration” manages generated territory and its restoration network; it does not pretend to paint every tile of an infinite, ungenerated world instantly.
 
-- New Space Age freeplay saves are the intended starting point. Back up existing saves before adding an overhaul.
-- Vanilla logistics, space travel, quality and planetary hazards remain. This overhauls **the campaign objective, ecological economy and research progression**, not every belt and assembler recipe.
-- Other major overhauls, alternative starting planets/victory scenarios and custom planets are **not tested integrations**. Unknown surfaces/platforms never receive a planetary ecology state.
-- Terrain recovery is local and conservative. Never rewrites lava, oil seas, crop soils, ice, foundations, resources, ghosts, cliffs or player paving. Aquilo uses sheltered garden overlays, not melting support tiles.
-- Art includes **original icons, research illustrations and garden overlays**; world machines deliberately reuse tinted installed Factorio animations and sounds. There is no claim of a complete custom animation set.
-- **Before uninstalling:** disable **Network victory**, save, then remove the mod. This restores the previous stock Space Age end setting. Removal can still delete modded items and machines; terrain changes already made are not rolled back.
+## Five worlds remain distinct
 
-## Project guide
+| World | Restoration specialty | What remains dangerous |
+|---|---|---|
+| **Nauvis** | Mineral bootstrap, legacy smog cleanup, forests and the native choice | Brood response to greening |
+| **Vulcanus** | Basalt weathering and exported thermophiles | Lava and demolisher territories |
+| **Fulgora** | Scrap/heavy-metal remediation and holmium biocatalysts | Lightning, islands and oil seas |
+| **Gleba** | Symbiotic cultures and balanced spores | Spoilage, crop-soil logistics and pentapods |
+| **Aquilo** | Heated cryogenic gardens and imported biodiversity | Heat, ice support and interplanetary supply chains |
 
-- [Design & progression](docs/DESIGN.md)
-- [All machines, recipes, research and materials](docs/CATALOG.md)
-- [Balance equations & rate budgets](docs/BALANCE.md)
-- [Reference-kit simulation results](docs/SIMULATION.md)
-- [Development, API and testing](docs/DEVELOPING.md)
-- [Verification ledger & release checklist](docs/VERIFICATION.md)
-- [Packaged player guide](second-nature/README.md)
+Vulcanus, Fulgora and Aquilo retain the ordinary pollution layers introduced in 0.1; Gleba keeps spores. No arbitrary biter invasions are introduced on those three worlds.
 
-```bash
-python3 -m pip install -r requirements-dev.txt
-python3 -m pytest -q               # source-data tests need the pinned upstream checkouts
-python3 tools/package.py           # builds both branch-specific archives
-```
+**Campaign victory:** research Second Nature, keep all five planets self-sustaining, and supply your force's Gaia beacon on every world for **ten uninterrupted minutes**. Each beacon needs a completed cycle at least every **90 seconds**. Interrupted conditions reset the hold. Continue building after victory.
 
-**MIT** for original code and generated art. Factorio and Space Age are Wube Software's games; installed proprietary assets are referenced, not redistributed. Planet Crafter is a design inspiration, not an asset source or affiliation.
+## Controls and safety
+
+| Control | Function |
+|---|---|
+| **Shift + T**, leaf shortcut, `/second-nature` | Field station, air survey, native choice and six-topic field guide |
+| **Ctrl + Shift + P**, smog shortcut | Toggle the private local smog overlay |
+| **Ecology monitor** | 11 signals: five fitness axes, toxicity, resistance, stability, stage, global pollution and local pollution |
+| `/sn-status` | Read-only status report |
+| `/sn-reindex` | Administrator-only reconciliation; does not reset ecology or issue new cargo |
+
+Preset alternatives: **Brood Frontier** (denser colonies, smaller starting area) and **Quiet Reclamation** (peaceful engineering campaign).
+
+- Idle, unpowered, frozen, output-blocked or ingredient-starved machines earn no completed-craft benefits.
+- Terrain workers preserve ore, paving, buildings, ghosts, foundations, crop soils, lava and Aquilo support ice. Nauvis water recoloring swaps only ordinary/green variants, not collision/support types.
+- The first combinator section is reserved for telemetry and never shares a named group across worlds.
+- Other total overhauls, alternative starting planets and custom victory scenarios are not certified integrations.
+- **Before uninstalling:** disable **Network victory**, save, then remove the mod. Removing it can still delete modded items/entities; restored terrain and an already executed native choice are not undone.
+
+## Verification and development
+
+The [verification ledger](docs/VERIFICATION.md) distinguishes source/mocked tests, actual headless checks and untested graphical/full-campaign behavior. **This is still an alpha**, not a claim of a fully balanced or multiplayer-certified campaign.
+
+- [Campaign design](docs/DESIGN.md)
+- [Complete recipes, machines, materials and research](docs/CATALOG.md)
+- [Balance equations and budgets](docs/BALANCE.md)
+- [Supplied-kit model simulation—not playthrough time](docs/SIMULATION.md)
+- [Development, stable-engine smoke tests and release workflow](docs/DEVELOPING.md)
+
+Build the stable ZIP with `python3 tools/package.py` (Python 3.11+, standard library only). Packages and game binaries stay out of Git; GitHub Releases host the ZIP and checksum.
+
+**License:** MIT for project code and original assets. Production machines/lander reuse installed Factorio assets, not redistributed Wube graphics. The menu is an original AI-assisted illustration; Bloomback sprites and gardens are original procedural artwork, not game screenshots.

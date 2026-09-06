@@ -14,7 +14,7 @@ end
 function M.air_ready(s)
   local air = s.air
   -- Pure-model simulations omit a surface; runtime records always have an air survey.
-  return not air or (air.measured and air.survey_complete and air.total <= C.air.total_goal and air.peak <= C.air.green_limit)
+  return not air or (air.measured and air.survey_complete and air.total <= C.air.total_goal and math.max(air.peak, air.scan_peak or 0) <= C.air.green_limit)
 end
 function M.cap(s, axis)
   local v = s.values

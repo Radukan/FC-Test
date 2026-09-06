@@ -8,7 +8,7 @@ Fitness values and toxicity/resistance are clamped to **0–100**. All changes a
 
 | Planet | Atmosphere | Thermal | Water | Soil | Biodiversity | Toxicity |
 |---|---:|---:|---:|---:|---:|---:|
-| Nauvis | 35 | 65 | 35 | 20 | 10 | 30 |
+| Nauvis | 12 | 55 | 15 | 0 | 0 | 65 |
 | Vulcanus | 8 | 2 | 3 | 8 | 0 | 65 |
 | Fulgora | 12 | 35 | 8 | 3 | 0 | 80 |
 | Gleba | 50 | 65 | 65 | 30 | 20 | 40 |
@@ -32,14 +32,14 @@ Example: a generic heat exchanger earns `0.24 × .45 = .108` Aquilo thermal poin
 
 ## Hard ecological support ceilings
 
-Let `A, T, W, S, B` be the five fitness values and `X` toxicity:
+Let `A, T, W, S, B` be the five fitness values, `X` toxicity and `Pmean` measured total pollution divided by generated chunks:
 
 ```text
 atmosphere cap   = 100
 thermal cap      = 100
 water cap        = min(100, A + 30, T + 35)
 soil cap         = min(100, W + 35, 110 - 0.4 X)
-biodiversity cap = clamp(min(A + 15, T + 20, W + 20, S + 15, 100 - 0.7 X), 0, 100)
+biodiversity cap = clamp(min(A + 15, T + 20, W + 20, S + 15, 100 - 0.7 X, 100 - 0.5 Pmean), 0, 100)
 ```
 
 A positive action never reduces an existing value merely because its cap has fallen. Instead, above-cap excess decays gradually. This avoids the nasty surprise of a “restoration” cycle instantly destroying existing progress.
@@ -59,6 +59,8 @@ Adding more seed dispersers cannot solve toxic soil, an unstable atmosphere or a
 | 4 · Living | 75 | 75 | 75 | 75 | 70 | 15 |
 | 5 · Self-sustaining | 90 | 90 | 90 | 90 | 90 | 8 |
 
+**Stage 5 also requires** measured total pollution/spores ≤ 500 and a completed rolling survey whose peak is ≤ 10. Newly generated territory immediately invalidates readiness until the survey covers it.
+
 The dashboard's summary is `mean(A,T,W,S,B) × (1 - .004 X)`. It is informational; it is **not** the victory check. Production surface conditions use the actual integer stage.
 
 ### Stage rewards
@@ -66,7 +68,7 @@ The dashboard's summary is `mean(A,T,W,S,B) × (1 - .004 X)`. It is informationa
 - **1:** local thermophile and holmium biocatalyst production.
 - **2:** efficient timber cultivation, biodiversity sanctuary operation, climate-science crafting, symbiotic egg fermentation; local safe terrain recovery begins.
 - **3:** biodiversity matrix assembly, efficient sheltered Gleban fruit production and sparse forest growth.
-- **4:** Gaia beacon cycles, matrix propagation from biosphere samples, 75% lower baseline ecological erosion.
+- **4:** Gaia beacon cycles, matrix propagation, 75% lower baseline erosion, and bounded generated-world Nauvis succession.
 - **5:** eligibility for the sustained network victory.
 
 Technology and planet requirements still apply. The stage alone does not grant recipes.
@@ -90,7 +92,7 @@ Dirty retorts emit 24 pollution/spores per minute before recipe multipliers. Coa
 
 ## Environmental drift
 
-No passive drift occurs before a world's first completed ecological/dirty-impact cycle.
+No model drift occurs before a world's first completed ecological/dirty-impact cycle. Real engine pollution still diffuses/absorbs independently; the rolling survey and cosmetic water/succession worker are independent of model drift.
 
 Base fitness erosion is modest (per game minute):
 
@@ -116,6 +118,17 @@ extra atmospheric erosion / minute = .02 × exposure
 
 Unpowered/blocked machines do **not** earn restoration. Passive natural resilience may still slowly reduce toxicity; that is independent of machine work. The restoration-speed setting scales ecological effects and drift, but not actual recipe throughput, physical pollution capture, raid timers or the ten-minute goal.
 
+## Pollution and succession contract (0.2)
+
+- New campaign Nauvis chunks receive **80** actual pollution units once, configurable from **0–500** at startup. No legacy seeding on existing-save upgrades or after native resolution.
+- Local concentration **> 10** suppresses positive soil/biodiversity effects. It does not cancel recipe production, remove input costs, or disable chemical/thermal/capture effects.
+- Planetary inventory is sampled roughly every **600 ticks** with `get_total_pollution()`. Mean is total / generated chunk count. Hotspots use a **4-chunk/second total** round-robin budget over visited worlds.
+- A final planet needs **≤ 500 total** and a completed survey with **known peak ≤ 10**, including newly found hotspots. Readings have disclosed sampling latency. A native confirmation refreshes the total immediately.
+- With inverse metabolism enabled, Nauvis sedation is `min(1, local pollution / 200)`. Use the greater sedation at target/nest for warning eligibility and dispatched group scaling. Gleba uses zero sedation.
+- Natural succession processes **128 tiles per chunk visit** in eight strips. Four visits/second is at most **512 tile candidates/second**, shared with other visited worlds. Dense areas with 256+ queried entities are skipped. Structures/resources are masked; water recoloring is limited to equivalent native water variants.
+- Early machine gardens retain their separate **20-candidate/second** budget. Both the machine and destination tile must be locally clean.
+- Native resolution requires **120 clean seconds** at Nauvis stage 5. Its single initial entity index is exceptional, not a periodic scan. The queue handles at most **32 natives/second**; bounded chunk/event checks also enforce future policy. A completed choice does not prevent later ecological regression.
+
 ## Native resistance
 
 For each actual, uncapped positive fitness gain, add `.7 × gain`; biodiversity receives an additional `× 1.7` weighting. Per-cycle pressure effects such as dampening then apply. Resistance naturally falls `.7/minute`, or `1.25/minute` on a living/mature world. Steady upkeep at saturated meters therefore becomes calmer than a restoration boom.
@@ -130,6 +143,10 @@ For each actual, uncapped positive fitness gain, add `.7 × gain`; biodiversity 
 | Pentapod count | at least 3; about one-third of biter count | same scaling |
 | Active scripted-group limit | 3/world | 3/world |
 
+Apply Nauvis's factor `(1 - sedation)` to the biter count (minimum one) and effective trigger pressure. Full sedation cancels a warning immediately. Tracked dispatched groups retreat toward their nest when the target reaches 200 local units. A direct `attack` command with no enemy distraction selects the cleaner, not surrounding pollution producers. Ordinary proximity/obstruction/retaliation remain possible.
+
+Scripted species selection uses `max(force evolution, stage × .12)`, so ecological advance can produce stronger broods without relying on pollution evolution. Native resolution disables further Nauvis restoration raids.
+
 The grace period defaults to 20 minutes per world and is configurable. Existing nests must be 96–512 tiles from a recently working restoration target. New members spawn within 24 tiles of that nest and at least 64 from the target. Nearby unaffiliated native units are recruited first. At 150 local units, the script does not create additional units. Expired groups are unlinked, not erased along with their members.
 
 Peaceful mode, disabling resistance, a destroyed target/nest and changed diplomacy are respected. No scripted native attacks are introduced on the three planets without a relevant biter/pentapod ecology.
@@ -140,4 +157,4 @@ The last ten minutes verify a real production system. A beacon takes 60 seconds 
 
 Each world must satisfy all thresholds **simultaneously**. Ecological fitness is shared by all forces, but research, eligible beacons and held time are force-specific.
 
-For a mathematical scale check, see [the reference kit](SIMULATION.md). Its 18–43 model-minute convergence is **not** an estimated campaign duration. Research, supply-chain construction, planetary travel, defense and power are deliberately excluded from that test.
+For a mathematical scale check, see [the reference kit](SIMULATION.md). Its supplied-kit model convergence is **not** an estimated campaign duration. Research, supply-chain construction, planetary travel, defense and power are deliberately excluded from that test.

@@ -1,114 +1,86 @@
-# Design: a factory that grows a home
+# Campaign design · stable 0.2
 
-## The promise
+## Premise and boundaries
 
-The satisfaction of **watching an inhospitable world recover**, expressed through Factorio's belts, pipes, power grids, research and interplanetary logistics. The player is a restoration engineer, not a gardener clicking individual plants and not an accountant servicing twenty nearly identical meters.
+Second Nature is a Space Age ecological-industrial overhaul inspired by the feeling of earning a living planet in Planet Crafter. The factory remains the means of progress, not a cosmetic backdrop to a score that rises while idle.
 
-The campaign overhauls **why you build, what your factory consumes, and what success means**. It deliberately retains Factorio's excellent transport, space platforms, military progression and local planetary hazards rather than replacing everything merely to justify the word “overhaul.”
+**Last Landing:** the descent engine is spent. A stranded cargo lander and finite defenses support a mineral-biological bootstrap on Nauvis. Native trees and fish have disappeared; the broods remain. No platform, free rocket or orbital teleport is granted. Standard rocket progression is the route out.
 
-This is the implemented v0.1.0 design, not a wishlist. Engine validation and full-playthrough balance are still pending.
+The five-planet economy, three scientific disciplines and sustained logistics victory remain. This is not a replacement map for every planet or a removal of Space Age's hazards.
 
-## Five design rules
+## The central choice: safety now or life later
 
-1. **Production, not proximity.** Installed machinery, stored cartridges and electric power alone do not award points. A real, completed craft must consume inputs and make physical outputs.
-2. **One cause per layer.** Fitness is the planet's ability to support the target ecosystem; toxicity is contamination; resistance is native response to ecological change. Ordinary pollution still belongs to Factorio. Its pollution layer is enabled on Vulcanus, Fulgora and Aquilo; Gleba retains spores. No new native enemy ecology is invented on those non-biter worlds.
-3. **Close loops, not inventories.** Reclamation creates a valuable factory problem. Spent filters, thermal buffers and captured effluent have engineered return routes, and surplus scientific samples have recycling sinks.
-4. **Specialize worlds; do not homogenize them.** Vulcanus is a thermal/mineral challenge, Fulgora a toxic legacy, Gleba an unstable biological community, and Aquilo a cold logistics frontier. No deleting their hazards to make all five planets Nauvis.
-5. **Complexity must change a decision.** Three new sciences, five fitness axes, one toxic-debt measure, one resistance measure. No redundant varieties of oxygen, universal seed that must never be lost, obligatory hand watering or dozens of nearly identical machines.
+Nauvis broods tolerate contamination. Pollution-driven vanilla biter recruitment is disabled with zero spawner uptake and an unreachable pollution recruitment cost; pollution evolution is disabled. Gleba's spores are untouched.
 
-## What the ecological index means
+Successful clean-machine work raises ecological resistance. Nearby real nests organize warned, bounded strikes against productive restoration targets. Ordinary dirty factories are not selected. Pollution reduces effective resistance and group size; heavy contamination cancels warnings and recalls tracked raiders from their targets.
 
-A Factorio surface can be effectively infinite. The model therefore describes the **managed planetary restoration network**, not a simulation of every ungenerated chunk, every ocean molecule or an atmosphere's literal pascal value. Visual recovery occurs near active installations. Unvisited terrain remains native.
+The compromise cannot win the campaign:
 
-- **Atmosphere:** suitable composition and atmospheric conditions, combined into one fitness measure.
-- **Thermal balance:** climate suitability. Improving either Vulcanus or Aquilo raises this value.
-- **Water cycle:** the ability to retain and circulate viable water, not a command to flood land.
-- **Living soil:** usable mineral/organic structure and microbial support.
-- **Biodiversity:** a stable engineered community, not a count of native trees or total biomass.
-- **Toxicity:** legacy/industrial contamination. Capturing pollution is not the same as destroying its waste.
-- **Resistance:** organisms defending an ecological niche that restoration is displacing.
+- Living-soil and biodiversity bonuses require local pollution ≤ 10.
+- Positive capture/thermal/chemical work still runs; samples and waste still emerge.
+- Mean generated-world pollution constrains biodiversity.
+- Final readiness requires low global inventory and a completed clean hotspot survey.
+- Dirty recipes create actual pollution, inventory waste and toxic debt.
 
-A lush Gleba can consequently have low **target ecosystem fitness** without the mod claiming the native planet is lifeless. The indigenous spore network is productive but not the stable community the project is engineering.
+Proximity combat, retaliation, obstruction and native territorial expansion remain. “Pollution calms broods” does not mean a pollution emitter has damage immunity.
 
-Native broods do not literally hate the color green. Pioneer ecosystems change the chemistry and symbiotic networks on which they depend. They attack the installations responsible. Eventually, a mature, maintained ecosystem stops changing so rapidly and resistance subsides.
+## Campaign arc
 
-## Progression in five acts
+1. **Recover the expedition.** Cargo, basic power, ammunition and finite wood. Stone becomes silica and glass; mineral nutrients start a culture/algae loop without natural seeds.
+2. **Make a clearing fit for life.** Samples unlock treatment even before local living bonuses work. Supply scrubbers, close filter and effluent loops, and improve water/soil/thermal support. First gardens appear around successful installations.
+3. **Defend ecological change.** The pollution blanket retreats. Pressure rises around cleaner infrastructure; perimeter defense, nest removal and supplied dampeners become useful investments.
+4. **Connect planetary specialties.** Vulcanus thermophiles, Fulgoran biocatalysts and Gleban symbionts form biodiversity matrices. Aquilo needs heated, imported ecosystems.
+5. **Resolve Nauvis.** Hold complete, clean readiness for two minutes. Choose permanent symbiosis or eradication in a confirmed dialog; multiplayer administrators decide for the shared planet.
+6. **Sustain the living network.** Own-force, recent beacon cycles across five ready worlds for ten uninterrupted minutes. Winning does not end the factory.
 
-### I · Pioneer biology — red and green science
+## World state versus the rendered world
 
-**Question:** How can a factory grow its own feedstocks?
+Five suitability axes plus toxicity/resistance describe the managed ecosystem. They are not the game's physical temperature or pressure: lava, lightning, spoilage and Aquilo heat/support stay relevant.
 
-Stone is hand-crushed into silica and smelted into glass, integrating the overhaul from the first science pack without hijacking stone-brick smelting. Pioneer bioreactors use minerals and water to create cultures and algae. Composters turn algae into compost, biofilm and biochar.
+Physical changes are real but bounded:
 
-Cultures are shelf-stable and can be recreated from minerals. The first colony never depends on a finite starter item, a tree-rich seed, captured eggs or material from another planet.
+- New campaign Nauvis chunks exclude trees/fish while retaining ore, rocks, native nests and worms.
+- Fresh grass becomes barren dirt/sand; legacy pollution is seeded once per new chunk.
+- Early recovery is sparse and local to productive machines, with pollution checks at both machine and destination tile.
+- At stage 4+, generated Nauvis ground undergoes rolling succession in 128-tile strips. Smog and surviving broods prevent recovery; heavy smog browns grass.
+- Native water/deepwater switch between normal and green-tinted variants without altering their collision/support class.
+- Structures, ghosts, resources, paving, hidden support, crop soils, lava, oil seas and Aquilo ice are protected.
 
-Green science consumes compost. Field ecology unlocks the first soil station and the ecological samples that finance the new research branch. From this point, terraforming and research support one another.
+“Global” inventory is the engine's whole-surface total, including pollution-only chunks beyond generated terrain—not every coordinate of an infinite map. A total is exact at sampling time; hotspot coverage explicitly surveys fully generated terrain and also respects newly detected hotspots. Exploration extends the survey and can introduce additional legacy smog before native resolution.
 
-### II · The living factory — green, blue and ecology science
+## Native futures
 
-**Question:** Is a cleaner factory actually a closed-loop factory?
+### Symbiosis
 
-Scrubbers create spent filters. Purification feeds watersheds and forests but produces captured contamination. Climate control consumes charged buffers. Closed-loop technology provides the return paths: reclaimed carbon/glass, treated water, vitrified sludge and powered buffer recharging.
+Biters/spitters become original flowering Bloomback grazers. Nests and worms become bloom gardens. The separate non-expanding force is friendly to every force; it does not ally existing hostile forces with each other. Bloombacks deal no attack damage. Gardens remain as inhabited space rather than free factory floor.
 
-Two competing approaches are available:
+### Eradication
 
-| Clean route | Dirty route |
-|---|---|
-| Biologically produced carbon | Cheap coal activation |
-| Compost-rich engineered substrate | Chemically forced, high-yield substrate |
-| Steady atmospheric scrubbing | Rapid atmospheric forcing |
-| More machines, electricity and biological logistics | More coal, pollution, sludge and future detoxification |
+Known Nauvis native species, including Second Nature's brood variants, are removed without replacement. Other planets and player-owned organisms are not swept.
 
-The dirty route is useful for startup, constrained power/manufacturing infrastructure or a deliberate burst of atmospheric recovery. It is not a disguised victory path: forcing undermines other fitness axes, and toxicity blocks high biodiversity.
+The decision is irreversible through normal UI/settings. It does not make ecological scores immune to later neglect. Automatic outcomes are available as explicit global mod settings; the default requires an in-game choice.
 
-Post-fossil chemistry then replaces petroleum inputs in plastic/fuel and fossil smelting with biological refining and oxygen-assisted steel. These still consume ores, power and treatment capacity. Nuclear, solar, efficiency modules and eventually fusion retain their vanilla roles.
+A one-time, save-safe entity index prevents moving units from outrunning the chunk survey. Up to 32 indexed natives are handled per second. Bounded chunk sweeps plus native spawning/expansion events cover later populations. No periodic whole-map entity scan is used.
 
-### III · An ecological archipelago — the first three destinations
+## Shared state and save safety
 
-**Question:** What can each planet contribute that another cannot?
+- Schema 2 preserves existing ecological values, research, production registries, contribution records and network progress.
+- Desolation/landing require a genuinely new, tick-zero freeplay game and the startup setting. Installing/updating on an existing save does not sterilize its terrain or provide new cargo.
+- Cargo is per force. Arrival records are per player; reconnects and configuration changes are idempotent. Force merges preserve the surviving camp and unlock redundant hulls rather than stranding unmineable wrecks.
+- Ecology/pollution are shared by planet. Beacon logistics and victory are force-specific.
+- Module dependencies resolve during `control.lua` parsing. No runtime `require` or `on_load` mutation is used.
+- `storage` contains persistent state and supported Lua object references, never chunk iterators or callbacks. Remote reports exclude native work queues and return copied primitive snapshots.
 
-- **Vulcanus:** weather basalt with calcite, tungsten and water. Develop heat-tolerant cultures once basic conditioning is achieved. Export thermophiles.
-- **Fulgora:** mine useful catalysts from scrap remediation. Export holmium biocatalysts while retaining the challenge of islands, lightning and oil seas.
-- **Gleba:** cultivate symbionts from spore treatment or an egg/nutrient fermentation route. Export symbiotic cultures. Efficient sheltered crops require a recovered ecosystem and still use real seeds and perishable nutrients.
+## Presentation
 
-These local products are restricted by native planet identity surface conditions. Importing raw ingredients to a convenient Nauvis assembler cannot bypass the specialization. Any **recovering** world can become the assembly center for biodiversity matrices, connecting the three supply lines.
+The dashboard has four tabs: Planet, Air & natives, Living network and Field guide. Every named child uses `sn_`; reserved GUI member names are forbidden by the test contract. Opening failures are caught and logged so a presentation defect does not stop a running factory.
 
-### IV · Habitats beyond habitability — climate science and Aquilo
+The original Last Landing illustration replaces menu simulations when enabled. Bloombacks use original procedural eight-direction/four-frame walking sprites. Ordinary machines and the lander reuse installed Factorio artwork; no Wube sprites are redistributed.
 
-**Question:** Can the ecosystem survive its supply chain?
+## Deliberate non-goals for this alpha
 
-Biodiversity sanctuaries combine all three biological specialties. Comparative climatology consumes climate samples and those same specialties, preventing a detached science factory from ignoring actual restoration.
-
-Aquilo's cryogenic gardens need imported matrices, ice, ammonia, recyclable thermal buffers, electricity and heating. They visibly form sheltered gardens over the machines, not land that erases the native heating and ice-support mechanics.
-
-**A successful ecosystem is a reason to maintain shipping, not to abandon it.**
-
-### V · Second Nature — a sustained network
-
-**Question:** Can the project keep functioning after the construction celebration?
-
-Gaia beacons consume coordination cells built from biodiversity matrices, superconductors, carbon fiber and lithium. On living worlds, they produce restoration science for the final technology.
-
-Then all five worlds must simultaneously be self-sustaining and retain recent beacon production for ten uninterrupted minutes. This is a modest stress test of the real economy: power, heat, waste disposal, local maintenance, platform throughput and defense.
-
-The win is not a hidden inventory quota, a mandatory extermination count or a ship crossing an arbitrary boundary. Afterward, repeatable laboratory productivity gives the network continued use.
-
-## The player-facing contract
-
-- Every support ceiling, stage threshold and next-stage requirement is visible.
-- Every operation exposes per-cycle effects in recipe descriptions.
-- The field guide is available from the start, not behind research.
-- Circuit signals make automation possible without scripting.
-- Raids warn before dispatch, require real nests, and respect peaceful mode.
-- Removing the source nest during the warning cancels the attack.
-- A cleared perimeter works. No secret spawns inside player infrastructure.
-- No arbitrary biters on Fulgora or Aquilo. Demolishers remain their own native system.
-- Terraforming does not delete resources, roads, ghosts, crops, water or support tiles.
-- A planted forest is sparse and grows outside a safety margin around infrastructure.
-- No full-map entity scan on a normal update tick.
-
-## Deliberately outside v0.1.0
-
-These are **not claimed features**: global conversion of every chunk, actual atmospheric fluid simulation, physical engine temperature/pressure changes, a new planetary map generator, custom enemy AI pathfinding, replacement animations for every machine, new music/voice acting, third-party planet integration, support for other total conversions, or a completed multiplayer/full-campaign certification.
-
-The included systems form one coherent campaign implementation. Expand its scope only after verifying and balancing that campaign in the real game.
+- No fake whole-infinite-map pollution percentage.
+- No orbital starting base or automatic rocket launch.
+- No instant world repaint, foundation deletion or universal hazard removal.
+- No claim of a complete graphical, multiplayer or full-campaign playthrough.
+- No new experimental 2.1 build or unverified compatibility with other total overhauls.

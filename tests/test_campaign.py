@@ -353,3 +353,29 @@ def test_chunk_deletion_does_not_restart_a_large_survey(game_lua):
       for _=1,100 do P.step(w,s) end
       assert(#w.chunks==66 and w.air.survey_complete)
     ''')
+
+
+def test_newly_detected_hotspots_block_readiness_before_the_survey_finishes(game_lua):
+    make_ready(game_lua)
+    game_lua.execute('''
+      local S=require('scripts.state');local M=require('shared.model');local P=require('scripts.pollution')
+      local w=S.by_planet('nauvis');local s=game.surfaces[1]
+      P.track(w,0,0);P.track(w,1,0);P.step(w,s);P.step(w,s)
+      assert(M.ready(w))
+      s.pollution=50;P.step(w,s)
+      assert(w.air.peak==0 and w.air.scan_peak==50)
+      assert(not M.ready(w) and not require('scripts.natives').available(w))
+    ''')
+
+
+def test_closing_dashboard_cancels_a_pending_irreversible_choice(game_lua):
+    make_ready(game_lua)
+    game_lua.execute('''
+      local G=require('scripts.gui');local S=require('scripts.state');local p=mock.player(1);G.open(p)
+      G.click({player_index=1,element={valid=true,name='sn_choose_eradication'}})
+      assert(S.root().players[1].pending_fate=='eradication')
+      G.close(p);G.open(p)
+      assert(not S.root().players[1].pending_fate)
+      G.click({player_index=1,element={valid=true,name='sn_confirm_fate'}})
+      assert(not S.by_planet('nauvis').native_outcome)
+    ''')

@@ -39,6 +39,8 @@ function G.button(player)
   if not flow.sn_open then flow.add({type = "sprite-button", name = "sn_open", sprite = "sn-logo", style = mod_gui.button_style, tooltip = {"sn-gui.toggle"}}) end
 end
 function G.close(player)
+  local prefs = S.root().players[player.index]
+  if prefs then prefs.pending_fate = nil end
   local frame = player.gui.screen.sn_dashboard
   if frame then frame.destroy() end
   player.set_shortcut_toggled("sn-dashboard", false)
@@ -208,7 +210,7 @@ function G.update(player)
   local air = world and world.air
   air_pane.sn_air_world.caption = {"space-location-name." .. prefs.planet}
   air_pane.sn_air_total.caption = air and {"sn-air.total", format(air.total), format(air.trend), format(air.mean), C.air.total_goal} or {"sn-gui.uncharted"}
-  air_pane.sn_air_survey.caption = air and {"sn-air.survey", #(world.chunks or {}), air.dirty, format(air.peak),
+  air_pane.sn_air_survey.caption = air and {"sn-air.survey", #(world.chunks or {}), air.dirty, format(math.max(air.peak, air.scan_peak or 0)),
     air.survey_complete and {"sn-air.complete"} or {"sn-air.pending"}, math.max(0, math.floor((game.tick - air.sampled_at) / 60))} or ""
   local here = S.planet(player.surface)
   local local_pollution = Pollution.local_amount(player.surface, player.position)

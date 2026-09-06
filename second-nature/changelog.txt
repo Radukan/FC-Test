@@ -4,6 +4,11 @@ Date: 2026-09-06
   Bugfixes:
     - Namespace all GUI child names: tabs, value, text and state no longer collide with LuaGuiElement members.
     - Validate GUI names against the stable API in runtime tests; protect dashboard opening from fatal GUI errors.
+    - Do not call crafting-only recipe APIs on the ecology monitor's constant-combinator entity.
+    - Import core utilities explicitly and resolve all modules at control parsing, not from runtime callbacks.
+    - Keep the special default map preset valid and explicitly preserve native nest/worm generation.
+    - Ignore ungenerated/pollution-only chunks when indexing terrain; chunk removal no longer restarts a survey.
+    - Newly detected hotspots immediately block readiness; closing the dashboard cancels pending native confirmation.
   Features:
     - Stable Factorio 2.0 only. Experimental builds are no longer developed or published.
     - Last Landing: one shared cargo lander, two loaded turrets and starter walls per force in new freeplay.
