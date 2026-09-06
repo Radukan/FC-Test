@@ -305,3 +305,20 @@ def test_canceling_native_choice_never_changes_the_world(game_lua):
       G.click({player_index=1,element={valid=true,name='sn_cancel_fate'}})
       assert(not S.by_planet('nauvis').native_outcome and not S.root().players[1].pending_fate)
     ''')
+
+
+def test_mobile_natives_cannot_escape_resolution_by_outrunning_the_chunk_survey(game_lua):
+    make_ready(game_lua)
+    game_lua.execute('''
+      local S=require('scripts.state');local N=require('scripts.natives');local s=game.surfaces[1];local w=S.by_planet('nauvis')
+      local b=mock.entity('small-biter',s,{x=4,y=4},mock.enemy,true)
+      assert(N.choose(w,'symbiosis',mock.player(1)))
+      b.position={x=300,y=300};N.tick(w)
+      assert(not b.valid and w.native_outcome.pending==0)
+      assert(s.find_entities_filtered({name='sn-bloomback'})[1].position.x==300)
+      local newborn=mock.entity('small-biter',s,{x=500,y=500},mock.enemy,true)
+      mock.event('on_entity_spawned',{entity=newborn})
+      assert(not newborn.valid and w.native_outcome.processed==2)
+      local snapshot=remote.call('second_nature','get_world','nauvis')
+      assert(snapshot.native_queue==nil and snapshot.native_outcome.pending==0)
+    ''')

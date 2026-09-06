@@ -35,7 +35,7 @@ def run(binary:Path):
         result=subprocess.run(command,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,timeout=240)
         print(result.stdout,end='');(root/(label+'.log')).write_text(result.stdout)
         if result.returncode:
-            summary=result.stdout[-6000:].replace('%','%25').replace('\r','%0D').replace('\n','%0A')
+            summary=result.stdout[-3300:].replace('%','%25').replace('\r','%0D').replace('\n','%0A')
             print('::error title=Factorio engine failure::'+summary)
             raise SystemExit(f'Factorio {label} failed ({result.returncode}); see {root/(label+".log")}')
         outputs.append(result.stdout)

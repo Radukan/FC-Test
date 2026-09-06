@@ -66,6 +66,7 @@ script.on_event(defines.events.on_chunk_generated, function(event)
   if world then Natives.chunk(world, event.surface, event.position) end
 end)
 script.on_event(defines.events.on_force_created, Natives.diplomacy)
+script.on_event(defines.events.on_entity_spawned, Natives.spawned)
 script.on_event(defines.events.on_biter_base_built, function(event)
   local entity = event.entity
   if entity and entity.valid then

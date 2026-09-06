@@ -7,7 +7,7 @@ function table.deepcopy(t)
 end
 mock={handlers={},nth={},commands={},messages={},logs={},renders={},next_id=100,next_registration=0,entities={},surface_calls={}}
 storage={};defines={events={},command={attack_area=1,attack=2,go_to_location=3,stop=4},distraction={by_enemy=1,none=0},controllers={character=1,cutscene=2}}
-local event_names={'on_chunk_generated','on_force_created','on_biter_base_built','on_rocket_launched','on_cutscene_cancelled','on_pre_player_mined_item','on_robot_pre_mined','on_entity_died','script_raised_destroy','on_built_entity','on_robot_built_entity','script_raised_built','script_raised_revive','on_space_platform_built_entity','on_entity_cloned','on_object_destroyed','on_surface_created','on_surface_deleted','on_surface_cleared','on_forces_merged','on_player_created','on_player_joined_game','on_player_removed','on_gui_click','on_gui_selection_state_changed','on_gui_closed','on_lua_shortcut','on_runtime_mod_setting_changed'}
+local event_names={'on_entity_spawned','on_chunk_generated','on_force_created','on_biter_base_built','on_rocket_launched','on_cutscene_cancelled','on_pre_player_mined_item','on_robot_pre_mined','on_entity_died','script_raised_destroy','on_built_entity','on_robot_built_entity','script_raised_built','script_raised_revive','on_space_platform_built_entity','on_entity_cloned','on_object_destroyed','on_surface_created','on_surface_deleted','on_surface_cleared','on_forces_merged','on_player_created','on_player_joined_game','on_player_removed','on_gui_click','on_gui_selection_state_changed','on_gui_closed','on_lua_shortcut','on_runtime_mod_setting_changed'}
 for i,name in ipairs(event_names) do defines.events[name]=i end
 script={mod_name='second-nature'}
 script.on_init=function(fn) mock.init=fn end
@@ -131,7 +131,7 @@ function mock.entity(name,surface,pos,force,no_event)
     _recipe=def and def.fixed and ('sn-'..def.fixed) or nil,commandable={}}
   e.inventory={};e.insert=function(stack) e.inventory[stack.name]=(e.inventory[stack.name] or 0)+stack.count;return stack.count end
   e.commandable.set_command=function(command) e.command=command end
-  e.get_recipe=function() return e._recipe and {name=e._recipe} or nil end
+  e.get_recipe=function() assert(e.type=='assembling-machine','Entity is not crafting-machine');return e._recipe and {name=e._recipe} or nil end
   local behavior={sections={}}
   behavior.get_section=function(i) return behavior.sections[i] end
   behavior.add_section=function()

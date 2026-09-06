@@ -53,8 +53,10 @@ function S.register(entity)
   local bucket = id % C.bucket_count + 1
   local list = root.buckets[bucket]
   local monitor = entity.type == "constant-combinator"
+  local recipe
+  if not monitor then recipe = S.recipe(entity) end
   local rec = {entity = entity, id = id, surface_index = entity.surface.index, bucket = bucket, slot = #list + 1,
-    produced = monitor and 0 or entity.products_finished, recipe = monitor and nil or S.recipe(entity), sequence = 0,
+    produced = monitor and 0 or entity.products_finished, recipe = recipe, sequence = 0,
     last_cycle = -C.beacon_freshness, active = false, monitor = monitor}
   rec.registration = script.register_on_object_destroyed(entity)
   root.registrations[rec.registration] = id
