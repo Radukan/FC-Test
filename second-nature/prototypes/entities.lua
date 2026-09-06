@@ -1,6 +1,7 @@
 local K = require("shared.catalog")
 local C = require("shared.constants")
 local H = require("prototypes.helpers")
+local Art = require("prototypes.artwork")
 local categories = {}
 for index, x in ipairs(K.machines) do
   local kind = x.entity_type or "assembling-machine"
@@ -14,8 +15,9 @@ for index, x in ipairs(K.machines) do
   p.max_health = x.planet and 700 or (x.fixed and 500 or 350)
   local rgb = C.colors[x.color]
   local tint = {0.65 + rgb[1] * 0.35, 0.65 + rgb[2] * 0.35, 0.65 + rgb[3] * 0.35}
-  H.tint_sprites(p.graphics_set, tint)
-  H.tint_sprites(p.sprites, tint)
+  p.water_reflection, p.corpse = nil, nil
+  if kind == "assembling-machine" then p.graphics_set = {animation = Art.four_way(x.name, true)}
+  else p.sprites = Art.four_way(x.name, false) end
   if kind == "assembling-machine" then
     p.crafting_categories = {}
     for _, category in ipairs(x.categories) do
@@ -34,12 +36,7 @@ for index, x in ipairs(K.machines) do
     p.fixed_recipe = x.fixed and "sn-" .. x.fixed or nil
     if x.fixed then p.surface_conditions = H.conditions({domain = true, planet = x.planet}) end
     p.production_health_effect = nil
-    p.graphics_set.working_visualisations = p.graphics_set.working_visualisations or {}
-    p.graphics_set.working_visualisations[#p.graphics_set.working_visualisations + 1] = {
-      always_draw = true, render_layer = "higher-object-above",
-      animation = {filename = H.icon("badge-" .. x.color), width = 64, height = 64, scale = 0.32,
-        shift = {0, -0.25}, draw_as_glow = true}
-    }
+
   end
   data:extend({p, {
     type = "item", name = p.name, icon = H.icon(x.name), icon_size = 64,

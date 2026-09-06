@@ -10,6 +10,7 @@ local Pollution = require("scripts.pollution")
 local Campaign = require("scripts.campaign")
 local Natives = require("scripts.natives")
 local Terrain = require("scripts.terrain")
+local Upgrades = require("scripts.upgrades")
 local function initialize(fresh)
   State.init()
   Campaign.init(fresh == true)
@@ -34,6 +35,7 @@ local function initialize(fresh)
     end
   end
   Natives.diplomacy()
+  for _, force in pairs(game.forces) do Upgrades.refresh(force) end
   Network.configure_victory()
   for _, player in pairs(game.players) do
     if player.gui.screen.sn_dashboard then Gui.close(player) end
@@ -69,7 +71,12 @@ script.on_event(defines.events.on_chunk_generated, function(event)
   local world = State.world(event.surface)
   if world then Natives.chunk(world, event.surface, event.position) end
 end)
-script.on_event(defines.events.on_force_created, Natives.diplomacy)
+script.on_event(defines.events.on_force_created, function(event)
+  Natives.diplomacy();if event.force then Upgrades.refresh(event.force) end
+end)
+script.on_event({defines.events.on_research_finished, defines.events.on_research_reversed}, function(event)
+  Upgrades.refresh(event.research.force)
+end)
 script.on_event(defines.events.on_entity_spawned, Natives.spawned)
 script.on_event(defines.events.on_biter_base_built, function(event)
   local entity = event.entity
@@ -90,12 +97,13 @@ script.on_event(defines.events.on_surface_cleared, function(event)
 end)
 script.on_event(defines.events.on_forces_merged, function(event)
   Network.merge(event.source_index, event.destination.index)
+  Upgrades.refresh(event.destination)
   local camps = State.root().campaign.camps
   local source, destination = camps[event.source_index], camps[event.destination.index]
   if source and destination then
     destination.rocket_launched = destination.rocket_launched or source.rocket_launched
-    if source.ship and source.ship.valid then source.ship.minable = true end
-    if destination.rocket_launched and destination.ship and destination.ship.valid then destination.ship.minable = true end
+    if source.ship and source.ship.valid then source.ship.minable, source.ship.destructible = false, false end
+    if destination.rocket_launched and destination.ship and destination.ship.valid then destination.ship.minable = false end
   end
   camps[event.destination.index] = destination or source
   camps[event.source_index] = nil

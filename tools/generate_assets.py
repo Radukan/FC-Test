@@ -203,7 +203,7 @@ def generate():
     }
     bymachine={m['name']:m for m in k['machines']}
     for index,t in enumerate(k['technologies']):
-        m=bymachine[machine_by_tech[t['name']]];c=PAL[m['color']];a=Art();
+        m=bymachine[machine_by_tech.get(t['name'],'ecology-monitor')];c=PAL[m['color']];a=Art();
         pts=[(32+28*math.cos(math.pi/3*i-math.pi/2),32+28*math.sin(math.pi/3*i-math.pi/2)) for i in range(6)]
         a.poly(pts,(*DARK,240),GOLD,.6);a.arc((7,7,57,57),45,310,c,.7)
         icon=machine_icon(m).image.resize((196,196),Image.Resampling.LANCZOS);a.image.alpha_composite(icon,(30,26))

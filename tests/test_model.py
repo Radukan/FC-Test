@@ -38,7 +38,7 @@ def test_toxicity_is_a_hard_biodiversity_constraint(lua):
       s.values.biodiversity=0;s.toxicity=100
       M.apply(s,{biodiversity=1000},1,1)
       assert(s.values.biodiversity==30)
-      M.apply(s,{toxicity=-100,biodiversity=1000},1,1)
+      M.apply(s,{toxicity=-100,biodiversity=1000},1/require('shared.constants').pace.fitness,1)
       assert(s.values.biodiversity==100 and s.toxicity==0)
     ''')
 

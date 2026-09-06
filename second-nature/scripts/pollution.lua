@@ -4,9 +4,10 @@ local Model = require("shared.model")
 local P = {}
 function P.ensure(world)
   world.chunks = world.chunks or {}
+  if world.planet == "nauvis" then world.landscape = world.landscape or {mean=0,measured=false,samples=0} end
   world.chunk_keys = world.chunk_keys or {}
   world.air = world.air or {total = 0, mean = 0, peak = 0, trend = 0, dirty = 0, measured = false,
-    survey_complete = false, cursor = 0, scan_peak = 0, scan_dirty = 0, scan_count = 0, sampled_at = -C.air.sample_ticks}
+    survey_complete = false, cursor = 0, scan_peak = 0, scan_dirty = 0, scan_count = 0, scan_cover = 0, scan_land = 0, sampled_at = -C.air.sample_ticks}
 end
 function P.track(world, x, y)
   P.ensure(world)
@@ -41,13 +42,21 @@ function P.sample(world, surface)
     air.trend = (total - air.total) * 3600 / (game.tick - air.sampled_at)
   end
   air.total, air.mean, air.measured, air.sampled_at = total, total / math.max(1, #world.chunks), true, game.tick
-  if #world.chunks == 0 then air.survey_complete, air.peak = true, 0 end
+  if #world.chunks == 0 then
+    air.survey_complete, air.peak = true, 0
+    if world.landscape then world.landscape.mean, world.landscape.measured = 1, true end
+  end
   Model.refresh(world)
 end
 local function finish_survey(world)
   local air = world.air
   air.peak, air.dirty, air.surveyed_at = air.scan_peak, air.scan_dirty, game.tick
   air.survey_complete = air.scan_count >= #world.chunks
+  if world.landscape and air.survey_complete then
+    world.landscape.mean = (air.scan_land or 0) > 0 and (air.scan_cover or 0) / air.scan_land or 1
+    world.landscape.measured, world.landscape.samples = true, air.scan_land or 0
+  end
+  air.scan_cover, air.scan_land = 0, 0
   air.scan_count, air.scan_peak, air.scan_dirty = 0, 0, 0
   Model.refresh(world)
 end
@@ -74,6 +83,10 @@ function P.step(world, surface)
   air.scan_peak = math.max(air.scan_peak, amount)
   if amount > C.air.green_limit then air.scan_dirty = air.scan_dirty + 1 end
   air.scan_count = air.scan_count + 1
+  if chunk.land then
+    air.scan_cover = (air.scan_cover or 0) + (chunk.cover or 0)
+    air.scan_land = (air.scan_land or 0) + 1
+  end
   if air.cursor == #list then
     finish_survey(world)
   end

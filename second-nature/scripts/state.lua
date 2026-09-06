@@ -126,6 +126,6 @@ function S.snapshot(name)
     score = world.score, toxicity = world.toxicity, pressure = world.pressure, ambient = world.ambient, cycles = world.cycles,
     machines = world.machine_count, active = world.active_count, restored_tiles = world.restored_tiles, grown_trees = world.grown_trees,
     removed_pollution = world.removed_pollution, contributions = table.deepcopy(world.contributions),
-    air = world.air and table.deepcopy(world.air), generated_chunks = #(world.chunks or {}), native_outcome = world.native_outcome and table.deepcopy(world.native_outcome)}
+    air = world.air and table.deepcopy(world.air), landscape = world.landscape and table.deepcopy(world.landscape), generated_chunks = #(world.chunks or {}), native_outcome = world.native_outcome and table.deepcopy(world.native_outcome)}
 end
 return S

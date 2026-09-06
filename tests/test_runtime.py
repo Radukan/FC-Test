@@ -11,7 +11,7 @@ def test_install_and_recipe_accounting_without_free_idle_progress(game_lua):
       e.products_finished=1;mock.run(240)
       local w=S.by_planet('nauvis')
       assert(w.cycles==1 and w.values.atmosphere>initial)
-      assert(s.pollution==0 and w.removed_pollution==25)
+      assert(s.pollution==15 and w.removed_pollution==10)
       mock.run(480);assert(w.cycles==1)
       assert(w.contributions[1]==1)
     ''')
@@ -161,7 +161,7 @@ def test_terrain_never_replaces_protected_tiles(game_lua,tile):
       local S=require('scripts.state');local T=require('scripts.terrain');local s=game.surfaces[1]
       settings.global['sn-living-terrain'].value=true;s.tile_name=test_tile
       local e=mock.entity('sn-soil-enricher',s);local w=S.by_planet('nauvis');w.stage=3
-      T.apply(S.root().machines[e.unit_number],w,{terrain=true,trees=true},100)
+      T.succession(w,s,{x=0,y=0,cover=1,stress=0,ecology_tick=0,stripe=0,land=true,trees={}},0)
       assert(#s.changed_tiles==0 and w.grown_trees==0)
     ''')
 
@@ -169,25 +169,24 @@ def test_terrain_never_replaces_protected_tiles(game_lua,tile):
 def test_terrain_is_bounded_and_respects_resources_hidden_tiles_and_generation(game_lua):
     game_lua.execute('''
       local S=require('scripts.state');local T=require('scripts.terrain');local s=game.surfaces[1]
+      local w=S.by_planet('nauvis');w.stage=4
+      for key in pairs(w.values) do w.values[key]=100 end
+      local c={x=0,y=0,cover=1,stress=0,ecology_tick=0,stripe=0,land=true,trees={}}
       settings.global['sn-living-terrain'].value=true
-      local e=mock.entity('sn-soil-enricher',s);local w=S.by_planet('nauvis');w.stage=3;local rec=S.root().machines[e.unit_number]
-      s.blocked=true;T.apply(rec,w,{terrain=true},100);assert(#s.changed_tiles==0)
-      s.blocked=false;s.hidden_tile='water';T.apply(rec,w,{terrain=true},100);assert(#s.changed_tiles==0)
-      s.hidden_tile=nil;s.generated=false;T.apply(rec,w,{terrain=true},100);assert(#s.changed_tiles==0)
-      s.generated=true
-      for i=1,100 do T.apply(rec,w,{terrain=true},100) end
-      assert(#s.changed_tiles>0 and #s.changed_tiles<=20 and S.root().visual_budget==0)
+      s.blocked=true;T.succession(w,s,c,0);assert(#s.changed_tiles==0)
+      s.blocked=false;s.hidden_tile='water';T.succession(w,s,c,0);assert(#s.changed_tiles==0)
+      s.hidden_tile=nil;s.generated=false;T.succession(w,s,c,0);assert(#s.changed_tiles==0)
+      s.generated=true;T.succession(w,s,c,0)
+      assert(#s.changed_tiles>0 and #s.changed_tiles<=128)
     ''')
 
 
-def test_aquilo_uses_entity_anchored_gardens_without_tile_replacement(game_lua):
+def test_aquilo_original_garden_models_never_replace_support_tiles(game_lua):
     game_lua.execute('''
       local S=require('scripts.state');local T=require('scripts.terrain');local s=mock.surface('aquilo',5)
-      settings.global['sn-living-terrain'].value=true
-      local e=mock.entity('sn-cryogenic-garden',s);local w=S.by_planet('aquilo');w.stage=2;local rec=S.root().machines[e.unit_number]
-      T.apply(rec,w,{garden=true,terrain=true},10);T.apply(rec,w,{garden=true,terrain=true},10)
-      assert(#mock.renders==1 and #s.changed_tiles==0 and rec.garden.valid)
-      e.destroy();assert(not mock.renders[1].valid)
+      local w=S.by_planet('aquilo');w.stage=4;settings.global['sn-living-terrain'].value=true
+      T.succession(w,s,{x=0,y=0,cover=1,ecology_tick=0},0)
+      assert(#s.changed_tiles==0 and #mock.renders==0)
     ''')
 
 

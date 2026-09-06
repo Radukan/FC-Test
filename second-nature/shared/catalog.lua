@@ -137,7 +137,7 @@ recipe("ceramic-membrane", "Porous ceramic membrane", "crafting", 4, {{"stone-br
 recipe("water-filtration", "Purify process water", "sn-reclamation", 5, {{"sn-filter-cartridge", 1}, {"water", 100, "fluid"}}, {{"sn-clean-water", 90, "fluid"}, {"sn-spent-filter", 1}}, {recycle = false})
 recipe("neutralization-charge", "Mineral neutralization charge", "crafting", 3, {{"stone", 6}, {"sn-biochar", 1}}, {{"sn-neutralization-charge", 2}})
 recipe("pioneer-timber", "Pioneer timber cultivation", "sn-bioculture", 18, {{"sn-algal-biomass", 12}, {"sn-compost", 2}, {"water", 30, "fluid"}}, {{"wood", 6}})
-recipe("seed-mix", "Prepare pioneer seed mix", "crafting", 3, {{"sn-microbial-culture", 1}, {"wood", 2}, {"sn-compost", 2}}, {{"sn-seed-mix", 2}})
+recipe("seed-mix", "Prepare pioneer seed mix", "crafting", 3, {{"sn-microbial-culture", 1}, {"sn-algal-biomass", 4}, {"sn-compost", 2}}, {{"sn-seed-mix", 2}})
 recipe("hydroponic-timber", "Established timber cultivation", "sn-hydroponics", 12, {{"sn-seed-mix", 1}, {"sn-mineral-nutrients", 2}, {"sn-clean-water", 40, "fluid"}}, {{"wood", 12}, {"sn-seed-mix", 1}}, {stage = 2, domain = true, recycle = false})
 recipe("thermal-buffer", "Charge a new thermal buffer", "crafting", 5, {{"steel-plate", 1}, {"copper-plate", 3}, {"sn-glass", 2}}, {{"sn-thermal-buffer", 2}}, {recycle = false})
 recipe("water-electrolysis", "Water electrolysis", "sn-electrochemistry", 10, {{"sn-clean-water", 100, "fluid"}}, {{"sn-hydrogen", 80, "fluid"}, {"sn-oxygen", 40, "fluid"}})
@@ -317,6 +317,13 @@ tech("ecological-research", "Ecological research productivity", {"sn-living-worl
   "Continue using the restored network after victory. Each level adds 2% laboratory productivity.",
   {max_level = "infinite", effects = {{type = "laboratory-productivity", modifier = 0.02}}, seconds = 60})
 
+local Expedition = require("shared.expedition")
+for _, x in ipairs(Expedition.items) do
+  if x.kind == "item" then x.family = "mineral"; K.items[#K.items + 1] = x end
+end
+for _, x in ipairs(Expedition.recipes) do K.recipes[#K.recipes + 1] = x end
+for _, x in ipairs(Expedition.technologies) do K.technologies[#K.technologies + 1] = x end
+K.expedition = Expedition.items
 K.by_recipe, K.by_machine = {}, {}
 for _, r in ipairs(K.recipes) do K.by_recipe["sn-" .. r.name] = r end
 for _, m in ipairs(K.machines) do K.by_machine["sn-" .. m.name] = m end

@@ -1,109 +1,117 @@
 local C = require("shared.constants")
 local S = require("scripts.state")
 local P = require("scripts.pollution")
+local Habitat = require("shared.succession")
 local T = {}
-local harmless = {tree = true, corpse = true, ["item-entity"] = true, ["flying-text"] = true, ["smoke-with-trigger"] = true}
-local function clear(surface, position, margin)
-  local area = {{position.x - margin, position.y - margin}, {position.x + 1 + margin, position.y + 1 + margin}}
-  -- Limit the work. More entities than this is itself a good reason not to alter a tile.
-  local entities = surface.find_entities_filtered({area = area, limit = 12})
-  if #entities == 12 then return false end
-  for _, entity in ipairs(entities) do if not harmless[entity.type] then return false end end
+local harmless = {tree=true,corpse=true,["item-entity"]=true,["flying-text"]=true,["smoke-with-trigger"]=true}
+local function clear(surface,position,margin)
+  local entities=surface.find_entities_filtered({area={{position.x-margin,position.y-margin},{position.x+1+margin,position.y+1+margin}},limit=12})
+  if #entities==12 then return false end
+  for _,entity in ipairs(entities) do if not harmless[entity.type] then return false end end
   return true
 end
-function T.apply(rec, world, effect, cycles)
-  if not settings.global["sn-living-terrain"].value then return end
-  local entity, profile, root = rec.entity, C.profiles[world.planet], S.root()
-  if effect.garden and world.stage >= 1 and not (rec.garden and rec.garden.valid) then
-    rec.garden = rendering.draw_sprite({sprite = "sn-garden", target = {entity = entity, offset = {0, -0.2}}, surface = entity.surface,
-      render_layer = "higher-object-above", x_scale = 0.46, y_scale = 0.46})
+function T.apply(rec,world,effect,cycles)
+  if not effect.terrain or cycles<=0 then return end
+  local entity=rec.entity
+  if P.local_amount(entity.surface,entity.position)>C.air.green_limit then return end
+  -- Actual productive installations support nearby habitat; they do not paint instant grass.
+  rec.sequence=rec.sequence+1
+  local x,y=math.floor(entity.position.x/32),math.floor(entity.position.y/32)
+  local offset=rec.sequence%5
+  local dx,dy=({{0,0},{1,0},{0,1},{-1,0},{0,-1}})[offset+1][1],({{0,0},{1,0},{0,1},{-1,0},{0,-1}})[offset+1][2]
+  local index=world.chunk_keys and world.chunk_keys[(x+dx)..":"..(y+dy)]
+  if index then world.chunks[index].nursery_until=game.tick+10*60*60 end
+end
+local function initialize_chunk(world,surface,chunk)
+  if chunk.cover~=nil then return end
+  local total,green=0,0
+  for _,offset in ipairs({{4,4},{12,20},{20,12},{28,28}}) do
+    local tile=surface.get_tile({x=chunk.x*32+offset[1],y=chunk.y*32+offset[2]})
+    if C.safe_tiles[tile.name] and not tile.hidden_tile then total=total+1;if C.barren_tiles[tile.name] then green=green+1 end end
   end
-  if P.local_amount(entity.surface, entity.position) > C.air.green_limit then return end
-  if not effect.terrain or not profile.terrain or world.stage < 2 or root.visual_budget <= 0 then return end
-  local radius = world.stage >= 4 and 64 or (world.stage >= 3 and 48 or 32)
-  for _ = 1, math.min(3, cycles, root.visual_budget) do
-    root.visual_budget = root.visual_budget - 1
-    rec.sequence = rec.sequence + 1
-    -- Stable per-entity spatial sequence, independent of global random state and GUI activity.
-    local hash = (rec.id * 48271 + rec.sequence * 69621) % 2147483647
-    local angle = (hash % 6283) / 1000
-    local distance = 9 + ((math.floor(hash / 6283) + rec.sequence * 17) % (radius - 8))
-    local pos = {x = math.floor(entity.position.x + math.cos(angle) * distance), y = math.floor(entity.position.y + math.sin(angle) * distance)}
-    local surface = entity.surface
-    if surface.is_chunk_generated({math.floor(pos.x / 32), math.floor(pos.y / 32)}) then
-      local tile = surface.get_tile(pos)
-      if C.safe_tiles[tile.name] and not tile.hidden_tile and P.local_amount(surface, pos) <= C.air.green_limit and clear(surface, pos, 0.25) then
-        if tile.name ~= profile.terrain then
-          -- No collision correction, no removal of entities/decoratives, no raised build events.
-          surface.set_tiles({{name = profile.terrain, position = pos}}, false, false, false, false)
-          world.restored_tiles = world.restored_tiles + 1
-        end
-        if effect.trees and world.stage >= 3 and settings.global["sn-tree-growth"].value and rec.sequence % 5 == 0
-          and clear(surface, pos, 3) and surface.count_entities_filtered({position = pos, radius = 6, type = "tree", limit = 1}) == 0 then
-          local location = {x = pos.x + 0.5, y = pos.y + 0.5}
-          if prototypes.entity[profile.tree] and surface.can_place_entity({name = profile.tree, position = location}) then
-            local tree = surface.create_entity({name = profile.tree, position = location, force = "neutral", raise_built = false})
-            if tree then world.grown_trees = world.grown_trees + 1 end
-          end
-        end
-      end
+  chunk.land=total>0
+  -- Preserve old terrain on upgrade; a fresh barren expedition starts near zero.
+  chunk.cover=world.native_outcome and Habitat.target(world) or (total>0 and green/total or 0)
+  chunk.stress=0;chunk.ecology_tick=game.tick;chunk.trees=chunk.trees or {}
+end
+local function tree_life(world,surface,chunk,pollution,broods)
+  local trees=chunk.trees or {};chunk.trees=trees
+  for i=#trees,1,-1 do if not trees[i].valid then table.remove(trees,i) end end
+  if chunk.cover<.38 and chunk.stress>.35 and #trees>0 then
+    local tree=table.remove(trees)
+    if tree.valid then
+      local pos=tree.position
+      tree.destroy({raise_destroy=true})
+      world.withered_trees=(world.withered_trees or 0)+1
+      if prototypes.entity["dead-dry-hairy-tree"] then surface.create_entity({name="dead-dry-hairy-tree",position=pos,force="neutral"}) end
     end
+    return
+  end
+  if not settings.global["sn-tree-growth"].value or chunk.cover<.64 or pollution>C.air.green_limit or broods then return end
+  if game.tick-(chunk.tree_tick or 0)<5*60*60 or #trees>=8 then return end
+  local x0,y0=chunk.x*32,chunk.y*32
+  local pos={x=x0+4+(chunk.stripe*7)%24,y=y0+4+(chunk.stripe*11)%24}
+  local tile=surface.get_tile(pos)
+  local name=C.profiles[world.planet].tree
+  if name and C.safe_tiles[tile.name] and not tile.hidden_tile and clear(surface,pos,3)
+    and surface.count_entities_filtered({position=pos,radius=6,type="tree",limit=1})==0
+    and surface.can_place_entity({name=name,position=pos}) then
+    local tree=surface.create_entity({name=name,position=pos,force="neutral",raise_built=false})
+    if tree then trees[#trees+1]=tree;chunk.tree_tick=game.tick;world.grown_trees=world.grown_trees+1 end
   end
 end
--- A bounded planetary succession front supplements the early machine-local gardens.
--- This changes only natural Nauvis ground. Buildings, ore, paving and hidden support stay intact.
-function T.succession(world, surface, chunk, pollution)
-  if world.planet ~= "nauvis" or not settings.global["sn-living-terrain"].value then return end
-  local x0, y0 = chunk.x * 32, chunk.y * 32
-  local area = {{x0 - 1, y0 - 1}, {x0 + 33, y0 + 33}}
-  local occupants = surface.find_entities_filtered({area = area, limit = 256})
-  if #occupants >= 256 then return end
-  local blocked, broods = {}, false
-  for _, entity in ipairs(occupants) do
+function T.succession(world,surface,chunk,pollution)
+  if not surface.is_chunk_generated({chunk.x,chunk.y}) then return end
+  local profile=C.profiles[world.planet]
+  if not profile.terrain then return end -- Aquilo never loses heat-supporting ice/foundations.
+  initialize_chunk(world,surface,chunk)
+  local minutes=math.max(0,game.tick-(chunk.ecology_tick or game.tick))/3600
+  chunk.ecology_tick=game.tick
+  local x0,y0=chunk.x*32,chunk.y*32
+  local area={{x0-1,y0-1},{x0+33,y0+33}}
+  local broods=surface.count_entities_filtered({area=area,force="enemy",type={"unit-spawner","unit"},limit=1})>0
+  local bonus=world.terrain_bonus_until and game.tick<world.terrain_bonus_until and world.terrain_bonus or 1
+  local supported=world.stage>=4 or (world.last_clean_operation and game.tick-world.last_clean_operation<15*60*60)
+    or (chunk.nursery_until and game.tick<chunk.nursery_until)
+  local before=chunk.cover
+  Habitat.advance(chunk,world,pollution,minutes,supported and bonus or 0,broods)
+  if not supported and chunk.cover>before then chunk.cover=before end
+  if not settings.global["sn-living-terrain"].value then return end
+  local occupants=surface.find_entities_filtered({area=area,limit=256})
+  if #occupants>=256 then return end
+  local blocked={}
+  for _,entity in ipairs(occupants) do
     if entity.valid and not harmless[entity.type] then
-      local b = entity.bounding_box
-      local left = b and b.left_top or {x = entity.position.x - 2, y = entity.position.y - 2}
-      local right = b and b.right_bottom or {x = entity.position.x + 2, y = entity.position.y + 2}
-      for x = math.max(x0, math.floor(left.x) - 1), math.min(x0 + 31, math.ceil(right.x)) do
-        for y = math.max(y0, math.floor(left.y) - 1), math.min(y0 + 31, math.ceil(right.y)) do blocked[x .. ":" .. y] = true end
+      local b=entity.bounding_box
+      local left=b and b.left_top or {x=entity.position.x-2,y=entity.position.y-2}
+      local right=b and b.right_bottom or {x=entity.position.x+2,y=entity.position.y+2}
+      for x=math.max(x0,math.floor(left.x)-1),math.min(x0+31,math.ceil(right.x)) do
+        for y=math.max(y0,math.floor(left.y)-1),math.min(y0+31,math.ceil(right.y)) do blocked[x..":"..y]=true end
       end
-      if entity.force.name == "enemy" and (entity.type == "unit-spawner" or entity.type == "unit") then broods = true end
     end
   end
-  chunk.stripe = ((chunk.stripe or 0) + 1) % 8
-  local changes = {}
-  local green = world.stage >= 4 and pollution <= C.air.green_limit and not broods
-  local wither = pollution >= C.air.wilt_limit or broods
-  for offset = 0, C.air.tile_batch - 1 do
-    local index = chunk.stripe * C.air.tile_batch + offset
-    local pos = {x = x0 + index % 32, y = y0 + math.floor(index / 32)}
-    if not blocked[pos.x .. ":" .. pos.y] then
-      local tile = surface.get_tile(pos)
+  chunk.stripe=((chunk.stripe or 0)+1)%8
+  local changes={}
+  for offset=0,C.air.tile_batch-1 do
+    local index=chunk.stripe*C.air.tile_batch+offset
+    local pos={x=x0+index%32,y=y0+math.floor(index/32)}
+    if not blocked[pos.x..":"..pos.y] then
+      local tile=surface.get_tile(pos)
       if not tile.hidden_tile then
         local name
-        if green and C.safe_tiles[tile.name] and tile.name ~= "grass-1" then name = "grass-1"
-        elseif wither and C.barren_tiles[tile.name] then name = C.barren_tiles[tile.name]
-        elseif pollution >= C.air.wilt_limit and (tile.name == "water" or tile.name == "deepwater") then name = tile.name .. "-green"
-        elseif pollution <= C.air.green_limit and tile.name == "water-green" then name = "water"
-        elseif pollution <= C.air.green_limit and tile.name == "deepwater-green" then name = "deepwater" end
-        if name then
-          changes[#changes + 1] = {name = name, position = pos}
-          if name == "grass-1" then world.restored_tiles = world.restored_tiles + 1 end
+        if C.safe_tiles[tile.name] then name=Habitat.tile(pos.x,pos.y,chunk.cover,tile.name)
+        elseif world.planet=="nauvis" and chunk.stress>.45 and (tile.name=="water" or tile.name=="deepwater") then name=tile.name.."-green"
+        elseif world.planet=="nauvis" and chunk.stress<.15 and tile.name=="water-green" then name="water"
+        elseif world.planet=="nauvis" and chunk.stress<.15 and tile.name=="deepwater-green" then name="deepwater" end
+        if name and name~=tile.name then
+          changes[#changes+1]={name=name,position=pos}
+          if C.barren_tiles[name] then world.restored_tiles=world.restored_tiles+1
+          elseif C.barren_tiles[tile.name] then world.degraded_tiles=(world.degraded_tiles or 0)+1 end
         end
       end
     end
   end
-  if #changes > 0 then surface.set_tiles(changes, false, false, false, false) end
-  if green and settings.global["sn-tree-growth"].value then
-    local pos = {x = x0 + 4 + chunk.stripe * 3, y = y0 + 5 + (chunk.stripe * 7) % 22}
-    local tile = surface.get_tile(pos)
-    if C.safe_tiles[tile.name] and not tile.hidden_tile and clear(surface, pos, 3)
-      and surface.count_entities_filtered({position = pos, radius = 7, type = "tree", limit = 1}) == 0
-      and surface.can_place_entity({name = C.profiles.nauvis.tree, position = pos}) then
-      if surface.create_entity({name = C.profiles.nauvis.tree, position = pos, force = "neutral", raise_built = false}) then
-        world.grown_trees = world.grown_trees + 1
-      end
-    end
-  end
+  if #changes>0 then surface.set_tiles(changes,false,false,false,false) end
+  tree_life(world,surface,chunk,pollution,broods)
 end
 return T

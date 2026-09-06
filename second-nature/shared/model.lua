@@ -16,6 +16,10 @@ function M.air_ready(s)
   -- Pure-model simulations omit a surface; runtime records always have an air survey.
   return not air or (air.measured and air.survey_complete and air.total <= C.air.total_goal and math.max(air.peak, air.scan_peak or 0) <= C.air.green_limit)
 end
+function M.landscape_ready(s)
+  local land = s.landscape
+  return s.planet ~= "nauvis" or not land or (land.measured and land.mean >= C.pace.landscape_goal)
+end
 function M.cap(s, axis)
   local v = s.values
   if axis == "water" then return math.min(100, v.atmosphere + 30, v.temperature + 35) end
@@ -33,13 +37,13 @@ function M.refresh(s)
   for index, stage in ipairs(C.stages) do
     local eligible = s.toxicity <= stage.max_toxicity
     for i, key in ipairs(C.axes) do eligible = eligible and s.values[key] >= stage.minimum[i] end
-    if eligible and (index < #C.stages or M.air_ready(s)) then s.stage = index - 1 end
+    if eligible and (index < #C.stages or (M.air_ready(s) and M.landscape_ready(s))) then s.stage = index - 1 end
   end
 end
 function M.apply(s, effect, cycles, speed)
   if cycles <= 0 then return 0 end
   local p, total = C.profiles[s.planet], 0
-  local scale = cycles * (speed or 1)
+  local scale = cycles * (speed or 1) * C.pace.fitness
   s.toxicity = M.clamp(s.toxicity + (effect.toxicity or 0) * scale)
   for _, key in ipairs(C.axes) do
     local amount = (effect[key] or 0) * (p.gain[key] or 1) * scale
@@ -57,7 +61,7 @@ function M.apply(s, effect, cycles, speed)
 end
 function M.advance(s, seconds, speed)
   if not s.first_operation then return end -- No off-screen attrition on untouched worlds.
-  local minutes = seconds / 60 * (speed or 1)
+  local minutes = seconds / 60 * (speed or 1) * C.pace.fitness
   local p = C.profiles[s.planet]
   local resilient = s.stage >= 4 and 0.25 or 1
   -- Local measured pollution/spores is a pressure on the ecosystem, not a second global pollution simulator.
@@ -82,9 +86,12 @@ function M.requirements(s, stage_number)
     missing[#missing + 1] = {axis = "smog", target = C.air.total_goal, less = true}
     missing[#missing + 1] = {axis = "hotspot", target = C.air.green_limit, less = true}
   end
+  if stage_number >= 5 and not M.landscape_ready(s) then
+    missing[#missing + 1] = {axis = "habitat", target = C.pace.landscape_goal * 100}
+  end
   return missing
 end
-function M.ready(s) return s and s.stage == #C.stages - 1 and M.air_ready(s) end
+function M.ready(s) return s and s.stage == #C.stages - 1 and M.air_ready(s) and M.landscape_ready(s) end
 -- Total produced is a monotonic engine counter. Recipe switches are intentionally conservative:
 -- establish a new baseline rather than attributing the old recipe's work to a new one.
 function M.completed(record, produced, recipe)

@@ -1,5 +1,6 @@
 local H = require("prototypes.helpers")
 local C = require("shared.constants")
+local Art = require("prototypes.artwork")
 local enabled = settings.startup["sn-desolate-start"].value
 if enabled then
   local map = data.raw.planet.nauvis.map_gen_settings
@@ -49,10 +50,17 @@ lander.localised_name = {"entity-name.sn-lander"}
 lander.localised_description = {"entity-description.sn-lander"}
 lander.inventory_size, lander.hidden, lander.hidden_in_factoriopedia = 48, false, false
 lander.flags = {"placeable-neutral", "player-creation", "not-blueprintable", "not-deconstructable"}
-lander.minable = {mining_time = 3, results = {{type = "item", name = "steel-plate", amount = 40}}}
-lander.dying_explosion = nil
-lander.factoriopedia_simulation = nil
-H.tint_sprites(lander.picture, {0.83, 1, 0.88})
+lander.minable, lander.dying_explosion, lander.corpse = nil, nil, nil
+lander.factoriopedia_simulation, lander.integration_patch, lander.default_status = nil, nil, nil
+lander.picture = Art.sprite("lander-still")
+lander.icon, lander.icon_size, lander.icons = H.icon("lander"), 64, nil
+lander.collision_box, lander.selection_box = {{-4.7,-2.8},{4.7,2.8}}, {{-5,-3.1},{5,3.1}}
+lander.max_health = 5000
+local lander_animation = Art.animation("lander",0.14)
+lander_animation.type, lander_animation.name, lander_animation.direction_count = "animation", "sn-lander-idle", nil
+local status_animation = Art.animation("status-light",0.2)
+status_animation.type, status_animation.name, status_animation.direction_count = "animation", "sn-status-light", nil
+data:extend({lander_animation,status_animation})
 
 local bloom = H.copy("unit", "small-biter")
 bloom.name, bloom.icon, bloom.icons, bloom.icon_size = "sn-bloomback", H.icon("bloomback"), nil, 64

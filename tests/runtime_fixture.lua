@@ -9,7 +9,7 @@ table.deepcopy=nil
 package.preload["util"]=function() table.deepcopy=deepcopy;return {table={deepcopy=deepcopy}} end
 mock={handlers={},nth={},commands={},messages={},logs={},renders={},next_id=100,next_registration=0,entities={},surface_calls={}}
 storage={};defines={events={},command={attack_area=1,attack=2,go_to_location=3,stop=4},distraction={by_enemy=1,none=0},controllers={character=1,cutscene=2}}
-local event_names={'on_entity_spawned','on_chunk_generated','on_force_created','on_biter_base_built','on_rocket_launched','on_cutscene_cancelled','on_pre_player_mined_item','on_robot_pre_mined','on_entity_died','script_raised_destroy','on_built_entity','on_robot_built_entity','script_raised_built','script_raised_revive','on_space_platform_built_entity','on_entity_cloned','on_object_destroyed','on_surface_created','on_surface_deleted','on_surface_cleared','on_forces_merged','on_player_created','on_player_joined_game','on_player_removed','on_gui_click','on_gui_selection_state_changed','on_gui_closed','on_lua_shortcut','on_runtime_mod_setting_changed'}
+local event_names={'on_research_finished','on_research_reversed','on_entity_spawned','on_chunk_generated','on_force_created','on_biter_base_built','on_rocket_launched','on_cutscene_cancelled','on_pre_player_mined_item','on_robot_pre_mined','on_entity_died','script_raised_destroy','on_built_entity','on_robot_built_entity','script_raised_built','script_raised_revive','on_space_platform_built_entity','on_entity_cloned','on_object_destroyed','on_surface_created','on_surface_deleted','on_surface_cleared','on_forces_merged','on_player_created','on_player_joined_game','on_player_removed','on_gui_click','on_gui_selection_state_changed','on_gui_closed','on_lua_shortcut','on_runtime_mod_setting_changed'}
 for i,name in ipairs(event_names) do defines.events[name]=i end
 script={mod_name='second-nature'}
 local loader=require
@@ -41,11 +41,11 @@ remote.add_interface=function(name,methods) remote.interfaces[name]=methods end
 remote.call=function(name,method,...) return remote.interfaces[name][method](...) end
 mock.escape_disabled=false
 remote.add_interface('space_finish_script',{get_no_victory=function() return mock.escape_disabled end,set_no_victory=function(v) mock.escape_disabled=v end})
-settings={startup={['sn-overhaul-progression']={value=true},['sn-desolate-start']={value=true},['sn-legacy-smog']={value=80},['sn-biter-metabolism']={value=true},['sn-menu-background']={value=true}},global={}}
+settings={startup={['sn-expedition-character']={value=true},['sn-overhaul-progression']={value=true},['sn-desolate-start']={value=true},['sn-legacy-smog']={value=80},['sn-biter-metabolism']={value=true},['sn-menu-background']={value=true}},global={}}
 for name,value in pairs({['sn-native-fate']='choose',['sn-restoration-speed']=1,['sn-native-resistance']='balanced',['sn-grace-minutes']=20,['sn-living-terrain']=false,['sn-tree-growth']=false,['sn-network-victory']=true}) do settings.global[name]={value=value} end
 settings.get_player_settings=function() return {['sn-show-welcome']={value=true}} end
 prototypes={entity={}}
-for _,name in ipairs({'sn-bloomback','sn-bloom-nest','sn-lander','tree-04','tree-08-brown','tree-02-red','tree-09','small-biter','small-spitter','sn-rootbreaker','sn-canopy-breaker','sn-blight-spitter','small-wriggler-pentapod','small-strafer-pentapod','small-stomper-pentapod','medium-stomper-pentapod','medium-strafer-pentapod','big-stomper-pentapod','big-strafer-pentapod'}) do prototypes.entity[name]={} end
+for _,name in ipairs({'dead-dry-hairy-tree','sn-bloomback','sn-bloom-nest','sn-lander','tree-04','tree-08-brown','tree-02-red','tree-09','small-biter','small-spitter','sn-rootbreaker','sn-canopy-breaker','sn-blight-spitter','small-wriggler-pentapod','small-strafer-pentapod','small-stomper-pentapod','medium-stomper-pentapod','medium-strafer-pentapod','big-stomper-pentapod','big-strafer-pentapod'}) do prototypes.entity[name]={} end
 log=function(message) mock.logs[#mock.logs+1]=message end
 rendering={}
 rendering.draw_sprite=function(spec)
@@ -55,6 +55,11 @@ rendering.draw_sprite=function(spec)
   mock.renders[#mock.renders+1]=r;return r
 end
 rendering.draw_rectangle=function(spec) local r={valid=true,spec=spec};r.destroy=function() r.valid=false end;mock.renders[#mock.renders+1]=r;return r end
+rendering.draw_animation=function(spec)
+  assert(spec.animation and spec.target.entity and spec.target.entity.valid)
+  local r={valid=true,spec=spec};r.destroy=function() r.valid=false end
+  mock.renders[#mock.renders+1]=r;return r
+end
 rendering.clear=function() for _,r in ipairs(mock.renders) do r.valid=false end end
 mock.forces_by_name={}
 game={tick=0,surfaces={},players={},connected_players={},forces=setmetatable({},{__index=function(_,key) return mock.forces_by_name[key] end}),map_settings={pollution={enabled=true}}}
@@ -112,7 +117,7 @@ function mock.surface(name,index)
   end
   s.find_entities_filtered=function(filter)
     s.query_calls=s.query_calls+1
-    if s.blocked and filter.area then return {{type='resource'}} end
+    if s.blocked and filter.area then return {{valid=true,type='resource',force=mock.neutral,position={x=16,y=16},bounding_box={left_top={x=-1,y=-1},right_bottom={x=33,y=33}}}} end
     local found={}
     for _,e in ipairs(s.entities) do
       local in_range=true
@@ -141,7 +146,7 @@ function mock.entity(name,surface,pos,force,no_event)
   if type(force)=='string' then force=mock.forces_by_name[force] or mock.neutral end
   local def=K.by_machine[name]
   local kind=def and (def.entity_type or 'assembling-machine') or (name:find('spawner') and 'unit-spawner' or (name:find('tree') and 'tree' or 'unit'))
-  if name=='sn-lander' then kind='container' elseif name=='gun-turret' then kind='ammo-turret' elseif name=='stone-wall' then kind='wall' elseif name=='fish' then kind='fish' elseif name=='sn-bloom-nest' then kind='simple-entity-with-owner' elseif name:find('worm') then kind='turret' end
+  if name=='sn-lander' then kind='container' elseif (name=='gun-turret' or name=='sn-sentry-turret') then kind='ammo-turret' elseif (name=='stone-wall' or name=='sn-field-barricade') then kind='wall' elseif name=='fish' then kind='fish' elseif name=='sn-bloom-nest' then kind='simple-entity-with-owner' elseif name:find('worm') then kind='turret' end
   local e={name=name,type=kind,surface=surface,position=pos or {x=0,y=0},force=force or mock.player_force,valid=true,unit_number=mock.next_id,products_finished=0,
     _recipe=def and def.fixed and ('sn-'..def.fixed) or nil,commandable={}}
   e.inventory={};e.insert=function(stack) e.inventory[stack.name]=(e.inventory[stack.name] or 0)+stack.count;return stack.count end

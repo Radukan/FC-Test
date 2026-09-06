@@ -4,7 +4,7 @@ for index, x in ipairs(K.recipes) do
   local ingredients, results = {}, {}
   for _, value in ipairs(x.ingredients) do ingredients[#ingredients + 1] = {type = value[3] or "item", name = value[1], amount = value[2]} end
   for _, value in ipairs(x.results) do results[#results + 1] = {type = value[3] or "item", name = value[1], amount = value[2]} end
-  local icon = x.machine and x.name or nil
+  local icon = x.icon or (x.machine and x.name or nil)
   if not icon then
     for _, value in ipairs(x.results) do if value[1]:sub(1, 3) == "sn-" then icon = value[1]:sub(4); break end end
   end
@@ -21,7 +21,7 @@ for index, x in ipairs(K.recipes) do
     ingredients = ingredients, results = results,
     localised_name = x.machine and {"entity-name.sn-" .. x.name} or {"recipe-name.sn-" .. x.name},
     localised_description = x.effects and {"recipe-description.sn-" .. x.name} or nil,
-    subgroup = x.machine and (K.by_machine["sn-" .. x.name].planet and "sn-planetary" or "sn-production") or (x.operation and "sn-operations" or "sn-recovery"),
+    subgroup = x.defense and "sn-defense" or (x.machine and (K.by_machine["sn-" .. x.name].planet and "sn-planetary" or "sn-production") or (x.operation and "sn-operations" or "sn-recovery")),
     order = string.format("%03d", index), main_product = "",
     allow_productivity = false, allow_quality = not x.effects and x.recycle ~= false,
     allow_decomposition = not x.operation, auto_recycle = x.machine or false,

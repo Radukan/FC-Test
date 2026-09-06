@@ -1,13 +1,14 @@
 local C = require("shared.constants")
 local S = require("scripts.state")
 local P = require("scripts.pollution")
+local Artwork = require("scripts.artwork")
 local Campaign = {}
 local function configure_freeplay()
   local api = remote.interfaces.freeplay
   if not api then return end
   for _, entry in ipairs({{"set_skip_intro", true}, {"set_disable_crashsite", true},
-    {"set_created_items", {pistol = 1, ["firearm-magazine"] = 20}},
-    {"set_respawn_items", {pistol = 1, ["firearm-magazine"] = 10}}}) do
+    {"set_created_items", {["sn-carbine"] = 1, ["sn-ballistic-magazine"] = 40, ["sn-field-armor"] = 1}},
+    {"set_respawn_items", {["sn-carbine"] = 1, ["sn-ballistic-magazine"] = 10}}}) do
     if api[entry[1]] then
       local ok, err = pcall(remote.call, "freeplay", entry[1], entry[2])
       if not ok then log("Second Nature: freeplay setup deferred: " .. tostring(err)) end
@@ -21,6 +22,7 @@ function Campaign.init(fresh)
     settings.startup["sn-desolate-start"].value and remote.interfaces.freeplay ~= nil,
     camps = {}, arrivals = {}}
   if root.campaign.active then configure_freeplay() end
+  for _, camp in pairs(root.campaign.camps) do Artwork.lander(camp) end
 end
 function Campaign.chunk(surface, position, area)
   local world = S.world(surface)
@@ -54,7 +56,7 @@ local function place(surface, force, name, position, radius)
 end
 function Campaign.land(force, surface)
   local camps = S.root().campaign.camps
-  if camps[force.index] then return camps[force.index] end
+  if camps[force.index] then Artwork.lander(camps[force.index]);return camps[force.index] end
   local spawn = force.get_spawn_position(surface)
   surface.request_to_generate_chunks(spawn, 2)
   surface.force_generate_chunk_requests()
@@ -68,15 +70,18 @@ function Campaign.land(force, surface)
   local pos = ship.position
   local camp = {ship = ship, position = {x = pos.x, y = pos.y}, landed_at = game.tick, rocket_launched = false}
   camps[force.index] = camp
-  for _, offset in ipairs({{-12, 2}, {12, 2}}) do
-    local turret = place(surface, force, "gun-turret", {x = pos.x + offset[1], y = pos.y + offset[2]}, 8)
-    if turret then turret.insert({name = "firearm-magazine", count = 75})
-    else ship.insert({name = "gun-turret", count = 1}); ship.insert({name = "firearm-magazine", count = 75}) end
+  for _, offset in ipairs({{-9,-5},{9,-5},{-9,6},{9,6}}) do
+    local turret = place(surface, force, "sn-sentry-turret", {x = pos.x + offset[1], y = pos.y + offset[2]}, 8)
+    if turret then turret.insert({name = "sn-ballistic-magazine", count = 60})
+    else ship.insert({name = "sn-sentry-turret", count = 1}); ship.insert({name = "sn-ballistic-magazine", count = 60}) end
   end
-  for _, dx in ipairs({-14, -13, -12, -11, -10, 10, 11, 12, 13, 14}) do
-    local wall = place(surface, force, "stone-wall", {x = pos.x + dx, y = pos.y + 5}, 2)
-    if not wall then ship.insert({name = "stone-wall", count = 1}) end
+  for _, side in ipairs({-1,1}) do
+    for _, y in ipairs({-8,-7,-6,-5,-4,-3,4,5,6,7,8,9}) do
+      local wall = place(surface, force, "sn-field-barricade", {x=pos.x+side*12,y=pos.y+y},2)
+      if not wall then ship.insert({name="sn-field-barricade",count=1}) end
+    end
   end
+  Artwork.lander(camp)
   force.chart(surface, {{pos.x - 64, pos.y - 64}, {pos.x + 64, pos.y + 64}})
   return camp
 end
@@ -116,7 +121,7 @@ function Campaign.rocket(event)
   local camp = S.root().campaign.camps[rocket.force.index]
   if camp and not camp.rocket_launched then
     camp.rocket_launched = true
-    if camp.ship and camp.ship.valid then camp.ship.minable = true end
+    if camp.ship and camp.ship.valid then camp.ship.minable, camp.ship.destructible = false, false end
     rocket.force.print({"sn-campaign.orbit-restored"}, {color = C.colors.atmosphere})
   end
 end

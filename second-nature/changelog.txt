@@ -1,4 +1,26 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.3.0
+Date: 2026-09-07
+  Features:
+    - Original heavy-industrial sprites and working animations for all 22 restoration/production buildings.
+    - Original intact animated expedition lander, permanently protected even after a rocket launch.
+    - Original feminine adult explorer with fully covered expedition gear, armor, tool, movement and armed poses.
+    - Three tiers of new guns, ammo, turrets, barricades and armor; powered personal shields and field dressings.
+    - Four loaded sentries and stronger initial barricades replace the minimal landing perimeter.
+    - No early structural wood dependency: mineral stocks, riveted poles/crates, metal gun stocks and algal seeds.
+    - Time-integrated habitat recovery and pollution stress. Greening and its reversal take sustained time.
+    - Three bounded optimization technologies: +15%, +30%, +45% clean work, capture and supported growth.
+  Balance:
+    - Baseline ecological work/drift now use 30% of the old rapid coefficients; physical capture uses 25%.
+    - Ideal full habitat growth takes about three supported hours; heavy contamination reverses it gradually.
+    - Nauvis stage 5 additionally requires at least 80% surveyed habitat condition.
+    - Mod-grown trees can wither under prolonged pollution; infrastructure and untracked player trees are preserved.
+  Compatibility:
+    - Surviving older landers gain permanent protection. Existing cargo and defenses are not duplicated.
+    - Character graphics are optional at startup; inventories/controllers and vanilla equipment mechanics remain.
+    - Original procedural art is reproducible with the optional art toolchain; no downloaded Wube sprites are bundled.
+    - Alpha: graphical, full-campaign and multiplayer validation remain separate from automated engine smoke tests.
+---------------------------------------------------------------------------------------------------
 Version: 0.2.0
 Date: 2026-09-06
   Bugfixes:

@@ -1,0 +1,4 @@
+# Optional original sprite regeneration. Not needed to test/package/play the mod.
+numpy==1.26.4
+Pillow==12.3.0
+lupa==2.8

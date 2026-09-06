@@ -20,20 +20,25 @@ function Probe.run(surface, force)
   assert(not camp.ship.minable and not camp.ship.destructible)
   assert(camp.ship.get_item_count("iron-plate") == 200, "lander inventory grant")
   assert(Campaign.land(force, surface).ship == camp.ship, "landing is not idempotent")
-  local turrets = surface.find_entities_filtered({name = "gun-turret", force = force})
-  assert(#turrets == 2, "deployed starter turrets")
-  for _, turret in ipairs(turrets) do assert(turret.get_item_count("firearm-magazine") == 75) end
+  assert(force.recipes["small-electric-pole"].enabled, "wood-free poles not available")
+  for _, name in ipairs({"small-electric-pole","wooden-chest","shotgun","combat-shotgun","sn-seed-mix"}) do
+    for _, ingredient in pairs(force.recipes[name].ingredients) do assert(ingredient.name ~= "wood", name .. " still needs wood") end
+  end
+  local turrets = surface.find_entities_filtered({name = "sn-sentry-turret", force = force})
+  assert(#turrets == 4, "deployed starter turrets")
+  for _, turret in ipairs(turrets) do assert(turret.get_item_count("sn-ballistic-magazine") == 60) end
   Campaign.init(false)
   assert(Campaign.land(force, surface).ship == camp.ship, "configuration changed landing identity")
   -- Exercise the rocket handler's shared LuaEntity API; this is NOT a rocket flight test.
   Campaign.rocket({rocket = camp.ship})
-  assert(camp.ship.minable and camp.rocket_launched)
+  assert(not camp.ship.minable and not camp.ship.destructible and camp.rocket_launched)
 
   surface.clear_pollution()
   Pollution.sample(world, surface)
   for _ = 1, #world.chunks do Pollution.step(world, surface) end
   for _, axis in ipairs(C.axes) do world.values[axis] = 100 end
   world.toxicity, world.clean_since = 0, game.tick - 7200
+  world.landscape = {mean = 1, measured = true, samples = #world.chunks}
   Model.refresh(world)
   assert(Model.ready(world), "clean mature probe world: stage=" .. world.stage .. " air=" .. serpent.line(world.air))
   local biter = assert(surface.create_entity({name = "small-biter", position = {45, 16}, force = "enemy"}))
@@ -81,6 +86,20 @@ function Probe.run(surface, force)
   if group.valid then group.destroy() end
   target.destroy(); dirty.destroy(); raid_nest.destroy()
   surface.clear_pollution(); surface.peaceful_mode = true
+  -- All three combat tiers and their real item/prototype contracts.
+  local weapons = {{"sn-sentry-turret","sn-ballistic-magazine"},{"sn-arc-turret"},{"sn-lance-turret","sn-lance-cell"}}
+  for i, entry in ipairs(weapons) do
+    local entity = assert(surface.create_entity({name=entry[1],position={-28+i*10,32},force=force}))
+    if entry[2] then assert(entity.insert({name=entry[2],count=10})==10,entry[1].." rejects ammo") end
+  end
+  for i, name in ipairs({"sn-field-barricade","sn-composite-wall"}) do
+    assert(surface.create_entity({name=name,position={-12+i*2,40},force=force}))
+  end
+  local character = assert(surface.create_entity({name="character",position={-20,32},force=force}))
+  assert(character.insert({name="sn-carbine",count=1})==1)
+  assert(character.insert({name="sn-induction-rifle",count=1})==1)
+  assert(character.insert({name="sn-lance-rifle",count=1})==1)
+  assert(character.insert({name="sn-field-dressing",count=5})==5)
   log("SECOND_NATURE_ENGINE_CAMPAIGN_PROBES_OK")
 end
 return Probe

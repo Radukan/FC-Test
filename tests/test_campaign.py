@@ -59,9 +59,9 @@ def test_landing_is_shared_and_never_duplicates_on_join_or_update(game_lua):
       local camp=S.root().campaign.camps[1];assert(camp and camp.ship.valid)
       assert(not camp.ship.minable and not camp.ship.destructible and not camp.rocket_launched)
       for _,item in ipairs(C.landing_cargo) do assert(camp.ship.inventory[item[1]]==item[2],item[1]) end
-      local turrets=game.surfaces[1].find_entities_filtered({name='gun-turret'})
-      assert(#turrets==2 and turrets[1].inventory['firearm-magazine']==75)
-      assert(#game.surfaces[1].find_entities_filtered({name='stone-wall'})==10)
+      local turrets=game.surfaces[1].find_entities_filtered({name='sn-sentry-turret'})
+      assert(#turrets==4 and turrets[1].inventory['sn-ballistic-magazine']==60)
+      assert(#game.surfaces[1].find_entities_filtered({name='sn-field-barricade'})==24)
       assert(mock.freeplay.disabled and mock.freeplay.skip)
       camp.ship.inventory['iron-plate']=3
       local p2=mock.player(2);Campaign.arrive(p2);Campaign.arrive(p);mock.configure();mock.run(120)
@@ -71,7 +71,7 @@ def test_landing_is_shared_and_never_duplicates_on_join_or_update(game_lua):
     ''')
 
 
-def test_arrival_pan_ends_and_only_a_nauvis_rocket_unlocks_salvage(game_lua):
+def test_arrival_pan_ends_and_a_nauvis_rocket_never_makes_the_lander_destructible(game_lua):
     prepare_landing(game_lua)
     game_lua.execute('''
       local S=require('scripts.state');local Campaign=require('scripts.campaign');local p=mock.player(1)
@@ -82,7 +82,7 @@ def test_arrival_pan_ends_and_only_a_nauvis_rocket_unlocks_salvage(game_lua):
       local v=mock.surface('vulcanus',2);Campaign.rocket({rocket=mock.entity('rocket',v)})
       assert(not camp.rocket_launched and not camp.ship.minable)
       Campaign.rocket({rocket=mock.entity('rocket',game.surfaces[1])})
-      assert(camp.rocket_launched and camp.ship.minable)
+      assert(camp.rocket_launched and not camp.ship.minable and not camp.ship.destructible)
     ''')
 
 
@@ -168,10 +168,10 @@ def test_succession_and_polluted_water_are_reversible_and_bounded(game_lua):
     game_lua.execute('''
       local S=require('scripts.state');local T=require('scripts.terrain');local w=S.by_planet('nauvis');local s=game.surfaces[1]
       settings.global['sn-living-terrain'].value=true;w.stage=4
-      local chunk={x=0,y=0,stripe=0};s.tile_name='water'
+      local chunk={x=0,y=0,stripe=0,cover=0,stress=.8,ecology_tick=0,land=false,trees={}};s.tile_name='water'
       T.succession(w,s,chunk,100);assert(#s.changed_tiles==128 and s.get_tile({0,4}).name=='water-green')
-      chunk.stripe=0;T.succession(w,s,chunk,0);assert(s.get_tile({0,4}).name=='water')
-      s.tiles={};s.tile_name='dirt-1';s.changed_tiles={};chunk.stripe=0
+      chunk.stripe=0;chunk.stress=0;T.succession(w,s,chunk,0);assert(s.get_tile({0,4}).name=='water')
+      s.tiles={};s.tile_name='dirt-1';s.changed_tiles={};chunk.stripe=0;chunk.cover=1;chunk.land=true
       local ore=mock.entity('ore',s,{x=8,y=5},mock.neutral,true);ore.type='resource'
       s.tiles['0:4']='concrete'
       T.succession(w,s,chunk,0)

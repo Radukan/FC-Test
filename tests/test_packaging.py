@@ -9,7 +9,7 @@ def test_installable_packages_are_branch_correct_complete_and_deterministic(tmp_
     a=build(target,tmp_path/'a');b=build(target,tmp_path/'b')
     assert a.read_bytes()==b.read_bytes()
     with zipfile.ZipFile(a) as z:
-        root='second-nature_0.2.0/'
+        root='second-nature_0.3.0/'
         names=z.namelist()
         assert all(n.startswith(root) for n in names)
         assert all(not any(part in n.split('/') for part in ('.git','.cache','tests','tools','artifacts')) for n in names)
@@ -18,7 +18,7 @@ def test_installable_packages_are_branch_correct_complete_and_deterministic(tmp_
         assert all(('2.0.77' if target=='2.0' else '2.1.17') in d for d in info['dependencies'])
         assert {root+x for x in ('control.lua','data.lua','settings.lua','README.md','LICENSE','thumbnail.png')}<=set(names)
         assert root+'graphics/garden.png' in names
-        assert len([n for n in names if '/graphics/technology/' in n])==20
+        assert len([n for n in names if '/graphics/technology/' in n])==len(load_catalog()['technologies'])
     assert a.with_suffix('.zip.sha256').read_text().split()[0]==hashlib.sha256(a.read_bytes()).hexdigest()
 
 
@@ -47,7 +47,7 @@ def test_generated_locale_matches_source_catalog():
 
 def test_mod_metadata_and_changelog_are_consistent():
     info=json.loads((MOD/'info.json').read_text());change=(MOD/'changelog.txt').read_text()
-    assert info['version']=='0.2.0' and 'Version: '+info['version'] in change
+    assert info['version']=='0.3.0' and 'Version: '+info['version'] in change
     assert info['factorio_version']=='2.0'
     assert any(s.startswith('space-age >=') for s in info['dependencies'])
     assert 'Date: 2026-09-06' in change

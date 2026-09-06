@@ -4,6 +4,7 @@ local S = require("scripts.state")
 local Network = require("scripts.network")
 local Pollution = require("scripts.pollution")
 local Natives = require("scripts.natives")
+local Upgrades = require("scripts.upgrades")
 local mod_gui = require("mod-gui")
 local G = {}
 local function player_data(player)
@@ -99,6 +100,7 @@ function G.open(player)
   wrap(air, "air_total", "", width - 80)
   wrap(air, "air_survey", "", width - 80)
   wrap(air, "air_local", "", width - 80)
+  wrap(air, "habitat", "", width - 80)
   air.add({type = "button", name = "sn_toggle_overlay", caption = {"sn-air.overlay-off"}})
   wrap(air, "air_legend", {"sn-air.legend"}, width - 80, "sn_muted")
   separator(air)
@@ -216,6 +218,8 @@ function G.update(player)
   local local_pollution = Pollution.local_amount(player.surface, player.position)
   air_pane.sn_air_local.caption = {"sn-air.local", here and {"space-location-name." .. here} or player.surface.name,
     format(local_pollution), here == "nauvis" and math.floor(Pollution.calm(player.surface, player.position) * 100) or 0}
+  air_pane.sn_habitat.caption = {"sn-expedition.habitat-status", world and world.landscape and format(world.landscape.mean * 100) or "—",
+    C.pace.landscape_goal * 100, math.floor((Upgrades.bonus(player.force) - 1) * 100 + .5)}
   air_pane.sn_toggle_overlay.caption = {prefs.air_overlay and "sn-air.overlay-on" or "sn-air.overlay-off"}
   local camp = S.root().campaign and S.root().campaign.camps[player.force.index]
   air_pane.sn_mission.caption = camp and {camp.rocket_launched and "sn-campaign.mission-orbit" or "sn-campaign.mission-stranded"} or {"sn-campaign.mission-existing"}

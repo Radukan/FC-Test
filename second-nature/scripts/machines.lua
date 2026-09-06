@@ -4,6 +4,8 @@ local Model = require("shared.model")
 local S = require("scripts.state")
 local Terrain = require("scripts.terrain")
 local Telemetry = require("scripts.telemetry")
+local Upgrades = require("scripts.upgrades")
+local Artwork = require("scripts.artwork")
 local Machines = {}
 local max_retort_toxicity = 0
 for _, recipe in ipairs(K.recipes) do
@@ -13,7 +15,11 @@ for _, recipe in ipairs(K.recipes) do
 end
 local function process(rec, world)
   local entity = rec.entity
-  if rec.monitor then Telemetry.update(entity, world); return end
+  if rec.monitor then
+    Telemetry.update(entity, world)
+    if not (rec.status_light and rec.status_light.valid) then rec.status_light = Artwork.monitor(entity) end
+    return
+  end
   local recipe_name = S.recipe(entity)
   local produced = entity.products_finished
   local raw_cycles = math.max(0, produced - rec.produced)
@@ -35,6 +41,13 @@ local function process(rec, world)
   if recipe.planet and recipe.planet ~= world.planet then return end
   if recipe.stage and world.stage < recipe.stage then return end
   world.first_operation = world.first_operation or game.tick
+  local bonus = definition.dirty and 1 or Upgrades.bonus(entity.force)
+  if not definition.dirty then
+    world.last_clean_operation = game.tick
+    if not world.terrain_bonus_until or game.tick >= world.terrain_bonus_until then world.terrain_bonus = bonus
+    else world.terrain_bonus = math.max(world.terrain_bonus or 1, bonus) end
+    world.terrain_bonus_until = game.tick + 10 * 60 * 60
+  end
   local effects = recipe.effects
   if has_pollutant and entity.surface.get_pollution(entity.position) > C.air.green_limit then
     effects = table.deepcopy(effects)
@@ -42,14 +55,14 @@ local function process(rec, world)
     if (effects.soil or 0) > 0 then effects.soil = 0 end
     if (effects.biodiversity or 0) > 0 then effects.biodiversity = 0 end
   end
-  Model.apply(world, effects, cycles, settings.global["sn-restoration-speed"].value)
+  Model.apply(world, effects, cycles, settings.global["sn-restoration-speed"].value * bonus)
   local force_index = entity.force.index
   world.contributions[force_index] = (world.contributions[force_index] or 0) + cycles
   world.recent[force_index] = game.tick
   rec.last_effect = game.tick
   local pollution = (recipe.effects.pollution or 0) * cycles
   if has_pollutant and pollution < 0 then
-    local removed = math.min(entity.surface.get_pollution(entity.position), -pollution)
+    local removed = math.min(entity.surface.get_pollution(entity.position), -pollution * C.pace.pollution_capture * bonus)
     if removed > 0 then entity.surface.pollute(entity.position, -removed, entity.name) end
     world.removed_pollution = world.removed_pollution + removed
   elseif has_pollutant and pollution > 0 then entity.surface.pollute(entity.position, pollution, entity.name) end
