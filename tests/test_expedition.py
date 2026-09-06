@@ -178,3 +178,17 @@ def test_mod_owned_withered_trees_can_recover_without_touching_other_trees(game_
       T.succession(w,s,c,0)
       assert(not stump.valid and other.valid and #c.trees==1 and #c.dead_trees==0)
     ''')
+
+
+def test_all_original_atlases_fit_their_declared_frames_and_texture_bounds():
+    import json,math
+    from PIL import Image
+    manifest=json.loads((ROOT/'docs/art/sprite-manifest.json').read_text())
+    assert len(manifest)>=146
+    for name,s in manifest.items():
+        path=MOD/s['filename'].split('__second-nature__/')[1]
+        image=Image.open(path)
+        rows=math.ceil(s['frame_count']*s['direction_count']/s['line_length'])
+        assert image.width==s['width']*s['line_length'],name
+        assert image.height==s['height']*rows,name
+        assert max(image.size)<=8192 and image.mode=='RGBA',name

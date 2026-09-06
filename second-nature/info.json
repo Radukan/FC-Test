@@ -4,7 +4,7 @@
   "title": "Second Nature — Planetary Restoration",
   "author": "Radukan",
   "homepage": "https://github.com/Radukan/FC-Test",
-  "description": "Stable Space Age terraforming overhaul. Land stranded on desolate Nauvis with emergency cargo and defenses. Pollution calms native broods but blocks life: cleanse local air and the planetary smog inventory, restore five worlds, and choose symbiosis or eradication. Includes a dashboard, pollution survey, field guide and custom menu art.",
+  "description": "Ironbound expedition for stable Space Age: intact protected lander, wood-free construction, original industrial building/player animations, three defense eras and hours-scale reversible habitat recovery. Pollution calms Nauvis broods but suffocates life. Restore five planets and choose the natives’ future.",
   "factorio_version": "2.0",
   "dependencies": [
     "base >= 2.0.77",

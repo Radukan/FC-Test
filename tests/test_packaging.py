@@ -50,7 +50,7 @@ def test_mod_metadata_and_changelog_are_consistent():
     assert info['version']=='0.3.0' and 'Version: '+info['version'] in change
     assert info['factorio_version']=='2.0'
     assert any(s.startswith('space-age >=') for s in info['dependencies'])
-    assert 'Date: 2026-09-06' in change
+    assert re.search(r'Version: 0\.3\.0\nDate: 2026-09-07',change)
 
 
 def test_game_runtime_has_no_network_filesystem_or_legacy_global_dependencies():

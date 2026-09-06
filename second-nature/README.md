@@ -1,95 +1,149 @@
-# Second Nature 0.2.0 · Last Landing
+# Second Nature · Ironbound Expedition
+### Stable Factorio 2.0 / Space Age restoration overhaul · v0.3.0 alpha
 
-**Stable Factorio 2.0.77 + Space Age + Quality + Elevated Rails. Alpha.**
+**An intact landing craft. A stripped planet. A factory built to bring life back.**
 
-You land on a stripped Nauvis with a spent descent engine, shared emergency cargo and two loaded turrets. No forests or fish remain. Build the factory that brings life back—then build a rocket to leave. Pollution calms the broods, but prevents the planet you want to create.
+Nauvis has no natural trees or fish in a fresh campaign. The broods tolerate your pollution—but resist the machines that clean their world. Establish a wood-free factory, defend the expedition and restore five distinct planets. Recovery is measured in sustained industrial work and hours of ecological succession, not a fast green repaint.
 
-## Start and upgrade
+## Download
 
-- Install this ZIP without extracting it. Replace older Second Nature copies rather than mixing stable/experimental packages.
-- For the intended opening, start new Space Age freeplay with **Second Nature / Last Landing** as the map preset. Keep **Desolate Nauvis landing**, **Pollution-fed Nauvis broods** and map pollution enabled.
-- **Brood Frontier** is a harder start; **Quiet Reclamation** is peaceful ecological engineering.
-- Back up older saves. Updating preserves factories, ecological scores and existing terrain. It does **not** sterilize an old map, provide a second cargo load or retrofit the landing scene.
-- Experimental 2.1 builds are discontinued.
+### [Second Nature 0.3.0 — stable Factorio 2.0](https://github.com/Radukan/FC-Test/releases/download/v0.3.0-factorio-2.0/second-nature_0.3.0.zip)
 
-## Controls
+[Release notes and checksum](https://github.com/Radukan/FC-Test/releases/tag/v0.3.0-factorio-2.0). **Private repository: sign in to GitHub with repository access.** Use the named mod ZIP, not GitHub’s automatic source archive.
 
-- **Shift + T**, leaf shortcut or `/second-nature`: dashboard with Planet, Air & natives, Living network and a six-topic field guide.
-- **Ctrl + Shift + P**, smog shortcut: private local pollution overlay.
-- `/sn-status`: read-only status report.
-- `/sn-reindex`: administrator reconciliation, not an ecology reset or cargo grant.
+1. Use **Factorio 2.0.77**, **Space Age**, **Quality** and **Elevated Rails**.
+2. Back up saves and replace older Second Nature ZIP/source copies with `second-nature_0.3.0.zip`, still zipped, in the Factorio `mods` folder.
+3. For the complete opening, start new Space Age freeplay with **Second Nature / Last Landing** and the default mod settings. **Brood Frontier** and **Quiet Reclamation** offer harder/peaceful alternatives.
+4. **Shift + T / leaf:** field station and guide. **Ctrl + Shift + P:** local smog overlay.
 
-The reported v0.1 dashboard error is fixed by prefixing every named GUI child. The ecology monitor's crafting-only API call, runtime utility import and event-time module-loading issues are also corrected. Dashboard construction failures are caught and logged rather than stopping the factory.
+Windows: `%APPDATA%\Factorio\mods` · Linux: `~/.factorio/mods` · macOS: `~/Library/Application Support/factorio/mods`.
 
-## Emergency cargo
+Stable only; experimental 2.1 builds are discontinued. Existing stable saves retain their factories, ecological values and terrain. They do **not** receive another cargo grant or a replacement defense kit. New habitat-readiness rules can temporarily demote an older mature world while its landscape is surveyed/recovered.
 
-One shared lander per force carries 200 iron plates, 100 copper plates, 40 steel, 120 stone, 160 coal, 40 wood, 40 gears, 40 circuits, 100 belts, 20 inserters, 20 poles, 40 pipes, 4 burner drills, 6 stone furnaces, 1 pump, 1 boiler, 2 steam engines, 100 spare magazines, 20 repair packs and 40 spare walls.
+## What is new in Ironbound
 
-Two turrets receive 75 magazines each, with ten short wall segments. If terrain prevents a defense placement, the items remain in cargo. Crew members receive a pistol and 20 magazines. Cargo is not duplicated on reconnect, respawn or update.
+### An intact, permanent lander
 
-The hull is initially protected and has **no launch function**. Launch a normal Nauvis rocket before returning to orbit. After that first launch, the hull becomes salvageable.
+The new original landing-craft model has animated standby systems. It is **not a crash-site wreck** and remains **unmineable and indestructible in normal play**, even after your first rocket. It is a permanent cargo camp, not a free orbital vehicle. Build and launch a normal Nauvis rocket to leave.
 
-## First living factory
+Surviving older landers receive the same permanent protection. Already removed old hulls are not recreated with free supplies.
 
-1. Recover supplies, establish water/steam power and keep defenses supplied.
-2. Hand-crush **stone → silica** and smelt **glass**. Overhaul red science needs glass.
-3. Research **Pioneer biology**: mineral nutrients → pioneer culture → algae. No natural seed or tree is needed.
-4. Compost algae and make biochar/living substrate. Green science consumes compost.
-5. Soil stations produce **ecological samples**. Samples still emerge while smog blocks the living-soil bonus, so treatment research is reachable.
-6. Supply atmospheric scrubbers. Empty spent-filter/effluent outputs and develop closed-loop reclamation.
-7. Add watersheds, forests, thermal balancing and detoxification. Defend the machines whose cleanup removes your protective pollution blanket.
+### A genuinely wood-free beginning
 
-## Smog and broods
+| Former dependency | New mineral/biological route |
+|---|---|
+| Small wooden power pole | Riveted pole: iron sticks, copper cable and stone; available immediately |
+| Wooden chest | Mineral-frame equipment crate using hand-formed composite stocks |
+| Shotgun / combat-shotgun wooden stocks | Mineral-composite stocks made from iron and stone |
+| Pioneer seed mix | Cultivated algae, culture and compost |
+| Wild fish for healing | Craftable sterile field dressings, plus a finite emergency supply |
 
-The global reading uses Factorio's whole-surface pollution inventory, including pollution-only engine chunks outside generated terrain. The hotspot survey covers fully generated chunks. The local reading follows your current location. Totals refresh roughly every ten seconds; four chunks per second are surveyed across visited worlds.
+The pole/chest keep their vanilla internal IDs for existing blueprints and logistics, but use new recipes, names and original art. Wood processing/composting remains an **optional** route once cultivation is established; it is not required for starting power, basic storage or weapon manufacture.
 
-- **≤ 10 local pollution:** soil/biodiversity bonuses and new vegetation can work.
-- **> 10:** those living bonuses stop; physical recipe outputs and non-living treatment still work.
-- **≥ 200:** Nauvis restoration warnings are suppressed, and tracked raiders turn back from polluted targets.
+### Better supplies and defenses
 
-With default inverse metabolism, pollution no longer recruits vanilla biter attack parties or drives pollution evolution. Recently productive **clean restoration machines** draw the scripted raids; dirty retorts and forcing towers are not targets. Lower concentrations reduce effective resistance and wave size.
+The shared lander supplies:
 
-Waves require a real nest 96–512 tiles away, give 45 seconds of warning, and respect peaceful mode. Balanced defaults: 20-minute grace after first ecological work, eight-minute cooldown, maximum 40 units and three tracked groups per world. Cleaner advanced ecosystems face stronger scripted brood variants.
+- **Materials:** 200 iron plates, 100 copper plates, 40 steel, 120 stone, 160 coal and 40 composite stocks.
+- **Factory:** 40 gears, 40 circuits, 100 belts, 20 inserters, 20 riveted poles, 40 pipes, 4 burner drills and 6 furnaces.
+- **Power:** 1 offshore pump, 1 boiler and 2 steam engines.
+- **Reserves:** 120 expedition magazines, 30 repair packs, 20 field dressings and 48 barricades.
+- **Deployed:** **four riveted sentries, 60 magazines each**, and **24 field-barricade segments**. Terrain-blocked defense items remain in cargo instead.
 
-**Pollution is not invulnerability:** proximity aggression, retaliation and blocked-path combat can still happen. Gleba retains ordinary spore behavior and smaller ecological-response groups; pollution does not pacify pentapods.
+New crew members receive a carbine, 40 magazines and a field suit. Cargo is one grant **per force**, never per reconnect, respawn or configuration change. Defenses are useful—not an invulnerable automated factory. Keep ammunition and repairs flowing.
 
-The optional overlay covers 5 × 5 nearby chunks: green ≤ 10, amber > 10, magenta ≥ 200. The map's native pollution layer provides the wider spatial overlay.
+## Three equipment eras
 
-## Visible restoration and the final choice
+| Era | Weapons | Defenses and protection | Costs that remain real |
+|---|---|---|---|
+| **Early / Frontier defense** | Expedition carbine; improved ballistic magazines; ordinary bullet family remains compatible | Riveted sentries, field barricades, field armor, sterile dressings | Iron/copper, reloads and repair logistics |
+| **Mid / Electrical doctrine** | Induction rifle and battery-fed electrical cells | Capacitor arc turrets, composite walls, 6 × 6 modular expedition armor | Batteries, circuits, power buffers and continuous electricity |
+| **Late / Bastion doctrine** | Heavy lance rifle and dense-core rail rounds | Bastion lance turrets, 10 × 10 armor and powered biosphere shields | Interplanetary materials, native rail charging/ammo, equipment-grid energy |
 
-Five fitness axes represent atmosphere, thermal balance, water, soil and biodiversity. They do not turn off lava, lightning, spoilage or Aquilo's heat/support mechanics.
+Lances are line weapons: **keep friendly infrastructure out of their firing lanes**. Electrical defenses fail without adequate power; armor/shields do not make the player immortal. Vanilla weapons remain useful alternatives.
 
-Early gardens grow around successful clean machines. At stage 4, safe Nauvis terrain greens gradually across generated chunks. Smog browns exposed grass; native water becomes murky and clears again after treatment. Paving, buildings, ghosts, ore, foundations, crop soils, oil seas, lava and Aquilo ice are protected.
+## Original art, not tinted stock buildings
 
-Stage 5 needs **every axis ≥ 90**, **toxicity ≤ 8**, **total pollution/spores ≤ 500**, and **a completed survey with no known sampled hotspot above 10**. Exploration adds territory to survey. Pollution readings have disclosed sampling latency; this is not an instantaneous scan of an infinite map.
+All **22 production/restoration/monitor buildings** have original heavy-industrial primary graphics: tanks, filters, hoppers, rotors, seed arms, radiators, culture towers, grow beds and beacon structures. Working machinery has animated loops; the monitor has an animated status light. New defenses have original art, including **64-direction turret animations** and connected barricade/wall pieces.
 
-Keep Nauvis fully ready for **two minutes**, then choose in **Air & natives**:
+The new **adult feminine explorer** wears fitted, fully covered industrial expedition gear. There are armor, idle, running, tool, weapon and corpse variations. The optional startup setting restores vanilla/another mod’s character appearance without replacing inventories or controllers.
 
-- **Symbiosis:** biters/spitters become original flowering Bloomback grazers; nests/worms become bloom gardens. Friendly to every force, no attack damage or expansion. Their living spaces remain occupied.
-- **Eradication:** remove native organisms/colonies and free the land.
+The art is procedural authored mesh geometry, CPU-rendered with lighting, depth and antialiasing—not redistributed Wube textures. Existing game collision, fluid ports, wiring, sounds, projectiles and equipment mechanics are reused where appropriate. Precise in-client animation/aiming/port alignment remains a graphical playtest item.
 
-The choice requires confirmation, is permanent, and affects only Nauvis. In multiplayer an administrator decides. Bounded workers handle existing/mobile natives; later generated and spawned populations inherit the policy. Optional global mod settings can choose an automatic outcome instead. Neither choice prevents future ecological damage from dirty industry.
+## Slow recovery—and slow damage
 
-## Five-world economy and victory
+### Industrial progress
 
-- **Nauvis:** mineral biology, legacy contamination, pioneer forests and the native choice.
-- **Vulcanus:** basalt conditioning and thermophile exports. Lava/demolishers remain.
-- **Fulgora:** heavy-metal remediation and holmium biocatalysts. Preserve islands/oil seas.
-- **Gleba:** symbionts, balanced spores and spoilage-aware production.
-- **Aquilo:** imported biodiversity matrices, cryogenic gardens and real heating infrastructure.
+Default ecological work and drift use **30%** of the old rapid coefficients. Physical pollution capture uses **25%** of its former rate: an unupgraded scrubber captures up to **10 pollution units per completed 10-second recipe**, not 40. Physical recipes still produce their declared samples, products and waste.
 
-**Victory:** research Second Nature and supply your force's Gaia beacon on each of the five self-sustaining worlds for ten uninterrupted minutes. Each beacon must complete a cycle at least every 90 seconds. Interrupted readiness resets the hold; the factory can continue after winning.
+You still need every fitness axis—atmosphere, thermal balance, water, soil and biodiversity—to develop together. These are ecological suitability scores, not replacements for the game’s pressure, lava, lightning, spoilage or Aquilo heat mechanics.
 
-Ecology monitors emit eleven signals: five fitness axes, toxicity, resistance, stability, stage, global pollution and local pollution. The first manual section is reserved; it never shares a named group across planets.
+### A living landscape, not a paint command
 
-## Presentation, testing and removal
+Each surveyed eligible chunk tracks **habitat condition** and **pollution stress** over time. Local productive installations support early growth; living-stage ecosystems can sustain succession naturally.
 
-The Last Landing menu illustration is optional in startup settings. It replaces menu simulations; disabling it restores the normal menu behavior. Bloombacks use original eight-direction/four-frame sprite art.
+- Sparse pioneer patches develop into dry grass, meadow, lush ground and sparse forests.
+- Ideal bare-to-full habitat development takes about **three hours of supported local time** before research bonuses.
+- Heavy pollution builds stress over roughly **twenty minutes**. Sustained contamination can degrade mature cover over roughly **two hours**, with weaker contamination acting more slowly.
+- Grass loses its lushness before disappearing. Tracked mod-grown trees wither into dead trees and can regenerate after the habitat recovers.
+- Ore, paving, ghosts, buildings, crop soils, support tiles and untracked player trees are protected. Aquilo’s ice/foundation support is never replaced.
 
-This is an alpha. Source/runtime regression tests and a required real stable headless workflow cover progressively stronger engine checks; they are not a graphical review, full campaign playthrough or multiplayer/UPS certification. See the repository verification ledger for exact evidence.
+Four chunks per second are surveyed across visited worlds, with 128 tile candidates per visit. Samples conservatively cap elapsed-time credit at ten minutes. Large maps therefore recover more slowly; these figures are model scales, **not guaranteed whole-campaign durations**. “Habitat condition” is a sampled ecological state, not a claim that an exact percentage of infinite terrain has been painted.
 
-Before removing the mod, disable **Network victory**, save, and back up. Mod removal can delete its items/entities. Terrain changes and a native decision are not reversed.
+### Research can help, but cannot skip the process
 
-Project, full catalog and verification: https://github.com/Radukan/FC-Test (private; repository access required).
+Three **Ecological process optimization** technologies give total bonuses of **+15%, +30%, +45%** to the researching force’s productive clean work/capture and recently supported habitat growth. They are bounded, not infinite. They do not increase recipe speed, shorten raid/victory timers, accelerate damage, or remove the need to clean pollution and supply materials.
 
-MIT license for project code/original art. Installed Factorio assets are reused, not redistributed. The menu is an original AI-assisted illustration; friendly sprites/gardens are original procedural artwork, not screenshots.
+## Pollution and native resistance
+
+The dashboard reports the **whole-surface pollution inventory**, including engine-known pollution-only chunks outside generated terrain. The rolling hotspot/habitat survey covers fully generated terrain. The local reading follows the current location.
+
+| Local pollution | Meaning |
+|---|---|
+| **≤ 10** | Living-soil/biodiversity bonuses can work; habitat recovery is possible |
+| **> 10** | Living bonuses stop; samples and chemical/thermal treatment still work |
+| **≥ 200** | Strong enough to suppress Nauvis restoration warnings and recall tracked raiders from their targets |
+
+The private overlay covers 5 × 5 nearby chunks; use the native map pollution layer for a wider view. Pollution is not invulnerability: proximity combat, retaliation and obstruction still exist.
+
+With the default inverse-metabolism rule, Nauvis pollution does not recruit vanilla biter attack parties or drive pollution evolution. Scripted raids choose **recently productive clean restoration machines**, not dirty retorts/forcing towers. They require real nests 96–512 tiles away, give 45 seconds of warning, respect peaceful mode and have bounded group sizes. Balanced defaults: 20-minute grace after first ecological work, eight-minute cooldown, up to 40 units and three tracked groups per planet. Greener advanced ecosystems can mobilize stronger variants.
+
+Gleba retains ordinary spores and smaller ecological-response groups; pollution does not pacify pentapods. No arbitrary biter invasion is introduced on Vulcanus, Fulgora or Aquilo.
+
+## The native choice and five-world victory
+
+Final readiness requires:
+
+- **Every fitness axis ≥ 90** and **toxicity ≤ 8**.
+- **Total pollution/spores ≤ 500** and **no known sampled hotspot > 10**.
+- On Nauvis, **surveyed habitat condition ≥ 80%**.
+
+After two continuously ready minutes on Nauvis, confirm **symbiosis** or **eradication** in **Air & natives**. Symbiosis creates peaceful Bloombacks and flowering gardens; eradication removes known hostile native populations. The permanent policy covers mobile and future populations and affects only Nauvis. Multiplayer administrators decide for the shared planet. Later pollution can still damage either ecosystem.
+
+The original interplanetary economy remains:
+
+- **Vulcanus:** basalt weathering and thermophiles; lava/demolishers remain.
+- **Fulgora:** heavy-metal remediation and holmium biocatalysts; preserve islands/oil seas.
+- **Gleba:** symbiotic cultures, spores and spoilage-aware cultivation.
+- **Aquilo:** imported biodiversity, cryogenic gardens and real heat logistics.
+
+**Victory:** research Second Nature, keep all five worlds self-sustaining and supply your force’s Gaia beacon on each for **ten uninterrupted minutes**, with a completed beacon cycle at least every **90 seconds**. Continue building afterward.
+
+## First factory
+
+Recover cargo → steam power → stone/silica/glass → Pioneer biology → nutrients/culture/algae → compost/substrate → ecological samples → atmospheric treatment → closed filter/waste loops. Samples still emerge before dirty local air allows living bonuses, preventing a cleanup-research softlock.
+
+**Frontier defense** provides replacements for expedition equipment; improved magazines and basic barricades are craftable immediately. Progress through electrical defenses and process optimization while the landscape catches up with your industry. The six-topic field guide is available inside the dashboard.
+
+## Testing and development
+
+This is an **alpha**, not a claim of a completed balanced campaign. [Verification ledger](https://github.com/Radukan/FC-Test/blob/arena/01a07515-fc-test/docs/VERIFICATION.md) distinguishes offline/source tests, actual headless checks and outstanding graphical/full-game/multiplayer work. Releases require real stable-engine validation and a re-download/checksum comparison.
+
+- [Full catalog](https://github.com/Radukan/FC-Test/blob/arena/01a07515-fc-test/docs/CATALOG.md) · [Balance equations](https://github.com/Radukan/FC-Test/blob/arena/01a07515-fc-test/docs/BALANCE.md) · [Model-only timing](https://github.com/Radukan/FC-Test/blob/arena/01a07515-fc-test/docs/SIMULATION.md)
+- [Campaign design](https://github.com/Radukan/FC-Test/blob/arena/01a07515-fc-test/docs/DESIGN.md) · [Development and art regeneration](https://github.com/Radukan/FC-Test/blob/arena/01a07515-fc-test/docs/DEVELOPING.md)
+
+`python3 tools/package.py` builds the stable ZIP. The optional art toolchain is in `requirements-art.txt`; generated game binaries/saves/ZIPs stay out of Git.
+
+**Removal:** back up first, disable Network victory, save, then remove the mod. Modded items/entities may disappear. Terraforming and a completed native choice are not undone.
+
+**License:** MIT for project code and original art. Existing installed Factorio mechanics/assets referenced by the mod remain Wube’s. The optional menu illustration is AI-assisted concept art; the new industrial sprites are original procedural mesh renders, not game screenshots.

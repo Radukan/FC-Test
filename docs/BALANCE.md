@@ -1,8 +1,28 @@
-# Balance and simulation contract
+# Balance and simulation contract · Ironbound 0.3
 
 Canonical data: [`shared/constants.lua`](../second-nature/shared/constants.lua), [`shared/catalog.lua`](../second-nature/shared/catalog.lua). Canonical equations: [`shared/model.lua`](../second-nature/shared/model.lua).
 
-Fitness values and toxicity/resistance are clamped to **0–100**. All changes are **percentage points**, not percentage multipliers, unless explicitly described otherwise.
+Fitness values and toxicity/resistance are clamped to **0–100**. All coefficient changes are **percentage points**, not percentage multipliers, unless explicitly described otherwise.
+
+## Pacing and process research
+
+Catalog effects are coefficients. Runtime/pure-model fitness, toxicity and pressure effects apply **0.30 × setting × cycle count**. Environmental drift uses the same 0.30 pacing. Physical capture uses **0.25 × cycle count**, independently of the ecological speed setting; positive scripted pollution is not discounted.
+
+Research adds total clean-operation multipliers of **1.15 / 1.30 / 1.45**, cached per force and refreshed on research/reversal/merges. This also scales that force's capture and recently supported habitat growth, never damage rates or the fixed native/victory hold timers. Dirty operations get no efficiency bonus.
+
+### Habitat integration
+
+Each eligible surveyed chunk stores cover, stress, last sample time, nursery support and references to its own mod-grown/dead trees. Time credit is capped at ten minutes per visit, avoiding a sudden forest after a long unobserved interval.
+
+- Target cover: `min(soil, biodiversity + 10, water + 10) / 100`, reduced by stress.
+- Stress target: clamp `(local pollution - 10) / 190`; nearby hostile broods enforce at least 0.6. Stress approaches this over twenty minutes at maximum exposure.
+- Maximum growth: `minutes / 180 × min(1.45, researched support bonus)`.
+- Maximum loss: `minutes / 120 × max(0.25, stress)`.
+- Local pollution above ten blocks positive cover change; sustained heavy smog/broods set the cover target to zero.
+- Growth needs recent clean/nursery work until living stage, after which succession can sustain itself.
+- Stable spatial thresholds create clustered pioneer patches. Cover bands 0.24/0.48/0.72 move through dry grass, meadow and lush grass; declining cover reverses that progression.
+- Mod-grown trees require cover ≥ 0.64 and five minutes between planting attempts. Under cover 0.38 with stress > 0.35, tracked trees wither. Only tracked stumps are regenerated; player trees are not retroactively claimed.
+- Nauvis final readiness additionally requires **surveyed mean eligible habitat condition ≥ 0.80**. This is ecological sampling, not exact tile-coverage accounting.
 
 ## Starting state
 
@@ -28,7 +48,7 @@ Applied to **fitness gains and losses**, not toxicity, resistance dampening or a
 | Gleba | 1.10 | 1 | 1.25 | .80 | .70 |
 | Aquilo | .60 | .45 | .80 | .70 | .60 |
 
-Example: a generic heat exchanger earns `0.24 × .45 = .108` Aquilo thermal points per 20-second cycle. A cryogenic garden earns `0.50 × .45 = .225` per 15-second cycle, and also improves water and biodiversity. The local specialty is substantially better, but the generic route remains possible.
+Coefficient example before the 0.30 pacing/research multipliers: a generic heat exchanger earns `0.24 × .45 = .108` Aquilo thermal points per 20-second cycle. A cryogenic garden earns `0.50 × .45 = .225` per 15-second cycle, and also improves water and biodiversity. The local specialty is substantially better, but the generic route remains possible.
 
 ## Hard ecological support ceilings
 
@@ -59,16 +79,16 @@ Adding more seed dispersers cannot solve toxic soil, an unstable atmosphere or a
 | 4 · Living | 75 | 75 | 75 | 75 | 70 | 15 |
 | 5 · Self-sustaining | 90 | 90 | 90 | 90 | 90 | 8 |
 
-**Stage 5 also requires** measured total pollution/spores ≤ 500 and a completed rolling survey whose peak is ≤ 10. Newly generated territory immediately invalidates readiness until the survey covers it.
+**Stage 5 on Nauvis also needs ≥ 80% surveyed habitat condition. All planets additionally require** measured total pollution/spores ≤ 500 and a completed rolling survey whose peak is ≤ 10. Newly generated territory immediately invalidates readiness until the survey covers it.
 
 The dashboard's summary is `mean(A,T,W,S,B) × (1 - .004 X)`. It is informational; it is **not** the victory check. Production surface conditions use the actual integer stage.
 
 ### Stage rewards
 
 - **1:** local thermophile and holmium biocatalyst production.
-- **2:** efficient timber cultivation, biodiversity sanctuary operation, climate-science crafting, symbiotic egg fermentation; local safe terrain recovery begins.
+- **2:** efficient timber cultivation, biodiversity sanctuary operation, climate-science crafting, symbiotic egg fermentation; local nursery support can sustain slow habitat recovery.
 - **3:** biodiversity matrix assembly, efficient sheltered Gleban fruit production and sparse forest growth.
-- **4:** Gaia beacon cycles, matrix propagation, 75% lower baseline erosion, and bounded generated-world Nauvis succession.
+- **4:** Gaia beacon cycles, matrix propagation, 75% lower baseline erosion, and self-supported succession.
 - **5:** eligibility for the sustained network victory.
 
 Technology and planet requirements still apply. The stage alone does not grant recipes.
@@ -77,14 +97,14 @@ Technology and planet requirements still apply. The stage alone does not grant r
 
 | Operation | Cycle | Principal gain | Important externalities |
 |---|---:|---:|---|
-| Atmospheric scrubbing | 10 s | +.14 atmosphere | −.045 toxicity; capture up to 40 local pollution/spores; spent filter |
-| Soil restoration | 15 s | +.18 soil | +.045 biodiversity; −.06 toxicity; ecological samples |
-| Pioneer reseeding | 15 s | +.18 biodiversity | Supporting atmosphere/water gain; sparse vegetation |
-| Watershed restoration | 12 s | +.20 water | Ceramic demand; contaminated effluent |
-| Thermal balancing | 20 s | +.24 thermal | **4 MW**; depleted buffer needing recharge |
-| Mineral detoxification | 15 s | −.38 toxicity | **1.5 MW**; sludge requiring vitrification |
-| Atmospheric forcing | 6 s | +.36 atmosphere | −.06 thermal, −.03 water, +.48 toxicity; +45 scripted pollution plus normal stack emissions |
-| Habitat restoration | 20 s | +.42 biodiversity | Three-planet matrix imports; strong native signature |
+| Atmospheric scrubbing | 10 s | +.042 atmosphere | −.0135 toxicity; capture up to 10 local pollution/spores; spent filter |
+| Soil restoration | 15 s | +.054 soil | +.0135 biodiversity; −.018 toxicity; ecological samples |
+| Pioneer reseeding | 15 s | +.054 biodiversity | Supporting atmosphere/water gain; sparse vegetation |
+| Watershed restoration | 12 s | +.060 water | Ceramic demand; contaminated effluent |
+| Thermal balancing | 20 s | +.072 thermal | **4 MW**; depleted buffer needing recharge |
+| Mineral detoxification | 15 s | −.114 toxicity | **1.5 MW**; sludge requiring vitrification |
+| Atmospheric forcing | 6 s | +.108 atmosphere | −.018 thermal, −.009 water, +.144 toxicity; +45 scripted pollution plus normal stack emissions |
+| Habitat restoration | 20 s | +.126 biodiversity | Three-planet matrix imports; strong native signature |
 
 See the [full catalog](CATALOG.md) for all costs/effects. Quality can improve the machine according to vanilla rules, and speed/efficiency modules work. Custom operations disable productivity and quality outputs; copied biochambers do not retain the native +50% productivity bonus.
 
@@ -118,7 +138,7 @@ extra atmospheric erosion / minute = .02 × exposure
 
 Unpowered/blocked machines do **not** earn restoration. Passive natural resilience may still slowly reduce toxicity; that is independent of machine work. The restoration-speed setting scales ecological effects and drift, but not actual recipe throughput, physical pollution capture, raid timers or the ten-minute goal.
 
-## Pollution and succession contract (0.2)
+## Pollution and succession contract (0.3)
 
 - New campaign Nauvis chunks receive **80** actual pollution units once, configurable from **0–500** at startup. No legacy seeding on existing-save upgrades or after native resolution.
 - Local concentration **> 10** suppresses positive soil/biodiversity effects. It does not cancel recipe production, remove input costs, or disable chemical/thermal/capture effects.
@@ -126,7 +146,7 @@ Unpowered/blocked machines do **not** earn restoration. Passive natural resilien
 - A final planet needs **≤ 500 total** and a completed survey with **known peak ≤ 10**, including newly found hotspots. Readings have disclosed sampling latency. A native confirmation refreshes the total immediately.
 - With inverse metabolism enabled, Nauvis sedation is `min(1, local pollution / 200)`. Use the greater sedation at target/nest for warning eligibility and dispatched group scaling. Gleba uses zero sedation.
 - Natural succession processes **128 tiles per chunk visit** in eight strips. Four visits/second is at most **512 tile candidates/second**, shared with other visited worlds. Dense areas with 256+ queried entities are skipped. Structures/resources are masked; water recoloring is limited to equivalent native water variants.
-- Early machine gardens retain their separate **20-candidate/second** budget. Both the machine and destination tile must be locally clean.
+- Productive machines grant bounded nearby nursery support rather than painting immediate green tiles. Habitat integration remains active when visual terrain is disabled.
 - Native resolution requires **120 clean seconds** at Nauvis stage 5. Its single initial entity index is exceptional, not a periodic scan. The queue handles at most **32 natives/second**; bounded chunk/event checks also enforce future policy. A completed choice does not prevent later ecological regression.
 
 ## Native resistance

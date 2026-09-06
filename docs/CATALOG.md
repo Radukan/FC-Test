@@ -2,7 +2,7 @@
 
 Generated from `second-nature/shared/catalog.lua` by `python tools/generate_docs.py`. Do not hand-edit tables.
 
-**22 machines · 88 recipes · 20 technologies · 31 material/science items · 6 fluids.**
+**22 machines · 105 recipes · 26 technologies · 32 material/science items · 6 fluids.**
 
 Times are seconds at crafting speed 1. Fitness effects are percentage points per completed cycle before planetary multipliers and support ceilings. No custom recipe supports productivity. Native recipe quality is disabled for operations and closed/catalytic loops.
 
@@ -39,20 +39,20 @@ Footprints: chemical-plant / assembling-machine-2 / biochamber derivatives are 3
 
 | Operation | Time | Inputs → Outputs | Ecological effect / cycle | Conditions |
 |---|---:|---|---|---|
-| Restore atmospheric balance | 10 s | 1 Carbon filter cartridge + 25 Water [fluid] → 1 Spent filter cartridge + 1 Climate samples | atmosphere +0.14; toxicity -0.045; pollution -40 | Any stock planet |
-| Restore living soil | 15 s | 3 Soil substrate + 1 Pioneer culture + 20 Water [fluid] → 2 Ecological samples | soil +0.18; biodiversity +0.045; toxicity -0.06; pollution -8 | Any stock planet |
-| Seed pioneer ecosystems | 15 s | 1 Pioneer seed mix + 1 Soil substrate + 20 Purified water [fluid] → 2 Ecological samples | atmosphere +0.025; water +0.015; biodiversity +0.18; pollution -12 | Any stock planet |
-| Restore the water cycle | 12 s | 100 Purified water [fluid] + 1 Ceramic membrane → 2 Climate samples + 10 Toxic effluent [fluid] | water +0.2; soil +0.035; toxicity -0.025; pollution -10 | Any stock planet |
-| Normalize thermal balance | 20 s | 1 Charged thermal buffer + 100 Water [fluid] → 1 Depleted thermal buffer + 2 Climate samples | atmosphere +0.025; temperature +0.24 | Any stock planet |
-| Bind planetary toxins | 15 s | 2 Neutralization charge + 50 Water [fluid] → 2 Hazardous sludge + 1 Climate samples | atmosphere +0.05; soil +0.025; toxicity -0.38; pollution -30 | Any stock planet |
-| Mask ecological disturbance | 12 s | 2 Engineered biofilm + 1 Activated carbon + 20 Water [fluid] → 1 Ecological samples | pressure -0.85 | Any stock planet |
-| Force the atmosphere [dirty] | 6 s | 8 Coal + 1 Mineral nutrients + 20 Water [fluid] → 1 Climate samples + 1 Hazardous sludge | atmosphere +0.36; temperature -0.06; water -0.03; toxicity +0.48; pollution +45 | Any stock planet |
-| Weather Vulcanus basalt | 15 s | 10 Calcite + 2 Tungsten ore + 50 Water [fluid] → 4 Mineral nutrients + 2 Climate samples | atmosphere +0.06; temperature +0.4; soil +0.24; toxicity -0.12 | Vulcanus |
-| Recover Fulgoran legacy waste | 12 s | 10 Scrap + 30 Mineral electrolyte [fluid] → 2 Heavy-metal concentrate + 2 Climate samples | atmosphere +0.16; water +0.1; soil +0.24; toxicity -0.5 | Fulgora |
-| Rebalance Gleban spores | 12 s | 5 Nutrients + 1 Carbon filter cartridge + 50 Water [fluid] → 1 Spent filter cartridge + 1 Symbiotic culture | atmosphere +0.1; soil +0.12; biodiversity +0.25; toxicity -0.15; pollution -45 | Gleba |
-| Cultivate sheltered thaw zones | 15 s | 1 Charged thermal buffer + 10 Ice + 30 Ammonia [fluid] → 80 Water [fluid] + 1 Depleted thermal buffer + 2 Biosphere samples | temperature +0.5; water +0.32; biodiversity +0.05; toxicity -0.035 | Aquilo |
-| Establish a biodiversity sanctuary | 20 s | 1 Biodiversity matrix + 5 Mineral nutrients + 100 Purified water [fluid] → 2 Biosphere samples | water +0.04; soil +0.08; biodiversity +0.42; toxicity -0.07; pollution -20 | Any stock planet, stage ≥ 2 |
-| Coordinate the living-world network | 60 s | 1 Gaia coordination cell + 50 Purified water [fluid] → 2 Restoration science pack | atmosphere +0.05; temperature +0.05; water +0.05; soil +0.05; biodiversity +0.05; toxicity -0.025 | Any stock planet, stage ≥ 4 |
+| Restore atmospheric balance | 10 s | 1 Carbon filter cartridge + 25 Water [fluid] → 1 Spent filter cartridge + 1 Climate samples | atmosphere +0.042; toxicity -0.0135; pollution -10 | Any stock planet |
+| Restore living soil | 15 s | 3 Soil substrate + 1 Pioneer culture + 20 Water [fluid] → 2 Ecological samples | soil +0.054; biodiversity +0.0135; toxicity -0.018; pollution -2 | Any stock planet |
+| Seed pioneer ecosystems | 15 s | 1 Pioneer seed mix + 1 Soil substrate + 20 Purified water [fluid] → 2 Ecological samples | atmosphere +0.0075; water +0.0045; biodiversity +0.054; pollution -3 | Any stock planet |
+| Restore the water cycle | 12 s | 100 Purified water [fluid] + 1 Ceramic membrane → 2 Climate samples + 10 Toxic effluent [fluid] | water +0.06; soil +0.0105; toxicity -0.0075; pollution -2.5 | Any stock planet |
+| Normalize thermal balance | 20 s | 1 Charged thermal buffer + 100 Water [fluid] → 1 Depleted thermal buffer + 2 Climate samples | atmosphere +0.0075; temperature +0.072 | Any stock planet |
+| Bind planetary toxins | 15 s | 2 Neutralization charge + 50 Water [fluid] → 2 Hazardous sludge + 1 Climate samples | atmosphere +0.015; soil +0.0075; toxicity -0.114; pollution -7.5 | Any stock planet |
+| Mask ecological disturbance | 12 s | 2 Engineered biofilm + 1 Activated carbon + 20 Water [fluid] → 1 Ecological samples | pressure -0.255 | Any stock planet |
+| Force the atmosphere [dirty] | 6 s | 8 Coal + 1 Mineral nutrients + 20 Water [fluid] → 1 Climate samples + 1 Hazardous sludge | atmosphere +0.108; temperature -0.018; water -0.009; toxicity +0.144; pollution +45 | Any stock planet |
+| Weather Vulcanus basalt | 15 s | 10 Calcite + 2 Tungsten ore + 50 Water [fluid] → 4 Mineral nutrients + 2 Climate samples | atmosphere +0.018; temperature +0.12; soil +0.072; toxicity -0.036 | Vulcanus |
+| Recover Fulgoran legacy waste | 12 s | 10 Scrap + 30 Mineral electrolyte [fluid] → 2 Heavy-metal concentrate + 2 Climate samples | atmosphere +0.048; water +0.03; soil +0.072; toxicity -0.15 | Fulgora |
+| Rebalance Gleban spores | 12 s | 5 Nutrients + 1 Carbon filter cartridge + 50 Water [fluid] → 1 Spent filter cartridge + 1 Symbiotic culture | atmosphere +0.03; soil +0.036; biodiversity +0.075; toxicity -0.045; pollution -11.25 | Gleba |
+| Cultivate sheltered thaw zones | 15 s | 1 Charged thermal buffer + 10 Ice + 30 Ammonia [fluid] → 80 Water [fluid] + 1 Depleted thermal buffer + 2 Biosphere samples | temperature +0.15; water +0.096; biodiversity +0.015; toxicity -0.0105 | Aquilo |
+| Establish a biodiversity sanctuary | 20 s | 1 Biodiversity matrix + 5 Mineral nutrients + 100 Purified water [fluid] → 2 Biosphere samples | water +0.012; soil +0.024; biodiversity +0.126; toxicity -0.021; pollution -5 | Any stock planet, stage ≥ 2 |
+| Coordinate the living-world network | 60 s | 1 Gaia coordination cell + 50 Purified water [fluid] → 2 Restoration science pack | atmosphere +0.015; temperature +0.015; water +0.015; soil +0.015; biodiversity +0.015; toxicity -0.0075 | Any stock planet, stage ≥ 4 |
 
 ## Processing recipes
 
@@ -77,7 +77,7 @@ Recipes tagged **dirty** also emit vanilla pollution/spores and incur explicit t
 | Purify process water | 5 s | 1 Carbon filter cartridge + 100 Water [fluid] | 90 Purified water [fluid] + 1 Spent filter cartridge | The water cycle |
 | Mineral neutralization charge | 3 s | 6 Stone + 1 Biochar | 2 Neutralization charge | The water cycle |
 | Pioneer timber cultivation | 18 s | 12 Algal biomass + 2 Living compost + 30 Water [fluid] | 6 Wood | Pioneer forests |
-| Prepare pioneer seed mix | 3 s | 1 Pioneer culture + 2 Wood + 2 Living compost | 2 Pioneer seed mix | Pioneer forests |
+| Prepare pioneer seed mix | 3 s | 1 Pioneer culture + 4 Algal biomass + 2 Living compost | 2 Pioneer seed mix | Pioneer forests |
 | Established timber cultivation | 12 s | 1 Pioneer seed mix + 2 Mineral nutrients + 40 Purified water [fluid] | 12 Wood + 1 Pioneer seed mix | Pioneer forests; Any stock planet, stage ≥ 2 |
 | Charge a new thermal buffer | 5 s | 1 Steel plate + 3 Copper plate + 2 Laboratory glass | 2 Charged thermal buffer | Climate control |
 | Water electrolysis | 10 s | 100 Purified water [fluid] | 80 Hydrogen [fluid] + 40 Oxygen [fluid] | Climate control |
@@ -112,6 +112,23 @@ Recipes tagged **dirty** also emit vanilla pollution/spores and incur explicit t
 | Recover surplus ecological samples | 5 s | 5 Ecological samples + 20 Water [fluid] | 1 Mineral nutrients + 10 Purified water [fluid] | The water cycle |
 | Recover surplus climate samples | 5 s | 5 Climate samples + 20 Water [fluid] | 1 Laboratory glass + 10 Purified water [fluid] | The water cycle |
 | Recover surplus biosphere samples | 5 s | 5 Biosphere samples | 2 Living compost | Many worlds, one biosphere |
+| Form mineral-composite stocks | 1 s | 2 Iron plate + 2 Stone | 2 Mineral-composite stock | Available from start |
+| Assemble expedition magazines | 2 s | 4 Iron plate + 1 Copper plate | 1 Sn ballistic magazine | Available from start |
+| Prepare sterile field dressings | 3 s | 2 Engineered biofilm + 1 Laboratory glass | 2 Sn field dressing | Frontier defense |
+| Build an expedition carbine | 6 s | 12 Iron plate + 8 Iron gear wheel + 4 Mineral-composite stock + 5 Copper plate | 1 Sn carbine | Frontier defense |
+| Build an expedition field suit | 8 s | 30 Iron plate + 10 Copper plate + 6 Mineral-composite stock | 1 Sn field armor | Frontier defense |
+| Build a riveted sentry | 12 s | 25 Iron plate + 15 Iron gear wheel + 8 Electronic circuit + 8 Mineral-composite stock | 1 Sn sentry turret | Frontier defense |
+| Pack riveted field barricades | 4 s | 4 Iron plate + 10 Stone | 2 Sn field barricade | Available from start |
+| Build an induction rifle | 15 s | 20 Steel plate + 10 Advanced circuit + 12 Battery + 8 Mineral-composite stock | 1 Sn induction rifle | Electrical defense doctrine |
+| Assemble induction cells | 5 s | 2 Battery + 3 Copper plate + 1 Electronic circuit | 1 Sn induction cell | Electrical defense doctrine |
+| Build a capacitor arc turret | 20 s | 35 Steel plate + 15 Advanced circuit + 30 Battery + 10 Ceramic membrane | 1 Sn arc turret | Electrical defense doctrine |
+| Build composite bastion walls | 6 s | 2 Sn field barricade + 4 Steel plate + 4 Engineered biofilm + 5 Stone brick | 2 Sn composite wall | Electrical defense doctrine |
+| Build powered expedition armor | 30 s | 40 Steel plate + 30 Advanced circuit + 30 Battery + 20 Engineered biofilm | 1 Sn expedition armor | Electrical defense doctrine |
+| Build a heavy lance rifle | 45 s | 1 Railgun + 30 Tungsten plate + 10 Supercapacitor + 5 Biodiversity matrix | 1 Sn lance rifle | Bastion defense doctrine |
+| Assemble dense-core lance rounds | 10 s | 1 Railgun ammo + 4 Tungsten carbide + 2 Superconductor | 1 Sn lance cell | Bastion defense doctrine |
+| Build a bastion lance turret | 60 s | 1 Railgun turret + 60 Tungsten plate + 20 Supercapacitor + 5 Quantum processor + 10 Biodiversity matrix | 1 Sn lance turret | Bastion defense doctrine |
+| Build bastion expedition armor | 60 s | 1 Power armor mk2 + 40 Tungsten plate + 10 Quantum processor + 20 Biodiversity matrix | 1 Sn bastion armor | Bastion defense doctrine |
+| Build a biosphere shield module | 30 s | 2 Energy shield mk2 equipment + 10 Supercapacitor + 5 Biodiversity matrix | 1 Sn ecoshield equipment | Bastion defense doctrine |
 
 ## Construction recipes
 
@@ -166,6 +183,12 @@ Recipes tagged **dirty** also emit vanilla pollution/spores and incur explicit t
 | The Gaia network | 600 × 30 s | Automation, Logistic, Chemical, Space, Production, Utility, Metallurgic, Electromagnetic, Agricultural, Cryogenic, Ecology, Climate | A garden beneath the ice, Quantum processor |
 | Second Nature | 200 × 60 s | Automation, Logistic, Chemical, Space, Production, Utility, Metallurgic, Electromagnetic, Agricultural, Cryogenic, Ecology, Climate, Restoration | The Gaia network |
 | Ecological research productivity | 1000*1.5^(L-1) × 60 s | Automation, Logistic, Chemical, Space, Production, Utility, Metallurgic, Electromagnetic, Agricultural, Cryogenic, Ecology, Climate, Restoration | Second Nature |
+| Frontier defense | 80 × 30 s | Automation | Military, Steel processing |
+| Electrical defense doctrine | 250 × 30 s | Automation, Logistic, Chemical, Military, Ecology | Laser turret, Climate control |
+| Bastion defense doctrine | 600 × 30 s | Automation, Logistic, Chemical, Military, Utility, Space, Cryogenic, Climate | Railgun, The Gaia network |
+| Ecological process optimization 1 | 150 × 30 s | Automation, Logistic, Ecology | Atmospheric engineering |
+| Ecological process optimization 2 | 350 × 30 s | Automation, Logistic, Chemical, Ecology | Ecological process optimization 1, Climate control |
+| Ecological process optimization 3 | 700 × 30 s | Automation, Logistic, Chemical, Space, Ecology, Climate | Ecological process optimization 2, Comparative climatology |
 
 ## Materials and fluids
 
@@ -200,6 +223,7 @@ Recipes tagged **dirty** also emit vanilla pollution/spores and incur explicit t
 - **Ecology science pack** (`sn-ecology-science-pack`): Field-driven research into sustainable industrial systems.
 - **Climate science pack** (`sn-climate-science-pack`): Cross-planet climate research using the specialties of Vulcanus, Fulgora and Gleba.
 - **Restoration science pack** (`sn-restoration-science-pack`): Produced only by operating planetary beacons on living worlds.
+- **Mineral-composite stock** (`sn-alloy-stock`): A hand-formed iron/mineral structural stock. No wood, resin, biomass, power or research required.
 - **Purified water** (`sn-clean-water`): A high-purity process fluid; not a replacement for native water or ocean tiles.
 - **Oxygen** (`sn-oxygen`): Electrolysis coproduct used for clean metallurgy and nutrient processing.
 - **Hydrogen** (`sn-hydrogen`): Power-intensive reducing agent and feedstock for renewable chemical fuels.
