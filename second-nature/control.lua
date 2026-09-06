@@ -1,3 +1,4 @@
+require("util") -- table.deepcopy is not preloaded in a mod's runtime environment.
 local C = require("shared.constants")
 local Model = require("shared.model")
 local State = require("scripts.state")

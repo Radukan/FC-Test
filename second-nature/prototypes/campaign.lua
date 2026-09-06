@@ -9,6 +9,12 @@ if enabled then
   for name in pairs(entities.settings) do
     if data.raw.tree[name] or name == "fish" then entities.settings[name] = nil end
   end
+  -- An explicit whitelist must retain native nests/worms as well as ore.
+  -- Vanilla normally includes these via treat_missing_as_default=true.
+  for _, name in ipairs(C.native_names) do
+    local prototype = data.raw["unit-spawner"][name] or data.raw.turret[name]
+    if prototype and prototype.autoplace then entities.settings[name] = {} end
+  end
   -- Only geological decoratives belong on this stripped world. Gleba is untouched.
   local decorations = map.autoplace_settings.decorative
   decorations.treat_missing_as_default = false

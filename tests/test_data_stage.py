@@ -182,6 +182,8 @@ def test_desolate_map_controls_and_presets_preserve_resources_and_gleba(stage):
     assert settings.autoplace_settings.entity.settings.fish is None
     assert settings.autoplace_settings.entity.settings['iron-ore'] is not None
     assert settings.autoplace_settings.entity.settings['crude-oil'] is not None
+    for name in ['biter-spawner','spitter-spawner','small-worm-turret','medium-worm-turret','big-worm-turret','behemoth-worm-turret']:
+        assert settings.autoplace_settings.entity.settings[name] is not None
     assert all(stage.raw.tree[name] is None for name in settings.autoplace_settings.entity.settings.keys())
     assert all('rock' in name or 'decal' in name for name in settings.autoplace_settings.decorative.settings.keys())
     presets=stage.raw['map-gen-presets'].default

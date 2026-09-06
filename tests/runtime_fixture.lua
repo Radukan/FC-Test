@@ -1,10 +1,12 @@
 -- Deterministic, deliberately small API test doubles. These do not simulate the
 -- engine's electric networks, graphics, entity collision or actual recipe execution.
 local C=require('shared.constants');local K=require('shared.catalog')
-function table.deepcopy(t)
+local function deepcopy(t)
   if type(t)~='table' then return t end
-  local r={};for k,v in pairs(t) do r[k]=table.deepcopy(v) end;return r
+  local r={};for k,v in pairs(t) do r[k]=deepcopy(v) end;return r
 end
+table.deepcopy=nil
+package.preload["util"]=function() table.deepcopy=deepcopy;return {table={deepcopy=deepcopy}} end
 mock={handlers={},nth={},commands={},messages={},logs={},renders={},next_id=100,next_registration=0,entities={},surface_calls={}}
 storage={};defines={events={},command={attack_area=1,attack=2,go_to_location=3,stop=4},distraction={by_enemy=1,none=0},controllers={character=1,cutscene=2}}
 local event_names={'on_entity_spawned','on_chunk_generated','on_force_created','on_biter_base_built','on_rocket_launched','on_cutscene_cancelled','on_pre_player_mined_item','on_robot_pre_mined','on_entity_died','script_raised_destroy','on_built_entity','on_robot_built_entity','script_raised_built','script_raised_revive','on_space_platform_built_entity','on_entity_cloned','on_object_destroyed','on_surface_created','on_surface_deleted','on_surface_cleared','on_forces_merged','on_player_created','on_player_joined_game','on_player_removed','on_gui_click','on_gui_selection_state_changed','on_gui_closed','on_lua_shortcut','on_runtime_mod_setting_changed'}
