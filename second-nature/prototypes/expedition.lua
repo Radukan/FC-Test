@@ -85,8 +85,8 @@ replace_wood("wooden-chest","sn-alloy-stock",1)
 replace_wood("shotgun","sn-alloy-stock",1)
 replace_wood("combat-shotgun","sn-alloy-stock",1)
 local pole=data.raw["electric-pole"]["small-electric-pole"]
-pole.pictures=Art.sprite("field-pole-north")
-pole.pictures.direction_count=1
+pole.pictures=Art.sprite("field-pole-sheet")
+pole.pictures.direction_count=4;pole.pictures.line_length=4
 pole.icon=H.icon("field-pole");pole.icons=nil;pole.icon_size=64;pole.water_reflection=nil
 pole.localised_name={"entity-name.sn-field-pole"}
 local chest=data.raw.container["wooden-chest"]

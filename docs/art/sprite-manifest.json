@@ -1883,5 +1883,18 @@
       0,
       0.0
     ]
+  },
+  "field-pole-sheet": {
+    "filename": "__second-nature__/graphics/entity/industry/field-pole-sheet.png",
+    "width": 128,
+    "height": 256,
+    "frame_count": 1,
+    "line_length": 4,
+    "direction_count": 4,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -1.28
+    ]
   }
 }

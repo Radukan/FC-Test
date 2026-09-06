@@ -91,6 +91,11 @@ def render_all(only=None):
             preview=animate(name+'-'+direction,lambda t,d:equipment(name),128,256 if name=='field-pole' else 128,
                             frames=1,angles=[index*math.pi/2],origin=.82 if name=='field-pole' else .7)
             if index==0:icon(preview,name);previews.append((name.replace('-',' ').title(),preview))
+    if not only or 'field-pole' in only:
+        sheet=Image.new('RGBA',(512,256))
+        for i,d in enumerate(DIRECTIONS):sheet.alpha_composite(Image.open(OUT/f'field-pole-{d}.png'),(i*128,0))
+        save(sheet,OUT/'field-pole-sheet.png')
+        manifest['field-pole-sheet']=dict(manifest['field-pole-north'],filename='__second-nature__/graphics/entity/industry/field-pole-sheet.png',direction_count=4,line_length=4)
     if not only or 'explorer' in only:
         for tier in range(3):
             for pose,frames,count in [('idle',8,8),('idle_with_gun',8,8),('running',12,8),('mining_with_tool',12,8),('running_with_gun',12,18)]:

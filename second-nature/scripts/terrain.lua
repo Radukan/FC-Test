@@ -36,6 +36,8 @@ local function initialize_chunk(world,surface,chunk)
 end
 local function tree_life(world,surface,chunk,pollution,broods)
   local trees=chunk.trees or {};chunk.trees=trees
+  local dead=chunk.dead_trees or {};chunk.dead_trees=dead
+  for i=#dead,1,-1 do if not dead[i].valid then table.remove(dead,i) end end
   for i=#trees,1,-1 do if not trees[i].valid then table.remove(trees,i) end end
   if chunk.cover<.38 and chunk.stress>.35 and #trees>0 then
     local tree=table.remove(trees)
@@ -43,12 +45,26 @@ local function tree_life(world,surface,chunk,pollution,broods)
       local pos=tree.position
       tree.destroy({raise_destroy=true})
       world.withered_trees=(world.withered_trees or 0)+1
-      if prototypes.entity["dead-dry-hairy-tree"] then surface.create_entity({name="dead-dry-hairy-tree",position=pos,force="neutral"}) end
+      if prototypes.entity["dead-dry-hairy-tree"] then
+        local stump=surface.create_entity({name="dead-dry-hairy-tree",position=pos,force="neutral"})
+        if stump then dead[#dead+1]=stump end
+      end
     end
     return
   end
   if not settings.global["sn-tree-growth"].value or chunk.cover<.64 or pollution>C.air.green_limit or broods then return end
   if game.tick-(chunk.tree_tick or 0)<5*60*60 or #trees>=8 then return end
+  if #dead>0 then
+    local stump=dead[#dead];local pos=stump.position;local name=C.profiles[world.planet].tree
+    if name and clear(surface,pos,3) then
+      stump.destroy({raise_destroy=false});table.remove(dead)
+      if surface.can_place_entity({name=name,position=pos}) then
+        local tree=surface.create_entity({name=name,position=pos,force="neutral",raise_built=false})
+        if tree then trees[#trees+1]=tree;chunk.tree_tick=game.tick;world.grown_trees=world.grown_trees+1 end
+      end
+    end
+    return
+  end
   local x0,y0=chunk.x*32,chunk.y*32
   local pos={x=x0+4+(chunk.stripe*7)%24,y=y0+4+(chunk.stripe*11)%24}
   local tile=surface.get_tile(pos)
