@@ -68,6 +68,7 @@ def test_weapons_and_defenses_have_ammo_energy_and_progression_contracts(expedit
     assert data.capsule['sn-field-dressing'] is not None
     assert len(data.technology['sn-restoration-efficiency-3'].prerequisites)>0
     assert data.technology['sn-restoration-efficiency-3'].max_level is None
+    assert data.technology['sn-restoration-efficiency-3'].effects[1].effect_description[2]=='45'
 
 
 def test_full_recovery_is_not_a_fast_or_instant_paintbrush(lua):

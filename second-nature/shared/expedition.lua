@@ -59,6 +59,6 @@ for level,bonus in ipairs({15,30,45}) do
   local packs=level==1 and {r,g,e} or (level==2 and {r,g,b,e} or {r,g,b,"space-science-pack",e,c})
   tech("restoration-efficiency-"..level,"Ecological process optimization "..level,prerequisites,packs,({150,350,700})[level],{},
     "Improve your productive clean installations, pollution capture and recently supported terrain recovery. Bonuses are bounded: total +"..bonus.."%, not instant greening or faster research clocks.",
-    {{type="nothing",effect_description={"sn-expedition.efficiency-effect",bonus}}})
+    {{type="nothing",effect_description={"sn-expedition.efficiency-effect",tostring(bonus)}}})
 end
 return X
