@@ -15,6 +15,7 @@ def lua():
 @pytest.fixture
 def game_lua(lua):
     lua.execute((ROOT/'tests/runtime_fixture.lua').read_text(),name='@runtime_fixture.lua')
+    lua.globals().mock.gui_reserved=lua.execute((ROOT/'tests/gui_reserved.lua').read_text())
     lua.execute((MOD/'control.lua').read_text(),name='@control.lua')
     lua.execute('mock.init()')
     return lua

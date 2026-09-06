@@ -87,7 +87,7 @@ def test_growth_not_clean_air_alone_provokes_resistance(lua):
 def test_pollution_exposure_creates_bounded_toxic_debt(lua):
     lua.execute('''
       local M=require('shared.model');local s=M.new('nauvis');s.first_operation=1;s.ambient=100000000
-      M.advance(s,60*60,1);assert(s.toxicity>30 and s.toxicity<=100)
+      M.advance(s,60*60,1);assert(s.toxicity>require('shared.constants').profiles.nauvis.toxicity and s.toxicity<=100)
       for k,v in pairs(s.values) do assert(v>=0 and v<=100) end
     ''')
 

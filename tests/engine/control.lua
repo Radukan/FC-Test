@@ -34,6 +34,15 @@ script.on_init(function()
   surface.pollute({0,0},100)
   storage.machine,storage.idle,storage.powerless=a,idle,powerless
   storage.baseline=remote.call('second_nature','get_world','nauvis').cycles
+  -- New stable campaign prototypes and real inventory APIs.
+  local ship=build(surface,'sn-lander',{x=64,y=64})
+  for _,item in ipairs(C.landing_cargo) do assert(ship.insert({name=item[1],count=item[2]})==item[2],item[1]) end
+  local friend=game.forces['sn-smoke-friendly'] or game.create_force('sn-smoke-friendly')
+  assert(surface.create_entity({name='sn-bloomback',position={64,80},force=friend}))
+  assert(surface.create_entity({name='sn-bloom-nest',position={72,80},force=friend}))
+  rendering.draw_rectangle({surface=surface,left_top={60,60},right_bottom={92,92},color={0.2,0.8,0.4,0.15},filled=true,draw_on_ground=true,time_to_live=120})
+  local absorptions=prototypes.entity['small-biter'].absorptions_to_join_attack
+  assert(not absorptions or not absorptions.pollution,'pollution still recruits biters')
   -- Save creation followed by benchmarking exercises storage LuaObject restoration.
   log('SECOND_NATURE_ENGINE_SMOKE_READY')
 end)
@@ -45,7 +54,7 @@ script.on_nth_tick(60,function()
   assert(storage.powerless.products_finished==0,'unpowered machine must not craft')
   local snapshot=remote.call('second_nature','get_world','nauvis')
   assert(snapshot.cycles==storage.baseline+1,'one actual completed cycle must earn one ecological cycle')
-  assert(snapshot.values.atmosphere>35,'powered scrubber must improve atmosphere')
+  assert(snapshot.values.atmosphere>C.profiles.nauvis.initial.atmosphere,'powered scrubber must improve atmosphere')
   assert(snapshot.removed_pollution>0,'pollution capture did not run')
   for _,name in ipairs(C.planets) do assert(remote.call('second_nature','get_world',name),'missing world '..name) end
   storage.machine.destroy({raise_destroy=true})

@@ -9,6 +9,7 @@ function S.init()
     visual_budget = 20, last_environment_tick = game.tick
   }
   local root = S.root()
+  root.schema = C.schema
   for i = 1, C.bucket_count do root.buckets[i] = root.buckets[i] or {} end
   return root
 end
@@ -122,6 +123,7 @@ function S.snapshot(name)
   return {planet = world.planet, surface_index = world.surface_index, values = table.deepcopy(world.values), stage = world.stage,
     score = world.score, toxicity = world.toxicity, pressure = world.pressure, ambient = world.ambient, cycles = world.cycles,
     machines = world.machine_count, active = world.active_count, restored_tiles = world.restored_tiles, grown_trees = world.grown_trees,
-    removed_pollution = world.removed_pollution, contributions = table.deepcopy(world.contributions)}
+    removed_pollution = world.removed_pollution, contributions = table.deepcopy(world.contributions),
+    air = world.air and table.deepcopy(world.air), generated_chunks = #(world.chunks or {}), native_outcome = world.native_outcome and table.deepcopy(world.native_outcome)}
 end
 return S

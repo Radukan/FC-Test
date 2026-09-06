@@ -1,7 +1,11 @@
 local C = require("shared.constants")
 local K = require("shared.catalog")
 local S = require("scripts.state")
+local P = require("scripts.pollution")
 local R = {}
+local function calm(world, surface, position)
+  return world.planet == "nauvis" and P.calm(surface, position) or 0
+end
 local function distance2(a, b) return (a.x - b.x)^2 + (a.y - b.y)^2 end
 local function cleanup(world)
   for i = #world.groups, 1, -1 do
@@ -18,7 +22,7 @@ local function target(world)
     local rec = S.root().machines[id]
     if rec and rec.entity.valid and rec.last_effect and game.tick - rec.last_effect < 2 * 60 * 60 then
       local def = K.by_machine[rec.entity.name]
-      if def.fixed and not def.dirty and def.name ~= "pheromone-dampener" then
+      if def.fixed and not def.dirty and def.name ~= "pheromone-dampener" and calm(world, rec.entity.surface, rec.entity.position) < 1 then
         local score = (def.name == "sanctuary" and 3 or (def.name == "seed-disperser" and 2 or 1))
         if not best or score > priority or (score == priority and id < best.id) then best, priority = rec, score end
       end
@@ -26,7 +30,7 @@ local function target(world)
   end
   return best
 end
-local function nest_for(surface, rec)
+local function nest_for(world, surface, rec)
   local nests = surface.find_entities_filtered({position = rec.entity.position, radius = 512, type = "unit-spawner", force = "enemy", limit = 32})
   table.sort(nests, function(a, b)
     local da, db = distance2(a.position, rec.entity.position), distance2(b.position, rec.entity.position)
@@ -35,7 +39,7 @@ local function nest_for(surface, rec)
   end)
   for _, nest in ipairs(nests) do
     -- No enemies materializing inside the player's factory. A cleared perimeter is a valid defense.
-    if distance2(nest.position, rec.entity.position) >= 96^2 then return nest end
+    if distance2(nest.position, rec.entity.position) >= 96^2 and calm(world, surface, nest.position) < 1 then return nest end
   end
 end
 local function species(world, evolution, index)
@@ -63,8 +67,12 @@ local function dispatch(world, surface)
     return
   end
   if rec.entity.force.get_cease_fire("enemy") or rec.entity.force.get_friend("enemy") then return end
+  local sedation = math.max(calm(world, surface, nest.position), calm(world, surface, rec.entity.position))
+  if sedation >= 1 then world.sedated_waves = (world.sedated_waves or 0) + 1; return end
+  if not rec.last_effect or game.tick - rec.last_effect > 2 * 60 * 60 then return end
   local aggressive = settings.global["sn-native-resistance"].value == "relentless"
   local size = math.min(C.max_wave, math.floor(6 + world.pressure * (aggressive and 0.4 or 0.25) + world.stage * 2))
+  size = math.max(1, math.floor(size * (1 - sedation)))
   -- Pentapods are substantially stronger than biters; count them conservatively.
   if world.planet == "gleba" then size = math.max(3, math.floor(size / 3)) end
   local group = surface.create_unit_group({position = nest.position, force = nest.force})
@@ -76,7 +84,7 @@ local function dispatch(world, surface)
     if unit.commandable and not unit.commandable.parent_group then group.add_member(unit); recruited = recruited + 1 end
   end
   local crowded = surface.count_entities_filtered({position = nest.position, radius = 128, type = "unit", force = nest.force, limit = 150}) >= 150
-  local evolution = nest.force.get_evolution_factor(surface)
+  local evolution = math.max(nest.force.get_evolution_factor(surface), world.stage * 0.12)
   if not crowded then
     for i = recruited + 1, size do
       local name = species(world, evolution, i)
@@ -90,9 +98,9 @@ local function dispatch(world, surface)
     end
   end
   if recruited > 0 then
-    group.set_command({type = defines.command.attack_area, destination = rec.entity.position, radius = 20, distraction = defines.distraction.by_enemy})
+    group.set_command({type = defines.command.attack, target = rec.entity, distraction = defines.distraction.none})
     group.start_moving()
-    world.groups[#world.groups + 1] = {group = group, created = game.tick}
+    world.groups[#world.groups + 1] = {group = group, created = game.tick, target = rec.id, nest_position = {x = nest.position.x, y = nest.position.y}}
     rec.entity.force.print({"sn-message.raid", {"space-location-name." .. world.planet}, recruited}, {color = C.colors.pressure})
   else group.destroy() end
   world.pressure = math.max(0, world.pressure - 22)
@@ -101,6 +109,16 @@ local function dispatch(world, surface)
 end
 function R.tick(world, surface)
   cleanup(world)
+  if world.native_outcome then world.warning = nil; return end
+  for _, entry in ipairs(world.groups) do
+    local rec = entry.target and S.root().machines[entry.target]
+    if not entry.retreated and rec and rec.entity.valid and entry.group.valid and entry.nest_position
+      and calm(world, surface, rec.entity.position) >= 1 then
+      entry.group.set_command({type = defines.command.go_to_location, destination = entry.nest_position, distraction = defines.distraction.none})
+      entry.retreated = true
+      world.sedated_waves = (world.sedated_waves or 0) + 1
+    end
+  end
   local mode = settings.global["sn-native-resistance"].value
   if not C.profiles[world.planet].native or mode == "off" or surface.peaceful_mode then world.warning = nil; return end
   if not world.first_operation or game.tick - world.first_operation < settings.global["sn-grace-minutes"].value * 60 * 60 then return end
@@ -111,8 +129,10 @@ function R.tick(world, surface)
   if not rec then return end
   -- Respect scenario diplomacy and other forces, rather than turning this into a PvP grief mechanic.
   if rec.entity.force.get_cease_fire("enemy") or rec.entity.force.get_friend("enemy") then return end
-  local nest = nest_for(surface, rec)
+  local nest = nest_for(world, surface, rec)
   if not nest then return end
+  local effective = world.pressure * (1 - math.max(calm(world, surface, rec.entity.position), calm(world, surface, nest.position)))
+  if effective < (mode == "relentless" and 20 or 30) then return end
   world.warning = {at = game.tick + C.warning_ticks, target = rec.id, nest = nest, force_index = rec.entity.force.index}
   local p = rec.entity.position
   rec.entity.force.print({"sn-message.raid-warning", {"space-location-name." .. world.planet}, 45,

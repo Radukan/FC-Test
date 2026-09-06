@@ -1,12 +1,17 @@
 {
   "name": "second-nature",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "title": "Second Nature — Planetary Restoration",
   "author": "Radukan",
   "homepage": "https://github.com/Radukan/FC-Test",
-  "description": "A Space Age terraforming overhaul. Rebuild atmosphere, climate, watersheds, soil and biodiversity on all five planets. Close industrial loops, weigh dirty shortcuts against toxic debt, and defend living ecosystems from native resistance. Includes a planetary dashboard, circuit telemetry and a cooperative five-world victory.",
+  "description": "Stable Space Age terraforming overhaul. Land stranded on desolate Nauvis with emergency cargo and defenses. Pollution calms native broods but blocks life: cleanse local air and the planetary smog inventory, restore five worlds, and choose symbiosis or eradication. Includes a dashboard, pollution survey, field guide and custom menu art.",
   "factorio_version": "2.0",
-  "dependencies": ["base >= 2.0.77", "space-age >= 2.0.77", "quality >= 2.0.77", "elevated-rails >= 2.0.77"],
+  "dependencies": [
+    "base >= 2.0.77",
+    "space-age >= 2.0.77",
+    "quality >= 2.0.77",
+    "elevated-rails >= 2.0.77"
+  ],
   "space_travel_required": true,
   "spoiling_required": true,
   "freezing_required": true

@@ -6,7 +6,7 @@ from catalog import ROOT,MOD,load_catalog,load_constants,plain
 from factorio_data import DataStage
 K,C=load_catalog(),load_constants()
 
-@pytest.fixture(scope='module',params=[('2.0.77',True),('2.1.17',True),('2.0.77',False),('2.1.17',False)])
+@pytest.fixture(scope='module',params=[('2.0.77',True),('2.0.77',False)])
 def stage(request):
     version,overhaul=request.param
     default=ROOT/'.cache'/('factorio-data-2.0.77' if version.startswith('2.0') else 'factorio-data')
@@ -174,3 +174,46 @@ def test_research_and_world_conditions_use_existing_prototypes(stage):
             assert family[ingredient[1]],(name,ingredient[1])
     for _,profile in C['profiles'].items():
         if profile.get('tree'):assert stage.raw.tree[profile['tree']],profile['tree']
+
+
+def test_desolate_map_controls_and_presets_preserve_resources_and_gleba(stage):
+    settings=stage.raw.planet.nauvis.map_gen_settings
+    assert settings.autoplace_settings.entity.treat_missing_as_default is False
+    assert settings.autoplace_settings.entity.settings.fish is None
+    assert settings.autoplace_settings.entity.settings['iron-ore'] is not None
+    assert settings.autoplace_settings.entity.settings['crude-oil'] is not None
+    assert all(stage.raw.tree[name] is None for name in settings.autoplace_settings.entity.settings.keys())
+    assert all('rock' in name or 'decal' in name for name in settings.autoplace_settings.decorative.settings.keys())
+    presets=stage.raw['map-gen-presets'].default
+    assert presets['sn-last-landing'].advanced_settings.pollution.enabled is True
+    assert presets['sn-quiet-reclamation'].basic_settings.peaceful_mode is True
+    assert presets['sn-brood-frontier'].basic_settings.autoplace_controls['enemy-base'].size==1.5
+    assert stage.raw.planet.gleba.pollutant_type=='spores'
+
+
+def test_nauvis_pollution_recruitment_is_removed_but_spores_are_untouched(stage):
+    for name in C['native_names']:
+        unit=stage.raw.unit[name]
+        if unit:assert unit.absorptions_to_join_attack.pollution is None
+        nest=stage.raw['unit-spawner'][name]
+        if nest:assert nest.absorptions_per_second.pollution is None
+    assert stage.raw['airborne-pollutant'].pollution.affects_evolution is False
+    assert stage.raw['unit-spawner']['gleba-spawner'].absorptions_per_second.spores is not None
+
+
+def test_friendly_native_has_original_multidirectional_art_and_zero_attack_damage(stage):
+    unit=stage.raw.unit['sn-bloomback']
+    assert unit.run_animation.direction_count==8 and unit.run_animation.frame_count==4
+    assert unit.attack_parameters.damage_modifier==0
+    assert unit.alternative_attacking_frame_sequence is None
+    assert Image.open(MOD/'graphics/entity/bloomback.png').size==(384,768)
+    assert stage.raw['simple-entity-with-owner']['sn-bloom-nest'] is not None
+    assert stage.raw.container['sn-lander'].inventory_size>=len(C['landing_cargo'])
+
+
+def test_main_menu_background_is_a_real_packaged_image(stage):
+    constants=stage.raw['utility-constants'].default
+    assert len(constants.main_menu_simulations)==0
+    assert constants.main_menu_background_image_location=='__second-nature__/graphics/menu/last-landing.jpg'
+    image=Image.open(MOD/'graphics/menu/last-landing.jpg')
+    assert image.width>=1280 and image.height>=720

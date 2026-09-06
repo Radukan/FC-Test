@@ -18,3 +18,26 @@ for _, t in ipairs(K.technologies) do
     assert(data.raw.technology[prerequisite], "Second Nature: missing prerequisite " .. prerequisite)
   end
 end
+-- Pollutant-fed attack recruitment is replaced for Nauvis species, not pentapods.
+-- Empty absorption dictionaries mean no pollution recruitment; zero-cost entries would not.
+if settings.startup["sn-biter-metabolism"].value then
+  for _, name in ipairs(require("shared.constants").native_names) do
+    local unit = data.raw.unit[name]
+    if unit then
+      unit.absorptions_to_join_attack = unit.absorptions_to_join_attack or {}
+      unit.absorptions_to_join_attack.pollution = nil
+    end
+    local nest = data.raw["unit-spawner"][name]
+    if nest then
+      nest.absorptions_per_second = nest.absorptions_per_second or {}
+      nest.absorptions_per_second.pollution = nil
+    end
+  end
+  data.raw["airborne-pollutant"].pollution.affects_evolution = false
+end
+if settings.startup["sn-menu-background"].value then
+  local constants = data.raw["utility-constants"].default
+  constants.main_menu_simulations = {}
+  constants.main_menu_background_image_location = "__second-nature__/graphics/menu/last-landing.jpg"
+  constants.main_menu_background_vignette_intensity = 18
+end

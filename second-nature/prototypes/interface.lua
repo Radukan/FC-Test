@@ -5,6 +5,10 @@ data:extend({
   {type = "surface-property", name = "sn-restoration-domain", default_value = 0, order = "z-sn-a"},
   {type = "surface-property", name = "sn-planet-identity", default_value = 0, order = "z-sn-b"},
   {type = "surface-property", name = "sn-ecological-stage", default_value = 0, order = "z-sn-c"},
+  {type = "custom-input", name = "sn-toggle-pollution", key_sequence = "CONTROL + SHIFT + P", consuming = "none"},
+  {type = "shortcut", name = "sn-pollution-overlay", action = "lua", toggleable = true,
+    icon = H.icon("signal-atmosphere"), icon_size = 64, small_icon = H.icon("signal-atmosphere"), small_icon_size = 64,
+    associated_control_input = "sn-toggle-pollution", style = "blue", order = "z[second-nature]-b"},
   {type = "custom-input", name = "sn-toggle-dashboard", key_sequence = "SHIFT + T", consuming = "none"},
   {type = "shortcut", name = "sn-dashboard", action = "lua", toggleable = true,
     icon = H.icon("second-nature"), icon_size = 64, small_icon = H.icon("second-nature"), small_icon_size = 64,
@@ -28,6 +32,10 @@ for index, name in ipairs({"atmosphere", "temperature", "water", "soil", "biodiv
     type = "virtual-signal", name = "sn-" .. name, icon = H.icon("signal-" .. name), icon_size = 64,
     subgroup = "sn-signals", order = tostring(index)
   }})
+end
+for _, name in ipairs({"smog-total", "smog-local"}) do
+  data:extend({{type = "virtual-signal", name = "sn-" .. name, icon = H.icon("signal-atmosphere"), icon_size = 64,
+    subgroup = "sn-signals", order = "z-" .. name}})
 end
 local styles = data.raw["gui-style"].default
 styles.sn_heading = {type = "label_style", parent = "label", font = "default-large-bold", font_color = {0.68, 0.9, 0.64}}

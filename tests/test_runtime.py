@@ -85,9 +85,9 @@ def test_monitor_uses_quality_aware_dense_section_and_force_local_state(game_lua
     game_lua.execute('''
       local e=mock.entity('sn-ecology-monitor',game.surfaces[1]);mock.run(240)
       local s=e.get_or_create_control_behavior().get_section(1)
-      assert(#s.filters==9 and s.group=='')
+      assert(#s.filters==11 and s.group=='')
       assert(s.filters[1].value.name=='sn-atmosphere' and s.filters[1].value.quality=='normal')
-      assert(s.filters[1].min==35 and s.filters[1].index==nil)
+      assert(s.filters[1].min==require('shared.constants').profiles.nauvis.initial.atmosphere and s.filters[1].index==nil)
       mock.run(240);assert(#e.get_or_create_control_behavior().sections==1)
     ''')
 
@@ -117,7 +117,7 @@ def test_resistance_requires_existing_distant_nest_and_warns_before_spawning(gam
       w.next_raid_check=0;R.tick(w,s);assert(w.warning and #w.groups==0)
       game.tick=w.warning.at;R.tick(w,s)
       assert(#w.groups==1 and #w.groups[1].group.members<=40)
-      assert(w.groups[1].group.command.destination.x==0 and w.groups[1].group.moving)
+      assert(w.groups[1].group.command.target==e and w.groups[1].group.command.distraction==defines.distraction.none and w.groups[1].group.moving)
       assert(w.next_raid_check>=game.tick+8*60*60)
     ''')
 
@@ -237,12 +237,12 @@ def test_dashboard_builds_updates_switches_tabs_and_closes(game_lua):
     game_lua.execute('''
       local G=require('scripts.gui');local p=mock.player(1);G.welcome(p);G.open(p)
       local f=p.gui.screen.sn_dashboard;assert(f and p.shortcut_toggled)
-      assert(f.tabs.overview.content.body.visible)
-      local selector=f.tabs.overview.content.selector.sn_planet;selector.selected_index=5
-      G.selection({player_index=1,element=selector});assert(f.tabs.overview.content.uncharted.visible)
-      local guide=f.tabs.guide.content.sn_guide;guide.selected_index=3;G.selection({player_index=1,element=guide})
+      assert(f.sn_tabs.sn_overview.sn_content.sn_body.visible)
+      local selector=f.sn_tabs.sn_overview.sn_content.sn_selector.sn_planet;selector.selected_index=5
+      G.selection({player_index=1,element=selector});assert(f.sn_tabs.sn_overview.sn_content.sn_uncharted.visible)
+      local guide=f.sn_tabs.sn_guide.sn_content.sn_guide;guide.selected_index=3;G.selection({player_index=1,element=guide})
       G.click({player_index=1,element={valid=true,name='sn_select_nauvis'}})
-      assert(f.tabs.overview.content.body.visible and f.tabs.selected_tab_index==1)
+      assert(f.sn_tabs.sn_overview.sn_content.sn_body.visible and f.sn_tabs.selected_tab_index==1)
       G.close(p);assert(not p.gui.screen.sn_dashboard and not p.shortcut_toggled)
     ''')
 
@@ -250,7 +250,7 @@ def test_dashboard_builds_updates_switches_tabs_and_closes(game_lua):
 def test_remote_reports_are_copies_not_mutation_backdoors(game_lua):
     game_lua.execute('''
       local snap=remote.call('second_nature','get_world','nauvis');snap.values.atmosphere=100
-      assert(remote.call('second_nature','get_world','nauvis').values.atmosphere==35)
+      assert(remote.call('second_nature','get_world','nauvis').values.atmosphere==require('shared.constants').profiles.nauvis.initial.atmosphere)
       assert(not remote.call('second_nature','get_world','aquilo'))
     ''')
 
@@ -260,7 +260,7 @@ def test_switching_dirty_recipes_cannot_launder_toxic_debt(game_lua):
       local S=require('scripts.state');local s=game.surfaces[1]
       local e=mock.entity('sn-pyrolyzer',s)
       e._recipe='sn-coal-activation';e.products_finished=1;mock.run(240)
-      local w=S.by_planet('nauvis');assert(w.cycles==1 and w.toxicity>30)
+      local w=S.by_planet('nauvis');assert(w.cycles==1 and w.toxicity>require('shared.constants').profiles.nauvis.toxicity)
       local before=w.toxicity;e._recipe=nil;e.products_finished=2;mock.run(240)
       assert(w.cycles==2 and w.toxicity>before)
     ''')

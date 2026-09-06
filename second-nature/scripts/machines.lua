@@ -35,7 +35,14 @@ local function process(rec, world)
   if recipe.planet and recipe.planet ~= world.planet then return end
   if recipe.stage and world.stage < recipe.stage then return end
   world.first_operation = world.first_operation or game.tick
-  Model.apply(world, recipe.effects, cycles, settings.global["sn-restoration-speed"].value)
+  local effects = recipe.effects
+  if has_pollutant and entity.surface.get_pollution(entity.position) > C.air.green_limit then
+    effects = table.deepcopy(effects)
+    -- Inputs still become samples/waste, but living gains require clean local air.
+    if (effects.soil or 0) > 0 then effects.soil = 0 end
+    if (effects.biodiversity or 0) > 0 then effects.biodiversity = 0 end
+  end
+  Model.apply(world, effects, cycles, settings.global["sn-restoration-speed"].value)
   local force_index = entity.force.index
   world.contributions[force_index] = (world.contributions[force_index] or 0) + cycles
   world.recent[force_index] = game.tick

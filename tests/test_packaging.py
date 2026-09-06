@@ -4,12 +4,12 @@ import pytest
 from catalog import ROOT,MOD,load_catalog
 from package import build
 
-@pytest.mark.parametrize('target',['2.0','2.1'])
+@pytest.mark.parametrize('target',['2.0'])
 def test_installable_packages_are_branch_correct_complete_and_deterministic(tmp_path,target):
     a=build(target,tmp_path/'a');b=build(target,tmp_path/'b')
     assert a.read_bytes()==b.read_bytes()
     with zipfile.ZipFile(a) as z:
-        root='second-nature_0.1.0/'
+        root='second-nature_0.2.0/'
         names=z.namelist()
         assert all(n.startswith(root) for n in names)
         assert all(not any(part in n.split('/') for part in ('.git','.cache','tests','tools','artifacts')) for n in names)
@@ -47,7 +47,7 @@ def test_generated_locale_matches_source_catalog():
 
 def test_mod_metadata_and_changelog_are_consistent():
     info=json.loads((MOD/'info.json').read_text());change=(MOD/'changelog.txt').read_text()
-    assert info['version']=='0.1.0' and 'Version: '+info['version'] in change
+    assert info['version']=='0.2.0' and 'Version: '+info['version'] in change
     assert info['factorio_version']=='2.0'
     assert any(s.startswith('space-age >=') for s in info['dependencies'])
     assert 'Date: 2026-09-06' in change
@@ -59,3 +59,8 @@ def test_game_runtime_has_no_network_filesystem_or_legacy_global_dependencies():
         assert not re.search(r'\b(os\.|io\.|loadfile\(|dofile\(|global\.)',text),path
         assert 'game.entity_prototypes' not in text
         assert '.unit_group' not in text
+
+
+def test_experimental_builds_are_no_longer_published():
+    with pytest.raises(ValueError, match='stable'):
+        build('2.1')

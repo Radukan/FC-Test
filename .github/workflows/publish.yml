@@ -29,7 +29,7 @@ jobs:
           import json, os
           from pathlib import Path
           info = json.loads(Path('second-nature/info.json').read_text())
-          targets = {f"v{info['version']}-factorio-{target}": target for target in ('2.0', '2.1')}
+          targets = {f"v{info['version']}-factorio-{target}": target for target in ('2.0',)}
           tag = os.environ['RELEASE_TAG']
           if tag not in targets:
               raise SystemExit(f'Unexpected release tag: {tag!r}; expected one of {list(targets)}')

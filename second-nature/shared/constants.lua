@@ -2,7 +2,7 @@
 local C = {}
 C.mod = "second-nature"
 C.prefix = "sn-"
-C.schema = 1
+C.schema = 2
 C.axes = {"atmosphere", "temperature", "water", "soil", "biodiversity"}
 C.planets = {"nauvis", "vulcanus", "fulgora", "gleba", "aquilo"}
 C.colors = {
@@ -20,9 +20,23 @@ C.victory_ticks = 10 * 60 * 60
 C.warning_ticks = 45 * 60
 C.max_wave = 40
 C.max_active_groups = 3
+-- Pollution is measured in Factorio chunk units, not an invented percentage.
+C.air = {total_goal = 500, green_limit = 10, wilt_limit = 40, sedation = 200,
+  sample_ticks = 600, chunk_budget = 4, tile_batch = 128}
+C.native_names = {"biter-spawner", "spitter-spawner", "sn-rootbreaker", "sn-canopy-breaker", "sn-blight-spitter"}
+for _, size in ipairs({"small", "medium", "big", "behemoth"}) do
+  for _, kind in ipairs({"biter", "spitter", "worm-turret"}) do C.native_names[#C.native_names + 1] = size .. "-" .. kind end
+end
+C.barren_tiles = {["grass-1"] = "dry-dirt", ["grass-2"] = "dirt-7", ["grass-3"] = "dirt-6", ["grass-4"] = "sand-3"}
+C.landing_cargo = {
+  {"iron-plate", 200}, {"copper-plate", 100}, {"steel-plate", 40}, {"stone", 120}, {"coal", 160}, {"wood", 40},
+  {"iron-gear-wheel", 40}, {"electronic-circuit", 40}, {"transport-belt", 100}, {"inserter", 20}, {"small-electric-pole", 20},
+  {"burner-mining-drill", 4}, {"stone-furnace", 6}, {"offshore-pump", 1}, {"boiler", 1}, {"steam-engine", 2},
+  {"pipe", 40}, {"firearm-magazine", 100}, {"repair-pack", 20}, {"stone-wall", 40}
+}
 C.profiles = {
   nauvis = {
-    id = 1, initial = {atmosphere = 35, temperature = 65, water = 35, soil = 20, biodiversity = 10}, toxicity = 30,
+    id = 1, initial = {atmosphere = 12, temperature = 55, water = 15, soil = 0, biodiversity = 0}, toxicity = 65,
     gain = {atmosphere = 1, temperature = 1, water = 1, soil = 1, biodiversity = 1},
     erosion = {atmosphere = 0.018, temperature = 0.006, water = 0.012, soil = 0.009, biodiversity = 0.018},
     native = "biter", terrain = "grass-1", tree = "tree-04", specialty = "soil-enricher"

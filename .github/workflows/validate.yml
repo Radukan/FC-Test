@@ -1,14 +1,10 @@
 name: Validate Second Nature
 on:
   push:
+    branches: ['**']
   pull_request:
   workflow_call:
   workflow_dispatch:
-    inputs:
-      engine:
-        description: Also download the free official headless builds and run engine smoke tests
-        type: boolean
-        default: false
 permissions:
   contents: read
 jobs:
@@ -20,10 +16,8 @@ jobs:
         with:
           python-version: '3.11'
       - run: pip install -r requirements-dev.txt
-      - name: Fetch pinned official prototype definitions
-        run: |
-          git clone --depth 1 --branch 2.0.77 https://github.com/wube/factorio-data.git .cache/factorio-data-2.0.77
-          git clone --depth 1 --branch 2.1.17 https://github.com/wube/factorio-data.git .cache/factorio-data
+      - name: Fetch pinned stable prototype definitions
+        run: git clone --depth 1 --branch 2.0.77 https://github.com/wube/factorio-data.git .cache/factorio-data-2.0.77
       - run: python -m pytest -q
       - name: Verify generated locale is in sync
         run: |
@@ -35,25 +29,21 @@ jobs:
           name: Second-Nature-installable-mods
           path: artifacts/
   engine:
-    if: github.event_name == 'workflow_dispatch' && inputs.engine
-    strategy:
-      matrix:
-        version: ['2.0.77', '2.1.17']
+    needs: lua-and-data
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: pip install -r requirements-dev.txt
-      - name: Download the official free headless build
+      - name: Download official stable headless build
         run: |
           mkdir -p .cache
-          curl --fail --location --retry 3 "https://factorio.com/get-download/${{ matrix.version }}/headless/linux64" -o .cache/factorio.tar.xz
+          curl --fail --location --retry 3 https://factorio.com/get-download/2.0.77/headless/linux64 -o .cache/factorio.tar.xz
           tar -xJf .cache/factorio.tar.xz -C .cache
       - run: python tools/headless.py --factorio .cache/factorio/bin/x64/factorio
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: engine-logs-${{ matrix.version }}
+          name: stable-engine-logs
           path: .cache/engine-*/*.log

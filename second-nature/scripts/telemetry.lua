@@ -17,6 +17,8 @@ function Telemetry.update(entity, world)
   values[#values + 1] = {name = "pressure", value = math.ceil(world.pressure)}
   values[#values + 1] = {name = "stability", value = math.floor(world.score)}
   values[#values + 1] = {name = "stage", value = world.stage}
+  values[#values + 1] = {name = "smog-total", value = math.min(2147483647, math.ceil(world.air and world.air.total or 0))}
+  values[#values + 1] = {name = "smog-local", value = math.min(2147483647, math.ceil(require("scripts.pollution").local_amount(entity.surface, entity.position)))}
   local filters = {}
   for index, signal in ipairs(values) do
     filters[#filters + 1] = {value = {type = "virtual", name = "sn-" .. signal.name, quality = "normal"}, min = signal.value}

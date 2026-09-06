@@ -11,17 +11,19 @@ def run(binary:Path):
     binary=binary.resolve()
     if not binary.is_file():raise SystemExit(f'Factorio binary not found: {binary}')
     version_output=subprocess.check_output([str(binary),'--version'],text=True)
-    match=re.search(r'Version:\s*(2\.[01]\.\d+)',version_output)
-    if not match:raise SystemExit('Expected Factorio 2.0 or 2.1 headless.\n'+version_output)
+    match=re.search(r'Version:\s*(2\.0\.\d+)',version_output)
+    if not match:raise SystemExit('Expected stable Factorio 2.0 headless.\n'+version_output)
     version=match.group(1);branch='.'.join(version.split('.')[:2])
     root=ROOT/'.cache'/f'engine-{version}';mods=root/'mods';write=root/'user-data'
     mods.mkdir(parents=True,exist_ok=True);write.mkdir(parents=True,exist_ok=True)
     archive=build(branch,mods)
+    version_mod=json.loads((ROOT/'second-nature/info.json').read_text())['version']
+    for old in mods.glob('second-nature_*.zip'):
+        if old != archive: old.unlink()
     test=mods/'second-nature-engine-tests_0.1.0';test.mkdir(exist_ok=True)
     shutil.copyfile(ROOT/'tests/engine/control.lua',test/'control.lua')
-    (test/'info.json').write_text(json.dumps({'name':'second-nature-engine-tests','version':'0.1.0','title':'Second Nature engine validation','author':'Radukan','factorio_version':branch,'dependencies':['second-nature = 0.1.0']}))
+    (test/'info.json').write_text(json.dumps({'name':'second-nature-engine-tests','version':'0.1.0','title':'Second Nature engine validation','author':'Radukan','factorio_version':branch,'dependencies':['second-nature = '+version_mod]}))
     enabled=['base','space-age','quality','elevated-rails','second-nature','second-nature-engine-tests']
-    if branch=='2.1':enabled.append('recycler')
     (mods/'mod-list.json').write_text(json.dumps({'mods':[{'name':m,'enabled':True} for m in enabled]}))
     config=root/'config.ini'
     config.write_text('[path]\nread-data=__PATH__executable__/../../data\nwrite-data='+str(write)+'\n[general]\nenable-new-mods=false\n')
@@ -32,7 +34,10 @@ def run(binary:Path):
         command=base+args
         result=subprocess.run(command,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,timeout=240)
         print(result.stdout,end='');(root/(label+'.log')).write_text(result.stdout)
-        if result.returncode:raise SystemExit(f'Factorio {label} failed ({result.returncode}); see {root/(label+".log")}')
+        if result.returncode:
+            summary=result.stdout[-6000:].replace('%','%25').replace('\r','%0D').replace('\n','%0A')
+            print('::error title=Factorio engine failure::'+summary)
+            raise SystemExit(f'Factorio {label} failed ({result.returncode}); see {root/(label+".log")}')
         outputs.append(result.stdout)
     if 'SECOND_NATURE_ENGINE_SMOKE_OK' not in '\n'.join(outputs):
         raise SystemExit('Engine exited without the smoke-test success marker. This is NOT a pass. Inspect '+str(root))

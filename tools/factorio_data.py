@@ -27,6 +27,8 @@ class DataStage:
           math.round=function(x) return math.floor(x+0.5) end
         ''')
         self.lua.globals().settings.startup['sn-overhaul-progression'].value=overhaul
+        for name, value in {'sn-desolate-start':True,'sn-legacy-smog':80,'sn-biter-metabolism':True,'sn-menu-background':True}.items():
+            self.lua.globals().settings.startup[name] = self.lua.table_from({'value':value})
         self.lua.globals().require=self.require
         # Only enums used by upstream's data stage; no permissive missing-property metatable.
         enums=set()
@@ -53,7 +55,7 @@ class DataStage:
         mods=['core','base','elevated-rails']
         if (self.upstream/'recycler').exists():mods.append('recycler')
         mods+=['quality','space-age','second-nature'];self.mods=mods
-        self.lua.globals().mods=self.lua.table_from({m: self.version if m!='second-nature' else '0.1.0' for m in mods})
+        self.lua.globals().mods=self.lua.table_from({m: self.version if m!='second-nature' else json.loads((MOD/'info.json').read_text())['version'] for m in mods})
         self.require('dataloader')
         for stage in ('data.lua','data-updates.lua','data-final-fixes.lua'):
             if stage == 'data-updates.lua' and not hierarchy.exists():

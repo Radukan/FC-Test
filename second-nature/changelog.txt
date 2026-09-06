@@ -1,4 +1,25 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.2.0
+Date: 2026-09-06
+  Bugfixes:
+    - Namespace all GUI child names: tabs, value, text and state no longer collide with LuaGuiElement members.
+    - Validate GUI names against the stable API in runtime tests; protect dashboard opening from fatal GUI errors.
+  Features:
+    - Stable Factorio 2.0 only. Experimental builds are no longer developed or published.
+    - Last Landing: one shared cargo lander, two loaded turrets and starter walls per force in new freeplay.
+    - Desolate Nauvis without trees/fish, barren ground, legacy smog and three themed map presets.
+    - Pollution-fed broods: restoration targets replace pollution-driven biter attack recruitment.
+    - Real local pollution suppresses warnings, reduces waves and can send tracked raiders back to their nests.
+    - Worldwide pollution inventory, rolling hotspot survey, local smog overlay and two new circuit signals.
+    - Dirty local air blocks soil/biodiversity gains. Total pollution and hotspots gate planetary completion.
+    - Bounded late-stage Nauvis succession, pollution-damaged grass and reversible water discoloration.
+    - Permanent player choice after full Nauvis restoration: friendly Bloombacks and gardens, or eradication.
+    - Original eight-direction Bloomback animations, bloom gardens and a Last Landing main-menu illustration.
+  Compatibility:
+    - Existing saves retain ecology, machines and terrain: no replacement cargo or retroactive sterilization.
+    - New landing/map-generation experience requires a fresh save. Back up older saves before upgrading.
+    - Alpha: automated validation does not establish a balanced full campaign or graphical/multiplayer certification.
+---------------------------------------------------------------------------------------------------
 Version: 0.1.0
 Date: 2026-09-06
   Major Features:

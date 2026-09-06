@@ -11,12 +11,17 @@ function M.new(planet)
   M.refresh(s)
   return s
 end
+function M.air_ready(s)
+  local air = s.air
+  -- Pure-model simulations omit a surface; runtime records always have an air survey.
+  return not air or (air.measured and air.survey_complete and air.total <= C.air.total_goal and air.peak <= C.air.green_limit)
+end
 function M.cap(s, axis)
   local v = s.values
   if axis == "water" then return math.min(100, v.atmosphere + 30, v.temperature + 35) end
   if axis == "soil" then return math.min(100, v.water + 35, 110 - s.toxicity * 0.4) end
   if axis == "biodiversity" then
-    return M.clamp(math.min(v.atmosphere + 15, v.temperature + 20, v.water + 20, v.soil + 15, 100 - s.toxicity * 0.7))
+    return M.clamp(math.min(v.atmosphere + 15, v.temperature + 20, v.water + 20, v.soil + 15, 100 - s.toxicity * 0.7, 100 - (s.air and s.air.mean or 0) * 0.5))
   end
   return 100
 end
@@ -28,7 +33,7 @@ function M.refresh(s)
   for index, stage in ipairs(C.stages) do
     local eligible = s.toxicity <= stage.max_toxicity
     for i, key in ipairs(C.axes) do eligible = eligible and s.values[key] >= stage.minimum[i] end
-    if eligible then s.stage = index - 1 end
+    if eligible and (index < #C.stages or M.air_ready(s)) then s.stage = index - 1 end
   end
 end
 function M.apply(s, effect, cycles, speed)
@@ -73,9 +78,13 @@ function M.requirements(s, stage_number)
     if s.values[key] < stage.minimum[i] then missing[#missing + 1] = {axis = key, target = stage.minimum[i]} end
   end
   if s.toxicity > stage.max_toxicity then missing[#missing + 1] = {axis = "toxicity", target = stage.max_toxicity} end
+  if stage_number >= 5 and s.air and not M.air_ready(s) then
+    missing[#missing + 1] = {axis = "smog", target = C.air.total_goal, less = true}
+    missing[#missing + 1] = {axis = "hotspot", target = C.air.green_limit, less = true}
+  end
   return missing
 end
-function M.ready(s) return s and s.stage == #C.stages - 1 end
+function M.ready(s) return s and s.stage == #C.stages - 1 and M.air_ready(s) end
 -- Total produced is a monotonic engine counter. Recipe switches are intentionally conservative:
 -- establish a new baseline rather than attributing the old recipe's work to a new one.
 function M.completed(record, produced, recipe)

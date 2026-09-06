@@ -9,10 +9,10 @@ TOP_LEVEL={'info.json','settings.lua','data.lua','data-updates.lua','data-final-
 FOLDERS={'shared','prototypes','scripts','locale','graphics','migrations'}
 
 def build(target='2.0',output=None):
-    if target not in ('2.0','2.1'):raise ValueError('Supported package targets: 2.0 or 2.1')
+    if target != '2.0':raise ValueError('Second Nature 0.2+ supports stable Factorio 2.0 only')
     info=json.loads((MOD/'info.json').read_text())
     info['factorio_version']=target
-    minimum='2.0.77' if target=='2.0' else '2.1.17'
+    minimum='2.0.77'
     info['dependencies']=[f'{name} >= {minimum}' for name in ('base','space-age','quality','elevated-rails')]
     folder=f"{info['name']}_{info['version']}"
     output=Path(output) if output else ROOT/'artifacts'/f'factorio-{target}'
@@ -33,10 +33,8 @@ def build(target='2.0',output=None):
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--target',choices=['2.0','2.1','all'],default='all')
+    parser.add_argument('--target',choices=['2.0'],default='2.0')
     parser.add_argument('--output',type=Path)
     args=parser.parse_args()
-    if args.target=='all':
-        for target in ('2.0','2.1'):build(target,args.output/f'factorio-{target}' if args.output else None)
-    else:build(args.target,args.output)
+    build(args.target,args.output)
 if __name__=='__main__':main()
