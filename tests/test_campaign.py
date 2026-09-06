@@ -188,7 +188,7 @@ def test_smog_cancels_a_warned_raid_and_turns_back_a_tracked_wave(game_lua):
       settings.global['sn-grace-minutes'].value=0
       mock.entity('biter-spawner',s,{x=150,y=0},mock.enemy,true)
       R.tick(w,s);assert(w.warning)
-      s.pollution=200;game.tick=w.warning.at;R.tick(w,s);assert(not w.warning and #w.groups==0)
+      s.pollution=200;game.tick=game.tick+60;R.tick(w,s);assert(not w.warning and #w.groups==0)
       s.pollution=0;w.next_raid_check=0;rec.last_effect=game.tick;R.tick(w,s);assert(w.warning)
       game.tick=w.warning.at;R.tick(w,s);assert(#w.groups==1)
       assert(w.groups[1].group.command.type==defines.command.attack and w.groups[1].group.command.target==e)
@@ -321,4 +321,15 @@ def test_mobile_natives_cannot_escape_resolution_by_outrunning_the_chunk_survey(
       assert(not newborn.valid and w.native_outcome.processed==2)
       local snapshot=remote.call('second_nature','get_world','nauvis')
       assert(snapshot.native_queue==nil and snapshot.native_outcome.pending==0)
+    ''')
+
+
+def test_local_gardens_cannot_spread_into_a_polluted_neighbor_chunk(game_lua):
+    game_lua.execute('''
+      local S=require('scripts.state');local T=require('scripts.terrain');local s=game.surfaces[1]
+      local e=mock.entity('sn-seed-disperser',s);local rec=S.root().machines[e.unit_number];local w=S.by_planet('nauvis')
+      settings.global['sn-living-terrain'].value=true;w.stage=4
+      s.get_pollution=function(pos) return pos.x==0 and pos.y==0 and 0 or 100 end
+      T.apply(rec,w,{terrain=true,trees=true},10)
+      assert(#s.changed_tiles==0 and w.grown_trees==0)
     ''')

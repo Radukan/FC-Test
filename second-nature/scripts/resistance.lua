@@ -122,7 +122,16 @@ function R.tick(world, surface)
   local mode = settings.global["sn-native-resistance"].value
   if not C.profiles[world.planet].native or mode == "off" or surface.peaceful_mode then world.warning = nil; return end
   if not world.first_operation or game.tick - world.first_operation < settings.global["sn-grace-minutes"].value * 60 * 60 then return end
-  if world.warning then if game.tick >= world.warning.at then dispatch(world, surface) end; return end
+  if world.warning then
+    local rec, nest = S.root().machines[world.warning.target], world.warning.nest
+    if rec and rec.entity.valid and nest and nest.valid and
+      math.max(calm(world, surface, rec.entity.position), calm(world, surface, nest.position)) >= 1 then
+      world.warning = nil
+      world.sedated_waves = (world.sedated_waves or 0) + 1
+      world.next_raid_check = game.tick + 30 * 60
+    elseif game.tick >= world.warning.at then dispatch(world, surface) end
+    return
+  end
   if game.tick < (world.next_raid_check or 0) or world.pressure < (mode == "relentless" and 20 or 30) or #world.groups >= C.max_active_groups then return end
   world.next_raid_check = game.tick + 30 * 60
   local rec = target(world)

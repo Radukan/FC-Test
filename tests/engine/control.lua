@@ -42,7 +42,7 @@ script.on_init(function()
   assert(surface.create_entity({name='sn-bloom-nest',position={72,80},force=friend}))
   rendering.draw_rectangle({surface=surface,left_top={60,60},right_bottom={92,92},color={0.2,0.8,0.4,0.15},filled=true,draw_on_ground=true,time_to_live=120})
   local absorptions=prototypes.entity['small-biter'].absorptions_to_join_attack
-  assert(not absorptions or not absorptions.pollution,'pollution still recruits biters')
+  assert(absorptions and absorptions.pollution>=1e29,'pollution recruitment cost: '..tostring(absorptions and absorptions.pollution))
   -- Save creation followed by benchmarking exercises storage LuaObject restoration.
   log('SECOND_NATURE_ENGINE_SMOKE_READY')
 end)

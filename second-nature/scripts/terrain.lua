@@ -32,7 +32,7 @@ function T.apply(rec, world, effect, cycles)
     local surface = entity.surface
     if surface.is_chunk_generated({math.floor(pos.x / 32), math.floor(pos.y / 32)}) then
       local tile = surface.get_tile(pos)
-      if C.safe_tiles[tile.name] and not tile.hidden_tile and clear(surface, pos, 0.25) then
+      if C.safe_tiles[tile.name] and not tile.hidden_tile and P.local_amount(surface, pos) <= C.air.green_limit and clear(surface, pos, 0.25) then
         if tile.name ~= profile.terrain then
           -- No collision correction, no removal of entities/decoratives, no raised build events.
           surface.set_tiles({{name = profile.terrain, position = pos}}, false, false, false, false)

@@ -197,9 +197,11 @@ def test_desolate_map_controls_and_presets_preserve_resources_and_gleba(stage):
 def test_nauvis_pollution_recruitment_is_removed_but_spores_are_untouched(stage):
     for name in C['native_names']:
         unit=stage.raw.unit[name]
-        if unit:assert unit.absorptions_to_join_attack.pollution is None
+        if unit:assert unit.absorptions_to_join_attack.pollution>=1e29
         nest=stage.raw['unit-spawner'][name]
-        if nest:assert nest.absorptions_per_second.pollution is None
+        if nest:
+            assert nest.absorptions_per_second.pollution.absolute==0
+            assert nest.absorptions_per_second.pollution.proportional==0
     assert stage.raw['airborne-pollutant'].pollution.affects_evolution is False
     assert stage.raw['unit-spawner']['gleba-spawner'].absorptions_per_second.spores is not None
 
@@ -220,3 +222,14 @@ def test_main_menu_background_is_a_real_packaged_image(stage):
     assert constants.main_menu_background_image_location=='__second-nature__/graphics/menu/last-landing.jpg'
     image=Image.open(MOD/'graphics/menu/last-landing.jpg')
     assert image.width>=1280 and image.height>=720
+
+
+def test_campaign_startup_switches_are_reversible():
+    path=ROOT/'.cache/factorio-data-2.0.77'
+    if not path.exists():pytest.skip('Pinned stable data checkout required')
+    result=DataStage(path,True,{'sn-desolate-start':False,'sn-biter-metabolism':False,'sn-menu-background':False})
+    settings=result.raw.planet.nauvis.map_gen_settings.autoplace_settings.entity
+    assert settings.settings.fish is not None and settings.treat_missing_as_default is not False
+    assert result.raw.unit['small-biter'].absorptions_to_join_attack.pollution>0
+    assert result.raw['airborne-pollutant'].pollution.affects_evolution is True
+    assert result.raw['utility-constants'].default.main_menu_background_image_location=='__core__/graphics/background-image.jpg'

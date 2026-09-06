@@ -12,7 +12,7 @@ from lupa.lua52 import LuaRuntime
 from catalog import ROOT, MOD
 
 class DataStage:
-    def __init__(self, upstream: Path, overhaul=True):
+    def __init__(self, upstream: Path, overhaul=True, startup_overrides=None):
         self.upstream=Path(upstream).resolve();self.lua=LuaRuntime(unpack_returned_tuples=True)
         self.cache={};self.context='core';self.stubbed_sprites=set()
         self.version=json.loads((self.upstream/'base/info.json').read_text())['version']
@@ -27,7 +27,7 @@ class DataStage:
           math.round=function(x) return math.floor(x+0.5) end
         ''')
         self.lua.globals().settings.startup['sn-overhaul-progression'].value=overhaul
-        for name, value in {'sn-desolate-start':True,'sn-legacy-smog':80,'sn-biter-metabolism':True,'sn-menu-background':True}.items():
+        for name, value in ({'sn-desolate-start':True,'sn-legacy-smog':80,'sn-biter-metabolism':True,'sn-menu-background':True} | (startup_overrides or {})).items():
             self.lua.globals().settings.startup[name] = self.lua.table_from({'value':value})
         self.lua.globals().require=self.require
         # Only enums used by upstream's data stage; no permissive missing-property metatable.

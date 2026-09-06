@@ -19,18 +19,20 @@ for _, t in ipairs(K.technologies) do
   end
 end
 -- Pollutant-fed attack recruitment is replaced for Nauvis species, not pentapods.
--- Empty absorption dictionaries mean no pollution recruitment; zero-cost entries would not.
+-- Use explicit zero spawner uptake plus an unreachable unit recruitment cost.
+-- The engine normalizes empty dictionaries to zero-valued pollutant entries, so
+-- deleting a Lua key is NOT a reliable way to represent disabled recruitment.
 if settings.startup["sn-biter-metabolism"].value then
   for _, name in ipairs(require("shared.constants").native_names) do
     local unit = data.raw.unit[name]
     if unit then
       unit.absorptions_to_join_attack = unit.absorptions_to_join_attack or {}
-      unit.absorptions_to_join_attack.pollution = nil
+      unit.absorptions_to_join_attack.pollution = 1e30
     end
     local nest = data.raw["unit-spawner"][name]
     if nest then
       nest.absorptions_per_second = nest.absorptions_per_second or {}
-      nest.absorptions_per_second.pollution = nil
+      nest.absorptions_per_second.pollution = {absolute = 0, proportional = 0}
     end
   end
   data.raw["airborne-pollutant"].pollution.affects_evolution = false
