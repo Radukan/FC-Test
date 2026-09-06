@@ -25,7 +25,9 @@ local function initialize(fresh)
     if surface then
       if fresh == true and State.root().campaign.active and planet == "nauvis" then
         for chunk in surface.get_chunks() do
-          Campaign.chunk(surface, chunk, {{chunk.x * 32, chunk.y * 32}, {chunk.x * 32 + 32, chunk.y * 32 + 32}})
+          if surface.is_chunk_generated(chunk) then
+            Campaign.chunk(surface, chunk, {{chunk.x * 32, chunk.y * 32}, {chunk.x * 32 + 32, chunk.y * 32 + 32}})
+          end
         end
       end
       Pollution.index(world, surface)

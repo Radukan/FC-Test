@@ -20,7 +20,10 @@ end
 function P.index(world, surface)
   P.ensure(world)
   -- One install/configuration scan. Iterators themselves must NEVER enter storage.
-  for chunk in surface.get_chunks() do P.track(world, chunk.x, chunk.y) end
+  for chunk in surface.get_chunks() do
+    -- The iterator also includes pollution-only / not-yet-generated chunks.
+    if surface.is_chunk_generated(chunk) then P.track(world, chunk.x, chunk.y) end
+  end
   P.sample(world, surface)
 end
 function P.local_amount(surface, position)
@@ -41,6 +44,13 @@ function P.sample(world, surface)
   if #world.chunks == 0 then air.survey_complete, air.peak = true, 0 end
   Model.refresh(world)
 end
+local function finish_survey(world)
+  local air = world.air
+  air.peak, air.dirty, air.surveyed_at = air.scan_peak, air.scan_dirty, game.tick
+  air.survey_complete = air.scan_count >= #world.chunks
+  air.scan_count, air.scan_peak, air.scan_dirty = 0, 0, 0
+  Model.refresh(world)
+end
 function P.step(world, surface)
   P.ensure(world)
   local air, list = world.air, world.chunks
@@ -55,7 +65,8 @@ function P.step(world, surface)
     list[air.cursor] = last
     list[#list] = nil
     if air.cursor <= #list then world.chunk_keys[last.x .. ":" .. last.y] = air.cursor end
-    air.cursor, air.scan_count, air.scan_peak, air.scan_dirty, air.survey_complete = 0, 0, 0, 0, false
+    air.cursor = air.cursor - 1 -- Visit the swapped tail next; don't restart the whole planet.
+    if air.cursor == #list then finish_survey(world) end
     return
   end
   local amount = P.local_amount(surface, {x = chunk.x * 32 + 16, y = chunk.y * 32 + 16})
@@ -64,10 +75,7 @@ function P.step(world, surface)
   if amount > C.air.green_limit then air.scan_dirty = air.scan_dirty + 1 end
   air.scan_count = air.scan_count + 1
   if air.cursor == #list then
-    air.peak, air.dirty, air.surveyed_at = air.scan_peak, air.scan_dirty, game.tick
-    air.survey_complete = air.scan_count >= #list
-    air.scan_count, air.scan_peak, air.scan_dirty = 0, 0, 0
-    Model.refresh(world)
+    finish_survey(world)
   end
   return chunk, amount
 end

@@ -333,3 +333,23 @@ def test_local_gardens_cannot_spread_into_a_polluted_neighbor_chunk(game_lua):
       T.apply(rec,w,{terrain=true,trees=true},10)
       assert(#s.changed_tiles==0 and w.grown_trees==0)
     ''')
+
+
+def test_pollution_index_ignores_engine_known_but_ungenerated_chunks(game_lua):
+    game_lua.execute('''
+      local S=require('scripts.state');local P=require('scripts.pollution');local s=game.surfaces[1];local w=S.by_planet('nauvis')
+      s.chunks={{x=0,y=0},{x=1,y=0},{x=2,y=0}}
+      s.is_chunk_generated=function(pos) return (pos.x or pos[1])~=1 end
+      P.index(w,s);assert(#w.chunks==2 and not w.chunk_keys['1:0'])
+      P.step(w,s);P.step(w,s);assert(w.air.survey_complete)
+    ''')
+
+
+def test_chunk_deletion_does_not_restart_a_large_survey(game_lua):
+    game_lua.execute('''
+      local S=require('scripts.state');local P=require('scripts.pollution');local s=game.surfaces[1];local w=S.by_planet('nauvis')
+      for i=0,99 do P.track(w,i,0) end
+      s.is_chunk_generated=function(pos) return (pos.x or pos[1])%3~=0 end
+      for _=1,100 do P.step(w,s) end
+      assert(#w.chunks==66 and w.air.survey_complete)
+    ''')
