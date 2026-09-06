@@ -18,7 +18,7 @@ function Art.four_way(name, animated)
   return p
 end
 function Art.turret(p, name)
-  p.graphics_set = nil -- No inherited vanilla base, masks or shadow hiding under our model.
+  p.graphics_set = {} -- Required container; full original turret frames already contain the base.
   p.water_reflection, p.corpse = nil, nil
   p.special_effect, p.resource_indicator_animation = nil, nil
   p.folded_animation = Art.animation(name .. "-idle")

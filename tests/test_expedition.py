@@ -36,7 +36,7 @@ def test_all_introduced_building_primary_art_is_original(expedition_data):
     for kind,name in [('ammo-turret','sn-sentry-turret'),('electric-turret','sn-arc-turret'),('ammo-turret','sn-lance-turret')]:
         p=data[kind][name]
         assert p.attacking_animation.frame_count==4 and p.attacking_animation.direction_count==64
-        assert p.graphics_set is None
+        assert p.graphics_set is not None and len(p.graphics_set)==0
     assert data.container['sn-lander'].minable is None
     assert '__second-nature__' in data.container['sn-lander'].picture.filename
 
