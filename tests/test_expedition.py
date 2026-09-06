@@ -192,3 +192,16 @@ def test_all_original_atlases_fit_their_declared_frames_and_texture_bounds():
         assert image.width==s['width']*s['line_length'],name
         assert image.height==s['height']*rows,name
         assert max(image.size)<=8192 and image.mode=='RGBA',name
+
+
+def test_production_working_loops_have_actual_visible_motion_in_every_direction():
+    import hashlib,json
+    from PIL import Image
+    manifest=json.loads((ROOT/'docs/art/sprite-manifest.json').read_text())
+    for machine in load_catalog()['machines']:
+        if machine['name']=='ecology-monitor':continue  # separate runtime status-light animation
+        for direction in ('north','east','south','west'):
+            key=machine['name']+'-'+direction;s=manifest[key]
+            image=Image.open(MOD/s['filename'].split('__second-nature__/')[1])
+            frames={hashlib.sha256(image.crop((f*s['width'],0,(f+1)*s['width'],s['height'])).tobytes()).hexdigest() for f in range(s['frame_count'])}
+            assert len(frames)>1,key

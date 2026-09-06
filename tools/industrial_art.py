@@ -102,7 +102,9 @@ def machine(name,t=0):
         tank(m,-.65,.15,.46,1.35,GREEN);tank(m,.62,.2,.42,1.15,TEAL)
         for x in (-.65,.62):
             m.tube((x,.1,1.95),(x,-.8,1.95),.08,COPPER)
-            for i in range(3):m.ball((x-.12+i*.12,-.18,.85+(t+i*.3)%1*.8),.045,WHITE,glow=True)
+            for side in range(4):
+                a=side*math.pi/2
+                for i in range(2):m.ball((x+math.cos(a)*.475,.18+math.sin(a)*.475,.84+(t+i*.45)%1*.7),.036,WHITE,glow=True)
         m.box((0,-.9,.8),(.55,.4,.65),STEEL)
     elif name=='composter':
         m.box((0,0,.9),(1.9,1.85,.8),EDGE)
@@ -127,7 +129,7 @@ def machine(name,t=0):
         elif name=='sanctuary':
             for a in range(8):
                 ang=a*TAU/8;m.tube((1.12*math.cos(ang),1.12*math.sin(ang),.5),(0,0,2.4),.045,EDGE)
-            m.ball((0,0,2.3),.22,TEAL,glow=True)
+            m.ball((0,0,2.3),.22,color(TEAL,1+.18*math.sin(t*TAU)),glow=True)
         else:
             for y in (-1.9,1.9):
                 m.tube((-1.9,y,1.9),(1.9,y,1.9),.13,WHITE)

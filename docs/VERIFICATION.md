@@ -4,12 +4,12 @@
 
 **Stable engine/source run:** [34065931167](https://github.com/Radukan/FC-Test/actions/runs/34065931167), code commit **`f7827159b627eebe2b7a4394786c2facba53b1a0`**. The offline validator and actual official **Factorio 2.0.77** headless job passed. Release publishing reruns validation on the exact tagged commit and re-downloads its uploaded assets for SHA-256/byte comparison.
 
-The engine-evidenced code passed 144 cases; a final atlas-boundary regression raises the complete suite to 145. The local complete suite reports **145 passing tests** with the pinned stable Wube data checkout present. The graphics source contact sheet and individual rendered lander/building/explorer images were visually inspected. The source animation preview demonstrates exported frames, not a game recording.
+The engine-evidenced code passed 144 cases; final atlas-boundary and visible-motion regressions raise the complete suite to 146. The local complete suite reports **146 passing tests** with the pinned stable Wube data checkout present. The graphics source contact sheet and individual rendered lander/building/explorer images were visually inspected. The source animation preview demonstrates exported frames, not a game recording.
 
 | Check | Result | What it establishes |
 |---|---|---|
 | All production Lua parses as 5.2 | **Pass** | Syntax / module loading |
-| Full offline suite | **145 passed** | Existing regression contracts plus wood-free recipes, pacing, research, habitat readiness and owned-tree recovery |
+| Full offline suite | **146 passed** | Existing regression contracts plus wood-free recipes, pacing, research, habitat readiness and owned-tree recovery |
 | Official stable source data stages | **Pass** | Prototype references, research graph, recipe unlocks, item/ammo categories, art paths and startup toggles |
 | Actual C++ prototype loading | **Pass** | New building/defense/player/armor/corpse animation structures accepted by 2.0.77 headless |
 | Real new save + reload + 2,100 ticks | **Pass** | No fatal runtime failure in the exercised setup |
