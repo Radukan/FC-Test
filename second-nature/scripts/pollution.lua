@@ -72,6 +72,7 @@ function P.step(world, surface)
   return chunk, amount
 end
 function P.tick()
+  local visits = {}
   local root = S.root()
   -- Four chunk visits TOTAL per second, round-robin over visited worlds.
   root.air_world_cursor = root.air_world_cursor or 0
@@ -86,11 +87,11 @@ function P.tick()
     if world and surface and surface.valid then
       local chunk, amount = P.step(world, surface)
       if chunk then
-        require("scripts.natives").chunk(world, surface, chunk)
-        require("scripts.terrain").succession(world, surface, chunk, amount)
+        visits[#visits + 1] = {world = world, surface = surface, chunk = chunk, pollution = amount}
       end
     end
   end
+  return visits
 end
 function P.overlay(player, enabled)
   local prefs = S.root().players[player.index]

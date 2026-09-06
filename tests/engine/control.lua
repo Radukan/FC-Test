@@ -1,6 +1,8 @@
--- Optional REAL ENGINE smoke test. Packaged only by tools/headless.py, never with the mod.
+-- REAL ENGINE smoke test. Packaged only by tools/headless.py, never with the mod.
+require('util')
 local K=require('__second-nature__/shared/catalog')
 local C=require('__second-nature__/shared/constants')
+local Probes=require('module_probes')
 local function build(surface,name,pos)
   return assert(surface.create_entity({name=name,position=pos,force='player',raise_built=true}),name)
 end
@@ -23,6 +25,7 @@ script.on_init(function()
     build(surface,'sn-'..machine.name,{x=-48+(index%8)*6,y=-48+math.floor(index/8)*6})
   end
   local surface=storage.worlds.nauvis
+  Probes.run(surface,force)
   local a=build(surface,'sn-air-scrubber',{x=0,y=0})
   build(surface,'substation',{x=5,y=1})
   build(surface,'electric-energy-interface',{x=6,y=5})

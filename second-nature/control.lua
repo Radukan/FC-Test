@@ -9,6 +9,7 @@ local Gui = require("scripts.gui")
 local Pollution = require("scripts.pollution")
 local Campaign = require("scripts.campaign")
 local Natives = require("scripts.natives")
+local Terrain = require("scripts.terrain")
 local function initialize(fresh)
   State.init()
   Campaign.init(fresh == true)
@@ -102,7 +103,10 @@ script.on_nth_tick(C.poll_ticks, Machines.tick)
 script.on_nth_tick(C.environment_ticks, function()
   local root = State.root()
   Campaign.tick()
-  Pollution.tick()
+  for _, visit in ipairs(Pollution.tick()) do
+    Natives.chunk(visit.world, visit.surface, visit.chunk)
+    Terrain.succession(visit.world, visit.surface, visit.chunk, visit.pollution)
+  end
   local elapsed = game.tick - root.last_environment_tick
   root.last_environment_tick, root.visual_budget = game.tick, 20
   for _, planet in ipairs(C.planets) do

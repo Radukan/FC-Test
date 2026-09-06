@@ -22,6 +22,9 @@ def run(binary:Path):
         if old != archive: old.unlink()
     test=mods/'second-nature-engine-tests_0.1.0';test.mkdir(exist_ok=True)
     shutil.copyfile(ROOT/'tests/engine/control.lua',test/'control.lua')
+    shutil.copyfile(ROOT/'tests/engine/module_probes.lua',test/'module_probes.lua')
+    for directory in ('scripts','shared'):
+        shutil.copytree(ROOT/'second-nature'/directory,test/directory,dirs_exist_ok=True)
     (test/'info.json').write_text(json.dumps({'name':'second-nature-engine-tests','version':'0.1.0','title':'Second Nature engine validation','author':'Radukan','factorio_version':branch,'dependencies':['second-nature = '+version_mod]}))
     enabled=['base','space-age','quality','elevated-rails','second-nature','second-nature-engine-tests']
     (mods/'mod-list.json').write_text(json.dumps({'mods':[{'name':m,'enabled':True} for m in enabled]}))
@@ -39,7 +42,7 @@ def run(binary:Path):
             print('::error title=Factorio engine failure::'+summary)
             raise SystemExit(f'Factorio {label} failed ({result.returncode}); see {root/(label+".log")}')
         outputs.append(result.stdout)
-    if 'SECOND_NATURE_ENGINE_SMOKE_OK' not in '\n'.join(outputs):
+    if not all(marker in '\n'.join(outputs) for marker in ('SECOND_NATURE_ENGINE_SMOKE_OK','SECOND_NATURE_ENGINE_CAMPAIGN_PROBES_OK')):
         raise SystemExit('Engine exited without the smoke-test success marker. This is NOT a pass. Inspect '+str(root))
     print(f'ENGINE VALIDATION PASSED: Factorio {version}. Logs: {root}')
 if __name__=='__main__':

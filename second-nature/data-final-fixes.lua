@@ -20,8 +20,8 @@ for _, t in ipairs(K.technologies) do
 end
 -- Pollutant-fed attack recruitment is replaced for Nauvis species, not pentapods.
 -- Use explicit zero spawner uptake plus an unreachable unit recruitment cost.
--- The engine normalizes empty dictionaries to zero-valued pollutant entries, so
--- deleting a Lua key is NOT a reliable way to represent disabled recruitment.
+-- The engine can expose default pollutant entries for empty dictionaries, so
+-- deleting a Lua key is not a sufficient safety contract for disabled recruitment.
 if settings.startup["sn-biter-metabolism"].value then
   for _, name in ipairs(require("shared.constants").native_names) do
     local unit = data.raw.unit[name]
