@@ -1,0 +1,23 @@
+---------------------------------------------------------------------------------------------------
+Version: 0.1.0
+Date: 2026-09-06
+  Major Features:
+    - Initial alpha of the Second Nature Space Age restoration campaign.
+    - Five persistent planetary ecosystems, five fitness axes, six stages, toxicity and native resistance.
+    - 22 machines, 88 recipes, 20 technologies, 31 materials/science items and six fluids.
+    - Three restoration sciences, integrated vanilla progression and a sustained five-world network victory.
+  Features:
+    - Ecology progresses only through completed production cycles, never passive machine ownership.
+    - Closed filter, water, thermal-buffer and waste loops; optional dirty industrial forcing.
+    - Planet-specific Vulcanus weathering, Fulgoran remediation, Gleban symbiosis and Aquilo gardens.
+    - Enable native pollution layers on all non-spore planets, without introducing arbitrary enemy invasions.
+    - Native nest-based response waves with warnings, grace periods, bounded group sizes and peaceful-mode support.
+    - Safe local terrain restoration, sparse forests, entity-anchored cryogenic garden overlays.
+    - Planetary dashboard, field guide, circuit telemetry, multiplayer force-aware network logistics and read-only remote API.
+    - Original inventory icons, research illustrations and environmental branding; tinted built-in machine animations.
+  Compatibility:
+    - Separate package metadata for Factorio 2.0.77 stable and 2.1.17 experimental.
+    - Adapts recipe categories and science-pack prototype types to the loaded game branch.
+    - Requires Space Age, Quality and Elevated Rails. Intended for a fresh Space Age freeplay save.
+  Info:
+    - Alpha: automated Lua and official source-data tests are provided; real engine and long-form campaign playtesting remain release gates.
