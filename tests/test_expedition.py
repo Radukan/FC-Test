@@ -159,3 +159,21 @@ def test_withering_removes_only_tracked_restoration_trees(game_lua):
       T.succession(w,s,c,250)
       assert(not ours.valid and player_tree.valid and w.withered_trees==1)
     ''')
+
+
+def test_pole_direction_count_matches_its_wire_positions(expedition_data):
+    p=expedition_data.raw['electric-pole']['small-electric-pole']
+    assert p.pictures.direction_count==len(p.connection_points)
+
+
+def test_mod_owned_withered_trees_can_recover_without_touching_other_trees(game_lua):
+    game_lua.execute('''
+      local S=require('scripts.state');local T=require('scripts.terrain');local s=game.surfaces[1];local w=S.by_planet('nauvis')
+      for k in pairs(w.values) do w.values[k]=100 end;w.stage=4
+      local stump=mock.entity('dead-dry-hairy-tree',s,{x=10,y=10},mock.neutral,true)
+      local other=mock.entity('tree-04',s,{x=25,y=25},mock.neutral,true)
+      local c={x=0,y=0,cover=.9,stress=0,ecology_tick=36000,land=true,trees={},dead_trees={stump},stripe=0}
+      settings.global['sn-living-terrain'].value=true;settings.global['sn-tree-growth'].value=true;game.tick=36000
+      T.succession(w,s,c,0)
+      assert(not stump.valid and other.valid and #c.trees==1 and #c.dead_trees==0)
+    ''')
