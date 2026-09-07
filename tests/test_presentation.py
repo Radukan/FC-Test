@@ -68,25 +68,27 @@ def test_weapon_muzzle_and_torso_share_the_requested_aim():
 
 def test_pickaxe_and_shadow_fit_every_mining_frame_and_direction():
     from character_layout import pose_angles,assert_frame_fits
+    from gait import MINING_FRAMES
     from explorer_model import explorer
     for tier in range(3):
         for direction in range(8):
             movement,aim=pose_angles('mining_with_tool',direction)
-            for frame in range(16):
-                mesh=explorer(frame/16,'mining_with_tool',tier,movement,aim)
+            for frame in range(MINING_FRAMES):
+                mesh=explorer(frame/MINING_FRAMES,'mining_with_tool',tier,movement,aim)
                 assert_frame_fits(mesh,(tier,direction,frame))
                 assert 'tool_tip' in mesh.anchors and 'tool_grip' in mesh.anchors
 
 
 def test_character_frames_share_a_consistent_foot_anchor():
-    from character_layout import WIDTH,HEIGHT,ORIGIN
+    from character_layout import frame_spec
     art=json.loads((ROOT/'docs/art/sprite-manifest.json').read_text())
     for tier in range(3):
         for pose in ('idle','idle_with_gun','running','running_with_gun','mining_with_tool'):
             spec=art[f'explorer-{tier}-{pose}']
-            assert (spec['width'],spec['height'])==(WIDTH,HEIGHT)
+            view=frame_spec(pose)
+            assert (spec['width'],spec['height'])==(view['width'],view['height'])
             assert spec['apply_projection'] is False
-            world_anchor=spec['height']*ORIGIN*spec['scale']+spec['shift'][1]*32
+            world_anchor=spec['height']*view['origin']*spec['scale']+spec['shift'][1]*32
             assert abs(world_anchor-spec['height']*.5*spec['scale'])<1e-4
 
 

@@ -99,7 +99,7 @@ def render(mesh,width=320,height=None,ppu=64,angle=0,aa=2,origin=.70,map_aligned
     normal+=bump*np.where(skin,.012,.065)[:,None];normal/=np.maximum(1e-6,np.linalg.norm(normal,axis=1))[:,None]
     ndl=np.clip(normal@light,0,1);half=unit(light+unit((0,math.cos(ELEVATION),math.sin(ELEVATION))))
     spec=np.clip(normal@half,0,1)**np.where(paint,32,48)
-    brightness=.31+ndl*visibility*1.05
+    brightness=.40+ndl*visibility*1.00
     shaded=color*brightness[:,None]*np.array([1.02,.99,.93])
     shaded+=spec[:,None]*visibility[:,None]*np.where(skin,.07,.22)[:,None]
     shaded=np.where(glow[:,None],color*1.12,shaded)
@@ -110,7 +110,7 @@ def render(mesh,width=320,height=None,ppu=64,angle=0,aa=2,origin=.70,map_aligned
     for _,world,_,_,_ in faces:
         ground=world.copy();ground[:,0]-=ground[:,2]*light[0]/light[2];ground[:,1]-=ground[:,2]*light[1]/light[2];ground[:,2]=0
         coords=project(ground,w,h,scale,origin,map_aligned)
-        d.polygon([tuple(p[:2]) for p in coords],fill=(20,18,12,88))
+        d.polygon([tuple(p[:2]) for p in coords],fill=(20,18,12,72))
     out.alpha_composite(cast.filter(ImageFilter.GaussianBlur(1.8*aa)))
     out.alpha_composite(Image.fromarray(pixels,'RGBA'))
     return out.resize((width,height),Image.Resampling.LANCZOS)

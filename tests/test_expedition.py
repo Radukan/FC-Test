@@ -30,7 +30,7 @@ def test_all_introduced_building_primary_art_is_original(expedition_data):
             else:yield from filenames(v)
     data=expedition_data.raw
     for machine in load_catalog()['machines']:
-        entity=data[machine.get('entity_type','assembling-machine')]['sn-'+machine['name']]
+        entity=data[machine.get('entity_type','assembling-machine')][machine['entity_name']]
         paths=list(filenames(entity.graphics_set or entity.sprites))
         assert paths and all(path.startswith('__second-nature__/graphics/entity/industry/') for path in paths)
     for kind,name in [('ammo-turret','sn-sentry-turret'),('electric-turret','sn-arc-turret'),('ammo-turret','sn-lance-turret')]:
@@ -47,7 +47,7 @@ def test_explorer_covers_armor_tool_and_armed_locomotion_variations(expedition_d
         for pose in ('idle','idle_with_gun','running','running_with_gun','mining_with_tool'):
             assert variation[pose].filename.startswith('__second-nature__/')
         assert variation.running_with_gun.direction_count==18
-        assert variation.running.frame_count==12
+        assert variation.running.frame_count==16
         assert variation.flipped_shadow_running_with_gun is None
     assert 'sn-expedition-armor' in list(char.animations[2].armors.values())
     assert 'sn-bastion-armor' in list(char.animations[3].armors.values())
@@ -201,7 +201,7 @@ def test_production_working_loops_have_actual_visible_motion_in_every_direction(
     for machine in load_catalog()['machines']:
         if machine['name']=='ecology-monitor':continue  # separate runtime status-light animation
         for direction in ('north','east','south','west'):
-            key=machine['name']+'-'+direction;s=manifest[key]
+            key=machine['art_name']+'-'+direction;s=manifest[key]
             image=Image.open(MOD/s['filename'].split('__second-nature__/')[1])
             frames={hashlib.sha256(image.crop((f*s['width'],0,(f+1)*s['width'],s['height'])).tobytes()).hexdigest() for f in range(s['frame_count'])}
             assert len(frames)>1,key

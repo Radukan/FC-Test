@@ -4,7 +4,7 @@
       "box": 1,
       "position": [
         -1,
-        -1
+        -2
       ],
       "direction": 0,
       "flow": "input"
@@ -13,7 +13,7 @@
       "box": 2,
       "position": [
         1,
-        -1
+        -2
       ],
       "direction": 0,
       "flow": "input"
@@ -22,7 +22,7 @@
       "box": 3,
       "position": [
         -1,
-        1
+        2
       ],
       "direction": 8,
       "flow": "output"
@@ -31,7 +31,7 @@
       "box": 4,
       "position": [
         1,
-        1
+        2
       ],
       "direction": 8,
       "flow": "output"
@@ -62,7 +62,7 @@
       "box": 1,
       "position": [
         -1,
-        -1
+        -2
       ],
       "direction": 0,
       "flow": "input"
@@ -71,7 +71,7 @@
       "box": 2,
       "position": [
         1,
-        -1
+        -2
       ],
       "direction": 0,
       "flow": "input"
@@ -80,7 +80,7 @@
       "box": 3,
       "position": [
         1,
-        1
+        2
       ],
       "direction": 8,
       "flow": "output"
@@ -89,7 +89,7 @@
       "box": 4,
       "position": [
         -1,
-        1
+        2
       ],
       "direction": 8,
       "flow": "output"
@@ -100,7 +100,7 @@
       "box": 1,
       "position": [
         -1,
-        -1
+        -2
       ],
       "direction": 0,
       "flow": "input"
@@ -109,7 +109,7 @@
       "box": 2,
       "position": [
         1,
-        -1
+        -2
       ],
       "direction": 0,
       "flow": "input"
@@ -118,7 +118,7 @@
       "box": 3,
       "position": [
         -1,
-        1
+        2
       ],
       "direction": 8,
       "flow": "output"
@@ -127,7 +127,7 @@
       "box": 4,
       "position": [
         1,
-        1
+        2
       ],
       "direction": 8,
       "flow": "output"
@@ -138,7 +138,7 @@
       "box": 1,
       "position": [
         -1,
-        -1
+        -2
       ],
       "direction": 0,
       "flow": "input"
@@ -147,7 +147,7 @@
       "box": 2,
       "position": [
         1,
-        -1
+        -2
       ],
       "direction": 0,
       "flow": "input"
@@ -156,7 +156,7 @@
       "box": 3,
       "position": [
         -1,
-        1
+        2
       ],
       "direction": 8,
       "flow": "output"
@@ -165,7 +165,7 @@
       "box": 4,
       "position": [
         1,
-        1
+        2
       ],
       "direction": 8,
       "flow": "output"
@@ -176,7 +176,7 @@
       "box": 1,
       "position": [
         0,
-        -1
+        -2
       ],
       "direction": 0,
       "flow": "input"
@@ -185,7 +185,7 @@
       "box": 2,
       "position": [
         0,
-        1
+        2
       ],
       "direction": 8,
       "flow": "output"
@@ -330,7 +330,7 @@
       "box": 1,
       "position": [
         -1,
-        -1
+        -2
       ],
       "direction": 0,
       "flow": "input"
@@ -339,7 +339,7 @@
       "box": 2,
       "position": [
         1,
-        -1
+        -2
       ],
       "direction": 0,
       "flow": "input"
@@ -348,7 +348,7 @@
       "box": 3,
       "position": [
         -1,
-        1
+        2
       ],
       "direction": 8,
       "flow": "output"
@@ -357,7 +357,7 @@
       "box": 4,
       "position": [
         1,
-        1
+        2
       ],
       "direction": 8,
       "flow": "output"
@@ -368,7 +368,7 @@
       "box": 1,
       "position": [
         -1,
-        -1
+        -2
       ],
       "direction": 0,
       "flow": "input"
@@ -377,7 +377,7 @@
       "box": 2,
       "position": [
         1,
-        -1
+        -2
       ],
       "direction": 0,
       "flow": "input"
@@ -386,7 +386,7 @@
       "box": 3,
       "position": [
         -1,
-        1
+        2
       ],
       "direction": 8,
       "flow": "output"
@@ -395,7 +395,7 @@
       "box": 4,
       "position": [
         1,
-        1
+        2
       ],
       "direction": 8,
       "flow": "output"
@@ -406,7 +406,7 @@
       "box": 1,
       "position": [
         -1,
-        -1
+        -2
       ],
       "direction": 0,
       "flow": "input"
@@ -415,7 +415,7 @@
       "box": 2,
       "position": [
         1,
-        -1
+        -2
       ],
       "direction": 0,
       "flow": "input"
@@ -424,7 +424,7 @@
       "box": 3,
       "position": [
         -1,
-        1
+        2
       ],
       "direction": 8,
       "flow": "output"
@@ -433,7 +433,7 @@
       "box": 4,
       "position": [
         1,
-        1
+        2
       ],
       "direction": 8,
       "flow": "output"
@@ -520,7 +520,7 @@
       "box": 1,
       "position": [
         -1,
-        -1
+        -2
       ],
       "direction": 0,
       "flow": "input"
@@ -529,7 +529,7 @@
       "box": 2,
       "position": [
         1,
-        -1
+        -2
       ],
       "direction": 0,
       "flow": "input"
@@ -538,7 +538,7 @@
       "box": 3,
       "position": [
         -1,
-        1
+        2
       ],
       "direction": 8,
       "flow": "output"
@@ -547,7 +547,7 @@
       "box": 4,
       "position": [
         1,
-        1
+        2
       ],
       "direction": 8,
       "flow": "output"
@@ -558,7 +558,7 @@
       "box": 1,
       "position": [
         -1,
-        -1
+        -2
       ],
       "direction": 0,
       "flow": "input"
@@ -567,7 +567,7 @@
       "box": 2,
       "position": [
         1,
-        -1
+        -2
       ],
       "direction": 0,
       "flow": "input"
@@ -576,7 +576,7 @@
       "box": 3,
       "position": [
         -1,
-        1
+        2
       ],
       "direction": 8,
       "flow": "output"
@@ -585,7 +585,7 @@
       "box": 4,
       "position": [
         1,
-        1
+        2
       ],
       "direction": 8,
       "flow": "output"
@@ -596,7 +596,7 @@
       "box": 1,
       "position": [
         -1,
-        -1
+        -2
       ],
       "direction": 0,
       "flow": "input"
@@ -605,7 +605,7 @@
       "box": 2,
       "position": [
         1,
-        -1
+        -2
       ],
       "direction": 0,
       "flow": "input"
@@ -614,7 +614,7 @@
       "box": 3,
       "position": [
         1,
-        1
+        2
       ],
       "direction": 8,
       "flow": "output"
@@ -623,7 +623,7 @@
       "box": 4,
       "position": [
         -1,
-        1
+        2
       ],
       "direction": 8,
       "flow": "output"
@@ -634,7 +634,7 @@
       "box": 1,
       "position": [
         -2,
-        2
+        3
       ],
       "direction": 8,
       "flow": "input"
@@ -643,7 +643,7 @@
       "box": 2,
       "position": [
         0,
-        2
+        3
       ],
       "direction": 8,
       "flow": "input"
@@ -652,7 +652,7 @@
       "box": 3,
       "position": [
         2,
-        2
+        3
       ],
       "direction": 8,
       "flow": "input"
@@ -661,7 +661,7 @@
       "box": 4,
       "position": [
         -2,
-        -2
+        -3
       ],
       "direction": 0,
       "flow": "output"
@@ -670,7 +670,7 @@
       "box": 5,
       "position": [
         0,
-        -2
+        -3
       ],
       "direction": 0,
       "flow": "output"
@@ -679,7 +679,7 @@
       "box": 6,
       "position": [
         2,
-        -2
+        -3
       ],
       "direction": 0,
       "flow": "output"
@@ -689,8 +689,8 @@
     {
       "box": 1,
       "position": [
-        -1,
-        -1
+        -2,
+        -3
       ],
       "direction": 0,
       "flow": "input"
@@ -698,8 +698,8 @@
     {
       "box": 2,
       "position": [
-        1,
-        -1
+        2,
+        -3
       ],
       "direction": 0,
       "flow": "input"
@@ -707,8 +707,8 @@
     {
       "box": 3,
       "position": [
-        1,
-        1
+        2,
+        3
       ],
       "direction": 8,
       "flow": "output"
@@ -716,8 +716,8 @@
     {
       "box": 4,
       "position": [
-        -1,
-        1
+        -2,
+        3
       ],
       "direction": 8,
       "flow": "output"
@@ -728,7 +728,7 @@
       "box": 1,
       "position": [
         -2,
-        2
+        3
       ],
       "direction": 8,
       "flow": "input"
@@ -737,7 +737,7 @@
       "box": 2,
       "position": [
         0,
-        2
+        3
       ],
       "direction": 8,
       "flow": "input"
@@ -746,7 +746,7 @@
       "box": 3,
       "position": [
         2,
-        2
+        3
       ],
       "direction": 8,
       "flow": "input"
@@ -755,7 +755,7 @@
       "box": 4,
       "position": [
         -2,
-        -2
+        -3
       ],
       "direction": 0,
       "flow": "output"
@@ -764,7 +764,7 @@
       "box": 5,
       "position": [
         0,
-        -2
+        -3
       ],
       "direction": 0,
       "flow": "output"
@@ -773,7 +773,7 @@
       "box": 6,
       "position": [
         2,
-        -2
+        -3
       ],
       "direction": 0,
       "flow": "output"

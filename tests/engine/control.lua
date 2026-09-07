@@ -22,7 +22,7 @@ script.on_init(function()
   -- Instantiate every entity to exercise prototype/graphics/fluidbox initialization.
   for index,machine in ipairs(K.machines) do
     local surface=storage.worlds[machine.planet or 'nauvis']
-    build(surface,'sn-'..machine.name,{x=-48+(index%8)*6,y=-48+math.floor(index/8)*6})
+    build(surface,machine.entity_name,{x=-70+(index%8)*10,y=-70+math.floor(index/8)*10})
   end
   local surface=storage.worlds.nauvis
   Probes.run(surface,force)

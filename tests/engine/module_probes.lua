@@ -10,6 +10,7 @@ local Resistance = require("scripts.resistance")
 local Inserters = require("scripts.inserters")
 local Jukebox = require("scripts.jukebox")
 local Ports = require("shared.fluid_ports")
+local Layouts = require("shared.machine_layouts")
 local Probe = {}
 function Probe.run(surface, force)
   S.init()
@@ -140,6 +141,42 @@ function Probe.run(surface, force)
     assert(math.abs(actual.x-expected.x)<.001 and math.abs(actual.y-expected.y)<.001,"connector boundary: "..serpent.line(connections[1]))
     pipe.destroy();machine.destroy()
   end
+  -- Expanded plants use their own geometry; old blueprints/entities remain compact.
+  for _, name in ipairs({"algae-vat","reclamation-plant","sanctuary","cryogenic-garden","planetary-beacon"}) do
+    local layout=Layouts[name]
+    assert(prototypes.item["sn-"..name].place_result.name==layout.entity_name,"item does not place the expanded plant")
+    local old=prototypes.entity["sn-"..name]
+    assert(old.collision_box.right_bottom.x < layout.size/2-.21,"legacy footprint expanded")
+  end
+  surface.set_property("sn-ecological-stage",4)
+  for family,name in ipairs({"algae-vat","planetary-beacon"}) do
+    local layout=Layouts[name];local port=Ports[name][1]
+    for quarter=0,3 do
+      local machine=assert(surface.create_entity({name=layout.entity_name,position={-44+quarter*12,80+family*12},direction=quarter*4,force=force}))
+      if name=="algae-vat" then machine.set_recipe("sn-mineral-nutrients") end
+      assert(S.register(machine),"expanded plant not in runtime registry")
+      if name=="planetary-beacon" then assert(world.beacon_ids[machine.unit_number],"expanded beacon is not registered") end
+      local direction=({[0]={0,-1},[4]={1,0},[8]={0,1},[12]={-1,0}})[port.direction]
+      local angle=quarter*math.pi/2;local c,s=math.cos(angle),math.sin(angle)
+      local function offset(x,y) return {x=machine.position.x+x*c-y*s,y=machine.position.y+x*s+y*c} end
+      local outside=offset(port.position[1]+direction[1],port.position[2]+direction[2])
+      local pipe=assert(surface.create_entity({name="pipe",position=outside,force=force}))
+      local connection=machine.fluidbox.get_pipe_connections(port.box)[1]
+      assert(connection and connection.target,"expanded plant pipe did not connect")
+      local expected=offset(port.position[1]+direction[1]*.5,port.position[2]+direction[2]*.5)
+      local actual={x=(connection.position.x+connection.target_position.x)/2,y=(connection.position.y+connection.target_position.y)/2}
+      assert(math.abs(actual.x-expected.x)<.001 and math.abs(actual.y-expected.y)<.001,"expanded port seam mismatch")
+      pipe.destroy();machine.destroy({raise_destroy=true})
+    end
+  end
+  surface.set_property("sn-ecological-stage",0)
+  local legacy=assert(surface.create_entity({name="sn-reclamation-plant",position={0,124},force=force}))
+  local neighbor=assert(surface.create_entity({name="stone-wall",position={2,124},force=force}))
+  local original_position=legacy.position
+  Campaign.init(false);assert(legacy.valid and neighbor.valid and legacy.name=="sn-reclamation-plant","configuration replaced compact hardware")
+  assert(legacy.position.x==original_position.x and legacy.position.y==original_position.y)
+  legacy.destroy();neighbor.destroy()
+  log("SECOND_NATURE_ENGINE_VERDANT_LAYOUTS_OK")
   -- The scene has a native hero track; headless cannot verify audible playback.
   log("SECOND_NATURE_ENGINE_LOGISTICS_AUDIO_OK")
   log("SECOND_NATURE_ENGINE_CAMPAIGN_PROBES_OK")

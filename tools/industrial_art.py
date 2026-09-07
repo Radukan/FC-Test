@@ -189,7 +189,7 @@ def fluid_ports(m,name):
         m.port_anchors.append({'box':port['box'],'position':tip,'direction':port['direction']})
 
 
-def machine(name,t=0):
+def machine_legacy(name,t=0):
     m=Mesh();big=name in ('cryogenic-garden','planetary-beacon');platform(m,4.6 if big else (1 if name=='ecology-monitor' else 2.7))
     if name=='algae-vat':
         tank(m,-.65,.15,.46,1.35,GREEN);tank(m,.62,.2,.42,1.15,TEAL)
@@ -327,6 +327,11 @@ def machine(name,t=0):
     detailing(m,name,t)
     fluid_ports(m,name)
     return m
+
+
+def machine(name,t=0):
+    from solarpunk_models import machine as build
+    return build(name,t)
 
 
 def lander(t=0):

@@ -8,13 +8,16 @@ from PIL import Image, ImageDraw, ImageFont
 from catalog import MOD, ROOT, load_catalog
 from industrial_art import *
 import character_layout as character
+import gait
 
 OUT=MOD/'graphics/entity/industry'
 DIRECTIONS=('north','east','south','west')
-manifest={}
+manifest_path=ROOT/"docs/art/sprite-manifest.json"
+manifest=json.loads(manifest_path.read_text()) if manifest_path.exists() else {}
 
 def save(image,path):
-    path.parent.mkdir(parents=True,exist_ok=True);image.save(path,optimize=True)
+    path.parent.mkdir(parents=True,exist_ok=True)
+    temporary=path.with_name(path.stem+".tmp.png");image.save(temporary,optimize=True);temporary.replace(path)
 
 def icon(image,name):
     bbox=image.getchannel('A').point(lambda a:255 if a>140 else 0).getbbox()
@@ -31,7 +34,7 @@ def spec(name,width,height=None,frames=8,directions=1,origin=.7,scale=.5):
 
 def animate(name,maker,width=320,height=None,frames=8,directions=1,origin=.7,ppu=64,angles=None,map_aligned=False):
     height=height or width
-    columns=8 if frames==1 and directions>8 else (16 if directions>=32 else frames)
+    columns=8 if frames==1 and directions>8 else (16 if directions>=32 else (10 if frames==20 and width*frames>8192 else frames))
     atlas=Image.new('RGBA',(width*columns,height*math.ceil(frames*directions/columns)))
     preview=None
     for direction in range(directions):
@@ -61,9 +64,11 @@ def render_all(only=None):
     for entry in catalog['machines']:
         name=entry['name']
         if only and name not in only:continue
-        size=448 if name in ('planetary-beacon','cryogenic-garden') else (160 if name=='ecology-monitor' else 320)
+        size={1:160,3:320,5:448,7:640}[entry['footprint']]
+        art_name=entry['art_name']
+        origin=.57 if entry['footprint']==7 else .6
         for index,direction in enumerate(DIRECTIONS):
-            preview=animate(name+'-'+direction,lambda t,_:machine(name,t),size,frames=8,angles=[index*math.pi/2],origin=.6,map_aligned=True)
+            preview=animate(art_name+'-'+direction,lambda t,_:machine(name,t),size,frames=8,angles=[index*math.pi/2],origin=origin,map_aligned=True)
             if index==0:previews.append((entry['title'],preview));icon(preview,name)
         print('BUILDING',name,flush=True)
     if not only or 'lander' in only:
@@ -120,14 +125,15 @@ def render_all(only=None):
         save(sticker,OUT/'root-binding.png')
     if not only or 'explorer' in only:
         for tier in range(3):
-            for pose,frames,count in [('idle',4,8),('idle_with_gun',4,8),('running',12,8),('mining_with_tool',16,8),('running_with_gun',12,18)]:
+            for pose,frames,count in [('idle',4,8),('idle_with_gun',4,8),('running',gait.RUN_FRAMES,8),('mining_with_tool',gait.MINING_FRAMES,8),('running_with_gun',gait.RUN_FRAMES,18)]:
                 def actor(t,d):
                     move,aim=character.pose_angles(pose,d)
                     model=explorer(t,pose,tier,move_angle=move,aim_angle=aim)
                     character.assert_frame_fits(model,(tier,pose,d,t))
                     return model
-                preview=animate(f'explorer-{tier}-{pose}',actor,character.WIDTH,character.HEIGHT,frames=frames,directions=count,
-                    angles=[0]*count,origin=character.ORIGIN,ppu=character.PIXELS_PER_UNIT,map_aligned=True)
+                view=character.frame_spec(pose)
+                preview=animate(f'explorer-{tier}-{pose}',actor,view['width'],view['height'],frames=frames,directions=count,
+                    angles=[0]*count,origin=view['origin'],ppu=view['ppu'],map_aligned=True)
                 if pose=='idle':icon(preview,'explorer' if tier==0 else f'explorer-{tier}');previews.append((f'Explorer / armor {tier}',preview))
             preview=animate(f'explorer-{tier}-corpse',lambda t,d:corpse(tier),256,192,frames=2,origin=.5,ppu=70)
             print('EXPLORER',tier,flush=True)
@@ -153,7 +159,7 @@ def render_all(only=None):
             model=equipment('cell');model.box((0,0,.45),(.65,.34,.18),c)
             icon(render(model,128,128,origin=.65),name)
     # Machine specs can be imported without loading the renderer at runtime.
-    if not only:
+    if True:
         def lua(v):
             if isinstance(v,dict):return '{'+','.join('['+json.dumps(k)+']='+lua(x) for k,x in v.items())+'}'
             if isinstance(v,list):return '{'+','.join(lua(x) for x in v)+'}'
@@ -169,7 +175,7 @@ def render_all(only=None):
             thumb=image.copy();thumb.thumbnail((220,210),Image.Resampling.LANCZOS)
             sheet.paste(thumb,(x+(cellw-thumb.width)//2,y+8+(205-thumb.height)//2),thumb)
             draw.text((x+12,y+221),label,fill=(219,226,220),font=font)
-        sheet.save(ROOT/'docs/art/ironbound-contact-sheet.jpg',quality=91,optimize=True)
+        if not only:sheet.save(ROOT/'docs/art/ironbound-contact-sheet.jpg',quality=91,optimize=True)
     print('SPRITE_EXPORT_COMPLETE',len(manifest),flush=True)
 
 if __name__=='__main__':

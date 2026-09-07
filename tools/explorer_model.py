@@ -4,6 +4,8 @@ rig so the muzzle cannot turn away from the arms. Tool motion shares the grips.
 """
 import math
 from industrial_art import Mesh,STEEL,DARK,EDGE,GOLD,COPPER,TEAL,WHITE,add,rot,mul
+import gait
+from character_rig import limb,hand as build_hand
 
 SKIN=(184,130,103)
 HAIR=(61,31,20)
@@ -23,26 +25,40 @@ def local_to_world(p,angle):return rot(p,angle)
 def explorer(t=0,pose='idle',tier=0,move_angle=0,aim_angle=0):
     m=Mesh();upper=Mesh();run=pose in ('running','running_with_gun');gun='gun' in pose;mining=pose=='mining_with_tool'
     phase=t*math.tau
-    step=.29*math.sin(phase) if run else .010*math.sin(phase)
-    bob=.018*(1-math.cos(phase*2)) if run else .009*math.sin(phase)
+    step=.24*math.sin(phase) if run else .008*math.sin(phase)
+    bob=-.035*math.cos(phase*2) if run else .007*math.sin(phase)
     facing=aim_angle if gun else move_angle
     armor=(119,111,88) if tier==0 else ((104,111,99) if tier==1 else (145,141,119))
-    # Legs keep their anatomical facing while the stride vector follows movement.
     stride_vector=(math.sin(move_angle),-math.cos(move_angle),0)
+    bend=rot((0,-1,0),facing)
+    joints={};phases={}
+    # Stance feet remain planted in height. The swing leg clears the ground and
+    # shortens through knee flexion, with constant femur/tibia lengths.
     for side in (-1,1):
-        hip=rot((side*.158,0,1.09+bob),facing)
-        knee=add(rot((side*.17,-.015,.61+bob),facing),mul(stride_vector,side*step*.53))
-        ankle=add(rot((side*.17,.005,.12),facing),mul(stride_vector,side*step))
-        ankle=add(ankle,(0,0,max(0,-side*step)*.25))
-        m.tube(hip,knee,.123,SUIT,18);m.tube(knee,ankle,.083,SUIT,16)
-        m.ball(knee,.113,armor,stretch=(.9,1.05,.85))
-        # Greaves, boot caps, seams and thigh straps follow the same limb axis.
-        m.tube(add(knee,(0,.027,-.1)),add(ankle,(0,.027,.12)),.067,armor,14)
-        boot=Mesh();boot.box((0,-.055,.015),(.195,.33,.20),DARK,.06)
-        boot.box((0,-.143,.05),(.18,.12,.055),armor,.02)
-        boot.box((0,-.05,-.074),(.21,.35,.035),(20,24,22),.02)
-        m.join(boot,facing,ankle)
-        belt=add(mul(hip,.52),mul(knee,.48));m.ball(belt,.125,(68,56,42),stretch=(1,1,.3))
+        sample=gait.foot_phase(t,side) if run else {'phase':0,'along':0,'lift':0,'pitch':0,'mode':'stance'}
+        phases[side]=sample
+        hip=rot((side*.158+.016*math.sin(phase) if run else side*.158,0,1.10+bob),facing)
+        ankle=add(rot((side*.17,0,.115),facing),mul(stride_vector,sample['along']))
+        ankle=add(ankle,(0,0,sample['lift']))
+        knee=gait.solve_two_bone(hip,ankle,gait.THIGH,gait.SHIN,bend)
+        limb(m,hip,knee,.127,.105,SUIT,18);limb(m,knee,ankle,.090,.061,SUIT,16)
+        m.ball(knee,.111,armor,stretch=(.95,1.0,.76))
+        shin_front=rot((0,-.046,0),facing)
+        top=add(gait.add(knee,gait.mul(gait.sub(ankle,knee),.15)),shin_front)
+        bottom=add(gait.add(knee,gait.mul(gait.sub(ankle,knee),.84)),shin_front)
+        limb(m,top,bottom,.075,.050,armor,14)
+        boot=Mesh();boot.box((0,-.055,.015),(.21,.35,.20),DARK,.06)
+        boot.box((0,-.143,.05),(.195,.13,.061),armor,.03)
+        boot.box((0,-.05,-.074),(.22,.37,.035),(20,24,22),.025)
+        # Toe roll on lift-off and controlled heel strike during contact.
+        pitch=sample['pitch'];c,ss=math.cos(pitch),math.sin(pitch)
+        rolled=Mesh()
+        for vertices,color,glow in boot.faces:
+            rolled.face([(x,y*c-z*ss,y*ss+z*c) for x,y,z in vertices],color,glow)
+        m.join(rolled,facing,ankle)
+        belt=gait.add(hip,gait.mul(gait.sub(knee,hip),.44));m.ball(belt,.126,(68,56,42),stretch=(1,1,.24))
+        joints['hip-'+str(side)]=hip;joints['knee-'+str(side)]=knee;joints['ankle-'+str(side)]=ankle
+        joints['toe-'+str(side)]=add(rot((0,-.20,.04),facing),ankle)
     # A fitted silhouette, articulated pelvis and curved protective shell.
     loft(upper,[(0,.006,1.00+bob,.215,.12),(0,.006,1.09+bob,.254,.153),
                 (0,0,1.21+bob,.164,.104),(0,0,1.36+bob,.171,.115),
@@ -72,30 +88,34 @@ def explorer(t=0,pose='idle',tier=0,move_angle=0,aim_angle=0):
     tool_bottom=tool_top=None
     if mining:
         swing=.5-.5*math.cos(phase)
-        theta=math.radians(-18+146*swing)
-        tool_bottom=(.065,-.40,1.10+bob+.44*(1-swing))
+        theta=math.radians(-18+158*swing)
+        tool_bottom=(.065,-.40,1.48+bob)
         shaft=(0,-math.sin(theta),math.cos(theta))
-        tool_top=add(tool_bottom,mul(shaft,.95))
+        tool_top=add(tool_bottom,mul(shaft,1.15))
         cutting_direction=(0,-math.cos(theta),-math.sin(theta))
-        grip_right=tuple(a*.70+b*.30 for a,b in zip(tool_bottom,tool_top))
-        grip_left=tuple(a*.45+b*.55 for a,b in zip(tool_bottom,tool_top))
+        grip_right=tuple(a*.96+b*.04 for a,b in zip(tool_bottom,tool_top))
+        grip_left=tuple(a*.83+b*.17 for a,b in zip(tool_bottom,tool_top))
+    hand_joints={}
     for side in (-1,1):
-        shoulder=(side*.273,.0,1.65+bob)
+        shoulder=(side*.273,0,1.65+bob)
         if mining:
-            hand=grip_left if side<0 else grip_right
-            elbow=(side*.34,-.22,1.42+bob+.16*(1-swing))
+            wrist=grip_left if side<0 else grip_right
+            forward=shaft;back=(0,1,0);curl=.95
         elif gun:
-            hand=(.072,-.40,1.425+bob) if side>0 else (-.028,-.66,1.43+bob)
-            elbow=(side*.33,-.15,1.34+bob)
+            wrist=(.085,-.385,1.46+bob) if side>0 else (-.034,-.585,1.455+bob)
+            forward=(0,0,-1) if side>0 else (0,-1,0)
+            back=(0,-1,0) if side>0 else (0,0,1);curl=.88
         else:
-            # Normal walk arm swing opposes the corresponding leg.
-            elbow=(side*.31,side*step*.48,1.31+bob)
-            hand=(side*.29,side*step*.90,1.05+bob)
-        upper.tube(shoulder,elbow,.080,SUIT,16);upper.tube(elbow,hand,.063,SUIT,16)
-        upper.ball(shoulder,.116,armor,stretch=(1.06,.95,.80))
-        upper.ball(elbow,.077,EDGE,stretch=(1,.8,.8))
-        upper.ball(hand,.065,DARK,stretch=(.8,1,.85))
-        for finger in range(3):upper.tube(add(hand,(-.035+finger*.023,-.03,-.035)),add(hand,(-.035+finger*.023,-.078,-.012)),.010,(89,82,68),6)
+            wrist=(side*.31,side*step*.90,1.07+bob+.04*math.cos(phase+side))
+            forward=(0,0,-1);back=(0,1,0);curl=.22
+        elbow=gait.solve_two_bone(shoulder,wrist,.38,.35,(side,.38,-.2))
+        limb(upper,shoulder,elbow,.086,.074,SUIT,16);limb(upper,elbow,wrist,.071,.055,SUIT,16)
+        upper.ball(shoulder,.116,armor,stretch=(1.06,.95,.80));upper.ball(elbow,.077,EDGE,stretch=(1,.8,.8))
+        h=build_hand(upper,wrist,forward,back,side,curl)
+        hand_joints[side]=h
+        joints['shoulder-'+str(side)]=rot(shoulder,facing)
+        joints['elbow-'+str(side)]=rot(elbow,facing)
+        joints['wrist-'+str(side)]=rot(wrist,facing)
         if tier>0:
             upper.box((side*.30,.012,1.67+bob),(.16,.255,.135),armor,.035)
             upper.box((side*.30,-.09,1.69+bob),(.10,.09,.025),GOLD,.008)
@@ -140,7 +160,7 @@ def explorer(t=0,pose='idle',tier=0,move_angle=0,aim_angle=0):
         upper.tube(tool_bottom,tool_top,.024,(96,78,53),12)
         rear=add(tool_top,mul(cutting_direction,-.22))
         neck=add(tool_top,mul(cutting_direction,.17))
-        tip=add(tool_top,mul(cutting_direction,.38))
+        tip=add(tool_top,mul(cutting_direction,.50))
         upper.tube(rear,neck,.057,EDGE,12)
         # A tapered forged point, not a flat crossbar presented to the ground.
         side=(.067,0,0);up=(0,-cutting_direction[2]*.045,cutting_direction[1]*.045)
@@ -153,4 +173,6 @@ def explorer(t=0,pose='idle',tier=0,move_angle=0,aim_angle=0):
     m.join(upper,facing)
     m.anchors={name:rot(point,facing) for name,point in anchors.items()}
     m.aim_angle=facing;m.move_angle=move_angle
+    m.joints=joints;m.foot_phases=phases;m.pose=pose
+    m.hands={side:{key:rot(point,facing) for key,point in values.items()} for side,values in hand_joints.items()}
     return m

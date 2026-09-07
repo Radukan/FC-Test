@@ -42,7 +42,7 @@ def run(binary:Path):
             print('::error title=Factorio engine failure::'+summary)
             raise SystemExit(f'Factorio {label} failed ({result.returncode}); see {root/(label+".log")}')
         outputs.append(result.stdout)
-    if not all(marker in '\n'.join(outputs) for marker in ('SECOND_NATURE_ENGINE_SMOKE_OK','SECOND_NATURE_ENGINE_CAMPAIGN_PROBES_OK','SECOND_NATURE_ENGINE_LOGISTICS_AUDIO_OK')):
+    if not all(marker in '\n'.join(outputs) for marker in ('SECOND_NATURE_ENGINE_SMOKE_OK','SECOND_NATURE_ENGINE_CAMPAIGN_PROBES_OK','SECOND_NATURE_ENGINE_LOGISTICS_AUDIO_OK','SECOND_NATURE_ENGINE_VERDANT_LAYOUTS_OK')):
         raise SystemExit('Engine exited without the smoke-test success marker. This is NOT a pass. Inspect '+str(root))
     print(f'ENGINE VALIDATION PASSED: Factorio {version}. Logs: {root}')
 if __name__=='__main__':

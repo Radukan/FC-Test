@@ -1,4 +1,19 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.6.0
+Date: 2026-09-07
+  Character:
+    - Replace linear leg offsets with constant-length two-bone kinematics, planted stance and lifted swing phases.
+    - Add toe roll, weight shift, articulated elbows and visible five-digit gloved hands.
+    - Increase locomotion frames and shorten the visual mining cycle while retaining the pointed tool strike.
+  Buildings:
+    - Introduce distinct industrial-solarpunk process architectures, greenhouse terraces, clarifiers, furnace drums and habitat courts.
+    - Expand complex plants to five-by-five or seven-by-seven footprints with matching placement geometry and fluid ports.
+    - Retain compact prototypes and their old collision/port geometry for existing saves and blueprints.
+    - New inventory placement uses the larger plants; existing factories are not silently expanded or moved.
+  Compatibility:
+    - Preserve inventories, recipes, research, ecological rates, military systems and audio content.
+    - Graphical-client validation remains distinct from geometry tests and stable headless checks.
+---------------------------------------------------------------------------------------------------
 Version: 0.5.0
 Date: 2026-09-07
   Features:

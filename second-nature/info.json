@@ -1,10 +1,10 @@
 {
   "name": "second-nature",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "title": "Second Nature: Planetary Restoration",
   "author": "Radukan",
   "homepage": "https://github.com/Radukan/FC-Test",
-  "description": "A five-planet restoration campaign with an intact expedition lander, biological industry, reversible habitat recovery, distinctive ecological defenses and precision logistics. Includes a voiced arrival transmission, an original soundtrack and a replayable expedition archive.",
+  "description": "A Space Age restoration campaign with biological process plants, articulated expedition equipment, reversible habitat recovery and a living-world soundtrack. Industrial systems, solar-shaded habitats and precision logistics support the renewal of five planets.",
   "factorio_version": "2.0",
   "dependencies": [
     "base >= 2.0.77",

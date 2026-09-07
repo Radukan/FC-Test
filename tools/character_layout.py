@@ -24,17 +24,23 @@ def pose_angles(pose,row):
     angle=row*TAU/8
     return angle,angle
 
-def projected(point):
+def frame_spec(pose=None):
+    if pose=='mining_with_tool':return {'width':448,'height':480,'origin':248/480,'ppu':PIXELS_PER_UNIT,'scale':.5}
+    return {'width':WIDTH,'height':HEIGHT,'origin':ORIGIN,'ppu':PIXELS_PER_UNIT,'scale':.5}
+
+def projected(point,pose=None):
     # Character ground axes are authored in screen/map space, not foreshortened twice.
-    return (WIDTH/2+point[0]*PIXELS_PER_UNIT,
-            HEIGHT*ORIGIN+(point[1]-point[2]*math.cos(math.radians(48)))*PIXELS_PER_UNIT)
+    spec=frame_spec(pose)
+    return (spec['width']/2+point[0]*spec['ppu'],
+            spec['height']*spec['origin']+(point[1]-point[2]*math.cos(math.radians(48)))*spec['ppu'])
 
 def assert_frame_fits(mesh,context):
-    points=[projected(p) for vertices,_,_ in mesh.faces for p in vertices]
+    pose=getattr(mesh,"pose",None);spec=frame_spec(pose)
+    points=[projected(p,pose) for vertices,_,_ in mesh.faces for p in vertices]
     # The cast shadow shares the canvas and must not be abruptly cropped either.
     for vertices,_,_ in mesh.faces:
-        for x,y,z in vertices:points.append(projected((x+z*.65/1.35,y+z*.78/1.35,0)))
+        for x,y,z in vertices:points.append(projected((x+z*.65/1.35,y+z*.78/1.35,0),pose))
     xs=[p[0] for p in points];ys=[p[1] for p in points]
     bounds=(min(xs),min(ys),max(xs),max(ys))
-    assert bounds[0]>=SAFE_MARGIN and bounds[1]>=SAFE_MARGIN and bounds[2]<=WIDTH-SAFE_MARGIN and bounds[3]<=HEIGHT-SAFE_MARGIN,(context,bounds)
+    assert bounds[0]>=SAFE_MARGIN and bounds[1]>=SAFE_MARGIN and bounds[2]<=spec['width']-SAFE_MARGIN and bounds[3]<=spec['height']-SAFE_MARGIN,(context,bounds)
     return bounds

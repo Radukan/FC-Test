@@ -1,7 +1,7 @@
 ![Ironbound expedition - original industrial sprites](docs/art/ironbound-contact-sheet.jpg)
 
-# Second Nature · Ironbound Expedition
-### Stable Factorio 2.0 / Space Age restoration overhaul · v0.5.0 alpha
+# Second Nature · Verdant Works
+### Stable Factorio 2.0 / Space Age restoration overhaul · v0.6.0 alpha
 
 **An intact landing craft. A stripped planet. A factory built to bring life back.**
 
@@ -9,12 +9,12 @@ Nauvis has no natural trees or fish in a fresh campaign. The broods tolerate you
 
 ## Download
 
-### [Second Nature 0.5.0 - stable Factorio 2.0](https://github.com/Radukan/FC-Test/releases/download/v0.5.0-factorio-2.0/second-nature_0.5.0.zip)
+### [Second Nature 0.6.0 - stable Factorio 2.0](https://github.com/Radukan/FC-Test/releases/download/v0.6.0-factorio-2.0/second-nature_0.6.0.zip)
 
-[Release notes and checksum](https://github.com/Radukan/FC-Test/releases/tag/v0.5.0-factorio-2.0). **Private repository: sign in to GitHub with repository access.** Use the named mod ZIP, not GitHub’s automatic source archive.
+[Release notes and checksum](https://github.com/Radukan/FC-Test/releases/tag/v0.6.0-factorio-2.0). **Private repository: sign in to GitHub with repository access.** Use the named mod ZIP, not GitHub’s automatic source archive.
 
 1. Use **Factorio 2.0.77**, **Space Age**, **Quality** and **Elevated Rails**.
-2. Back up saves and replace older Second Nature ZIP/source copies with `second-nature_0.5.0.zip`, still zipped, in the Factorio `mods` folder.
+2. Back up saves and replace older Second Nature ZIP/source copies with `second-nature_0.6.0.zip`, still zipped, in the Factorio `mods` folder.
 3. For the complete opening, start new Space Age freeplay with **Second Nature / Last Landing** and the default mod settings. **Brood Frontier** and **Quiet Reclamation** offer harder/peaceful alternatives.
 4. **Shift + T / leaf:** field station. **Ctrl + Shift + P:** smog. **Shift + I:** inserter vectors. **Ctrl + Shift + J:** jukebox.
 
@@ -22,25 +22,26 @@ Windows: `%APPDATA%\Factorio\mods` · Linux: `~/.factorio/mods` · macOS: `~/Lib
 
 Stable only; experimental 2.1 builds are discontinued. Existing stable saves retain their factories, ecological values and terrain. They do **not** receive another cargo grant or a replacement defense kit. New habitat-readiness rules can temporarily demote an older mature world while its landscape is surveyed/recovered.
 
-## Living World: expedition audio, biological defense and precision logistics
+## Verdant Works: articulated movement and larger process plants
 
-**Landing transmission:** a female first-person log precedes **We Need a Living World**, a new original industrial-punk/metal instrumental with spoken lyrical vocals about humanity's need for a green, lush home. The voice tool produces speech, not singing. The complete recording contains the voice-before-music sequence and is registered as Nauvis's native arrival/hero track.
+The explorer now uses a constant-length two-bone leg rig. Feet have a planted stance and a lifted swing, with knee flexion, toe roll and weight transfer. Arms have articulated elbows, and larger contrasting gloves contain four segmented fingers and an opposing thumb. Running and armed movement use sixteen frames; mining uses a twenty-frame, faster visual cycle while the pointed impact and game mining speed are retained.
 
-A craftable **Expedition jukebox** preserves the transmission, the new anthem and **After the Ash**. Open a jukebox or press **Ctrl + Shift + J** nearby. Playback is local by default; a surface broadcast requires an administrator in multiplayer. Native speaker controls can stop or replace a jukebox track. The arrival soundtrack has its own startup toggle.
+Process plants have been redesigned as different architectures rather than variations of one box: fermentation trains, greenhouse terraces, membrane-cell banks, clarifiers, furnace drums, cyclone filters, heat recuperators, spore towers and vaulted habitat courts. Weathered industrial metal is paired with restrained solar shades, copper service loops and contained greenery.
 
-**Inserter vectors:** open any inserter, or select one and press **Shift + I**. Separate 5 × 5 grids select pickup and delivery offsets from **-2 to +2 on both axes**, including diagonals. The center and identical endpoints are blocked. This is a two-tile per-axis reach limit, not a literal four-tile area. Native custom vectors are enabled for every inserter; filters, quality and stack behavior remain intact.
+| Footprint | Installations |
+|---|---|
+| **1 x 1** | Ecology monitor |
+| **3 x 3** | Composter, pyrolysis retort, air scrubber, soil station, seed disperser, pheromone dampener, forcing tower |
+| **5 x 5** | Bioreactor, hydroponics, electrolyzer, reclamation plant, materials kiln, watershed, heat exchanger, detoxifier, basalt conditioner, Fulgoran reclaimer, spore tower |
+| **7 x 7** | Cryogenic garden, biodiversity sanctuary, planetary beacon |
 
-**Endgame logistics:** vector servo inserters accelerate bulk transfer, canopy inserters move stacked cargo, and the complete vital belt/tunnel/splitter family shares **90 items/second before stacking**. Tunnels span sixteen tiles. The belt family retains native lane/corner geometry and stack/filter/priority mechanics.
+**Existing factories are not expanded in place.** Surviving compact plants keep their original collision boxes and pipe positions. New inventory placement uses the larger versions; old compact blueprints remain compatible. Mining a compact plant returns the normal item, whose next ordinary placement uses the larger footprint. Allow room before rebuilding a compact production block.
 
-**Distinctive defenses:** Rootweaver emplacements launch bioactive flechettes that slow exposed targets, resonance diffusers disrupt hostile movement, and pressure-lance rounds bind a small amount of actual airborne contamination at impact. Existing ballistic/rail ammunition remains compatible; special ammunition and effects do not award free fitness or science.
+The new plants keep the same recipe identities, production speed, energy requirements and ecological rates. The increased footprint represents their internal process equipment, not a hidden throughput bonus. Their visible nozzles share the enlarged native fluid-port coordinates.
 
-**Rounder machinery and aligned ports:** process vessels, housings, emplacements and logistics assemblies use more curved geometry. Visible nozzles are built from the same fluid-box coordinates as the game prototypes. Map-aligned rendering and removal of mismatched inherited stubs address the earlier pipe-attachment discrepancy. Connector-tip transforms are checked in every building orientation.
+[Building contact sheet](docs/art/ironbound-contact-sheet.jpg) · [Locomotion review](docs/art/locomotion-review.gif) · [Mining review](docs/art/mining-framing-preview.gif)
 
-**Point-led mining:** the pickaxe's forged point follows the swing tangent and leads the downward impact. Its grips, head, motion and complete frame/shadow envelope are checked together.
-
-[Sprite contact sheet](docs/art/ironbound-contact-sheet.jpg) · [Mining preview](docs/art/mining-framing-preview.gif) · [Landing transmission and anthem](second-nature/sound/music/landing-transmission.ogg)
-
-These source previews are not in-game recordings. Audible first-arrival timing, every native GUI/blueprint interaction and exact graphical alignment still require client playtesting in addition to the automated checks.
+The voiced arrival, jukebox, biological defenses, inserter vector controls and endgame logistics remain. Source-art previews and kinematic tests do not replace graphical-client review of every native animation/movement combination.
 
 ## Ironbound campaign
 

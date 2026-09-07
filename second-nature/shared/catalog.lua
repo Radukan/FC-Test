@@ -329,7 +329,14 @@ for _, x in ipairs(Logistics.technologies) do K.technologies[#K.technologies + 1
 K.expedition = {}
 for _, x in ipairs(Expedition.items) do K.expedition[#K.expedition + 1] = x end
 for _, x in ipairs(Logistics.items) do K.expedition[#K.expedition + 1] = x end
+local Layouts = require("shared.machine_layouts")
 K.by_recipe, K.by_machine = {}, {}
 for _, r in ipairs(K.recipes) do K.by_recipe["sn-" .. r.name] = r end
-for _, m in ipairs(K.machines) do K.by_machine["sn-" .. m.name] = m end
+for _, m in ipairs(K.machines) do
+  local layout = assert(Layouts[m.name], m.name)
+  m.footprint, m.previous_footprint = layout.size, layout.previous_size
+  m.entity_name, m.art_name = layout.entity_name, layout.art_name
+  K.by_machine["sn-" .. m.name] = m
+  K.by_machine[m.entity_name] = m
+end
 return K

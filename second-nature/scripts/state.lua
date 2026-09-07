@@ -62,7 +62,7 @@ function S.register(entity)
   root.registrations[rec.registration] = id
   list[#list + 1], root.machines[id], world.machine_ids[id] = id, rec, true
   world.machine_count = world.machine_count + 1
-  if entity.name == "sn-planetary-beacon" then world.beacon_ids[id] = true end
+  if K.by_machine[entity.name].name == "planetary-beacon" then world.beacon_ids[id] = true end
   return rec
 end
 function S.remove(id)
@@ -91,7 +91,8 @@ end
 function S.scan()
   -- A one-time install/configuration scan, never a periodic whole-map entity search.
   local names = {}
-  for _, m in ipairs(K.machines) do names[#names + 1] = "sn-" .. m.name end
+  for name in pairs(K.by_machine) do names[#names + 1] = name end
+  table.sort(names)
   local surfaces = {}
   for _, surface in pairs(game.surfaces) do surfaces[#surfaces + 1] = surface end
   table.sort(surfaces, function(a, b) return a.index < b.index end)

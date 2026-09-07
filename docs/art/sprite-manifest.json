@@ -1994,20 +1994,6 @@
     "filename": "__second-nature__/graphics/entity/industry/explorer-0-running.png",
     "width": 384,
     "height": 432,
-    "frame_count": 12,
-    "line_length": 12,
-    "direction_count": 8,
-    "scale": 0.5,
-    "shift": [
-      0,
-      -0.0625
-    ],
-    "apply_projection": false
-  },
-  "explorer-0-mining_with_tool": {
-    "filename": "__second-nature__/graphics/entity/industry/explorer-0-mining_with_tool.png",
-    "width": 384,
-    "height": 432,
     "frame_count": 16,
     "line_length": 16,
     "direction_count": 8,
@@ -2018,12 +2004,26 @@
     ],
     "apply_projection": false
   },
+  "explorer-0-mining_with_tool": {
+    "filename": "__second-nature__/graphics/entity/industry/explorer-0-mining_with_tool.png",
+    "width": 448,
+    "height": 480,
+    "frame_count": 20,
+    "line_length": 10,
+    "direction_count": 8,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.125
+    ],
+    "apply_projection": false
+  },
   "explorer-0-running_with_gun": {
     "filename": "__second-nature__/graphics/entity/industry/explorer-0-running_with_gun.png",
     "width": 384,
     "height": 432,
-    "frame_count": 12,
-    "line_length": 12,
+    "frame_count": 16,
+    "line_length": 16,
     "direction_count": 18,
     "scale": 0.5,
     "shift": [
@@ -2077,20 +2077,6 @@
     "filename": "__second-nature__/graphics/entity/industry/explorer-1-running.png",
     "width": 384,
     "height": 432,
-    "frame_count": 12,
-    "line_length": 12,
-    "direction_count": 8,
-    "scale": 0.5,
-    "shift": [
-      0,
-      -0.0625
-    ],
-    "apply_projection": false
-  },
-  "explorer-1-mining_with_tool": {
-    "filename": "__second-nature__/graphics/entity/industry/explorer-1-mining_with_tool.png",
-    "width": 384,
-    "height": 432,
     "frame_count": 16,
     "line_length": 16,
     "direction_count": 8,
@@ -2101,12 +2087,26 @@
     ],
     "apply_projection": false
   },
+  "explorer-1-mining_with_tool": {
+    "filename": "__second-nature__/graphics/entity/industry/explorer-1-mining_with_tool.png",
+    "width": 448,
+    "height": 480,
+    "frame_count": 20,
+    "line_length": 10,
+    "direction_count": 8,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.125
+    ],
+    "apply_projection": false
+  },
   "explorer-1-running_with_gun": {
     "filename": "__second-nature__/graphics/entity/industry/explorer-1-running_with_gun.png",
     "width": 384,
     "height": 432,
-    "frame_count": 12,
-    "line_length": 12,
+    "frame_count": 16,
+    "line_length": 16,
     "direction_count": 18,
     "scale": 0.5,
     "shift": [
@@ -2160,20 +2160,6 @@
     "filename": "__second-nature__/graphics/entity/industry/explorer-2-running.png",
     "width": 384,
     "height": 432,
-    "frame_count": 12,
-    "line_length": 12,
-    "direction_count": 8,
-    "scale": 0.5,
-    "shift": [
-      0,
-      -0.0625
-    ],
-    "apply_projection": false
-  },
-  "explorer-2-mining_with_tool": {
-    "filename": "__second-nature__/graphics/entity/industry/explorer-2-mining_with_tool.png",
-    "width": 384,
-    "height": 432,
     "frame_count": 16,
     "line_length": 16,
     "direction_count": 8,
@@ -2184,12 +2170,26 @@
     ],
     "apply_projection": false
   },
+  "explorer-2-mining_with_tool": {
+    "filename": "__second-nature__/graphics/entity/industry/explorer-2-mining_with_tool.png",
+    "width": 448,
+    "height": 480,
+    "frame_count": 20,
+    "line_length": 10,
+    "direction_count": 8,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.125
+    ],
+    "apply_projection": false
+  },
   "explorer-2-running_with_gun": {
     "filename": "__second-nature__/graphics/entity/industry/explorer-2-running_with_gun.png",
     "width": 384,
     "height": 432,
-    "frame_count": 12,
-    "line_length": 12,
+    "frame_count": 16,
+    "line_length": 16,
     "direction_count": 18,
     "scale": 0.5,
     "shift": [
@@ -2223,5 +2223,789 @@
       0,
       0.0
     ]
+  },
+  "algae-vat-plant-north": {
+    "filename": "__second-nature__/graphics/entity/industry/algae-vat-plant-north.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "algae-vat-plant-east": {
+    "filename": "__second-nature__/graphics/entity/industry/algae-vat-plant-east.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "algae-vat-plant-south": {
+    "filename": "__second-nature__/graphics/entity/industry/algae-vat-plant-south.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "algae-vat-plant-west": {
+    "filename": "__second-nature__/graphics/entity/industry/algae-vat-plant-west.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "hydroponics-bay-plant-north": {
+    "filename": "__second-nature__/graphics/entity/industry/hydroponics-bay-plant-north.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "hydroponics-bay-plant-east": {
+    "filename": "__second-nature__/graphics/entity/industry/hydroponics-bay-plant-east.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "hydroponics-bay-plant-south": {
+    "filename": "__second-nature__/graphics/entity/industry/hydroponics-bay-plant-south.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "hydroponics-bay-plant-west": {
+    "filename": "__second-nature__/graphics/entity/industry/hydroponics-bay-plant-west.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "electrolyzer-plant-north": {
+    "filename": "__second-nature__/graphics/entity/industry/electrolyzer-plant-north.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "electrolyzer-plant-east": {
+    "filename": "__second-nature__/graphics/entity/industry/electrolyzer-plant-east.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "electrolyzer-plant-south": {
+    "filename": "__second-nature__/graphics/entity/industry/electrolyzer-plant-south.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "electrolyzer-plant-west": {
+    "filename": "__second-nature__/graphics/entity/industry/electrolyzer-plant-west.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "reclamation-plant-plant-north": {
+    "filename": "__second-nature__/graphics/entity/industry/reclamation-plant-plant-north.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "reclamation-plant-plant-east": {
+    "filename": "__second-nature__/graphics/entity/industry/reclamation-plant-plant-east.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "reclamation-plant-plant-south": {
+    "filename": "__second-nature__/graphics/entity/industry/reclamation-plant-plant-south.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "reclamation-plant-plant-west": {
+    "filename": "__second-nature__/graphics/entity/industry/reclamation-plant-plant-west.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "materials-kiln-plant-north": {
+    "filename": "__second-nature__/graphics/entity/industry/materials-kiln-plant-north.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "materials-kiln-plant-east": {
+    "filename": "__second-nature__/graphics/entity/industry/materials-kiln-plant-east.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "materials-kiln-plant-south": {
+    "filename": "__second-nature__/graphics/entity/industry/materials-kiln-plant-south.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "materials-kiln-plant-west": {
+    "filename": "__second-nature__/graphics/entity/industry/materials-kiln-plant-west.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "watershed-plant-north": {
+    "filename": "__second-nature__/graphics/entity/industry/watershed-plant-north.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "watershed-plant-east": {
+    "filename": "__second-nature__/graphics/entity/industry/watershed-plant-east.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "watershed-plant-south": {
+    "filename": "__second-nature__/graphics/entity/industry/watershed-plant-south.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "watershed-plant-west": {
+    "filename": "__second-nature__/graphics/entity/industry/watershed-plant-west.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "thermal-exchanger-plant-north": {
+    "filename": "__second-nature__/graphics/entity/industry/thermal-exchanger-plant-north.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "thermal-exchanger-plant-east": {
+    "filename": "__second-nature__/graphics/entity/industry/thermal-exchanger-plant-east.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "thermal-exchanger-plant-south": {
+    "filename": "__second-nature__/graphics/entity/industry/thermal-exchanger-plant-south.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "thermal-exchanger-plant-west": {
+    "filename": "__second-nature__/graphics/entity/industry/thermal-exchanger-plant-west.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "detoxifier-plant-north": {
+    "filename": "__second-nature__/graphics/entity/industry/detoxifier-plant-north.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "detoxifier-plant-east": {
+    "filename": "__second-nature__/graphics/entity/industry/detoxifier-plant-east.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "detoxifier-plant-south": {
+    "filename": "__second-nature__/graphics/entity/industry/detoxifier-plant-south.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "detoxifier-plant-west": {
+    "filename": "__second-nature__/graphics/entity/industry/detoxifier-plant-west.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "basalt-conditioner-plant-north": {
+    "filename": "__second-nature__/graphics/entity/industry/basalt-conditioner-plant-north.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "basalt-conditioner-plant-east": {
+    "filename": "__second-nature__/graphics/entity/industry/basalt-conditioner-plant-east.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "basalt-conditioner-plant-south": {
+    "filename": "__second-nature__/graphics/entity/industry/basalt-conditioner-plant-south.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "basalt-conditioner-plant-west": {
+    "filename": "__second-nature__/graphics/entity/industry/basalt-conditioner-plant-west.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "fulgoran-reclaimer-plant-north": {
+    "filename": "__second-nature__/graphics/entity/industry/fulgoran-reclaimer-plant-north.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "fulgoran-reclaimer-plant-east": {
+    "filename": "__second-nature__/graphics/entity/industry/fulgoran-reclaimer-plant-east.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "fulgoran-reclaimer-plant-south": {
+    "filename": "__second-nature__/graphics/entity/industry/fulgoran-reclaimer-plant-south.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "fulgoran-reclaimer-plant-west": {
+    "filename": "__second-nature__/graphics/entity/industry/fulgoran-reclaimer-plant-west.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "spore-tower-plant-north": {
+    "filename": "__second-nature__/graphics/entity/industry/spore-tower-plant-north.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "spore-tower-plant-east": {
+    "filename": "__second-nature__/graphics/entity/industry/spore-tower-plant-east.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "spore-tower-plant-south": {
+    "filename": "__second-nature__/graphics/entity/industry/spore-tower-plant-south.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "spore-tower-plant-west": {
+    "filename": "__second-nature__/graphics/entity/industry/spore-tower-plant-west.png",
+    "width": 448,
+    "height": 448,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "cryogenic-garden-plant-north": {
+    "filename": "__second-nature__/graphics/entity/industry/cryogenic-garden-plant-north.png",
+    "width": 640,
+    "height": 640,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "cryogenic-garden-plant-east": {
+    "filename": "__second-nature__/graphics/entity/industry/cryogenic-garden-plant-east.png",
+    "width": 640,
+    "height": 640,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "cryogenic-garden-plant-south": {
+    "filename": "__second-nature__/graphics/entity/industry/cryogenic-garden-plant-south.png",
+    "width": 640,
+    "height": 640,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "cryogenic-garden-plant-west": {
+    "filename": "__second-nature__/graphics/entity/industry/cryogenic-garden-plant-west.png",
+    "width": 640,
+    "height": 640,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "sanctuary-plant-north": {
+    "filename": "__second-nature__/graphics/entity/industry/sanctuary-plant-north.png",
+    "width": 640,
+    "height": 640,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "sanctuary-plant-east": {
+    "filename": "__second-nature__/graphics/entity/industry/sanctuary-plant-east.png",
+    "width": 640,
+    "height": 640,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "sanctuary-plant-south": {
+    "filename": "__second-nature__/graphics/entity/industry/sanctuary-plant-south.png",
+    "width": 640,
+    "height": 640,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "sanctuary-plant-west": {
+    "filename": "__second-nature__/graphics/entity/industry/sanctuary-plant-west.png",
+    "width": 640,
+    "height": 640,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "planetary-beacon-plant-north": {
+    "filename": "__second-nature__/graphics/entity/industry/planetary-beacon-plant-north.png",
+    "width": 640,
+    "height": 640,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "planetary-beacon-plant-east": {
+    "filename": "__second-nature__/graphics/entity/industry/planetary-beacon-plant-east.png",
+    "width": 640,
+    "height": 640,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "planetary-beacon-plant-south": {
+    "filename": "__second-nature__/graphics/entity/industry/planetary-beacon-plant-south.png",
+    "width": 640,
+    "height": 640,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "planetary-beacon-plant-west": {
+    "filename": "__second-nature__/graphics/entity/industry/planetary-beacon-plant-west.png",
+    "width": 640,
+    "height": 640,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
   }
 }

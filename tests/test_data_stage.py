@@ -78,7 +78,7 @@ def test_operations_are_fixed_powered_surface_gated_and_nonproductive(stage):
     for r in ops:
         hosts=[m for m in K['machines'] if m.get('fixed')==r['name']]
         assert len(hosts)==1
-        p=stage.raw['assembling-machine']['sn-'+hosts[0]['name']]
+        p=stage.raw['assembling-machine'][hosts[0]['entity_name']]
         recipe=stage.raw.recipe['sn-'+r['name']]
         assert p.fixed_recipe=='sn-'+r['name']
         assert p.energy_source.type=='electric' and p.energy_usage

@@ -97,7 +97,7 @@ def test_fluid_port_art_and_prototypes_use_one_coordinate_contract(advanced_data
     for definition in load_catalog()['machines']:
         name=definition['name']
         if definition.get('entity_type')=='constant-combinator':continue
-        p=advanced_data.raw['assembling-machine']['sn-'+name]
+        p=advanced_data.raw['assembling-machine'][definition['entity_name']]
         mesh=machine(name,0)
         assert len(mesh.port_anchors)==len(ports[name])
         for source,anchor in zip(ports[name],mesh.port_anchors):
