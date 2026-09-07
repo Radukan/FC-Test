@@ -323,7 +323,12 @@ for _, x in ipairs(Expedition.items) do
 end
 for _, x in ipairs(Expedition.recipes) do K.recipes[#K.recipes + 1] = x end
 for _, x in ipairs(Expedition.technologies) do K.technologies[#K.technologies + 1] = x end
-K.expedition = Expedition.items
+local Logistics = require("shared.logistics")
+for _, x in ipairs(Logistics.recipes) do K.recipes[#K.recipes + 1] = x end
+for _, x in ipairs(Logistics.technologies) do K.technologies[#K.technologies + 1] = x end
+K.expedition = {}
+for _, x in ipairs(Expedition.items) do K.expedition[#K.expedition + 1] = x end
+for _, x in ipairs(Logistics.items) do K.expedition[#K.expedition + 1] = x end
 K.by_recipe, K.by_machine = {}, {}
 for _, r in ipairs(K.recipes) do K.by_recipe["sn-" .. r.name] = r end
 for _, m in ipairs(K.machines) do K.by_machine["sn-" .. m.name] = m end

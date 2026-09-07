@@ -8,8 +8,8 @@ end
 table.deepcopy=nil
 package.preload["util"]=function() table.deepcopy=deepcopy;return {table={deepcopy=deepcopy}} end
 mock={handlers={},nth={},commands={},messages={},logs={},renders={},next_id=100,next_registration=0,entities={},surface_calls={}}
-storage={};defines={events={},command={attack_area=1,attack=2,go_to_location=3,stop=4},distraction={by_enemy=1,none=0},controllers={character=1,cutscene=2}}
-local event_names={'on_research_finished','on_research_reversed','on_entity_spawned','on_chunk_generated','on_force_created','on_biter_base_built','on_rocket_launched','on_cutscene_cancelled','on_pre_player_mined_item','on_robot_pre_mined','on_entity_died','script_raised_destroy','on_built_entity','on_robot_built_entity','script_raised_built','script_raised_revive','on_space_platform_built_entity','on_entity_cloned','on_object_destroyed','on_surface_created','on_surface_deleted','on_surface_cleared','on_forces_merged','on_player_created','on_player_joined_game','on_player_removed','on_gui_click','on_gui_selection_state_changed','on_gui_closed','on_lua_shortcut','on_runtime_mod_setting_changed'}
+storage={};defines={events={},command={attack_area=1,attack=2,go_to_location=3,stop=4},distraction={by_enemy=1,none=0},controllers={character=1,cutscene=2,remote=3},direction={north=0,east=4,south=8,west=12},relative_gui_type={inserter_gui=1},relative_gui_position={right=1}}
+local event_names={'on_gui_opened','on_player_rotated_entity','on_entity_settings_pasted','on_script_trigger_effect','on_research_finished','on_research_reversed','on_entity_spawned','on_chunk_generated','on_force_created','on_biter_base_built','on_rocket_launched','on_cutscene_cancelled','on_pre_player_mined_item','on_robot_pre_mined','on_entity_died','script_raised_destroy','on_built_entity','on_robot_built_entity','script_raised_built','script_raised_revive','on_space_platform_built_entity','on_entity_cloned','on_object_destroyed','on_surface_created','on_surface_deleted','on_surface_cleared','on_forces_merged','on_player_created','on_player_joined_game','on_player_removed','on_gui_click','on_gui_selection_state_changed','on_gui_closed','on_lua_shortcut','on_runtime_mod_setting_changed'}
 for i,name in ipairs(event_names) do defines.events[name]=i end
 script={mod_name='second-nature'}
 local loader=require
@@ -41,7 +41,7 @@ remote.add_interface=function(name,methods) remote.interfaces[name]=methods end
 remote.call=function(name,method,...) return remote.interfaces[name][method](...) end
 mock.escape_disabled=false
 remote.add_interface('space_finish_script',{get_no_victory=function() return mock.escape_disabled end,set_no_victory=function(v) mock.escape_disabled=v end})
-settings={startup={['sn-menu-music']={value=true},['sn-expedition-character']={value=true},['sn-overhaul-progression']={value=true},['sn-desolate-start']={value=true},['sn-legacy-smog']={value=80},['sn-biter-metabolism']={value=true},['sn-menu-background']={value=true}},global={}}
+settings={startup={['sn-opening-audio']={value=true},['sn-inserter-vectors']={value=true},['sn-menu-music']={value=true},['sn-expedition-character']={value=true},['sn-overhaul-progression']={value=true},['sn-desolate-start']={value=true},['sn-legacy-smog']={value=80},['sn-biter-metabolism']={value=true},['sn-menu-background']={value=true}},global={}}
 for name,value in pairs({['sn-native-fate']='choose',['sn-restoration-speed']=1,['sn-native-resistance']='balanced',['sn-grace-minutes']=20,['sn-living-terrain']=false,['sn-tree-growth']=false,['sn-network-victory']=true}) do settings.global[name]={value=value} end
 settings.get_player_settings=function() return {['sn-show-welcome']={value=true}} end
 prototypes={entity={}}
@@ -146,9 +146,13 @@ function mock.entity(name,surface,pos,force,no_event)
   if type(force)=='string' then force=mock.forces_by_name[force] or mock.neutral end
   local def=K.by_machine[name]
   local kind=def and (def.entity_type or 'assembling-machine') or (name:find('spawner') and 'unit-spawner' or (name:find('tree') and 'tree' or 'unit'))
-  if name=='sn-lander' then kind='container' elseif (name=='gun-turret' or name=='sn-sentry-turret') then kind='ammo-turret' elseif (name=='stone-wall' or name=='sn-field-barricade') then kind='wall' elseif name=='fish' then kind='fish' elseif name=='sn-bloom-nest' then kind='simple-entity-with-owner' elseif name:find('worm') then kind='turret' end
+  if name:find('inserter') then kind='inserter' elseif name=='sn-jukebox' then kind='programmable-speaker' elseif name=='sn-lander' then kind='container' elseif (name=='gun-turret' or name=='sn-sentry-turret') then kind='ammo-turret' elseif (name=='stone-wall' or name=='sn-field-barricade') then kind='wall' elseif name=='fish' then kind='fish' elseif name=='sn-bloom-nest' then kind='simple-entity-with-owner' elseif name:find('worm') then kind='turret' end
   local e={name=name,type=kind,surface=surface,position=pos or {x=0,y=0},force=force or mock.player_force,valid=true,unit_number=mock.next_id,products_finished=0,
     _recipe=def and def.fixed and ('sn-'..def.fixed) or nil,commandable={}}
+  e.direction=0;e.prototype={allow_custom_vectors=true,inserter_pickup_position={0,-1},inserter_drop_position={0,1.2}}
+  e.pickup_position={x=e.position.x,y=e.position.y-1};e.drop_position={x=e.position.x,y=e.position.y+1.2}
+  e.parameters={playback_volume=1,playback_mode='local',allow_polyphony=false,volume_controlled_by_signal=false,volume_signal_id={type='virtual',name='signal-A'}}
+  e.play_note=function(instrument,note,stop) assert(e.type=='programmable-speaker');e.played={instrument=instrument,note=note,stop=stop};return true end
   e.inventory={};e.insert=function(stack) e.inventory[stack.name]=(e.inventory[stack.name] or 0)+stack.count;return stack.count end
   e.commandable.set_command=function(command) e.command=command end
   e.get_recipe=function() assert(e.type=='assembling-machine','Entity is not crafting-machine');return e._recipe and {name=e._recipe} or nil end
@@ -174,7 +178,7 @@ end
 mock.gui_reserved = {}
 function mock.gui(spec,parent)
   assert(not (spec.name and mock.gui_reserved[spec.name]), "Invalid LuaGuiElement child name: " .. tostring(spec.name))
-  local g={valid=true,name=spec.name or '',type=spec.type,parent=parent,children={},style={},caption=spec.caption,value=spec.value,selected_index=spec.selected_index}
+  local g={valid=true,name=spec.name or '',type=spec.type,parent=parent,children={},style={},caption=spec.caption,value=spec.value,selected_index=spec.selected_index,state=spec.state,tags=spec.tags,enabled=spec.enabled}
   if parent then parent.children[#parent.children+1]=g;if g.name~='' then parent[g.name]=g end end
   g.add=function(child) return mock.gui(child,g) end
   g.add_tab=function() end
@@ -184,7 +188,7 @@ end
 package.preload['mod-gui']=function() return {button_style='slot_button',get_button_flow=function(p) return p.gui.top end} end
 function mock.player(index)
   local p={index=index,force=mock.player_force,surface=game.surfaces[1],display_resolution={width=1920,height=1080},display_scale=1,
-    position={x=0,y=0},controller_type=defines.controllers.character,gui={screen=mock.gui({type='screen'}),top=mock.gui({type='flow'})},admin=true}
+    position={x=0,y=0},controller_type=defines.controllers.character,gui={screen=mock.gui({type='screen'}),top=mock.gui({type='flow'}),left=mock.gui({type='flow'}),relative=mock.gui({type='flow'})},admin=true}
   p.set_shortcut_toggled=function(name,value) p.shortcut_toggled=value end
   p.set_controller=function(spec) p.controller_type=spec.type;p.cutscene=spec end
   p.exit_cutscene=function() p.controller_type=defines.controllers.character end

@@ -1,7 +1,7 @@
 local K = require("shared.catalog")
 local H = require("prototypes.helpers")
 local prototypes = {{type = "item-group", name = "sn-restoration", icon = H.icon("second-nature"), icon_size = 64, order = "z-a"}}
-for index, group in ipairs({"materials", "biology", "fluids", "science", "production", "restoration", "planetary", "operations", "recovery", "signals", "defense"}) do
+for index, group in ipairs({"materials", "biology", "fluids", "science", "production", "restoration", "planetary", "operations", "recovery", "signals", "defense", "logistics"}) do
   prototypes[#prototypes + 1] = {type = "item-subgroup", name = "sn-" .. group, group = "sn-restoration", order = string.format("%02d", index)}
 end
 data:extend(prototypes)

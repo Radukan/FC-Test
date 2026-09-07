@@ -7,17 +7,18 @@ item("item","alloy-stock","Mineral-composite stock",nil,"An iron-reinforced mine
 item("gun","carbine","Expedition carbine","submachine-gun","A compact automatic carbine chambered for standard ballistic magazines.")
 item("ammo","ballistic-magazine","Expedition magazine","firearm-magazine","Ten copper-jacketed cartridges for automatic weapons and sentry turrets.")
 item("capsule","field-dressing","Sterile field dressing","raw-fish","A sterile biofilm dressing that accelerates wound closure and restores health.")
+item("ammo","mycelial-magazine","Mycelial flechette magazine","piercing-rounds-magazine","Bioactive flechettes that bind exposed tissue in a slowing mycelial lattice. Compatible with ballistic weapons.")
 item("armor","field-armor","Expedition field armor","light-armor","A fitted expedition suit with reinforced impact panels and chemical-resistant outer layers.")
-item("ammo-turret","sentry-turret","Riveted sentry turret","gun-turret","A belt-fed automatic sentry mounted in a reinforced, rotating armored housing.")
+item("ammo-turret","sentry-turret","Rootweaver emplacement","gun-turret","A bioactive flechette launcher whose rotating seed chambers deliver root-binding ammunition across a defensive perimeter.")
 item("wall","field-barricade","Riveted field barricade","stone-wall","A riveted, stone-filled barrier that absorbs impacts and resists corrosive attack.")
 item("gun","induction-rifle","Induction rifle","submachine-gun","A battery-fed precision rifle that discharges concentrated electrical energy into its target.")
 item("ammo","induction-cell","Induction cell","firearm-magazine","A sealed power cell providing ten electrical discharges for an induction rifle.")
-item("electric-turret","arc-turret","Capacitor arc turret","laser-turret","A capacitor-fed electrical turret with a high-capacity buffer and a sustained demand for power.")
+item("electric-turret","arc-turret","Resonance diffuser","laser-turret","A resonant field emitter that disrupts hostile movement with a sustained electrical and pheromonal pulse.")
 item("wall","composite-wall","Composite bastion wall","stone-wall","A layered steel and biological-composite barrier with strong impact and acid resistance.")
 item("armor","expedition-armor","Powered expedition armor","modular-armor","Powered modular armor with a six-by-six equipment grid and expanded carrying capacity.")
 item("gun","lance-rifle","Heavy lance rifle","railgun","A magnetic accelerator that drives dense projectiles through armored targets along a straight firing line.")
 item("ammo","lance-cell","Dense-core lance round","railgun-ammo","A dense-core rail projectile capable of penetrating multiple targets along its firing line.")
-item("ammo-turret","lance-turret","Bastion lance turret","railgun-turret","A reinforced magnetic accelerator for long-range defense against heavily armored targets. Requires charged power reserves and rail ammunition.")
+item("ammo-turret","lance-turret","Atmospheric pressure lance","railgun-turret","A pressure-buffered magnetic lance that drives a cooling, pollutant-capturing discharge through armored targets.")
 item("armor","bastion-armor","Bastion expedition armor","power-armor-mk2","Heavy powered armor with a ten-by-ten equipment grid, reinforced plating and expanded carrying capacity.")
 item("energy-shield-equipment","ecoshield-equipment","Biosphere shield module","energy-shield-mk2-equipment","A powered field generator that absorbs incoming damage and recharges from the equipment grid.")
 local function recipe(name,title,seconds,ingredients,amount,enabled)
@@ -27,6 +28,7 @@ end
 recipe("alloy-stock","Form mineral-composite stocks",1,{{"iron-plate",2},{"stone",2}},2,true)
 recipe("ballistic-magazine","Assemble expedition magazines",2,{{"iron-plate",4},{"copper-plate",1}},1,true)
 recipe("field-dressing","Prepare sterile field dressings",3,{{"sn-biofilm",2},{"sn-glass",1}},2)
+recipe("mycelial-magazine","Pack bioactive flechettes",4,{{"iron-plate",3},{"sn-algal-biomass",3},{"sn-biofilm",1}},2)
 recipe("carbine","Build an expedition carbine",6,{{"iron-plate",12},{"iron-gear-wheel",8},{"sn-alloy-stock",4},{"copper-plate",5}})
 recipe("field-armor","Build an expedition field suit",8,{{"iron-plate",30},{"copper-plate",10},{"sn-alloy-stock",6}})
 recipe("sentry-turret","Build a riveted sentry",12,{{"iron-plate",25},{"iron-gear-wheel",15},{"electronic-circuit",8},{"sn-alloy-stock",8}})
@@ -49,7 +51,7 @@ end
 local r="automation-science-pack";local g="logistic-science-pack";local b="chemical-science-pack"
 local e="sn-ecology-science-pack";local c="sn-climate-science-pack"
 tech("expedition-defense","Frontier defense",{"military","steel-processing"},{r},80,
-  {"carbine","field-armor","sentry-turret","field-dressing"},"Replace expedition losses with wood-free arms, armor and sentries. Basic magazines and barricades can already be crafted by hand.")
+  {"carbine","field-armor","sentry-turret","field-dressing","mycelial-magazine"},"Replace expedition losses with wood-free arms, armor and sentries. Basic magazines and barricades can already be crafted by hand.")
 tech("induction-defense","Electrical defense doctrine",{"laser-turret","sn-thermal-engineering"},{r,g,b,"military-science-pack",e},250,
   {"induction-rifle","induction-cell","arc-turret","composite-wall","expedition-armor"},"Battery-fed rifles, electrical perimeter turrets and modular protection. Stronger defenses need a stronger energy economy.")
 tech("bastion-defense","Bastion defense doctrine",{"railgun","sn-planetary-coordination"},{r,g,b,"military-science-pack","utility-science-pack","space-science-pack","cryogenic-science-pack",c},600,

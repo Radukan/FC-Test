@@ -2,6 +2,10 @@ local C = require("shared.constants")
 local M = require("shared.model")
 local H = require("prototypes.helpers")
 data:extend({
+  {type="custom-input",name="sn-configure-inserter",key_sequence="SHIFT + I",consuming="none"},
+  {type="custom-input",name="sn-open-jukebox",key_sequence="CONTROL + SHIFT + J",consuming="none"},
+  {type="shortcut",name="sn-inserter-vectors",action="lua",icon=H.icon("vector-inserter"),icon_size=64,small_icon=H.icon("vector-inserter"),small_icon_size=64,associated_control_input="sn-configure-inserter",order="z-sn-c"},
+  {type="shortcut",name="sn-jukebox",action="lua",icon=H.icon("jukebox"),icon_size=64,small_icon=H.icon("jukebox"),small_icon_size=64,associated_control_input="sn-open-jukebox",order="z-sn-d"},
   {type = "surface-property", name = "sn-restoration-domain", default_value = 0, order = "z-sn-a"},
   {type = "surface-property", name = "sn-planet-identity", default_value = 0, order = "z-sn-b"},
   {type = "surface-property", name = "sn-ecological-stage", default_value = 0, order = "z-sn-c"},

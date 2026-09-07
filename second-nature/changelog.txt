@@ -1,4 +1,21 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.5.0
+Date: 2026-09-07
+  Features:
+    - Add a voiced landing log followed by We Need a Living World, an original industrial-punk score with spoken female lyrics.
+    - Add an expedition jukebox with native speaker playback, stop controls and protected surface broadcasting.
+    - Add bounded pickup/drop tile controls for every inserter and endgame vector/canopy manipulators.
+    - Add a matched 90-item-per-second transport, underground and splitter family.
+    - Introduce root-binding flechettes, a resonance diffuser and pressure-lance contamination capture.
+  Graphics:
+    - Round machinery housings and replace conventional turret silhouettes with biological/field-control structures.
+    - Use shared native fluid-port coordinates for visible nozzles and remove mismatched inherited stubs.
+    - Reorient the pickaxe so its forged point leads the impact; preserve audited frame margins.
+  Compatibility:
+    - Preserve existing inventories, research, ecology and ordinary ballistic/rail ammunition compatibility.
+    - The opening is one native hero-track recording with voice before music.
+    - The vocal performance is spoken, not sung. Full graphical/audio and multiplayer review remains separate from engine checks.
+---------------------------------------------------------------------------------------------------
 Version: 0.4.0
 Date: 2026-09-07
   Graphics:

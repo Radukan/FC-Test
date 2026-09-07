@@ -72,9 +72,11 @@ def explorer(t=0,pose='idle',tier=0,move_angle=0,aim_angle=0):
     tool_bottom=tool_top=None
     if mining:
         swing=.5-.5*math.cos(phase)
-        # Over-shoulder preparation, forward impact, then recovery.
-        tool_bottom=(.06,-.39,1.17+bob+.43*(1-swing))
-        tool_top=(.06,-.58- .50*swing,2.43+bob-1.22*swing)
+        theta=math.radians(-18+146*swing)
+        tool_bottom=(.065,-.40,1.10+bob+.44*(1-swing))
+        shaft=(0,-math.sin(theta),math.cos(theta))
+        tool_top=add(tool_bottom,mul(shaft,.95))
+        cutting_direction=(0,-math.cos(theta),-math.sin(theta))
         grip_right=tuple(a*.70+b*.30 for a,b in zip(tool_bottom,tool_top))
         grip_left=tuple(a*.45+b*.55 for a,b in zip(tool_bottom,tool_top))
     for side in (-1,1):
@@ -136,10 +138,17 @@ def explorer(t=0,pose='idle',tier=0,move_angle=0,aim_angle=0):
         anchors['right_grip']=grip_right if mining else (.072,-.40,1.425+bob)
     if mining:
         upper.tube(tool_bottom,tool_top,.024,(96,78,53),12)
-        left=add(tool_top,(-.38,-.045,0));right=add(tool_top,(.32,.045,-.02))
-        upper.tube(left,right,.05,EDGE,12)
-        upper.face([left,add(left,(-.16,-.035,-.04)),add(left,(.015,.03,.05))],STEEL)
-        anchors['tool_tip']=add(left,(-.16,-.035,-.04))
+        rear=add(tool_top,mul(cutting_direction,-.22))
+        neck=add(tool_top,mul(cutting_direction,.17))
+        tip=add(tool_top,mul(cutting_direction,.38))
+        upper.tube(rear,neck,.057,EDGE,12)
+        # A tapered forged point, not a flat crossbar presented to the ground.
+        side=(.067,0,0);up=(0,-cutting_direction[2]*.045,cutting_direction[1]*.045)
+        ring=[add(neck,side),add(neck,up),add(neck,mul(side,-1)),add(neck,mul(up,-1))]
+        for i in range(4):upper.face([ring[i],ring[(i+1)%4],tip],STEEL)
+        anchors['tool_tip']=tip
+        anchors['tool_neck']=neck
+        anchors['strike_direction']=cutting_direction
         anchors['tool_grip']=grip_right
     m.join(upper,facing)
     m.anchors={name:rot(point,facing) for name,point in anchors.items()}

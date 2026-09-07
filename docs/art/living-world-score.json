@@ -1,0 +1,44 @@
+{
+  "title": "We Need a Living World",
+  "vocals": "Selected synthetic female spoken performance, not singing",
+  "tempo_bpm": 144,
+  "song_seconds": 160.0,
+  "intro_seconds": 45.76,
+  "suite_seconds": 206.46,
+  "sample_rate": 32000,
+  "channels": 2,
+  "intro": "They called this a dead world. They were wrong. Death is quiet. This place is still screaming. Every rusted pipe, every poisoned river, every empty sky. I helped build the machines that did this. I can't undo that. But I brought living cultures. Water filters. A little hope, sealed in steel. Humanity needs more than another factory. We need green horizons. We need a lush planet that can carry our children. So let the engines wake. Let the ground remember rain. I am staying. And I will make this world breathe again.",
+  "lyrics": {
+    "verse-one": "We carved our names in iron. We buried rivers under stone. We lit a thousand furnaces, then wondered why the birds were gone. I hear the roots beneath the concrete. I hear the life we left to die. I will not build another graveyard. I will not leave an empty sky.",
+    "chorus": "We need a living world. Green and lush beneath the sun. Not a kingdom made of ashes. Not a victory with no one. Give us forests. Give us rivers. Give the earth a second birth. We are more than what we burn. We are here to heal this world.",
+    "verse-two": "My hands are black with yesterday. My heart is red with what remains. I'll turn the gears against the silence. I'll teach the dust to drink the rain. Every seed is an uprising. Every leaf, a battle won. Humanity needs green horizons. We need a home, not just a sun.",
+    "outro": "Let the iron carry water. Let the fire serve the seed. Let the power that broke this planet become the strength its forests need. I am not finished. We are not done. We need a living world. And we will build one."
+  },
+  "vocal_cues_seconds": [
+    [
+      "verse-one",
+      13.333333333333334
+    ],
+    [
+      "chorus",
+      40.0
+    ],
+    [
+      "verse-two",
+      66.66666666666667
+    ],
+    [
+      "chorus",
+      93.33333333333334
+    ],
+    [
+      "outro",
+      133.33333333333334
+    ]
+  ],
+  "source": "Original synthesized instrumental and commissioned spoken voice lines",
+  "sha256": {
+    "we-need-a-living-world.ogg": "9c150854723782f634eec742da93a9d425fdcbdf43ac5868d127b16d809b8ef3",
+    "landing-transmission.ogg": "2cc15b045b609f7a416db70641323a9ef51dc19cbaad7f9b2949d0bb95908b2f"
+  }
+}

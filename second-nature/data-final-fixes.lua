@@ -48,3 +48,7 @@ if settings.startup["sn-menu-music"].value then
   local menu = assert(data.raw["ambient-sound"]["main-menu"], "Second Nature requires the base menu track")
   menu.sound = {filename="__second-nature__/sound/music/after-the-ash.ogg",volume=0.8}
 end
+
+if settings.startup["sn-inserter-vectors"].value then
+  for _, inserter in pairs(data.raw.inserter) do inserter.allow_custom_vectors = true end
+end

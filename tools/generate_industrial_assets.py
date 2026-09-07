@@ -63,7 +63,7 @@ def render_all(only=None):
         if only and name not in only:continue
         size=448 if name in ('planetary-beacon','cryogenic-garden') else (160 if name=='ecology-monitor' else 320)
         for index,direction in enumerate(DIRECTIONS):
-            preview=animate(name+'-'+direction,lambda t,_:machine(name,t),size,frames=8,angles=[index*math.pi/2])
+            preview=animate(name+'-'+direction,lambda t,_:machine(name,t),size,frames=8,angles=[index*math.pi/2],origin=.6,map_aligned=True)
             if index==0:previews.append((entry['title'],preview));icon(preview,name)
         print('BUILDING',name,flush=True)
     if not only or 'lander' in only:
@@ -98,6 +98,26 @@ def render_all(only=None):
         for i,d in enumerate(DIRECTIONS):sheet.alpha_composite(Image.open(OUT/f'field-pole-{d}.png'),(i*128,0))
         save(sheet,OUT/'field-pole-sheet.png')
         manifest['field-pole-sheet']=dict(manifest['field-pole-north'],filename='__second-nature__/graphics/entity/industry/field-pole-sheet.png',direction_count=4,line_length=4)
+    for name,size,frames in [('vector-inserter',128,1),('canopy-inserter',128,1),('vital-splitter',192,8),('jukebox',192,8)]:
+        if only and name not in only:continue
+        for i,direction in enumerate(DIRECTIONS):
+            preview=animate(name+'-'+direction,lambda t,_:logistics(name,t),size,frames=frames,angles=[i*math.pi/2],origin=.60,map_aligned=True)
+            if i==0:icon(preview,name);previews.append((name.replace('-',' ').title(),preview))
+        print('LOGISTICS',name,flush=True)
+    if not only:
+        for name in ('vital-belt','vital-underground-belt'):
+            icon(render(logistics(name),160,128,origin=.6,map_aligned=True),name)
+        model=Mesh();model.cyl(0,0,0,.24,.62,STEEL)
+        for i in range(4):model.ball((-.14+i*.09,0,.60),.075,GREEN,stretch=(.7,.7,2.1))
+        icon(render(model,128,128,origin=.64), 'mycelial-magazine')
+        sticker=Image.new('RGBA',(96*4,96))
+        for frame in range(4):
+            draw=ImageDraw.Draw(sticker);x=frame*96
+            for i in range(5):
+                a=i*TAU/5+frame*.06
+                points=[(x+48+math.cos(a+j*.24)*r,48+math.sin(a+j*.24)*r*.62) for j,r in enumerate((4,13,22,29,35))]
+                draw.line(points,fill=(98,176,98,180),width=3)
+        save(sticker,OUT/'root-binding.png')
     if not only or 'explorer' in only:
         for tier in range(3):
             for pose,frames,count in [('idle',4,8),('idle_with_gun',4,8),('running',12,8),('mining_with_tool',16,8),('running_with_gun',12,18)]:

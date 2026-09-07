@@ -26,7 +26,11 @@ class Mesh:
         self.faces.extend(([add(rot(p,angle),offset) for p in v],c,g) for v,c,g in other.faces)
     def box(self,center,size,c=STEEL,bevel=.05):
         x,y,z=center;w,d,h=(v/2 for v in size);b=min(bevel,w*.4,d*.4)
-        ring=[(-w+b,-d),(w-b,-d),(w,-d+b),(w,d-b),(w-b,d),(-w+b,d),(-w,d-b),(-w,-d+b)]
+        b=min(max(b,min(w,d)*.24),min(w,d)*.82)
+        ring=[]
+        for cx,cy,start in ((w-b,d-b,0),(-w+b,d-b,90),(-w+b,-d+b,180),(w-b,-d+b,270)):
+            for i in range(5):
+                a=math.radians(start+i*90/4);ring.append((cx+b*math.cos(a),cy+b*math.sin(a)))
         zbevel=min(b,h*.35)
         rings=[[(x+a*.96,y+v*.96,z-h) for a,v in ring],
                [(x+a,y+v,z-h+zbevel) for a,v in ring],
@@ -34,7 +38,7 @@ class Mesh:
                [(x+a*.96,y+v*.96,z+h) for a,v in ring]]
         self.face(rings[-1],c);self.face(list(reversed(rings[0])),color(c,.7))
         for low,high in zip(rings,rings[1:]):
-            for i in range(8):self.face([low[i],low[(i+1)%8],high[(i+1)%8],high[i]],c)
+            for i in range(len(ring)):self.face([low[i],low[(i+1)%len(ring)],high[(i+1)%len(ring)],high[i]],c)
     def tube(self,a,b,r,c=EDGE,sides=12):
         if r<.035:sides=min(sides,8)
         axis=norm(sub(b,a));u=norm(cross(axis,(0,0,1) if abs(axis[2])<.9 else (0,1,0)));v=cross(axis,u)
@@ -97,11 +101,6 @@ def detailing(m,name,t):
     hose(m,[(-p,-p,.50),(-p,-p*.4,.50),(-p,p*.55,.5),(-p*.70,p*.78,.66)],.033)
     hose(m,[(p,-p,.53),(p,p*.7,.53),(p*.75,p,.53)],.04,EDGE)
     cabinet(m,-p*.65,p*.88,.79,.8,.4+.18*math.sin(t*TAU))
-    for side in (-1,1):
-        m.tube((side*p,0,.48),(side*(p+.13),0,.48),.12,STEEL,16)
-        m.tube((side*(p+.13),0,.48),(side*(p+.16),0,.48),.17,EDGE,16)
-        for i in range(4):
-            a=i*math.pi/2;m.ball((side*(p+.165),.11*math.cos(a),.48+.11*math.sin(a)),.022,DARK)
     if name in ('air-scrubber','thermal-exchanger'):
         for x in (-.9,.9):
             m.box((x,.78,.87),(.12,.52,.7),EDGE,.018)
@@ -166,6 +165,28 @@ def fan(m,x,y,z,r,t):
     m.cyl(x,y,z+.15,r*.18,.06,COPPER)
 
 
+_PORTS=None
+def fluid_ports(m,name):
+    global _PORTS
+    if _PORTS is None:
+        from lupa.lua52 import LuaRuntime
+        from catalog import MOD,plain
+        runtime=LuaRuntime(unpack_returned_tuples=True);runtime.globals().package.path=str(MOD/'?.lua')+';'+runtime.globals().package.path
+        _PORTS=plain(runtime.eval('require("shared.fluid_ports")'))
+    m.port_anchors=[]
+    for port in _PORTS.get(name,[]):
+        dx,dy={0:(0,-1),4:(1,0),8:(0,1),12:(-1,0)}[port['direction']]
+        x,y=port['position'];tip=(x+dx*.5,y+dy*.5,0)
+        inner=(x-dx*.42,y-dy*.42,.44)
+        end=(tip[0]-dx*.12,tip[1]-dy*.12,.015)
+        m.tube(inner,end,.115,STEEL,16)
+        m.tube(end,tip,.18,EDGE,20)
+        m.tube(add(tip,(-dx*.005,-dy*.005,0)),add(tip,(dx*.005,dy*.005,0)),.105,DARK,16)
+        mark=TEAL if port['flow']=='input' else GOLD
+        m.tube(add(end,(-dx*.12,-dy*.12,.01)),add(end,(-dx*.08,-dy*.08,.01)),.124,mark,16)
+        m.port_anchors.append({'box':port['box'],'position':tip,'direction':port['direction']})
+
+
 def machine(name,t=0):
     m=Mesh();big=name in ('cryogenic-garden','planetary-beacon');platform(m,4.6 if big else (1 if name=='ecology-monitor' else 2.7))
     if name=='algae-vat':
@@ -218,7 +239,8 @@ def machine(name,t=0):
         m.box((-.55,-.65,.65),(.85,.7,.42),BLUE);fan(m,-.55,-.65,.89,.28,t)
     elif name in ('materials-kiln','pyrolyzer','forcing-tower'):
         h=1.6 if name=='forcing-tower' else 1.0
-        m.box((0,0,.5+h/2),(1.8,1.7,h),STEEL if name=='materials-kiln' else DARK,.13)
+        m.cyl(0,0,.5,.94,h,STEEL if name=="materials-kiln" else DARK,28)
+        m.ball((0,0,.5+h),.94,STEEL if name=="materials-kiln" else DARK,stretch=(1,1,.22))
         m.box((0,-.9,.85),(1.0,.08,.56),EDGE)
         m.box((0,-.955,.85),(.8,.045,.36),color(RED,1+.2*math.sin(t*TAU)))
         for i in range(5):m.box((-.33+i*.17,-.99,.85),(.035,.02,.35),DARK,0)
@@ -228,7 +250,7 @@ def machine(name,t=0):
         fan(m,-.45,-.05,h+.52,.38,t)
     elif name=='air-scrubber':
         for x in (-.66,.66):
-            m.box((x,.2,1),(.95,1.7,1.15),STEEL)
+            m.cyl(x,.2,.43,.51,1.17,STEEL,24)
             fan(m,x,.2,1.61,.42,t)
             for j in range(5):m.box((x,-.67,.7+j*.15),(.74,.05,.052),EDGE,0)
         m.box((0,1.05,.8),(1.8,.3,.45),COPPER)
@@ -301,6 +323,7 @@ def machine(name,t=0):
         for i in range(5):m.box((-.23+i*.115,-.413,.6+(.12+.10*math.sin(t*TAU+i))/2),(.045,.01,.12+.10*math.sin(t*TAU+i)),TEAL,0)
         m.cyl(.27,.12,.92,.034,.34,EDGE,6)
     detailing(m,name,t)
+    fluid_ports(m,name)
     return m
 
 
@@ -357,23 +380,36 @@ def turret(kind,t=0,angle=0,base=True):
     q=Mesh();recoil=.12*math.sin(t*TAU)
     q.box((0,0,1.04),(1.35 if big else .9,1.5 if big else .8,.6),STEEL,.12)
     if kind=='sentry-turret':
-        for x in (-.21,.21):
-            q.tube((x,.0,1.17),(x,-1.25+recoil,1.17),.10,DARK)
-            for y in (-.9,-.7,-.5):q.tube((x,y,1.17),(x,y+.07,1.17),.14,EDGE)
-        q.box((.57,.1,1.0),(.35,.54,.42),GOLD)
+        # Rootweaver: three curved seed chambers, not a conventional twin gun barrel.
+        q.cyl(0,0,.72,.40,.62,STEEL,24)
+        for x,z in ((-.34,1.13),(.34,1.13),(0,1.46)):
+            q.ball((x,-.41+recoil,z),.245,GREEN,stretch=(.86,1.65,.82))
+            q.tube((x,-.53+recoil,z),(x,-1.02+recoil,z),.075,DARK,14)
+            q.tube((x,-.95+recoil,z),(x,-1.08+recoil,z),.13,COPPER,16)
+            hose(q,[(x,.26,.91),(x,.23,z),(x,-.12,z+.14)],.032,TEAL)
+            q.ball((x,-1.095+recoil,z),.054,color(TEAL,1+.18*math.sin(t*TAU)),glow=True)
+        q.ring((0,0,.89),.43,.035,COPPER)
     elif kind=='arc-turret':
-        q.cyl(0,0,1.35,.14,.9,EDGE)
-        for z,r in ((1.45,.37),(1.7,.3),(1.95,.22)):
-            q.ring((0,0,z),r,.065,COPPER)
-        q.ball((0,0,2.25),.25,color(TEAL,1+.25*math.sin(t*TAU)),glow=True)
-        q.tube((-.42,-.1,1.22),(-.42,-.7,1.7),.07,EDGE)
-        q.tube((.42,-.1,1.22),(.42,-.7,1.7),.07,EDGE)
+        # Resonance diffuser: concentric organic horns around a charged core.
+        q.cyl(0,0,1.27,.18,.38,EDGE)
+        for i in range(5):
+            a=i*TAU/5+t*.10
+            q.ball((.44*math.cos(a),.44*math.sin(a),1.54),.22,STEEL,stretch=(1,.75,1.35))
+            hose(q,[(0,0,1.22),(.40*math.cos(a),.40*math.sin(a),1.45),(.38*math.cos(a),.38*math.sin(a),1.85)],.044,COPPER)
+        for z,r in ((1.44,.33),(1.74,.28),(2.0,.18)):q.ring((0,0,z),r,.039,EDGE)
+        q.ball((0,0,1.90),.21,color(TEAL,1+.2*math.sin(t*TAU)),glow=True)
     else:
-        for x in (-.32,.32):
-            q.box((x,-1.15+recoil,1.3),(.25,2.6,.32),DARK)
-            q.box((x,-1.15+recoil,1.48),(.13,2.4,.08),TEAL)
-            for i in range(7):q.box((x,-2.2+i*.35+recoil,1.27),(.42,.12,.53),EDGE)
-        q.box((0,.76,1.12),(1.1,.6,.65),GOLD)
+        # Pressure lance: a toroidal nozzle, buffer reservoirs and converging field rings.
+        for x in (-.58,.58):
+            q.ball((x,.05,1.10),.37,STEEL,stretch=(.80,1.8,.9))
+            hose(q,[(x,.6,1.15),(x,-.50,1.15),(x*.4,-.85,1.32)],.075,COPPER)
+        q.tube((0,.16,1.30),(0,-1.85+recoil,1.30),.19,DARK,24)
+        for y,r in ((-.38,.46),(-.78,.40),(-1.18,.33),(-1.63,.24)):
+            for i in range(20):
+                a=i*TAU/20;b=(i+1)*TAU/20
+                q.tube((r*math.cos(a),y+recoil,1.3+r*math.sin(a)),(r*math.cos(b),y+recoil,1.3+r*math.sin(b)),.045,EDGE,8)
+            q.tube((0,y+recoil,1.3),(0,y-.04+recoil,1.3),r*.52,color(TEAL,1+.16*math.sin(t*TAU)),16)
+        q.ball((0,-1.98+recoil,1.3),.14,TEAL,glow=True)
     q.box((0,.43,1.05),(.58,.18,.40),DARK,.03)
     for i in range(5):q.box((-.22+i*.11,.54,1.05),(.052,.024,.31),EDGE,.004)
     for x in (-.38,.38):
@@ -412,6 +448,40 @@ def equipment(kind):
     else:
         m.box((0,0,.2),(.9,.65,.32),STEEL)
         m.cyl(0,0,.38,.24,.07,TEAL)
+    return m
+
+
+def logistics(name,t=0):
+    m=Mesh()
+    if name in ('vector-inserter','canopy-inserter'):
+        m.cyl(0,0,.07,.43,.19,DARK,24);m.cyl(0,0,.26,.35,.27,STEEL,24)
+        m.ring((0,0,.52),.33,.045,TEAL if name=='canopy-inserter' else COPPER)
+        m.ball((0,0,.56),.24,EDGE,stretch=(1,1,.48))
+        m.box((0,-.17,.64),(.22,.28,.22),STEEL,.1)
+        for i in range(8):
+            a=i*TAU/8;m.cyl(.33*math.cos(a),.33*math.sin(a),.43,.026,.04,GOLD,8)
+    elif name=='vital-splitter':
+        m.box((0,0,.19),(1.95,.93,.33),DARK,.3)
+        for x in (-.50,.50):
+            m.cyl(x,0,.36,.36,.42,STEEL,24)
+            fan(m,x,0,.79,.30,t)
+        m.tube((-.58,0,.74),(.58,0,.74),.07,COPPER)
+        m.box((0,.25,.88),(.36,.25,.19),EDGE,.12)
+        m.box((0,.39,.90),(.18,.02,.05),TEAL,.01)
+    elif name=='jukebox':
+        m.cyl(0,0,.05,.57,.18,DARK,24)
+        m.ball((0,0,.7),.58,STEEL,stretch=(.85,.65,1.1))
+        for x in (-.23,.23):
+            m.tube((x,.29,.58),(x,.36,.58),.19,DARK,20)
+            m.tube((x,.36,.58),(x,.39,.58),.13,EDGE,20)
+            m.ball((x,.40,.58),.07,TEAL,stretch=(1,.4,1))
+        m.box((0,.24,1.02),(.40,.17,.20),DARK,.08)
+        for i in range(5):m.box((-.14+i*.07,.34,.96),(.035,.014,.05+.07*(.5+.5*math.sin(t*TAU+i))),TEAL,.01)
+        m.tube((-.32,-.04,1.08),(-.32,-.04,1.66),.024,EDGE,8)
+    else:
+        m.box((0,0,.10),(1.6,1.1,.18),DARK,.2)
+        for i in range(7):m.box((0,-.45+i*.15,.22),(1.4,.065,.05),TEAL,.015)
+        for x in (-.73,.73):m.box((x,0,.22),(.10,1.13,.12),EDGE,.04)
     return m
 
 

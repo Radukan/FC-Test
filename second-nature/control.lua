@@ -11,6 +11,8 @@ local Campaign = require("scripts.campaign")
 local Natives = require("scripts.natives")
 local Terrain = require("scripts.terrain")
 local Upgrades = require("scripts.upgrades")
+local Inserters = require("scripts.inserters")
+local Jukebox = require("scripts.jukebox")
 local function initialize(fresh)
   State.init()
   Campaign.init(fresh == true)
@@ -40,6 +42,7 @@ local function initialize(fresh)
   for _, player in pairs(game.players) do
     if player.gui.screen.sn_dashboard then Gui.close(player) end
     Gui.welcome(player)
+    Inserters.close(player);Jukebox.close(player)
   end
   State.root().last_environment_tick = game.tick
 end
@@ -155,16 +158,47 @@ script.on_event({defines.events.on_player_created, defines.events.on_player_join
   local player = game.get_player(event.player_index)
   if player then State.world(player.surface); Gui.welcome(player); Campaign.arrive(player) end
 end)
-script.on_event(defines.events.on_player_removed, function(event) State.root().players[event.player_index] = nil end)
-script.on_event(defines.events.on_gui_click, Gui.click)
+script.on_event(defines.events.on_player_removed, function(event)
+  State.root().players[event.player_index] = nil
+  if State.root().inserter_editors then State.root().inserter_editors[event.player_index] = nil end
+  if State.root().radios then State.root().radios[event.player_index] = nil end
+end)
+script.on_event(defines.events.on_gui_click, function(event)
+  if not Inserters.click(event) and not Jukebox.click(event) then Gui.click(event) end
+end)
+script.on_event(defines.events.on_gui_opened, function(event) Inserters.opened(event);Jukebox.opened(event) end)
+script.on_event({defines.events.on_player_rotated_entity,defines.events.on_entity_settings_pasted}, Inserters.refresh)
+script.on_event("sn-configure-inserter", function(event)
+  local player=game.get_player(event.player_index);if player then Inserters.open(player,player.selected,false) end
+end)
+script.on_event("sn-open-jukebox", function(event)
+  local player=game.get_player(event.player_index);if player then Jukebox.open(player,player.selected) end
+end)
+script.on_event(defines.events.on_script_trigger_effect, function(event)
+  if event.effect_id ~= "sn-pressure-cleanup" then return end
+  local surface=game.surfaces[event.surface_index]
+  local position=event.target_position or (event.target_entity and event.target_entity.valid and event.target_entity.position)
+  if not (surface and surface.valid and surface.pollutant_type and position) then return end
+  local removed=math.min(4,surface.get_pollution(position))
+  if removed>0 then
+    surface.pollute(position,-removed,"sn-lance-turret")
+    local world=State.world(surface);if world then world.removed_pollution=world.removed_pollution+removed end
+  end
+end)
 script.on_event(defines.events.on_gui_selection_state_changed, Gui.selection)
 script.on_event(defines.events.on_gui_closed, function(event)
   local player = game.get_player(event.player_index)
-  if player and event.element and event.element.valid and event.element.name == "sn_dashboard" then Gui.close(player) end
+  if player and event.element and event.element.valid then
+    if event.element.name == "sn_dashboard" then Gui.close(player)
+    elseif event.element.name == "sn_inserter_editor" then Inserters.close(player)
+    elseif event.element.name == "sn_jukebox" then Jukebox.close(player) end
+  end
 end)
 script.on_event(defines.events.on_lua_shortcut, function(event)
   if event.prototype_name == "sn-dashboard" then Gui.toggle(game.get_player(event.player_index))
-  elseif event.prototype_name == "sn-pollution-overlay" then Gui.toggle_overlay(game.get_player(event.player_index)) end
+  elseif event.prototype_name == "sn-pollution-overlay" then Gui.toggle_overlay(game.get_player(event.player_index))
+  elseif event.prototype_name == "sn-inserter-vectors" then local p=game.get_player(event.player_index);Inserters.open(p,p.selected,false)
+  elseif event.prototype_name == "sn-jukebox" then local p=game.get_player(event.player_index);Jukebox.open(p,p.selected) end
 end)
 script.on_event("sn-toggle-pollution", function(event) Gui.toggle_overlay(game.get_player(event.player_index)) end)
 script.on_event("sn-toggle-dashboard", function(event) Gui.toggle(game.get_player(event.player_index)) end)

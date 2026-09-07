@@ -7,6 +7,8 @@ local Pollution = require("scripts.pollution")
 local Model = require("shared.model")
 local Natives = require("scripts.natives")
 local Resistance = require("scripts.resistance")
+local Inserters = require("scripts.inserters")
+local Jukebox = require("scripts.jukebox")
 local Probe = {}
 function Probe.run(surface, force)
   S.init()
@@ -26,7 +28,7 @@ function Probe.run(surface, force)
   end
   local turrets = surface.find_entities_filtered({name = "sn-sentry-turret", force = force})
   assert(#turrets == 4, "deployed starter turrets")
-  for _, turret in ipairs(turrets) do assert(turret.get_item_count("sn-ballistic-magazine") == 60) end
+  for _, turret in ipairs(turrets) do assert(turret.get_item_count("sn-mycelial-magazine") == 60) end
   Campaign.init(false)
   assert(Campaign.land(force, surface).ship == camp.ship, "configuration changed landing identity")
   -- Exercise the rocket handler's shared LuaEntity API; this is NOT a rocket flight test.
@@ -100,6 +102,28 @@ function Probe.run(surface, force)
   assert(character.insert({name="sn-induction-rifle",count=1})==1)
   assert(character.insert({name="sn-lance-rifle",count=1})==1)
   assert(character.insert({name="sn-field-dressing",count=5})==5)
+  -- Native vector setters, blueprints, belts and sound-note controls.
+  local operator={force=force,admin=true,index=999,print=function(text) log(serpent.line(text)) end}
+  local inserter=assert(surface.create_entity({name="sn-vector-inserter",position={40,40},force=force}))
+  assert(Inserters.set(operator,inserter,"pickup",2,-2))
+  assert(Inserters.set(operator,inserter,"drop",-2,2))
+  assert(inserter.pickup_position.x==inserter.position.x+2 and inserter.drop_position.y==inserter.position.y+2)
+  assert(not Inserters.set(operator,inserter,"pickup",3,0))
+  local inventory=game.create_inventory(1);local blueprint=inventory[1]
+  blueprint.set_stack({name="blueprint",count=1})
+  blueprint.create_blueprint({surface=surface,force=force,area={{39.4,39.4},{40.6,40.6}}})
+  local entities=blueprint.get_blueprint_entities()
+  assert(entities and #entities==1 and entities[1].pickup_position and entities[1].drop_position,"custom vectors missing from blueprint")
+  assert(entities[1].pickup_position.x==2 and entities[1].drop_position.y==2)
+  inventory.destroy()
+  for i,name in ipairs({"sn-canopy-inserter","sn-vital-belt","sn-vital-underground-belt","sn-vital-splitter"}) do
+    assert(surface.create_entity({name=name,position={44+i*4,40},force=force}))
+  end
+  local jukebox=assert(camp.jukebox,"landing jukebox missing")
+  assert(Jukebox.play(operator,jukebox,2,false),"anthem note unavailable")
+  assert(Jukebox.play(operator,jukebox,0,false),"jukebox stop note unavailable")
+  -- The scene has a native hero track; headless cannot verify audible playback.
+  log("SECOND_NATURE_ENGINE_LOGISTICS_AUDIO_OK")
   log("SECOND_NATURE_ENGINE_CAMPAIGN_PROBES_OK")
 end
 return Probe

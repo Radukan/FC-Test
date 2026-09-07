@@ -60,7 +60,7 @@ def test_landing_is_shared_and_never_duplicates_on_join_or_update(game_lua):
       assert(not camp.ship.minable and not camp.ship.destructible and not camp.rocket_launched)
       for _,item in ipairs(C.landing_cargo) do assert(camp.ship.inventory[item[1]]==item[2],item[1]) end
       local turrets=game.surfaces[1].find_entities_filtered({name='sn-sentry-turret'})
-      assert(#turrets==4 and turrets[1].inventory['sn-ballistic-magazine']==60)
+      assert(#turrets==4 and turrets[1].inventory['sn-mycelial-magazine']==60)
       assert(#game.surfaces[1].find_entities_filtered({name='sn-field-barricade'})==24)
       assert(mock.freeplay.disabled and mock.freeplay.skip)
       camp.ship.inventory['iron-plate']=3

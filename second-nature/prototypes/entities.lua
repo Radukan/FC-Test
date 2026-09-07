@@ -2,6 +2,7 @@ local K = require("shared.catalog")
 local C = require("shared.constants")
 local H = require("prototypes.helpers")
 local Art = require("prototypes.artwork")
+local Ports = require("shared.fluid_ports")
 local categories = {}
 for index, x in ipairs(K.machines) do
   local kind = x.entity_type or "assembling-machine"
@@ -19,6 +20,12 @@ for index, x in ipairs(K.machines) do
   if kind == "assembling-machine" then p.graphics_set = {animation = Art.four_way(x.name, true)}
   else p.sprites = Art.four_way(x.name, false) end
   if kind == "assembling-machine" then
+    -- The same coordinates drive the mesh nozzles. Do not draw inherited assembler stubs.
+    for _, box in ipairs(p.fluid_boxes or {}) do box.pipe_picture = nil end
+    for _, port in ipairs(Ports[x.name] or {}) do
+      local box = assert(p.fluid_boxes[port.box], "Missing fluid box for " .. x.name)
+      box.pipe_connections = {{position = table.deepcopy(port.position), direction = port.direction, flow_direction = port.flow}}
+    end
     p.crafting_categories = {}
     for _, category in ipairs(x.categories) do
       local name = "sn-" .. category

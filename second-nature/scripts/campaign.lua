@@ -2,6 +2,7 @@ local C = require("shared.constants")
 local S = require("scripts.state")
 local P = require("scripts.pollution")
 local Artwork = require("scripts.artwork")
+local Jukebox = require("scripts.jukebox")
 local Campaign = {}
 local function configure_freeplay()
   local api = remote.interfaces.freeplay
@@ -72,8 +73,8 @@ function Campaign.land(force, surface)
   camps[force.index] = camp
   for _, offset in ipairs({{-9,-5},{9,-5},{-9,6},{9,6}}) do
     local turret = place(surface, force, "sn-sentry-turret", {x = pos.x + offset[1], y = pos.y + offset[2]}, 8)
-    if turret then turret.insert({name = "sn-ballistic-magazine", count = 60})
-    else ship.insert({name = "sn-sentry-turret", count = 1}); ship.insert({name = "sn-ballistic-magazine", count = 60}) end
+    if turret then turret.insert({name = "sn-mycelial-magazine", count = 60})
+    else ship.insert({name = "sn-sentry-turret", count = 1}); ship.insert({name = "sn-mycelial-magazine", count = 60}) end
   end
   for _, side in ipairs({-1,1}) do
     for _, y in ipairs({-8,-7,-6,-5,-4,-3,4,5,6,7,8,9}) do
@@ -81,6 +82,8 @@ function Campaign.land(force, surface)
       if not wall then ship.insert({name="sn-field-barricade",count=1}) end
     end
   end
+  camp.jukebox=place(surface,force,"sn-jukebox",{x=pos.x+4,y=pos.y+5},8)
+  if not camp.jukebox then ship.insert({name="sn-jukebox",count=1}) end
   Artwork.lander(camp)
   force.chart(surface, {{pos.x - 64, pos.y - 64}, {pos.x + 64, pos.y + 64}})
   return camp
@@ -102,6 +105,7 @@ function Campaign.tick()
       local camp = Campaign.land(player.force, player.surface)
       if camp then
         arrival.done = true
+        Jukebox.transmission(player)
         player.print({"sn-campaign.briefing"}, {color = C.colors.biodiversity})
         if player.character and player.controller_type == defines.controllers.character then
           arrival.pan, arrival.pan_until = true, game.tick + 240

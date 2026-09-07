@@ -1,7 +1,7 @@
 ![Ironbound expedition - original industrial sprites](docs/art/ironbound-contact-sheet.jpg)
 
 # Second Nature · Ironbound Expedition
-### Stable Factorio 2.0 / Space Age restoration overhaul · v0.4.0 alpha
+### Stable Factorio 2.0 / Space Age restoration overhaul · v0.5.0 alpha
 
 **An intact landing craft. A stripped planet. A factory built to bring life back.**
 
@@ -9,32 +9,38 @@ Nauvis has no natural trees or fish in a fresh campaign. The broods tolerate you
 
 ## Download
 
-### [Second Nature 0.4.0 - stable Factorio 2.0](https://github.com/Radukan/FC-Test/releases/download/v0.4.0-factorio-2.0/second-nature_0.4.0.zip)
+### [Second Nature 0.5.0 - stable Factorio 2.0](https://github.com/Radukan/FC-Test/releases/download/v0.5.0-factorio-2.0/second-nature_0.5.0.zip)
 
-[Release notes and checksum](https://github.com/Radukan/FC-Test/releases/tag/v0.4.0-factorio-2.0). **Private repository: sign in to GitHub with repository access.** Use the named mod ZIP, not GitHub’s automatic source archive.
+[Release notes and checksum](https://github.com/Radukan/FC-Test/releases/tag/v0.5.0-factorio-2.0). **Private repository: sign in to GitHub with repository access.** Use the named mod ZIP, not GitHub’s automatic source archive.
 
 1. Use **Factorio 2.0.77**, **Space Age**, **Quality** and **Elevated Rails**.
-2. Back up saves and replace older Second Nature ZIP/source copies with `second-nature_0.4.0.zip`, still zipped, in the Factorio `mods` folder.
+2. Back up saves and replace older Second Nature ZIP/source copies with `second-nature_0.5.0.zip`, still zipped, in the Factorio `mods` folder.
 3. For the complete opening, start new Space Age freeplay with **Second Nature / Last Landing** and the default mod settings. **Brood Frontier** and **Quiet Reclamation** offer harder/peaceful alternatives.
-4. **Shift + T / leaf:** field station and guide. **Ctrl + Shift + P:** local smog overlay.
+4. **Shift + T / leaf:** field station. **Ctrl + Shift + P:** smog. **Shift + I:** inserter vectors. **Ctrl + Shift + J:** jukebox.
 
 Windows: `%APPDATA%\Factorio\mods` · Linux: `~/.factorio/mods` · macOS: `~/Library/Application Support/factorio/mods`.
 
 Stable only; experimental 2.1 builds are discontinued. Existing stable saves retain their factories, ecological values and terrain. They do **not** receive another cargo grant or a replacement defense kit. New habitat-readiness rules can temporarily demote an older mature world while its landscape is surveyed/recovered.
 
-## Foundry and Field: presentation update
+## Living World: expedition audio, biological defense and precision logistics
 
-The explorer now uses a paired armed-pose layout and a shared torso, arm and weapon rig. Gun directions are authored in map space, and every state keeps the same foot anchor. An expanded canvas contains the full pickaxe swing and cast shadow with audited margins.
+**Landing transmission:** a female first-person log precedes **We Need a Living World**, a new original industrial-punk/metal instrumental with spoken lyrical vocals about humanity's need for a green, lush home. The voice tool produces speech, not singing. The complete recording contains the voice-before-music sequence and is registered as Nauvis's native arrival/hero track.
 
-The character has a more detailed adult silhouette, curved protective panels, fitted equipment, articulated hands, facial features and tied hair. Machinery has chamfered panels, pressure gauges, handwheels, flanged pipes, routed hoses, fasteners, worn material surfaces and component self-shadows. These are original models and renders with a weathered industrial treatment, not copied Factorio textures.
+A craftable **Expedition jukebox** preserves the transmission, the new anthem and **After the Ash**. Open a jukebox or press **Ctrl + Shift + J** nearby. Playback is local by default; a surface broadcast requires an administrator in multiplayer. Native speaker controls can stop or replace a jukebox track. The arrival soundtrack has its own startup toggle.
 
-**After the Ash** is a new original 96-second instrumental menu score: low machinery pulses, restrained metallic tones and a gradually warmer harmonic theme. It uses the normal music-volume control. The **Second Nature menu music** startup setting restores the standard track when disabled.
+**Inserter vectors:** open any inserter, or select one and press **Shift + I**. Separate 5 × 5 grids select pickup and delivery offsets from **-2 to +2 on both axes**, including diagonals. The center and identical endpoints are blocked. This is a two-tile per-axis reach limit, not a literal four-tile area. Native custom vectors are enabled for every inserter; filters, quality and stack behavior remain intact.
 
-Item and building descriptions now describe their material, construction and function. Current in-game and repository text uses ordinary punctuation; see [the copy guide](docs/COPY-STYLE.md).
+**Endgame logistics:** vector servo inserters accelerate bulk transfer, canopy inserters move stacked cargo, and the complete vital belt/tunnel/splitter family shares **90 items/second before stacking**. Tunnels span sixteen tiles. The belt family retains native lane/corner geometry and stack/filter/priority mechanics.
 
-[Sprite contact sheet](docs/art/ironbound-contact-sheet.jpg) · [Rendered animation preview](docs/art/industrial-animation-preview.gif) · [Original menu score](second-nature/sound/music/after-the-ash.ogg)
+**Distinctive defenses:** Rootweaver emplacements launch bioactive flechettes that slow exposed targets, resonance diffusers disrupt hostile movement, and pressure-lance rounds bind a small amount of actual airborne contamination at impact. Existing ballistic/rail ammunition remains compatible; special ammunition and effects do not award free fitness or science.
 
-The aiming and clipping checks validate authored poses, vectors, anchors and image bounds. They do not substitute for a full graphical client review of every strafe/backpedal/armor combination.
+**Rounder machinery and aligned ports:** process vessels, housings, emplacements and logistics assemblies use more curved geometry. Visible nozzles are built from the same fluid-box coordinates as the game prototypes. Map-aligned rendering and removal of mismatched inherited stubs address the earlier pipe-attachment discrepancy. Connector-tip transforms are checked in every building orientation.
+
+**Point-led mining:** the pickaxe's forged point follows the swing tangent and leads the downward impact. Its grips, head, motion and complete frame/shadow envelope are checked together.
+
+[Sprite contact sheet](docs/art/ironbound-contact-sheet.jpg) · [Mining preview](docs/art/mining-framing-preview.gif) · [Landing transmission and anthem](second-nature/sound/music/landing-transmission.ogg)
+
+These source previews are not in-game recordings. Audible first-arrival timing, every native GUI/blueprint interaction and exact graphical alignment still require client playtesting in addition to the automated checks.
 
 ## Ironbound campaign
 
@@ -64,7 +70,7 @@ The shared lander supplies:
 - **Factory:** 40 gears, 40 circuits, 100 belts, 20 inserters, 20 riveted poles, 40 pipes, 4 burner drills and 6 furnaces.
 - **Power:** 1 offshore pump, 1 boiler and 2 steam engines.
 - **Reserves:** 120 expedition magazines, 30 repair packs, 20 field dressings and 48 barricades.
-- **Deployed:** **four riveted sentries, 60 magazines each**, and **24 field-barricade segments**. Terrain-blocked defense items remain in cargo instead.
+- **Deployed:** **four Rootweaver emplacements, 60 mycelial magazines each**, and **24 field-barricade segments**. Terrain-blocked defense items remain in cargo instead.
 
 New crew members receive a carbine, 40 magazines and a field suit. Cargo is one grant **per force**, never per reconnect, respawn or configuration change. Defenses are useful - not an invulnerable automated factory. Keep ammunition and repairs flowing.
 
@@ -72,9 +78,9 @@ New crew members receive a carbine, 40 magazines and a field suit. Cargo is one 
 
 | Era | Weapons | Defenses and protection | Costs that remain real |
 |---|---|---|---|
-| **Early / Frontier defense** | Expedition carbine; improved ballistic magazines; ordinary bullet family remains compatible | Riveted sentries, field barricades, field armor, sterile dressings | Iron/copper, reloads and repair logistics |
-| **Mid / Electrical doctrine** | Induction rifle and battery-fed electrical cells | Capacitor arc turrets, composite walls, 6 × 6 modular expedition armor | Batteries, circuits, power buffers and continuous electricity |
-| **Late / Bastion doctrine** | Heavy lance rifle and dense-core rail rounds | Bastion lance turrets, 10 × 10 armor and powered biosphere shields | Interplanetary materials, native rail charging/ammo, equipment-grid energy |
+| **Early / Frontier defense** | Expedition carbine; improved ballistic magazines; ordinary bullet family remains compatible | Rootweaver emplacements, field barricades, field armor, sterile dressings | Iron/copper, reloads and repair logistics |
+| **Mid / Electrical doctrine** | Induction rifle and battery-fed electrical cells | Resonance diffusers, composite walls, 6 × 6 modular expedition armor | Batteries, circuits, power buffers and continuous electricity |
+| **Late / Bastion doctrine** | Heavy lance rifle and dense-core rail rounds | Atmospheric pressure lances, 10 × 10 armor and powered biosphere shields | Interplanetary materials, native rail charging/ammo, equipment-grid energy |
 
 Lances are line weapons: **keep friendly infrastructure out of their firing lanes**. Electrical defenses fail without adequate power; armor/shields do not make the player immortal. Vanilla weapons remain useful alternatives.
 

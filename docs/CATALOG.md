@@ -2,7 +2,7 @@
 
 Generated from `second-nature/shared/catalog.lua` by `python tools/generate_docs.py`. Do not hand-edit tables.
 
-**22 machines · 105 recipes · 26 technologies · 32 material/science items · 6 fluids.**
+**22 machines · 112 recipes · 27 technologies · 32 material/science items · 6 fluids.**
 
 Times are seconds at crafting speed 1. Fitness effects are percentage points per completed cycle before planetary multipliers and support ceilings. No custom recipe supports productivity. Native recipe quality is disabled for operations and closed/catalytic loops.
 
@@ -115,6 +115,7 @@ Recipes tagged **dirty** also emit vanilla pollution/spores and incur explicit t
 | Form mineral-composite stocks | 1 s | 2 Iron plate + 2 Stone | 2 Mineral-composite stock | Available from start |
 | Assemble expedition magazines | 2 s | 4 Iron plate + 1 Copper plate | 1 Sn ballistic magazine | Available from start |
 | Prepare sterile field dressings | 3 s | 2 Engineered biofilm + 1 Laboratory glass | 2 Sn field dressing | Frontier defense |
+| Pack bioactive flechettes | 4 s | 3 Iron plate + 3 Algal biomass + 1 Engineered biofilm | 2 Sn mycelial magazine | Frontier defense |
 | Build an expedition carbine | 6 s | 12 Iron plate + 8 Iron gear wheel + 4 Mineral-composite stock + 5 Copper plate | 1 Sn carbine | Frontier defense |
 | Build an expedition field suit | 8 s | 30 Iron plate + 10 Copper plate + 6 Mineral-composite stock | 1 Sn field armor | Frontier defense |
 | Build a riveted sentry | 12 s | 25 Iron plate + 15 Iron gear wheel + 8 Electronic circuit + 8 Mineral-composite stock | 1 Sn sentry turret | Frontier defense |
@@ -129,6 +130,12 @@ Recipes tagged **dirty** also emit vanilla pollution/spores and incur explicit t
 | Build a bastion lance turret | 60 s | 1 Railgun turret + 60 Tungsten plate + 20 Supercapacitor + 5 Quantum processor + 10 Biodiversity matrix | 1 Sn lance turret | Bastion defense doctrine |
 | Build bastion expedition armor | 60 s | 1 Power armor mk2 + 40 Tungsten plate + 10 Quantum processor + 20 Biodiversity matrix | 1 Sn bastion armor | Bastion defense doctrine |
 | Build a biosphere shield module | 30 s | 2 Energy shield mk2 equipment + 10 Supercapacitor + 5 Biodiversity matrix | 1 Sn ecoshield equipment | Bastion defense doctrine |
+| Assemble a vector servo inserter | 8 s | 1 Bulk inserter + 4 Processing unit + 2 Superconductor + 4 Carbon fiber | 1 Sn vector inserter | Living-world logistics |
+| Assemble a canopy stack inserter | 12 s | 1 Stack inserter + 1 Quantum processor + 4 Superconductor + 2 Biodiversity matrix | 1 Sn canopy inserter | Living-world logistics |
+| Assemble vital transport sections | 3 s | 4 Turbo transport belt + 1 Superconductor + 2 Carbon fiber + 1 Gaia coordination cell | 4 Sn vital belt | Living-world logistics |
+| Assemble a sealed transfer tunnel | 8 s | 2 Turbo underground belt + 8 Sn vital belt + 10 Tungsten plate + 2 Gaia coordination cell | 2 Sn vital underground belt | Living-world logistics |
+| Assemble a distribution manifold | 10 s | 1 Turbo splitter + 10 Processing unit + 4 Superconductor + 2 Gaia coordination cell | 1 Sn vital splitter | Living-world logistics |
+| Assemble an expedition jukebox | 5 s | 5 Electronic circuit + 10 Iron plate + 10 Copper cable | 1 Sn jukebox | Available from start |
 
 ## Construction recipes
 
@@ -189,6 +196,7 @@ Recipes tagged **dirty** also emit vanilla pollution/spores and incur explicit t
 | Ecological process optimization 1 | 150 × 30 s | Automation, Logistic, Ecology | Atmospheric engineering |
 | Ecological process optimization 2 | 350 × 30 s | Automation, Logistic, Chemical, Ecology | Ecological process optimization 1, Climate control |
 | Ecological process optimization 3 | 700 × 30 s | Automation, Logistic, Chemical, Space, Ecology, Climate | Ecological process optimization 2, Comparative climatology |
+| Living-world logistics | 750 × 30 s | Automation, Logistic, Chemical, Production, Utility, Space, Climate | The Gaia network, Stack inserter, Turbo transport belt |
 
 ## Materials and fluids
 

@@ -9,8 +9,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "algae-vat-east": {
     "filename": "__second-nature__/graphics/entity/industry/algae-vat-east.png",
@@ -22,8 +23,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "algae-vat-south": {
     "filename": "__second-nature__/graphics/entity/industry/algae-vat-south.png",
@@ -35,8 +37,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "algae-vat-west": {
     "filename": "__second-nature__/graphics/entity/industry/algae-vat-west.png",
@@ -48,8 +51,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "composter-north": {
     "filename": "__second-nature__/graphics/entity/industry/composter-north.png",
@@ -61,8 +65,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "composter-east": {
     "filename": "__second-nature__/graphics/entity/industry/composter-east.png",
@@ -74,8 +79,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "composter-south": {
     "filename": "__second-nature__/graphics/entity/industry/composter-south.png",
@@ -87,8 +93,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "composter-west": {
     "filename": "__second-nature__/graphics/entity/industry/composter-west.png",
@@ -100,8 +107,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "hydroponics-bay-north": {
     "filename": "__second-nature__/graphics/entity/industry/hydroponics-bay-north.png",
@@ -113,8 +121,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "hydroponics-bay-east": {
     "filename": "__second-nature__/graphics/entity/industry/hydroponics-bay-east.png",
@@ -126,8 +135,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "hydroponics-bay-south": {
     "filename": "__second-nature__/graphics/entity/industry/hydroponics-bay-south.png",
@@ -139,8 +149,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "hydroponics-bay-west": {
     "filename": "__second-nature__/graphics/entity/industry/hydroponics-bay-west.png",
@@ -152,8 +163,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "electrolyzer-north": {
     "filename": "__second-nature__/graphics/entity/industry/electrolyzer-north.png",
@@ -165,8 +177,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "electrolyzer-east": {
     "filename": "__second-nature__/graphics/entity/industry/electrolyzer-east.png",
@@ -178,8 +191,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "electrolyzer-south": {
     "filename": "__second-nature__/graphics/entity/industry/electrolyzer-south.png",
@@ -191,8 +205,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "electrolyzer-west": {
     "filename": "__second-nature__/graphics/entity/industry/electrolyzer-west.png",
@@ -204,8 +219,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "reclamation-plant-north": {
     "filename": "__second-nature__/graphics/entity/industry/reclamation-plant-north.png",
@@ -217,8 +233,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "reclamation-plant-east": {
     "filename": "__second-nature__/graphics/entity/industry/reclamation-plant-east.png",
@@ -230,8 +247,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "reclamation-plant-south": {
     "filename": "__second-nature__/graphics/entity/industry/reclamation-plant-south.png",
@@ -243,8 +261,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "reclamation-plant-west": {
     "filename": "__second-nature__/graphics/entity/industry/reclamation-plant-west.png",
@@ -256,8 +275,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "materials-kiln-north": {
     "filename": "__second-nature__/graphics/entity/industry/materials-kiln-north.png",
@@ -269,8 +289,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "materials-kiln-east": {
     "filename": "__second-nature__/graphics/entity/industry/materials-kiln-east.png",
@@ -282,8 +303,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "materials-kiln-south": {
     "filename": "__second-nature__/graphics/entity/industry/materials-kiln-south.png",
@@ -295,8 +317,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "materials-kiln-west": {
     "filename": "__second-nature__/graphics/entity/industry/materials-kiln-west.png",
@@ -308,8 +331,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "pyrolyzer-north": {
     "filename": "__second-nature__/graphics/entity/industry/pyrolyzer-north.png",
@@ -321,8 +345,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "pyrolyzer-east": {
     "filename": "__second-nature__/graphics/entity/industry/pyrolyzer-east.png",
@@ -334,8 +359,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "pyrolyzer-south": {
     "filename": "__second-nature__/graphics/entity/industry/pyrolyzer-south.png",
@@ -347,8 +373,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "pyrolyzer-west": {
     "filename": "__second-nature__/graphics/entity/industry/pyrolyzer-west.png",
@@ -360,8 +387,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "air-scrubber-north": {
     "filename": "__second-nature__/graphics/entity/industry/air-scrubber-north.png",
@@ -373,8 +401,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "air-scrubber-east": {
     "filename": "__second-nature__/graphics/entity/industry/air-scrubber-east.png",
@@ -386,8 +415,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "air-scrubber-south": {
     "filename": "__second-nature__/graphics/entity/industry/air-scrubber-south.png",
@@ -399,8 +429,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "air-scrubber-west": {
     "filename": "__second-nature__/graphics/entity/industry/air-scrubber-west.png",
@@ -412,8 +443,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "soil-enricher-north": {
     "filename": "__second-nature__/graphics/entity/industry/soil-enricher-north.png",
@@ -425,8 +457,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "soil-enricher-east": {
     "filename": "__second-nature__/graphics/entity/industry/soil-enricher-east.png",
@@ -438,8 +471,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "soil-enricher-south": {
     "filename": "__second-nature__/graphics/entity/industry/soil-enricher-south.png",
@@ -451,8 +485,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "soil-enricher-west": {
     "filename": "__second-nature__/graphics/entity/industry/soil-enricher-west.png",
@@ -464,8 +499,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "seed-disperser-north": {
     "filename": "__second-nature__/graphics/entity/industry/seed-disperser-north.png",
@@ -477,8 +513,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "seed-disperser-east": {
     "filename": "__second-nature__/graphics/entity/industry/seed-disperser-east.png",
@@ -490,8 +527,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "seed-disperser-south": {
     "filename": "__second-nature__/graphics/entity/industry/seed-disperser-south.png",
@@ -503,8 +541,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "seed-disperser-west": {
     "filename": "__second-nature__/graphics/entity/industry/seed-disperser-west.png",
@@ -516,8 +555,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "watershed-north": {
     "filename": "__second-nature__/graphics/entity/industry/watershed-north.png",
@@ -529,8 +569,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "watershed-east": {
     "filename": "__second-nature__/graphics/entity/industry/watershed-east.png",
@@ -542,8 +583,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "watershed-south": {
     "filename": "__second-nature__/graphics/entity/industry/watershed-south.png",
@@ -555,8 +597,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "watershed-west": {
     "filename": "__second-nature__/graphics/entity/industry/watershed-west.png",
@@ -568,8 +611,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "thermal-exchanger-north": {
     "filename": "__second-nature__/graphics/entity/industry/thermal-exchanger-north.png",
@@ -581,8 +625,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "thermal-exchanger-east": {
     "filename": "__second-nature__/graphics/entity/industry/thermal-exchanger-east.png",
@@ -594,8 +639,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "thermal-exchanger-south": {
     "filename": "__second-nature__/graphics/entity/industry/thermal-exchanger-south.png",
@@ -607,8 +653,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "thermal-exchanger-west": {
     "filename": "__second-nature__/graphics/entity/industry/thermal-exchanger-west.png",
@@ -620,8 +667,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "detoxifier-north": {
     "filename": "__second-nature__/graphics/entity/industry/detoxifier-north.png",
@@ -633,8 +681,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "detoxifier-east": {
     "filename": "__second-nature__/graphics/entity/industry/detoxifier-east.png",
@@ -646,8 +695,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "detoxifier-south": {
     "filename": "__second-nature__/graphics/entity/industry/detoxifier-south.png",
@@ -659,8 +709,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "detoxifier-west": {
     "filename": "__second-nature__/graphics/entity/industry/detoxifier-west.png",
@@ -672,8 +723,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "pheromone-dampener-north": {
     "filename": "__second-nature__/graphics/entity/industry/pheromone-dampener-north.png",
@@ -685,8 +737,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "pheromone-dampener-east": {
     "filename": "__second-nature__/graphics/entity/industry/pheromone-dampener-east.png",
@@ -698,8 +751,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "pheromone-dampener-south": {
     "filename": "__second-nature__/graphics/entity/industry/pheromone-dampener-south.png",
@@ -711,8 +765,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "pheromone-dampener-west": {
     "filename": "__second-nature__/graphics/entity/industry/pheromone-dampener-west.png",
@@ -724,8 +779,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "forcing-tower-north": {
     "filename": "__second-nature__/graphics/entity/industry/forcing-tower-north.png",
@@ -737,8 +793,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "forcing-tower-east": {
     "filename": "__second-nature__/graphics/entity/industry/forcing-tower-east.png",
@@ -750,8 +807,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "forcing-tower-south": {
     "filename": "__second-nature__/graphics/entity/industry/forcing-tower-south.png",
@@ -763,8 +821,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "forcing-tower-west": {
     "filename": "__second-nature__/graphics/entity/industry/forcing-tower-west.png",
@@ -776,8 +835,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "basalt-conditioner-north": {
     "filename": "__second-nature__/graphics/entity/industry/basalt-conditioner-north.png",
@@ -789,8 +849,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "basalt-conditioner-east": {
     "filename": "__second-nature__/graphics/entity/industry/basalt-conditioner-east.png",
@@ -802,8 +863,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "basalt-conditioner-south": {
     "filename": "__second-nature__/graphics/entity/industry/basalt-conditioner-south.png",
@@ -815,8 +877,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "basalt-conditioner-west": {
     "filename": "__second-nature__/graphics/entity/industry/basalt-conditioner-west.png",
@@ -828,8 +891,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "fulgoran-reclaimer-north": {
     "filename": "__second-nature__/graphics/entity/industry/fulgoran-reclaimer-north.png",
@@ -841,8 +905,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "fulgoran-reclaimer-east": {
     "filename": "__second-nature__/graphics/entity/industry/fulgoran-reclaimer-east.png",
@@ -854,8 +919,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "fulgoran-reclaimer-south": {
     "filename": "__second-nature__/graphics/entity/industry/fulgoran-reclaimer-south.png",
@@ -867,8 +933,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "fulgoran-reclaimer-west": {
     "filename": "__second-nature__/graphics/entity/industry/fulgoran-reclaimer-west.png",
@@ -880,8 +947,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "spore-tower-north": {
     "filename": "__second-nature__/graphics/entity/industry/spore-tower-north.png",
@@ -893,8 +961,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "spore-tower-east": {
     "filename": "__second-nature__/graphics/entity/industry/spore-tower-east.png",
@@ -906,8 +975,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "spore-tower-south": {
     "filename": "__second-nature__/graphics/entity/industry/spore-tower-south.png",
@@ -919,8 +989,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "spore-tower-west": {
     "filename": "__second-nature__/graphics/entity/industry/spore-tower-west.png",
@@ -932,8 +1003,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "cryogenic-garden-north": {
     "filename": "__second-nature__/graphics/entity/industry/cryogenic-garden-north.png",
@@ -945,8 +1017,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.4
-    ]
+      -0.7
+    ],
+    "apply_projection": false
   },
   "cryogenic-garden-east": {
     "filename": "__second-nature__/graphics/entity/industry/cryogenic-garden-east.png",
@@ -958,8 +1031,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.4
-    ]
+      -0.7
+    ],
+    "apply_projection": false
   },
   "cryogenic-garden-south": {
     "filename": "__second-nature__/graphics/entity/industry/cryogenic-garden-south.png",
@@ -971,8 +1045,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.4
-    ]
+      -0.7
+    ],
+    "apply_projection": false
   },
   "cryogenic-garden-west": {
     "filename": "__second-nature__/graphics/entity/industry/cryogenic-garden-west.png",
@@ -984,8 +1059,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.4
-    ]
+      -0.7
+    ],
+    "apply_projection": false
   },
   "sanctuary-north": {
     "filename": "__second-nature__/graphics/entity/industry/sanctuary-north.png",
@@ -997,8 +1073,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "sanctuary-east": {
     "filename": "__second-nature__/graphics/entity/industry/sanctuary-east.png",
@@ -1010,8 +1087,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "sanctuary-south": {
     "filename": "__second-nature__/graphics/entity/industry/sanctuary-south.png",
@@ -1023,8 +1101,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "sanctuary-west": {
     "filename": "__second-nature__/graphics/entity/industry/sanctuary-west.png",
@@ -1036,8 +1115,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.0
-    ]
+      -0.5
+    ],
+    "apply_projection": false
   },
   "planetary-beacon-north": {
     "filename": "__second-nature__/graphics/entity/industry/planetary-beacon-north.png",
@@ -1049,8 +1129,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.4
-    ]
+      -0.7
+    ],
+    "apply_projection": false
   },
   "planetary-beacon-east": {
     "filename": "__second-nature__/graphics/entity/industry/planetary-beacon-east.png",
@@ -1062,8 +1143,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.4
-    ]
+      -0.7
+    ],
+    "apply_projection": false
   },
   "planetary-beacon-south": {
     "filename": "__second-nature__/graphics/entity/industry/planetary-beacon-south.png",
@@ -1075,8 +1157,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.4
-    ]
+      -0.7
+    ],
+    "apply_projection": false
   },
   "planetary-beacon-west": {
     "filename": "__second-nature__/graphics/entity/industry/planetary-beacon-west.png",
@@ -1088,8 +1171,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -1.4
-    ]
+      -0.7
+    ],
+    "apply_projection": false
   },
   "ecology-monitor-north": {
     "filename": "__second-nature__/graphics/entity/industry/ecology-monitor-north.png",
@@ -1101,8 +1185,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -0.5
-    ]
+      -0.25
+    ],
+    "apply_projection": false
   },
   "ecology-monitor-east": {
     "filename": "__second-nature__/graphics/entity/industry/ecology-monitor-east.png",
@@ -1114,8 +1199,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -0.5
-    ]
+      -0.25
+    ],
+    "apply_projection": false
   },
   "ecology-monitor-south": {
     "filename": "__second-nature__/graphics/entity/industry/ecology-monitor-south.png",
@@ -1127,8 +1213,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -0.5
-    ]
+      -0.25
+    ],
+    "apply_projection": false
   },
   "ecology-monitor-west": {
     "filename": "__second-nature__/graphics/entity/industry/ecology-monitor-west.png",
@@ -1140,8 +1227,9 @@
     "scale": 0.5,
     "shift": [
       0,
-      -0.5
-    ]
+      -0.25
+    ],
+    "apply_projection": false
   },
   "lander": {
     "filename": "__second-nature__/graphics/entity/industry/lander.png",
@@ -1650,73 +1738,297 @@
       -1.28
     ]
   },
+  "vector-inserter-north": {
+    "filename": "__second-nature__/graphics/entity/industry/vector-inserter-north.png",
+    "width": 128,
+    "height": 128,
+    "frame_count": 1,
+    "line_length": 1,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.2
+    ],
+    "apply_projection": false
+  },
+  "vector-inserter-east": {
+    "filename": "__second-nature__/graphics/entity/industry/vector-inserter-east.png",
+    "width": 128,
+    "height": 128,
+    "frame_count": 1,
+    "line_length": 1,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.2
+    ],
+    "apply_projection": false
+  },
+  "vector-inserter-south": {
+    "filename": "__second-nature__/graphics/entity/industry/vector-inserter-south.png",
+    "width": 128,
+    "height": 128,
+    "frame_count": 1,
+    "line_length": 1,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.2
+    ],
+    "apply_projection": false
+  },
+  "vector-inserter-west": {
+    "filename": "__second-nature__/graphics/entity/industry/vector-inserter-west.png",
+    "width": 128,
+    "height": 128,
+    "frame_count": 1,
+    "line_length": 1,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.2
+    ],
+    "apply_projection": false
+  },
+  "canopy-inserter-north": {
+    "filename": "__second-nature__/graphics/entity/industry/canopy-inserter-north.png",
+    "width": 128,
+    "height": 128,
+    "frame_count": 1,
+    "line_length": 1,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.2
+    ],
+    "apply_projection": false
+  },
+  "canopy-inserter-east": {
+    "filename": "__second-nature__/graphics/entity/industry/canopy-inserter-east.png",
+    "width": 128,
+    "height": 128,
+    "frame_count": 1,
+    "line_length": 1,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.2
+    ],
+    "apply_projection": false
+  },
+  "canopy-inserter-south": {
+    "filename": "__second-nature__/graphics/entity/industry/canopy-inserter-south.png",
+    "width": 128,
+    "height": 128,
+    "frame_count": 1,
+    "line_length": 1,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.2
+    ],
+    "apply_projection": false
+  },
+  "canopy-inserter-west": {
+    "filename": "__second-nature__/graphics/entity/industry/canopy-inserter-west.png",
+    "width": 128,
+    "height": 128,
+    "frame_count": 1,
+    "line_length": 1,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.2
+    ],
+    "apply_projection": false
+  },
+  "vital-splitter-north": {
+    "filename": "__second-nature__/graphics/entity/industry/vital-splitter-north.png",
+    "width": 192,
+    "height": 192,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.3
+    ],
+    "apply_projection": false
+  },
+  "vital-splitter-east": {
+    "filename": "__second-nature__/graphics/entity/industry/vital-splitter-east.png",
+    "width": 192,
+    "height": 192,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.3
+    ],
+    "apply_projection": false
+  },
+  "vital-splitter-south": {
+    "filename": "__second-nature__/graphics/entity/industry/vital-splitter-south.png",
+    "width": 192,
+    "height": 192,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.3
+    ],
+    "apply_projection": false
+  },
+  "vital-splitter-west": {
+    "filename": "__second-nature__/graphics/entity/industry/vital-splitter-west.png",
+    "width": 192,
+    "height": 192,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.3
+    ],
+    "apply_projection": false
+  },
+  "jukebox-north": {
+    "filename": "__second-nature__/graphics/entity/industry/jukebox-north.png",
+    "width": 192,
+    "height": 192,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.3
+    ],
+    "apply_projection": false
+  },
+  "jukebox-east": {
+    "filename": "__second-nature__/graphics/entity/industry/jukebox-east.png",
+    "width": 192,
+    "height": 192,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.3
+    ],
+    "apply_projection": false
+  },
+  "jukebox-south": {
+    "filename": "__second-nature__/graphics/entity/industry/jukebox-south.png",
+    "width": 192,
+    "height": 192,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.3
+    ],
+    "apply_projection": false
+  },
+  "jukebox-west": {
+    "filename": "__second-nature__/graphics/entity/industry/jukebox-west.png",
+    "width": 192,
+    "height": 192,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.3
+    ],
+    "apply_projection": false
+  },
   "explorer-0-idle": {
     "filename": "__second-nature__/graphics/entity/industry/explorer-0-idle.png",
-    "width": 352,
-    "height": 400,
+    "width": 384,
+    "height": 432,
     "frame_count": 4,
     "line_length": 4,
     "direction_count": 8,
     "scale": 0.5,
     "shift": [
       0,
-      -0.109375
+      -0.0625
     ],
     "apply_projection": false
   },
   "explorer-0-idle_with_gun": {
     "filename": "__second-nature__/graphics/entity/industry/explorer-0-idle_with_gun.png",
-    "width": 352,
-    "height": 400,
+    "width": 384,
+    "height": 432,
     "frame_count": 4,
     "line_length": 4,
     "direction_count": 8,
     "scale": 0.5,
     "shift": [
       0,
-      -0.109375
+      -0.0625
     ],
     "apply_projection": false
   },
   "explorer-0-running": {
     "filename": "__second-nature__/graphics/entity/industry/explorer-0-running.png",
-    "width": 352,
-    "height": 400,
+    "width": 384,
+    "height": 432,
     "frame_count": 12,
     "line_length": 12,
     "direction_count": 8,
     "scale": 0.5,
     "shift": [
       0,
-      -0.109375
+      -0.0625
     ],
     "apply_projection": false
   },
   "explorer-0-mining_with_tool": {
     "filename": "__second-nature__/graphics/entity/industry/explorer-0-mining_with_tool.png",
-    "width": 352,
-    "height": 400,
+    "width": 384,
+    "height": 432,
     "frame_count": 16,
     "line_length": 16,
     "direction_count": 8,
     "scale": 0.5,
     "shift": [
       0,
-      -0.109375
+      -0.0625
     ],
     "apply_projection": false
   },
   "explorer-0-running_with_gun": {
     "filename": "__second-nature__/graphics/entity/industry/explorer-0-running_with_gun.png",
-    "width": 352,
-    "height": 400,
+    "width": 384,
+    "height": 432,
     "frame_count": 12,
     "line_length": 12,
     "direction_count": 18,
     "scale": 0.5,
     "shift": [
       0,
-      -0.109375
+      -0.0625
     ],
     "apply_projection": false
   },
@@ -1735,71 +2047,71 @@
   },
   "explorer-1-idle": {
     "filename": "__second-nature__/graphics/entity/industry/explorer-1-idle.png",
-    "width": 352,
-    "height": 400,
+    "width": 384,
+    "height": 432,
     "frame_count": 4,
     "line_length": 4,
     "direction_count": 8,
     "scale": 0.5,
     "shift": [
       0,
-      -0.109375
+      -0.0625
     ],
     "apply_projection": false
   },
   "explorer-1-idle_with_gun": {
     "filename": "__second-nature__/graphics/entity/industry/explorer-1-idle_with_gun.png",
-    "width": 352,
-    "height": 400,
+    "width": 384,
+    "height": 432,
     "frame_count": 4,
     "line_length": 4,
     "direction_count": 8,
     "scale": 0.5,
     "shift": [
       0,
-      -0.109375
+      -0.0625
     ],
     "apply_projection": false
   },
   "explorer-1-running": {
     "filename": "__second-nature__/graphics/entity/industry/explorer-1-running.png",
-    "width": 352,
-    "height": 400,
+    "width": 384,
+    "height": 432,
     "frame_count": 12,
     "line_length": 12,
     "direction_count": 8,
     "scale": 0.5,
     "shift": [
       0,
-      -0.109375
+      -0.0625
     ],
     "apply_projection": false
   },
   "explorer-1-mining_with_tool": {
     "filename": "__second-nature__/graphics/entity/industry/explorer-1-mining_with_tool.png",
-    "width": 352,
-    "height": 400,
+    "width": 384,
+    "height": 432,
     "frame_count": 16,
     "line_length": 16,
     "direction_count": 8,
     "scale": 0.5,
     "shift": [
       0,
-      -0.109375
+      -0.0625
     ],
     "apply_projection": false
   },
   "explorer-1-running_with_gun": {
     "filename": "__second-nature__/graphics/entity/industry/explorer-1-running_with_gun.png",
-    "width": 352,
-    "height": 400,
+    "width": 384,
+    "height": 432,
     "frame_count": 12,
     "line_length": 12,
     "direction_count": 18,
     "scale": 0.5,
     "shift": [
       0,
-      -0.109375
+      -0.0625
     ],
     "apply_projection": false
   },
@@ -1818,71 +2130,71 @@
   },
   "explorer-2-idle": {
     "filename": "__second-nature__/graphics/entity/industry/explorer-2-idle.png",
-    "width": 352,
-    "height": 400,
+    "width": 384,
+    "height": 432,
     "frame_count": 4,
     "line_length": 4,
     "direction_count": 8,
     "scale": 0.5,
     "shift": [
       0,
-      -0.109375
+      -0.0625
     ],
     "apply_projection": false
   },
   "explorer-2-idle_with_gun": {
     "filename": "__second-nature__/graphics/entity/industry/explorer-2-idle_with_gun.png",
-    "width": 352,
-    "height": 400,
+    "width": 384,
+    "height": 432,
     "frame_count": 4,
     "line_length": 4,
     "direction_count": 8,
     "scale": 0.5,
     "shift": [
       0,
-      -0.109375
+      -0.0625
     ],
     "apply_projection": false
   },
   "explorer-2-running": {
     "filename": "__second-nature__/graphics/entity/industry/explorer-2-running.png",
-    "width": 352,
-    "height": 400,
+    "width": 384,
+    "height": 432,
     "frame_count": 12,
     "line_length": 12,
     "direction_count": 8,
     "scale": 0.5,
     "shift": [
       0,
-      -0.109375
+      -0.0625
     ],
     "apply_projection": false
   },
   "explorer-2-mining_with_tool": {
     "filename": "__second-nature__/graphics/entity/industry/explorer-2-mining_with_tool.png",
-    "width": 352,
-    "height": 400,
+    "width": 384,
+    "height": 432,
     "frame_count": 16,
     "line_length": 16,
     "direction_count": 8,
     "scale": 0.5,
     "shift": [
       0,
-      -0.109375
+      -0.0625
     ],
     "apply_projection": false
   },
   "explorer-2-running_with_gun": {
     "filename": "__second-nature__/graphics/entity/industry/explorer-2-running_with_gun.png",
-    "width": 352,
-    "height": 400,
+    "width": 384,
+    "height": 432,
     "frame_count": 12,
     "line_length": 12,
     "direction_count": 18,
     "scale": 0.5,
     "shift": [
       0,
-      -0.109375
+      -0.0625
     ],
     "apply_projection": false
   },

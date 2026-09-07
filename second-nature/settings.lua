@@ -1,4 +1,6 @@
 data:extend({
+  {type="bool-setting",name="sn-opening-audio",setting_type="startup",default_value=true,order="a-g"},
+  {type="bool-setting",name="sn-inserter-vectors",setting_type="startup",default_value=true,order="a-h"},
   {type="bool-setting",name="sn-menu-music",setting_type="startup",default_value=true,order="a-f"},
   {type = "bool-setting", name = "sn-expedition-character", setting_type = "startup", default_value = true, order = "a-e"},
   {type = "bool-setting", name = "sn-desolate-start", setting_type = "startup", default_value = true, order = "a-a"},
