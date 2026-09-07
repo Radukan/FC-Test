@@ -199,3 +199,11 @@ Field Crew uses `shared/field_drones.lua` for its research, recipes and bounds; 
 `tools/generate_drone_assets.py` owns the separate drone manifest and emits body/shadow layers, icons and the field robotics research card. These can be authored independently of the large explorer atlases. The drone shadow is drawn on the ground layer rather than over the player's head or machine roofs.
 
 The current agent report is [AGENT-REPORT.md](AGENT-REPORT.md). Exact model/token telemetry is not available from the coding tools and must not be guessed.
+
+## Field Crew 0.6.2
+
+The user retained the scripted, inventory-fed drones after clarifying activation. Do not replace them with native robots, introduce an armor/power requirement, or connect them to logistic networks. New crews default on; explicit saved pauses are preserved. Ctrl + Shift + B and a one-time monitor/message make the controls visible.
+
+`field_drone_tasks.lua` owns construction, explicit planner deconstruction and upgrade accounting. The native `mine` and `apply_upgrade` APIs preserve real contents/configuration. Connected underground upgrades reserve the possible pair and reconcile actual results. Avoid manually synthesizing chest contents, wiping item quality or losing old upgrade items. `field_planner_probes.lua` tests these APIs on real engine entities after the saved-flight probe. The benchmark is 3,300 ticks and requires `SECOND_NATURE_ENGINE_FIELD_PLANNERS_OK`.
+
+Drone art has 16 directional rows, each containing 8 animation frames. Runtime animation prototypes select a row by `y`; the 0.6.1 names remain as compatibility aliases. Position updates are per tick. Regenerate with `generate_drone_assets.py`, then refresh presentation previews. Character chest/boot/grip changes require a complete explorer export, not only the running rows.

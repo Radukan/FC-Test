@@ -2,14 +2,15 @@
 local D = {
   item = "sn-field-drone", controller = "sn-field-controller", entity = "sn-field-drone-worker",
   technology = "sn-field-robotics", range = 18, speed = .035,
-  step_ticks = 3, scan_ticks = 30, work_ticks = 90, lifetime_ticks = 3600,
+  step_ticks = 1, scan_ticks = 30, work_ticks = 90, lifetime_ticks = 3600,
   default_limit = 64, maximum_limit = 128, global_limit = 512,
-  scan_limit = 128, queue_limit = 256, dispatch_budget = 8, cargo_slots = 4,
-  items = {}, recipes = {}, technologies = {}
+  scan_limit = 128, queue_limit = 256, dispatch_budget = 8, cargo_slots = 96, directions = 16,
+  items = {}, recipes = {}, technologies = {},
+  planner_shortcuts={"undo","redo","copy","cut","paste","import-string","give-blueprint","give-blueprint-book","give-deconstruction-planner","give-upgrade-planner"}
 }
 D.items = {
-  {kind="item",name="field-drone",title="Wind-up construction drone",description="A light spring-driven rotorcraft with a folding gripper and a single construction cradle. A field controller dispatches it from its operator's inventory; it has no roboport docking or logistics interface."},
-  {kind="item",name="field-controller",title="Field drone controller",description="A hand-cranked spring winder and short-range construction sequencer. It directs nearby wind-up drones using supplies carried by its operator, without an armor grid or a logistics network."}
+  {kind="item",name="field-drone",title="Wind-up construction drone",description="A spring-driven rotorcraft that builds, dismantles and upgrades nearby planner targets from its operator's inventory. Carry drones, a field controller and materials after research. New crews run automatically; Ctrl + Shift + B pauses or resumes them. No armor, power supply or logistics network is needed."},
+  {kind="item",name="field-controller",title="Field drone controller",description="Carry this with wind-up drones and materials in the character inventory. The crew starts automatically after Field construction robotics. Ctrl + Shift + B opens the monitor and pauses/resumes work. No equipment grid, power or roboport connection is required."}
 }
 D.recipes = {
   {name="field-drone",title="Assemble a wind-up construction drone",category="crafting",seconds=2,
@@ -25,4 +26,12 @@ D.technologies = {
    unlocks={"field-drone","field-controller"},
    description="Compact spring-driven construction assistants for local blueprint work. A carried controller winds and directs a large, slow crew without batteries, an equipment grid, roboports or logistic deliveries."}
 }
+D.technologies[#D.technologies+1]={name="field-robotics-2",title="Field crew tuning 1",prerequisites={D.technology},
+  science={{"automation-science-pack",1}},count=40,seconds=15,unlocks={},
+  effects={{type="nothing",effect_description={"sn-drones.tuning-1"}}},
+  description="Improve the field sequencer: 22-tile reach, 20% faster flight and shorter on-site work cycles. Native robots and other equipment are unchanged."}
+D.technologies[#D.technologies+1]={name="field-robotics-3",title="Field crew tuning 2",prerequisites={"sn-field-robotics-2","logistic-science-pack"},
+  science={{"automation-science-pack",1},{"logistic-science-pack",1}},count=60,seconds=15,unlocks={},
+  effects={{type="nothing",effect_description={"sn-drones.tuning-2"}}},
+  description="Refine the field drive and job sequencer: 26-tile reach, 3-tile-per-second flight and one-second work cycles. No logistics network or power supply is introduced."}
 return D

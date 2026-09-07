@@ -1,12 +1,12 @@
 {
   "description": "Current source-art review ledger. These files are not game screenshots or gameplay certification.",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "inputs": {
     "docs/art/lander-render.json": "57e554b1e825f0a390dac910918bfccab853d0a6122ada20f70f78d8b9b3392c",
-    "second-nature/graphics/entity/field-drones/flying-shadow.png": "f199dface5f4eb4d8b9162c75f622bd9393a77bb04ad52caa6c1b01bf6ac1ff2",
-    "second-nature/graphics/entity/field-drones/flying.png": "8254a2c28be9b979b36fd79e27aee4269fc0f489dbd3c4ece4bb3700d26fc13c",
-    "second-nature/graphics/entity/field-drones/working-shadow.png": "f638aeabb49f23413d8eff58f15a070dcff9354ca8dac923419bd27d4c75d33f",
-    "second-nature/graphics/entity/field-drones/working.png": "fdc433a124f33045f75f2308db56a99f54dad46553d049d3e4e5ceecee7cb02b",
+    "second-nature/graphics/entity/field-drones/flying-shadow.png": "ba7317815ae6f07e0ccd00bbc977df7ece341cc19da31c8cbb724fd19dc544bf",
+    "second-nature/graphics/entity/field-drones/flying.png": "0f6c0b1ea79380e9fda29ee3ee960126330127f895dbfa262fed15fdfdf730cf",
+    "second-nature/graphics/entity/field-drones/working-shadow.png": "1fd95be630fedaa38d262935199aacd178534aa23d66fb669e3bf03e4fea7e00",
+    "second-nature/graphics/entity/field-drones/working.png": "f64230315ddeea6d5720725fc6b736389327e78547f82da4aadc7aa4eb2cc914",
     "second-nature/graphics/entity/industry/air-scrubber-north.png": "c37935db168021917e8bd3bc54f25208e586d7c3ab7c5adf981126d6c44135f7",
     "second-nature/graphics/entity/industry/algae-vat-plant-north.png": "c740391f7d861195bb5af8738e22319cc42fb269969836ba511ed0c127c3f758",
     "second-nature/graphics/entity/industry/arc-turret-fire.png": "ed5029ae8a74d598d2d14b5108f44839c926f975bcd43aaf18ec20095943861f",
@@ -17,12 +17,12 @@
     "second-nature/graphics/entity/industry/detoxifier-plant-north.png": "c20bf0eeed71c7d58722176799abfd3056d8ef756fef42256f3ee0a49283cbcc",
     "second-nature/graphics/entity/industry/ecology-monitor-north.png": "6239ef8a49b7e426e5775eef2b2a9930d17711172112df8e67f7aa8083c433d7",
     "second-nature/graphics/entity/industry/electrolyzer-plant-north.png": "76c21418bd8128efa4b2af5026ccd6ef2531378974cf03a36c6cfc21d624f484",
-    "second-nature/graphics/entity/industry/explorer-0-idle.png": "e80d42861503b13ea35d4dcf08bc1d910b88ed94c88f4bb0a30be8c9b5f3b172",
-    "second-nature/graphics/entity/industry/explorer-0-mining_with_tool.png": "f44cde5ce2ea1d05cf02e0cdb67e33e5305786d660985ce3f31dc16c47d616c5",
-    "second-nature/graphics/entity/industry/explorer-0-running.png": "0903da43f54b0364432e2843c70511ab33dc443767ee85b65591e56fefe227b3",
-    "second-nature/graphics/entity/industry/explorer-0-running_with_gun.png": "a70a2066563e700d8794d22c1b8bcd49fa7b843a43faa3d03c2c689c94f48e92",
-    "second-nature/graphics/entity/industry/explorer-1-idle.png": "5c99e597d065648e2824397e38725936c204c5eae6121b3f8b04943a0b93d800",
-    "second-nature/graphics/entity/industry/explorer-2-idle.png": "02fbd5afa270410d24db953e79fc20884d6a44d178d297414d10ec1ce4536a8a",
+    "second-nature/graphics/entity/industry/explorer-0-idle.png": "f49c24dc91aed00c9f754e1d61521ee79045d00e91fb746ac3aa370d2fa5fef8",
+    "second-nature/graphics/entity/industry/explorer-0-mining_with_tool.png": "3ec596fd7f15fe543068617865f856e957792a7d4cedeb0c0cff8a6434a6e596",
+    "second-nature/graphics/entity/industry/explorer-0-running.png": "0c82a5dee615e9e3996956a1b2586e59a7f51b826fbb424155a47ed93904332a",
+    "second-nature/graphics/entity/industry/explorer-0-running_with_gun.png": "1c9c7a40adbec5eaa290d304aff3d73f182c8ccf8e50a1d578e618f4f8ce0018",
+    "second-nature/graphics/entity/industry/explorer-1-idle.png": "d4abfdef36f5de9be26be87eb132072a093eada9c6b175aeeb5de3a761ba4061",
+    "second-nature/graphics/entity/industry/explorer-2-idle.png": "8f88b760316e7b5aaa0e55f096e13b64d3b0a5744c01e7bd0067e0b0d1e5ab8c",
     "second-nature/graphics/entity/industry/field-crate-north.png": "0654c9ac6f2452cf63bdc29f691aa3da25e6b43cf78e481fc92c87acc7af5c68",
     "second-nature/graphics/entity/industry/field-pole-north.png": "6e1ec07b9ff8f6729ca9d67041f8c46bf1a701277cbf1ec86e15caa599f08f0a",
     "second-nature/graphics/entity/industry/forcing-tower-north.png": "7cec30f8215a88b86e0975ac6f79729237cc20ad2e1831c6c9e851aefb03b5a5",
@@ -47,18 +47,18 @@
     "second-nature/graphics/entity/industry/vital-splitter-north.png": "076df233a1d6220ff35fd99bb814b9c069b4b5e5c0ee218ac7c83f5c583c1380",
     "second-nature/graphics/entity/industry/watershed-plant-north.png": "33a57dd3b553ca86238377928e417321d5adaf595c46a36570a61603d57ea0de",
     "second-nature/graphics/icons/field-controller.png": "4ed068670e04d79c2a6f8f7d25c0c6520a77d081d04ff395194cff999124dea7",
-    "second-nature/graphics/technology/field-robotics.png": "bb628aabd133048838ed591d6fc6e087da58413d3eea8a86cb9769fddd7a6922"
+    "second-nature/graphics/technology/field-robotics.png": "4b473de9d92c69cf92b0dc34920fa6e73cfff8ac52eef38348006d76bf4e2b5e"
   },
   "outputs": {
-    "ironbound-contact-sheet.jpg": "d05314743dc03743c3f57698dcb3c082b4b222bbc07334cf6955e84d0bbd12b5",
-    "character-aim-layout.jpg": "2db33f5f161d9b885bd7ca0bad2302b1473eef635bdb61fb146c673c6b4a396d",
-    "locomotion-review.gif": "290e0e185714d2243d9344144e541ff7ff420d2652712fec9a22a8314bdb379a",
-    "mining-framing-preview.gif": "fd5b34cd537b2ef883050e803536207615b4ee49ece201283853cba2bce4c2ec",
+    "ironbound-contact-sheet.jpg": "ecba2b17dd4dbc96fd5aa2e643467f828f6d625485a6cc2e8cfa41ac0a2cf868",
+    "character-aim-layout.jpg": "afb4bc62b00f92c56e277cf584e8158e6d5823e4de2bb191a29107396bc44493",
+    "locomotion-review.gif": "a0276aea3b2fbfc912a1d04847d4841364b9bd251351d6d13c609e22511d5c5a",
+    "mining-framing-preview.gif": "11be07b1abc12c7d840cf0e5f2dfa54112d77d2eeeb02b803fc55918c922ca20",
     "industrial-animation-preview.gif": "867dfe0b2aa748891e8380575baf08bee32af75ba8aecc1d9171418fd8d04e0c",
     "lander-review.jpg": "ec26802001a73e1ff74c48f918cc8ab7a74528963b646d6eb37e22ff080367b9",
     "lander-standby.gif": "d92c72d4c4a57d392280c3b0b25b2c0b9ccbf8bda495487db50fa38ae0c6eb49",
-    "field-crew-review.jpg": "206594b6cd22e808b937bc1b34feb8188c5cc907c7d44ce54c6628897c691a8f",
-    "field-drone-preview.gif": "56c4f59ad32af01379e5104238f9a286e73caf44310a8112abfb7971336dcb87"
+    "field-crew-review.jpg": "ff4cb72fd6245ca2643ef9f10b6156e504918f2ce6c078ab3a9d019d20021e54",
+    "field-drone-preview.gif": "456b2525093fc716896ce03d6628c7b435f69ecbef08b33e4ee40b06ba117c3d"
   },
   "canonical_machines": {
     "algae-vat": {

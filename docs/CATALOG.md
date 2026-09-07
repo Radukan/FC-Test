@@ -2,7 +2,7 @@
 
 Generated from `second-nature/shared/catalog.lua` by `python tools/generate_docs.py`. Do not hand-edit tables.
 
-**22 machines · 114 recipes · 28 technologies · 32 material/science items · 6 fluids.**
+**22 machines · 114 recipes · 30 technologies · 32 material/science items · 6 fluids.**
 
 Times are seconds at crafting speed 1. Fitness effects are percentage points per completed cycle before planetary multipliers and support ceilings. No custom recipe supports productivity. Native recipe quality is disabled for operations and closed/catalytic loops.
 
@@ -200,6 +200,8 @@ Recipes tagged **dirty** also emit vanilla pollution/spores and incur explicit t
 | Ecological process optimization 3 | 700 × 30 s | Automation, Logistic, Chemical, Space, Ecology, Climate | Ecological process optimization 2, Comparative climatology |
 | Living-world logistics | 750 × 30 s | Automation, Logistic, Chemical, Production, Utility, Space, Climate | The Gaia network, Stack inserter, Turbo transport belt |
 | Field construction robotics | 20 × 15 s | Automation | Automation |
+| Field crew tuning 1 | 40 × 15 s | Automation | Field construction robotics |
+| Field crew tuning 2 | 60 × 15 s | Automation, Logistic | Field crew tuning 1, Logistic science pack |
 
 ## Materials and fluids
 

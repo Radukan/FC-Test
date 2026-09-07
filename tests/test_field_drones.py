@@ -51,11 +51,12 @@ def test_drone_sprite_specs_and_assets_are_complete_and_original():
     for name,digest in report['files'].items():assert hashlib.sha256((ROOT/name).read_bytes()).hexdigest()==digest
     for spec in report['specs'].values():
         image=Image.open(MOD/spec['filename'].split('__second-nature__/')[1])
-        assert image.size==(spec['width']*8,spec['height']) and image.mode=='RGBA'
+        assert image.size==(spec['width']*8,spec['height']*spec['direction_count']) and image.mode=='RGBA'
         assert spec['apply_projection'] is False
         frames=set()
-        for i in range(8):
-            frame=image.crop((i*spec['width'],0,(i+1)*spec['width'],spec['height']))
+        for i in range(8*spec['direction_count']):
+            x=i%8*spec['width'];y=i//8*spec['height']
+            frame=image.crop((x,y,x+spec['width'],y+spec['height']))
             frames.add(hashlib.sha256(frame.tobytes()).hexdigest())
             box=frame.getchannel('A').point(lambda a:255 if a>16 else 0).getbbox()
             assert min(box[0],box[1],spec['width']-box[2],spec['height']-box[3])>=2
@@ -271,4 +272,112 @@ def test_unreachable_teleport_and_surface_cleanup_return_the_reservation(drone_l
       assert(S.root().field_drones.active==1)
       mock.event('on_pre_surface_cleared',{surface_index=p.surface.index})
       assert(S.root().field_drones.active==0 and p.inventory.get_item_count('stone-wall')==1)
+    ''')
+
+
+def test_new_crews_start_automatically_and_introduction_explains_the_toggle(drone_lua):
+    drone_lua.execute('''
+      local p=mock.drone_player(1);local ghost=mock.ghost(p,'stone-wall',{x=4,y=2})
+      assert(not S.root().field_drones.owners[1])
+      mock.drone_steps(1200)
+      assert(not ghost.valid and D.status(p).enabled and p.inventory.get_item_count('sn-field-drone')==1)
+      assert(D.introduction(p) and not D.introduction(p))
+      D.set_enabled(p,false);mock.configure();mock.drone_steps(60)
+      assert(not D.status(p).enabled,'an intentional pause must survive updates')
+    ''')
+
+
+def test_early_research_unlocks_native_planner_shortcuts_without_replacing_the_actions(drone_data):
+    data=drone_data.raw
+    for name in ('copy','cut','paste','give-blueprint','give-blueprint-book','give-deconstruction-planner','give-upgrade-planner','undo','redo','import-string'):
+        assert data.shortcut[name].technology_to_unlock=='sn-field-robotics'
+    assert data.shortcut.copy.item_to_spawn=='copy-paste-tool'
+    assert data.shortcut.paste.action=='paste'
+    assert data.shortcut['give-deconstruction-planner'].item_to_spawn=='deconstruction-planner'
+    assert data.shortcut['give-upgrade-planner'].item_to_spawn=='upgrade-planner'
+
+
+def test_deconstruction_returns_the_real_entity_and_contents_to_inventory(drone_lua):
+    drone_lua.execute('''
+      local p=mock.drone_player(1)
+      local chest=mock.drone_target(p,'iron-chest',{x=4,y=2},{{name='iron-plate',count=27,quality='rare'}})
+      chest.marked=true;chest.deconstruction_force=p.force
+      enable(p);mock.drone_steps(1200)
+      assert(not chest.valid and p.inventory.get_item_count('iron-chest')==1)
+      assert(p.inventory.get_item_count({name='iron-plate',quality='rare'})==27)
+      assert(p.inventory.get_item_count('sn-field-drone')==1 and D.status(p).deconstructed==1)
+    ''')
+
+
+def test_cancelled_deconstruction_never_collects_unmarked_or_foreign_entities(drone_lua):
+    drone_lua.execute('''
+      local p=mock.drone_player(1,3,3)
+      local target=mock.drone_target(p,'iron-chest',{x=4,y=2},{{name='iron-plate',count=20}})
+      target.marked=true;enable(p);mock.drone_steps(30)
+      target.marked=false;mock.drone_steps(1200)
+      assert(target.valid and target.contents[1].count==20 and p.inventory.get_item_count('iron-chest')==0)
+      target.marked=true;target.force=mock.enemy;mock.drone_steps(1200)
+      assert(target.valid and p.inventory.get_item_count('sn-field-drone')==3)
+    ''')
+
+
+def test_upgrade_reserves_new_material_returns_old_item_and_preserves_settings(drone_lua):
+    drone_lua.execute('''
+      local p=mock.drone_player(1);p.inventory.insert({name='fast-inserter',quality='rare',count=1})
+      local arm=mock.drone_target(p,'inserter',{x=4,y=2})
+      arm.pickup_position={x=2,y=0};arm.drop_position={x=6,y=4};arm.saved_recipe='fixture'
+      arm.upgrade_target={name='fast-inserter',items_to_place_this={{name='fast-inserter',count=1}}};arm.upgrade_quality='rare'
+      enable(p);mock.drone_steps(1200)
+      assert(not arm.valid and p.inventory.get_item_count({name='fast-inserter',quality='rare'})==0)
+      assert(p.inventory.get_item_count('inserter')==1 and D.status(p).upgraded==1)
+      local new=p.surface.find_entities_filtered({name='fast-inserter'})[1]
+      assert(new.quality.name=='rare' and new.pickup_position.x==2 and new.drop_position.x==6 and new.saved_recipe=='fixture')
+    ''')
+
+
+def test_connected_underground_upgrade_accounts_for_both_ends(drone_lua):
+    drone_lua.execute('''
+      local p=mock.drone_player(1);p.inventory.insert({name='fast-underground-belt',count=2})
+      local a=mock.drone_target(p,'underground-belt',{x=3,y=2});local b=mock.drone_target(p,'underground-belt',{x=6,y=2})
+      a.neighbours=b;b.neighbours=a;a.upgrade_pair=true
+      a.upgrade_target={name='fast-underground-belt',items_to_place_this={{name='fast-underground-belt',count=1}}}
+      enable(p);mock.drone_steps(1200)
+      assert(not a.valid and not b.valid)
+      assert(p.inventory.get_item_count('fast-underground-belt')==0 and p.inventory.get_item_count('underground-belt')==2)
+      assert(p.inventory.get_item_count('sn-field-drone')==1)
+    ''')
+
+
+def test_upgrade_failure_or_cancellation_returns_reserved_new_items(drone_lua):
+    drone_lua.execute('''
+      local p=mock.drone_player(1);p.inventory.insert({name='fast-transport-belt',count=1})
+      local belt=mock.drone_target(p,'transport-belt',{x=3,y=2})
+      belt.upgrade_target={name='fast-transport-belt',items_to_place_this={{name='fast-transport-belt',count=1}}}
+      belt.upgrade_blocked=true;enable(p);mock.drone_steps(420);D.set_enabled(p,false)
+      assert(belt.valid and p.inventory.get_item_count('fast-transport-belt')==1 and p.inventory.get_item_count('transport-belt')==0)
+      assert(p.inventory.get_item_count('sn-field-drone')==1)
+    ''')
+
+
+def test_tuning_research_changes_only_field_capabilities(drone_lua):
+    drone_lua.execute('''
+      local p=mock.drone_player(1);local a=D.capabilities(p.force)
+      assert(a.range==18 and a.speed==.035 and a.work_ticks==90)
+      p.force.technologies['sn-field-robotics-2']={researched=true}
+      a=D.capabilities(p.force);assert(a.range==22 and a.speed==.042 and a.work_ticks==75)
+      p.force.technologies['sn-field-robotics-3']={researched=true}
+      a=D.capabilities(p.force);assert(a.range==26 and a.speed==.05 and a.work_ticks==60)
+    ''')
+
+
+def test_movement_updates_each_tick_and_selects_a_3d_facing(drone_lua):
+    drone_lua.execute('''
+      local p=mock.drone_player(1);mock.ghost(p,'stone-wall',{x=7,y=1})
+      enable(p);mock.drone_steps(30);local _,rec=next(S.root().field_drones.workers)
+      local x=rec.entity.position.x
+      for i=1,5 do
+        mock.drone_steps(1);local next_x=rec.entity.position.x
+        assert(next_x>x and next_x-x<.036);x=next_x
+      end
+      assert(rec.heading and rec.heading>0 and rec.visual.animation:find('flight-'))
     ''')

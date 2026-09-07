@@ -4,6 +4,7 @@ local K=require('__second-nature__/shared/catalog')
 local C=require('__second-nature__/shared/constants')
 local Probes=require('module_probes')
 local FieldDroneProbes=require('field_drone_probes')
+local FieldPlannerProbes=require('field_planner_probes')
 local function build(surface,name,pos)
   return assert(surface.create_entity({name=name,position=pos,force='player',raise_built=true}),name)
 end
@@ -59,7 +60,13 @@ script.on_init(function()
   -- Save creation followed by benchmarking exercises storage LuaObject restoration.
   log('SECOND_NATURE_ENGINE_SMOKE_READY')
 end)
-script.on_nth_tick(3,FieldDroneProbes.tick)
+script.on_nth_tick(1,function()
+  FieldDroneProbes.tick()
+  if storage.drone_probe and storage.drone_probe.finished and not storage.field_planner_probe then
+    FieldPlannerProbes.init(storage.worlds.nauvis,game.forces.player)
+  end
+  FieldPlannerProbes.tick()
+end)
 script.on_nth_tick(60,function()
   if storage.finished or not storage.start_tick or game.tick-storage.start_tick<1800 then return end
   assert(storage.machine.valid,'tracked entity lost across save/load')

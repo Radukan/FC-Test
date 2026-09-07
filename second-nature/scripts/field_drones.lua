@@ -1,7 +1,8 @@
--- Inventory-fed construction only. No roboports, logistic cells, chest access,
--- delivery requests, mining, repair or item-request-proxy fulfillment.
+-- Personal planner work from inventory. Deconstruction is explicit planner
+-- work, never automatic chest collection or logistic-request fulfillment.
 local C = require("shared.field_drones")
 local S = require("scripts.state")
+local Tasks=require("scripts.field_drone_tasks")
 local D = {}
 local function root() return S.root().field_drones end
 local function ids(t)
@@ -12,7 +13,7 @@ local function distance2(a,b) return (a.x-b.x)^2+(a.y-b.y)^2 end
 local function quality(q) return type(q)=="string" and q or (q and q.name or "normal") end
 local function owner(index)
   local r=root()
-  r.owners[index]=r.owners[index] or {enabled=false,workers={},active=0,cell=0,built=0,reason="off",pending={},pending_keys={},head=1}
+  r.owners[index]=r.owners[index] or {enabled=true,workers={},active=0,cell=0,built=0,deconstructed=0,upgraded=0,reason="waiting",pending={},pending_keys={},head=1}
   return r.owners[index]
 end
 local function carried(inv,name)
@@ -29,7 +30,13 @@ local function carried(inv,name)
   end)
   return choices[1]
 end
-local function context(player)
+function D.capabilities(force)
+  local tech=force.technologies
+  if tech["sn-field-robotics-3"] and tech["sn-field-robotics-3"].researched then return {range=26,speed=.05,work_ticks=60,level=2} end
+  if tech["sn-field-robotics-2"] and tech["sn-field-robotics-2"].researched then return {range=22,speed=.042,work_ticks=75,level=1} end
+  return {range=C.range,speed=C.speed,work_ticks=C.work_ticks,level=0}
+end
+local function context(player,refresh)
   if not (player and player.valid~=false and player.connected and player.controller_type==defines.controllers.character) then return nil,"character" end
   local character=player.character
   if not (character and character.valid and character.type=="character" and character.force.index==player.force.index) then return nil,"character" end
@@ -38,11 +45,19 @@ local function context(player)
   local tech=player.force.technologies[C.technology]
   if not (tech and tech.researched) then return nil,"research" end
   local inv=character.get_main_inventory()
-  if not (inv and inv.valid and carried(inv,C.controller)) then return nil,"controller" end
+  if not (inv and inv.valid) then return nil,"controller" end
+  local o=owner(player.index)
+  if refresh or not o.controller_checked or game.tick-o.controller_checked>=C.scan_ticks or o.checked_character~=character then
+    o.has_controller=carried(inv,C.controller)~=nil;o.controller_checked=game.tick;o.checked_character=character
+  end
+  if not o.has_controller then return nil,"controller" end
   if character.surface.platform then return nil,"platform" end
-  return {character=character,inventory=inv,surface=character.surface,position=character.position,force=player.force,
+  local caps=D.capabilities(player.force)
+  return {range=caps.range,speed=caps.speed,work_ticks=caps.work_ticks,character=character,inventory=inv,surface=character.surface,position=character.position,force=player.force,
     tiles=not permissions or permissions.allows_action(defines.input_action.build_terrain),
-    rails=not permissions or permissions.allows_action(defines.input_action.build_rail)}
+    rails=not permissions or permissions.allows_action(defines.input_action.build_rail),
+    deconstruct=not permissions or permissions.allows_action(defines.input_action.deconstruct),
+    upgrade=not permissions or permissions.allows_action(defines.input_action.upgrade)}
 end
 function D.limit(player)
   local current=game.get_player(player.index)
@@ -51,44 +66,22 @@ function D.limit(player)
 end
 local function ghost_key(ghost)
   if ghost.unit_number then return "entity:"..ghost.unit_number end
-  return table.concat({ghost.surface.index,ghost.type,ghost.position.x,ghost.position.y,ghost.ghost_name},":")
-end
-local function loose_items(ghost)
-  -- Early assistants cannot collect loose items. Do not let revive delete or
-  -- implicitly transport a stranger's dropped cargo beneath a blueprint.
-  return #ghost.surface.find_entities_filtered({area=ghost.bounding_box,type="item-entity",limit=1})>0
-end
-local function valid_target(ghost,ctx)
-  if ghost and ghost.valid then
-    if ghost.type=="tile-ghost" and not ctx.tiles then return false end
-    if ghost.type=="entity-ghost" and not ctx.rails and ghost.ghost_prototype.type:find("rail",1,true) then return false end
-  end
-  return ghost and ghost.valid and (ghost.type=="entity-ghost" or ghost.type=="tile-ghost")
-    and ghost.surface.index==ctx.surface.index and ghost.force.index==ctx.force.index
-    and distance2(ghost.position,ctx.position)<=C.range*C.range and not ghost.to_be_deconstructed()
-end
-local function material(ghost,inv)
-  local q=quality(ghost.quality)
-  for _,item in ipairs(ghost.ghost_prototype.items_to_place_this or {}) do
-    local prototype=prototypes.item[item.name]
-    -- Specialized packed vehicles/inventories have state that revive alone
-    -- cannot restore. Leave those to native construction, never flatten them.
-    if prototype and prototype.type=="item" and item.count>=1 and item.count<=10 then
-      local stack={name=item.name,count=item.count,quality=q}
-      if inv.get_item_count({name=stack.name,quality=q})>=stack.count then return stack end
-    end
-  end
+  local name=(ghost.type=="entity-ghost" or ghost.type=="tile-ghost") and ghost.ghost_name or ghost.name
+  return table.concat({ghost.surface.index,ghost.type,ghost.position.x,ghost.position.y,name},":")
 end
 local function animation(rec,working)
-  local name=working and "sn-field-drone-work" or "sn-field-drone-flight"
+  local base=working and "sn-field-drone-work" or "sn-field-drone-flight"
+  local direction=rec.heading or 0
+  local name=base.."-"..direction
+  local shadow_name=base.."-shadow-"..direction
   if not (rec.visual and rec.visual.valid) then
     rec.visual=rendering.draw_animation({animation=name,target={entity=rec.entity},surface=rec.surface,
       render_layer="air-object",animation_speed=.3})
   elseif rec.animation_name~=name then rec.visual.animation=name end
   if not (rec.shadow and rec.shadow.valid) then
-    rec.shadow=rendering.draw_animation({animation=name.."-shadow",target={entity=rec.entity},surface=rec.surface,
+    rec.shadow=rendering.draw_animation({animation=shadow_name,target={entity=rec.entity},surface=rec.surface,
       render_layer="ground-patch-higher",animation_speed=.3})
-  elseif rec.animation_name~=name then rec.shadow.animation=name.."-shadow" end
+  elseif rec.animation_name~=name then rec.shadow.animation=shadow_name end
   rec.animation_name=name
 end
 
@@ -142,9 +135,12 @@ function D.init()
   local state=S.root()
   state.field_drones=state.field_drones or {owners={},workers={},claims={},active=0}
   local r=root();r.active=0;r.claims={}
-  for _,o in pairs(r.owners) do o.workers={};o.active=0;o.pending={};o.pending_keys={};o.head=1 end
+  for _,o in pairs(r.owners) do
+    o.workers={};o.active=0;o.pending={};o.pending_keys={};o.head=1
+    o.deconstructed=o.deconstructed or 0;o.upgraded=o.upgraded or 0;o.controller_checked=nil
+  end
   for _,id in ipairs(ids(r.workers)) do
-    local rec=r.workers[id];local o=owner(rec.owner)
+    local rec=r.workers[id];rec.kind=rec.kind or "build";local o=owner(rec.owner)
     r.active=r.active+1;o.active=o.active+1;o.workers[id]=true;r.claims[rec.key]=id
   end
 end
@@ -173,14 +169,15 @@ function D.set_enabled(player,enabled)
   if not player then return false end
   local o=owner(player.index)
   if enabled then
-    local ctx,reason=context(player)
+    local ctx,reason=context(player,true)
     if not ctx then o.reason=reason;player.print({"sn-drones."..reason});return false end
   else D.cancel(player.index) end
-  o.enabled=enabled;o.reason=enabled and "waiting" or "off"
+  o.explicit_choice=true;o.enabled=enabled;o.reason=enabled and "waiting" or "off"
   player.set_shortcut_toggled("sn-field-drones",enabled)
   return true
 end
 function D.toggle(player)
+  if not root().owners[player.index] then return D.set_enabled(player,true) end
   return D.set_enabled(player,not owner(player.index).enabled)
 end
 local function take(inv,cargo,stack)
@@ -191,7 +188,7 @@ local function take(inv,cargo,stack)
   end
   return got==stack.count
 end
-local function launch(player,ctx,ghost,stack,limit)
+local function launch(player,ctx,ghost,job,limit)
   local r,o=root(),owner(player.index)
   if o.active>=limit or r.active>=C.global_limit then return false end
   local key=ghost_key(ghost)
@@ -199,9 +196,9 @@ local function launch(player,ctx,ghost,stack,limit)
   local drone=carried(ctx.inventory,C.item);if not drone then return false end
   local cargo=game.create_inventory(C.cargo_slots)
   local rec={owner=player.index,character=ctx.character,surface=ctx.surface,force_index=ctx.force.index,
-    cargo=cargo,drone_item=drone,material=stack,target=ghost,key=key,stage="outbound",started=game.tick,
+    cargo=cargo,drone_item=drone,material=job.material,kind=job.kind,product=job.product,product_quality=job.product_quality,old_parts=job.old_parts,unit_cost=job.unit_cost,target=ghost,key=key,stage="outbound",started=game.tick,
     last_position=position(ctx.position)}
-  if not take(ctx.inventory,cargo,drone) or not take(ctx.inventory,cargo,stack) then refund(rec,player,false);return false end
+  if not take(ctx.inventory,cargo,drone) or (job.material and not take(ctx.inventory,cargo,job.material)) then refund(rec,player,false);return false end
   local entity=ctx.surface.create_entity({name=C.entity,position=ctx.position,force=ctx.force})
   if not entity then refund(rec,player,false);return false end
   rec.entity=entity;rec.id=assert(entity.unit_number,"Field drone needs a unit number")
@@ -209,22 +206,10 @@ local function launch(player,ctx,ghost,stack,limit)
   animation(rec,false)
   return true
 end
-local function build(rec,ctx)
-  local ghost=rec.target
-  if not valid_target(ghost,ctx) or loose_items(ghost) then return false end
-  if rec.cargo.get_item_count({name=rec.material.name,quality=rec.material.quality})<rec.material.count then return false end
-  -- Reserve at dispatch, consume at arrival. Native revive keeps blueprint
-  -- recipes, directions, wires and inserter vectors; never create a replacement.
-  rec.cargo.remove(rec.material)
-  local ok,_,revived=pcall(function() return ghost.revive({raise_revive=true,overflow=rec.cargo}) end)
-  local succeeded=revived~=nil or not ghost.valid
-  if not succeeded then rec.cargo.insert(rec.material) end
-  if not ok then log("Second Nature: a field-drone revival failed; its reservation was reconciled.") end
-  return succeeded
-end
-local function move(rec,at)
+local function move(rec,at,speed)
   local from=rec.entity.position;local dx,dy=at.x-from.x,at.y-from.y
-  local distance=math.sqrt(dx*dx+dy*dy);local step=C.speed*C.step_ticks
+  local distance=math.sqrt(dx*dx+dy*dy);local step=speed*C.step_ticks
+  if distance>.0001 then rec.heading=math.floor(((math.atan2(dx,-dy)/ (2*math.pi))%1)*C.directions+.5)%C.directions end
   if distance<=step then
     if not rec.entity.teleport(at) then return nil end
     rec.last_position=position(at);return true
@@ -241,6 +226,7 @@ function D.step_player(player,index)
     if o.active>0 then D.cancel(index) end
     o.reason="off";return
   end
+  if o.active==0 and game.tick%C.scan_ticks~=0 then return end
   local ctx,reason=context(player)
   if not ctx then
     if o.active>0 then D.cancel(index) end
@@ -254,18 +240,21 @@ function D.step_player(player,index)
     elseif o.active>limit then finish(rec,player)
     else
       animation(rec,rec.stage=="working")
-      if rec.stage~="returning" and not valid_target(rec.target,ctx) then rec.stage="returning" end
+      if rec.stage~="returning" and not Tasks.valid(rec,ctx) then rec.stage="returning" end
       if rec.stage=="outbound" then
-        local arrived=move(rec,rec.target.position)
+        local arrived=move(rec,rec.target.position,ctx.speed)
         if arrived==nil then finish(rec,player)
-        elseif arrived then rec.stage="working";rec.ready=game.tick+C.work_ticks;animation(rec,true) end
+        elseif arrived then rec.stage="working";rec.ready=game.tick+ctx.work_ticks;animation(rec,true) end
       elseif rec.stage=="working" then
         if game.tick>=rec.ready then
-          if build(rec,ctx) then o.built=o.built+1 end
+          if Tasks.perform(rec,ctx) then
+            local counter=rec.kind=="deconstruct" and "deconstructed" or (rec.kind=="upgrade" and "upgraded" or "built")
+            o[counter]=(o[counter] or 0)+1
+          end
           rec.stage="returning";animation(rec,false)
         end
       elseif rec.stage=="returning" then
-        local arrived=move(rec,ctx.position)
+        local arrived=move(rec,ctx.position,ctx.speed)
         if arrived or arrived==nil then finish(rec,player) end
       end
     end
@@ -273,15 +262,20 @@ function D.step_player(player,index)
   o.reason=o.active>0 and "working" or "waiting"
   if o.active>=limit or root().active>=C.global_limit then return end
   if not carried(ctx.inventory,C.item) then o.reason="no-drones";return end
+  if not o.introduced then o.introduced=true;o.show_intro=true end
   if game.tick%C.scan_ticks==0 then
     -- A bounded, rotating spatial scan feeds a separate dispatch queue. A dense
     -- blueprint can use the whole crew, not just eight drones per scan cycle.
     local cell=o.cell;o.cell=(cell+1)%16
-    local width=C.range/2
-    local x=ctx.position.x-C.range+(cell%4)*width
-    local y=ctx.position.y-C.range+math.floor(cell/4)*width
-    local ghosts=ctx.surface.find_entities_filtered({area={{x,y},{x+width,y+width}},
-      type={"entity-ghost","tile-ghost"},force=ctx.force,limit=C.scan_limit})
+    local width=ctx.range/2
+    local x=ctx.position.x-ctx.range+(cell%4)*width
+    local y=ctx.position.y-ctx.range+math.floor(cell/4)*width
+    local area={{x,y},{x+width,y+width}}
+    local ghosts=ctx.surface.find_entities_filtered({area=area,type={"entity-ghost","tile-ghost"},force=ctx.force,limit=C.scan_limit})
+    for _,filter in ipairs({{to_be_deconstructed=true},{to_be_upgraded=true}}) do
+      filter.area=area;filter.limit=C.scan_limit
+      for _,e in ipairs(ctx.surface.find_entities_filtered(filter)) do ghosts[#ghosts+1]=e end
+    end
     table.sort(ghosts,function(a,b)
       local da,db=distance2(a.position,ctx.position),distance2(b.position,ctx.position)
       return da==db and ghost_key(a)<ghost_key(b) or da<db
@@ -289,7 +283,7 @@ function D.step_player(player,index)
     for _,ghost in ipairs(ghosts) do
       if #o.pending-o.head+1>=C.queue_limit then break end
       local key=ghost_key(ghost)
-      if valid_target(ghost,ctx) and not root().claims[key] and not o.pending_keys[key] then
+      if ghost.valid and Tasks.kind(ghost) and not root().claims[key] and not o.pending_keys[key] then
         o.pending[#o.pending+1]={entity=ghost,key=key};o.pending_keys[key]=true
       end
     end
@@ -299,13 +293,10 @@ function D.step_player(player,index)
     local entry=o.pending[o.head];o.pending[o.head]=false;o.head=o.head+1
     o.pending_keys[entry.key]=nil;examined=examined+1
     local ghost=entry.entity
-    if valid_target(ghost,ctx) and not root().claims[entry.key] then
-      if loose_items(ghost) then o.reason="loose-items"
-      else
-        local stack=material(ghost,ctx.inventory)
-        if stack and launch(player,ctx,ghost,stack,limit) then o.reason="working"
-        elseif not stack and o.active==0 then o.reason="materials" end
-      end
+    if ghost and ghost.valid and not root().claims[entry.key] then
+      local job,reason=Tasks.inspect(ghost,ctx,ctx.inventory)
+      if job and launch(player,ctx,ghost,job,limit) then o.reason="working"
+      elseif reason and o.active==0 then o.reason=reason end
     end
   end
   if o.head>#o.pending then o.pending={};o.pending_keys={};o.head=1
@@ -316,13 +307,29 @@ function D.step_player(player,index)
 end
 function D.tick()
   if not root() then return end
+  if game.tick%C.scan_ticks==0 then
+    for _,player in pairs(game.connected_players) do
+      local tech=player.force.technologies[C.technology]
+      if tech and tech.researched and not root().owners[player.index] then
+        owner(player.index);player.set_shortcut_toggled("sn-field-drones",true)
+      end
+    end
+  end
   for _,index in ipairs(ids(root().owners)) do D.step_player(game.get_player(index),index) end
+end
+function D.introduction(player)
+  local o=root().owners[player.index]
+  if o and o.show_intro then o.show_intro=nil;return true end
+  return false
+end
+function D.invalidate_inventory(index)
+  local o=root().owners[index];if o then o.controller_checked=nil end
 end
 function D.status(player)
   local o=owner(player.index)
   local stock=0;local character=player.character
   local inv=character and character.valid and character.get_main_inventory()
   if inv then for _,entry in pairs(inv.get_contents()) do if entry.name==C.item then stock=stock+entry.count end end end
-  return {enabled=o.enabled,active=o.active,stock=stock,limit=D.limit(player),built=o.built,reason=o.reason}
+  return {enabled=o.enabled,active=o.active,stock=stock,limit=D.limit(player),built=o.built,deconstructed=o.deconstructed,upgraded=o.upgraded,reason=o.reason,range=D.capabilities(player.force).range}
 end
 return D

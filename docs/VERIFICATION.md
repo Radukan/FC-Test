@@ -1,4 +1,16 @@
-# Verification ledger: Field Crew 0.6.1 alpha
+# Verification ledger: Field Crew 0.6.2 alpha
+
+## Current 0.6.2 candidate
+
+The existing no-power inventory drone/controller system is retained, per the activation clarification. New crews automatically enable, a visible notice/monitor explains Ctrl + Shift + B, and native blueprint/planner shortcuts unlock with the early research. New task tests cover explicit deconstruction, upgrade material/old-item accounting, preserved configurations and paired underground upgrades. The renderer now exports 16 directional drone views and updates positions every tick.
+
+Character regressions cover the reduced teardrop profile, rounded boot mesh and exact right/left grip fractions of 48%/16% along the shaft. Existing articulation, tool contact and framing guards remain.
+
+The expanded official-engine scenario uses native mining/upgrading on real entities, including a loaded chest, a rare inserter with custom vectors, and an underground pair. It requires `SECOND_NATURE_ENGINE_FIELD_PLANNERS_OK` during a 3,300-tick create/reload run, in addition to all prior markers. Native GUI/hotkey use and long-run GPU/UPS/multiplayer profiling are not claimed.
+
+The completed source export passes **235 local tests** with the pinned 2.0.77 prototype data present, and `git diff --check` is clean. The expanded official-engine check is pending branch CI; native mining/upgrade correctness is not inferred from mock tests.
+
+## Historical Field Crew 0.6.1 evidence
 
 ## Field Crew 0.6.1
 

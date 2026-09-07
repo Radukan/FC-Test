@@ -33,7 +33,7 @@ def run(binary:Path):
     world=root/'smoke.zip'
     base=[str(binary),'--config',str(config),'--mod-directory',str(mods)]
     outputs=[]
-    for label,args in [('create',['--create',str(world)]),('benchmark',['--benchmark',str(world),'--benchmark-ticks','2100','--benchmark-runs','1'])]:
+    for label,args in [('create',['--create',str(world)]),('benchmark',['--benchmark',str(world),'--benchmark-ticks','3300','--benchmark-runs','1'])]:
         command=base+args
         result=subprocess.run(command,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,timeout=240)
         print(result.stdout,end='');(root/(label+'.log')).write_text(result.stdout)
@@ -42,7 +42,7 @@ def run(binary:Path):
             print('::error title=Factorio engine failure::'+summary)
             raise SystemExit(f'Factorio {label} failed ({result.returncode}); see {root/(label+".log")}')
         outputs.append(result.stdout)
-    if not all(marker in '\n'.join(outputs) for marker in ('SECOND_NATURE_ENGINE_SMOKE_OK','SECOND_NATURE_ENGINE_CAMPAIGN_PROBES_OK','SECOND_NATURE_ENGINE_LOGISTICS_AUDIO_OK','SECOND_NATURE_ENGINE_VERDANT_LAYOUTS_OK','SECOND_NATURE_ENGINE_LANDER_REFIT_OK','SECOND_NATURE_ENGINE_FIELD_DRONES_OK')):
+    if not all(marker in '\n'.join(outputs) for marker in ('SECOND_NATURE_ENGINE_SMOKE_OK','SECOND_NATURE_ENGINE_CAMPAIGN_PROBES_OK','SECOND_NATURE_ENGINE_LOGISTICS_AUDIO_OK','SECOND_NATURE_ENGINE_VERDANT_LAYOUTS_OK','SECOND_NATURE_ENGINE_LANDER_REFIT_OK','SECOND_NATURE_ENGINE_FIELD_DRONES_OK','SECOND_NATURE_ENGINE_FIELD_PLANNERS_OK')):
         raise SystemExit('Engine exited without the smoke-test success marker. This is NOT a pass. Inspect '+str(root))
     print(f'ENGINE VALIDATION PASSED: Factorio {version}. Logs: {root}')
 if __name__=='__main__':

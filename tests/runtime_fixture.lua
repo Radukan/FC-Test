@@ -9,7 +9,7 @@ table.deepcopy=nil
 package.preload["util"]=function() table.deepcopy=deepcopy;return {table={deepcopy=deepcopy}} end
 mock={handlers={},nth={},commands={},messages={},logs={},renders={},next_id=100,next_registration=0,entities={},surface_calls={}}
 storage={};defines={events={},command={attack_area=1,attack=2,go_to_location=3,stop=4},distraction={by_enemy=1,none=0},controllers={character=1,cutscene=2,remote=3},direction={north=0,east=4,south=8,west=12},relative_gui_type={inserter_gui=1},relative_gui_position={right=1}}
-local event_names={'on_pre_surface_deleted','on_pre_surface_cleared','on_pre_player_died','on_player_left_game','on_player_changed_surface','on_player_controller_changed','on_player_changed_force','on_gui_opened','on_player_rotated_entity','on_entity_settings_pasted','on_script_trigger_effect','on_research_finished','on_research_reversed','on_entity_spawned','on_chunk_generated','on_force_created','on_biter_base_built','on_rocket_launched','on_cutscene_cancelled','on_pre_player_mined_item','on_robot_pre_mined','on_entity_died','script_raised_destroy','on_built_entity','on_robot_built_entity','script_raised_built','script_raised_revive','on_space_platform_built_entity','on_entity_cloned','on_object_destroyed','on_surface_created','on_surface_deleted','on_surface_cleared','on_forces_merged','on_player_created','on_player_joined_game','on_player_removed','on_gui_click','on_gui_selection_state_changed','on_gui_closed','on_lua_shortcut','on_runtime_mod_setting_changed'}
+local event_names={'on_player_main_inventory_changed','on_pre_surface_deleted','on_pre_surface_cleared','on_pre_player_died','on_player_left_game','on_player_changed_surface','on_player_controller_changed','on_player_changed_force','on_gui_opened','on_player_rotated_entity','on_entity_settings_pasted','on_script_trigger_effect','on_research_finished','on_research_reversed','on_entity_spawned','on_chunk_generated','on_force_created','on_biter_base_built','on_rocket_launched','on_cutscene_cancelled','on_pre_player_mined_item','on_robot_pre_mined','on_entity_died','script_raised_destroy','on_built_entity','on_robot_built_entity','script_raised_built','script_raised_revive','on_space_platform_built_entity','on_entity_cloned','on_object_destroyed','on_surface_created','on_surface_deleted','on_surface_cleared','on_forces_merged','on_player_created','on_player_joined_game','on_player_removed','on_gui_click','on_gui_selection_state_changed','on_gui_closed','on_lua_shortcut','on_runtime_mod_setting_changed'}
 for i,name in ipairs(event_names) do defines.events[name]=i end
 script={mod_name='second-nature'}
 local loader=require
@@ -123,7 +123,7 @@ function mock.surface(name,index)
       local in_range=true
       if filter.position then in_range=(e.position.x-filter.position.x)^2+(e.position.y-filter.position.y)^2<=(filter.radius or 1)^2 end
       if filter.area then local a=filter.area;local l=a.left_top or a[1];local r=a.right_bottom or a[2];in_range=e.position.x>=(l.x or l[1]) and e.position.x<=(r.x or r[1]) and e.position.y>=(l.y or l[2]) and e.position.y<=(r.y or r[2]) end
-      if e.valid and in_range and matches(e.name,filter.name) and matches(e.type,filter.type) and matches(e.force.name,filter.force) then
+      if e.valid and in_range and matches(e.name,filter.name) and matches(e.type,filter.type) and matches(e.force.name,filter.force) and (not filter.to_be_deconstructed or (e.to_be_deconstructed and e.to_be_deconstructed())) and (not filter.to_be_upgraded or (e.to_be_upgraded and e.to_be_upgraded())) then
         found[#found+1]=e;if filter.limit and #found>=filter.limit then break end
       end
     end
@@ -172,7 +172,7 @@ function mock.event(name,event) event.name=defines.events[name];return mock.hand
 function mock.run(ticks)
   for _=1,ticks do
     game.tick=game.tick+1
-    for _,interval in ipairs({3,6,15,60,120}) do if game.tick%interval==0 and mock.nth[interval] then mock.nth[interval]({tick=game.tick}) end end
+    for _,interval in ipairs({1,3,6,15,60,120}) do if game.tick%interval==0 and mock.nth[interval] then mock.nth[interval]({tick=game.tick}) end end
   end
 end
 mock.gui_reserved = {}

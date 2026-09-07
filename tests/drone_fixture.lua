@@ -1,9 +1,9 @@
 -- Focused LuaInventory / ghost doubles for field-drone accounting. These do not
 -- claim native collision, controller or rendering behavior; engine probes cover that.
-defines.input_action={build=1,build_rail=2,build_terrain=3}
+defines.input_action={build=1,build_rail=2,build_terrain=3,deconstruct=4,upgrade=5}
 prototypes.item=prototypes.item or {}
 prototypes.quality={normal={level=0},uncommon={level=1},rare={level=2},epic={level=3},legendary={level=5}}
-for _,name in ipairs({'sn-field-drone','sn-field-controller','stone-wall','stone-brick','iron-plate','iron-chest','transport-belt'}) do
+for _,name in ipairs({'sn-field-drone','sn-field-controller','stone-wall','stone-brick','iron-plate','iron-chest','transport-belt','fast-transport-belt','underground-belt','fast-underground-belt','inserter','fast-inserter'}) do
   prototypes.item[name]={type='item',stack_size=name=='sn-field-controller' and 1 or (name=='sn-field-drone' and 200 or 100)}
 end
 prototypes.item['packed-vehicle']={type='item-with-entity-data',stack_size=1}
@@ -63,9 +63,14 @@ function mock.inventory(size)
   return inv
 end
 game.create_inventory=mock.inventory
+script.raise_script_built=function(event) mock.event("script_raised_built",event) end
 local create=mock.entity
 mock.entity=function(name,surface,pos,force,no_event)
   local e=create(name,surface,pos,force,no_event)
+  e.quality={name='normal'};e.minable=true
+  e.to_be_deconstructed=function() return e.marked or false end
+  e.to_be_upgraded=function() return e.upgrade_target~=nil end
+  e.is_registered_for_deconstruction=function(force) return e.marked and (not e.deconstruction_force or e.deconstruction_force==force) end
   if name=='sn-field-drone-worker' then e.type='simple-entity-with-owner';e.logistic_network=nil end
   e.teleport=function(pos)
     assert(e.valid)
@@ -121,8 +126,41 @@ function mock.ghost(player,name,pos,quality,tile)
 end
 function mock.drone_steps(ticks)
   local D=require('scripts.field_drones')
-  for _=1,ticks do game.tick=game.tick+1;if game.tick%3==0 then D.tick() end end
+  for _=1,ticks do game.tick=game.tick+1;D.tick() end
 end
 function mock.spill_count(name,quality)
   local n=0;for _,s in ipairs(mock.spills) do if s.name==name and s.quality==(quality or 'normal') then n=n+s.count end end;return n
+end
+
+function mock.drone_target(player,name,pos,contents)
+  local e=mock.entity(name,player.surface,pos,player.force,true)
+  e.type=name:find('underground') and 'underground-belt' or (name:find('belt') and 'transport-belt' or (name:find('inserter') and 'inserter' or 'container'))
+  e.prototype={name=name,type=e.type,items_to_place_this={{name=name,count=1}}}
+  e.contents=contents or {}
+  e.mine=function(options)
+    assert(options.inventory and options.force==false and options.raise_destroyed)
+    if e.mine_blocked then return false end
+    for _,stack in ipairs(e.contents) do
+      local inserted=options.inventory.insert(stack);stack.count=stack.count-inserted
+      if stack.count>0 then return false end
+    end
+    if options.inventory.insert({name=name,count=1,quality=q(e.quality)})~=1 then return false end
+    mock.event('script_raised_destroy',{entity=e});e.destroy();return true
+  end
+  e.get_upgrade_target=function() return e.upgrade_target,{name=e.upgrade_quality or 'normal'} end
+  e.apply_upgrade=function()
+    if e.upgrade_blocked then return nil end
+    local target=e.upgrade_target
+    local new=mock.drone_target(player,target.name,e.position,e.contents)
+    new.quality={name=e.upgrade_quality or 'normal'}
+    new.pickup_position=e.pickup_position;new.drop_position=e.drop_position;new.saved_recipe=e.saved_recipe
+    e.destroy()
+    local other
+    if e.upgrade_pair and e.neighbours and e.neighbours.valid then
+      local old=e.neighbours;old.upgrade_target=target;old.upgrade_quality=e.upgrade_quality
+      other=old.apply_upgrade()
+    end
+    return new,other
+  end
+  return e
 end

@@ -21,7 +21,7 @@ def generate():
     manifest=json.loads((MOD.parent/'docs/art/sprite-manifest.json').read_text())
     catalog=load_catalog();art_names={m['name']:m['art_name'] for m in catalog['machines']}
     for t in catalog['technologies']:
-        if t['name']=='field-robotics':continue  # Owned by generate_drone_assets.py.
+        if t['name'].startswith('field-robotics'):continue  # Owned by generate_drone_assets.py.
         card=Image.new('RGBA',(256,256));d=ImageDraw.Draw(card)
         points=[(128+119*math.cos(i*math.tau/6-math.pi/2),128+119*math.sin(i*math.tau/6-math.pi/2)) for i in range(6)]
         d.polygon(points,fill=(28,38,43,250),outline=(208,145,63,255),width=4)

@@ -109,7 +109,7 @@ def contact_sheet(catalog):
         ('Vital distribution manifold', 'vital-splitter-north', 'Matched 90-item/s belt family'),
         ('Expedition jukebox', 'jukebox-north', 'Local archive playback'),
         ('Wind-up construction drone', 'field-drone-flying', 'Inventory-fed / no network'),
-        ('Field drone controller', 'field-controller-icon', '20 red science / up to 128 drones'),
+        ('Field drone controller', 'field-controller-icon', 'Auto-enabled / Ctrl + Shift + B'),
         ('Explorer / field gear', 'explorer-0-idle', 'Authored adult character'),
         ('Explorer / modular gear', 'explorer-1-idle', 'Articulated rig'),
         ('Explorer / bastion gear', 'explorer-2-idle', 'Third armor appearance'),
@@ -165,7 +165,7 @@ def character_reviews():
     frames = []
     for f in range(spec['frame_count']):
         sheet = Image.new('RGB', (4 * 310, 492), BACKGROUND)
-        header(sheet, 'MINING / RIGHT HAND LEADS THE POWER STROKE', 'Anticipation, fast downstroke, weighted impact and recovery. Twenty frames; unchanged gameplay mining speed.')
+        header(sheet, 'MINING / RIGHT HAND AT 48% OF THE SHAFT', 'Right grip near the midpoint; lower left-hand support. Rounded boots, weighted impact, unchanged mining speed.')
         d = ImageDraw.Draw(sheet)
         for i, direction in enumerate((0, 2, 4, 6)):
             x = i * 310
@@ -240,23 +240,27 @@ def field_crew_review():
     working, work_spec = load('field-drone-working')
     work_shadow, ws_spec = load('field-drone-working-shadow')
     frames = []
-    for f in range(8):
-        sheet = Image.new('RGB', (820, 370), BACKGROUND)
-        header(sheet, 'WIND-UP CONSTRUCTION / STANDBY AND WORK', 'Original rotor/gripper loops. Drone bodies and ground shadows are separate native render layers.')
+    for f in range(64):
+        sheet = Image.new('RGB', (880, 510), BACKGROUND)
+        header(sheet, 'FIELD DRONES / DIRECTIONAL 3D MOTION', 'Source-sprite motion study, not gameplay footage. In-game positions update every tick.')
         d = ImageDraw.Draw(sheet)
-        for i, (body, bs, ground, gs, label) in enumerate([
-                (source, spec, shadow, shadow_spec, 'Flight / reusable spring drive'),
-                (working, work_spec, work_shadow, ws_spec, 'Construction / folding gripper')]):
-            image = tile(ground, gs, frame=f)
-            image.alpha_composite(tile(body, bs, frame=f))
-            fit_sprite(sheet, image, (i*410+30, 98, i*410+380, 320))
-            d.text((i*410+40, 330), label, font=font(14), fill=CREAM)
+        for y in range(128,450,28):d.line((30,y,850,y),fill=(35,48,41))
+        for x in range(30,851,28):d.line((x,128,x,450),fill=(35,48,41))
+        phase=f/64*math.tau
+        for i, (body, bs, ground, gs) in enumerate([(source,spec,shadow,shadow_spec),(working,work_spec,work_shadow,ws_spec)]):
+            a=phase+i*math.pi
+            x=440+255*math.cos(a);y=285+92*math.sin(a)
+            vx=-255*math.sin(a);vy=92*math.cos(a)
+            heading=round((math.atan2(vx,-vy)/math.tau)%1*bs['direction_count'])%bs['direction_count']
+            image=tile(ground,gs,heading,f%8);image.alpha_composite(tile(body,bs,heading,f%8))
+            sheet.paste(image,(round(x-image.width/2),round(y-image.height*.52)),image)
+        d.text((30,468),'AUTO-ENABLED WITH KIT  |  Ctrl + Shift + B: pause / resume and monitor',font=font(15),fill=CREAM)
         frames.append(sheet)
-    save_gif(frames, 'field-drone-preview.gif', 80)
+    save_gif(frames, 'field-drone-preview.gif', 50)
     for image in (source, shadow, working, work_shadow):image.close()
 
     sheet=Image.new('RGB',(1200,870),BACKGROUND)
-    header(sheet,'FIELD CREW / SECOND NATURE '+json.loads((MOD/'info.json').read_text())['version'],'Small-version update: inventory-fed construction assistants and a coordinated human animation rig.')
+    header(sheet,'FIELD CREW / SECOND NATURE '+json.loads((MOD/'info.json').read_text())['version'],'Auto-enabled inventory crews, planner work, directional 3D drone sprites and a refined explorer silhouette.')
     d=ImageDraw.Draw(sheet)
     for i in range(3):
         d.rounded_rectangle((22+i*395,110,392+i*395,775),radius=9,fill=PANEL)
@@ -272,14 +276,14 @@ def field_crew_review():
         fit_sprite(sheet,tile(mining,ms,2,frame),(825+i*165,172,975+i*165,505),trim=True)
     mining.close()
     columns=[
-        ('01 / EARLY CONSTRUCTION',['20 red science after Automation','Iron, gears, circuits and cable','64 concurrent drones by default','18-tile personal operating radius','No roboports or logistics network']),
-        ('02 / HUMAN MOVEMENT',['Hips and shoulders counter-rotate','Independent head bob and balance','Continuous foot-swing velocity','Fuller fitted protective clothing','Armor-damped secondary motion']),
-        ('03 / WEIGHTED TOOL WORK',['Right palm closer to the tool head','Both hands remain on the shaft','Measured wind-up and fast impact','Torso drive and planted stance','Unchanged mining productivity'])]
+        ('01 / EARLY CONSTRUCTION',['AUTO-ENABLED with carried kit','Ctrl + Shift + B: pause / resume','Build, deconstruct and upgrade','16 directional 3D sprite views','No armor, power or logistics']),
+        ('02 / REFINED EXPLORER',['Tapered, tear-shaped chest profile','Reduced projection and upper bulk','Rounded boot outline and toe cap','Coordinated hips, shoulders, head','Subtle protective-clothing motion']),
+        ('03 / WEIGHTED TOOL WORK',['Right palm at 48% of the shaft','Both hands remain on the shaft','Measured wind-up and fast impact','Torso drive and planted stance','Unchanged mining productivity'])]
     for i,(title,lines) in enumerate(columns):
         x=42+i*395
         d.text((x,137),title,font=font(15,True),fill=ACCENT)
         for j,line in enumerate(lines):d.text((x,545+j*36),line,font=font(14),fill=CREAM)
-    d.text((30,799),'Real material reservations / matching quality / cancel-safe return / preserved existing factories',font=font(15),fill=CREAM)
+    d.text((30,799),'Personal inventory / blueprint and planner tools / real material accounting / no logistics-network connection',font=font(15),fill=CREAM)
     d.text((30,838),'Exported sprites and poses, not graphical Factorio footage. See the field-crew contract and verification ledger.',font=font(12),fill=MUTED)
     sheet.save(ART/'field-crew-review.jpg',quality=94,optimize=True)
 

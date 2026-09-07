@@ -8,7 +8,8 @@ function G.update(player)
   local frame=player and player.gui.left.sn_field_drones
   if not (frame and frame.valid) then return end
   local s=D.status(player)
-  frame.sn_drone_stats.caption={"sn-drones.stats",tostring(s.active),tostring(s.limit),tostring(s.stock),tostring(s.built)}
+  player.set_shortcut_toggled("sn-field-drones",s.enabled)
+  frame.sn_drone_stats.caption={"sn-drones.stats",tostring(s.active),tostring(s.limit),tostring(s.stock),tostring(s.built),tostring(s.deconstructed),tostring(s.upgraded)}
   frame.sn_drone_reason.caption={"sn-drones."..s.reason}
   frame.sn_drone_buttons.sn_drone_toggle.caption={s.enabled and "sn-drones.pause" or "sn-drones.enable"}
 end

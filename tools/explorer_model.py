@@ -40,6 +40,37 @@ def rounded_panel(mesh, center, radius, color, stretch=(1, 1, 1)):
             mesh.face([a[i], a[j], b[j], b[i]], color)
 
 
+def chest_panel(mesh, side, color, displacement=0):
+    """Fitted teardrop volume: fullness low down, taper blended into the thorax."""
+    x=side*.108
+    rings=[(x,-.10,1.355,.025,.015),(x,-.114,1.390,.081,.051),
+           (x,-.116,1.438,.119,.085),(x,-.105,1.490,.118,.081),
+           (x,-.083,1.550,.088,.055),(x,-.055,1.610,.045,.022),
+           (x,-.040,1.640,.012,.005)]
+    loft(mesh,[(a,b,z+displacement,rx,ry) for a,b,z,rx,ry in rings],color,28)
+    return rings
+
+
+def boot_mesh(armor):
+    """Rounded heel/toe outline and curved toe cap, not three beveled boxes."""
+    boot=Mesh();outline=[]
+    for i in range(9):
+        a=i*math.pi/8;outline.append((.087*math.cos(a),.050+.063*math.sin(a)))
+    for i in range(13):
+        a=math.pi+i*math.pi/12;outline.append((.109*math.cos(a),-.139+.112*math.sin(a)))
+    def shell(levels,color):
+        rings=[[(x*sx,-.045+(y+.045)*sy,z) for x,y in outline] for z,sx,sy in levels]
+        boot.face(list(reversed(rings[0])),color);boot.face(rings[-1],color)
+        for a,b in zip(rings,rings[1:]):
+            for i in range(len(a)):
+                j=(i+1)%len(a);boot.face([a[i],a[j],b[j],b[i]],color)
+    shell([(-.095,.98,.98),(-.078,1,1),(-.056,.99,.99)],(20,24,22))
+    shell([(-.055,.96,.97),(.012,.94,.94),(.069,.86,.81),(.103,.71,.55)],DARK)
+    rounded_panel(boot,(0,-.137,.024),.096,armor,stretch=(1.02,.94,.59))
+    boot.cyl(0,.007,.085,.071,.040,DARK,20)
+    return boot
+
+
 def explorer(t=0, pose='idle', tier=0, move_angle=0, aim_angle=0):
     run, gun, mining = pose in ('running', 'running_with_gun'), 'gun' in pose, pose == 'mining_with_tool'
     facing = aim_angle if gun else move_angle
@@ -66,10 +97,7 @@ def explorer(t=0, pose='idle', tier=0, move_angle=0, aim_angle=0):
         top = add(add(knee, mul(gait.sub(ankle, knee), .15)), (0, -.046, 0))
         bottom = add(add(knee, mul(gait.sub(ankle, knee), .84)), (0, -.046, 0))
         limb(m, top, bottom, .075, .050, armor, 14)
-        boot = Mesh()
-        boot.box((0, -.055, .015), (.21, .35, .20), DARK, .06)
-        boot.box((0, -.143, .05), (.195, .13, .061), armor, .03)
-        boot.box((0, -.05, -.074), (.22, .37, .035), (20, 24, 22), .025)
+        boot = boot_mesh(armor)
         c, s = math.cos(sample['pitch']), math.sin(sample['pitch'])
         rolled = Mesh()
         for vertices, color, glow in boot.faces:
@@ -91,15 +119,15 @@ def explorer(t=0, pose='idle', tier=0, move_angle=0, aim_angle=0):
         weight = gait.smooth(max(0, min(1, (point[2] - 1.10) / .40)))
         return add(mul(pelvis.point(point), 1 - weight), mul(torso.point(point), weight))
     join_transformed(m, skin, skinned)
-    secondary = rig['secondary']
+    secondary = rig['secondary'] * .45
     for side in (-1, 1):
-        center = (side * .129, -.124, 1.488 + secondary)
-        rounded_panel(shell, center, .185, armor, stretch=(1.01, 1.06, .97))
+        center = (side * .108, -.116, 1.438 + secondary)
+        chest_panel(shell,side,armor,secondary)
         joints['chest-' + str(side)] = torso.point(center)
         # The fitted protective garment remains fully covered. Harness straps
         # follow its curved surface; heavier chest plates strongly damp motion.
-        points = [(side * .13, -.09, 1.65), (side * .183, -.282, 1.54 + secondary),
-                  (side * .173, -.286, 1.44 + secondary), (side * .12, -.14, 1.18)]
+        points = [(side * .13, -.148, 1.63), (side * .156, -.199, 1.52 + secondary),
+                  (side * .166, -.211, 1.44 + secondary), (side * .12, -.152, 1.18)]
         for a, b in zip(points, points[1:]):
             shell.tube(a, b, .019, (117, 78, 38), 8)
         shell.box((side * .145, -.198, 1.34), (.052, .027, .063), EDGE, .009)
@@ -125,9 +153,9 @@ def explorer(t=0, pose='idle', tier=0, move_angle=0, aim_angle=0):
         shaft = torso.vector((0, -math.sin(theta), math.cos(theta)))
         cutting = torso.vector((0, -math.cos(theta), -math.sin(theta)))
         back = mul(cutting, -1)
-        center = torso.point((.055, -.38, 1.41))
+        center = torso.point((.075, -.35, 1.415))
         tool_bottom, tool_top = add(center, mul(shaft, -.36)), add(center, mul(shaft, 1.05))
-        grips = {1: add(center, mul(shaft, .14)), -1: add(center, mul(shaft, -.14))}
+        grips = {side:add(tool_bottom,mul(shaft,1.41*fraction)) for side,fraction in ((1,.48),(-1,.16))}
         anchors.update(tool_bottom=tool_bottom, tool_top=tool_top, tool_axis=shaft,
                        right_grip=grips[1], left_grip=grips[-1])
     elif gun:

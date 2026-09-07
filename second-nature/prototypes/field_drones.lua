@@ -26,11 +26,18 @@ worker.picture={filename="__core__/graphics/empty.png",width=1,height=1}
 worker.pictures,worker.animations,worker.integration_patch,worker.factoriopedia_simulation=nil,nil,nil,nil
 local animations={worker}
 for key,spec in pairs(A) do
-  local animation=table.deepcopy(spec)
-  animation.type="animation"
-  animation.name="sn-field-drone-"..key:gsub("flying","flight"):gsub("working","work")
-  animation.animation_speed=.3;animation.direction_count=nil
-  animations[#animations+1]=animation
+  local base="sn-field-drone-"..key:gsub("flying","flight"):gsub("working","work")
+  for direction=0,D.directions-1 do
+    local animation=table.deepcopy(spec)
+    animation.type="animation";animation.name=base.."-"..direction
+    animation.y=direction*spec.height
+    animation.animation_speed=.3;animation.direction_count=nil
+    animations[#animations+1]=animation
+  end
+  -- Retain the 0.6.1 names so saved LuaRenderObjects can be refitted on load.
+  local legacy=table.deepcopy(spec)
+  legacy.type="animation";legacy.name=base;legacy.direction_count=nil;legacy.animation_speed=.3
+  animations[#animations+1]=legacy
 end
 data:extend(animations)
 data:extend({
@@ -38,3 +45,9 @@ data:extend({
   {type="shortcut",name="sn-field-drones",action="lua",toggleable=true,
    icon=H.icon("field-drone"),icon_size=64,small_icon=H.icon("field-drone"),small_icon_size=64,
    associated_control_input="sn-toggle-field-drones",order="z-sn-e"}})
+
+-- The native shortcuts and their native hotkeys unlock with the early crew.
+for _,name in ipairs(D.planner_shortcuts) do
+  local shortcut=data.raw.shortcut[name]
+  if shortcut and shortcut.technology_to_unlock=="construction-robotics" then shortcut.technology_to_unlock=D.technology end
+end

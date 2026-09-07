@@ -161,6 +161,7 @@ end)
 script.on_nth_tick(C.gui_ticks, function()
   for _, player in pairs(game.connected_players) do
     Gui.update(player)
+    if FieldDrones.introduction(player) then DroneGui.open(player);player.print({"sn-drones.introduction"}) end
     DroneGui.update(player)
     local prefs = State.root().players[player.index]
     if prefs and prefs.air_overlay then Pollution.overlay(player, true) end
@@ -187,6 +188,7 @@ script.on_event({defines.events.on_player_rotated_entity,defines.events.on_entit
 script.on_event("sn-configure-inserter", function(event)
   local player=game.get_player(event.player_index);if player then Inserters.open(player,player.selected,false) end
 end)
+script.on_event(defines.events.on_player_main_inventory_changed,function(event) FieldDrones.invalidate_inventory(event.player_index) end)
 script.on_event("sn-toggle-field-drones", function(event) DroneGui.toggle(game.get_player(event.player_index)) end)
 script.on_event("sn-open-jukebox", function(event)
   local player=game.get_player(event.player_index);if player then Jukebox.open(player,player.selected) end

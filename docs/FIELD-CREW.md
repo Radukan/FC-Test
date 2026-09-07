@@ -1,61 +1,53 @@
-# Field Crew / 0.6.1
+# Field Crew / 0.6.2
 
-A small-version continuation of 0.6.0: one early construction system and a focused explorer animation revision. Existing building footprints, ecological rates, music, weapons and landing cargo are unchanged.
+## Activation: carry the kit, no armor or power
 
-## Wind-up construction assistants
+The 0.6.1 inventory-based drones and field controller are retained, as requested after the activation clarification. They are **not** replaced with native robots or a power-armor requirement.
 
-Research **Field construction robotics** after **Automation**: 20 automation (red) science packs, 15 seconds per unit. Craft a field controller and wind-up construction drones from iron plates, gears, electronic circuits and copper cable. No engines, batteries, lubricant, robot frames, armor grid or advanced science are required.
+Research **Field construction robotics** after **Automation**, for **20 red science packs**. Carry a **field controller**, **wind-up drones** and suitable building materials in the **character's main inventory**. New crews are **enabled automatically**. A one-time message and monitor explain the controls.
 
-Carry the controller, drones and matching construction items in the **character's main inventory**. Press **Ctrl + Shift + B** or use the drone shortcut to enable/pause the crew. The small monitor shows active/packed drones, completed work and the current reason for waiting. Hiding the monitor does not pause the crew; Pause + recall does.
+**Ctrl + Shift + B** pauses/resumes the crew and opens its monitor. The toolbar's drone button is the same control. Hiding the monitor does not disable the crew. Deliberate pauses saved by 0.6.1 are retained; use the key or button to resume such a crew.
 
-| Contract | Value |
-|---|---|
-| Operating radius | 18 tiles around the physical, controllable character |
-| Flight speed | 0.035 tiles/tick, or 2.1 tiles/second before any simulation slowdown |
-| Construction delay | 90 ticks, or 1.5 seconds, after reaching the ghost |
-| Default concurrent crew | 64 per player |
-| Per-player setting | 1 through 128 drones |
-| Server safety cap | 512 active field drones |
-| Packed stack size | 200 drones |
-| Movement update | Every 3 ticks, separate from the bounded spatial scan |
-| Search | One rotating local sector every 30 ticks; at most 128 results |
-| Dispatch | At most 8 queued candidates per update; queue capped at 256 |
+No equipment grid, armor, batteries, charging station or electric power is needed. The drones remain outside all logistic networks; the packed items cannot dock in native roboports or perform logistic deliveries.
 
-The carried sequencer rewinds the spring drives between sorties. There is no battery/fuel network or passive factory service. Each sortie reserves a real drone and a real construction load, flies to a ghost, constructs it, then returns the reusable drone. A large local blueprint can dispatch a full crew through the queue rather than being limited to eight drones per complete scan.
+## Native planner tools, personal inventory jobs
 
-### No logistics network
+The native blueprint, blueprint-book, copy, cut, paste, undo, redo, import-string, deconstruction and upgrade shortcuts unlock with the early field-robotics technology. Their native hotkeys/actions are retained.
 
-These are **not construction-robot or logistic-robot prototypes**. The worker is a scripted, off-grid simple entity with its own original flight and gripper animation. It has no logistic cell, docking category, equipment grid, chest search or delivery-request behavior. Native roboport robot inventories reject the packed item. Flying near a powered roboport does not connect it to that network.
+- **Construction:** entity and tile ghosts consume matching-quality items reserved from your inventory. Native ghost revival preserves blueprint settings, recipes, direction, wires and inserter vectors.
+- **Deconstruction:** explicitly marked, mineable, same-force or neutral entities are mined into an escrow inventory. The actual building and its actual contents, quality and item metadata are returned to your inventory. It is not an automatic chest collection service. Full containers may take multiple sorties.
+- **Upgrades:** eligible marked buildings use native in-place upgrades, preserving configuration. The new matching-quality building item is reserved and consumed, and the old item is returned. Connected underground upgrades reserve a pair and reconcile one or two actual replacements.
+- Other forces' hardware, occupied/unmineable entities, the protected lander and field drones themselves are not dismantled. Build/deconstruction/upgrade permissions are checked.
+- Packed vehicle construction/upgrades, perishable place-items, specialized rail upgrades, repair and item-request/module delivery remain outside this barebones system. Ordinary rail blueprint construction is supported. Later native robots still have broader capabilities.
+- Loose items beneath a construction ghost are not silently deleted or collected. Clear them or explicitly mark them for deconstruction first.
 
-The assistants build **entity and tile ghosts only**. They do not repair, deconstruct, upgrade existing machines, insert requested modules or deliver items. Later native construction/logistics robots retain those advantages. They do not operate on space platforms, in remote/editor/cutscene control, without the controller or without the required research. Native player build permissions are respected.
+All jobs share claims across operators. Cancellation, moved/removed targets, failed operations, inventory overflow, loss of controller/range, disconnect/death and force/surface transitions reconcile the real cargo. Overflow is spilled rather than deleted. A destroyed drone is lost, but its unspent cargo is recoverable. Existing in-flight 0.6.1 construction jobs keep their escrow; no extra drones or materials are granted.
 
-### Material and save safety
+## Capacity, movement and early tuning
 
-- Items are removed from the character inventory into a script-owned escrow inventory before launch. There is no free building or ghost-item synthesis.
-- The ghost's exact requested quality is required. Drone quality is preserved on return but does not add speed, reach or carrying capacity.
-- Native `revive` preserves the ghost's own settings, direction, recipes, wires and inserter vectors. The mod does not replace it with a newly configured approximation.
-- Specialized packed vehicle/inventory items are left for native construction because a plain revival cannot safely restore all their embedded state.
-- Loose ground items beneath a ghost block this early crew. They are not collected, deleted or turned into an implicit logistics delivery.
-- Claims are shared across operators, so two players cannot dispatch paid construction to the same ghost simultaneously.
-- Cancellation, failed placement, loss of range, controller changes, disconnects, force/surface changes and pre-death recall reconcile reservations. Inventory overflow is spilled with its quality intact rather than deleted.
-- A destroyed drone is actually lost. Its unspent construction material is spilled for recovery, not duplicated or silently destroyed.
-- Escrow inventories and worker/render references live in `storage.second_nature.field_drones`. Configuration changes rebuild accounting without minting drones or replacing active reservations. Completed inventories and render objects are destroyed.
-- Drone bodies render above objects; their shadows render separately on the ground, not over nearby roofs or the player.
+| Capability | Base | Tuning 1 | Tuning 2 |
+|---|---:|---:|---:|
+| Science | 20 red after Automation | 40 red | 60 red + green |
+| Radius | 18 tiles | 22 tiles | 26 tiles |
+| Flight speed | 2.1 tiles/s | 2.52 tiles/s | 3 tiles/s |
+| On-site work | 1.5 s | 1.25 s | 1 s |
 
-## Human motion revision
+Tuning applies automatically to the field crew only; it does not buff native robots or military equipment. Capacity remains **64 active drones by default**, adjustable to **128 per player**, with a **512-drone server safety limit**. Packed drones stack to 200.
 
-`tools/body_motion.py` separates pelvis, thorax and head transforms. Hip yaw/roll and lateral weight transfer are countered by the shoulders, while the head has its own stabilization and bob. Arms solve between moving shoulders and real grip targets. The gun retains the requested native aim direction instead of swaying away from its firing line.
+Positions update **every simulation tick**, rather than jumping every three ticks. The original 3D model now has a raised canopy, layered hull, visible curved body, mechanical outriggers and gripper. Sixteen directional sprite banks provide consistent 3D views and lighting. Factorio still displays pre-rendered 2D sprites, not real-time 3D geometry. Body and ground-shadow layers remain separate.
 
-Foot swing velocities now meet the planted-stance velocity continuously. Boot sole clearance is kept above the ground. The existing sixteen-frame locomotion and twenty-frame mining formats, native paired armed rows and gameplay movement/mining speeds are retained.
+Scanning is bounded: one local sector every 30 ticks, up to 128 results for each of construction/deconstruction/upgrade searches, a 256-entry pending queue and at most eight examined/dispatch candidates per update. Idle crews avoid full per-tick scans; controller presence is cached briefly and invalidated by inventory changes.
 
-Mining has a measured anticipation, a much faster downstroke, a brief impact/follow-through and recovery. The torso leans and drops into the strike. The **right palm is closer to the pickaxe head along the shaft** than the left palm in every frame; both remain attached to the handle. A stable perpendicular hand frame removes the old degenerate grip orientation when the shaft crossed horizontal. Native mining particles use frame 11, the contact frame of the twenty-frame cycle.
+## Explorer refinements
 
-The adult explorer remains fully clothed in protective equipment. Her suit has a fuller, rounder chest profile. Small, phase-lagged secondary motion is strongest in the field suit and substantially damped by the heavier armor tiers; rigid equipment is not treated as unconstrained soft material.
+The protected, fully clothed chest profile uses an asymmetric loft rather than oversized spheres: less projection and upper bulk, fuller lower volume and a tapered join into the thorax. Secondary motion is reduced further. Boots have a rounded heel/toe outline, layered sole and curved toe cap rather than three box primitives.
 
-## Validation scope
+The right palm grips at **48% of the shaft length from its lower end**, near the midpoint. The left palm supports at **16%**. Both hands stay attached through the existing weighted mining cycle, with constant arm lengths, safe framing and unchanged gameplay mining speed.
 
-Offline tests cover inventory conservation, quality, simultaneous operators, large crews, cancellation, failed placement, lifecycle events, permissions, HUD behavior, motion/grip geometry, complete atlas bounds and current preview fingerprints.
+## Verification scope
 
-The official 2.0.77 headless probe uses real characters, inventories, entity/tile ghosts, a powered nearby roboport, script escrow and rendering objects. It saves while drones are in flight, reloads, verifies real construction and exact material/quality conservation, and requires `SECOND_NATURE_ENGINE_FIELD_DRONES_OK`. Its LuaPlayer-facing shell is a fixture because headless has no interactive player GUI; per-player settings and the actual shortcut interaction are additionally covered by offline tests, not claimed as a native GUI playtest.
+Source tests cover startup/default activation, preserved pauses, planner gates, item/quality accounting, marked versus unmarked targets, deconstruction contents, upgrade refunds and configuration, underground-pair accounting, cancellation, lifecycle events, tuning, smooth movement, directional art, chest/boot geometry and grip placement.
 
-Graphical-client movement/appearance, every Mech/weapon combination, long-run multiplayer/desync behavior and GPU/UPS profiling still need real client playtesting. Source previews are actual exported sprites, not game footage.
+The official stable-engine harness uses real inventories/entities/ghosts and native mining/upgrading. It exercises saved in-flight work, real construction, a marked loaded chest, a rare inserter upgrade with custom vectors and an underground pair. Its LuaPlayer-facing shell remains a fixture, not an interactive GUI playtest.
+
+Native client appearance/hotkey interaction, all third-party mod combinations, a complete long campaign and live multiplayer/GPU/UPS profiling remain unverified. Previews are source-art studies, not gameplay recordings. See the verification ledger for executed results.

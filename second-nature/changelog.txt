@@ -1,4 +1,18 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.6.2
+Date: 2026-09-07
+  Changes:
+    - Keep inventory-based field drones and their no-power controller; automatically enable newly discovered crews and clearly show Ctrl + Shift + B for pause/resume.
+    - Unlock native blueprint, copy/paste, undo/redo, deconstruction and upgrade planner shortcuts with early field robotics.
+    - Add explicit planner deconstruction with content recovery and native in-place upgrades with exact new/old item accounting.
+    - Add two early field-only tuning researches for reach, speed and work duration.
+    - Update drone positions each tick and render sixteen directional 3D views with separate ground shadows.
+    - Replace oversized spherical chest panels with a reduced, tapered teardrop profile and round the boot outlines and toe caps.
+    - Place the right-hand pickaxe grip at 48% of the shaft, above the left hand at 16%.
+  Compatibility:
+    - Preserve saved manual pauses, existing drone/controller items and in-flight escrow; do not add an armor or power requirement.
+    - Preserve native blueprint configuration and return genuine deconstruction/upgrade items, with quality and inventory safeguards.
+---------------------------------------------------------------------------------------------------
 Version: 0.6.1
 Date: 2026-09-07
   Features:

@@ -88,3 +88,31 @@ def test_relaxed_arms_swing_opposite_the_advancing_leg():
     assert first.joints['wrist-1'][1]<first.joints['wrist--1'][1]
     assert other.joints['ankle-1'][1]<other.joints['ankle--1'][1]
     assert other.joints['wrist--1'][1]<other.joints['wrist-1'][1]
+
+
+def test_teardrop_chest_profile_is_smaller_and_lower_fuller_than_the_old_spheres():
+    from explorer_model import chest_panel
+    from industrial_art import Mesh
+    rings=chest_panel(Mesh(),1,(100,100,100))
+    fullest=max(rings,key=lambda r:r[4])
+    assert fullest[2]<1.49 and max(r[3] for r in rings)<.125
+    assert max(r[4] for r in rings)<.09
+    assert rings[-1][3]<fullest[3]*.15
+    assert min(r[1]-r[4] for r in rings)>-.21
+
+
+def test_right_palm_grips_at_48_percent_of_the_shaft_and_the_left_stays_lower():
+    for phase in (0,.25,.5,.75):
+        m=explorer(phase,'mining_with_tool')
+        a=m.anchors;shaft=sub(a['tool_top'],a['tool_bottom']);size=length(shaft)
+        for side,expected in ((1,.48),(-1,.16)):
+            fraction=dot(sub(m.hands[side]['palm'],a['tool_bottom']),a['tool_axis'])/size
+            assert abs(fraction-expected)<1e-8
+
+
+def test_boots_have_a_rounded_outline_and_curved_toe_cap():
+    from explorer_model import boot_mesh
+    m=boot_mesh((100,100,100))
+    assert len(m.faces)>350
+    assert len({round(p[0],5) for v,_,_ in m.faces for p in v})>25
+    assert min(p[2] for v,_,_ in m.faces for p in v)>-.10
