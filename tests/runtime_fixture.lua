@@ -152,7 +152,7 @@ function mock.entity(name,surface,pos,force,no_event)
   e.direction=0;e.prototype={allow_custom_vectors=true,inserter_pickup_position={0,-1},inserter_drop_position={0,1.2}}
   e.pickup_position={x=e.position.x,y=e.position.y-1};e.drop_position={x=e.position.x,y=e.position.y+1.2}
   e.parameters={playback_volume=1,playback_mode='local',allow_polyphony=false,volume_controlled_by_signal=false,volume_signal_id={type='virtual',name='signal-A'}}
-  e.play_note=function(instrument,note,stop) assert(e.type=='programmable-speaker');e.played={instrument=instrument,note=note,stop=stop};return true end
+  e.play_note=function(instrument,note,stop) assert(e.type=='programmable-speaker');assert(instrument>=1 and note>=1,'speaker indices are one-based');e.played={instrument=instrument,note=note,stop=stop};return true end
   e.inventory={};e.insert=function(stack) e.inventory[stack.name]=(e.inventory[stack.name] or 0)+stack.count;return stack.count end
   e.commandable.set_command=function(command) e.command=command end
   e.get_recipe=function() assert(e.type=='assembling-machine','Entity is not crafting-machine');return e._recipe and {name=e._recipe} or nil end

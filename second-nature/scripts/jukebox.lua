@@ -18,7 +18,7 @@ function J.play(player,entity,note,surface_broadcast)
   parameters.playback_mode=surface_broadcast and "surface" or "local"
   entity.parameters=parameters
   -- Native programmable-speaker playback can stop a previous note cleanly.
-  local ok=entity.play_note(0,note,true)
+  local ok=entity.play_note(1,note+1,true)
   if ok then local d=data(player);d.note=note end
   return ok
 end

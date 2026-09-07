@@ -59,9 +59,9 @@ def test_vector_editor_preserves_ownership_and_distinct_endpoints(game_lua):
 def test_native_jukebox_can_replace_and_stop_a_track(game_lua):
     game_lua.execute('''
       local J=require('scripts.jukebox');local p=mock.player(1);local e=mock.entity('sn-jukebox',game.surfaces[1])
-      assert(J.play(p,e,2,false));assert(e.played.instrument==0 and e.played.note==2 and e.played.stop)
+      assert(J.play(p,e,2,false));assert(e.played.instrument==1 and e.played.note==3 and e.played.stop)
       assert(e.parameters.playback_mode=='local' and not e.parameters.allow_polyphony)
-      assert(J.play(p,e,0,false) and e.played.note==0)
+      assert(J.play(p,e,0,false) and e.played.note==1)
       mock.multiplayer=true;p.admin=false;assert(not J.play(p,e,2,true))
       p.admin=true;assert(J.play(p,e,2,true) and e.parameters.playback_mode=='surface')
       e.force=mock.enemy;assert(not J.play(p,e,1,false))
