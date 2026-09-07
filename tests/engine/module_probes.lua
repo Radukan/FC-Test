@@ -135,7 +135,8 @@ function Probe.run(surface, force)
     local connections=machine.fluidbox.get_pipe_connections(1)
     assert(connections[1] and connections[1].target,"pipe did not attach to rotated input")
     local expected=world(first_port.position[1],first_port.position[2]-.5)
-    local actual=connections[1].position
+    local a,b=connections[1].position,connections[1].target_position
+    local actual={x=(a.x+b.x)/2,y=(a.y+b.y)/2}
     assert(math.abs(actual.x-expected.x)<.001 and math.abs(actual.y-expected.y)<.001,"connector boundary: "..serpent.line(connections[1]))
     pipe.destroy();machine.destroy()
   end

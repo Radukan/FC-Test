@@ -37,6 +37,14 @@ script.on_init(function()
   surface.pollute({0,0},100)
   storage.machine,storage.idle,storage.powerless=a,idle,powerless
   storage.baseline=remote.call('second_nature','get_world','nauvis').cycles
+  -- Physical transfer through diagonal custom vectors, not only setter acceptance.
+  local arm=build(surface,'sn-vector-inserter',{x=80.5,y=44.5})
+  arm.pickup_position={x=82.5,y=42.5};arm.drop_position={x=78.5,y=46.5}
+  local source=build(surface,'iron-chest',{x=82.5,y=42.5})
+  local destination=build(surface,'iron-chest',{x=78.5,y=46.5})
+  assert(source.insert({name='iron-plate',count=4})==4)
+  build(surface,'substation',{x=84,y=48});build(surface,'electric-energy-interface',{x=86,y=49})
+  storage.transfer_source,storage.transfer_destination=source,destination
   -- New stable campaign prototypes and real inventory APIs.
   local ship=build(surface,'sn-lander',{x=64,y=64})
   for _,item in ipairs(C.landing_cargo) do assert(ship.insert({name=item[1],count=item[2]})==item[2],item[1]) end
@@ -55,6 +63,7 @@ script.on_nth_tick(60,function()
   assert(storage.machine.products_finished==1,'a single batch must increment products_finished by exactly one')
   assert(storage.idle.products_finished==0,'idle machine must not craft')
   assert(storage.powerless.products_finished==0,'unpowered machine must not craft')
+  assert(storage.transfer_source.get_item_count('iron-plate')==0 and storage.transfer_destination.get_item_count('iron-plate')==4,'custom-vector inserter did not transfer its batch')
   local snapshot=remote.call('second_nature','get_world','nauvis')
   assert(snapshot.cycles==storage.baseline+1,'one actual completed cycle must earn one ecological cycle')
   assert(snapshot.values.atmosphere>C.profiles.nauvis.initial.atmosphere,'powered scrubber must improve atmosphere')
