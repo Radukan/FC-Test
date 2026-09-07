@@ -1,0 +1,145 @@
+{
+  "description": "Current source-art review ledger. These files are not game screenshots or gameplay certification.",
+  "version": "0.6.0",
+  "inputs": {
+    "docs/art/lander-render.json": "57e554b1e825f0a390dac910918bfccab853d0a6122ada20f70f78d8b9b3392c",
+    "second-nature/graphics/entity/industry/air-scrubber-north.png": "c37935db168021917e8bd3bc54f25208e586d7c3ab7c5adf981126d6c44135f7",
+    "second-nature/graphics/entity/industry/algae-vat-plant-north.png": "c740391f7d861195bb5af8738e22319cc42fb269969836ba511ed0c127c3f758",
+    "second-nature/graphics/entity/industry/arc-turret-fire.png": "ed5029ae8a74d598d2d14b5108f44839c926f975bcd43aaf18ec20095943861f",
+    "second-nature/graphics/entity/industry/basalt-conditioner-plant-north.png": "87c9c9b47d0eeb09aa89be979024e2b0df77829b233e79d7ce41a82a47c16dc6",
+    "second-nature/graphics/entity/industry/canopy-inserter-north.png": "3efaf2d26af611ee482c935f237d442491cfc1c79b90d7300596b87a32598072",
+    "second-nature/graphics/entity/industry/composter-north.png": "9e2a695594f06dd32704fcdadf72bdf93984f050210362d4450bcaed4ff07b93",
+    "second-nature/graphics/entity/industry/cryogenic-garden-plant-north.png": "f3e371d0de3cc5d9191c9d9aafd26931c9195cebf2e7a52d58e09d50d333faab",
+    "second-nature/graphics/entity/industry/detoxifier-plant-north.png": "c20bf0eeed71c7d58722176799abfd3056d8ef756fef42256f3ee0a49283cbcc",
+    "second-nature/graphics/entity/industry/ecology-monitor-north.png": "6239ef8a49b7e426e5775eef2b2a9930d17711172112df8e67f7aa8083c433d7",
+    "second-nature/graphics/entity/industry/electrolyzer-plant-north.png": "76c21418bd8128efa4b2af5026ccd6ef2531378974cf03a36c6cfc21d624f484",
+    "second-nature/graphics/entity/industry/explorer-0-idle.png": "65ffda7f030e5b53167d7aa4e57d2c846572686b204b57fb5b6e0dedfed7efa4",
+    "second-nature/graphics/entity/industry/explorer-0-mining_with_tool.png": "602e7f9d4a114777bc1039c0d7f80667cc2d51717e38a7a2896e8acc36033a03",
+    "second-nature/graphics/entity/industry/explorer-0-running.png": "0cf2c2fd0b89429d33d1bfa55616f0b57047ae495407b672daf53d2a5bbaa824",
+    "second-nature/graphics/entity/industry/explorer-0-running_with_gun.png": "2c3596e5d02e95d30e5b747c5e0511e6214c351b6674cb0fcc721dda601a5b53",
+    "second-nature/graphics/entity/industry/explorer-1-idle.png": "b63879ff64d1f298c7fe1aeb804772cf226b9ee3a3309d1ef345589d873980bb",
+    "second-nature/graphics/entity/industry/explorer-2-idle.png": "90d33ce17ef72f151747502c5786408e1a73d7c211b722d5a6185dc02519eaa8",
+    "second-nature/graphics/entity/industry/field-crate-north.png": "0654c9ac6f2452cf63bdc29f691aa3da25e6b43cf78e481fc92c87acc7af5c68",
+    "second-nature/graphics/entity/industry/field-pole-north.png": "6e1ec07b9ff8f6729ca9d67041f8c46bf1a701277cbf1ec86e15caa599f08f0a",
+    "second-nature/graphics/entity/industry/forcing-tower-north.png": "7cec30f8215a88b86e0975ac6f79729237cc20ad2e1831c6c9e851aefb03b5a5",
+    "second-nature/graphics/entity/industry/fulgoran-reclaimer-plant-north.png": "33734cac6714a6a59969892a98e603226fb9640eb0dee9df3559423ec67d0d5a",
+    "second-nature/graphics/entity/industry/hydroponics-bay-plant-north.png": "0cccbcc28b1e6535a67462e728801006d96a4485275d4e5fe7c17e8268a2e08e",
+    "second-nature/graphics/entity/industry/jukebox-north.png": "2e73080c31c6f2c37dfba4d3135e4c8fa63fe895c53b6e4cd410b402920b7481",
+    "second-nature/graphics/entity/industry/lance-turret-fire.png": "a20292c0b0eed9bfa8adc386b76688527238de4f49a4d177708bed3cf6bc830c",
+    "second-nature/graphics/entity/industry/lander-still.png": "820d0477c7e42611cb83e75f9fc832a98fb31d609e249eb1fece3b714a243471",
+    "second-nature/graphics/entity/industry/lander.png": "c4573f547839f5236796d9fe0c37c77b3e596bd9c0a7ca4d320cdb1ecfaf7b23",
+    "second-nature/graphics/entity/industry/materials-kiln-plant-north.png": "270b7a31d58b3848e052b44629de2be6942e720fe8e0d722df06ac4be54a29a7",
+    "second-nature/graphics/entity/industry/pheromone-dampener-north.png": "623ce9158ca6e1b8bcd049d58e571c6578277dd97c68d77efdff761e6830a3dc",
+    "second-nature/graphics/entity/industry/planetary-beacon-plant-north.png": "531198710f4f54eb67d9cf4eae5d2b1750692106b2eedfa3ca704b80d163b8f2",
+    "second-nature/graphics/entity/industry/pyrolyzer-north.png": "1b306c8044a4a53e9aa642e6ab567eeed181454af295330d08d735b9d4f941cc",
+    "second-nature/graphics/entity/industry/reclamation-plant-plant-north.png": "b65dce1a8fb6cedfdc9cc297343ec2b7ec4f2650f109dbab553829ed34bd1b4f",
+    "second-nature/graphics/entity/industry/sanctuary-plant-north.png": "33ffe01d1e96367c87888b67f9c116c3ac69fde020a8d6dff3e0e7233eeca789",
+    "second-nature/graphics/entity/industry/seed-disperser-north.png": "7e3c0d53697b55d0595af6122b891ac45e3c9040f57840a433f406c507066bb8",
+    "second-nature/graphics/entity/industry/sentry-turret-fire.png": "b5d1b311116ea2046f5394f71ff151c69739714508a032d88d098a4d9894477b",
+    "second-nature/graphics/entity/industry/soil-enricher-north.png": "1453d5557dc3ee202d52be491e05d4c9ab15cd2ce4b72ef0e25e26138606ccb8",
+    "second-nature/graphics/entity/industry/spore-tower-plant-north.png": "bb251eee345fc3cc297cba7a9c13c70fc30318fd9e6985d88146a2c292967ba6",
+    "second-nature/graphics/entity/industry/thermal-exchanger-plant-north.png": "6689e3ae43ec256451a749c174d42a5c26e26129622a3f31ada1f5e136e65d33",
+    "second-nature/graphics/entity/industry/vector-inserter-north.png": "317395746487db44cc5f29132e4df40563772907c1362b17343118bb5b631831",
+    "second-nature/graphics/entity/industry/vital-splitter-north.png": "076df233a1d6220ff35fd99bb814b9c069b4b5e5c0ee218ac7c83f5c583c1380",
+    "second-nature/graphics/entity/industry/watershed-plant-north.png": "33a57dd3b553ca86238377928e417321d5adaf595c46a36570a61603d57ea0de"
+  },
+  "outputs": {
+    "ironbound-contact-sheet.jpg": "5bbb36bb4942eace9343968e0b6e21ccda680e1471bef0af1487a6e2fff915ee",
+    "character-aim-layout.jpg": "2abb88746a7c34ec34e0b0da74b4fe1eb4fb619ffdc4d2e8c3d2b62843dc5f13",
+    "locomotion-review.gif": "0addafbfb5761dad09af26f864c61948e2138b8ad708b03191f8a7d246569677",
+    "mining-framing-preview.gif": "1d6c9f843073fb3e893d4444c83ae15f5c1cb67e6f2147fe031c952ea8ccce14",
+    "industrial-animation-preview.gif": "867dfe0b2aa748891e8380575baf08bee32af75ba8aecc1d9171418fd8d04e0c",
+    "lander-review.jpg": "5bd21ee36b7ae38fb2cddb6c6f1cdc8b6dd1f31791b18f858a2043bc14200cdd",
+    "lander-standby.gif": "d92c72d4c4a57d392280c3b0b25b2c0b9ccbf8bda495487db50fa38ae0c6eb49"
+  },
+  "canonical_machines": {
+    "algae-vat": {
+      "art_name": "algae-vat-plant",
+      "footprint": 5
+    },
+    "composter": {
+      "art_name": "composter",
+      "footprint": 3
+    },
+    "hydroponics-bay": {
+      "art_name": "hydroponics-bay-plant",
+      "footprint": 5
+    },
+    "electrolyzer": {
+      "art_name": "electrolyzer-plant",
+      "footprint": 5
+    },
+    "reclamation-plant": {
+      "art_name": "reclamation-plant-plant",
+      "footprint": 5
+    },
+    "materials-kiln": {
+      "art_name": "materials-kiln-plant",
+      "footprint": 5
+    },
+    "pyrolyzer": {
+      "art_name": "pyrolyzer",
+      "footprint": 3
+    },
+    "air-scrubber": {
+      "art_name": "air-scrubber",
+      "footprint": 3
+    },
+    "soil-enricher": {
+      "art_name": "soil-enricher",
+      "footprint": 3
+    },
+    "seed-disperser": {
+      "art_name": "seed-disperser",
+      "footprint": 3
+    },
+    "watershed": {
+      "art_name": "watershed-plant",
+      "footprint": 5
+    },
+    "thermal-exchanger": {
+      "art_name": "thermal-exchanger-plant",
+      "footprint": 5
+    },
+    "detoxifier": {
+      "art_name": "detoxifier-plant",
+      "footprint": 5
+    },
+    "pheromone-dampener": {
+      "art_name": "pheromone-dampener",
+      "footprint": 3
+    },
+    "forcing-tower": {
+      "art_name": "forcing-tower",
+      "footprint": 3
+    },
+    "basalt-conditioner": {
+      "art_name": "basalt-conditioner-plant",
+      "footprint": 5
+    },
+    "fulgoran-reclaimer": {
+      "art_name": "fulgoran-reclaimer-plant",
+      "footprint": 5
+    },
+    "spore-tower": {
+      "art_name": "spore-tower-plant",
+      "footprint": 5
+    },
+    "cryogenic-garden": {
+      "art_name": "cryogenic-garden-plant",
+      "footprint": 7
+    },
+    "sanctuary": {
+      "art_name": "sanctuary-plant",
+      "footprint": 7
+    },
+    "planetary-beacon": {
+      "art_name": "planetary-beacon-plant",
+      "footprint": 7
+    },
+    "ecology-monitor": {
+      "art_name": "ecology-monitor",
+      "footprint": 1
+    }
+  }
+}

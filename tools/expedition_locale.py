@@ -2,8 +2,8 @@
 
 def add_expedition_locale(put):
     groups={
-      'entity-name':{'sn-lander':'Ironbound expedition lander','sn-field-pole':'Riveted power pole','sn-field-crate':'Mineral-frame equipment crate'},
-      'entity-description':{'sn-lander':'An armored atmospheric landing craft with protected cargo storage, standby ventilation and an autonomous maintenance supply. Its atmospheric propulsion cannot reach orbit.'},
+      'entity-name':{'sn-lander':'Wayfarer expedition lander','sn-field-pole':'Riveted power pole','sn-field-crate':'Mineral-frame equipment crate'},
+      'entity-description':{'sn-lander':'A riveted expedition shuttle with a pressurized flight deck, twin atmospheric engine pods, sealed seed canisters and folded solar cells. Hydraulic struts support its protected cargo hold and boarding ramp. Its propulsion cannot reach orbit.'},
       'ammo-category-name':{'sn-induction':'Induction cells'},
       'mod-setting-name':{'sn-expedition-character':'Industrial expedition explorer'},
       'mod-setting-description':{

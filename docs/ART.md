@@ -1,4 +1,18 @@
-# Foundry and Field art notes
+# Verdant Works art notes
+
+The current [contact sheet](art/ironbound-contact-sheet.jpg) uses the canonical expanded plant keys. See [the continuation audit](CONTINUATION-AUDIT.md) for the recovered 0.6 work and the finishing fixes.
+
+## Wayfarer shuttle
+
+`tools/lander_model.py` authors a tapered elliptical fuselage with divided cockpit glazing, twin atmospheric engine pods, lift fans, swept stabilizers, hydraulic landing gear and a cargo ramp. Worn ceramic/steel plating, sage paint, copper service lines, sealed seed canisters and folded solar cells fit the industrial-solarpunk setting. There is no rectangular building plinth or flight flame on the parked craft.
+
+`shared/lander_layout.lua` owns the unchanged collision/selection geometry, render view and standby speed. The static sprite supplies the hull and its single cast shadow. `tools/lander_export.py` exports a narrow opaque overlay for only changing pixels, checks exact reconstruction against eight complete reference renders, and records hashes/crop coordinates in `art/lander-render.json`. Runtime art migration changes only the render object, never the cargo entity.
+
+## Complete framing and reproducible reviews
+
+The compact-sized 0.6 process canvases truncated some long shadows. Canonical `machine_layouts.lua` views now include extra vertical space, with compensated Lua shifts and unchanged pixel density. `sprite_bounds.py` checks all mesh/shadow vertices during export; regressions also check the alpha margin of every finished working frame. Pipe coordinates are not moved to accommodate artwork.
+
+Run `python tools/generate_presentation_previews.py` after asset export. This uses Pillow and the Lua catalog, not the optional rasterizer. It regenerates current building/character/ship reviews and `art/review-manifest.json`, which fingerprints the inputs and outputs. Static contact cards trim transparent margins; animation review panels retain the same crop for the whole loop. Locomotion and production reviews are deliberately slowed for inspection; mining and ship reviews use their declared authoring rates. These are not claims about gameplay timing under every native modifier.
 
 All production/defense/player meshes are authored for this project. The assets are not repainted or redistributed Factorio textures. The visual treatment uses desaturated painted steel, copper, mineral surfaces, worn seams, service fittings and directional light to sit more naturally beside industrial machinery.
 

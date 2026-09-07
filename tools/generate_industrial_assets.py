@@ -64,18 +64,21 @@ def render_all(only=None):
     for entry in catalog['machines']:
         name=entry['name']
         if only and name not in only:continue
-        size={1:160,3:320,5:448,7:640}[entry['footprint']]
-        art_name=entry['art_name']
-        origin=.57 if entry['footprint']==7 else .6
+        view=entry['art_view'];art_name=entry['art_name']
+        from sprite_bounds import assert_sprite_fits
         for index,direction in enumerate(DIRECTIONS):
-            preview=animate(art_name+'-'+direction,lambda t,_:machine(name,t),size,frames=8,angles=[index*math.pi/2],origin=origin,map_aligned=True)
+            def model(t,_):
+                result=machine(name,t)
+                assert_sprite_fits(result,view,index*math.pi/2,(name,direction,t))
+                return result
+            preview=animate(art_name+'-'+direction,model,view['width'],view['height'],frames=8,
+                            angles=[index*math.pi/2],origin=view['origin'],ppu=view['ppu'],map_aligned=True)
             if index==0:previews.append((entry['title'],preview));icon(preview,name)
         print('BUILDING',name,flush=True)
     if not only or 'lander' in only:
-        preview=animate('lander',lambda t,_:lander(t),768,640,frames=8,angles=[math.pi])
-        previews.append(('Intact expedition lander',preview));icon(preview,'lander')
-        # Container picture is a single frame; runtime overlay supplies the animated lamps/rotors.
-        save(preview,OUT/'lander-still.png');manifest['lander-still']=spec('lander-still',768,640,1)
+        from lander_export import export_lander
+        preview=export_lander(manifest,save,icon)
+        previews.append(('Wayfarer expedition lander',preview))
         print('LANDER',flush=True)
     for name in ('sentry-turret','arc-turret','lance-turret'):
         if only and name not in only:continue

@@ -1,4 +1,26 @@
-# Verification ledger: Living World 0.5.0 alpha
+# Verification ledger: Verdant Works 0.6.0 alpha
+
+## Current continuation / 7 September 2026
+
+The previous 0.6 source commit, `eb8213737c055de109d0ee3a9c192fa110e4e9e9`, passed [source and official stable-engine CI](https://github.com/Radukan/FC-Test/actions/runs/34088602288). It also passed **178 tests** after recovery into this workspace with the pinned official 2.0.77 prototype data present. See [the continuation audit](CONTINUATION-AUDIT.md) for what was already done versus finished here.
+
+The finished continuation passes **192 local tests** with that same pinned data. `git diff --check` passes. The deterministic 0.6.0 ZIP was built, and its SHA-256 sidecar verifies successfully.
+
+Added verification covers:
+
+- Every current machine sheet's complete alpha margins, canonical view and compensated ground/pipe pivot.
+- Mesh and cast-shadow bounds in all rotations; the exporter checks every generated frame.
+- The Wayfarer model's physical bounds inside the preserved lander collision box.
+- One static hull/shadow plus a cropped opaque overlay: every composed frame exactly matches its complete reference render.
+- Render-only migration of an existing camp, depleted cargo preservation, unchanged entity/position/rocket history, missing-ship behavior, and no duplicate animation after repeated configuration changes.
+- Current contact/locomotion/mining/process/ship previews tied to actual source sprites by SHA-256, with complete loops and explicit source-review timing.
+- Updated generated footprint documentation and all README art links.
+
+**Current official-engine rerun: pending the branch CI result.** The direct Factorio download failed from this sandbox, so the required native create/reload/2,100-tick probes run on GitHub's runner. The new required marker is `SECOND_NATURE_ENGINE_LANDER_REFIT_OK`; existing Verdant layout, pipe/vector, audio API, campaign and smoke markers remain mandatory. A successful source harness alone is not a native-engine pass.
+
+No graphical Factorio client or two-client multiplayer test was run here. Source-art review is not a screenshot/playthrough certificate. In particular, native character/Mech transitions, exact client pipe seams, audible arrival/music/jukebox behavior, GPU use and long-term campaign balance remain unverified. The 0.6.0 ZIP is a source build, not a newly published GitHub release.
+
+## Historical Living World 0.5.0 evidence
 
 ## Completed stable-engine evidence
 

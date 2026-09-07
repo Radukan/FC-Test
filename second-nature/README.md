@@ -1,3 +1,5 @@
+![Wayfarer expedition shuttle - original rendered sprite](https://github.com/Radukan/FC-Test/blob/arena/01a07c4e-fc-test/docs/art/lander-review.jpg)
+
 # Second Nature · Verdant Works
 ### Stable Factorio 2.0 / Space Age restoration overhaul · v0.6.0 alpha
 
@@ -7,9 +9,18 @@ Nauvis has no natural trees or fish in a fresh campaign. The broods tolerate you
 
 ## Download
 
-### [Second Nature 0.6.0 - stable Factorio 2.0](https://github.com/Radukan/FC-Test/releases/download/v0.6.0-factorio-2.0/second-nature_0.6.0.zip)
+### Verdant Works 0.6.0 / source build
 
-[Release notes and checksum](https://github.com/Radukan/FC-Test/releases/tag/v0.6.0-factorio-2.0). **Private repository: sign in to GitHub with repository access.** Use the named mod ZIP, not GitHub’s automatic source archive.
+This checkout contains **0.6.0**, including the articulated explorer, expanded process plants and Wayfarer lander refit. It is **not yet a published GitHub release**. Build the installable archive with:
+
+```sh
+python3 tools/package.py
+# artifacts/factorio-2.0/second-nature_0.6.0.zip
+```
+
+The [validation workflow](https://github.com/Radukan/FC-Test/actions/workflows/validate.yml) also uploads an installable mod artifact for each successful source job. Select the run for the source commit you want, and check its separate engine job too.
+
+The previously published [0.5.0 release and checksum](https://github.com/Radukan/FC-Test/releases/tag/v0.5.0-factorio-2.0) remain available, but **do not contain these 0.6.0 changes**. Private repository downloads require GitHub access. Use the named mod ZIP, not GitHub's automatic source archive.
 
 1. Use **Factorio 2.0.77**, **Space Age**, **Quality** and **Elevated Rails**.
 2. Back up saves and replace older Second Nature ZIP/source copies with `second-nature_0.6.0.zip`, still zipped, in the Factorio `mods` folder.
@@ -35,9 +46,9 @@ Process plants have been redesigned as different architectures rather than varia
 
 **Existing factories are not expanded in place.** Surviving compact plants keep their original collision boxes and pipe positions. New inventory placement uses the larger versions; old compact blueprints remain compatible. Mining a compact plant returns the normal item, whose next ordinary placement uses the larger footprint. Allow room before rebuilding a compact production block.
 
-The new plants keep the same recipe identities, production speed, energy requirements and ecological rates. The increased footprint represents their internal process equipment, not a hidden throughput bonus. Their visible nozzles share the enlarged native fluid-port coordinates.
+The new plants keep the same recipe identities, production speed, energy requirements and ecological rates. The increased footprint represents their internal process equipment, not a hidden throughput bonus. Their visible nozzles share the enlarged native fluid-port coordinates. Expanded render canvases retain complete cast shadows in every rotation, with compensated shifts so the ground pivot and pipe seams do not move.
 
-[Building contact sheet](https://github.com/Radukan/FC-Test/blob/arena/01a07515-fc-test/docs/art/ironbound-contact-sheet.jpg) · [Locomotion review](https://github.com/Radukan/FC-Test/blob/arena/01a07515-fc-test/docs/art/locomotion-review.gif) · [Mining review](https://github.com/Radukan/FC-Test/blob/arena/01a07515-fc-test/docs/art/mining-framing-preview.gif)
+[Building contact sheet](https://github.com/Radukan/FC-Test/blob/arena/01a07c4e-fc-test/docs/art/ironbound-contact-sheet.jpg) · [Locomotion review](https://github.com/Radukan/FC-Test/blob/arena/01a07c4e-fc-test/docs/art/locomotion-review.gif) · [Mining review](https://github.com/Radukan/FC-Test/blob/arena/01a07c4e-fc-test/docs/art/mining-framing-preview.gif)
 
 The voiced arrival, jukebox, biological defenses, inserter vector controls and endgame logistics remain. Source-art previews and kinematic tests do not replace graphical-client review of every native animation/movement combination.
 
@@ -45,9 +56,13 @@ The voiced arrival, jukebox, biological defenses, inserter vector controls and e
 
 ### An intact, permanent lander
 
-The new original landing-craft model has animated standby systems. It is **not a crash-site wreck** and remains **unmineable and indestructible in normal play**, even after your first rocket. It is a permanent cargo camp, not a free orbital vehicle. Build and launch a normal Nauvis rocket to leave.
+The **Wayfarer** is a tapered, riveted expedition shuttle with sloped cockpit glazing, swept shoulders, twin atmospheric engine pods, cold exhaust bells and vertical stabilizers. Hydraulic landing struts and a cargo ramp make it read as a landed ship rather than a square production building. Folded solar cells and sealed seed canisters carry the restrained solarpunk theme.
 
-Surviving older landers receive the same permanent protection. Already removed old hulls are not recreated with free supplies.
+Standby fans and navigation lights animate over a single static hull and ground shadow, without drawing the complete ship twice. It is **not a crash-site wreck** and remains **unmineable and indestructible in normal play**, even after your first rocket. It is a permanent cargo camp, not a free orbital vehicle. Build and launch a normal Nauvis rocket to leave.
+
+The refit preserves the original collision box, all 48 cargo slots, position, entity identity and rocket history. Surviving older landers receive the new art and the same permanent protection. Already removed old hulls are not recreated with free supplies.
+
+[Ship study](https://github.com/Radukan/FC-Test/blob/arena/01a07c4e-fc-test/docs/art/lander-review.jpg) · [Standby animation](https://github.com/Radukan/FC-Test/blob/arena/01a07c4e-fc-test/docs/art/lander-standby.gif) · [Continuation audit](https://github.com/Radukan/FC-Test/blob/arena/01a07c4e-fc-test/docs/CONTINUATION-AUDIT.md)
 
 ### A genuinely wood-free beginning
 
@@ -158,10 +173,10 @@ Recover cargo → steam power → stone/silica/glass → Pioneer biology → nut
 
 ## Testing and development
 
-This is an **alpha**, not a claim of a completed balanced campaign. [Verification ledger](https://github.com/Radukan/FC-Test/blob/arena/01a07515-fc-test/docs/VERIFICATION.md) distinguishes offline/source tests, actual headless checks and outstanding graphical/full-game/multiplayer work. Releases require real stable-engine validation and a re-download/checksum comparison.
+This is an **alpha**, not a claim of a completed balanced campaign. [Verification ledger](https://github.com/Radukan/FC-Test/blob/arena/01a07c4e-fc-test/docs/VERIFICATION.md) distinguishes offline/source tests, actual headless checks and outstanding graphical/full-game/multiplayer work. Releases require real stable-engine validation and a re-download/checksum comparison.
 
-- [Full catalog](https://github.com/Radukan/FC-Test/blob/arena/01a07515-fc-test/docs/CATALOG.md) · [Balance equations](https://github.com/Radukan/FC-Test/blob/arena/01a07515-fc-test/docs/BALANCE.md) · [Model-only timing](https://github.com/Radukan/FC-Test/blob/arena/01a07515-fc-test/docs/SIMULATION.md)
-- [Campaign design](https://github.com/Radukan/FC-Test/blob/arena/01a07515-fc-test/docs/DESIGN.md) · [Development and art regeneration](https://github.com/Radukan/FC-Test/blob/arena/01a07515-fc-test/docs/DEVELOPING.md)
+- [Full catalog](https://github.com/Radukan/FC-Test/blob/arena/01a07c4e-fc-test/docs/CATALOG.md) · [Balance equations](https://github.com/Radukan/FC-Test/blob/arena/01a07c4e-fc-test/docs/BALANCE.md) · [Model-only timing](https://github.com/Radukan/FC-Test/blob/arena/01a07c4e-fc-test/docs/SIMULATION.md)
+- [Campaign design](https://github.com/Radukan/FC-Test/blob/arena/01a07c4e-fc-test/docs/DESIGN.md) · [Development and art regeneration](https://github.com/Radukan/FC-Test/blob/arena/01a07c4e-fc-test/docs/DEVELOPING.md)
 
 `python3 tools/package.py` builds the stable ZIP. The optional art toolchain is in `requirements-art.txt`; generated game binaries/saves/ZIPs stay out of Git.
 

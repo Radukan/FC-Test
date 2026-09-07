@@ -58,56 +58,56 @@
   "composter-north": {
     "filename": "__second-nature__/graphics/entity/industry/composter-north.png",
     "width": 320,
-    "height": 320,
+    "height": 384,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.5
+      0.0
     ],
     "apply_projection": false
   },
   "composter-east": {
     "filename": "__second-nature__/graphics/entity/industry/composter-east.png",
     "width": 320,
-    "height": 320,
+    "height": 384,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.5
+      0.0
     ],
     "apply_projection": false
   },
   "composter-south": {
     "filename": "__second-nature__/graphics/entity/industry/composter-south.png",
     "width": 320,
-    "height": 320,
+    "height": 384,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.5
+      0.0
     ],
     "apply_projection": false
   },
   "composter-west": {
     "filename": "__second-nature__/graphics/entity/industry/composter-west.png",
     "width": 320,
-    "height": 320,
+    "height": 384,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.5
+      0.0
     ],
     "apply_projection": false
   },
@@ -338,224 +338,224 @@
   "pyrolyzer-north": {
     "filename": "__second-nature__/graphics/entity/industry/pyrolyzer-north.png",
     "width": 320,
-    "height": 320,
+    "height": 384,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.5
+      0.0
     ],
     "apply_projection": false
   },
   "pyrolyzer-east": {
     "filename": "__second-nature__/graphics/entity/industry/pyrolyzer-east.png",
     "width": 320,
-    "height": 320,
+    "height": 384,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.5
+      0.0
     ],
     "apply_projection": false
   },
   "pyrolyzer-south": {
     "filename": "__second-nature__/graphics/entity/industry/pyrolyzer-south.png",
     "width": 320,
-    "height": 320,
+    "height": 384,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.5
+      0.0
     ],
     "apply_projection": false
   },
   "pyrolyzer-west": {
     "filename": "__second-nature__/graphics/entity/industry/pyrolyzer-west.png",
     "width": 320,
-    "height": 320,
+    "height": 384,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.5
+      0.0
     ],
     "apply_projection": false
   },
   "air-scrubber-north": {
     "filename": "__second-nature__/graphics/entity/industry/air-scrubber-north.png",
     "width": 320,
-    "height": 320,
+    "height": 384,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.5
+      0.0
     ],
     "apply_projection": false
   },
   "air-scrubber-east": {
     "filename": "__second-nature__/graphics/entity/industry/air-scrubber-east.png",
     "width": 320,
-    "height": 320,
+    "height": 384,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.5
+      0.0
     ],
     "apply_projection": false
   },
   "air-scrubber-south": {
     "filename": "__second-nature__/graphics/entity/industry/air-scrubber-south.png",
     "width": 320,
-    "height": 320,
+    "height": 384,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.5
+      0.0
     ],
     "apply_projection": false
   },
   "air-scrubber-west": {
     "filename": "__second-nature__/graphics/entity/industry/air-scrubber-west.png",
     "width": 320,
-    "height": 320,
+    "height": 384,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.5
+      0.0
     ],
     "apply_projection": false
   },
   "soil-enricher-north": {
     "filename": "__second-nature__/graphics/entity/industry/soil-enricher-north.png",
     "width": 320,
-    "height": 320,
+    "height": 384,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.5
+      0.0
     ],
     "apply_projection": false
   },
   "soil-enricher-east": {
     "filename": "__second-nature__/graphics/entity/industry/soil-enricher-east.png",
     "width": 320,
-    "height": 320,
+    "height": 384,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.5
+      0.0
     ],
     "apply_projection": false
   },
   "soil-enricher-south": {
     "filename": "__second-nature__/graphics/entity/industry/soil-enricher-south.png",
     "width": 320,
-    "height": 320,
+    "height": 384,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.5
+      0.0
     ],
     "apply_projection": false
   },
   "soil-enricher-west": {
     "filename": "__second-nature__/graphics/entity/industry/soil-enricher-west.png",
     "width": 320,
-    "height": 320,
+    "height": 384,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.5
+      0.0
     ],
     "apply_projection": false
   },
   "seed-disperser-north": {
     "filename": "__second-nature__/graphics/entity/industry/seed-disperser-north.png",
     "width": 320,
-    "height": 320,
+    "height": 384,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.5
+      0.0
     ],
     "apply_projection": false
   },
   "seed-disperser-east": {
     "filename": "__second-nature__/graphics/entity/industry/seed-disperser-east.png",
     "width": 320,
-    "height": 320,
+    "height": 384,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.5
+      0.0
     ],
     "apply_projection": false
   },
   "seed-disperser-south": {
     "filename": "__second-nature__/graphics/entity/industry/seed-disperser-south.png",
     "width": 320,
-    "height": 320,
+    "height": 384,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.5
+      0.0
     ],
     "apply_projection": false
   },
   "seed-disperser-west": {
     "filename": "__second-nature__/graphics/entity/industry/seed-disperser-west.png",
     "width": 320,
-    "height": 320,
+    "height": 384,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.5
+      0.0
     ],
     "apply_projection": false
   },
@@ -730,112 +730,112 @@
   "pheromone-dampener-north": {
     "filename": "__second-nature__/graphics/entity/industry/pheromone-dampener-north.png",
     "width": 320,
-    "height": 320,
+    "height": 384,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.5
+      0.0
     ],
     "apply_projection": false
   },
   "pheromone-dampener-east": {
     "filename": "__second-nature__/graphics/entity/industry/pheromone-dampener-east.png",
     "width": 320,
-    "height": 320,
+    "height": 384,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.5
+      0.0
     ],
     "apply_projection": false
   },
   "pheromone-dampener-south": {
     "filename": "__second-nature__/graphics/entity/industry/pheromone-dampener-south.png",
     "width": 320,
-    "height": 320,
+    "height": 384,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.5
+      0.0
     ],
     "apply_projection": false
   },
   "pheromone-dampener-west": {
     "filename": "__second-nature__/graphics/entity/industry/pheromone-dampener-west.png",
     "width": 320,
-    "height": 320,
+    "height": 384,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.5
+      0.0
     ],
     "apply_projection": false
   },
   "forcing-tower-north": {
     "filename": "__second-nature__/graphics/entity/industry/forcing-tower-north.png",
     "width": 320,
-    "height": 320,
+    "height": 384,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.5
+      0.0
     ],
     "apply_projection": false
   },
   "forcing-tower-east": {
     "filename": "__second-nature__/graphics/entity/industry/forcing-tower-east.png",
     "width": 320,
-    "height": 320,
+    "height": 384,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.5
+      0.0
     ],
     "apply_projection": false
   },
   "forcing-tower-south": {
     "filename": "__second-nature__/graphics/entity/industry/forcing-tower-south.png",
     "width": 320,
-    "height": 320,
+    "height": 384,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.5
+      0.0
     ],
     "apply_projection": false
   },
   "forcing-tower-west": {
     "filename": "__second-nature__/graphics/entity/industry/forcing-tower-west.png",
     "width": 320,
-    "height": 320,
+    "height": 384,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.5
+      0.0
     ],
     "apply_projection": false
   },
@@ -1178,83 +1178,85 @@
   "ecology-monitor-north": {
     "filename": "__second-nature__/graphics/entity/industry/ecology-monitor-north.png",
     "width": 160,
-    "height": 160,
+    "height": 192,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.25
+      0.0
     ],
     "apply_projection": false
   },
   "ecology-monitor-east": {
     "filename": "__second-nature__/graphics/entity/industry/ecology-monitor-east.png",
     "width": 160,
-    "height": 160,
+    "height": 192,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.25
+      0.0
     ],
     "apply_projection": false
   },
   "ecology-monitor-south": {
     "filename": "__second-nature__/graphics/entity/industry/ecology-monitor-south.png",
     "width": 160,
-    "height": 160,
+    "height": 192,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.25
+      0.0
     ],
     "apply_projection": false
   },
   "ecology-monitor-west": {
     "filename": "__second-nature__/graphics/entity/industry/ecology-monitor-west.png",
     "width": 160,
-    "height": 160,
+    "height": 192,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.25
+      0.0
     ],
     "apply_projection": false
   },
   "lander": {
+    "direction_count": 1,
+    "scale": 0.4,
+    "apply_projection": false,
     "filename": "__second-nature__/graphics/entity/industry/lander.png",
-    "width": 768,
-    "height": 640,
+    "width": 68,
+    "height": 426,
     "frame_count": 8,
     "line_length": 8,
-    "direction_count": 1,
-    "scale": 0.5,
     "shift": [
-      0,
-      -2.0
+      0.65,
+      -0.8205
     ]
   },
   "lander-still": {
+    "direction_count": 1,
+    "scale": 0.4,
+    "apply_projection": false,
     "filename": "__second-nature__/graphics/entity/industry/lander-still.png",
-    "width": 768,
-    "height": 640,
+    "width": 1024,
+    "height": 768,
     "frame_count": 1,
     "line_length": 1,
-    "direction_count": 1,
-    "scale": 0.5,
     "shift": [
       0,
-      -2.0
+      0.192
     ]
   },
   "sentry-turret-idle": {
@@ -2227,616 +2229,616 @@
   "algae-vat-plant-north": {
     "filename": "__second-nature__/graphics/entity/industry/algae-vat-plant-north.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "algae-vat-plant-east": {
     "filename": "__second-nature__/graphics/entity/industry/algae-vat-plant-east.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "algae-vat-plant-south": {
     "filename": "__second-nature__/graphics/entity/industry/algae-vat-plant-south.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "algae-vat-plant-west": {
     "filename": "__second-nature__/graphics/entity/industry/algae-vat-plant-west.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "hydroponics-bay-plant-north": {
     "filename": "__second-nature__/graphics/entity/industry/hydroponics-bay-plant-north.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "hydroponics-bay-plant-east": {
     "filename": "__second-nature__/graphics/entity/industry/hydroponics-bay-plant-east.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "hydroponics-bay-plant-south": {
     "filename": "__second-nature__/graphics/entity/industry/hydroponics-bay-plant-south.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "hydroponics-bay-plant-west": {
     "filename": "__second-nature__/graphics/entity/industry/hydroponics-bay-plant-west.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "electrolyzer-plant-north": {
     "filename": "__second-nature__/graphics/entity/industry/electrolyzer-plant-north.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "electrolyzer-plant-east": {
     "filename": "__second-nature__/graphics/entity/industry/electrolyzer-plant-east.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "electrolyzer-plant-south": {
     "filename": "__second-nature__/graphics/entity/industry/electrolyzer-plant-south.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "electrolyzer-plant-west": {
     "filename": "__second-nature__/graphics/entity/industry/electrolyzer-plant-west.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "reclamation-plant-plant-north": {
     "filename": "__second-nature__/graphics/entity/industry/reclamation-plant-plant-north.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "reclamation-plant-plant-east": {
     "filename": "__second-nature__/graphics/entity/industry/reclamation-plant-plant-east.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "reclamation-plant-plant-south": {
     "filename": "__second-nature__/graphics/entity/industry/reclamation-plant-plant-south.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "reclamation-plant-plant-west": {
     "filename": "__second-nature__/graphics/entity/industry/reclamation-plant-plant-west.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "materials-kiln-plant-north": {
     "filename": "__second-nature__/graphics/entity/industry/materials-kiln-plant-north.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "materials-kiln-plant-east": {
     "filename": "__second-nature__/graphics/entity/industry/materials-kiln-plant-east.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "materials-kiln-plant-south": {
     "filename": "__second-nature__/graphics/entity/industry/materials-kiln-plant-south.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "materials-kiln-plant-west": {
     "filename": "__second-nature__/graphics/entity/industry/materials-kiln-plant-west.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "watershed-plant-north": {
     "filename": "__second-nature__/graphics/entity/industry/watershed-plant-north.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "watershed-plant-east": {
     "filename": "__second-nature__/graphics/entity/industry/watershed-plant-east.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "watershed-plant-south": {
     "filename": "__second-nature__/graphics/entity/industry/watershed-plant-south.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "watershed-plant-west": {
     "filename": "__second-nature__/graphics/entity/industry/watershed-plant-west.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "thermal-exchanger-plant-north": {
     "filename": "__second-nature__/graphics/entity/industry/thermal-exchanger-plant-north.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "thermal-exchanger-plant-east": {
     "filename": "__second-nature__/graphics/entity/industry/thermal-exchanger-plant-east.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "thermal-exchanger-plant-south": {
     "filename": "__second-nature__/graphics/entity/industry/thermal-exchanger-plant-south.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "thermal-exchanger-plant-west": {
     "filename": "__second-nature__/graphics/entity/industry/thermal-exchanger-plant-west.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "detoxifier-plant-north": {
     "filename": "__second-nature__/graphics/entity/industry/detoxifier-plant-north.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "detoxifier-plant-east": {
     "filename": "__second-nature__/graphics/entity/industry/detoxifier-plant-east.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "detoxifier-plant-south": {
     "filename": "__second-nature__/graphics/entity/industry/detoxifier-plant-south.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "detoxifier-plant-west": {
     "filename": "__second-nature__/graphics/entity/industry/detoxifier-plant-west.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "basalt-conditioner-plant-north": {
     "filename": "__second-nature__/graphics/entity/industry/basalt-conditioner-plant-north.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "basalt-conditioner-plant-east": {
     "filename": "__second-nature__/graphics/entity/industry/basalt-conditioner-plant-east.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "basalt-conditioner-plant-south": {
     "filename": "__second-nature__/graphics/entity/industry/basalt-conditioner-plant-south.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "basalt-conditioner-plant-west": {
     "filename": "__second-nature__/graphics/entity/industry/basalt-conditioner-plant-west.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "fulgoran-reclaimer-plant-north": {
     "filename": "__second-nature__/graphics/entity/industry/fulgoran-reclaimer-plant-north.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "fulgoran-reclaimer-plant-east": {
     "filename": "__second-nature__/graphics/entity/industry/fulgoran-reclaimer-plant-east.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "fulgoran-reclaimer-plant-south": {
     "filename": "__second-nature__/graphics/entity/industry/fulgoran-reclaimer-plant-south.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "fulgoran-reclaimer-plant-west": {
     "filename": "__second-nature__/graphics/entity/industry/fulgoran-reclaimer-plant-west.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "spore-tower-plant-north": {
     "filename": "__second-nature__/graphics/entity/industry/spore-tower-plant-north.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "spore-tower-plant-east": {
     "filename": "__second-nature__/graphics/entity/industry/spore-tower-plant-east.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "spore-tower-plant-south": {
     "filename": "__second-nature__/graphics/entity/industry/spore-tower-plant-south.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },
   "spore-tower-plant-west": {
     "filename": "__second-nature__/graphics/entity/industry/spore-tower-plant-west.png",
     "width": 448,
-    "height": 448,
+    "height": 512,
     "frame_count": 8,
     "line_length": 8,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.7
+      -0.2
     ],
     "apply_projection": false
   },

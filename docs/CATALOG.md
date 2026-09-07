@@ -8,32 +8,32 @@ Times are seconds at crafting speed 1. Fitness effects are percentage points per
 
 ## Machines
 
-Footprints: chemical-plant / assembling-machine-2 / biochamber derivatives are 3×3; cryogenic-plant derivatives are 5×5; the circuit monitor is 1×1. All crafting machines are electric and require heat on Aquilo.
+New construction uses the canonical footprints below. Complex processes occupy 5 x 5 or 7 x 7 tiles; simple stations remain compact. Existing compact entities and their blueprint geometry are preserved, but mining one returns the item for the new larger plant. All crafting machines are electric and require heat on Aquilo.
 
-| Machine | Power | Recipe role | Unlock |
-|---|---:|---|---|
-| Pioneer bioreactor | 180kW | bioculture | Pioneer biology |
-| Aerobic composter | 120kW | composting | The living substrate |
-| Hydroponics bay | 650kW | hydroponics | Pioneer forests |
-| Electrochemical works | 1.8MW | electrochemistry | Climate control |
-| Closed-loop reclamation plant | 800kW | reclamation | The water cycle |
-| Electric materials kiln | 900kW | kiln | Nothing left behind |
-| Dirty pyrolysis retort | 350kW | pyrolysis | Industrial forcing |
-| Atmospheric scrubber | 450kW | Fixed: Restore atmospheric balance | Atmospheric engineering |
-| Soil restoration station | 300kW | Fixed: Restore living soil | Field ecology |
-| Pioneer seed disperser | 500kW | Fixed: Seed pioneer ecosystems | Pioneer forests |
-| Watershed restoration plant | 750kW | Fixed: Restore the water cycle | The water cycle |
-| Climate heat exchanger | 4MW | Fixed: Normalize thermal balance | Climate control |
-| Mineral detoxification plant | 1.5MW | Fixed: Bind planetary toxins | Nothing left behind |
-| Pheromone dampener | 400kW | Fixed: Mask ecological disturbance | Atmospheric engineering |
-| Atmospheric forcing stack | 600kW | Fixed: Force the atmosphere [dirty] | Industrial forcing |
-| Basalt weathering station | 2.5MW | Fixed: Weather Vulcanus basalt | Weather the furnace |
-| Fulgoran remediation works | 2MW | Fixed: Recover Fulgoran legacy waste | Life after the scrapyard |
-| Symbiotic spore tower | 1.2MW | Fixed: Rebalance Gleban spores | Beyond the monoculture |
-| Cryogenic garden | 3.5MW | Fixed: Cultivate sheltered thaw zones | A garden beneath the ice |
-| Biodiversity sanctuary | 2.2MW | Fixed: Establish a biodiversity sanctuary | Many worlds, one biosphere |
-| Gaia planetary beacon | 5MW | Fixed: Coordinate the living-world network | The Gaia network |
-| Ecology circuit monitor | Passive sensor | Circuit telemetry | Field ecology |
+| Machine | New footprint | Legacy footprint | Power | Recipe role | Unlock |
+|---|---:|---:|---:|---|---|
+| Pioneer bioreactor | 5 x 5 | 3 x 3 | 180kW | bioculture | Pioneer biology |
+| Aerobic composter | 3 x 3 | 3 x 3 | 120kW | composting | The living substrate |
+| Hydroponics bay | 5 x 5 | 3 x 3 | 650kW | hydroponics | Pioneer forests |
+| Electrochemical works | 5 x 5 | 3 x 3 | 1.8MW | electrochemistry | Climate control |
+| Closed-loop reclamation plant | 5 x 5 | 3 x 3 | 800kW | reclamation | The water cycle |
+| Electric materials kiln | 5 x 5 | 3 x 3 | 900kW | kiln | Nothing left behind |
+| Dirty pyrolysis retort | 3 x 3 | 3 x 3 | 350kW | pyrolysis | Industrial forcing |
+| Atmospheric scrubber | 3 x 3 | 3 x 3 | 450kW | Fixed: Restore atmospheric balance | Atmospheric engineering |
+| Soil restoration station | 3 x 3 | 3 x 3 | 300kW | Fixed: Restore living soil | Field ecology |
+| Pioneer seed disperser | 3 x 3 | 3 x 3 | 500kW | Fixed: Seed pioneer ecosystems | Pioneer forests |
+| Watershed restoration plant | 5 x 5 | 3 x 3 | 750kW | Fixed: Restore the water cycle | The water cycle |
+| Climate heat exchanger | 5 x 5 | 3 x 3 | 4MW | Fixed: Normalize thermal balance | Climate control |
+| Mineral detoxification plant | 5 x 5 | 3 x 3 | 1.5MW | Fixed: Bind planetary toxins | Nothing left behind |
+| Pheromone dampener | 3 x 3 | 3 x 3 | 400kW | Fixed: Mask ecological disturbance | Atmospheric engineering |
+| Atmospheric forcing stack | 3 x 3 | 3 x 3 | 600kW | Fixed: Force the atmosphere [dirty] | Industrial forcing |
+| Basalt weathering station | 5 x 5 | 3 x 3 | 2.5MW | Fixed: Weather Vulcanus basalt | Weather the furnace |
+| Fulgoran remediation works | 5 x 5 | 3 x 3 | 2MW | Fixed: Recover Fulgoran legacy waste | Life after the scrapyard |
+| Symbiotic spore tower | 5 x 5 | 3 x 3 | 1.2MW | Fixed: Rebalance Gleban spores | Beyond the monoculture |
+| Cryogenic garden | 7 x 7 | 5 x 5 | 3.5MW | Fixed: Cultivate sheltered thaw zones | A garden beneath the ice |
+| Biodiversity sanctuary | 7 x 7 | 3 x 3 | 2.2MW | Fixed: Establish a biodiversity sanctuary | Many worlds, one biosphere |
+| Gaia planetary beacon | 7 x 7 | 5 x 5 | 5MW | Fixed: Coordinate the living-world network | The Gaia network |
+| Ecology circuit monitor | 1 x 1 | 1 x 1 | Passive sensor | Circuit telemetry | Field ecology |
 
 ## Restoration operations
 

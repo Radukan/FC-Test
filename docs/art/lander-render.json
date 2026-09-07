@@ -1,0 +1,33 @@
+{
+  "description": "Exact reconstruction from one static hull/shadow and a cropped opaque systems overlay. Offline renders, not gameplay.",
+  "art_revision": 2,
+  "view": {
+    "origin": 0.48,
+    "ppu": 80,
+    "height": 768,
+    "width": 1024,
+    "frames": 8,
+    "scale": 0.4
+  },
+  "overlay_crop": [
+    530,
+    90,
+    598,
+    516
+  ],
+  "moving_pixels": 4914,
+  "frame_rgba_sha256": [
+    "d3d037f7482851a7a4120c4e4eac4890924ba70792af5ed7c73f45ed64f051c0",
+    "94d9f194168d515a760b9d72643a03c346f21d779299bf88af90662a7bdc391a",
+    "d7377e6ff2e76a8f516665d0a3a287e5aeacac7fa856f854f45b30660faae3b2",
+    "f0c17b09b8a176d6fe59d36484069cbf60d27f1bee6e6dbb9ef6c2c45bb8a886",
+    "a92acad762759313c72bcb940888423d9a7431102fc0b46beeae9af3ba154c95",
+    "f91136b58fe5d2c69fc7feb1df0819945af8d8f2adaf6769c1f5977b3c52d1a2",
+    "1c0301e25fb2137747d0eba1d126de4f271d29207d5af5e85c827583fd3836a6",
+    "80b05417d27efeb05d0a552f9d4a3877820c30dc479e1449b9ae44f7faa2cea7"
+  ],
+  "files": {
+    "lander-still.png": "820d0477c7e42611cb83e75f9fc832a98fb31d609e249eb1fece3b714a243471",
+    "lander.png": "c4573f547839f5236796d9fe0c37c77b3e596bd9c0a7ca4d320cdb1ecfaf7b23"
+  }
+}

@@ -95,6 +95,12 @@ def render(mesh,width=320,height=None,ppu=64,angle=0,aa=2,origin=.70,map_aligned
     color+=scratches[:,None]
     # Low-amplitude procedural normals add grain without moving the texture through time.
     bump=np.column_stack((np.sin(surface[:,0]*89+surface[:,2]*21),np.sin(surface[:,1]*83+surface[:,2]*31),np.zeros(len(surface))))
+    if getattr(mesh, 'surface_finish', None) == 'hull':
+        # Non-periodic, model-anchored cast-metal grain; avoid a woven/checker
+        # pattern on the shuttle's broad ceramic and painted hull surfaces.
+        bump=np.column_stack((noise(surface+np.array([7.1,2.3,4.7]),32)-.5,
+                              noise(surface+np.array([1.9,8.2,3.6]),32)-.5,
+                              noise(surface+np.array([4.6,1.7,9.2]),32)-.5))
     bump-=normal*np.sum(normal*bump,axis=1)[:,None]
     normal+=bump*np.where(skin,.012,.065)[:,None];normal/=np.maximum(1e-6,np.linalg.norm(normal,axis=1))[:,None]
     ndl=np.clip(normal@light,0,1);half=unit(light+unit((0,math.cos(ELEVATION),math.sin(ELEVATION))))

@@ -11,6 +11,8 @@ local Inserters = require("scripts.inserters")
 local Jukebox = require("scripts.jukebox")
 local Ports = require("shared.fluid_ports")
 local Layouts = require("shared.machine_layouts")
+local Artwork = require("scripts.artwork")
+local Lander = require("shared.lander_layout")
 local Probe = {}
 function Probe.run(surface, force)
   S.init()
@@ -36,6 +38,24 @@ function Probe.run(surface, force)
   -- Exercise the rocket handler's shared LuaEntity API; this is NOT a rocket flight test.
   Campaign.rocket({rocket = camp.ship})
   assert(not camp.ship.minable and not camp.ship.destructible and camp.rocket_launched)
+  -- A 0.5 camp is visually refitted in place, never recreated or resupplied.
+  local ship, position = camp.ship, camp.ship.position
+  local old_animation = camp.animation
+  assert(old_animation and old_animation.valid)
+  assert(ship.remove_item({name="iron-plate",count=197})==197)
+  camp.art_revision = nil
+  Campaign.init(false)
+  assert(not old_animation.valid and camp.animation.valid and camp.art_revision==Lander.art_revision)
+  assert(camp.ship==ship and ship.get_item_count("iron-plate")==3)
+  assert(ship.position.x==position.x and ship.position.y==position.y and camp.rocket_launched)
+  assert(not ship.minable and not ship.destructible)
+  local animation_id=camp.animation.id
+  Campaign.init(false);Artwork.lander(camp)
+  assert(camp.animation.id==animation_id,"duplicate standby render after configuration change")
+  assert(Campaign.land(force,surface).ship==ship and ship.get_item_count("iron-plate")==3)
+  local collision=ship.prototype.collision_box
+  assert(math.abs(collision.left_top.x+4.7)<.005 and math.abs(collision.right_bottom.y-2.8)<.005,"lander collision contract changed")
+  log("SECOND_NATURE_ENGINE_LANDER_REFIT_OK")
 
   surface.clear_pollution()
   Pollution.sample(world, surface)

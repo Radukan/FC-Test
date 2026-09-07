@@ -61,14 +61,15 @@ Edit locale prose in `tools/generate_locale.py` / `tools/campaign_locale.py`, no
 .venv/bin/pip install -r requirements-art.txt
 .venv/bin/python tools/generate_industrial_assets.py
 .venv/bin/python tools/generate_expedition_cards.py
+.venv/bin/python tools/generate_presentation_previews.py
 ```
 
 The optional CPU renderer uses authored mesh primitives, depth-buffered polygon rasterization, directional light and Pillow antialiasing. It needs no Blender/GPU or external models. Generated sheets and `shared/art.lua`/`docs/art/sprite-manifest.json` are committed; tests and packaging do not install NumPy or regenerate them. Run the industrial tools **after** the older general icon generator so new machine/card icons remain consistent.
 
-`--only <names...>` renders selected models for iteration; run the full export before committing a new global manifest. The model/contact sheet and small animation preview are source-art inspection aids, **not in-game screenshots/footage**. Keep sprite sheets within the engine texture limit; pole picture directions must match wire-position count, and character armed locomotion needs exactly 18 or 40 variants.
+`--only <names...>` renders selected models while preserving other manifest entries. Rebuild every affected model after a shared primitive/material change. Regenerate presentation previews after either a full or selective export; fingerprint tests reject stale previews. The model/contact sheet and small animation preview are source-art inspection aids, **not in-game screenshots/footage**. Keep sprite sheets within the engine texture limit; pole picture directions must match wire-position count, and character armed locomotion needs exactly 18 or 40 variants.
 
 The basic buildings have four directional eight-frame working sets; turrets have 64 directions and four firing frames. The character has three armor looks, eight-facing idle/tool/running sets and eighteen armed locomotion variants. Review actual aiming/body orientation and fluid/wire alignment in a client - successful headless schema loading does not certify their appearance.
- Preserve it when updating procedural art.
+ Preserve the pivot, framing and native pose layout when updating procedural art.
 
 `tests/gui_reserved.lua` records stable LuaGuiElement member names from the 2.0.75 API declarations (the available near-stable typed API). The production rule is stronger: every named child uses `sn_`, so new engine members do not collide with generic child names.
 
@@ -106,7 +107,7 @@ python3 tools/package.py
 python3 tools/package.py --target 2.0
 ```
 
-Output: `artifacts/factorio-2.0/second-nature_0.5.0.zip` and its `.zip.sha256` sidecar. The canonical mod folder sits directly at the archive root. Deterministic ordering, timestamps, permissions, allowlisted source paths and metadata are tested. `--target 2.1` is rejected.
+Output: `artifacts/factorio-2.0/second-nature_0.6.0.zip` and its `.zip.sha256` sidecar. The canonical mod folder sits directly at the archive root. Deterministic ordering, timestamps, permissions, allowlisted source paths and metadata are tested. `--target 2.1` is rejected.
 
 Do not commit `.cache`, virtual environments, game binaries, saves, generated release artifacts or ZIP files. They are ignored, and large engine assets are external to the source repository.
 
@@ -117,13 +118,13 @@ The source workflow uses release tag **`v<mod-version>-factorio-2.0`**. `publish
 Example after validation (substitute the actual intended commit):
 
 ```sh
-gh release create v0.5.0-factorio-2.0 --target <validated-commit> --prerelease \
-  --title 'Second Nature 0.4.0 · Ironbound Expedition · stable 2.0' --notes-file release-notes.md
+gh release create v0.6.0-factorio-2.0 --target <validated-commit> --prerelease \
+  --title 'Second Nature 0.6.0 · Verdant Works · stable 2.0' --notes-file release-notes.md
 ```
 
 Create the release without directly uploading from the sandbox if binary uploads are blocked; the hosted publisher handles them. The repository is private, so download links require authenticated repository access. Never request credentials in chat or embed them in files.
 
-This Arena session remains on `arena/01a07515-fc-test`; push only that branch. Generated content changes and release source must be committed there. Do not silently retarget an existing release tag to different source.
+Commit generated game assets and the source used to build them together. Do not silently retarget an existing release tag to different source. The 0.6.0 source build is not a published release; the command above is a publishing example, not evidence that a release exists.
 
 ## Regression priorities
 
@@ -165,3 +166,24 @@ The audio authoring dependencies are in `requirements-art.txt`. They are not ins
 - New engine probes preserve native blueprint vector arrays, transfer actual cargo using diagonal endpoints, connect real pipes in all rotations, and issue native jukebox play/stop requests. Headless has audio disabled and still does not certify the client GUI or audible mix.
 
 The standalone editor is Shift + I. The nearby jukebox shortcut is Ctrl + Shift + J. Native belt tread/corner and inserter hand geometry is reused/tinted for alignment; new platforms, manifolds, casings and weapons are original curved meshes.
+
+## Verdant Works continuation (0.6)
+
+- `shared/machine_layouts.lua` owns the new/legacy footprints and canonical export views. Its views are exposed as `art_view` in the catalog. Frame height includes the complete ground shadow, and the Lua shift compensates the ground pivot.
+- `tools/sprite_bounds.py` is a pure-Python geometry guard used by the exporter and tests. Do not pad an already-clipped PNG; re-render its affected orientations from the model.
+- `tools/lander_model.py` authors the Wayfarer. `shared/lander_layout.lua` preserves the old collision/selection boxes and owns the source view, idle speed and art revision.
+- `tools/lander_export.py` renders the complete ship for reference, then exports one still plus an exact opaque moving-pixel overlay. It crops the overlay and compensates both shift axes. `docs/art/lander-render.json` records per-frame reconstruction hashes. No full second hull/shadow is drawn.
+- `scripts/artwork.lua` performs an idempotent render-only refit of existing camps. The protected inventory entity, cargo quantities, force, position and rocket state are not replaced.
+- The required `SECOND_NATURE_ENGINE_LANDER_REFIT_OK` marker exercises this update with real rendering objects and a deliberately depleted cargo inventory. Headless still cannot certify visual appearance.
+- `tools/generate_presentation_previews.py` reads finished atlases, uses canonical plant keys, and emits a fingerprint ledger. It can be run with the normal development dependencies, without rendering every mesh again.
+
+A focused ship rebuild is:
+
+```sh
+OPENBLAS_NUM_THREADS=1 .venv/bin/python tools/generate_industrial_assets.py --only lander
+.venv/bin/python tools/generate_presentation_previews.py
+.venv/bin/python -m pytest -q
+.venv/bin/python tools/package.py
+```
+
+See [CONTINUATION-AUDIT.md](CONTINUATION-AUDIT.md) for the actual recovered commit and the published-versus-source-build distinction. Back up an older save before testing either expanded plants or a lander refit.

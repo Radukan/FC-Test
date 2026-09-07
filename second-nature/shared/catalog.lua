@@ -336,6 +336,7 @@ for _, m in ipairs(K.machines) do
   local layout = assert(Layouts[m.name], m.name)
   m.footprint, m.previous_footprint = layout.size, layout.previous_size
   m.entity_name, m.art_name = layout.entity_name, layout.art_name
+  m.art_view = {width=layout.frame_width,height=layout.frame_height,origin=layout.origin,ppu=64,scale=.5}
   K.by_machine["sn-" .. m.name] = m
   K.by_machine[m.entity_name] = m
 end

@@ -10,6 +10,15 @@ Date: 2026-09-07
     - Expand complex plants to five-by-five or seven-by-seven footprints with matching placement geometry and fluid ports.
     - Retain compact prototypes and their old collision/port geometry for existing saves and blueprints.
     - New inventory placement uses the larger plants; existing factories are not silently expanded or moved.
+  Landing craft:
+    - Rebuild the lander as the tapered Wayfarer shuttle with sloped cockpit glazing, engine pods, stabilizers, landing struts and a cargo ramp.
+    - Add folded solar cells, sealed seed canisters, service hatches and worn industrial hull materials.
+    - Draw the hull and ground shadow once; animate only the fan wells and navigation lights with an exact, cropped overlay.
+    - Refit existing camps by replacing only their render object, preserving collision geometry, cargo and rocket history.
+  Fixes:
+    - Retain complete building cast shadows in all rotations without moving native ground pivots or pipe seams.
+    - Generate current canonical building previews and the missing locomotion review; record source-asset fingerprints.
+    - Correct stale footprint documentation, first-join version text and links to an unpublished release.
   Compatibility:
     - Preserve inventories, recipes, research, ecological rates, military systems and audio content.
     - Graphical-client validation remains distinct from geometry tests and stable headless checks.

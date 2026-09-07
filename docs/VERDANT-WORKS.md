@@ -38,3 +38,9 @@ The old variants are hidden from the normal catalog and labeled compact when ins
 - Full client review of strafe/backpedal/armor/Mech transitions, GPU memory, port seams and sustained factory behavior.
 
 The render tools and their previews are offline authoring outputs, not in-game footage.
+
+## Completed continuation
+
+See [CONTINUATION-AUDIT.md](CONTINUATION-AUDIT.md). The recovered rig and process architectures were already implemented; the continuation completes clipped building shadows, current preview generation and delivery documentation, and introduces the Wayfarer shuttle refit. Added canvas height is offset in the prototype shift, preserving the native ground/pipe pivot. Old compact entity geometry and all gameplay rates remain unchanged.
+
+The lander keeps its old collision box and inventory entity. Its single static hull/shadow is combined with a tiny opaque animated-system overlay, checked against full reference frames. An art-revision migration replaces only the render object and is idempotent across configuration changes.

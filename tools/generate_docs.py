@@ -14,11 +14,11 @@ def generate():
     text=['# Complete content catalog','','Generated from `second-nature/shared/catalog.lua` by `python tools/generate_docs.py`. Do not hand-edit tables.','',
       f"**{len(k['machines'])} machines · {len(k['recipes'])} recipes · {len(k['technologies'])} technologies · {len(k['items'])} material/science items · {len(k['fluids'])} fluids.**",'',
       'Times are seconds at crafting speed 1. Fitness effects are percentage points per completed cycle before planetary multipliers and support ceilings. No custom recipe supports productivity. Native recipe quality is disabled for operations and closed/catalytic loops.','',
-      '## Machines','','Footprints: chemical-plant / assembling-machine-2 / biochamber derivatives are 3×3; cryogenic-plant derivatives are 5×5; the circuit monitor is 1×1. All crafting machines are electric and require heat on Aquilo.','',
-      '| Machine | Power | Recipe role | Unlock |','|---|---:|---|---|']
+      '## Machines','','New construction uses the canonical footprints below. Complex processes occupy 5 x 5 or 7 x 7 tiles; simple stations remain compact. Existing compact entities and their blueprint geometry are preserved, but mining one returns the item for the new larger plant. All crafting machines are electric and require heat on Aquilo.','',
+      '| Machine | New footprint | Legacy footprint | Power | Recipe role | Unlock |','|---|---:|---:|---:|---|---|']
     for m in k['machines']:
         role=('Fixed: '+k['by_recipe']['sn-'+m['fixed']]['title']) if m.get('fixed') else ' / '.join(m['categories']) or 'Circuit telemetry'
-        text.append(f"| {m['title']} | {m.get('energy') or 'Passive sensor'} | {role} | {owners[m['name']]} |")
+        text.append(f"| {m['title']} | {m['footprint']} x {m['footprint']} | {m['previous_footprint']} x {m['previous_footprint']} | {m.get('energy') or 'Passive sensor'} | {role} | {owners[m['name']]} |")
     text+=['','## Restoration operations','','| Operation | Time | Inputs → Outputs | Ecological effect / cycle | Conditions |','|---|---:|---|---|---|']
     for r in k['recipes']:
         if not r.get('operation'):continue

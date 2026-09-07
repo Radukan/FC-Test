@@ -15,6 +15,10 @@ for name,size in pairs(sizes) do
   local large=size>previous
   layouts[name]={size=size,previous_size=previous,expanded=large,
     entity_name="sn-"..name..(large and "-plant" or ""),art_name=name..(large and "-plant" or ""),
-    frame_size=size==7 and 640 or (size==5 and 448 or (size==1 and 160 or 320)),origin=size==7 and .57 or .60}
+    -- Extra space below the ground pivot contains complete cast shadows in
+    -- every rotation. A changed canvas must never shift a native pipe seam.
+    frame_width=size==7 and 640 or (size==5 and 448 or (size==1 and 160 or 320)),
+    frame_height=size==7 and 640 or (size==5 and 512 or (size==1 and 192 or 384)),
+    origin=size==7 and .57 or (size==5 and .525 or .50)}
 end
 return layouts
