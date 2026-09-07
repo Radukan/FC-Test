@@ -3,7 +3,7 @@
 def add_expedition_locale(put):
     groups={
       'entity-name':{'sn-lander':'Ironbound expedition lander','sn-field-pole':'Riveted power pole','sn-field-crate':'Mineral-frame equipment crate'},
-      'entity-description':{'sn-lander':'An intact atmospheric landing craft, not a wreck. It retains your shared cargo and remains permanently protected from mining and damage, including after orbital access is restored. Build a normal rocket to leave Nauvis.'},
+      'entity-description':{'sn-lander':'An armored atmospheric landing craft with protected cargo storage, standby ventilation and an autonomous maintenance supply. Its atmospheric propulsion cannot reach orbit.'},
       'ammo-category-name':{'sn-induction':'Induction cells'},
       'mod-setting-name':{'sn-expedition-character':'Industrial expedition explorer'},
       'mod-setting-description':{

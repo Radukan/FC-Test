@@ -28,7 +28,7 @@ local function metric(parent, key, width)
   local bar = row.add({type = "progressbar", name = "sn_bar", value = 0, style = "sn_progress"})
   bar.style.width = math.max(80, width - 300)
   bar.style.color = C.colors[key]
-  row.add({type = "label", name = "sn_value", caption = "—", style = "sn_metric_value"})
+  row.add({type = "label", name = "sn_value", caption = " - ", style = "sn_metric_value"})
   row.tooltip = {"sn-axis-description." .. key}
 end
 local function selected_index(name)
@@ -218,7 +218,7 @@ function G.update(player)
   local local_pollution = Pollution.local_amount(player.surface, player.position)
   air_pane.sn_air_local.caption = {"sn-air.local", here and {"space-location-name." .. here} or player.surface.name,
     format(local_pollution), here == "nauvis" and math.floor(Pollution.calm(player.surface, player.position) * 100) or 0}
-  air_pane.sn_habitat.caption = {"sn-expedition.habitat-status", world and world.landscape and format(world.landscape.mean * 100) or "—",
+  air_pane.sn_habitat.caption = {"sn-expedition.habitat-status", world and world.landscape and format(world.landscape.mean * 100) or " - ",
     C.pace.landscape_goal * 100, math.floor((Upgrades.bonus(player.force) - 1) * 100 + .5)}
   air_pane.sn_toggle_overlay.caption = {prefs.air_overlay and "sn-air.overlay-on" or "sn-air.overlay-off"}
   local camp = S.root().campaign and S.root().campaign.camps[player.force.index]

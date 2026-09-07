@@ -1,4 +1,20 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.4.0
+Date: 2026-09-07
+  Graphics:
+    - Rebuild explorer aiming with the engine's mirrored armed-pose layout and a shared torso/arm/weapon rig.
+    - Expand character framing and keep one foot anchor across all states; audit tool and shadow bounds.
+    - Add detailed anatomy, fitted protective equipment, articulated hands and facial features.
+    - Rework machinery with chamfered panels, valves, gauges, conduits, bolts, worn surfaces and self-shadowing.
+  Sound:
+    - Add After the Ash, an original instrumental main-menu score with an optional startup setting.
+  Interface:
+    - Rewrite equipment and machinery descriptions around their construction and function.
+    - Remove long dash punctuation from in-game text and repository documentation; add regression checks.
+  Compatibility:
+    - Retain character/controller state, inventories, research, habitat progress and equipment mechanics.
+    - Stable Factorio 2.0 only. Graphical client review remains distinct from headless engine validation.
+---------------------------------------------------------------------------------------------------
 Version: 0.3.0
 Date: 2026-09-07
   Features:

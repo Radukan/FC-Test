@@ -27,7 +27,7 @@ class DataStage:
           math.round=function(x) return math.floor(x+0.5) end
         ''')
         self.lua.globals().settings.startup['sn-overhaul-progression'].value=overhaul
-        for name, value in ({'sn-expedition-character':True,'sn-desolate-start':True,'sn-legacy-smog':80,'sn-biter-metabolism':True,'sn-menu-background':True} | (startup_overrides or {})).items():
+        for name, value in ({'sn-menu-music':True,'sn-expedition-character':True,'sn-desolate-start':True,'sn-legacy-smog':80,'sn-biter-metabolism':True,'sn-menu-background':True} | (startup_overrides or {})).items():
             self.lua.globals().settings.startup[name] = self.lua.table_from({'value':value})
         self.lua.globals().require=self.require
         # Only enums used by upstream's data stage; no permissive missing-property metatable.

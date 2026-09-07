@@ -57,7 +57,7 @@ def generate():
       'Reference kit per world: **4 scrubbers, 4 heat exchangers, 3 watersheds, 3 soil stations, 3 seed dispersers, 2 detoxifiers and 1 sanctuary**. Add **2 native specialty stations** off Nauvis. Sanctuaries wait until their local stage requirement is met. The kit assumes biodiversity matrices can be imported from an already established production center.','',
       '| World | Model minutes to stage 5 | Atmosphere | Thermal | Water | Soil | Biodiversity | Toxicity |','|---|---:|---:|---:|---:|---:|---:|---:|']
     for r in results:text.append('| '+r['planet'].title()+' | '+str(r['minutes'])+' | '+' | '.join(f"{r['values'][axis]:.1f}" for axis in c['axes'])+f" | {r['toxicity']:.1f} |")
-    text+=['','This kit is deliberately not a minimal solution. Once established, use circuit thresholds around 95–97 to reduce operation duty cycles and preserve headroom above the 90-point victory threshold. Actual factories need extra capacity for materials, byproducts, power, heat, transport and defense.','',
+    text+=['','This kit is deliberately not a minimal solution. Once established, use circuit thresholds around 95-97 to reduce operation duty cycles and preserve headroom above the 90-point victory threshold. Actual factories need extra capacity for materials, byproducts, power, heat, transport and defense.','',
       'The test suite asserts convergence within 180 model minutes on every planet. It does not assert that these minute counts are balanced campaign pacing. That requires playtesting.']
     (ROOT/'docs/SIMULATION.md').write_text('\n'.join(text)+'\n')
     print('Generated docs/CATALOG.md and docs/SIMULATION.md')

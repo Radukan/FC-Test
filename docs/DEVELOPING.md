@@ -67,7 +67,7 @@ The optional CPU renderer uses authored mesh primitives, depth-buffered polygon 
 
 `--only <names...>` renders selected models for iteration; run the full export before committing a new global manifest. The model/contact sheet and small animation preview are source-art inspection aids, **not in-game screenshots/footage**. Keep sprite sheets within the engine texture limit; pole picture directions must match wire-position count, and character armed locomotion needs exactly 18 or 40 variants.
 
-The basic buildings have four directional eight-frame working sets; turrets have 64 directions and four firing frames. The character has three armor looks, eight-facing idle/tool/running sets and eighteen armed locomotion variants. Review actual aiming/body orientation and fluid/wire alignment in a client—successful headless schema loading does not certify their appearance.
+The basic buildings have four directional eight-frame working sets; turrets have 64 directions and four firing frames. The character has three armor looks, eight-facing idle/tool/running sets and eighteen armed locomotion variants. Review actual aiming/body orientation and fluid/wire alignment in a client - successful headless schema loading does not certify their appearance.
  Preserve it when updating procedural art.
 
 `tests/gui_reserved.lua` records stable LuaGuiElement member names from the 2.0.75 API declarations (the available near-stable typed API). The production rule is stronger: every named child uses `sn_`, so new engine members do not collide with generic child names.
@@ -106,7 +106,7 @@ python3 tools/package.py
 python3 tools/package.py --target 2.0
 ```
 
-Output: `artifacts/factorio-2.0/second-nature_0.3.0.zip` and its `.zip.sha256` sidecar. The canonical mod folder sits directly at the archive root. Deterministic ordering, timestamps, permissions, allowlisted source paths and metadata are tested. `--target 2.1` is rejected.
+Output: `artifacts/factorio-2.0/second-nature_0.4.0.zip` and its `.zip.sha256` sidecar. The canonical mod folder sits directly at the archive root. Deterministic ordering, timestamps, permissions, allowlisted source paths and metadata are tested. `--target 2.1` is rejected.
 
 Do not commit `.cache`, virtual environments, game binaries, saves, generated release artifacts or ZIP files. They are ignored, and large engine assets are external to the source repository.
 
@@ -117,8 +117,8 @@ The source workflow uses release tag **`v<mod-version>-factorio-2.0`**. `publish
 Example after validation (substitute the actual intended commit):
 
 ```sh
-gh release create v0.3.0-factorio-2.0 --target <validated-commit> --prerelease \
-  --title 'Second Nature 0.3.0 · Ironbound Expedition · stable 2.0' --notes-file release-notes.md
+gh release create v0.4.0-factorio-2.0 --target <validated-commit> --prerelease \
+  --title 'Second Nature 0.4.0 · Ironbound Expedition · stable 2.0' --notes-file release-notes.md
 ```
 
 Create the release without directly uploading from the sandbox if binary uploads are blocked; the hosted publisher handles them. The repository is private, so download links require authenticated repository access. Never request credentials in chat or embed them in files.
@@ -142,3 +142,15 @@ This Arena session remains on `arena/01a07515-fc-test`; push only that branch. G
 ## Slow ecology test contract
 
 `shared/succession.lua` is a pure time integrator. Test short intervals, hours of growth, prolonged pollution, bounded research, save-copy/replay and large timestamp gaps. Rendering is a separate bounded pass. Habitat condition must continue to simulate with visuals disabled, and only tracked mod-grown/dead trees may be replaced. The new final Nauvis habitat requirement is explicit; do not weaken it to make a short headless fixture look like a natural playthrough.
+
+## Presentation authoring and regression checks (0.4)
+
+- `tools/character_layout.py` defines the paired 18-row armed layout, common foot pivot and safe framing envelope. Never replace this with a full-circle modulo table.
+- `tools/explorer_model.py` attaches torso, head, arms and firearm to one aiming rig. Stride is independent. Mining grips share the actual tool shaft.
+- `tools/pbr_raster.py` and `tools/raster_kernel.py` add compiled depth rasterization, self-shadow maps, model-space wear and material lighting. Numba is an optional offline-art dependency, not a game/CI runtime dependency.
+- Exported character frames set `apply_projection=false` because their ground axes are already map-aligned. The canvas includes body, tool and shadow margins; the Lua shift compensates the common pivot.
+- `tools/compose_menu_music.py` synthesizes an original score in small blocks and writes a stereo Vorbis file. No recorded sample or borrowed tune is used. Run with `OPENBLAS_NUM_THREADS=1` for a predictable memory budget.
+- Packaging explicitly includes `sound/`. The music is menu-only and can be disabled independently of menu artwork.
+- Locale generation rejects long dash punctuation. Text tests cover current tracked/untracked source, and copy tests reject development commentary in item/building descriptions.
+
+The audio authoring dependencies are in `requirements-art.txt`. They are not installed by normal source/engine validation. The runtime music test parses Ogg/Vorbis headers and duration, while authoring reports record decoded peak/RMS and file hashes.

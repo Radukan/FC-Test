@@ -6,46 +6,46 @@ local function item(name, title, family, desc, extra)
   for key, value in pairs(extra or {}) do x[key] = value end
   K.items[#K.items + 1] = x
 end
-item("silica", "Silica", "mineral", "Crushed stone for glass. A separate feedstock keeps automatic furnaces from choosing between glass and stone bricks.")
-item("glass", "Laboratory glass", "mineral", "Vessels, membranes and the first automation science packs.")
-item("mineral-nutrients", "Mineral nutrients", "mineral", "Stable mineral feed for pioneer cultures. Not the perishable Gleban nutrient fuel.")
-item("microbial-culture", "Pioneer culture", "culture", "A sealed, shelf-stable inoculum. Can be synthesized from minerals without wood, eggs or a starter seed.")
-item("algal-biomass", "Algal biomass", "leaf", "Renewable organic feedstock. Its embodied energy comes from an electrically powered bioreactor.", {fuel_value = "1MJ"})
-item("compost", "Living compost", "soil", "The foundation of soil restoration and logistic science.")
-item("biochar", "Biochar", "carbon", "Stable carbon from biomass. Useful as sorbent, soil amendment or fuel.", {fuel_value = "4MJ"})
-item("activated-carbon", "Activated carbon", "carbon", "High-surface-area sorbent. Renewable activation is slow; coal activation is fast and dirty.")
-item("filter-cartridge", "Carbon filter cartridge", "filter", "Used by scrubbers and water filtration. Route spent cartridges back to reclamation.")
-item("spent-filter", "Spent filter cartridge", "waste", "Not disposable: reclaim the carbon and glass, then treat the captured effluent.")
-item("soil-substrate", "Soil substrate", "soil", "Compost, mineral grains and biochar engineered into a stable rooting medium.")
-item("seed-mix", "Pioneer seed mix", "seed", "A robust starter community for reclaimed ground.")
-item("ceramic-membrane", "Ceramic membrane", "filter", "A mineral water-cycle component, made without oil chemistry.")
-item("thermal-buffer", "Charged thermal buffer", "thermal", "A recyclable heat-transfer cartridge. Thermal fitness is climate suitability, not the game's temperature property.")
-item("depleted-thermal-buffer", "Depleted thermal buffer", "waste", "Recharge with clean water, biofilm and electricity. Never recycle for free fresh buffers.")
-item("neutralization-charge", "Neutralization charge", "mineral", "A mineral/carbon charge that binds toxic material into sludge.")
-item("hazardous-sludge", "Hazardous sludge", "waste", "Toxic debt made tangible. Vitrify it; stockpiling does not count as detoxification twice.")
-item("vitrified-waste", "Vitrified aggregate", "mineral", "Bound, inert industrial waste suitable for concrete.")
-item("biofilm", "Engineered biofilm", "culture", "A renewable membrane and pheromone carrier, recovered from composting.")
-item("ecological-data", "Ecological samples", "data", "Physical field samples from completed restoration cycles. Research them or reclaim their contents.")
-item("climate-data", "Climate samples", "data", "Instrument samples from atmospheric, thermal and watershed operations.")
-item("biosphere-data", "Biosphere samples", "data", "Complex habitat samples for biodiversity matrices and advanced research.")
-item("thermophile-culture", "Thermophile culture", "thermal", "Vulcanus-exclusive organisms that stabilize mineral and thermal cycles.")
-item("heavy-metal-cake", "Heavy-metal concentrate", "waste", "Recovered Fulgoran contamination. Refine it into useful metals and catalysts.")
-item("holmium-catalyst", "Holmium biocatalyst", "crystal", "A Fulgoran catalyst for resilient, interplanetary ecosystems.")
-item("symbiotic-culture", "Symbiotic culture", "culture", "Gleban life rebalanced toward diversity rather than invasive monoculture.")
-item("biodiversity-matrix", "Biodiversity matrix", "seed", "Thermophiles, holmium catalysts and Gleban symbionts woven into one ecological community.")
-item("gaia-cell", "Gaia coordination cell", "crystal", "An interplanetary maintenance consumable. Beacons need regular shipments, not just a one-time build.")
-item("ecology-science-pack", "Ecology science pack", "science", "Field-driven research into sustainable industrial systems.", {tool = true, color = "biodiversity"})
-item("climate-science-pack", "Climate science pack", "science", "Cross-planet climate research using the specialties of Vulcanus, Fulgora and Gleba.", {tool = true, color = "atmosphere"})
-item("restoration-science-pack", "Restoration science pack", "science", "Produced only by operating planetary beacons on living worlds.", {tool = true, color = "temperature"})
+item("silica", "Silica", "mineral", "Crushed silicate grains used to melt laboratory glass and fire porous ceramics.")
+item("glass", "Laboratory glass", "mineral", "Chemically resistant glass for culture vessels, instruments and filtration assemblies.")
+item("mineral-nutrients", "Mineral nutrients", "mineral", "A stable blend of mineral salts that feeds pioneer microorganisms.")
+item("microbial-culture", "Pioneer culture", "culture", "A sealed inoculum of hardy microorganisms for nutrient processing and ecological seeding.")
+item("algal-biomass", "Algal biomass", "leaf", "Cultivated algae rich in organic carbon. Feedstock for compost, membranes and biological fuels.", {fuel_value = "1MJ"})
+item("compost", "Living compost", "soil", "A living mixture of decomposed biomass and microorganisms that enriches mineral soil.")
+item("biochar", "Biochar", "carbon", "Porous carbon that retains nutrients, stabilizes soil and adsorbs impurities.", {fuel_value = "4MJ"})
+item("activated-carbon", "Activated carbon", "carbon", "High-surface-area carbon for purification cartridges and chemical processing.")
+item("filter-cartridge", "Carbon filter cartridge", "filter", "A replaceable sorbent cartridge for atmospheric scrubbers and water filters.")
+item("spent-filter", "Spent filter cartridge", "waste", "A saturated cartridge containing recoverable carbon, glass and captured contaminants.")
+item("soil-substrate", "Soil substrate", "soil", "A stable rooting medium composed of mineral grains, compost and porous carbon.")
+item("seed-mix", "Pioneer seed mix", "seed", "A blend of pioneer seeds and microbial cultures adapted to recovering ground.")
+item("ceramic-membrane", "Ceramic membrane", "filter", "A porous, heat-resistant barrier that separates suspended contaminants from process water.")
+item("thermal-buffer", "Charged thermal buffer", "thermal", "A charged heat-transfer cartridge for climate exchangers and sheltered habitats.")
+item("depleted-thermal-buffer", "Depleted thermal buffer", "waste", "A discharged heat-transfer cartridge. Its casing and working medium can be reconditioned.")
+item("neutralization-charge", "Neutralization charge", "mineral", "Reactive minerals and carbon that bind dissolved contaminants into separable sludge.")
+item("hazardous-sludge", "Hazardous sludge", "waste", "Concentrated industrial contaminants. Vitrification locks the residue into an inert matrix.")
+item("vitrified-waste", "Vitrified aggregate", "mineral", "An inert glass-mineral aggregate suitable for durable construction materials.")
+item("biofilm", "Engineered biofilm", "culture", "A cultivated polymer matrix used in membranes, composite reinforcement and pheromone carriers.")
+item("ecological-data", "Ecological samples", "data", "Preserved field samples documenting soil structure, microbial activity and pioneer growth.")
+item("climate-data", "Climate samples", "data", "Instrument samples recording atmospheric composition, heat transfer and water-cycle recovery.")
+item("biosphere-data", "Biosphere samples", "data", "Complex habitat samples used to study interactions within established ecological communities.")
+item("thermophile-culture", "Thermophile culture", "thermal", "Heat-tolerant organisms cultivated in mineral-rich volcanic conditions.")
+item("heavy-metal-cake", "Heavy-metal concentrate", "waste", "A concentrated mixture of metals separated from contaminated scrap and processing residues.")
+item("holmium-catalyst", "Holmium biocatalyst", "crystal", "A stabilized holmium catalyst that supports resilient biological and electrochemical systems.")
+item("symbiotic-culture", "Symbiotic culture", "culture", "A balanced consortium of Gleban organisms used to establish diverse habitats.")
+item("biodiversity-matrix", "Biodiversity matrix", "seed", "An organized community of thermophiles, symbionts and mineral catalysts for habitat restoration.")
+item("gaia-cell", "Gaia coordination cell", "crystal", "A biological coordination cartridge consumed by planetary beacons to maintain a synchronized ecosystem network.")
+item("ecology-science-pack", "Ecology science pack", "science", "A research package containing ecological samples, preserved media and analytical electronics.", {tool = true, color = "biodiversity"})
+item("climate-science-pack", "Climate science pack", "science", "A research package combining climate measurements with specialized planetary cultures.", {tool = true, color = "atmosphere"})
+item("restoration-science-pack", "Restoration science pack", "science", "A research package produced from the operating data of a coordinated living-world network.", {tool = true, color = "temperature"})
 local function fluid(name, title, color, desc)
   K.fluids[#K.fluids + 1] = {name = name, title = title, color = color, description = desc}
 end
-fluid("clean-water", "Purified water", {0.35, 0.72, 0.93}, "A high-purity process fluid; not a replacement for native water or ocean tiles.")
-fluid("oxygen", "Oxygen", {0.62, 0.89, 0.95}, "Electrolysis coproduct used for clean metallurgy and nutrient processing.")
-fluid("hydrogen", "Hydrogen", {0.78, 0.70, 0.95}, "Power-intensive reducing agent and feedstock for renewable chemical fuels.")
-fluid("electrolyte", "Mineral electrolyte", {0.84, 0.68, 0.36}, "An aqueous mineral solution for Fulgoran reclamation.")
-fluid("bioleachate", "Bioleachate", {0.52, 0.74, 0.25}, "A biological alternative to fossil-fuel smelting. Captured metal-bearing effluent still needs treatment.")
-fluid("toxic-effluent", "Toxic effluent", {0.70, 0.31, 0.51}, "Captured pollution is not gone until neutralized. Treat it into water and hazardous sludge.")
+fluid("clean-water", "Purified water", {0.35, 0.72, 0.93}, "High-purity water for sensitive biological cultures, thermal circuits and chemical processing.")
+fluid("oxygen", "Oxygen", {0.62, 0.89, 0.95}, "Concentrated oxygen for clean metallurgy, nutrient preparation and oxidation reactions.")
+fluid("hydrogen", "Hydrogen", {0.78, 0.70, 0.95}, "A light reducing gas used in metallurgy and synthetic fuel production.")
+fluid("electrolyte", "Mineral electrolyte", {0.84, 0.68, 0.36}, "An aqueous mineral electrolyte for selective metal recovery and electrochemical reactions.")
+fluid("bioleachate", "Bioleachate", {0.52, 0.74, 0.25}, "A biologically active solution that releases useful metals from mineral feedstocks.")
+fluid("toxic-effluent", "Toxic effluent", {0.70, 0.31, 0.51}, "Contaminated process liquid containing captured pollutants and dissolved industrial residues.")
 
 local function machine(name, title, base, categories, energy, pollution, desc, options)
   local x = {name = name, title = title, base = base, categories = categories, energy = energy,
@@ -54,63 +54,63 @@ local function machine(name, title, base, categories, energy, pollution, desc, o
   K.machines[#K.machines + 1] = x
 end
 machine("algae-vat", "Pioneer bioreactor", "chemical-plant", {"bioculture"}, "180kW", 0.5,
-  "Minerals, water and power become the first living feedstocks. No irreplaceable starter culture required.")
+  "An agitated, temperature-regulated culture vessel for growing microorganisms and algal biomass.")
 machine("composter", "Aerobic composter", "assembling-machine-2", {"composting"}, "120kW", 1,
-  "Convert organics into compost, biofilm and low-temperature biochar.", {color = "soil"})
+  "An aerated processing bed that converts organic feedstock into compost, biofilm and biochar.", {color = "soil"})
 machine("hydroponics-bay", "Hydroponics bay", "biochamber", {"hydroponics"}, "650kW", 0.5,
-  "Electrically powered cultivation. Efficient crops require a rooted ecosystem. Imports cannot bypass ecological surface conditions.")
+  "A controlled growing enclosure that supplies crops with circulating water, nutrients and sheltered light.")
 machine("electrolyzer", "Electrochemical works", "chemical-plant", {"electrochemistry"}, "1.8MW", 0.5,
-  "Hydrogen, oxygen, buffer recharging and clean chemistry. Powerful, but power-hungry.", {color = "atmosphere"})
+  "An electrochemical cell bank for gas separation, buffer charging and low-emission chemical processing.", {color = "atmosphere"})
 machine("reclamation-plant", "Closed-loop reclamation plant", "chemical-plant", {"reclamation"}, "800kW", 1,
-  "Recover filters, water and metals. Pipe every byproduct: blocked outputs stop real restoration.", {color = "water"})
+  "A closed-loop separator that recovers useful materials and process water from spent filters and effluent.", {color = "water"})
 machine("materials-kiln", "Electric materials kiln", "assembling-machine-2", {"kiln"}, "900kW", 1,
-  "Vitrify hazardous sludge and fire ceramics without a fossil burner.", {color = "temperature"})
+  "An electrically heated furnace for firing ceramics, melting glass and vitrifying hazardous residues.", {color = "temperature"})
 machine("pyrolyzer", "Dirty pyrolysis retort", "assembling-machine-2", {"pyrolysis"}, "350kW", 24,
-  "Cheap, fast activated carbon and forced substrates, at a measurable planetary toxicity cost.", {color = "toxicity", dirty = true})
+  "A sealed high-temperature retort that converts carbon-rich feedstock into concentrated industrial reagents. Produces substantial emissions and toxic residues.", {color = "toxicity", dirty = true})
 machine("air-scrubber", "Atmospheric scrubber", "chemical-plant", {"scrubbing"}, "450kW", 0,
-  "Completed cycles improve atmospheric fitness and capture up to 40 local pollution or spores. Feed water and cartridges; reclaim spent filters.",
+  "A forced-air filtration unit that captures airborne pollutants in replaceable sorbent cartridges.",
   {fixed = "air-scrubbing", color = "atmosphere"})
 machine("soil-enricher", "Soil restoration station", "chemical-plant", {"soil-restoration"}, "300kW", 0,
-  "Build living soil using real substrate, culture and water. Healthy ground appears around operating stations, never under infrastructure.",
+  "A mixing and injection station that distributes mineral substrate, microbial culture and water into recovering soil.",
   {fixed = "soil-restoration", color = "soil"})
 machine("seed-disperser", "Pioneer seed disperser", "chemical-plant", {"reseeding"}, "500kW", 0,
-  "Grow biodiversity and, on safe terrain, forests. Atmosphere, heat, water and soil limit viable biomass.",
+  "A metered broadcast system that distributes pioneer seeds and soil treatments across suitable habitat.",
   {fixed = "pioneer-reseeding"})
 machine("watershed", "Watershed restoration plant", "chemical-plant", {"watershed"}, "750kW", 0,
-  "Rebuild the water cycle. Ocean geometry never changes; lava, oil seas and agricultural wetlands remain intact.",
+  "A treatment reservoir that restores water quality and supports a stable local water cycle.",
   {fixed = "watershed-restoration", color = "water"})
 machine("thermal-exchanger", "Climate heat exchanger", "chemical-plant", {"thermal-balancing"}, "4MW", 0,
-  "Actively normalize local climate using recyclable thermal buffers. Does not alter engine temperature, recipe pressure or Aquilo heating rules.",
+  "A high-power heat-transfer installation that regulates ecological thermal conditions using rechargeable buffer cartridges.",
   {fixed = "thermal-balancing", color = "temperature"})
 machine("detoxifier", "Mineral detoxification plant", "chemical-plant", {"detoxification"}, "1.5MW", 0,
-  "Bind planetary toxins into sludge. Lower toxicity unlocks the upper biodiversity ceiling.",
+  "A chemical binding plant that concentrates environmental contaminants into hazardous sludge for treatment.",
   {fixed = "mineral-detoxification", color = "toxicity"})
 machine("pheromone-dampener", "Pheromone dampener", "chemical-plant", {"dampening"}, "400kW", 0,
-  "Consume biofilm to soften native resistance to restoration. No free protection from unpowered or idle machines.",
+  "A controlled-release diffuser that moderates native aggression with a sustained supply of biological pheromone carriers.",
   {fixed = "pheromone-dampening", color = "atmosphere"})
 machine("forcing-tower", "Atmospheric forcing stack", "chemical-plant", {"forcing"}, "600kW", 30,
-  "Fast atmospheric gains at the expense of thermal balance, water and toxic debt. A bootstrap tool, not a path to a living world.",
+  "An industrial reaction stack that rapidly alters atmospheric chemistry while releasing pollution and accumulating toxic residues.",
   {fixed = "atmospheric-forcing", color = "toxicity", dirty = true})
 machine("basalt-conditioner", "Basalt weathering station", "chemical-plant", {"weathering"}, "2.5MW", 0,
-  "Vulcanus: calcite and water build soil and temper the climate. Operates only on Vulcanus; never modifies lava or demolisher territories.",
+  "A heavy mineral-conditioning station that weathers volcanic feedstock into biologically useful substrate.",
   {fixed = "basalt-weathering", color = "temperature", planet = "vulcanus"})
 machine("fulgoran-reclaimer", "Fulgoran remediation works", "chemical-plant", {"fulgoran-recovery"}, "2MW", 0,
-  "Fulgora: recover legacy heavy metals from scrap while removing toxic debt. Leave oil oceans, ruins and elevation alone.",
+  "A scrap-remediation installation that separates heavy metals and conditions contaminated mineral residues.",
   {fixed = "fulgoran-recovery", color = "toxicity", planet = "fulgora"})
 machine("spore-tower", "Symbiotic spore tower", "biochamber", {"spore-balancing"}, "1.2MW", 0,
-  "Gleba: filter spores and cultivate a balanced microbiome. Less pollution does not mean pentapods accept a changed habitat.",
+  "A vertical filtration and culture system that balances airborne spores and cultivates symbiotic organisms.",
   {fixed = "spore-balancing", planet = "gleba"})
 machine("cryogenic-garden", "Cryogenic garden", "cryogenic-plant", {"cryogenic-restoration"}, "3.5MW", 0,
-  "Aquilo: turn ice and ammonia into thermal and water-cycle recovery. These sheltered gardens still require heat and imported biology.",
+  "An insulated, heated growing installation that maintains living cultures and water circulation in extreme cold.",
   {fixed = "cryogenic-restoration", color = "water", planet = "aquilo"})
 machine("sanctuary", "Biodiversity sanctuary", "biochamber", {"habitat-restoration"}, "2.2MW", 0,
-  "Unite the specialties of three worlds into stable habitats. Requires a rooted ecosystem and draws strong native resistance.",
+  "A sheltered habitat complex that combines specialized cultures into a resilient ecological community.",
   {fixed = "habitat-restoration"})
 machine("planetary-beacon", "Gaia planetary beacon", "cryogenic-plant", {"gaia-coordination"}, "5MW", 0,
-  "The living-world network. Complete a cycle at least every 90 seconds on every planet; sustain all five self-sustaining worlds for ten minutes.",
+  "A planetary coordination station that synchronizes habitat maintenance and records the operating state of the living-world network.",
   {fixed = "gaia-coordination", color = "atmosphere"})
 machine("ecology-monitor", "Ecology circuit monitor", "constant-combinator", {}, nil, 0,
-  "Outputs 0–100 fitness, toxicity, native pressure and stability; stage is 0–5. The first combinator section is reserved for automatic telemetry.",
+  "An instrument console that broadcasts ecological fitness, contamination, resistance and pollution readings to the circuit network.",
   {entity_type = "constant-combinator", color = "atmosphere"})
 
 -- Short recipe DSL: ingredient/result entries are {prototype-name, amount, optional "fluid"}.

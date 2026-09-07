@@ -1,10 +1,10 @@
 {
   "name": "second-nature",
-  "version": "0.3.0",
-  "title": "Second Nature — Planetary Restoration",
+  "version": "0.4.0",
+  "title": "Second Nature: Planetary Restoration",
   "author": "Radukan",
   "homepage": "https://github.com/Radukan/FC-Test",
-  "description": "Ironbound expedition for stable Space Age: intact protected lander, wood-free construction, original industrial building/player animations, three defense eras and hours-scale reversible habitat recovery. Pollution calms Nauvis broods but suffocates life. Restore five planets and choose the natives’ future.",
+  "description": "A Space Age restoration campaign across five planets. Build biological industry, reclaim contaminated habitats, defend the living frontier and choose the future of Nauvis. Includes industrial machinery, expedition equipment, a protected lander and an original menu score.",
   "factorio_version": "2.0",
   "dependencies": [
     "base >= 2.0.77",

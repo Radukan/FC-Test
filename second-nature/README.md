@@ -1,18 +1,18 @@
 # Second Nature · Ironbound Expedition
-### Stable Factorio 2.0 / Space Age restoration overhaul · v0.3.0 alpha
+### Stable Factorio 2.0 / Space Age restoration overhaul · v0.4.0 alpha
 
 **An intact landing craft. A stripped planet. A factory built to bring life back.**
 
-Nauvis has no natural trees or fish in a fresh campaign. The broods tolerate your pollution—but resist the machines that clean their world. Establish a wood-free factory, defend the expedition and restore five distinct planets. Recovery is measured in sustained industrial work and hours of ecological succession, not a fast green repaint.
+Nauvis has no natural trees or fish in a fresh campaign. The broods tolerate your pollution - but resist the machines that clean their world. Establish a wood-free factory, defend the expedition and restore five distinct planets. Recovery is measured in sustained industrial work and hours of ecological succession, not a fast green repaint.
 
 ## Download
 
-### [Second Nature 0.3.0 — stable Factorio 2.0](https://github.com/Radukan/FC-Test/releases/download/v0.3.0-factorio-2.0/second-nature_0.3.0.zip)
+### [Second Nature 0.4.0 - stable Factorio 2.0](https://github.com/Radukan/FC-Test/releases/download/v0.4.0-factorio-2.0/second-nature_0.4.0.zip)
 
-[Release notes and checksum](https://github.com/Radukan/FC-Test/releases/tag/v0.3.0-factorio-2.0). **Private repository: sign in to GitHub with repository access.** Use the named mod ZIP, not GitHub’s automatic source archive.
+[Release notes and checksum](https://github.com/Radukan/FC-Test/releases/tag/v0.4.0-factorio-2.0). **Private repository: sign in to GitHub with repository access.** Use the named mod ZIP, not GitHub’s automatic source archive.
 
 1. Use **Factorio 2.0.77**, **Space Age**, **Quality** and **Elevated Rails**.
-2. Back up saves and replace older Second Nature ZIP/source copies with `second-nature_0.3.0.zip`, still zipped, in the Factorio `mods` folder.
+2. Back up saves and replace older Second Nature ZIP/source copies with `second-nature_0.4.0.zip`, still zipped, in the Factorio `mods` folder.
 3. For the complete opening, start new Space Age freeplay with **Second Nature / Last Landing** and the default mod settings. **Brood Frontier** and **Quiet Reclamation** offer harder/peaceful alternatives.
 4. **Shift + T / leaf:** field station and guide. **Ctrl + Shift + P:** local smog overlay.
 
@@ -20,7 +20,21 @@ Windows: `%APPDATA%\Factorio\mods` · Linux: `~/.factorio/mods` · macOS: `~/Lib
 
 Stable only; experimental 2.1 builds are discontinued. Existing stable saves retain their factories, ecological values and terrain. They do **not** receive another cargo grant or a replacement defense kit. New habitat-readiness rules can temporarily demote an older mature world while its landscape is surveyed/recovered.
 
-## What is new in Ironbound
+## Foundry and Field: presentation update
+
+The explorer now uses a paired armed-pose layout and a shared torso, arm and weapon rig. Gun directions are authored in map space, and every state keeps the same foot anchor. An expanded canvas contains the full pickaxe swing and cast shadow with audited margins.
+
+The character has a more detailed adult silhouette, curved protective panels, fitted equipment, articulated hands, facial features and tied hair. Machinery has chamfered panels, pressure gauges, handwheels, flanged pipes, routed hoses, fasteners, worn material surfaces and component self-shadows. These are original models and renders with a weathered industrial treatment, not copied Factorio textures.
+
+**After the Ash** is a new original 96-second instrumental menu score: low machinery pulses, restrained metallic tones and a gradually warmer harmonic theme. It uses the normal music-volume control. The **Second Nature menu music** startup setting restores the standard track when disabled.
+
+Item and building descriptions now describe their material, construction and function. Current in-game and repository text uses ordinary punctuation; see [the copy guide](https://github.com/Radukan/FC-Test/blob/arena/01a07515-fc-test/docs/COPY-STYLE.md).
+
+[Sprite contact sheet](https://github.com/Radukan/FC-Test/blob/arena/01a07515-fc-test/docs/art/ironbound-contact-sheet.jpg) · [Rendered animation preview](https://github.com/Radukan/FC-Test/blob/arena/01a07515-fc-test/docs/art/industrial-animation-preview.gif) · [Original menu score](sound/music/after-the-ash.ogg)
+
+The aiming and clipping checks validate authored poses, vectors, anchors and image bounds. They do not substitute for a full graphical client review of every strafe/backpedal/armor combination.
+
+## Ironbound campaign
 
 ### An intact, permanent lander
 
@@ -50,7 +64,7 @@ The shared lander supplies:
 - **Reserves:** 120 expedition magazines, 30 repair packs, 20 field dressings and 48 barricades.
 - **Deployed:** **four riveted sentries, 60 magazines each**, and **24 field-barricade segments**. Terrain-blocked defense items remain in cargo instead.
 
-New crew members receive a carbine, 40 magazines and a field suit. Cargo is one grant **per force**, never per reconnect, respawn or configuration change. Defenses are useful—not an invulnerable automated factory. Keep ammunition and repairs flowing.
+New crew members receive a carbine, 40 magazines and a field suit. Cargo is one grant **per force**, never per reconnect, respawn or configuration change. Defenses are useful - not an invulnerable automated factory. Keep ammunition and repairs flowing.
 
 ## Three equipment eras
 
@@ -68,15 +82,15 @@ All **22 production/restoration/monitor buildings** have original heavy-industri
 
 The new **adult feminine explorer** wears fitted, fully covered industrial expedition gear. There are armor, idle, running, tool, weapon and corpse variations. The optional startup setting restores vanilla/another mod’s character appearance without replacing inventories or controllers.
 
-The art is procedural authored mesh geometry, CPU-rendered with lighting, depth and antialiasing—not redistributed Wube textures. Existing game collision, fluid ports, wiring, sounds, projectiles and equipment mechanics are reused where appropriate. Precise in-client animation/aiming/port alignment remains a graphical playtest item.
+The art is procedural authored mesh geometry, CPU-rendered with depth, self-shadow maps, surface wear and material lighting - not redistributed Wube textures. Existing game collision, fluid ports, wiring, sounds, projectiles and equipment mechanics are reused where appropriate. Native in-client strafing, backpedaling, armor transitions and port alignment remain graphical playtest items.
 
-## Slow recovery—and slow damage
+## Slow recovery - and slow damage
 
 ### Industrial progress
 
 Default ecological work and drift use **30%** of the old rapid coefficients. Physical pollution capture uses **25%** of its former rate: an unupgraded scrubber captures up to **10 pollution units per completed 10-second recipe**, not 40. Physical recipes still produce their declared samples, products and waste.
 
-You still need every fitness axis—atmosphere, thermal balance, water, soil and biodiversity—to develop together. These are ecological suitability scores, not replacements for the game’s pressure, lava, lightning, spoilage or Aquilo heat mechanics.
+You still need every fitness axis - atmosphere, thermal balance, water, soil and biodiversity - to develop together. These are ecological suitability scores, not replacements for the game’s pressure, lava, lightning, spoilage or Aquilo heat mechanics.
 
 ### A living landscape, not a paint command
 
@@ -106,7 +120,7 @@ The dashboard reports the **whole-surface pollution inventory**, including engin
 
 The private overlay covers 5 × 5 nearby chunks; use the native map pollution layer for a wider view. Pollution is not invulnerability: proximity combat, retaliation and obstruction still exist.
 
-With the default inverse-metabolism rule, Nauvis pollution does not recruit vanilla biter attack parties or drive pollution evolution. Scripted raids choose **recently productive clean restoration machines**, not dirty retorts/forcing towers. They require real nests 96–512 tiles away, give 45 seconds of warning, respect peaceful mode and have bounded group sizes. Balanced defaults: 20-minute grace after first ecological work, eight-minute cooldown, up to 40 units and three tracked groups per planet. Greener advanced ecosystems can mobilize stronger variants.
+With the default inverse-metabolism rule, Nauvis pollution does not recruit vanilla biter attack parties or drive pollution evolution. Scripted raids choose **recently productive clean restoration machines**, not dirty retorts/forcing towers. They require real nests 96-512 tiles away, give 45 seconds of warning, respect peaceful mode and have bounded group sizes. Balanced defaults: 20-minute grace after first ecological work, eight-minute cooldown, up to 40 units and three tracked groups per planet. Greener advanced ecosystems can mobilize stronger variants.
 
 Gleba retains ordinary spores and smaller ecological-response groups; pollution does not pacify pentapods. No arbitrary biter invasion is introduced on Vulcanus, Fulgora or Aquilo.
 

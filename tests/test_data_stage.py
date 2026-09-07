@@ -233,3 +233,17 @@ def test_campaign_startup_switches_are_reversible():
     assert result.raw.unit['small-biter'].absorptions_to_join_attack.pollution>0
     assert result.raw['airborne-pollutant'].pollution.affects_evolution is True
     assert result.raw['utility-constants'].default.main_menu_background_image_location=='__core__/graphics/background-image.jpg'
+
+
+def test_menu_music_replaces_only_the_menu_track(stage):
+    menu=stage.raw['ambient-sound']['main-menu']
+    assert menu.track_type=='menu-track'
+    assert menu.sound.filename=='__second-nature__/sound/music/after-the-ash.ogg'
+    assert stage.raw['ambient-sound']['pollution'].track_type=='main-track'
+
+
+def test_menu_music_setting_restores_the_standard_track():
+    path=ROOT/'.cache/factorio-data-2.0.77'
+    if not path.exists():pytest.skip('Pinned stable data required')
+    stage=DataStage(path,True,{'sn-menu-music':False})
+    assert stage.raw['ambient-sound']['main-menu'].sound=='__base__/sound/ambient/main-menu.ogg'

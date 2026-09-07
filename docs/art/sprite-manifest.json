@@ -1637,238 +1637,266 @@
       -0.4
     ]
   },
+  "field-pole-sheet": {
+    "filename": "__second-nature__/graphics/entity/industry/field-pole-sheet.png",
+    "width": 128,
+    "height": 256,
+    "frame_count": 1,
+    "line_length": 4,
+    "direction_count": 4,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -1.28
+    ]
+  },
   "explorer-0-idle": {
     "filename": "__second-nature__/graphics/entity/industry/explorer-0-idle.png",
-    "width": 144,
-    "height": 192,
-    "frame_count": 8,
-    "line_length": 8,
+    "width": 352,
+    "height": 400,
+    "frame_count": 4,
+    "line_length": 4,
     "direction_count": 8,
     "scale": 0.5,
     "shift": [
       0,
-      -0.9
-    ]
+      -0.109375
+    ],
+    "apply_projection": false
   },
   "explorer-0-idle_with_gun": {
     "filename": "__second-nature__/graphics/entity/industry/explorer-0-idle_with_gun.png",
-    "width": 144,
-    "height": 192,
-    "frame_count": 8,
-    "line_length": 8,
+    "width": 352,
+    "height": 400,
+    "frame_count": 4,
+    "line_length": 4,
     "direction_count": 8,
     "scale": 0.5,
     "shift": [
       0,
-      -0.9
-    ]
+      -0.109375
+    ],
+    "apply_projection": false
   },
   "explorer-0-running": {
     "filename": "__second-nature__/graphics/entity/industry/explorer-0-running.png",
-    "width": 144,
-    "height": 192,
+    "width": 352,
+    "height": 400,
     "frame_count": 12,
     "line_length": 12,
     "direction_count": 8,
     "scale": 0.5,
     "shift": [
       0,
-      -0.9
-    ]
+      -0.109375
+    ],
+    "apply_projection": false
   },
   "explorer-0-mining_with_tool": {
     "filename": "__second-nature__/graphics/entity/industry/explorer-0-mining_with_tool.png",
-    "width": 144,
-    "height": 192,
-    "frame_count": 12,
-    "line_length": 12,
+    "width": 352,
+    "height": 400,
+    "frame_count": 16,
+    "line_length": 16,
     "direction_count": 8,
     "scale": 0.5,
     "shift": [
       0,
-      -0.9
-    ]
+      -0.109375
+    ],
+    "apply_projection": false
   },
   "explorer-0-running_with_gun": {
     "filename": "__second-nature__/graphics/entity/industry/explorer-0-running_with_gun.png",
-    "width": 144,
-    "height": 192,
+    "width": 352,
+    "height": 400,
     "frame_count": 12,
     "line_length": 12,
     "direction_count": 18,
     "scale": 0.5,
     "shift": [
       0,
-      -0.9
-    ]
+      -0.109375
+    ],
+    "apply_projection": false
   },
   "explorer-0-corpse": {
     "filename": "__second-nature__/graphics/entity/industry/explorer-0-corpse.png",
-    "width": 192,
-    "height": 160,
+    "width": 256,
+    "height": 192,
     "frame_count": 2,
     "line_length": 2,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.3
+      0.0
     ]
   },
   "explorer-1-idle": {
     "filename": "__second-nature__/graphics/entity/industry/explorer-1-idle.png",
-    "width": 144,
-    "height": 192,
-    "frame_count": 8,
-    "line_length": 8,
+    "width": 352,
+    "height": 400,
+    "frame_count": 4,
+    "line_length": 4,
     "direction_count": 8,
     "scale": 0.5,
     "shift": [
       0,
-      -0.9
-    ]
+      -0.109375
+    ],
+    "apply_projection": false
   },
   "explorer-1-idle_with_gun": {
     "filename": "__second-nature__/graphics/entity/industry/explorer-1-idle_with_gun.png",
-    "width": 144,
-    "height": 192,
-    "frame_count": 8,
-    "line_length": 8,
+    "width": 352,
+    "height": 400,
+    "frame_count": 4,
+    "line_length": 4,
     "direction_count": 8,
     "scale": 0.5,
     "shift": [
       0,
-      -0.9
-    ]
+      -0.109375
+    ],
+    "apply_projection": false
   },
   "explorer-1-running": {
     "filename": "__second-nature__/graphics/entity/industry/explorer-1-running.png",
-    "width": 144,
-    "height": 192,
+    "width": 352,
+    "height": 400,
     "frame_count": 12,
     "line_length": 12,
     "direction_count": 8,
     "scale": 0.5,
     "shift": [
       0,
-      -0.9
-    ]
+      -0.109375
+    ],
+    "apply_projection": false
   },
   "explorer-1-mining_with_tool": {
     "filename": "__second-nature__/graphics/entity/industry/explorer-1-mining_with_tool.png",
-    "width": 144,
-    "height": 192,
-    "frame_count": 12,
-    "line_length": 12,
+    "width": 352,
+    "height": 400,
+    "frame_count": 16,
+    "line_length": 16,
     "direction_count": 8,
     "scale": 0.5,
     "shift": [
       0,
-      -0.9
-    ]
+      -0.109375
+    ],
+    "apply_projection": false
   },
   "explorer-1-running_with_gun": {
     "filename": "__second-nature__/graphics/entity/industry/explorer-1-running_with_gun.png",
-    "width": 144,
-    "height": 192,
+    "width": 352,
+    "height": 400,
     "frame_count": 12,
     "line_length": 12,
     "direction_count": 18,
     "scale": 0.5,
     "shift": [
       0,
-      -0.9
-    ]
+      -0.109375
+    ],
+    "apply_projection": false
   },
   "explorer-1-corpse": {
     "filename": "__second-nature__/graphics/entity/industry/explorer-1-corpse.png",
-    "width": 192,
-    "height": 160,
+    "width": 256,
+    "height": 192,
     "frame_count": 2,
     "line_length": 2,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.3
+      0.0
     ]
   },
   "explorer-2-idle": {
     "filename": "__second-nature__/graphics/entity/industry/explorer-2-idle.png",
-    "width": 144,
-    "height": 192,
-    "frame_count": 8,
-    "line_length": 8,
+    "width": 352,
+    "height": 400,
+    "frame_count": 4,
+    "line_length": 4,
     "direction_count": 8,
     "scale": 0.5,
     "shift": [
       0,
-      -0.9
-    ]
+      -0.109375
+    ],
+    "apply_projection": false
   },
   "explorer-2-idle_with_gun": {
     "filename": "__second-nature__/graphics/entity/industry/explorer-2-idle_with_gun.png",
-    "width": 144,
-    "height": 192,
-    "frame_count": 8,
-    "line_length": 8,
+    "width": 352,
+    "height": 400,
+    "frame_count": 4,
+    "line_length": 4,
     "direction_count": 8,
     "scale": 0.5,
     "shift": [
       0,
-      -0.9
-    ]
+      -0.109375
+    ],
+    "apply_projection": false
   },
   "explorer-2-running": {
     "filename": "__second-nature__/graphics/entity/industry/explorer-2-running.png",
-    "width": 144,
-    "height": 192,
+    "width": 352,
+    "height": 400,
     "frame_count": 12,
     "line_length": 12,
     "direction_count": 8,
     "scale": 0.5,
     "shift": [
       0,
-      -0.9
-    ]
+      -0.109375
+    ],
+    "apply_projection": false
   },
   "explorer-2-mining_with_tool": {
     "filename": "__second-nature__/graphics/entity/industry/explorer-2-mining_with_tool.png",
-    "width": 144,
-    "height": 192,
-    "frame_count": 12,
-    "line_length": 12,
+    "width": 352,
+    "height": 400,
+    "frame_count": 16,
+    "line_length": 16,
     "direction_count": 8,
     "scale": 0.5,
     "shift": [
       0,
-      -0.9
-    ]
+      -0.109375
+    ],
+    "apply_projection": false
   },
   "explorer-2-running_with_gun": {
     "filename": "__second-nature__/graphics/entity/industry/explorer-2-running_with_gun.png",
-    "width": 144,
-    "height": 192,
+    "width": 352,
+    "height": 400,
     "frame_count": 12,
     "line_length": 12,
     "direction_count": 18,
     "scale": 0.5,
     "shift": [
       0,
-      -0.9
-    ]
+      -0.109375
+    ],
+    "apply_projection": false
   },
   "explorer-2-corpse": {
     "filename": "__second-nature__/graphics/entity/industry/explorer-2-corpse.png",
-    "width": 192,
-    "height": 160,
+    "width": 256,
+    "height": 192,
     "frame_count": 2,
     "line_length": 2,
     "direction_count": 1,
     "scale": 0.5,
     "shift": [
       0,
-      -0.3
+      0.0
     ]
   },
   "status-light": {
@@ -1882,19 +1910,6 @@
     "shift": [
       0,
       0.0
-    ]
-  },
-  "field-pole-sheet": {
-    "filename": "__second-nature__/graphics/entity/industry/field-pole-sheet.png",
-    "width": 128,
-    "height": 256,
-    "frame_count": 1,
-    "line_length": 4,
-    "direction_count": 4,
-    "scale": 0.5,
-    "shift": [
-      0,
-      -1.28
     ]
   }
 }

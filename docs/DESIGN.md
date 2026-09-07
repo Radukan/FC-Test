@@ -38,7 +38,7 @@ Habitat condition is a distinct local state, not an immediate conversion wheneve
 
 Ideal growth is around three hours of supported local time, with sustained heavy contamination able to reverse mature habitat over about two hours after stress builds. Mild pollution is slower. Sampling budgets and a ten-minute elapsed-credit cap prevent giant unobserved instant transformations.
 
-Three bounded optimization technologies offer total +15%, +30%, +45% clean work/capture and supported growth. That is at most about 31% less ideal growth time—not an instant terraform button or infinite research multiplier. Damage rates, recipe speeds, grace periods and victory holds are not accelerated by this research.
+Three bounded optimization technologies offer total +15%, +30%, +45% clean work/capture and supported growth. That is at most about 31% less ideal growth time - not an instant terraform button or infinite research multiplier. Damage rates, recipe speeds, grace periods and victory holds are not accelerated by this research.
 
 ## Pollutants and native resistance
 
@@ -52,7 +52,7 @@ This is a meaningful compromise: dirty industry can buy temporary safety, but it
 
 The global inventory is the engine's whole-surface total, including pollution-only engine chunks. Hotspot/habitat surveys cover fully generated terrain. Local overlays follow the current position. None of these pretends to measure an infinite unexplored map.
 
-Final readiness requires every fitness axis ≥ 90, toxicity ≤ 8, total pollution ≤ 500 and no known sampled hotspot above 10. **Nauvis also requires at least 80% surveyed eligible habitat condition.** The habitat value is an ecological sample—not an exact percentage of rendered ground tiles.
+Final readiness requires every fitness axis ≥ 90, toxicity ≤ 8, total pollution ≤ 500 and no known sampled hotspot above 10. **Nauvis also requires at least 80% surveyed eligible habitat condition.** The habitat value is an ecological sample - not an exact percentage of rendered ground tiles.
 
 After two continuously ready minutes, the player confirms Nauvis's irreversible future: friendly Bloombacks/flowering gardens or eradication. A one-time entity index catches moving natives; bounded workers and generation/spawning events enforce later policy. Other planets/player-owned organisms are protected. Multiplayer administrators decide for the shared world.
 

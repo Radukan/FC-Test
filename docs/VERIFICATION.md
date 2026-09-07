@@ -1,66 +1,55 @@
-# Verification ledger · Ironbound 0.3.0 alpha · 2026-09-07
+# Verification ledger: Foundry and Field 0.4.0 alpha
 
-## Completed evidence
+## Reported visual defects
 
-**Stable engine/source run:** [34065931167](https://github.com/Radukan/FC-Test/actions/runs/34065931167), code commit **`f7827159b627eebe2b7a4394786c2facba53b1a0`**. The offline validator and actual official **Factorio 2.0.77** headless job passed. Release publishing reruns validation on the exact tagged commit and re-downloads its uploaded assets for SHA-256/byte comparison.
+A player reported incorrect shooting direction and the pickaxe disappearing at the top of its frame in 0.3. The earlier headless pass verified accepted prototype structures, not the appearance of those animation rows in a graphical client.
 
-The engine-evidenced code passed 144 cases; final atlas-boundary and visible-motion regressions raise the complete suite to 146. The local complete suite reports **146 passing tests** with the pinned stable Wube data checkout present. The graphics source contact sheet and individual rendered lander/building/explorer images were visually inspected. The source animation preview demonstrates exported frames, not a game recording.
+The 0.4 exporter no longer treats the 18 armed rows as a full-circle turnaround. It uses paired gun-facing/stride-axis rows over the engine-mirrored half. Torso, hands and gun share the aim transform; stride is independent. The projected muzzle vector is checked against the intended facing.
 
-| Check | Result | What it establishes |
-|---|---|---|
-| All production Lua parses as 5.2 | **Pass** | Syntax / module loading |
-| Full offline suite | **146 passed** | Existing regression contracts plus wood-free recipes, pacing, research, habitat readiness and owned-tree recovery |
-| Official stable source data stages | **Pass** | Prototype references, research graph, recipe unlocks, item/ammo categories, art paths and startup toggles |
-| Actual C++ prototype loading | **Pass** | New building/defense/player/armor/corpse animation structures accepted by 2.0.77 headless |
-| Real new save + reload + 2,100 ticks | **Pass** | No fatal runtime failure in the exercised setup |
-| Powered/idle/unpowered crafting | **Pass** | Real completion counters and physical pollution changes; idle/unpowered peers earn none |
-| Lander/cargo/defense probes | **Pass** | Actual placement, shared/idempotent cargo, permanent protection after the rocket handler, four loaded sentries and real ammo insertion |
-| Wood-free recipe probes | **Pass** | Poles, crates, shotguns and pioneer seed mix have no wood ingredient; pole recipe is enabled |
-| Combat/character prototypes | **Pass** | New turret tiers accept expected ammunition; actual character entity accepts new guns/medical items |
-| Native policy/commandables | **Pass** | Conversion, eradication, friendly-force relationships and real attack/retreat API commands |
-| Slow habitat model | **Pass** | No instant growth after a long timestamp gap, hours-scale gain/loss, bounded optimization, visual toggle separation and final habitat gate |
-| Terrain/tree safety | **Pass in doubles** | Protected tiles/resources, tracked-only withering and regrowth, no ungenerated terrain access |
-| Art integrity | **Pass** | Original sprite paths and required direction/frame counts; rendered source sheets reviewed |
-| Packaging | **Pass locally** | Stable-only reproducible ZIP/metadata/CRC/SHA-256 tests; release performs hosted download verification |
+Mining has a larger shared-pivot canvas. Authoring checks include every tool vertex and the projected cast shadow across all mining frames, directions and armor looks. A separate pixel-alpha test checks the exported sheets for edge truncation. Character ground axes are already map-aligned, with a second projection correction disabled.
 
-## Engine issues caught and corrected in this update
+## Validation status
 
-1. A pole’s picture direction count must equal its wire-position count. The riveted pole now uses a four-direction atlas matching its four connection-point entries.
-2. New turrets still require a `graphics_set` container even when the full original rotated frames include the entire base. It is present and empty rather than absent; no old visible base sprite is inherited.
-3. Data-stage localized research-effect parameters require strings. Bounded optimization percentages are converted to string parameters rather than passed as numbers.
+Final 0.4 source/engine runs are recorded by the required GitHub validator and release publisher. Do not infer that a prior 0.3 engine run proves later artwork. The publisher must pass the exact tagged source before uploading and re-download both assets for checksum/byte comparison.
 
-The earlier GUI reserved-name fix, crafting-only monitor guard, explicit runtime utility import, parse-time dependency resolution and generated-chunk filtering regressions remain in the suite.
+The suite retains the campaign, pollution, habitat, weapons, protected lander and strict GUI/import regressions. New checks cover:
 
-## Scope of the real-engine harness
+- Equipment descriptions that explain the object instead of development or availability commentary.
+- No long dash punctuation in current source, in-game localization or GitHub-facing documentation.
+- The menu-only music replacement, valid stereo Vorbis headers, duration and the authored waveform report/hash.
+- Paired armed row structure, muzzle/torso direction and map-space projection.
+- All mining model/shadow bounds, identical state pivots and exported image-edge margins.
+- Atlas dimensions, engine texture bounds and visible working-frame differences.
 
-The actual production mod runs its ordinary lifecycle, registry, crafting, pollution, telemetry and animation-render callbacks. A test-only companion also loads unmodified runtime module copies into **isolated test storage**, then deliberately arranges ecology/clocks to exercise long-latency features against actual engine entities and surfaces. No production debug/mutation interface is added.
+The soundtrack is an original 96-second stereo composition. It is synthesized without borrowed samples or melodies. The authoring pass decodes the exported Ogg and records measured peak/RMS in the score report. Source validation parses its Ogg/Vorbis structure; the game package includes the sound directory explicitly.
 
-Both `SECOND_NATURE_ENGINE_CAMPAIGN_PROBES_OK` and `SECOND_NATURE_ENGINE_SMOKE_OK`, plus successful process exit codes, are required. Merely loading prototypes is not enough.
+Current editable GitHub release titles/bodies have had long dash punctuation removed. Published commit history and other users' historical comments are not rewritten.
 
-The rocket handler is called with a shared-entity-API fixture; this does **not** prove an actual passenger rocket launch. The character created by the companion is an engine entity, not an interactive player controlling the GUI. Native commands are issued and accepted; this is not exhaustive combat/pathfinding balance testing.
+## What the real-engine harness establishes
 
-## Still unverified / alpha limitations
+The official Factorio 2.0.77 headless job loads C++ prototypes, creates a save, reloads it and runs 2,100 ticks. It exercises real production counters, powered/idle/unpowered behavior, pollution, circuit telemetry, render-object creation, protected landing cargo, native outcomes and attack/retreat commands. Companion probes arrange isolated state to reach those conditions. No debug mutation API ships in the mod.
 
-- **Graphical client review:** actual building port/wire alignment, sprites at all zoom/UI scales, every animation/firing direction, armed character movement/aiming, armor/Mech flight transitions, corpses, menu composition and the arrival camera.
-- **Full no-cheat campaign:** bootstrap pacing, steady byproduct flow, all specialty research/material imports, the complete habitat timeline and five-world victory.
-- **Every combat situation:** all enemy tiers, resistances, moving targets, firing-lane/friendly-fire behavior, energy drain under sustained fire and equipment-grid balance.
-- **Every production configuration:** all qualities/modules, heat starvation, output/fluid blockage and recipe-switch combinations in the real engine.
-- **Existing-save migration/removal:** real 0.2-to-0.3 migration across all controller, raid, tree, hull and network states. Non-duplication/protection contracts are tested in doubles; that is not a full save-migration certification.
-- **Multiplayer/desync:** two-client testing, customized permissions, force merges and simultaneous native decisions.
-- **Large-map/factory performance:** realistic UPS, GPU sprite memory and long rolling-survey latency. Chunk work is bounded, but no large-factory performance claim is made.
+Both explicit engine success markers and zero exit status are required. A prototype-only load is not counted as a complete pass.
 
-The 18 armed locomotion variants satisfy the stable engine structure; their precise visual aim/movement mapping must be reviewed in a client. A headless pass cannot certify that appearance. Character art can be disabled without replacing player inventories/controllers.
+## Graphical and gameplay checks still required
 
-## Focused playtest checklist
+- Native client aiming while stationary, strafing, retreating and changing direction, for all weapons and armor states.
+- The native engine's complete mirrored/reversed locomotion selection under real player controls. Authoring vector tests are not a full client interaction test.
+- Pickaxe framing at normal and high zoom, armor/Mech transitions, corpse appearance and all source/shadow alignment.
+- Building scale, port/wire endpoints, full rotations, weapon muzzle placement and all working loops at gameplay zoom.
+- Audible main-menu playback, loop/fade behavior and balance against the user's music-volume setting.
+- Complete no-cheat five-world playthrough, sustained combat balance, multiplayer/desync, older-save migration and large-factory/GPU profiling.
 
-1. Fresh Last Landing: confirm intact permanent ship, supplies, four loaded sentries and no wood/fish dependency. Make additional poles/crates/ammo by hand without console items.
-2. Check all four dashboard tabs, six guide topics, updated habitat/optimization readings and confirmation cancellation on close. Verify leaf/Shift+T and Ctrl+Shift+P.
-3. Inspect the original industrial sprites in each orientation while idle/working. Check turret idle/prepare/fire/rotation, wall connections and actual wire/pipe endpoints.
-4. Walk, run, mine and fire in all directions with light/modular/power/Mech armor; test death/recovery and the optional vanilla-character setting.
-5. Sustain a clean supported area, observe patch → grass → meadow → forest progression. Pollute it for a sustained period; verify gradual browning/withering, then recovery after cleaning. Player trees/infrastructure must survive.
-6. Research/reverse each optimization level; no total bonus above 45%, no free outputs and no shortened victory/raid timers. Check the per-force cache after merging forces.
-7. Test all three defense eras, low ammo, low power, blocked firing lanes and hostile groups. The protected lander is not a shield for every other entity.
-8. Verify the new Nauvis habitat gate, two-minute native hold, both irreversible outcomes, moving/future natives, and untouched other planets.
-9. Save/reload mid-growth, mid-withering, mid-warning, during native conversion and at the final network hold; profile larger maps and multiple players.
+The contact sheets and GIFs demonstrate rendered assets, not in-game footage. Original models, richer shading and more detailed textures are not a claim of graphical-client certification.
 
-Record actual game version, mod list, save and reproduction steps. Keep unrun checks labeled unrun; source/mocked validation is not a substitute for playing the full game.
+## Focused retest
+
+1. Open a stable save with the required official mods and Second Nature. Confirm that inventories, character controllers, research and habitat state remain intact.
+2. Aim and fire in all eight facings, then strafe and backpedal. The gun, hands and torso must agree; compare to the source aiming review sheet.
+3. Mine continuously in all directions. The pickaxe and shadow must remain inside their frame without shifting the feet.
+4. Review all building orientations and turret firing states. Check dark surfaces, gauges, moving parts and pipe/wire endpoints.
+5. Read representative material, ammo, armor and building descriptions. They should describe construction/function, not a change request or crafting milestone.
+6. Return to the menu, listen to After the Ash, adjust music volume, then disable the setting and confirm standard menu music is restored.
+7. Recheck the saved-world/campaign and performance scenarios documented in the development guide.
+
+Record version, mod list, save and reproduction steps for failures. Keep unrun checks explicitly unrun.

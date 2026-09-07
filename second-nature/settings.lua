@@ -1,4 +1,5 @@
 data:extend({
+  {type="bool-setting",name="sn-menu-music",setting_type="startup",default_value=true,order="a-f"},
   {type = "bool-setting", name = "sn-expedition-character", setting_type = "startup", default_value = true, order = "a-e"},
   {type = "bool-setting", name = "sn-desolate-start", setting_type = "startup", default_value = true, order = "a-a"},
   {type = "double-setting", name = "sn-legacy-smog", setting_type = "startup", default_value = 80, minimum_value = 0, maximum_value = 500, order = "a-b"},

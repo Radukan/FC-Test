@@ -6,7 +6,7 @@ ROOT = Path(__file__).resolve().parents[1]
 MOD = ROOT / "second-nature"
 # Explicit package allowlist: never leak test saves, binaries, Git metadata or local config.
 TOP_LEVEL={'info.json','settings.lua','data.lua','data-updates.lua','data-final-fixes.lua','control.lua','changelog.txt','thumbnail.png','LICENSE','README.md'}
-FOLDERS={'shared','prototypes','scripts','locale','graphics','migrations'}
+FOLDERS={'shared','prototypes','scripts','locale','graphics','migrations','sound'}
 
 def build(target='2.0',output=None):
     if target != '2.0':raise ValueError('Second Nature 0.2+ supports stable Factorio 2.0 only')

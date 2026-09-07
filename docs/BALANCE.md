@@ -2,7 +2,7 @@
 
 Canonical data: [`shared/constants.lua`](../second-nature/shared/constants.lua), [`shared/catalog.lua`](../second-nature/shared/catalog.lua). Canonical equations: [`shared/model.lua`](../second-nature/shared/model.lua).
 
-Fitness values and toxicity/resistance are clamped to **0–100**. All coefficient changes are **percentage points**, not percentage multipliers, unless explicitly described otherwise.
+Fitness values and toxicity/resistance are clamped to **0-100**. All coefficient changes are **percentage points**, not percentage multipliers, unless explicitly described otherwise.
 
 ## Pacing and process research
 
@@ -140,7 +140,7 @@ Unpowered/blocked machines do **not** earn restoration. Passive natural resilien
 
 ## Pollution and succession contract (0.3)
 
-- New campaign Nauvis chunks receive **80** actual pollution units once, configurable from **0–500** at startup. No legacy seeding on existing-save upgrades or after native resolution.
+- New campaign Nauvis chunks receive **80** actual pollution units once, configurable from **0-500** at startup. No legacy seeding on existing-save upgrades or after native resolution.
 - Local concentration **> 10** suppresses positive soil/biodiversity effects. It does not cancel recipe production, remove input costs, or disable chemical/thermal/capture effects.
 - Planetary inventory is sampled roughly every **600 ticks** with `get_total_pollution()`. Mean is total / generated chunk count. Hotspots use a **4-chunk/second total** round-robin budget over visited worlds.
 - A final planet needs **≤ 500 total** and a completed survey with **known peak ≤ 10**, including newly found hotspots. Readings have disclosed sampling latency. A native confirmation refreshes the total immediately.
@@ -167,7 +167,7 @@ Apply Nauvis's factor `(1 - sedation)` to the biter count (minimum one) and effe
 
 Scripted species selection uses `max(force evolution, stage × .12)`, so ecological advance can produce stronger broods without relying on pollution evolution. Native resolution disables further Nauvis restoration raids.
 
-The grace period defaults to 20 minutes per world and is configurable. Existing nests must be 96–512 tiles from a recently working restoration target. New members spawn within 24 tiles of that nest and at least 64 from the target. Nearby unaffiliated native units are recruited first. At 150 local units, the script does not create additional units. Expired groups are unlinked, not erased along with their members.
+The grace period defaults to 20 minutes per world and is configurable. Existing nests must be 96-512 tiles from a recently working restoration target. New members spawn within 24 tiles of that nest and at least 64 from the target. Nearby unaffiliated native units are recruited first. At 150 local units, the script does not create additional units. Expired groups are unlinked, not erased along with their members.
 
 Peaceful mode, disabling resistance, a destroyed target/nest and changed diplomacy are respected. No scripted native attacks are introduced on the three planets without a relevant biter/pentapod ecology.
 

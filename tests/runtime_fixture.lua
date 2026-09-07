@@ -41,7 +41,7 @@ remote.add_interface=function(name,methods) remote.interfaces[name]=methods end
 remote.call=function(name,method,...) return remote.interfaces[name][method](...) end
 mock.escape_disabled=false
 remote.add_interface('space_finish_script',{get_no_victory=function() return mock.escape_disabled end,set_no_victory=function(v) mock.escape_disabled=v end})
-settings={startup={['sn-expedition-character']={value=true},['sn-overhaul-progression']={value=true},['sn-desolate-start']={value=true},['sn-legacy-smog']={value=80},['sn-biter-metabolism']={value=true},['sn-menu-background']={value=true}},global={}}
+settings={startup={['sn-menu-music']={value=true},['sn-expedition-character']={value=true},['sn-overhaul-progression']={value=true},['sn-desolate-start']={value=true},['sn-legacy-smog']={value=80},['sn-biter-metabolism']={value=true},['sn-menu-background']={value=true}},global={}}
 for name,value in pairs({['sn-native-fate']='choose',['sn-restoration-speed']=1,['sn-native-resistance']='balanced',['sn-grace-minutes']=20,['sn-living-terrain']=false,['sn-tree-growth']=false,['sn-network-victory']=true}) do settings.global[name]={value=value} end
 settings.get_player_settings=function() return {['sn-show-welcome']={value=true}} end
 prototypes={entity={}}

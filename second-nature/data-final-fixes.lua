@@ -43,3 +43,8 @@ if settings.startup["sn-menu-background"].value then
   constants.main_menu_background_image_location = "__second-nature__/graphics/menu/last-landing.jpg"
   constants.main_menu_background_vignette_intensity = 18
 end
+
+if settings.startup["sn-menu-music"].value then
+  local menu = assert(data.raw["ambient-sound"]["main-menu"], "Second Nature requires the base menu track")
+  menu.sound = {filename="__second-nature__/sound/music/after-the-ash.ogg",volume=0.8}
+end

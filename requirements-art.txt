@@ -1,4 +1,7 @@
-# Optional original sprite regeneration. Not needed to test/package/play the mod.
+# Offline sprite and original soundtrack authoring. Not needed by the mod itself.
 numpy==1.26.4
 Pillow==12.3.0
 lupa==2.8
+scipy>=1.11,<2
+soundfile>=0.12,<1
+numba==0.61.2

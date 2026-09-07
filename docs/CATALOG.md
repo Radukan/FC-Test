@@ -192,41 +192,41 @@ Recipes tagged **dirty** also emit vanilla pollution/spores and incur explicit t
 
 ## Materials and fluids
 
-- **Silica** (`sn-silica`): Crushed stone for glass. A separate feedstock keeps automatic furnaces from choosing between glass and stone bricks.
-- **Laboratory glass** (`sn-glass`): Vessels, membranes and the first automation science packs.
-- **Mineral nutrients** (`sn-mineral-nutrients`): Stable mineral feed for pioneer cultures. Not the perishable Gleban nutrient fuel.
-- **Pioneer culture** (`sn-microbial-culture`): A sealed, shelf-stable inoculum. Can be synthesized from minerals without wood, eggs or a starter seed.
-- **Algal biomass** (`sn-algal-biomass`): Renewable organic feedstock. Its embodied energy comes from an electrically powered bioreactor.
-- **Living compost** (`sn-compost`): The foundation of soil restoration and logistic science.
-- **Biochar** (`sn-biochar`): Stable carbon from biomass. Useful as sorbent, soil amendment or fuel.
-- **Activated carbon** (`sn-activated-carbon`): High-surface-area sorbent. Renewable activation is slow; coal activation is fast and dirty.
-- **Carbon filter cartridge** (`sn-filter-cartridge`): Used by scrubbers and water filtration. Route spent cartridges back to reclamation.
-- **Spent filter cartridge** (`sn-spent-filter`): Not disposable: reclaim the carbon and glass, then treat the captured effluent.
-- **Soil substrate** (`sn-soil-substrate`): Compost, mineral grains and biochar engineered into a stable rooting medium.
-- **Pioneer seed mix** (`sn-seed-mix`): A robust starter community for reclaimed ground.
-- **Ceramic membrane** (`sn-ceramic-membrane`): A mineral water-cycle component, made without oil chemistry.
-- **Charged thermal buffer** (`sn-thermal-buffer`): A recyclable heat-transfer cartridge. Thermal fitness is climate suitability, not the game's temperature property.
-- **Depleted thermal buffer** (`sn-depleted-thermal-buffer`): Recharge with clean water, biofilm and electricity. Never recycle for free fresh buffers.
-- **Neutralization charge** (`sn-neutralization-charge`): A mineral/carbon charge that binds toxic material into sludge.
-- **Hazardous sludge** (`sn-hazardous-sludge`): Toxic debt made tangible. Vitrify it; stockpiling does not count as detoxification twice.
-- **Vitrified aggregate** (`sn-vitrified-waste`): Bound, inert industrial waste suitable for concrete.
-- **Engineered biofilm** (`sn-biofilm`): A renewable membrane and pheromone carrier, recovered from composting.
-- **Ecological samples** (`sn-ecological-data`): Physical field samples from completed restoration cycles. Research them or reclaim their contents.
-- **Climate samples** (`sn-climate-data`): Instrument samples from atmospheric, thermal and watershed operations.
-- **Biosphere samples** (`sn-biosphere-data`): Complex habitat samples for biodiversity matrices and advanced research.
-- **Thermophile culture** (`sn-thermophile-culture`): Vulcanus-exclusive organisms that stabilize mineral and thermal cycles.
-- **Heavy-metal concentrate** (`sn-heavy-metal-cake`): Recovered Fulgoran contamination. Refine it into useful metals and catalysts.
-- **Holmium biocatalyst** (`sn-holmium-catalyst`): A Fulgoran catalyst for resilient, interplanetary ecosystems.
-- **Symbiotic culture** (`sn-symbiotic-culture`): Gleban life rebalanced toward diversity rather than invasive monoculture.
-- **Biodiversity matrix** (`sn-biodiversity-matrix`): Thermophiles, holmium catalysts and Gleban symbionts woven into one ecological community.
-- **Gaia coordination cell** (`sn-gaia-cell`): An interplanetary maintenance consumable. Beacons need regular shipments, not just a one-time build.
-- **Ecology science pack** (`sn-ecology-science-pack`): Field-driven research into sustainable industrial systems.
-- **Climate science pack** (`sn-climate-science-pack`): Cross-planet climate research using the specialties of Vulcanus, Fulgora and Gleba.
-- **Restoration science pack** (`sn-restoration-science-pack`): Produced only by operating planetary beacons on living worlds.
-- **Mineral-composite stock** (`sn-alloy-stock`): A hand-formed iron/mineral structural stock. No wood, resin, biomass, power or research required.
-- **Purified water** (`sn-clean-water`): A high-purity process fluid; not a replacement for native water or ocean tiles.
-- **Oxygen** (`sn-oxygen`): Electrolysis coproduct used for clean metallurgy and nutrient processing.
-- **Hydrogen** (`sn-hydrogen`): Power-intensive reducing agent and feedstock for renewable chemical fuels.
-- **Mineral electrolyte** (`sn-electrolyte`): An aqueous mineral solution for Fulgoran reclamation.
-- **Bioleachate** (`sn-bioleachate`): A biological alternative to fossil-fuel smelting. Captured metal-bearing effluent still needs treatment.
-- **Toxic effluent** (`sn-toxic-effluent`): Captured pollution is not gone until neutralized. Treat it into water and hazardous sludge.
+- **Silica** (`sn-silica`): Crushed silicate grains used to melt laboratory glass and fire porous ceramics.
+- **Laboratory glass** (`sn-glass`): Chemically resistant glass for culture vessels, instruments and filtration assemblies.
+- **Mineral nutrients** (`sn-mineral-nutrients`): A stable blend of mineral salts that feeds pioneer microorganisms.
+- **Pioneer culture** (`sn-microbial-culture`): A sealed inoculum of hardy microorganisms for nutrient processing and ecological seeding.
+- **Algal biomass** (`sn-algal-biomass`): Cultivated algae rich in organic carbon. Feedstock for compost, membranes and biological fuels.
+- **Living compost** (`sn-compost`): A living mixture of decomposed biomass and microorganisms that enriches mineral soil.
+- **Biochar** (`sn-biochar`): Porous carbon that retains nutrients, stabilizes soil and adsorbs impurities.
+- **Activated carbon** (`sn-activated-carbon`): High-surface-area carbon for purification cartridges and chemical processing.
+- **Carbon filter cartridge** (`sn-filter-cartridge`): A replaceable sorbent cartridge for atmospheric scrubbers and water filters.
+- **Spent filter cartridge** (`sn-spent-filter`): A saturated cartridge containing recoverable carbon, glass and captured contaminants.
+- **Soil substrate** (`sn-soil-substrate`): A stable rooting medium composed of mineral grains, compost and porous carbon.
+- **Pioneer seed mix** (`sn-seed-mix`): A blend of pioneer seeds and microbial cultures adapted to recovering ground.
+- **Ceramic membrane** (`sn-ceramic-membrane`): A porous, heat-resistant barrier that separates suspended contaminants from process water.
+- **Charged thermal buffer** (`sn-thermal-buffer`): A charged heat-transfer cartridge for climate exchangers and sheltered habitats.
+- **Depleted thermal buffer** (`sn-depleted-thermal-buffer`): A discharged heat-transfer cartridge. Its casing and working medium can be reconditioned.
+- **Neutralization charge** (`sn-neutralization-charge`): Reactive minerals and carbon that bind dissolved contaminants into separable sludge.
+- **Hazardous sludge** (`sn-hazardous-sludge`): Concentrated industrial contaminants. Vitrification locks the residue into an inert matrix.
+- **Vitrified aggregate** (`sn-vitrified-waste`): An inert glass-mineral aggregate suitable for durable construction materials.
+- **Engineered biofilm** (`sn-biofilm`): A cultivated polymer matrix used in membranes, composite reinforcement and pheromone carriers.
+- **Ecological samples** (`sn-ecological-data`): Preserved field samples documenting soil structure, microbial activity and pioneer growth.
+- **Climate samples** (`sn-climate-data`): Instrument samples recording atmospheric composition, heat transfer and water-cycle recovery.
+- **Biosphere samples** (`sn-biosphere-data`): Complex habitat samples used to study interactions within established ecological communities.
+- **Thermophile culture** (`sn-thermophile-culture`): Heat-tolerant organisms cultivated in mineral-rich volcanic conditions.
+- **Heavy-metal concentrate** (`sn-heavy-metal-cake`): A concentrated mixture of metals separated from contaminated scrap and processing residues.
+- **Holmium biocatalyst** (`sn-holmium-catalyst`): A stabilized holmium catalyst that supports resilient biological and electrochemical systems.
+- **Symbiotic culture** (`sn-symbiotic-culture`): A balanced consortium of Gleban organisms used to establish diverse habitats.
+- **Biodiversity matrix** (`sn-biodiversity-matrix`): An organized community of thermophiles, symbionts and mineral catalysts for habitat restoration.
+- **Gaia coordination cell** (`sn-gaia-cell`): A biological coordination cartridge consumed by planetary beacons to maintain a synchronized ecosystem network.
+- **Ecology science pack** (`sn-ecology-science-pack`): A research package containing ecological samples, preserved media and analytical electronics.
+- **Climate science pack** (`sn-climate-science-pack`): A research package combining climate measurements with specialized planetary cultures.
+- **Restoration science pack** (`sn-restoration-science-pack`): A research package produced from the operating data of a coordinated living-world network.
+- **Mineral-composite stock** (`sn-alloy-stock`): An iron-reinforced mineral composite used for structural frames, storage casings and firearm stocks.
+- **Purified water** (`sn-clean-water`): High-purity water for sensitive biological cultures, thermal circuits and chemical processing.
+- **Oxygen** (`sn-oxygen`): Concentrated oxygen for clean metallurgy, nutrient preparation and oxidation reactions.
+- **Hydrogen** (`sn-hydrogen`): A light reducing gas used in metallurgy and synthetic fuel production.
+- **Mineral electrolyte** (`sn-electrolyte`): An aqueous mineral electrolyte for selective metal recovery and electrochemical reactions.
+- **Bioleachate** (`sn-bioleachate`): A biologically active solution that releases useful metals from mineral feedstocks.
+- **Toxic effluent** (`sn-toxic-effluent`): Contaminated process liquid containing captured pollutants and dissolved industrial residues.

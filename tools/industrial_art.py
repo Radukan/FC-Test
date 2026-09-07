@@ -6,8 +6,8 @@ import math
 from PIL import Image, ImageDraw, ImageFilter
 
 TAU = math.tau
-STEEL=(65,79,85); DARK=(27,35,39); EDGE=(121,140,146); GOLD=(212,146,54)
-COPPER=(163,94,53); WHITE=(185,192,184); GREEN=(99,177,102); TEAL=(47,170,173)
+STEEL=(92,94,79); DARK=(34,37,31); EDGE=(151,147,124); GOLD=(189,139,57)
+COPPER=(153,96,55); WHITE=(181,179,152); GREEN=(89,138,72); TEAL=(55,142,139)
 BLUE=(49,117,164); RED=(173,73,49); VIOLET=(149,100,166)
 
 def add(a,b): return tuple(x+y for x,y in zip(a,b))
@@ -27,12 +27,16 @@ class Mesh:
     def box(self,center,size,c=STEEL,bevel=.05):
         x,y,z=center;w,d,h=(v/2 for v in size);b=min(bevel,w*.4,d*.4)
         ring=[(-w+b,-d),(w-b,-d),(w,-d+b),(w,d-b),(w-b,d),(-w+b,d),(-w,d-b),(-w,-d+b)]
-        low=[(x+a,y+v,z-h) for a,v in ring];high=[(x+a,y+v,z+h) for a,v in ring]
-        self.face(high,c);self.face(list(reversed(low)),color(c,.65))
-        for i in range(8):self.face([low[i],low[(i+1)%8],high[(i+1)%8],high[i]],c)
-        inset=[(x+a*.96,y+v*.96,z+h+.025) for a,v in ring]
-        self.face(inset,color(c,1.08))
+        zbevel=min(b,h*.35)
+        rings=[[(x+a*.96,y+v*.96,z-h) for a,v in ring],
+               [(x+a,y+v,z-h+zbevel) for a,v in ring],
+               [(x+a,y+v,z+h-zbevel) for a,v in ring],
+               [(x+a*.96,y+v*.96,z+h) for a,v in ring]]
+        self.face(rings[-1],c);self.face(list(reversed(rings[0])),color(c,.7))
+        for low,high in zip(rings,rings[1:]):
+            for i in range(8):self.face([low[i],low[(i+1)%8],high[(i+1)%8],high[i]],c)
     def tube(self,a,b,r,c=EDGE,sides=12):
+        if r<.035:sides=min(sides,8)
         axis=norm(sub(b,a));u=norm(cross(axis,(0,0,1) if abs(axis[2])<.9 else (0,1,0)));v=cross(axis,u)
         def ring(p):return [add(p,add(mul(u,r*math.cos(i*TAU/sides)),mul(v,r*math.sin(i*TAU/sides)))) for i in range(sides)]
         p,q=ring(a),ring(b)
@@ -40,7 +44,7 @@ class Mesh:
         for i in range(sides):j=(i+1)%sides;self.face([p[i],p[j],q[j],q[i]],c)
     def cyl(self,x,y,z,r,h,c=STEEL,sides=16):self.tube((x,y,z),(x,y,z+h),r,c,sides)
     def ball(self,p,r,c=TEAL,stretch=(1,1,1),glow=False):
-        rows,cols=6,12
+        rows,cols=(4,8) if r<.05 else ((6,12) if r<.11 else (9,18))
         grid=[]
         for j in range(rows+1):
             lat=-math.pi/2+j*math.pi/rows
@@ -64,6 +68,66 @@ class Mesh:
         for i in range(4):self.leaf((x,y,z+.1*scale+i*.12*scale),i*2.3,scale)
 
 
+def hose(m,points,r=.035,c=DARK):
+    for a,b in zip(points,points[1:]):m.tube(a,b,r,c,10)
+def gauge(m,x,y,z,r=.12,t=0):
+    m.tube((x,y,z),(x,y+.045,z),r,EDGE,20)
+    m.tube((x,y+.046,z),(x,y+.054,z),r*.81,WHITE,20)
+    angle=-.5+t*.8
+    m.tube((x,y+.065,z),(x+math.sin(angle)*r*.67,y+.065,z+math.cos(angle)*r*.67),.008,DARK,6)
+    for i in range(5):
+        a=-1+i*.5;m.tube((x+math.sin(a)*r*.63,y+.06,z+math.cos(a)*r*.63),(x+math.sin(a)*r*.73,y+.06,z+math.cos(a)*r*.73),.005,DARK,4)
+def handwheel(m,x,y,z,r=.15,angle=0):
+    m.tube((x,y,z),(x,y+.05,z),r,DARK,18)
+    for i in range(4):
+        a=angle+i*math.pi/2
+        m.tube((x,y+.07,z),(x+math.sin(a)*r,y+.07,z+math.cos(a)*r),.022,COPPER,8)
+    m.ball((x,y+.09,z),.037,EDGE)
+def cabinet(m,x,y,z,scale=1,t=0):
+    m.box((x,y,z),(.42*scale,.29*scale,.63*scale),STEEL,.035)
+    m.box((x,y+.15*scale,z),(.35*scale,.025,.54*scale),DARK,.02)
+    gauge(m,x,y+.18*scale,z+.13*scale,.10*scale,t)
+    for i in range(4):m.box((x,y+.185*scale,z-.03*scale-i*.055*scale),(.26*scale,.018,.016),EDGE,.002)
+    m.box((x+.11*scale,y+.20*scale,z-.18*scale),(.045,.025,.05),GOLD,.005)
+def detailing(m,name,t):
+    if name=='ecology-monitor':return
+    size=4.6 if name in ('cryogenic-garden','planetary-beacon') else 2.7
+    p=size*.43
+    # Utility skid: conduits, flanges, pressure instrumentation and replaceable filters.
+    hose(m,[(-p,-p,.50),(-p,-p*.4,.50),(-p,p*.55,.5),(-p*.70,p*.78,.66)],.033)
+    hose(m,[(p,-p,.53),(p,p*.7,.53),(p*.75,p,.53)],.04,EDGE)
+    cabinet(m,-p*.65,p*.88,.79,.8,.4+.18*math.sin(t*TAU))
+    for side in (-1,1):
+        m.tube((side*p,0,.48),(side*(p+.13),0,.48),.12,STEEL,16)
+        m.tube((side*(p+.13),0,.48),(side*(p+.16),0,.48),.17,EDGE,16)
+        for i in range(4):
+            a=i*math.pi/2;m.ball((side*(p+.165),.11*math.cos(a),.48+.11*math.sin(a)),.022,DARK)
+    if name in ('air-scrubber','thermal-exchanger'):
+        for x in (-.9,.9):
+            m.box((x,.78,.87),(.12,.52,.7),EDGE,.018)
+            for i in range(4):m.box((x,.81,.62+i*.12),(.17,.58,.025),STEEL,.005)
+    elif name in ('materials-kiln','pyrolyzer','forcing-tower'):
+        for z in (.62,.84,1.06):
+            m.box((0,.868,z),(1.65,.025,.018),DARK,.003)
+        m.box((0,.90,.84),(.63,.10,.44),EDGE,.04)
+        m.box((0,.961,.84),(.43,.035,.27),(109,56,25),.02)
+        handwheel(m,.45,.93,1.00,.14,t*.08)
+        hose(m,[(-.86,-.3,.6),(-.92,-.3,1.65),(-.4,-.3,1.65)],.06,COPPER)
+    elif name in ('algae-vat','spore-tower','detoxifier','reclamation-plant','electrolyzer'):
+        hose(m,[(-.65,.8,.55),(-.65,.85,1.5),(.60,.85,1.5),(.60,.85,.6)],.045,EDGE)
+        gauge(m,.42,1.0,1.16,.10,t*.2)
+        handwheel(m,.78,.94,.65,.13,t*.1)
+    elif name in ('composter','soil-enricher','basalt-conditioner','fulgoran-reclaimer'):
+        for i in range(5):m.box((-.7+i*.32,1.0,.64),(.12,.38,.12),EDGE,.012)
+        m.cyl(.8,-.75,.46,.24,.42,STEEL)
+        m.ring((.8,-.75,.8),.25,.025,COPPER)
+    elif name in ('hydroponics-bay','sanctuary','cryogenic-garden'):
+        for x in (-p,p):
+            hose(m,[(x,-p,.7),(x,-p,1.6),(x,p,1.6)],.025,COPPER)
+        for i in range(7):m.box((-.75+i*.25,-p,.75),(.12,.23,.06),WHITE,.01)
+    return m
+
+
 def platform(m,size=2.7):
     for x in (-size*.39,size*.39):
         for y in (-size*.39,size*.39):m.box((x,y,.12),(.42,.42,.24),DARK)
@@ -73,7 +137,13 @@ def platform(m,size=2.7):
     for i in range(6):
         x=-size*.38+i*size*.14
         m.face([(x,-size/2-.005,.19),(x+.16,-size/2-.005,.19),(x+.27,-size/2-.005,.36),(x+.11,-size/2-.005,.36)],GOLD)
-    m.rivets(0,size*.48,.41,size*.8,6)
+    m.rivets(0,size*.48,.41,size*.8,8)
+    for side in (-1,1):
+        for i in range(9):m.box((side*size*.44,-size*.38+i*size*.095,.487),(.15,.032,.018),EDGE,.003)
+        for corner in (-1,1):
+            x=side*size*.38;y=corner*size*.38
+            m.cyl(x,y,.43,.066,.052,EDGE,6)
+            m.cyl(x,y,.485,.026,.012,DARK,8)
 
 
 def tank(m,x,y,r=.4,h=1.3,c=TEAL):
@@ -230,6 +300,7 @@ def machine(name,t=0):
         m.box((0,-.385,.72),(.64,.035,.36),DARK,0)
         for i in range(5):m.box((-.23+i*.115,-.413,.6+(.12+.10*math.sin(t*TAU+i))/2),(.045,.01,.12+.10*math.sin(t*TAU+i)),TEAL,0)
         m.cyl(.27,.12,.92,.034,.34,EDGE,6)
+    detailing(m,name,t)
     return m
 
 
@@ -265,6 +336,15 @@ def lander(t=0):
     for x in (-2.5,2.5):m.rivets(x,2.75,1.96,.3,3)
     m.tube((1.7,.5,2.2),(1.7,.5,3.4),.04,EDGE,8)
     m.ball((1.7,.5,3.44),.075,TEAL,glow=True)
+    for x in (-2.2,2.2):
+        m.box((x,.1,2.095),(.45,3.8,.055),DARK,.018)
+        for y in (-1.2,-.4,.4,1.2):
+            m.box((x,y,2.14),(.35,.59,.055),STEEL,.025)
+            m.rivets(x,y-.21,2.175,.23,3)
+        hose(m,[(x,1.5,2.1),(x,1.9,2.1),(x*.7,2.0,2.1)],.06,COPPER)
+    for x in (-3.6,3.6):
+        handwheel(m,x,1.91,1.51,.18)
+        for y in (-1.1,-.7,-.3,.1):m.box((x,y,2.01),(1.02,.095,.10),EDGE,.015)
     return m
 
 
@@ -294,6 +374,11 @@ def turret(kind,t=0,angle=0,base=True):
             q.box((x,-1.15+recoil,1.48),(.13,2.4,.08),TEAL)
             for i in range(7):q.box((x,-2.2+i*.35+recoil,1.27),(.42,.12,.53),EDGE)
         q.box((0,.76,1.12),(1.1,.6,.65),GOLD)
+    q.box((0,.43,1.05),(.58,.18,.40),DARK,.03)
+    for i in range(5):q.box((-.22+i*.11,.54,1.05),(.052,.024,.31),EDGE,.004)
+    for x in (-.38,.38):
+        hose(q,[(x,.3,.9),(x,.45,1.3),(x*.7,.15,1.45)],.025,COPPER)
+    q.rivets(0,.40,1.38,.56,5)
     m.join(q,angle);return m
 
 
@@ -304,7 +389,10 @@ def wall(mask=0,advanced=False):
     for bit,(x,y) in enumerate(((0,-.5),(.5,0),(0,.5),(-.5,0))):
         if mask&(1<<bit):m.box((x*.65,y*.65,.63),(.65 if x else .43,.65 if y else .43,.88),c)
     m.box((0,0,1.15),(.72,.62,.13),GOLD if not advanced else TEAL)
-    for x in (-.20,.2):m.box((x,.295,.73),(.08,.025,.36),DARK,0)
+    for x in (-.20,.2):
+        m.box((x,.295,.73),(.08,.025,.36),DARK,0)
+        for z in (.49,.96):m.ball((x,.32,z),.03,EDGE)
+    for z in (.4,.7,1.0):m.box((0,.284,z),(.51,.018,.023),EDGE,.002)
     return m
 
 
@@ -327,105 +415,11 @@ def equipment(kind):
     return m
 
 
-def explorer(t=0,pose='idle',tier=0,move_angle=0,aim_offset=0):
-    m=Mesh();run=pose in ('running','running_with_gun');gun='gun' in pose
-    stride=.32*math.sin(t*TAU) if run else .018*math.sin(t*TAU)
-    bob=.025*abs(math.sin(t*TAU)) if run else .012*math.sin(t*TAU)
-    suit=(37,45,52);armor=STEEL if tier<2 else (97,111,119)
-    for side in (-1,1):
-        hip=(side*.145,0,1.0+bob);knee=(side*.17,side*stride*.50,.58+bob)
-        foot=(side*.17,side*stride,.10+max(0,-side*stride)*.25)
-        m.tube(hip,knee,.12,suit);m.tube(knee,foot,.087,suit)
-        m.ball(knee,.115,armor,stretch=(.9,1,1.05))
-        m.box(add(foot,(0,-.065,0)),(.20,.34,.20),DARK,.06)
-        m.tube(add(knee,(0,.035,-.08)),add(foot,(0,.035,.11)),.075,armor)
-    # Fitted, fully covered adult expedition suit; shaped torso with layered armor.
-    m.ball((0,0,1.06+bob),.25,suit,stretch=(1,.62,.65))
-    m.ball((0,0,1.25+bob),.22,suit,stretch=(.74,.65,.95))
-    m.ball((0,-.005,1.48+bob),.27,suit,stretch=(.97,.66,.88))
-    m.box((0,-.14,1.48+bob),(.37,.12,.35),armor,.06)
-    m.box((0,-.211,1.50+bob),(.07,.014,.27),GOLD,.015)
-    m.box((0,0,1.13+bob),(.39,.32,.12),COPPER,.04)
-    m.box((.18,-.12,1.10+bob),(.13,.13,.21),DARK)
-    m.box((0,.22,1.39+bob),(.32,.18,.47),STEEL)
-    for x in (-.11,.11):m.cyl(x,.23,1.48+bob,.065,.2,TEAL,8)
-    for side in (-1,1):
-        shoulder=(side*.29,0,1.59+bob)
-        if pose=='mining_with_tool':
-            reach=.45+.25*math.sin(t*TAU);elbow=(side*.32,-.22,1.35+bob+reach*.3);hand=(side*.13,-.42,1.1+bob+reach)
-        elif gun:
-            elbow=(side*.33,-.12,1.30+bob);hand=(side*.14,-.42,1.38+bob)
-        else:
-            elbow=(side*.32,-side*stride*.7,1.22+bob);hand=(side*.31,-side*stride,1.02+bob)
-        m.ball(shoulder,.14,armor,stretch=(1.05,1,1))
-        m.tube(shoulder,elbow,.081,suit);m.tube(elbow,hand,.073,suit);m.ball(hand,.083,DARK)
-        if tier>0:m.box((side*.32,0,1.59+bob),(.2,.29,.17),EDGE)
-    m.tube((0,0,1.66+bob),(0,0,1.77+bob),.095,suit)
-    skin=(187,135,109)
-    m.ball((0,-.015,1.91+bob),.19,skin,stretch=(.85,.9,1.13))
-    # Copper-dark hair, ponytail, helmet crown and an open face / visor frame.
-    m.ball((0,.075,1.95+bob),.19,(73,44,33),stretch=(.92,.68,1.10))
-    m.tube((0,.20,1.93+bob),(.045,.30,1.64+bob),.07,(73,44,33),8)
-    m.box((0,-.12,2.047+bob),(.30,.12,.065),armor)
-    m.box((0,-.177,1.956+bob),(.26,.025,.055),TEAL,.01)
-    for x in (-.17,.17):m.ball((x,0,1.925+bob),.06,EDGE)
-    if tier==2:
-        m.box((0,-.145,1.83+bob),(.27,.075,.1),DARK)
-        for x in (-.30,.30):m.box((x,.14,1.58+bob),(.22,.28,.27),GOLD)
-    if gun:
-        g=Mesh();g.box((0,-.51,1.4+bob),(.18,.72,.15),DARK)
-        g.box((0,-.48,1.50+bob),(.08,.44,.06),EDGE)
-        g.tube((0,-.62,1.4+bob),(0,-.99,1.4+bob),.035,STEEL,8)
-        g.box((0,-.37,1.25+bob),(.11,.16,.22),COPPER)
-        m.join(g,aim_offset)
-    if pose=='mining_with_tool':
-        h=1.2+.45*(.5+.5*math.sin(t*TAU))
-        m.tube((0,-.46,h),(0,-.68,h+.55),.034,EDGE,8)
-        m.box((0,-.68,h+.53),(.59,.12,.12),STEEL)
-    result=Mesh();result.join(m,move_angle);return result
+def explorer(t=0,pose='idle',tier=0,move_angle=0,aim_offset=0,aim_angle=None):
+    from explorer_model import explorer as build
+    return build(t,pose,tier,move_angle,move_angle+aim_offset if aim_angle is None else aim_angle)
 
 
-def render(mesh,width=320,height=None,ppu=64,angle=0,aa=2,origin=.70):
-    import numpy as np
-    height=height or width;w,h=width*aa,height*aa
-    out=Image.new('RGBA',(w,h));shadow=Image.new('RGBA',(w,h))
-    sd=ImageDraw.Draw(shadow)
-    elev=math.radians(48);view=(0,math.cos(elev),math.sin(elev));light=norm((-.6,-.8,1.1))
-    halfway=norm(add(view,light))
-    def project(p):return (w/2+p[0]*ppu*aa,h*origin+(p[1]*math.sin(elev)-p[2]*math.cos(elev))*ppu*aa,dot(p,view))
-    faces=[([rot(p,angle) for p in v],c,g) for v,c,g in mesh.faces]
-    for v,c,g in faces:
-        points=[project((p[0]+p[2]*.42,p[1]+p[2]*.58,.015))[:2] for p in v]
-        sd.polygon(points,fill=(10,15,19,70))
-    pixels=np.zeros((h,w,4),dtype=np.uint8);zbuf=np.full((h,w),-1e20,dtype=np.float32)
-    for vertices,c,glow in faces:
-        n=norm(cross(sub(vertices[1],vertices[0]),sub(vertices[2],vertices[0])))
-        if dot(n,view)<0:n=mul(n,-1)
-        specular=max(0,dot(n,halfway))**24*.23
-        shade=1 if glow else .43+.61*max(0,dot(n,light))+.09*max(0,n[2])+specular
-        base=np.array(color(c,shade),dtype=float)
-        projected=[project(p) for p in vertices]
-        for i in range(1,len(vertices)-1):
-            pa,pb,pc=projected[0],projected[i],projected[i+1]
-            xmin=max(0,int(math.floor(min(pa[0],pb[0],pc[0]))));xmax=min(w-1,int(math.ceil(max(pa[0],pb[0],pc[0]))))
-            ymin=max(0,int(math.floor(min(pa[1],pb[1],pc[1]))));ymax=min(h-1,int(math.ceil(max(pa[1],pb[1],pc[1]))))
-            if xmin>xmax or ymin>ymax:continue
-            den=(pb[1]-pc[1])*(pa[0]-pc[0])+(pc[0]-pb[0])*(pa[1]-pc[1])
-            if abs(den)<1e-7:continue
-            yy,xx=np.ogrid[ymin:ymax+1,xmin:xmax+1];xx=xx+.5;yy=yy+.5
-            a=((pb[1]-pc[1])*(xx-pc[0])+(pc[0]-pb[0])*(yy-pc[1]))/den
-            b=((pc[1]-pa[1])*(xx-pc[0])+(pa[0]-pc[0])*(yy-pc[1]))/den
-            cc=1-a-b;depth=a*pa[2]+b*pb[2]+cc*pc[2]
-            old=zbuf[ymin:ymax+1,xmin:xmax+1]
-            mask=(a>=-1e-5)&(b>=-1e-5)&(cc>=-1e-5)&(depth>=old-1e-6)
-            if not mask.any():continue
-            old[mask]=depth[mask]
-            # Surface-anchored fine grain gives metal some wear without frame flicker.
-            va,vb,vc=vertices[0],vertices[i],vertices[i+1]
-            u=a*dot(va,(61,29,43))+b*dot(vb,(61,29,43))+cc*dot(vc,(61,29,43))
-            grain=1+(np.sin(u*5.1)*np.sin(u*2.73))*(0 if glow else .036)
-            rgb=np.clip(grain[...,None]*base,0,255).astype(np.uint8)
-            region=pixels[ymin:ymax+1,xmin:xmax+1];region[mask,:3]=rgb[mask];region[mask,3]=255
-    out.alpha_composite(shadow.filter(ImageFilter.GaussianBlur(2.1*aa)))
-    out.alpha_composite(Image.fromarray(pixels,'RGBA'))
-    return out.resize((width,height),Image.Resampling.LANCZOS)
+def render(mesh,width=320,height=None,ppu=64,angle=0,aa=1,origin=.70,map_aligned=False):
+    from pbr_raster import render as raster
+    return raster(mesh,width,height,ppu,angle,aa,origin,map_aligned)

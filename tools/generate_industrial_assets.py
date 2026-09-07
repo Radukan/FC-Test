@@ -7,6 +7,7 @@ import json, math, argparse
 from PIL import Image, ImageDraw, ImageFont
 from catalog import MOD, ROOT, load_catalog
 from industrial_art import *
+import character_layout as character
 
 OUT=MOD/'graphics/entity/industry'
 DIRECTIONS=('north','east','south','west')
@@ -16,7 +17,7 @@ def save(image,path):
     path.parent.mkdir(parents=True,exist_ok=True);image.save(path,optimize=True)
 
 def icon(image,name):
-    bbox=image.getbbox()
+    bbox=image.getchannel('A').point(lambda a:255 if a>140 else 0).getbbox()
     if not bbox:return
     im=image.crop(bbox);im.thumbnail((58,58),Image.Resampling.LANCZOS)
     canvas=Image.new('RGBA',(64,64));canvas.alpha_composite(im,((64-im.width)//2,(64-im.height)//2))
@@ -28,7 +29,7 @@ def spec(name,width,height=None,frames=8,directions=1,origin=.7,scale=.5):
             'frame_count':frames,'line_length':frames,'direction_count':directions,'scale':scale,
             'shift':[0,round((.5-origin)*height*scale/32,6)]}
 
-def animate(name,maker,width=320,height=None,frames=8,directions=1,origin=.7,ppu=64,angles=None):
+def animate(name,maker,width=320,height=None,frames=8,directions=1,origin=.7,ppu=64,angles=None,map_aligned=False):
     height=height or width
     columns=8 if frames==1 and directions>8 else (16 if directions>=32 else frames)
     atlas=Image.new('RGBA',(width*columns,height*math.ceil(frames*directions/columns)))
@@ -36,13 +37,14 @@ def animate(name,maker,width=320,height=None,frames=8,directions=1,origin=.7,ppu
     for direction in range(directions):
         angle=angles[direction] if angles is not None else direction*TAU/directions
         for frame in range(frames):
-            image=render(maker(frame/frames,direction),width,height,angle=angle,origin=origin,ppu=ppu)
+            image=render(maker(frame/frames,direction),width,height,angle=angle,origin=origin,ppu=ppu,map_aligned=map_aligned)
             index=direction*frames+frame
             atlas.alpha_composite(image,((index%columns)*width,(index//columns)*height))
             if preview is None:preview=image
     save(atlas,OUT/f'{name}.png')
     manifest[name]=spec(name,width,height,frames,directions,origin)
     manifest[name]['line_length']=columns
+    if map_aligned:manifest[name]['apply_projection']=False
     return preview
 
 def corpse(tier):
@@ -98,17 +100,16 @@ def render_all(only=None):
         manifest['field-pole-sheet']=dict(manifest['field-pole-north'],filename='__second-nature__/graphics/entity/industry/field-pole-sheet.png',direction_count=4,line_length=4)
     if not only or 'explorer' in only:
         for tier in range(3):
-            for pose,frames,count in [('idle',8,8),('idle_with_gun',8,8),('running',12,8),('mining_with_tool',12,8),('running_with_gun',12,18)]:
-                # Stock layout: eight facing directions and eighteen armed locomotion variants.
+            for pose,frames,count in [('idle',4,8),('idle_with_gun',4,8),('running',12,8),('mining_with_tool',16,8),('running_with_gun',12,18)]:
                 def actor(t,d):
-                    if count==18:
-                        direction=d%8
-                        offset=0 if d<8 else (math.pi/4 if d<16 else math.pi/2)
-                    else:direction=d;offset=0
-                    return explorer(t,pose,tier,move_angle=direction*TAU/8,aim_offset=offset)
-                preview=animate(f'explorer-{tier}-{pose}',actor,144,192,frames=frames,directions=count,angles=[0]*count,origin=.8,ppu=80)
+                    move,aim=character.pose_angles(pose,d)
+                    model=explorer(t,pose,tier,move_angle=move,aim_angle=aim)
+                    character.assert_frame_fits(model,(tier,pose,d,t))
+                    return model
+                preview=animate(f'explorer-{tier}-{pose}',actor,character.WIDTH,character.HEIGHT,frames=frames,directions=count,
+                    angles=[0]*count,origin=character.ORIGIN,ppu=character.PIXELS_PER_UNIT,map_aligned=True)
                 if pose=='idle':icon(preview,'explorer' if tier==0 else f'explorer-{tier}');previews.append((f'Explorer / armor {tier}',preview))
-            preview=animate(f'explorer-{tier}-corpse',lambda t,d:corpse(tier),192,160,frames=2,origin=.62,ppu=70)
+            preview=animate(f'explorer-{tier}-corpse',lambda t,d:corpse(tier),256,192,frames=2,origin=.5,ppu=70)
             print('EXPLORER',tier,flush=True)
         # Small animated status beacon for the constant combinator, not an invented craft.
     if not only:
@@ -119,7 +120,7 @@ def render_all(only=None):
         save(overlay,OUT/'status-light.png');manifest['status-light']=spec('status-light',32,frames=8,origin=.5)
         # Weapon/armor icons use original procedural geometry, never cloned stock icons.
         for name,tier in [('carbine',0),('induction-rifle',1),('lance-rifle',2),('field-armor',0),('expedition-armor',1),('bastion-armor',2)]:
-            if 'armor' in name:im=render(explorer(0,'idle',tier,move_angle=math.pi),144,192,ppu=80,origin=.8)
+            if 'armor' in name:im=render(explorer(0,'idle',tier,move_angle=math.pi),character.WIDTH,character.HEIGHT,ppu=character.PIXELS_PER_UNIT,origin=character.ORIGIN,map_aligned=True)
             else:
                 model=Mesh();model.box((0,0,.2),(.28,1.25,.25),STEEL)
                 model.box((0,.6,.2),(.38,.55,.31),GOLD if tier==0 else (TEAL if tier==1 else WHITE))

@@ -16,6 +16,6 @@ Reference kit per world: **4 scrubbers, 4 heat exchangers, 3 watersheds, 3 soil 
 | Gleba | 59 | 100.0 | 100.0 | 100.0 | 90.9 | 99.5 | 0.0 |
 | Aquilo | 142 | 100.0 | 100.0 | 100.0 | 90.3 | 99.2 | 0.0 |
 
-This kit is deliberately not a minimal solution. Once established, use circuit thresholds around 95–97 to reduce operation duty cycles and preserve headroom above the 90-point victory threshold. Actual factories need extra capacity for materials, byproducts, power, heat, transport and defense.
+This kit is deliberately not a minimal solution. Once established, use circuit thresholds around 95-97 to reduce operation duty cycles and preserve headroom above the 90-point victory threshold. Actual factories need extra capacity for materials, byproducts, power, heat, transport and defense.
 
 The test suite asserts convergence within 180 model minutes on every planet. It does not assert that these minute counts are balanced campaign pacing. That requires playtesting.
