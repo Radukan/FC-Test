@@ -9,6 +9,7 @@ local Natives = require("scripts.natives")
 local Resistance = require("scripts.resistance")
 local Inserters = require("scripts.inserters")
 local Jukebox = require("scripts.jukebox")
+local Ports = require("shared.fluid_ports")
 local Probe = {}
 function Probe.run(surface, force)
   S.init()
@@ -123,6 +124,21 @@ function Probe.run(surface, force)
   local jukebox=assert(camp.jukebox,"landing jukebox missing")
   assert(Jukebox.play(operator,jukebox,2,false),"anthem note unavailable")
   assert(Jukebox.play(operator,jukebox,0,false),"jukebox stop note unavailable")
+  -- Physical pipe connectivity and the shared visible boundary in all four rotations.
+  local first_port=Ports["air-scrubber"][1]
+  for quarter=0,3 do
+    local machine=assert(surface.create_entity({name="sn-air-scrubber",position={-40+quarter*10,52},direction=quarter*4,force=force}))
+    local angle=quarter*math.pi/2;local c,s=math.cos(angle),math.sin(angle)
+    local function world(x,y) return {x=machine.position.x+x*c-y*s,y=machine.position.y+x*s+y*c} end
+    local external=world(first_port.position[1],first_port.position[2]-1)
+    local pipe=assert(surface.create_entity({name="pipe",position=external,force=force}))
+    local connections=machine.fluidbox.get_pipe_connections(1)
+    assert(connections[1] and connections[1].target,"pipe did not attach to rotated input")
+    local expected=world(first_port.position[1],first_port.position[2]-.5)
+    local actual=connections[1].position
+    assert(math.abs(actual.x-expected.x)<.001 and math.abs(actual.y-expected.y)<.001,"connector boundary: "..serpent.line(connections[1]))
+    pipe.destroy();machine.destroy()
+  end
   -- The scene has a native hero track; headless cannot verify audible playback.
   log("SECOND_NATURE_ENGINE_LOGISTICS_AUDIO_OK")
   log("SECOND_NATURE_ENGINE_CAMPAIGN_PROBES_OK")
