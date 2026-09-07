@@ -16,7 +16,15 @@ Added verification covers:
 - Current contact/locomotion/mining/process/ship previews tied to actual source sprites by SHA-256, with complete loops and explicit source-review timing.
 - Updated generated footprint documentation and all README art links.
 
-**Current official-engine rerun: pending the branch CI result.** The direct Factorio download failed from this sandbox, so the required native create/reload/2,100-tick probes run on GitHub's runner. The new required marker is `SECOND_NATURE_ENGINE_LANDER_REFIT_OK`; existing Verdant layout, pipe/vector, audio API, campaign and smoke markers remain mandatory. A successful source harness alone is not a native-engine pass.
+**Current official-engine rerun: PASS.** [Run 34136511528](https://github.com/Radukan/FC-Test/actions/runs/34136511528), code commit `ee35420e77e16877be7cc9a4a1e4bfaca96deb6d`, passed both the source job and the official Factorio 2.0.77 headless job. This includes native save creation, reload and the 2,100-tick probe run. The new required marker is `SECOND_NATURE_ENGINE_LANDER_REFIT_OK`; existing Verdant layout, pipe/vector, audio API, campaign and smoke markers remain mandatory. The lander refit probe uses a real render object, removes 197 iron plates from the camp, and verifies that the remaining three are not replenished by configuration changes.
+
+The sandbox could not reach the Factorio binary host or the Actions log/artifact CDN. Native validation therefore ran on GitHub's runner; success was confirmed through the GitHub run/job API. A local-versus-CI artifact re-download comparison was attempted but blocked by the CDN and is **not claimed as a pass**. The local deterministic package build and checksum check did pass:
+
+```text
+3638625478b1f32d233425bcdfc8db09ff36a02aed3bef6063489e49b72c0181  second-nature_0.6.0.zip
+```
+
+The archive is 62,299,192 bytes and contains 420 mod files. Documentation-only updates to this ledger do not change the packaged mod. The publisher still performs its own required tagged-source validation and asset re-download comparison if a release is explicitly published later.
 
 No graphical Factorio client or two-client multiplayer test was run here. Source-art review is not a screenshot/playthrough certificate. In particular, native character/Mech transitions, exact client pipe seams, audible arrival/music/jukebox behavior, GPU use and long-term campaign balance remain unverified. The 0.6.0 ZIP is a source build, not a newly published GitHub release.
 
