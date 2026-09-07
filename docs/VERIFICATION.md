@@ -1,6 +1,6 @@
 # Verification ledger: Field Crew 0.6.2 alpha
 
-## Current 0.6.2 candidate
+## Current 0.6.2 release
 
 The existing no-power inventory drone/controller system is retained, per the activation clarification. New crews automatically enable, a visible notice/monitor explains Ctrl + Shift + B, and native blueprint/planner shortcuts unlock with the early research. New task tests cover explicit deconstruction, upgrade material/old-item accounting, preserved configurations and paired underground upgrades. The renderer now exports 16 directional drone views and updates positions every tick.
 
@@ -8,7 +8,13 @@ Character regressions cover the reduced teardrop profile, rounded boot mesh and 
 
 The expanded official-engine scenario uses native mining/upgrading on real entities, including a loaded chest, a rare inserter with custom vectors, and an underground pair. It requires `SECOND_NATURE_ENGINE_FIELD_PLANNERS_OK` during a 3,300-tick create/reload run, in addition to all prior markers. Native GUI/hotkey use and long-run GPU/UPS/multiplayer profiling are not claimed.
 
-The completed source export passes **235 local tests** with the pinned 2.0.77 prototype data present, and `git diff --check` is clean. The expanded official-engine check is pending branch CI; native mining/upgrade correctness is not inferred from mock tests.
+The completed source export passes **235 local tests** with the pinned 2.0.77 prototype data present, and `git diff --check` is clean. **Official engine: PASS.** [Run 34166208791](https://github.com/Radukan/FC-Test/actions/runs/34166208791), code commit `2a013829fafbd08b92cf370922604eeb94d45a87`, passed the source job and the official 2.0.77 create/reload/3,300-tick job. The native planner marker passed for real chest contents, rare inserter configuration, old/new upgrade item accounting and an underground pair, alongside all existing markers. Native GUI/hotkey interaction is still not a headless claim.
+
+The local installable archive contains **435 mod files**, is **67,941,618 bytes**, and passes ZIP CRC and SHA-256 verification. The publisher independently revalidates the tagged source and re-downloads its release assets before reporting success.
+
+```text
+7242933b07cb5ff3671704d58ddcaa6343e3a761089a3acd0559ef83e1640d0b  second-nature_0.6.2.zip
+```
 
 ## Historical Field Crew 0.6.1 evidence
 
