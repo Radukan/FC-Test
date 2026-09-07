@@ -10,6 +10,8 @@ Mining has a larger shared-pivot canvas. Authoring checks include every tool ver
 
 ## Validation status
 
+**Completed 0.4 validation:** [34073999327](https://github.com/Radukan/FC-Test/actions/runs/34073999327), code commit `64e7700f0e5bdd4730ac94cb1f6c71f6144bda8f`. All **157 tests** and the official **Factorio 2.0.77 headless** job passed. The source aiming/mining sheets and revised industrial contact sheet were inspected after export. This ledger was updated after observing that result.
+
 Final 0.4 source/engine runs are recorded by the required GitHub validator and release publisher. Do not infer that a prior 0.3 engine run proves later artwork. The publisher must pass the exact tagged source before uploading and re-download both assets for checksum/byte comparison.
 
 The suite retains the campaign, pollution, habitat, weapons, protected lander and strict GUI/import regressions. New checks cover:
