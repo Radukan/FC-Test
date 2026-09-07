@@ -1,8 +1,12 @@
 {
   "description": "Current source-art review ledger. These files are not game screenshots or gameplay certification.",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "inputs": {
     "docs/art/lander-render.json": "57e554b1e825f0a390dac910918bfccab853d0a6122ada20f70f78d8b9b3392c",
+    "second-nature/graphics/entity/field-drones/flying-shadow.png": "f199dface5f4eb4d8b9162c75f622bd9393a77bb04ad52caa6c1b01bf6ac1ff2",
+    "second-nature/graphics/entity/field-drones/flying.png": "8254a2c28be9b979b36fd79e27aee4269fc0f489dbd3c4ece4bb3700d26fc13c",
+    "second-nature/graphics/entity/field-drones/working-shadow.png": "f638aeabb49f23413d8eff58f15a070dcff9354ca8dac923419bd27d4c75d33f",
+    "second-nature/graphics/entity/field-drones/working.png": "fdc433a124f33045f75f2308db56a99f54dad46553d049d3e4e5ceecee7cb02b",
     "second-nature/graphics/entity/industry/air-scrubber-north.png": "c37935db168021917e8bd3bc54f25208e586d7c3ab7c5adf981126d6c44135f7",
     "second-nature/graphics/entity/industry/algae-vat-plant-north.png": "c740391f7d861195bb5af8738e22319cc42fb269969836ba511ed0c127c3f758",
     "second-nature/graphics/entity/industry/arc-turret-fire.png": "ed5029ae8a74d598d2d14b5108f44839c926f975bcd43aaf18ec20095943861f",
@@ -13,12 +17,12 @@
     "second-nature/graphics/entity/industry/detoxifier-plant-north.png": "c20bf0eeed71c7d58722176799abfd3056d8ef756fef42256f3ee0a49283cbcc",
     "second-nature/graphics/entity/industry/ecology-monitor-north.png": "6239ef8a49b7e426e5775eef2b2a9930d17711172112df8e67f7aa8083c433d7",
     "second-nature/graphics/entity/industry/electrolyzer-plant-north.png": "76c21418bd8128efa4b2af5026ccd6ef2531378974cf03a36c6cfc21d624f484",
-    "second-nature/graphics/entity/industry/explorer-0-idle.png": "65ffda7f030e5b53167d7aa4e57d2c846572686b204b57fb5b6e0dedfed7efa4",
-    "second-nature/graphics/entity/industry/explorer-0-mining_with_tool.png": "602e7f9d4a114777bc1039c0d7f80667cc2d51717e38a7a2896e8acc36033a03",
-    "second-nature/graphics/entity/industry/explorer-0-running.png": "0cf2c2fd0b89429d33d1bfa55616f0b57047ae495407b672daf53d2a5bbaa824",
-    "second-nature/graphics/entity/industry/explorer-0-running_with_gun.png": "2c3596e5d02e95d30e5b747c5e0511e6214c351b6674cb0fcc721dda601a5b53",
-    "second-nature/graphics/entity/industry/explorer-1-idle.png": "b63879ff64d1f298c7fe1aeb804772cf226b9ee3a3309d1ef345589d873980bb",
-    "second-nature/graphics/entity/industry/explorer-2-idle.png": "90d33ce17ef72f151747502c5786408e1a73d7c211b722d5a6185dc02519eaa8",
+    "second-nature/graphics/entity/industry/explorer-0-idle.png": "e80d42861503b13ea35d4dcf08bc1d910b88ed94c88f4bb0a30be8c9b5f3b172",
+    "second-nature/graphics/entity/industry/explorer-0-mining_with_tool.png": "f44cde5ce2ea1d05cf02e0cdb67e33e5305786d660985ce3f31dc16c47d616c5",
+    "second-nature/graphics/entity/industry/explorer-0-running.png": "0903da43f54b0364432e2843c70511ab33dc443767ee85b65591e56fefe227b3",
+    "second-nature/graphics/entity/industry/explorer-0-running_with_gun.png": "a70a2066563e700d8794d22c1b8bcd49fa7b843a43faa3d03c2c689c94f48e92",
+    "second-nature/graphics/entity/industry/explorer-1-idle.png": "5c99e597d065648e2824397e38725936c204c5eae6121b3f8b04943a0b93d800",
+    "second-nature/graphics/entity/industry/explorer-2-idle.png": "02fbd5afa270410d24db953e79fc20884d6a44d178d297414d10ec1ce4536a8a",
     "second-nature/graphics/entity/industry/field-crate-north.png": "0654c9ac6f2452cf63bdc29f691aa3da25e6b43cf78e481fc92c87acc7af5c68",
     "second-nature/graphics/entity/industry/field-pole-north.png": "6e1ec07b9ff8f6729ca9d67041f8c46bf1a701277cbf1ec86e15caa599f08f0a",
     "second-nature/graphics/entity/industry/forcing-tower-north.png": "7cec30f8215a88b86e0975ac6f79729237cc20ad2e1831c6c9e851aefb03b5a5",
@@ -41,16 +45,20 @@
     "second-nature/graphics/entity/industry/thermal-exchanger-plant-north.png": "6689e3ae43ec256451a749c174d42a5c26e26129622a3f31ada1f5e136e65d33",
     "second-nature/graphics/entity/industry/vector-inserter-north.png": "317395746487db44cc5f29132e4df40563772907c1362b17343118bb5b631831",
     "second-nature/graphics/entity/industry/vital-splitter-north.png": "076df233a1d6220ff35fd99bb814b9c069b4b5e5c0ee218ac7c83f5c583c1380",
-    "second-nature/graphics/entity/industry/watershed-plant-north.png": "33a57dd3b553ca86238377928e417321d5adaf595c46a36570a61603d57ea0de"
+    "second-nature/graphics/entity/industry/watershed-plant-north.png": "33a57dd3b553ca86238377928e417321d5adaf595c46a36570a61603d57ea0de",
+    "second-nature/graphics/icons/field-controller.png": "4ed068670e04d79c2a6f8f7d25c0c6520a77d081d04ff395194cff999124dea7",
+    "second-nature/graphics/technology/field-robotics.png": "bb628aabd133048838ed591d6fc6e087da58413d3eea8a86cb9769fddd7a6922"
   },
   "outputs": {
-    "ironbound-contact-sheet.jpg": "5bbb36bb4942eace9343968e0b6e21ccda680e1471bef0af1487a6e2fff915ee",
-    "character-aim-layout.jpg": "2abb88746a7c34ec34e0b0da74b4fe1eb4fb619ffdc4d2e8c3d2b62843dc5f13",
-    "locomotion-review.gif": "0addafbfb5761dad09af26f864c61948e2138b8ad708b03191f8a7d246569677",
-    "mining-framing-preview.gif": "1d6c9f843073fb3e893d4444c83ae15f5c1cb67e6f2147fe031c952ea8ccce14",
+    "ironbound-contact-sheet.jpg": "d05314743dc03743c3f57698dcb3c082b4b222bbc07334cf6955e84d0bbd12b5",
+    "character-aim-layout.jpg": "2db33f5f161d9b885bd7ca0bad2302b1473eef635bdb61fb146c673c6b4a396d",
+    "locomotion-review.gif": "290e0e185714d2243d9344144e541ff7ff420d2652712fec9a22a8314bdb379a",
+    "mining-framing-preview.gif": "fd5b34cd537b2ef883050e803536207615b4ee49ece201283853cba2bce4c2ec",
     "industrial-animation-preview.gif": "867dfe0b2aa748891e8380575baf08bee32af75ba8aecc1d9171418fd8d04e0c",
-    "lander-review.jpg": "5bd21ee36b7ae38fb2cddb6c6f1cdc8b6dd1f31791b18f858a2043bc14200cdd",
-    "lander-standby.gif": "d92c72d4c4a57d392280c3b0b25b2c0b9ccbf8bda495487db50fa38ae0c6eb49"
+    "lander-review.jpg": "ec26802001a73e1ff74c48f918cc8ab7a74528963b646d6eb37e22ff080367b9",
+    "lander-standby.gif": "d92c72d4c4a57d392280c3b0b25b2c0b9ccbf8bda495487db50fa38ae0c6eb49",
+    "field-crew-review.jpg": "206594b6cd22e808b937bc1b34feb8188c5cc907c7d44ce54c6628897c691a8f",
+    "field-drone-preview.gif": "56c4f59ad32af01379e5104238f9a286e73caf44310a8112abfb7971336dcb87"
   },
   "canonical_machines": {
     "algae-vat": {

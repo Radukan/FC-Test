@@ -1,7 +1,7 @@
-![Wayfarer expedition shuttle - original rendered sprite](docs/art/lander-review.jpg)
+![Field Crew - original drone and explorer sprites](docs/art/field-crew-review.jpg)
 
-# Second Nature · Verdant Works
-### Stable Factorio 2.0 / Space Age restoration overhaul · v0.6.0 alpha
+# Second Nature · Field Crew
+### Stable Factorio 2.0 / Space Age restoration overhaul · v0.6.1 alpha
 
 **An intact landing craft. A stripped planet. A factory built to bring life back.**
 
@@ -9,22 +9,34 @@ Nauvis has no natural trees or fish in a fresh campaign. The broods tolerate you
 
 ## Download
 
-### [Second Nature 0.6.0 - stable Factorio 2.0](https://github.com/Radukan/FC-Test/releases/download/v0.6.0-factorio-2.0/second-nature_0.6.0.zip)
+### [Second Nature 0.6.1 - stable Factorio 2.0](https://github.com/Radukan/FC-Test/releases/download/v0.6.1-factorio-2.0/second-nature_0.6.1.zip)
 
-[Release notes](https://github.com/Radukan/FC-Test/releases/tag/v0.6.0-factorio-2.0) · [SHA-256 checksum](https://github.com/Radukan/FC-Test/releases/download/v0.6.0-factorio-2.0/second-nature_0.6.0.zip.sha256)
+[Release notes](https://github.com/Radukan/FC-Test/releases/tag/v0.6.1-factorio-2.0) · [SHA-256 checksum](https://github.com/Radukan/FC-Test/releases/download/v0.6.1-factorio-2.0/second-nature_0.6.1.zip.sha256)
 
-Download **`second-nature_0.6.0.zip`** and put it directly in your Factorio `mods` folder. **Do not extract it.** Back up saves and remove older Second Nature copies first. Use the named mod ZIP, not GitHub's automatic source archive. This private repository requires GitHub sign-in with repository access.
+Download **`second-nature_0.6.1.zip`** and put it directly in your Factorio `mods` folder. **Do not extract it.** Back up saves and remove older Second Nature copies first. Use the named mod ZIP, not GitHub's automatic source archive. This private repository requires GitHub sign-in with repository access.
 
-This prerelease includes the articulated explorer, larger industrial-solarpunk process plants, complete building shadows and the Wayfarer lander refit, alongside the existing music, jukebox, defenses and logistics.
+This small-version update adds early field construction drones and a focused human-motion revision. The larger process plants, Wayfarer lander, music, jukebox, defenses and logistics from 0.6.0 remain included.
 
 1. Use **Factorio 2.0.77**, **Space Age**, **Quality** and **Elevated Rails**.
-2. Back up saves and replace older Second Nature ZIP/source copies with `second-nature_0.6.0.zip`, still zipped, in the Factorio `mods` folder.
+2. Back up saves and replace older Second Nature ZIP/source copies with `second-nature_0.6.1.zip`, still zipped, in the Factorio `mods` folder.
 3. For the complete opening, start new Space Age freeplay with **Second Nature / Last Landing** and the default mod settings. **Brood Frontier** and **Quiet Reclamation** offer harder/peaceful alternatives.
-4. **Shift + T / leaf:** field station. **Ctrl + Shift + P:** smog. **Shift + I:** inserter vectors. **Ctrl + Shift + J:** jukebox.
+4. **Shift + T / leaf:** field station. **Ctrl + Shift + P:** smog. **Shift + I:** inserter vectors. **Ctrl + Shift + J:** jukebox. **Ctrl + Shift + B:** field drones.
 
 Windows: `%APPDATA%\Factorio\mods` · Linux: `~/.factorio/mods` · macOS: `~/Library/Application Support/factorio/mods`.
 
 Stable only; experimental 2.1 builds are discontinued. Existing stable saves retain their factories, ecological values and terrain. They do **not** receive another cargo grant or a replacement defense kit. New habitat-readiness rules can temporarily demote an older mature world while its landscape is surveyed/recovered.
+
+## Field Crew 0.6.1: early construction and human motion
+
+Research **Field construction robotics** after **Automation**, using only **20 red science packs**. Craft a field controller and wind-up drones from iron plates, gears, circuits and copper cable. Carry them and your construction materials in the character inventory, then press **Ctrl + Shift + B** or use the drone shortcut.
+
+The crew builds nearby **entity and tile ghosts** within **18 tiles**, flying at **2.1 tiles/second** and taking **1.5 seconds** to perform each construction after arrival. The default crew is **64 concurrent drones**, adjustable to **128 per player** in Mod settings. They require no batteries, armor grid, roboports or logistics network. The server-wide safety cap is 512 active field drones.
+
+Each sortie reserves an actual drone and matching-quality materials. Cancellation and failed work return supplies; overflow is spilled safely. These assistants do not repair, deconstruct, upgrade or deliver items. Loose ground items and specialized packed vehicles are left alone. Remote view, cutscenes, disconnects and owner transitions pause or recall the crew. Existing saves receive no free drone or material grant.
+
+The explorer now has coordinated hip/shoulder counter-rotation, weight transfer, independent head motion and smoother foot transitions. Mining uses a **right-hand-leading grip**, a quicker downstroke and a weighted impact/follow-through. The fully clothed suit has a fuller, rounder chest silhouette with controlled secondary motion, reduced by heavier armor. Native aiming and gameplay mining speed are unchanged.
+
+[Field crew overview](docs/art/field-crew-review.jpg) · [Drone animation](docs/art/field-drone-preview.gif) · [Movement](docs/art/locomotion-review.gif) · [Mining](docs/art/mining-framing-preview.gif) · [Design and safeguards](docs/FIELD-CREW.md)
 
 ## Verdant Works: articulated movement and larger process plants
 

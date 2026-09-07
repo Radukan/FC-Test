@@ -45,8 +45,11 @@ def foot_phase(cycle,side):
         mode='stance'
     else:
         t=(phase-STANCE)/(1-STANCE)
-        along=STEP_SPAN*(-.5+smooth(t))
-        lift=FOOT_LIFT*math.sin(math.pi*t)**1.25
+        # Match the stance velocity at lift-off and heel strike. A Hermite
+        # swing avoids the old instantaneous velocity stop at either boundary.
+        velocity=-STEP_SPAN/STANCE*(1-STANCE)
+        along=(-STEP_SPAN*.5)*(2*t**3-3*t*t+1) + STEP_SPAN*.5*(-2*t**3+3*t*t) + velocity*(2*t**3-3*t*t+t)
+        lift=FOOT_LIFT*math.sin(math.pi*t)**2
         pitch=.22*math.sin(math.pi*t)
         mode='swing'
     return {'phase':phase,'along':along,'lift':lift,'pitch':pitch,'mode':mode}

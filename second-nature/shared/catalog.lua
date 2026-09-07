@@ -329,6 +329,10 @@ for _, x in ipairs(Logistics.technologies) do K.technologies[#K.technologies + 1
 K.expedition = {}
 for _, x in ipairs(Expedition.items) do K.expedition[#K.expedition + 1] = x end
 for _, x in ipairs(Logistics.items) do K.expedition[#K.expedition + 1] = x end
+local FieldDrones = require("shared.field_drones")
+for _, x in ipairs(FieldDrones.items) do K.expedition[#K.expedition + 1] = x end
+for _, x in ipairs(FieldDrones.recipes) do K.recipes[#K.recipes + 1] = x end
+for _, x in ipairs(FieldDrones.technologies) do K.technologies[#K.technologies + 1] = x end
 local Layouts = require("shared.machine_layouts")
 K.by_recipe, K.by_machine = {}, {}
 for _, r in ipairs(K.recipes) do K.by_recipe["sn-" .. r.name] = r end

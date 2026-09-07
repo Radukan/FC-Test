@@ -109,7 +109,7 @@ if settings.startup["sn-expedition-character"].value then
       variation[pose]=Art.animation("explorer-"..tier.."-"..pose,pose=="mining_with_tool" and .26 or (pose:find("running") and .6 or .15))
     end
     variation.flipped_shadow_running_with_gun=nil
-    variation.mining_with_tool_particles_animation_positions={10}
+    variation.mining_with_tool_particles_animation_positions={11}
     if variation.take_off or variation.landing then
       variation.take_off=Art.animation("explorer-2-idle");variation.landing=Art.animation("explorer-2-idle")
       variation.idle_in_air=Art.animation("explorer-2-idle")

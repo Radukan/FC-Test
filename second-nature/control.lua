@@ -13,8 +13,12 @@ local Terrain = require("scripts.terrain")
 local Upgrades = require("scripts.upgrades")
 local Inserters = require("scripts.inserters")
 local Jukebox = require("scripts.jukebox")
+local FieldDrones = require("scripts.field_drones")
+local DroneGui = require("scripts.field_drone_gui")
+local DroneConfig = require("shared.field_drones")
 local function initialize(fresh)
   State.init()
+  FieldDrones.init()
   Campaign.init(fresh == true)
   -- Reconcile removed prototypes and invalid references before the install-only scan.
   local invalid = {}
@@ -58,7 +62,10 @@ local removing = {}
 for _, name in ipairs({"on_pre_player_mined_item", "on_robot_pre_mined", "on_entity_died", "script_raised_destroy"}) do
   if defines.events[name] then removing[#removing + 1] = defines.events[name] end
 end
-script.on_event(removing, function(event) Machines.flush(event.entity) end)
+script.on_event(removing, function(event)
+  Machines.flush(event.entity)
+  if event.name==defines.events.on_entity_died then FieldDrones.entity_died(event) end
+end)
 script.on_event(defines.events.on_entity_cloned, function(event) State.register(event.destination) end)
 script.on_event(defines.events.on_object_destroyed, function(event)
   local id = State.root().registrations[event.registration_number]
@@ -93,12 +100,15 @@ script.on_event(defines.events.on_cutscene_cancelled, function(event)
   local player = game.get_player(event.player_index)
   if player then Campaign.end_pan(player) end
 end)
+script.on_event(defines.events.on_pre_surface_deleted, function(event) FieldDrones.surface_removed(event.surface_index) end)
+script.on_event(defines.events.on_pre_surface_cleared, function(event) FieldDrones.surface_removed(event.surface_index) end)
 script.on_event(defines.events.on_surface_deleted, function(event) State.delete_surface(event.surface_index) end)
 script.on_event(defines.events.on_surface_cleared, function(event)
   State.delete_surface(event.surface_index)
   State.world(game.surfaces[event.surface_index])
 end)
 script.on_event(defines.events.on_forces_merged, function(event)
+  for _,player in pairs(game.players) do FieldDrones.cancel(player.index) end
   Network.merge(event.source_index, event.destination.index)
   Upgrades.refresh(event.destination)
   local camps = State.root().campaign.camps
@@ -112,6 +122,7 @@ script.on_event(defines.events.on_forces_merged, function(event)
   camps[event.source_index] = nil
   Natives.diplomacy()
 end)
+script.on_nth_tick(DroneConfig.step_ticks,FieldDrones.tick)
 script.on_nth_tick(C.poll_ticks, Machines.tick)
 script.on_nth_tick(C.environment_ticks, function()
   local root = State.root()
@@ -150,6 +161,7 @@ end)
 script.on_nth_tick(C.gui_ticks, function()
   for _, player in pairs(game.connected_players) do
     Gui.update(player)
+    DroneGui.update(player)
     local prefs = State.root().players[player.index]
     if prefs and prefs.air_overlay then Pollution.overlay(player, true) end
   end
@@ -158,19 +170,24 @@ script.on_event({defines.events.on_player_created, defines.events.on_player_join
   local player = game.get_player(event.player_index)
   if player then State.world(player.surface); Gui.welcome(player); Campaign.arrive(player) end
 end)
+script.on_event({defines.events.on_pre_player_died,defines.events.on_player_left_game,defines.events.on_player_changed_surface,defines.events.on_player_controller_changed,defines.events.on_player_changed_force}, function(event)
+  FieldDrones.cancel(event.player_index)
+end)
 script.on_event(defines.events.on_player_removed, function(event)
+  FieldDrones.remove_player(event.player_index)
   State.root().players[event.player_index] = nil
   if State.root().inserter_editors then State.root().inserter_editors[event.player_index] = nil end
   if State.root().radios then State.root().radios[event.player_index] = nil end
 end)
 script.on_event(defines.events.on_gui_click, function(event)
-  if not Inserters.click(event) and not Jukebox.click(event) then Gui.click(event) end
+  if not DroneGui.click(event) and not Inserters.click(event) and not Jukebox.click(event) then Gui.click(event) end
 end)
 script.on_event(defines.events.on_gui_opened, function(event) Inserters.opened(event);Jukebox.opened(event) end)
 script.on_event({defines.events.on_player_rotated_entity,defines.events.on_entity_settings_pasted}, Inserters.refresh)
 script.on_event("sn-configure-inserter", function(event)
   local player=game.get_player(event.player_index);if player then Inserters.open(player,player.selected,false) end
 end)
+script.on_event("sn-toggle-field-drones", function(event) DroneGui.toggle(game.get_player(event.player_index)) end)
 script.on_event("sn-open-jukebox", function(event)
   local player=game.get_player(event.player_index);if player then Jukebox.open(player,player.selected) end
 end)
@@ -195,7 +212,8 @@ script.on_event(defines.events.on_gui_closed, function(event)
   end
 end)
 script.on_event(defines.events.on_lua_shortcut, function(event)
-  if event.prototype_name == "sn-dashboard" then Gui.toggle(game.get_player(event.player_index))
+  if event.prototype_name == "sn-field-drones" then DroneGui.toggle(game.get_player(event.player_index))
+  elseif event.prototype_name == "sn-dashboard" then Gui.toggle(game.get_player(event.player_index))
   elseif event.prototype_name == "sn-pollution-overlay" then Gui.toggle_overlay(game.get_player(event.player_index))
   elseif event.prototype_name == "sn-inserter-vectors" then local p=game.get_player(event.player_index);Inserters.open(p,p.selected,false)
   elseif event.prototype_name == "sn-jukebox" then local p=game.get_player(event.player_index);Jukebox.open(p,p.selected) end

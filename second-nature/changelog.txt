@@ -1,4 +1,23 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.6.1
+Date: 2026-09-07
+  Features:
+    - Add inexpensive wind-up construction drones and a carried field controller after Automation and 20 red science packs.
+    - Build nearby entity and tile ghosts from reserved personal inventory materials without a logistics network, roboports or an equipment grid.
+    - Support 64 concurrent drones by default, configurable up to 128 per player, with a bounded shared queue and server safety cap.
+    - Add Ctrl + Shift + B and a field-crew monitor for enable, pause and recall.
+  Character:
+    - Add counter-rotating hips and shoulders, lateral weight transfer, independent head bob and stabilization, and smoother foot swing transitions.
+    - Rebuild the mining cycle around anticipation, a fast downstroke, body drive, impact and recovery.
+    - Keep the right palm closer to the pickaxe head and both hands attached; eliminate a degenerate hand frame near horizontal swings.
+    - Add a fuller rounded protective-suit chest profile and bounded, armor-damped secondary motion.
+    - Retain native aiming rows, movement speed, frame counts and actual mining productivity.
+  Safety:
+    - Reserve actual materials and drone items, preserve quality, and reconcile cancellation, failed construction, full inventories and owner transitions.
+    - Leave packed vehicles, loose ground items, repair, deconstruction, upgrades and deliveries to native systems.
+    - Preserve in-flight escrow across save/reload and keep drone shadows on the ground layer.
+    - Add source and official engine probes for material conservation, isolated-network behavior and saved in-flight construction.
+---------------------------------------------------------------------------------------------------
 Version: 0.6.0
 Date: 2026-09-07
   Character:

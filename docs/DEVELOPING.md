@@ -107,7 +107,7 @@ python3 tools/package.py
 python3 tools/package.py --target 2.0
 ```
 
-Output: `artifacts/factorio-2.0/second-nature_0.6.0.zip` and its `.zip.sha256` sidecar. The canonical mod folder sits directly at the archive root. Deterministic ordering, timestamps, permissions, allowlisted source paths and metadata are tested. `--target 2.1` is rejected.
+Output: `artifacts/factorio-2.0/second-nature_0.6.1.zip` and its `.zip.sha256` sidecar. The canonical mod folder sits directly at the archive root. Deterministic ordering, timestamps, permissions, allowlisted source paths and metadata are tested. `--target 2.1` is rejected.
 
 Do not commit `.cache`, virtual environments, game binaries, saves, generated release artifacts or ZIP files. They are ignored, and large engine assets are external to the source repository.
 
@@ -187,3 +187,15 @@ OPENBLAS_NUM_THREADS=1 .venv/bin/python tools/generate_industrial_assets.py --on
 ```
 
 See [CONTINUATION-AUDIT.md](CONTINUATION-AUDIT.md) for the actual recovered commit and the published-versus-source-build distinction. Back up an older save before testing either expanded plants or a lander refit.
+
+## Version increments and Field Crew
+
+Use small patch increments for focused fixes and additions after 0.6.0 (0.6.1, 0.6.2, and so on). Reserve a minor-series increment for a substantial expansion. Every released mod version gets its own immutable tag and installable ZIP; never replace an older version's asset with different code.
+
+Field Crew uses `shared/field_drones.lua` for its research, recipes and bounds; `scripts/field_drones.lua` for inventory escrow, claims and movement; and `scripts/field_drone_gui.lua` for the monitor. No logistics network is created. `tests/drone_fixture.lua` models inventory accounting; `tests/engine/field_drone_probes.lua` exercises actual entities and inventories across save/reload.
+
+`tools/body_motion.py` separates pelvis, thorax and head transforms. Mining hands use a stable perpendicular basis and actual shaft grips. `tools/generate_industrial_assets.py --only explorer --jobs 2` renders the character; `--poses running running_with_gun` can limit a focused animation export. Parallel workers do not write the global manifest independently. Run the presentation preview generator after all affected poses finish.
+
+`tools/generate_drone_assets.py` owns the separate drone manifest and emits body/shadow layers, icons and the field robotics research card. These can be authored independently of the large explorer atlases. The drone shadow is drawn on the ground layer rather than over the player's head or machine roofs.
+
+The current agent report is [AGENT-REPORT.md](AGENT-REPORT.md). Exact model/token telemetry is not available from the coding tools and must not be guessed.

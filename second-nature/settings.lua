@@ -1,4 +1,5 @@
 data:extend({
+  {type="int-setting",name="sn-field-drone-limit",setting_type="runtime-per-user",default_value=64,minimum_value=1,maximum_value=128,order="h-b"},
   {type="bool-setting",name="sn-opening-audio",setting_type="startup",default_value=true,order="a-g"},
   {type="bool-setting",name="sn-inserter-vectors",setting_type="startup",default_value=true,order="a-h"},
   {type="bool-setting",name="sn-menu-music",setting_type="startup",default_value=true,order="a-f"},

@@ -108,13 +108,15 @@ def contact_sheet(catalog):
         ('Canopy stack inserter', 'canopy-inserter-north', 'Endgame stacked cargo'),
         ('Vital distribution manifold', 'vital-splitter-north', 'Matched 90-item/s belt family'),
         ('Expedition jukebox', 'jukebox-north', 'Local archive playback'),
+        ('Wind-up construction drone', 'field-drone-flying', 'Inventory-fed / no network'),
+        ('Field drone controller', 'field-controller-icon', '20 red science / up to 128 drones'),
         ('Explorer / field gear', 'explorer-0-idle', 'Authored adult character'),
         ('Explorer / modular gear', 'explorer-1-idle', 'Articulated rig'),
         ('Explorer / bastion gear', 'explorer-2-idle', 'Third armor appearance'),
     ]
     cw, ch, columns = 300, 310, 4
     sheet = Image.new('RGB', (cw * columns, 110 + ch * math.ceil(len(entries) / columns)), BACKGROUND)
-    header(sheet, 'SECOND NATURE / VERDANT WORKS', 'Current exported sprites. New-build footprints. Source-art inspection, not game screenshots.')
+    header(sheet, 'SECOND NATURE / FIELD CREW', 'Current exported sprites. New-build footprints. Source-art inspection, not game screenshots.')
     d = ImageDraw.Draw(sheet)
     for i, (label, name, caption) in enumerate(entries):
         x, y = i % columns * cw, 100 + i // columns * ch
@@ -146,7 +148,7 @@ def character_reviews():
     frames = []
     for f in range(rspec['frame_count']):
         sheet = Image.new('RGB', (4 * 310, 474), BACKGROUND)
-        header(sheet, 'THE EXPLORER / ARTICULATED LOCOMOTION', 'Slowed source review: planted stance, raised swing, bent knees and gloved hands. Native movement is distance-driven.')
+        header(sheet, 'THE EXPLORER / ARTICULATED LOCOMOTION', 'Slowed source review: hip/shoulder counter-rotation, independent head bob, weight transfer and grounded feet.')
         d = ImageDraw.Draw(sheet)
         for i, (source, s, row, label) in enumerate([
                 (running, rspec, 2, 'Profile / east'), (running, rspec, 4, 'Front / south'),
@@ -163,7 +165,7 @@ def character_reviews():
     frames = []
     for f in range(spec['frame_count']):
         sheet = Image.new('RGB', (4 * 310, 492), BACKGROUND)
-        header(sheet, 'MINING / THE POINT LEADS THE STRIKE', 'Twenty authored frames at 0.26 animation speed. Complete tool/shadow canvas; unchanged gameplay mining speed.')
+        header(sheet, 'MINING / RIGHT HAND LEADS THE POWER STROKE', 'Anticipation, fast downstroke, weighted impact and recovery. Twenty frames; unchanged gameplay mining speed.')
         d = ImageDraw.Draw(sheet)
         for i, direction in enumerate((0, 2, 4, 6)):
             x = i * 310
@@ -199,7 +201,7 @@ def ship_review():
     frames = lander_frames()
     sheet = Image.new('RGB', (1280, 924), BACKGROUND)
     d = ImageDraw.Draw(sheet)
-    d.text((42, 28), 'SECOND NATURE / VERDANT WORKS', font=font(15, True), fill=ACCENT)
+    d.text((42, 28), 'SECOND NATURE / FIELD CREW', font=font(15, True), fill=ACCENT)
     d.text((38, 58), 'WAYFARER', font=font(57, True), fill=CREAM)
     d.text((42, 136), 'An expedition craft. Not a crash site.', font=font(21), fill=MUTED)
     d.line((42, 180, 1238, 180), fill=(65, 82, 65))
@@ -232,17 +234,72 @@ def ship_review():
     save_gif(animation, 'lander-standby.gif', durations(len(frames), 1000 / (60 * layout()['animation_speed'])))
 
 
+def field_crew_review():
+    source, spec = load('field-drone-flying')
+    shadow, shadow_spec = load('field-drone-flying-shadow')
+    working, work_spec = load('field-drone-working')
+    work_shadow, ws_spec = load('field-drone-working-shadow')
+    frames = []
+    for f in range(8):
+        sheet = Image.new('RGB', (820, 370), BACKGROUND)
+        header(sheet, 'WIND-UP CONSTRUCTION / STANDBY AND WORK', 'Original rotor/gripper loops. Drone bodies and ground shadows are separate native render layers.')
+        d = ImageDraw.Draw(sheet)
+        for i, (body, bs, ground, gs, label) in enumerate([
+                (source, spec, shadow, shadow_spec, 'Flight / reusable spring drive'),
+                (working, work_spec, work_shadow, ws_spec, 'Construction / folding gripper')]):
+            image = tile(ground, gs, frame=f)
+            image.alpha_composite(tile(body, bs, frame=f))
+            fit_sprite(sheet, image, (i*410+30, 98, i*410+380, 320))
+            d.text((i*410+40, 330), label, font=font(14), fill=CREAM)
+        frames.append(sheet)
+    save_gif(frames, 'field-drone-preview.gif', 80)
+    for image in (source, shadow, working, work_shadow):image.close()
+
+    sheet=Image.new('RGB',(1200,870),BACKGROUND)
+    header(sheet,'FIELD CREW / SECOND NATURE '+json.loads((MOD/'info.json').read_text())['version'],'Small-version update: inventory-fed construction assistants and a coordinated human animation rig.')
+    d=ImageDraw.Draw(sheet)
+    for i in range(3):
+        d.rounded_rectangle((22+i*395,110,392+i*395,775),radius=9,fill=PANEL)
+    tech, ts=load('field-robotics-card')
+    fit_sprite(sheet,tile(tech,ts),(62,175,350,490))
+    tech.close()
+    running, rs=load('explorer-0-running')
+    for i,frame in enumerate((4,12)):
+        fit_sprite(sheet,tile(running,rs,4,frame),(430+i*165,184,580+i*165,493),trim=True)
+    running.close()
+    mining, ms=load('explorer-0-mining_with_tool')
+    for i,frame in enumerate((5,10)):
+        fit_sprite(sheet,tile(mining,ms,2,frame),(825+i*165,172,975+i*165,505),trim=True)
+    mining.close()
+    columns=[
+        ('01 / EARLY CONSTRUCTION',['20 red science after Automation','Iron, gears, circuits and cable','64 concurrent drones by default','18-tile personal operating radius','No roboports or logistics network']),
+        ('02 / HUMAN MOVEMENT',['Hips and shoulders counter-rotate','Independent head bob and balance','Continuous foot-swing velocity','Fuller fitted protective clothing','Armor-damped secondary motion']),
+        ('03 / WEIGHTED TOOL WORK',['Right palm closer to the tool head','Both hands remain on the shaft','Measured wind-up and fast impact','Torso drive and planted stance','Unchanged mining productivity'])]
+    for i,(title,lines) in enumerate(columns):
+        x=42+i*395
+        d.text((x,137),title,font=font(15,True),fill=ACCENT)
+        for j,line in enumerate(lines):d.text((x,545+j*36),line,font=font(14),fill=CREAM)
+    d.text((30,799),'Real material reservations / matching quality / cancel-safe return / preserved existing factories',font=font(15),fill=CREAM)
+    d.text((30,838),'Exported sprites and poses, not graphical Factorio footage. See the field-crew contract and verification ledger.',font=font(12),fill=MUTED)
+    sheet.save(ART/'field-crew-review.jpg',quality=94,optimize=True)
+
+
 def generate():
     global MANIFEST
     INPUTS.clear()
     MANIFEST = json.loads((ART / 'sprite-manifest.json').read_text())
+    drone = json.loads((ART/'drone-manifest.json').read_text())
+    for key,spec in drone['specs'].items():MANIFEST['field-drone-'+key]=spec
+    for key,path,size in [('field-controller-icon','graphics/icons/field-controller.png',64),('field-robotics-card','graphics/technology/field-robotics.png',256)]:
+        MANIFEST[key]={'filename':'__second-nature__/'+path,'width':size,'height':size,'frame_count':1,'line_length':1,'direction_count':1}
     catalog = load_catalog()
     contact_sheet(catalog)
     character_reviews()
     industrial_review(catalog)
     ship_review()
+    field_crew_review()
     outputs = ('ironbound-contact-sheet.jpg', 'character-aim-layout.jpg', 'locomotion-review.gif',
-               'mining-framing-preview.gif', 'industrial-animation-preview.gif', 'lander-review.jpg', 'lander-standby.gif')
+               'mining-framing-preview.gif', 'industrial-animation-preview.gif', 'lander-review.jpg', 'lander-standby.gif', 'field-crew-review.jpg', 'field-drone-preview.gif')
     report = {
         'description': 'Current source-art review ledger. These files are not game screenshots or gameplay certification.',
         'version': json.loads((MOD / 'info.json').read_text())['version'],
@@ -251,7 +308,7 @@ def generate():
         'canonical_machines': {m['name']: {'art_name': m['art_name'], 'footprint': m['footprint']} for m in catalog['machines']},
     }
     (ART / 'review-manifest.json').write_text(json.dumps(report, indent=2) + '\n')
-    print('Generated current contact, aim, locomotion, mining, process and ship reviews.')
+    print('Generated current contact, aim, locomotion, mining, process, ship and field-crew reviews.')
 
 
 if __name__ == '__main__':

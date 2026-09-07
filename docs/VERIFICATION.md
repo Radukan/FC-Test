@@ -1,4 +1,18 @@
-# Verification ledger: Verdant Works 0.6.0 alpha
+# Verification ledger: Field Crew 0.6.1 alpha
+
+## Field Crew candidate
+
+This update adds a construction-only personal drone system and revises the explorer's whole-body motion. [FIELD-CREW.md](FIELD-CREW.md) records the mechanics, limits and inventory safeguards. [AGENT-REPORT.md](AGENT-REPORT.md) records the available agent/usage information without inventing model identities or token totals.
+
+Added checks cover exact material reservation/refund, quality, two operators claiming one ghost, a 64-drone crew, lowered limits, research/controller/permission gates, entity and tile ghosts, loose-item protection, packed-item exclusion, cancellation, failed movement/revival, disconnect/death/surface/controller changes, destroyed-drone cargo recovery, saved escrow and separate body/shadow render cleanup.
+
+Motion checks measure pelvis/shoulder counter-rotation, independent head movement, opposing arm/leg swing, constant limb lengths, right-hand-leading grips, attachment to the shaft, fast downstroke versus wind-up, body drive, sole clearance, bounded armor-damped secondary motion and loop continuity. Export bounds and actual sprite/preview fingerprints remain required.
+
+The required native marker is `SECOND_NATURE_ENGINE_FIELD_DRONES_OK`. Its companion scenario saves with four drones in flight, cancels one ghost, reloads, constructs a normal wall, a rare chest and a tile, preserves exact material/drone totals across two operators, leaves loose cargo untouched, and verifies that a nearby powered roboport cannot dock or network these workers. Real engine characters/inventories/ghosts/render objects are used; a LuaPlayer-facing shell is a fixture, not an interactive GUI or per-player-settings playtest.
+
+The finished candidate passes **223 local source/offline tests**, including the pinned official 2.0.77 prototype data. `git diff --check` is clean. The required official-engine rerun is pending branch CI; it is not inferred from the offline pass. No graphical Factorio client, long-run UPS/GPU profile or two-client desync test has been run. Actual native movement/Mech transitions and subjective appearance still need client review.
+
+## Historical Verdant Works 0.6.0 evidence
 
 ## Current continuation / 7 September 2026
 

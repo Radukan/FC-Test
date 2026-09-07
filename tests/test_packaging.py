@@ -48,10 +48,10 @@ def test_generated_locale_matches_source_catalog():
 
 def test_mod_metadata_and_changelog_are_consistent():
     info=json.loads((MOD/'info.json').read_text());change=(MOD/'changelog.txt').read_text()
-    assert info['version']=='0.6.0' and 'Version: '+info['version'] in change
+    assert re.fullmatch(r'0\.\d+\.\d+',info['version']) and 'Version: '+info['version'] in change
     assert info['factorio_version']=='2.0'
     assert any(s.startswith('space-age >=') for s in info['dependencies'])
-    assert re.search(r'Version: 0\.6\.0\nDate: 2026-09-07',change)
+    assert re.search(r'Version: '+re.escape(info['version'])+r'\nDate: \d{4}-\d{2}-\d{2}',change)
 
 
 def test_game_runtime_has_no_network_filesystem_or_legacy_global_dependencies():

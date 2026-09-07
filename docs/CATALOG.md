@@ -2,7 +2,7 @@
 
 Generated from `second-nature/shared/catalog.lua` by `python tools/generate_docs.py`. Do not hand-edit tables.
 
-**22 machines · 112 recipes · 27 technologies · 32 material/science items · 6 fluids.**
+**22 machines · 114 recipes · 28 technologies · 32 material/science items · 6 fluids.**
 
 Times are seconds at crafting speed 1. Fitness effects are percentage points per completed cycle before planetary multipliers and support ceilings. No custom recipe supports productivity. Native recipe quality is disabled for operations and closed/catalytic loops.
 
@@ -136,6 +136,8 @@ Recipes tagged **dirty** also emit vanilla pollution/spores and incur explicit t
 | Assemble a sealed transfer tunnel | 8 s | 2 Turbo underground belt + 8 Sn vital belt + 10 Tungsten plate + 2 Gaia coordination cell | 2 Sn vital underground belt | Living-world logistics |
 | Assemble a distribution manifold | 10 s | 1 Turbo splitter + 10 Processing unit + 4 Superconductor + 2 Gaia coordination cell | 1 Sn vital splitter | Living-world logistics |
 | Assemble an expedition jukebox | 5 s | 5 Electronic circuit + 10 Iron plate + 10 Copper cable | 1 Sn jukebox | Available from start |
+| Assemble a wind-up construction drone | 2 s | 2 Iron plate + 1 Iron gear wheel + 1 Electronic circuit + 2 Copper cable | 1 Sn field drone | Field construction robotics |
+| Build a field drone controller | 5 s | 8 Iron plate + 6 Iron gear wheel + 5 Electronic circuit + 6 Copper cable | 1 Sn field controller | Field construction robotics |
 
 ## Construction recipes
 
@@ -197,6 +199,7 @@ Recipes tagged **dirty** also emit vanilla pollution/spores and incur explicit t
 | Ecological process optimization 2 | 350 × 30 s | Automation, Logistic, Chemical, Ecology | Ecological process optimization 1, Climate control |
 | Ecological process optimization 3 | 700 × 30 s | Automation, Logistic, Chemical, Space, Ecology, Climate | Ecological process optimization 2, Comparative climatology |
 | Living-world logistics | 750 × 30 s | Automation, Logistic, Chemical, Production, Utility, Space, Climate | The Gaia network, Stack inserter, Turbo transport belt |
+| Field construction robotics | 20 × 15 s | Automation | Automation |
 
 ## Materials and fluids
 

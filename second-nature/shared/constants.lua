@@ -2,7 +2,7 @@
 local C = {}
 C.mod = "second-nature"
 C.prefix = "sn-"
-C.schema = 5
+C.schema = 6
 C.axes = {"atmosphere", "temperature", "water", "soil", "biodiversity"}
 C.planets = {"nauvis", "vulcanus", "fulgora", "gleba", "aquilo"}
 C.colors = {

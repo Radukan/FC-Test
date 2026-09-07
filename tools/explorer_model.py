@@ -1,178 +1,234 @@
-"""Detailed adult expedition explorer with independently oriented stride and aim.
-All surfaces are authored geometry. The torso, head, hands and weapon share one
-rig so the muzzle cannot turn away from the arms. Tool motion shares the grips.
+"""Adult, fully clothed explorer with hierarchical human locomotion and tool work.
+
+The pelvis, thorax and head have distinct transforms. Arms solve between moving
+shoulders and actual grips; gun aim stays independent of body counter-rotation.
 """
 import math
-from industrial_art import Mesh,STEEL,DARK,EDGE,GOLD,COPPER,TEAL,WHITE,add,rot,mul
+from industrial_art import Mesh, STEEL, DARK, EDGE, GOLD, COPPER, TEAL, WHITE, add, rot, mul
 import gait
-from character_rig import limb,hand as build_hand
+from character_rig import limb, hand as build_hand
+from body_motion import motion, mining_profile, join_transformed
 
-SKIN=(184,130,103)
-HAIR=(61,31,20)
-SUIT=(37,42,39)
+SKIN = (184, 130, 103)
+HAIR = (61, 31, 20)
+SUIT = (37, 42, 39)
 
-def loft(mesh,rings,color,sides=20):
-    loops=[]
-    for x,y,z,rx,ry in rings:
-        loops.append([(x+rx*math.cos(i*math.tau/sides),y+ry*math.sin(i*math.tau/sides),z) for i in range(sides)])
-    mesh.face(list(reversed(loops[0])),color);mesh.face(loops[-1],color)
-    for j in range(len(loops)-1):
+
+def loft(mesh, rings, color, sides=24):
+    loops = [[(x + rx * math.cos(i * math.tau / sides), y + ry * math.sin(i * math.tau / sides), z)
+              for i in range(sides)] for x, y, z, rx, ry in rings]
+    mesh.face(list(reversed(loops[0])), color)
+    mesh.face(loops[-1], color)
+    for a, b in zip(loops, loops[1:]):
         for i in range(sides):
-            k=(i+1)%sides;mesh.face([loops[j][i],loops[j][k],loops[j+1][k],loops[j+1][i]],color)
+            j = (i + 1) % sides
+            mesh.face([a[i], a[j], b[j], b[i]], color)
 
-def local_to_world(p,angle):return rot(p,angle)
 
-def explorer(t=0,pose='idle',tier=0,move_angle=0,aim_angle=0):
-    m=Mesh();upper=Mesh();run=pose in ('running','running_with_gun');gun='gun' in pose;mining=pose=='mining_with_tool'
-    phase=t*math.tau
-    step=.24*math.sin(phase) if run else .008*math.sin(phase)
-    bob=-.035*math.cos(phase*2) if run else .007*math.sin(phase)
-    facing=aim_angle if gun else move_angle
-    armor=(119,111,88) if tier==0 else ((104,111,99) if tier==1 else (145,141,119))
-    stride_vector=(math.sin(move_angle),-math.cos(move_angle),0)
-    bend=rot((0,-1,0),facing)
-    joints={};phases={}
-    # Stance feet remain planted in height. The swing leg clears the ground and
-    # shortens through knee flexion, with constant femur/tibia lengths.
-    for side in (-1,1):
-        sample=gait.foot_phase(t,side) if run else {'phase':0,'along':0,'lift':0,'pitch':0,'mode':'stance'}
-        phases[side]=sample
-        hip=rot((side*.158+.016*math.sin(phase) if run else side*.158,0,1.10+bob),facing)
-        ankle=add(rot((side*.17,0,.115),facing),mul(stride_vector,sample['along']))
-        ankle=add(ankle,(0,0,sample['lift']))
-        knee=gait.solve_two_bone(hip,ankle,gait.THIGH,gait.SHIN,bend)
-        limb(m,hip,knee,.127,.105,SUIT,18);limb(m,knee,ankle,.090,.061,SUIT,16)
-        m.ball(knee,.111,armor,stretch=(.95,1.0,.76))
-        shin_front=rot((0,-.046,0),facing)
-        top=add(gait.add(knee,gait.mul(gait.sub(ankle,knee),.15)),shin_front)
-        bottom=add(gait.add(knee,gait.mul(gait.sub(ankle,knee),.84)),shin_front)
-        limb(m,top,bottom,.075,.050,armor,14)
-        boot=Mesh();boot.box((0,-.055,.015),(.21,.35,.20),DARK,.06)
-        boot.box((0,-.143,.05),(.195,.13,.061),armor,.03)
-        boot.box((0,-.05,-.074),(.22,.37,.035),(20,24,22),.025)
-        # Toe roll on lift-off and controlled heel strike during contact.
-        pitch=sample['pitch'];c,ss=math.cos(pitch),math.sin(pitch)
-        rolled=Mesh()
-        for vertices,color,glow in boot.faces:
-            rolled.face([(x,y*c-z*ss,y*ss+z*c) for x,y,z in vertices],color,glow)
-        m.join(rolled,facing,ankle)
-        belt=gait.add(hip,gait.mul(gait.sub(knee,hip),.44));m.ball(belt,.126,(68,56,42),stretch=(1,1,.24))
-        joints['hip-'+str(side)]=hip;joints['knee-'+str(side)]=knee;joints['ankle-'+str(side)]=ankle
-        joints['toe-'+str(side)]=add(rot((0,-.20,.04),facing),ankle)
-    # A fitted silhouette, articulated pelvis and curved protective shell.
-    loft(upper,[(0,.006,1.00+bob,.215,.12),(0,.006,1.09+bob,.254,.153),
-                (0,0,1.21+bob,.164,.104),(0,0,1.36+bob,.171,.115),
-                (0,-.005,1.52+bob,.222,.155),(0,.005,1.66+bob,.24,.134)],SUIT)
-    upper.ball((-.105,-.083,1.50+bob),.148,armor,stretch=(.9,.77,.93))
-    upper.ball((.105,-.083,1.50+bob),.148,armor,stretch=(.9,.77,.93))
-    upper.box((0,-.122,1.27+bob),(.22,.045,.25),DARK,.035)
-    for i in range(4):upper.box((0,-.150,1.17+bob+i*.056),(.14,.016,.018),EDGE,.005)
-    # Harness follows the curved chest and waist rather than a single square slab.
-    for side in (-1,1):
-        upper.tube((side*.13,-.10,1.65+bob),(side*.18,-.20,1.44+bob),.022,(117,78,38),8)
-        upper.tube((side*.18,-.20,1.44+bob),(side*.12,-.13,1.15+bob),.018,(117,78,38),8)
-        upper.box((side*.147,-.173,1.36+bob),(.052,.025,.063),EDGE,.009)
-    for side in (-1,1):
-        upper.tube((side*.238,.016,1.065+bob),(side*.157,-.077,1.26+bob),.012,COPPER,8)
-    upper.box((0,0,1.11+bob),(.43,.30,.09),(92,69,43),.045)
-    upper.box((0,-.163,1.11+bob),(.10,.035,.075),EDGE,.01)
-    for side in (-1,1):upper.box((side*.225,.025,1.10+bob),(.12,.15,.205),DARK,.025)
-    # Compact respirator pack, routed tubes and instrumentation.
-    upper.box((0,.19,1.40+bob),(.31,.16,.47),armor,.05)
-    for x in (-.10,.10):
-        upper.cyl(x,.245,1.28+bob,.049,.28,EDGE,14)
-        upper.tube((x,.26,1.58+bob),(x*.8,.11,1.72+bob),.018,DARK,8)
-    for i in range(5):upper.box((0,.285,1.28+bob+i*.051),(.21,.014,.018),DARK,.002)
-    upper.box((.07,.286,1.56+bob),(.07,.013,.022),TEAL,.002)
-    # Hands and tool/weapon anchors belong to this torso rig.
-    tool_bottom=tool_top=None
+def rounded_panel(mesh, center, radius, color, stretch=(1, 1, 1)):
+    # Higher curvature resolution on fitted fabric/armor than a low-sided primitive.
+    rows, columns = 12, 28
+    rings = []
+    for j in range(rows + 1):
+        latitude = -math.pi / 2 + j * math.pi / rows
+        rings.append([add(center, (radius * stretch[0] * math.cos(latitude) * math.cos(i * math.tau / columns),
+                                  radius * stretch[1] * math.cos(latitude) * math.sin(i * math.tau / columns),
+                                  radius * stretch[2] * math.sin(latitude))) for i in range(columns)])
+    for a, b in zip(rings, rings[1:]):
+        for i in range(columns):
+            j = (i + 1) % columns
+            mesh.face([a[i], a[j], b[j], b[i]], color)
+
+
+def explorer(t=0, pose='idle', tier=0, move_angle=0, aim_angle=0):
+    run, gun, mining = pose in ('running', 'running_with_gun'), 'gun' in pose, pose == 'mining_with_tool'
+    facing = aim_angle if gun else move_angle
+    relative = move_angle - facing
+    rig = motion(t, pose, tier, relative)
+    pelvis, torso, head_rig = rig['pelvis'], rig['torso'], rig['head']
+    phase, bob = rig['phase'], rig['bob']
+    m, shell, waist, skin = Mesh(), Mesh(), Mesh(), Mesh()
+    armor = (119, 111, 88) if tier == 0 else ((104, 111, 99) if tier == 1 else (145, 141, 119))
+    stride = (math.sin(relative), -math.cos(relative), 0)
+    joints, foot_phases, hands, anchors, soles = {}, {}, {}, {}, {}
+
+    for side in (-1, 1):
+        sample = gait.foot_phase(t, side) if run else {'phase': 0, 'along': 0, 'lift': 0, 'pitch': 0, 'mode': 'stance'}
+        foot_phases[side] = sample
+        hip = pelvis.point((side * .158, 0, 1.10))
+        # A staggered, braced stance transfers weight through a mining strike.
+        stagger = side * .085 if mining else 0
+        ankle = add((side * (.19 if mining else .17), stagger, .115 + sample['lift']), mul(stride, sample['along']))
+        knee = gait.solve_two_bone(hip, ankle, gait.THIGH, gait.SHIN, pelvis.vector((0, -1, 0)))
+        limb(m, hip, knee, .127, .105, SUIT, 18)
+        limb(m, knee, ankle, .090, .061, SUIT, 16)
+        m.ball(knee, .111, armor, stretch=(.95, 1, .76))
+        top = add(add(knee, mul(gait.sub(ankle, knee), .15)), (0, -.046, 0))
+        bottom = add(add(knee, mul(gait.sub(ankle, knee), .84)), (0, -.046, 0))
+        limb(m, top, bottom, .075, .050, armor, 14)
+        boot = Mesh()
+        boot.box((0, -.055, .015), (.21, .35, .20), DARK, .06)
+        boot.box((0, -.143, .05), (.195, .13, .061), armor, .03)
+        boot.box((0, -.05, -.074), (.22, .37, .035), (20, 24, 22), .025)
+        c, s = math.cos(sample['pitch']), math.sin(sample['pitch'])
+        rolled = Mesh()
+        for vertices, color, glow in boot.faces:
+            rolled.face([(x, y * c - z * s, y * s + z * c) for x, y, z in vertices], color, glow)
+        lowest = min(p[2] for v, _, _ in rolled.faces for p in v)
+        sole_correction = max(0, .018 - ankle[2] - lowest)
+        m.join(rolled, offset=add(ankle, (0, 0, sole_correction)))
+        soles[side] = ankle[2] + lowest + sole_correction
+        belt = add(hip, mul(gait.sub(knee, hip), .44))
+        m.ball(belt, .126, (68, 56, 42), stretch=(1, 1, .24))
+        for name, point in [('hip', hip), ('knee', knee), ('ankle', ankle), ('toe', add(ankle, (0, -.20, .04)))]:
+            joints[name + '-' + str(side)] = point
+
+    # Smoothly skinned waist-to-thorax fabric, with separately moving rigid gear.
+    loft(skin, [(0, .006, 1.00, .215, .12), (0, .006, 1.09, .254, .153),
+                (0, 0, 1.21, .164, .104), (0, 0, 1.36, .171, .115),
+                (0, -.005, 1.52, .227, .155), (0, .005, 1.66, .24, .134)], SUIT)
+    def skinned(point):
+        weight = gait.smooth(max(0, min(1, (point[2] - 1.10) / .40)))
+        return add(mul(pelvis.point(point), 1 - weight), mul(torso.point(point), weight))
+    join_transformed(m, skin, skinned)
+    secondary = rig['secondary']
+    for side in (-1, 1):
+        center = (side * .129, -.124, 1.488 + secondary)
+        rounded_panel(shell, center, .185, armor, stretch=(1.01, 1.06, .97))
+        joints['chest-' + str(side)] = torso.point(center)
+        # The fitted protective garment remains fully covered. Harness straps
+        # follow its curved surface; heavier chest plates strongly damp motion.
+        points = [(side * .13, -.09, 1.65), (side * .183, -.282, 1.54 + secondary),
+                  (side * .173, -.286, 1.44 + secondary), (side * .12, -.14, 1.18)]
+        for a, b in zip(points, points[1:]):
+            shell.tube(a, b, .019, (117, 78, 38), 8)
+        shell.box((side * .145, -.198, 1.34), (.052, .027, .063), EDGE, .009)
+    shell.box((0, -.122, 1.27), (.22, .045, .25), DARK, .035)
+    for i in range(4):
+        shell.box((0, -.150, 1.17 + i * .056), (.14, .016, .018), EDGE, .005)
+    waist.box((0, 0, 1.11), (.43, .30, .09), (92, 69, 43), .045)
+    waist.box((0, -.163, 1.11), (.10, .035, .075), EDGE, .01)
+    for side in (-1, 1):
+        waist.box((side * .225, .025, 1.10), (.12, .15, .205), DARK, .025)
+        waist.tube((side * .238, .016, 1.065), (side * .157, -.077, 1.21), .012, COPPER, 8)
+    join_transformed(m, waist, pelvis.point)
+    shell.box((0, .19, 1.40), (.31, .16, .47), armor, .05)
+    for x in (-.10, .10):
+        shell.cyl(x, .245, 1.28, .049, .28, EDGE, 14)
+        shell.tube((x, .26, 1.58), (x * .8, .11, 1.72), .018, DARK, 8)
+    for i in range(5):
+        shell.box((0, .285, 1.28 + i * .051), (.21, .014, .018), DARK, .002)
+    shell.box((.07, .286, 1.56), (.07, .013, .022), TEAL, .002)
+
     if mining:
-        swing=.5-.5*math.cos(phase)
-        theta=math.radians(-18+158*swing)
-        tool_bottom=(.065,-.40,1.48+bob)
-        shaft=(0,-math.sin(theta),math.cos(theta))
-        tool_top=add(tool_bottom,mul(shaft,1.15))
-        cutting_direction=(0,-math.cos(theta),-math.sin(theta))
-        grip_right=tuple(a*.96+b*.04 for a,b in zip(tool_bottom,tool_top))
-        grip_left=tuple(a*.83+b*.17 for a,b in zip(tool_bottom,tool_top))
-    hand_joints={}
-    for side in (-1,1):
-        shoulder=(side*.273,0,1.65+bob)
+        theta = mining_profile(t)['angle']
+        shaft = torso.vector((0, -math.sin(theta), math.cos(theta)))
+        cutting = torso.vector((0, -math.cos(theta), -math.sin(theta)))
+        back = mul(cutting, -1)
+        center = torso.point((.055, -.38, 1.41))
+        tool_bottom, tool_top = add(center, mul(shaft, -.36)), add(center, mul(shaft, 1.05))
+        grips = {1: add(center, mul(shaft, .14)), -1: add(center, mul(shaft, -.14))}
+        anchors.update(tool_bottom=tool_bottom, tool_top=tool_top, tool_axis=shaft,
+                       right_grip=grips[1], left_grip=grips[-1])
+    elif gun:
+        # The weapon stays on the requested aim axis while the shoulders sway.
+        weapon_bob = bob + .006 * math.sin(phase * 2)
+        grips = {1: (.085, -.385, 1.46 + weapon_bob), -1: (-.034, -.585, 1.455 + weapon_bob)}
+
+    for side in (-1, 1):
+        shoulder = torso.point((side * .273, 0, 1.65))
         if mining:
-            wrist=grip_left if side<0 else grip_right
-            forward=shaft;back=(0,1,0);curl=.95
+            forward = shaft
+            wrist = add(grips[side], mul(shaft, -.065))
+            hand_back, curl, bend = back, .95, (side * .60, .45, -.3)
         elif gun:
-            wrist=(.085,-.385,1.46+bob) if side>0 else (-.034,-.585,1.455+bob)
-            forward=(0,0,-1) if side>0 else (0,-1,0)
-            back=(0,-1,0) if side>0 else (0,0,1);curl=.88
+            wrist = grips[side]
+            forward = (0, 0, -1) if side > 0 else (0, -1, 0)
+            hand_back = (0, -1, 0) if side > 0 else (0, 0, 1)
+            curl, bend = .88, (side * .45, .65, -.35)
         else:
-            wrist=(side*.31,side*step*.90,1.07+bob+.04*math.cos(phase+side))
-            forward=(0,0,-1);back=(0,1,0);curl=.22
-        elbow=gait.solve_two_bone(shoulder,wrist,.38,.35,(side,.38,-.2))
-        limb(upper,shoulder,elbow,.086,.074,SUIT,16);limb(upper,elbow,wrist,.071,.055,SUIT,16)
-        upper.ball(shoulder,.116,armor,stretch=(1.06,.95,.80));upper.ball(elbow,.077,EDGE,stretch=(1,.8,.8))
-        h=build_hand(upper,wrist,forward,back,side,curl)
-        hand_joints[side]=h
-        joints['shoulder-'+str(side)]=rot(shoulder,facing)
-        joints['elbow-'+str(side)]=rot(elbow,facing)
-        joints['wrist-'+str(side)]=rot(wrist,facing)
-        if tier>0:
-            upper.box((side*.30,.012,1.67+bob),(.16,.255,.135),armor,.035)
-            upper.box((side*.30,-.09,1.69+bob),(.10,.09,.025),GOLD,.008)
+            swing = -side * .29 * math.cos(phase - .14) if run else .008 * math.sin(phase)
+            wrist = (side * .30 + .01 * math.sin(phase), swing,
+                     1.10 + bob + (.035 * math.cos(phase * 2) if run else 0))
+            forward, hand_back, curl, bend = (0, 0, -1), (0, 1, 0), .26, (side * .17, .8, -.35)
+        elbow = gait.solve_two_bone(shoulder, wrist, .38, .35, bend)
+        limb(m, shoulder, elbow, .086, .074, SUIT, 16)
+        limb(m, elbow, wrist, .071, .055, SUIT, 16)
+        m.ball(shoulder, .112, armor, stretch=(1.06, .95, .80))
+        m.ball(elbow, .077, EDGE, stretch=(1, .8, .8))
+        hands[side] = build_hand(m, wrist, forward, hand_back, side, curl)
+        for name, point in [('shoulder', shoulder), ('elbow', elbow), ('wrist', wrist)]:
+            joints[name + '-' + str(side)] = point
+        if tier > 0:
+            shell.box((side * .30, .012, 1.67), (.16, .255, .135), armor, .035)
+            shell.box((side * .30, -.09, 1.69), (.10, .09, .025), GOLD, .008)
+        if tier == 2:
+            shell.box((side * .31, .12, 1.64), (.18, .23, .21), armor, .04)
+            shell.box((side * .31, .02, 1.75), (.13, .05, .025), GOLD, .006)
+    join_transformed(m, shell, torso.point)
+
+    head = head_mesh(phase, tier)
+    def head_point(point):
+        return torso.point(head_rig.point(point))
+    join_transformed(m, head, head_point)
+    m.tube(torso.point((0, 0, 1.68)), head_point((0, -.005, 1.80)), .073, SKIN, 16)
+    joints.update(pelvis=pelvis.point((0, 0, 1.08)), thorax=torso.point((0, 0, 1.53)),
+                  head=head_point((0, 0, 1.95)), neck=head_point((0, 0, 1.78)))
+
+    if gun:
+        z = weapon_bob
+        m.box((.028, -.51, 1.447 + z), (.145, .53, .116), DARK, .025)
+        m.box((.028, -.47, 1.516 + z), (.065, .34, .033), EDGE, .009)
+        m.tube((.028, -.67, 1.448 + z), (.028, -1.12, 1.448 + z), .025, STEEL, 14)
+        for j in range(4):
+            m.tube((.028, -.79 + j * .055, 1.448 + z), (.028, -.766 + j * .055, 1.448 + z), .036, EDGE, 12)
+        m.box((.028, -.39, 1.315 + z), (.085, .145, .19), COPPER, .016)
+        m.box((.028, -.24, 1.443 + z), (.10, .18, .12), (104, 89, 64), .025)
+        anchors.update(gun_root=(.028, -.67, 1.448 + z), gun_muzzle=(.028, -1.12, 1.448 + z),
+                       right_grip=grips[1], left_grip=grips[-1])
+    if mining:
+        m.tube(tool_bottom, tool_top, .026, (96, 78, 53), 14)
+        # Forged, tapered point follows the downward cutting tangent.
+        rear, neck, tip = (add(tool_top, mul(cutting, distance)) for distance in (-.22, .17, .50))
+        m.tube(rear, neck, .064, EDGE, 14)
+        sideways = torso.vector((.072, 0, 0))
+        up = mul(shaft, .051)
+        ring = [add(neck, sideways), add(neck, up), add(neck, mul(sideways, -1)), add(neck, mul(up, -1))]
+        for i in range(4):
+            m.face([ring[i], ring[(i + 1) % 4], tip], STEEL)
+        anchors.update(tool_tip=tip, tool_neck=neck, strike_direction=cutting, tool_grip=grips[1])
+    result = Mesh()
+    result.join(m, facing)
+    result.anchors = {name: rot(p, facing) for name, p in anchors.items()}
+    result.joints = {name: rot(p, facing) for name, p in joints.items()}
+    result.hands = {side: {name: rot(p, facing) for name, p in points.items()} for side, points in hands.items()}
+    result.aim_angle, result.move_angle, result.pose = facing, move_angle, pose
+    result.foot_phases, result.sole_heights, result.motion = foot_phases, soles, rig
+    result.surface_finish = 'cloth'
+    return result
+
+def head_mesh(phase,tier):
+    head=Mesh()
+    armor=(119,111,88) if tier==0 else ((104,111,99) if tier==1 else (145,141,119))
     # Neck, face, shaped hairline, eyes, brow and small facial details.
-    upper.tube((0,0,1.68+bob),(0,-.005,1.80+bob),.073,SKIN,16)
-    upper.ball((0,-.006,1.951+bob),.151,SKIN,stretch=(.87,.91,1.18))
-    upper.ball((0,-.012,1.865+bob),.12,SKIN,stretch=(.86,.82,.82))
-    upper.ball((0,.05,1.991+bob),.158,HAIR,stretch=(.97,.82,1.0))
+    head.ball((0,-.006,1.951),.151,SKIN,stretch=(.87,.91,1.18))
+    head.ball((0,-.012,1.865),.12,SKIN,stretch=(.86,.82,.82))
+    head.ball((0,.05,1.991),.158,HAIR,stretch=(.97,.82,1.0))
     # The face remains open; the brow-mounted optics leave the features visible.
-    upper.ball((0,-.149,1.946+bob),.028,(196,141,111),stretch=(.55,1,.9))
-    upper.box((0,-.135,1.895+bob),(.070,.013,.014),(120,57,49),.005)
+    head.ball((0,-.149,1.946),.028,(196,141,111),stretch=(.55,1,.9))
+    head.box((0,-.135,1.895),(.070,.013,.014),(120,57,49),.005)
     for x in (-.062,.062):
-        upper.ball((x,-.127,1.977+bob),.025,(213,197,166),stretch=(1,.35,.58))
-        upper.ball((x,-.140,1.978+bob),.012,(38,60,51),stretch=(1,.32,1))
-        upper.tube((x-.028,-.119,2.007+bob),(x+.022,-.126,2.012+bob),.009,HAIR,6)
-        upper.box((x,-.083,2.081+bob),(.092,.076,.046),DARK,.013)
-        upper.box((x,-.126,2.082+bob),(.075,.018,.026),(64,132,137),.008)
+        head.ball((x,-.127,1.977),.025,(213,197,166),stretch=(1,.35,.58))
+        head.ball((x,-.140,1.978),.012,(38,60,51),stretch=(1,.32,1))
+        head.tube((x-.028,-.119,2.007),(x+.022,-.126,2.012),.009,HAIR,6)
+        head.box((x,-.083,2.081),(.092,.076,.046),DARK,.013)
+        head.box((x,-.126,2.082),(.075,.018,.026),(64,132,137),.008)
     # Detailed tied hair, not a featureless block helmet.
     for i in range(7):
         angle=(i-3)*.19
-        upper.tube((.11*math.sin(angle),.155,2.01+bob),(.04+.025*math.sin(phase+i),.255,1.68+bob-i*.006),.017,tuple(v+i*2 for v in HAIR),8)
-    upper.ball((0,.164,1.99+bob),.052,GOLD,stretch=(1,.5,.6))
-    for x in (-.137,.137):upper.ball((x,.015,1.95+bob),.036,armor)
+        head.tube((.11*math.sin(angle),.155,2.01),(.04+.025*math.sin(phase+i),.255,1.68-i*.006),.017,tuple(v+i*2 for v in HAIR),8)
+    head.ball((0,.164,1.99),.052,GOLD,stretch=(1,.5,.6))
+    for x in (-.137,.137):head.ball((x,.015,1.95),.036,armor)
     if tier==2:
-        for side in (-1,1):
-            upper.box((side*.31,.12,1.64+bob),(.18,.23,.21),armor,.04)
-            upper.box((side*.31,.02,1.75+bob),(.13,.05,.025),GOLD,.006)
-        upper.box((0,-.118,1.841+bob),(.20,.055,.067),DARK,.015)
-    anchors={}
-    if gun:
-        recoil=.014*(.5-.5*math.cos(phase))
-        upper.box((.028,-.51+recoil,1.447+bob),(.145,.53,.116),DARK,.025)
-        upper.box((.028,-.47+recoil,1.516+bob),(.065,.34,.033),EDGE,.009)
-        upper.tube((.028,-.67+recoil,1.448+bob),(.028,-1.12+recoil,1.448+bob),.025,STEEL,14)
-        for j in range(4):upper.tube((.028,-.79+j*.055+recoil,1.448+bob),(.028,-.766+j*.055+recoil,1.448+bob),.036,EDGE,12)
-        upper.box((.028,-.39+recoil,1.315+bob),(.085,.145,.19),COPPER,.016)
-        upper.box((.028,-.24+recoil,1.443+bob),(.10,.18,.12),(104,89,64),.025)
-        anchors['gun_root']=(.028,-.67+recoil,1.448+bob)
-        anchors['gun_muzzle']=(.028,-1.12+recoil,1.448+bob)
-        anchors['right_grip']=grip_right if mining else (.072,-.40,1.425+bob)
-    if mining:
-        upper.tube(tool_bottom,tool_top,.024,(96,78,53),12)
-        rear=add(tool_top,mul(cutting_direction,-.22))
-        neck=add(tool_top,mul(cutting_direction,.17))
-        tip=add(tool_top,mul(cutting_direction,.50))
-        upper.tube(rear,neck,.057,EDGE,12)
-        # A tapered forged point, not a flat crossbar presented to the ground.
-        side=(.067,0,0);up=(0,-cutting_direction[2]*.045,cutting_direction[1]*.045)
-        ring=[add(neck,side),add(neck,up),add(neck,mul(side,-1)),add(neck,mul(up,-1))]
-        for i in range(4):upper.face([ring[i],ring[(i+1)%4],tip],STEEL)
-        anchors['tool_tip']=tip
-        anchors['tool_neck']=neck
-        anchors['strike_direction']=cutting_direction
-        anchors['tool_grip']=grip_right
-    m.join(upper,facing)
-    m.anchors={name:rot(point,facing) for name,point in anchors.items()}
-    m.aim_angle=facing;m.move_angle=move_angle
-    m.joints=joints;m.foot_phases=phases;m.pose=pose
-    m.hands={side:{key:rot(point,facing) for key,point in values.items()} for side,values in hand_joints.items()}
-    return m
+        head.box((0,-.118,1.841),(.20,.055,.067),DARK,.015)
+    return head

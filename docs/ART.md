@@ -1,4 +1,10 @@
-# Verdant Works art notes
+# Field Crew art notes
+
+The 0.6.1 rig separates pelvis, thorax, head and weapon frames. Shoulders counter-rotate against the hips; the head bobs and stabilizes independently; the unarmed hands swing opposite the advancing leg. Mining uses an asymmetric, right-hand-leading power stroke with native contact particles on frame 11. A fully covered, fuller rounded suit profile has small armor-damped secondary motion. See [FIELD-CREW.md](FIELD-CREW.md) for the contracts and remaining native-client checks.
+
+The drone exporter writes separate opaque body and translucent ground-shadow animations. Their composition is checked against the original render; shadows stay beneath world objects while the drone flies above them. [The field-crew overview](art/field-crew-review.jpg) and [drone loop](art/field-drone-preview.gif) show exported source art, not gameplay footage.
+
+## Prior Verdant Works art notes
 
 The current [contact sheet](art/ironbound-contact-sheet.jpg) uses the canonical expanded plant keys. See [the continuation audit](CONTINUATION-AUDIT.md) for the recovered 0.6 work and the finishing fixes.
 
