@@ -1,6 +1,6 @@
 # Verification ledger: Field Crew 0.6.1 alpha
 
-## Field Crew candidate
+## Field Crew 0.6.1
 
 This update adds a construction-only personal drone system and revises the explorer's whole-body motion. [FIELD-CREW.md](FIELD-CREW.md) records the mechanics, limits and inventory safeguards. [AGENT-REPORT.md](AGENT-REPORT.md) records the available agent/usage information without inventing model identities or token totals.
 
@@ -10,7 +10,17 @@ Motion checks measure pelvis/shoulder counter-rotation, independent head movemen
 
 The required native marker is `SECOND_NATURE_ENGINE_FIELD_DRONES_OK`. Its companion scenario saves with four drones in flight, cancels one ghost, reloads, constructs a normal wall, a rare chest and a tile, preserves exact material/drone totals across two operators, leaves loose cargo untouched, and verifies that a nearby powered roboport cannot dock or network these workers. Real engine characters/inventories/ghosts/render objects are used; a LuaPlayer-facing shell is a fixture, not an interactive GUI or per-player-settings playtest.
 
-The finished candidate passes **223 local source/offline tests**, including the pinned official 2.0.77 prototype data. `git diff --check` is clean. The required official-engine rerun is pending branch CI; it is not inferred from the offline pass. No graphical Factorio client, long-run UPS/GPU profile or two-client desync test has been run. Actual native movement/Mech transitions and subjective appearance still need client review.
+The finished candidate passes **223 local source/offline tests**, including the pinned official 2.0.77 prototype data. `git diff --check` is clean. **Official engine: PASS.** [Run 34147961483](https://github.com/Radukan/FC-Test/actions/runs/34147961483), code commit `a8cbd9045c53df7a315b1a47326e8abe03361872`, passed both the source job and the official Factorio 2.0.77 create/reload/2,100-tick job. The new required `SECOND_NATURE_ENGINE_FIELD_DRONES_OK` marker passed alongside the existing campaign, lander, logistics, layout and smoke markers. This includes real normal/rare construction, a tile, cancellation, two-operator accounting, preserved in-flight escrow and isolation from the powered reference roboport. No graphical Factorio client, long-run UPS/GPU profile or two-client desync test has been run. Actual native movement/Mech transitions and subjective appearance still need client review.
+
+### Installable archive
+
+The release publisher revalidates the final tagged commit and re-downloads the uploaded ZIP/checksum before reporting success. The local 0.6.1 archive contains **432 mod files**, is **66,818,242 bytes**, and passes ZIP CRC and SHA-256 verification:
+
+```text
+6e41c5d1286ce7b4fe65279844e95fb01a9a4dbb1063c5a284f45e6180f42091  second-nature_0.6.1.zip
+```
+
+The README inside the ZIP points source-only documents at the immutable 0.6.1 tag. The source and generated assets are committed to the session branch; a pull request targets `main`, rather than a direct push to that branch.
 
 ## Historical Verdant Works 0.6.0 evidence
 
