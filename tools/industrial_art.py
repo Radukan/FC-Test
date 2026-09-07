@@ -177,9 +177,11 @@ def fluid_ports(m,name):
     for port in _PORTS.get(name,[]):
         dx,dy={0:(0,-1),4:(1,0),8:(0,1),12:(-1,0)}[port['direction']]
         x,y=port['position'];tip=(x+dx*.5,y+dy*.5,0)
-        inner=(x-dx*.42,y-dy*.42,.44)
+        inner=(x-dx*.42,y-dy*.42,.50)
+        knee=(x+dx*.31,y+dy*.31,.50)
         end=(tip[0]-dx*.12,tip[1]-dy*.12,.015)
-        m.tube(inner,end,.115,STEEL,16)
+        m.tube(inner,knee,.115,STEEL,16)
+        m.tube(knee,end,.115,STEEL,16)
         m.tube(end,tip,.18,EDGE,20)
         m.tube(add(tip,(-dx*.005,-dy*.005,0)),add(tip,(dx*.005,dy*.005,0)),.105,DARK,16)
         mark=TEAL if port['flow']=='input' else GOLD

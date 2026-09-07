@@ -114,7 +114,8 @@ function Probe.run(surface, force)
   blueprint.create_blueprint({surface=surface,force=force,area={{39.4,39.4},{40.6,40.6}}})
   local entities=blueprint.get_blueprint_entities()
   assert(entities and #entities==1 and entities[1].pickup_position and entities[1].drop_position,"custom vectors missing from blueprint")
-  assert(entities[1].pickup_position.x==2 and entities[1].drop_position.y==2)
+  local pickup,drop=entities[1].pickup_position,entities[1].drop_position
+  assert((pickup.x or pickup[1])==2 and (drop.y or drop[2])==2,"blueprint vectors: "..serpent.line(entities[1]))
   inventory.destroy()
   for i,name in ipairs({"sn-canopy-inserter","sn-vital-belt","sn-vital-underground-belt","sn-vital-splitter"}) do
     assert(surface.create_entity({name=name,position={44+i*4,40},force=force}))
