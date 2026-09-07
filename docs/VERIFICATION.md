@@ -24,9 +24,9 @@ The sandbox could not reach the Factorio binary host or the Actions log/artifact
 3638625478b1f32d233425bcdfc8db09ff36a02aed3bef6063489e49b72c0181  second-nature_0.6.0.zip
 ```
 
-The archive is 62,299,192 bytes and contains 420 mod files. Documentation-only updates to this ledger do not change the packaged mod. The publisher still performs its own required tagged-source validation and asset re-download comparison if a release is explicitly published later.
+That earlier source-build archive was 62,299,192 bytes and contained 420 mod files. Its checksum is historical: the release preparation changes the bundled README to use permanent release/tag links, which changes the ZIP bytes without changing gameplay. Use the checksum attached to the release for the published download. The publisher requires tagged-source validation followed by an asset re-download and byte comparison.
 
-No graphical Factorio client or two-client multiplayer test was run here. Source-art review is not a screenshot/playthrough certificate. In particular, native character/Mech transitions, exact client pipe seams, audible arrival/music/jukebox behavior, GPU use and long-term campaign balance remain unverified. The 0.6.0 ZIP is a source build, not a newly published GitHub release.
+No graphical Factorio client or two-client multiplayer test was run here. Source-art review is not a screenshot/playthrough certificate. In particular, native character/Mech transitions, exact client pipe seams, audible arrival/music/jukebox behavior, GPU use and long-term campaign balance remain unverified. The [0.6.0 prerelease](https://github.com/Radukan/FC-Test/releases/tag/v0.6.0-factorio-2.0) distributes the installable ZIP and checksum. The release workflow separately validates the exact tagged source and verifies its uploaded assets; a successful branch run alone does not certify a completed release upload.
 
 ## Historical Living World 0.5.0 evidence
 

@@ -39,6 +39,6 @@ Presence of code, source art and engine-accepted prototypes is not the same as a
 
 ## Delivery and limits
 
-Build `second-nature_0.6.0.zip` with `python3 tools/package.py`. The archive and SHA-256 sidecar are under `artifacts/factorio-2.0/`, intentionally outside Git. No 0.6.0 release tag has been published by this continuation.
+The follow-up delivery request publishes [0.6.0 / Verdant Works](https://github.com/Radukan/FC-Test/releases/tag/v0.6.0-factorio-2.0) in the same prerelease format as the earlier versions. Download `second-nature_0.6.0.zip`, keep it zipped, and replace older copies in the Factorio `mods` folder. The ZIP and SHA-256 sidecar are release assets, intentionally not committed to Git. `python3 tools/package.py` also builds them locally under `artifacts/factorio-2.0/`. The release publisher requires exact tagged-source validation and a successful asset re-download/checksum comparison.
 
 See [VERIFICATION.md](VERIFICATION.md) for current test evidence and the remaining graphical-client checks. [The ship study](art/lander-review.jpg), [locomotion loop](art/locomotion-review.gif), [mining loop](art/mining-framing-preview.gif) and [building contact sheet](art/ironbound-contact-sheet.jpg) show actual exported assets, not gameplay footage.

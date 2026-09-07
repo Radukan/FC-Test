@@ -9,18 +9,13 @@ Nauvis has no natural trees or fish in a fresh campaign. The broods tolerate you
 
 ## Download
 
-### Verdant Works 0.6.0 / source build
+### [Second Nature 0.6.0 - stable Factorio 2.0](https://github.com/Radukan/FC-Test/releases/download/v0.6.0-factorio-2.0/second-nature_0.6.0.zip)
 
-This checkout contains **0.6.0**, including the articulated explorer, expanded process plants and Wayfarer lander refit. It is **not yet a published GitHub release**. Build the installable archive with:
+[Release notes](https://github.com/Radukan/FC-Test/releases/tag/v0.6.0-factorio-2.0) · [SHA-256 checksum](https://github.com/Radukan/FC-Test/releases/download/v0.6.0-factorio-2.0/second-nature_0.6.0.zip.sha256)
 
-```sh
-python3 tools/package.py
-# artifacts/factorio-2.0/second-nature_0.6.0.zip
-```
+Download **`second-nature_0.6.0.zip`** and put it directly in your Factorio `mods` folder. **Do not extract it.** Back up saves and remove older Second Nature copies first. Use the named mod ZIP, not GitHub's automatic source archive. This private repository requires GitHub sign-in with repository access.
 
-The [validation workflow](https://github.com/Radukan/FC-Test/actions/workflows/validate.yml) also uploads an installable mod artifact for each successful source job. Select the run for the source commit you want, and check its separate engine job too.
-
-The previously published [0.5.0 release and checksum](https://github.com/Radukan/FC-Test/releases/tag/v0.5.0-factorio-2.0) remain available, but **do not contain these 0.6.0 changes**. Private repository downloads require GitHub access. Use the named mod ZIP, not GitHub's automatic source archive.
+This prerelease includes the articulated explorer, larger industrial-solarpunk process plants, complete building shadows and the Wayfarer lander refit, alongside the existing music, jukebox, defenses and logistics.
 
 1. Use **Factorio 2.0.77**, **Space Age**, **Quality** and **Elevated Rails**.
 2. Back up saves and replace older Second Nature ZIP/source copies with `second-nature_0.6.0.zip`, still zipped, in the Factorio `mods` folder.

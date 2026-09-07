@@ -124,7 +124,7 @@ gh release create v0.6.0-factorio-2.0 --target <validated-commit> --prerelease \
 
 Create the release without directly uploading from the sandbox if binary uploads are blocked; the hosted publisher handles them. The repository is private, so download links require authenticated repository access. Never request credentials in chat or embed them in files.
 
-Commit generated game assets and the source used to build them together. Do not silently retarget an existing release tag to different source. The 0.6.0 source build is not a published release; the command above is a publishing example, not evidence that a release exists.
+Commit generated game assets and the source used to build them together. Do not silently retarget an existing release tag to different source. The 0.6.0 ZIP and checksum are distributed through the GitHub prerelease. The command above describes the publishing procedure; do not recreate or retarget an already published tag. Generated ZIPs remain outside Git.
 
 ## Regression priorities
 
