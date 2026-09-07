@@ -106,7 +106,7 @@ python3 tools/package.py
 python3 tools/package.py --target 2.0
 ```
 
-Output: `artifacts/factorio-2.0/second-nature_0.4.0.zip` and its `.zip.sha256` sidecar. The canonical mod folder sits directly at the archive root. Deterministic ordering, timestamps, permissions, allowlisted source paths and metadata are tested. `--target 2.1` is rejected.
+Output: `artifacts/factorio-2.0/second-nature_0.5.0.zip` and its `.zip.sha256` sidecar. The canonical mod folder sits directly at the archive root. Deterministic ordering, timestamps, permissions, allowlisted source paths and metadata are tested. `--target 2.1` is rejected.
 
 Do not commit `.cache`, virtual environments, game binaries, saves, generated release artifacts or ZIP files. They are ignored, and large engine assets are external to the source repository.
 
@@ -117,7 +117,7 @@ The source workflow uses release tag **`v<mod-version>-factorio-2.0`**. `publish
 Example after validation (substitute the actual intended commit):
 
 ```sh
-gh release create v0.4.0-factorio-2.0 --target <validated-commit> --prerelease \
+gh release create v0.5.0-factorio-2.0 --target <validated-commit> --prerelease \
   --title 'Second Nature 0.4.0 · Ironbound Expedition · stable 2.0' --notes-file release-notes.md
 ```
 
@@ -154,3 +154,14 @@ This Arena session remains on `arena/01a07515-fc-test`; push only that branch. G
 - Locale generation rejects long dash punctuation. Text tests cover current tracked/untracked source, and copy tests reject development commentary in item/building descriptions.
 
 The audio authoring dependencies are in `requirements-art.txt`. They are not installed by normal source/engine validation. The runtime music test parses Ogg/Vorbis headers and duration, while authoring reports record decoded peak/RMS and file hashes.
+
+## Living World additions (0.5)
+
+- `shared/fluid_ports.lua` is the canonical connection table. Both prototypes and mesh nozzles use it. Render connector tips at the midpoint between native connection centers, with necks above the plinth until the final elbow.
+- `scripts/inserters.lua` handles native custom pickup/drop endpoints and both relative/standalone editors. Do not store a second incompatible vector representation in blueprints.
+- `scripts/jukebox.lua` uses a real programmable speaker. Instrument/note arguments to `play_note` are one-based. UI track zero maps to the first (silent stop) note.
+- `prototypes/audio.lua` registers the complete arrival sequence as a native Nauvis hero track. The new main-track entry has zero random weight and remains accessible through the archive.
+- `tools/compose_living_world.py` builds the instrumental around original selected spoken vocals. Stored Ogg voice stems are the regeneration inputs; the speech service cannot sing. Regenerate the score only with the optional art/audio dependencies.
+- New engine probes preserve native blueprint vector arrays, transfer actual cargo using diagonal endpoints, connect real pipes in all rotations, and issue native jukebox play/stop requests. Headless has audio disabled and still does not certify the client GUI or audible mix.
+
+The standalone editor is Shift + I. The nearby jukebox shortcut is Ctrl + Shift + J. Native belt tread/corner and inserter hand geometry is reused/tinted for alignment; new platforms, manifolds, casings and weapons are original curved meshes.

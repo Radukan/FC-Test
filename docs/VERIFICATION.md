@@ -1,57 +1,70 @@
-# Verification ledger: Foundry and Field 0.4.0 alpha
+# Verification ledger: Living World 0.5.0 alpha
 
-## Reported visual defects
+## Completed stable-engine evidence
 
-A player reported incorrect shooting direction and the pickaxe disappearing at the top of its frame in 0.3. The earlier headless pass verified accepted prototype structures, not the appearance of those animation rows in a graphical client.
+Run [34081716276](https://github.com/Radukan/FC-Test/actions/runs/34081716276), code commit `fc2e379b7a614617eed72d8002c5c99930e716af`, passed the source validator and official Factorio 2.0.77 headless job. The exercised code passed 169 tests. A final complete-audio/lyrics regression brings the local suite to **170 tests**. Release publishing independently revalidates the exact tagged source and re-downloads its assets for checksum/byte comparison.
 
-The 0.4 exporter no longer treats the 18 armed rows as a full-circle turnaround. It uses paired gun-facing/stride-axis rows over the engine-mirrored half. Torso, hands and gun share the aim transform; stride is independent. The projected muzzle vector is checked against the intended facing.
+The source contact sheet, revised pipe-nozzle images, mining frames and complete audio files were generated. Source-art previews are not in-game footage, and waveform/file checks do not establish native-client listening behavior.
 
-Mining has a larger shared-pivot canvas. Authoring checks include every tool vertex and the projected cast shadow across all mining frames, directions and armor looks. A separate pixel-alpha test checks the exported sheets for edge truncation. Character ground axes are already map-aligned, with a second projection correction disabled.
+## What was actually exercised
 
-## Validation status
+| Check | Result / scope |
+|---|---|
+| Lua compilation and strict runtime doubles | Pass; existing campaign, GUI naming, parse-time import and accounting regressions retained |
+| Stable source data stages | Pass; all new prototypes, references, research dependencies, ammo categories and custom vector flags |
+| Original art contracts | Pass; atlas bounds, visible working motion, paired aim poses, full mining/shadow envelope and pointed impact geometry |
+| Fluid-port source contract | Pass; data prototypes and mesh anchors read the same connection coordinates, with every quarter-turn checked |
+| Official C++ prototype load | Pass for buildings, stickers, beam, endgame logistics, hero/music entries and jukebox instruments |
+| Real save creation/reload and 2,100-tick run | Pass |
+| Actual inserter endpoint setters | Pass; diagonal two-tile vectors accepted and out-of-range editor request rejected |
+| Native blueprint vector persistence | Pass; custom pickup/drop values present in the blueprint |
+| Actual custom-vector item transfer | Pass; a powered vector inserter moves four iron plates between the configured diagonal chests |
+| Physical pipe connectivity | Pass in all four machine rotations; visible nozzle boundary agrees with the midpoint between connected pipe centers |
+| Jukebox native calls | Pass; correct instrument/note indices, track selection and stop/replacement call accepted |
+| Combat/campaign probes | Pass; all defense tiers instantiate and accept ammunition, native outcomes and attack/retreat APIs continue to work |
+| Audio asset integrity | Pass; complete stereo Vorbis duration/hash checks, narration-before-song file layout and saved lyrical text |
+| Copy and punctuation | Pass; physical object descriptions and no prohibited long dash characters in current project text |
 
-**Completed 0.4 validation:** [34073999327](https://github.com/Radukan/FC-Test/actions/runs/34073999327), code commit `64e7700f0e5bdd4730ac94cb1f6c71f6144bda8f`. All **157 tests** and the official **Factorio 2.0.77 headless** job passed. The source aiming/mining sheets and revised industrial contact sheet were inspected after export. This ledger was updated after observing that result.
+## Engine-found corrections
 
-Final 0.4 source/engine runs are recorded by the required GitHub validator and release publisher. Do not infer that a prior 0.3 engine run proves later artwork. The publisher must pass the exact tagged source before uploading and re-download both assets for checksum/byte comparison.
+- Blueprint vector tables returned array coordinates; the probe now validates the actual representation rather than assuming named fields.
+- Programmable-speaker instrument and note arguments are one-based. The jukebox maps its UI track indices onto the native one-based archive and the stop note.
+- Pipe connection `position` and `target_position` describe their respective centers. The visible seam is their midpoint, not the machine-side center. The art contract and rotated connectivity probe agree on that boundary.
 
-The suite retains the campaign, pollution, habitat, weapons, protected lander and strict GUI/import regressions. New checks cover:
+## Audio implementation and limits
 
-- Equipment descriptions that explain the object instead of development or availability commentary.
-- No long dash punctuation in current source, in-game localization or GitHub-facing documentation.
-- The menu-only music replacement, valid stereo Vorbis headers, duration and the authored waveform report/hash.
-- Paired armed row structure, muzzle/torso direction and map-space projection.
-- All mining model/shadow bounds, identical state pivots and exported image-edge margins.
-- Atlas dimensions, engine texture bounds and visible working-frame differences.
+The selected synthetic female voice performs an original personal log and spoken lyrics. The synthesis tool cannot sing. The 160-second industrial-punk/metal arrangement is an original synthesized instrumental with spoken vocals, not a sung-metal performance or a recording of a human performer.
 
-The soundtrack is an original 96-second stereo composition. It is synthesized without borrowed samples or melodies. The authoring pass decodes the exported Ogg and records measured peak/RMS in the score report. Source validation parses its Ogg/Vorbis structure; the game package includes the sound directory explicitly.
+The native Nauvis hero track is a single 206.46-second file: 45.76 seconds of narration, a short pause and the anthem. A native arrival track owns the sequence instead of simulation-tick sound fragments. The jukebox is an actual programmable-speaker entity, with local playback by default and administrator-gated surface broadcasting in multiplayer.
 
-Current editable GitHub release titles/bodies have had long dash punctuation removed. Published commit history and other users' historical comments are not rewritten.
+Headless mode has audio disabled. It verifies accepted sound/music/instrument structures and play/stop calls, **not** audible first-arrival timing, music-volume balance, native jukebox UI or overlap behavior. Those remain graphical-client checks.
 
-## What the real-engine harness establishes
+## New editor and logistics limits
 
-The official Factorio 2.0.77 headless job loads C++ prototypes, creates a save, reloads it and runs 2,100 ticks. It exercises real production counters, powered/idle/unpowered behavior, pollution, circuit telemetry, render-object creation, protected landing cargo, native outcomes and attack/retreat commands. Companion probes arrange isolated state to reach those conditions. No debug mutation API ships in the mod.
+Custom pickup/drop positions are integral offsets in [-2,2] on each axis, with the center and identical endpoints excluded. Server-side code checks types, range, ownership and the startup flag. This is a two-tile per-axis range, not a literal four-tile area. Other mods retain their own scripting APIs; no per-tick factory-wide enforcement scan is added.
 
-Both explicit engine success markers and zero exit status are required. A prototype-only load is not counted as a complete pass.
+Native custom-vector state is retained for blueprints. The engine probe verifies a real transfer through configured diagonal positions. Complete rotation/paste/robot/quality combinations and the relative GUI require further client testing.
 
-## Graphical and gameplay checks still required
+The vital transport family shares a 90-item-per-second base rate before stacking. Native tread/corner/stack geometry is retained, with original rounded platforms/manifold art. The canopy manipulator retains the game's four-item belt-stack limit.
 
-- Native client aiming while stationary, strafing, retreating and changing direction, for all weapons and armor states.
-- The native engine's complete mirrored/reversed locomotion selection under real player controls. Authoring vector tests are not a full client interaction test.
-- Pickaxe framing at normal and high zoom, armor/Mech transitions, corpse appearance and all source/shadow alignment.
-- Building scale, port/wire endpoints, full rotations, weapon muzzle placement and all working loops at gameplay zoom.
-- Audible main-menu playback, loop/fade behavior and balance against the user's music-volume setting.
-- Complete no-cheat five-world playthrough, sustained combat balance, multiplayer/desync, older-save migration and large-factory/GPU profiling.
+## Still not certified
 
-The contact sheets and GIFs demonstrate rendered assets, not in-game footage. Original models, richer shading and more detailed textures are not a claim of graphical-client certification.
+- Audible new-game hero-track triggering, narration mix, replay/stop behavior heard through a client and multiplayer audio scope.
+- Every native editor interaction, alternate permissions, rotation/paste, robot construction and controller mode.
+- Pixel-perfect pipe seams and all ports at all zooms, qualities and rotations in a graphical client.
+- Every pickaxe/aiming/armor/Mech transition and native movement combination.
+- Full no-cheat campaign balance, long-term logistics throughput, every weapon target/resistance interaction and friendly firing lanes.
+- Existing-save migration/removal across all possible states, two-client desync tests and large-map/GPU/UPS profiling.
 
 ## Focused retest
 
-1. Open a stable save with the required official mods and Second Nature. Confirm that inventories, character controllers, research and habitat state remain intact.
-2. Aim and fire in all eight facings, then strafe and backpedal. The gun, hands and torso must agree; compare to the source aiming review sheet.
-3. Mine continuously in all directions. The pickaxe and shadow must remain inside their frame without shifting the feet.
-4. Review all building orientations and turret firing states. Check dark surfaces, gauges, moving parts and pipe/wire endpoints.
-5. Read representative material, ammo, armor and building descriptions. They should describe construction/function, not a change request or crafting milestone.
-6. Return to the menu, listen to After the Ash, adjust music volume, then disable the setting and confirm standard menu music is restored.
-7. Recheck the saved-world/campaign and performance scenarios documented in the development guide.
+1. Start fresh Space Age freeplay on Nauvis. Confirm the log is visible and the voice precedes the anthem. Check the opening-audio setting.
+2. Open the landing jukebox; play both scores, replay the transmission and stop playback. Check local versus authorized surface broadcast.
+3. Configure every vanilla inserter type and both new arms. Test both grids, reset, diagonal positions, prohibited cells, blueprints, pasting and robot placement.
+4. Build the whole vital belt family; confirm matched flow, stacking, routing and the sixteen-tile tunnel range.
+5. Attach pipes to each active machine port in all rotations. Compare the real seam against the source alignment diagrams.
+6. Mine in every direction. The tapered point must lead the impact without clipping or foot-pivot shifts.
+7. Use mycelial rounds, resonance effects and pressure-lance impacts. Contamination capture must never manufacture pollution or award free fitness/science.
+8. Recheck preserved campaign state, native decisions, existing defense ammunition and the five-world victory loop.
 
-Record version, mod list, save and reproduction steps for failures. Keep unrun checks explicitly unrun.
+Record game version, mod list, save and reproduction steps. Keep unrun checks labeled unrun.

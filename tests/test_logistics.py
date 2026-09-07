@@ -132,3 +132,27 @@ def test_opening_is_one_complete_native_hero_track_and_replayable_archive(advanc
     jukebox=data['programmable-speaker']['sn-jukebox']
     assert len(jukebox.instruments[1].notes)==4 and jukebox.maximum_polyphony==1
     assert jukebox.instruments[1].notes[3].sound.filename.endswith('we-need-a-living-world.ogg')
+
+
+def test_arrival_audio_contains_complete_voice_then_song_and_saved_lyrics():
+    import json,struct,hashlib
+    from catalog import MOD
+    report=json.loads((ROOT/'docs/art/living-world-score.json').read_text())
+    assert report['intro_seconds']>30 and report['song_seconds']==160
+    assert report['suite_seconds']>report['intro_seconds']+report['song_seconds']
+    assert 'not singing' in report['vocals']
+    assert 'humanity' in ' '.join(report['lyrics'].values()).lower()
+    assert 'green and lush' in report['lyrics']['chorus'].lower()
+    for name,expected in [('we-need-a-living-world.ogg',report['song_seconds']),('landing-transmission.ogg',report['suite_seconds'])]:
+        data=(MOD/'sound/music'/name).read_bytes();assert data[:4]==b'OggS'
+        first=27+data[26];assert data[first:first+7]==b'\x01vorbis'
+        rate=struct.unpack_from('<I',data,first+12)[0];assert rate==32000 and data[first+11]==2
+        position=0;granule=0
+        while position<len(data):
+            assert data[position:position+4]==b'OggS'
+            count=data[position+26];header=27+count
+            value=struct.unpack_from('<Q',data,position+6)[0]
+            if value<2**63:granule=max(granule,value)
+            position+=header+sum(data[position+27:position+header])
+        assert abs(granule/rate-expected)<.05
+        assert hashlib.sha256(data).hexdigest()==report['sha256'][name]
