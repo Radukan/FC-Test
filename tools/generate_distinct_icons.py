@@ -31,6 +31,19 @@ def upper_model(model,accent=None):
     return out if out.faces else model
 
 
+def placeable_marker(icon,accent=(196,214,190)):
+    """Mark icons whose item places a building.
+
+    Loose materials and placeable buildings were visually interchangeable in the
+    inventory. A thin baseplate rule with three footing ticks, drawn in the
+    bottom margin, distinguishes them without covering the artwork.
+    """
+    icon=icon.copy();d=ImageDraw.Draw(icon)
+    d.line((13,59,50,59),fill=accent+(220,),width=2)
+    for x in (16,31,46):d.line((x,56,x,62),fill=accent+(190,),width=2)
+    return icon
+
+
 def render_icon(model,angle=math.pi*.78):
     # Frame the model itself, not its large world cast-shadow/plinth rectangle.
     rotated=Mesh();rotated.join(model,angle)
@@ -90,6 +103,18 @@ def generate():
         if name=='solar-rail-panels':
             from energy_models import solar
             solar(models[name],0,0,.18,.72,.60,.12)
+    # Which icons carry the placeable rule: anything whose item builds an entity.
+    placeable=set()
+    for x in k['machines']:placeable.add(x['name'])
+    for x in k['energy']['plants']:placeable.add(x['name'])
+    for x in k['energy']['trains']:placeable.add(x['name'])
+    for x in k['expedition']:
+        if x['kind'] in ('ammo-turret','electric-turret','wall','inserter','transport-belt',
+                         'underground-belt','splitter','container'):
+            placeable.add(x['name'])
+    placeable.update({'field-pole','field-crate','jukebox','lander'})
+    placeable-={'solar-drive-charge','solar-rail-battery','solar-rail-panels'}
+
     outputs={}
     for name,model in models.items():
         angle=-math.pi/5 if roles[name]=="process building" or " power / " in roles[name] else math.pi*.78
@@ -99,8 +124,10 @@ def generate():
             d=ImageDraw.Draw(icon)
             if name=='solar-drive-charge':d.polygon([(24,18),(38,18),(31,30),(41,30),(24,49),(29,34),(20,34)],fill=(229,187,92,255))
             elif name=='solar-rail-battery':d.rectangle((26,24,36,40),fill=(166,193,167,255))
+        if name in placeable:icon=placeable_marker(icon)
         path=MOD/f'graphics/icons/{name}.png';icon.save(path,optimize=True)
-        outputs[name]={'role':roles[name],'file':str(path.relative_to(ROOT)),'sha256':hashlib.sha256(path.read_bytes()).hexdigest()}
+        outputs[name]={'role':roles[name],'placeable':name in placeable,
+                       'file':str(path.relative_to(ROOT)),'sha256':hashlib.sha256(path.read_bytes()).hexdigest()}
     # Close-ups at both inventory resolutions make confusing pairs visible.
     names=sorted(outputs);cw,ch,cols=210,136,6
     sheet=Image.new('RGB',(cw*cols,80+ch*math.ceil(len(names)/cols)),(32,38,35));d=ImageDraw.Draw(sheet)

@@ -116,3 +116,22 @@ def test_boots_have_a_rounded_outline_and_curved_toe_cap():
     assert len(m.faces)>350
     assert len({round(p[0],5) for v,_,_ in m.faces for p in v})>25
     assert min(p[2] for v,_,_ in m.faces for p in v)>-.10
+
+
+def test_explorer_stands_at_a_vanilla_character_height():
+    """The explorer used to render about 1.95 tiles tall, roughly 25 percent
+    taller than a vanilla character, which made every machine look small.
+    Lock the projected body height into the stock range."""
+    import math
+    from character_layout import PIXELS_PER_UNIT
+    from explorer_model import explorer
+
+    model = explorer(0, 'idle', 0, move_angle=0)
+    sin_e, cos_e = math.sin(math.radians(48)), math.cos(math.radians(48))
+    screen = [sin_e * y - cos_e * z for face, _, _ in model.faces for _, y, z in face]
+    tiles = (max(screen) - min(screen)) * PIXELS_PER_UNIT * 0.25 / 32
+    assert 1.50 <= tiles <= 1.65, tiles
+
+    width = [x for face, _, _ in model.faces for x, _, _ in face]
+    span = (max(width) - min(width)) * PIXELS_PER_UNIT * 0.25 / 32
+    assert 0.7 <= span <= 1.1, span

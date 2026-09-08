@@ -80,14 +80,14 @@ def test_pickaxe_and_shadow_fit_every_mining_frame_and_direction():
 
 
 def test_character_frames_share_a_consistent_foot_anchor():
-    from character_layout import frame_spec
+    from character_layout import frame_spec, PIXELS_PER_UNIT
     art=json.loads((ROOT/'docs/art/sprite-manifest.json').read_text())
     for tier in range(3):
         for pose in ('idle','idle_with_gun','running','running_with_gun','mining_with_tool'):
             spec=art[f'explorer-{tier}-{pose}']
             view=frame_spec(pose)
             report=json.loads((ROOT/'docs/art/character-render.json').read_text())[f'explorer-{tier}-{pose}']
-            assert report['view']==view and view['ppu']==160 and spec['scale']==.25
+            assert report['view']==view and view['ppu']==PIXELS_PER_UNIT and spec['scale']==.25
             crop=report['crop']
             assert (spec['width'],spec['height'])==(crop[2]-crop[0],crop[3]-crop[1])
             assert spec['apply_projection'] is False

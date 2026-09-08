@@ -53,10 +53,14 @@ function S.register(entity)
   local bucket = id % C.bucket_count + 1
   local list = root.buckets[bucket]
   local monitor = entity.type == "constant-combinator"
+  -- Mining drills and laboratories are catalog machines but they never run a
+  -- recipe and expose no products_finished counter, so they are tracked purely
+  -- for placement/statistics and are skipped by the restoration processor.
+  local inert = entity.type == "mining-drill" or entity.type == "lab"
   local recipe
-  if not monitor then recipe = S.recipe(entity) end
+  if not monitor and not inert then recipe = S.recipe(entity) end
   local rec = {entity = entity, id = id, surface_index = entity.surface.index, bucket = bucket, slot = #list + 1,
-    produced = monitor and 0 or entity.products_finished, recipe = recipe, sequence = 0,
+    produced = (monitor or inert) and 0 or entity.products_finished, recipe = recipe, sequence = 0, inert = inert,
     last_cycle = -C.beacon_freshness, active = false, monitor = monitor}
   rec.registration = script.register_on_object_destroyed(entity)
   root.registrations[rec.registration] = id

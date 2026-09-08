@@ -27,7 +27,16 @@ A.layers = {
   deep_earth   = {file = BASE .. "pumpjack.ogg", volume = .42, distance = .8},
   electro      = {file = SPACE .. "electromagnetic-plant/electromagnetic-plant-loop.ogg", volume = .42, distance = .6},
   -- A quiet instrument tick, so a wired monitor is findable by ear.
-  telemetry    = {file = BASE .. "combinator.ogg", volume = .28, distance = .4}
+  telemetry    = {file = BASE .. "combinator.ogg", volume = .28, distance = .4},
+  -- Industry expansion. A furnace, a mill and a laboratory should not all
+  -- share the generic assembler loop; each mechanism gets its own voice.
+  furnace      = {file = BASE .. "electric-furnace.ogg", volume = .46, distance = .7},
+  blast        = {file = BASE .. "oil-refinery.ogg", volume = .52, distance = .9},
+  grinding     = {file = SPACE .. "crusher/crusher-loop.ogg", volume = .50, distance = .8},
+  press        = {file = SPACE .. "foundry/foundry.ogg", volume = .48, distance = .8},
+  drilling     = {file = BASE .. "electric-mining-drill.ogg", volume = .42, distance = .6},
+  deep_drill   = {file = SPACE .. "big-mining-drill/big-mining-drill-working-loop.ogg", volume = .48, distance = .9},
+  laboratory   = {file = BASE .. "lab.ogg", volume = .38, distance = .5}
 }
 
 -- Generating plant name -> layer. Plants absent from this table already own a
@@ -52,7 +61,21 @@ A.plants = {
 }
 
 -- Other Second Nature entities that are silent in 0.8 and should be audible.
-A.entities = {["sn-ecology-monitor"] = "telemetry"}
+A.entities = {
+  ["sn-ecology-monitor"]   = "telemetry",
+  ["sn-crucible-furnace"]  = "furnace",
+  ["sn-oxy-smelter"]       = "furnace",
+  ["sn-arc-refinery"]      = "blast",
+  ["sn-blast-furnace"]     = "blast",
+  ["sn-cupola-furnace"]    = "blast",
+  ["sn-foundry-press"]     = "press",
+  ["sn-ore-mill"]          = "grinding",
+  ["sn-dewatering-press"]  = "press",
+  ["sn-electric-auger"]    = "drilling",
+  ["sn-hydraulic-miner"]   = "drilling",
+  ["sn-deep-core-drill"]   = "deep_drill",
+  ["sn-field-laboratory"]  = "laboratory"
+}
 
 -- Generating plants report real activity to the engine, so their loop tracks
 -- load: a becalmed wind turbine, a solar bank at midnight and a starved gas

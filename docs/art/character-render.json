@@ -4,17 +4,17 @@
       "width": 768,
       "height": 864,
       "origin": 0.5092592592592593,
-      "ppu": 160,
+      "ppu": 132,
       "scale": 0.25
     },
     "crop": [
-      296,
-      166,
-      600,
-      688
+      308,
+      212,
+      566,
+      648
     ],
     "files": {
-      "second-nature/graphics/entity/industry/explorer-0-idle.png": "4f1cad3e194259765318fd8965ad02e27fd7066e3844ecb64683a6d9640c84e8"
+      "second-nature/graphics/entity/industry/explorer-0-idle.png": "b4df946d74c4e7fec5d603df1950e64d773047426d843f87528d272e9cf5d348"
     }
   },
   "explorer-0-idle_with_gun": {
@@ -22,17 +22,17 @@
       "width": 768,
       "height": 864,
       "origin": 0.5092592592592593,
-      "ppu": 160,
+      "ppu": 132,
       "scale": 0.25
     },
     "crop": [
-      188,
-      86,
-      698,
-      776
+      220,
+      146,
+      646,
+      722
     ],
     "files": {
-      "second-nature/graphics/entity/industry/explorer-0-idle_with_gun.png": "d6696aff98ded0719049b961b983cdf9c1fe8225e326af480b90c47dbcdcd07a"
+      "second-nature/graphics/entity/industry/explorer-0-idle_with_gun.png": "626aa16e64a51d19c329d115b86ffb80e92222c301777c32d4ac46f80867e6bb"
     }
   },
   "explorer-0-running": {
@@ -40,17 +40,17 @@
       "width": 768,
       "height": 864,
       "origin": 0.5092592592592593,
-      "ppu": 160,
+      "ppu": 132,
       "scale": 0.25
     },
     "crop": [
-      270,
-      172,
-      596,
-      684
+      286,
+      216,
+      562,
+      644
     ],
     "files": {
-      "second-nature/graphics/entity/industry/explorer-0-running.png": "4216297e87d13ab5acaed26b60cbe0870a04415bfaad4337168c5216cc547944"
+      "second-nature/graphics/entity/industry/explorer-0-running.png": "3da50bb9ab0f7c837116b8ec6b32a89b15e9c181cb78518db55e06aaa6834c6d"
     }
   },
   "explorer-0-mining_with_tool": {
@@ -58,18 +58,18 @@
       "width": 896,
       "height": 960,
       "origin": 0.5166666666666667,
-      "ppu": 160,
+      "ppu": 132,
       "scale": 0.25
     },
     "crop": [
-      184,
-      48,
-      840,
-      916
+      228,
+      126,
+      776,
+      846
     ],
     "files": {
-      "second-nature/graphics/entity/industry/explorer-0-mining_with_tool-1.png": "6cc2c638c807c4ac8605f97e40ce2ca2d90b857d0c9b167505a19e2ff299f57a",
-      "second-nature/graphics/entity/industry/explorer-0-mining_with_tool-2.png": "8f9493d56f70c34da87f54f58201d25face36080b74545d59803f0f11770e0ed"
+      "second-nature/graphics/entity/industry/explorer-0-mining_with_tool-1.png": "f919e0ddfd8f19cd0a2623bbc7231874f1d8575bfa78ec2832ce0f73a48558f8",
+      "second-nature/graphics/entity/industry/explorer-0-mining_with_tool-2.png": "aef2095f6901b87695a2f195229df1c0a452cb03b708d44fee5d3be94be82293"
     }
   },
   "explorer-0-running_with_gun": {

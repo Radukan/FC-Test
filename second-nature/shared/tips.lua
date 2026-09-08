@@ -122,6 +122,40 @@ tip("field-crew", {
     "CTRL + SHIFT + B pauses the crew: workers fly home with their cargo instead of being deleted."
 })
 
+tip("clean-versus-dirty-industry", {
+  indent = 1,
+  tag = "[item=sn-crucible-furnace]",
+  trigger = {type = "research", technology = "sn-refractories"},
+  title = "Two furnaces, two different bargains",
+  text = "Second Nature never replaces a vanilla furnace. It gives you two honest alternatives.\n\n" ..
+    "Sealed and oxygen-blown smelters capture their own flue gas and emit almost nothing, but they smelt more slowly per ore and need an oxygen supply. " ..
+    "Coke blast furnaces and cupolas are cheap and roughly twice as fast on raw ore, and they pour emissions and toxicity into the world the restoration model is scoring.\n\n" ..
+    "Running both is normal. Smelt dirty while you bootstrap, then move the load onto sealed furnaces before you start chasing the higher stages."
+})
+
+tip("ore-concentration", {
+  indent = 1,
+  tag = "[item=sn-ore-concentrate]",
+  trigger = {type = "research", technology = "sn-ore-concentration"},
+  title = "Getting more metal out of the same patch",
+  text = "Concentration is a production line, not a better drill.\n\n" ..
+    "A wet ore mill grinds ore into pumpable slurry. A flotation bank floats the valuable mineral off as froth and drops the rest as tailings. " ..
+    "A dewatering press squeezes froth into dry concentrate and hands most of the water back.\n\n" ..
+    "Smelted in an oxygen-blown smelter, concentrate returns about 2.8 plates per original ore against 1.0 for direct smelting. " ..
+    "The catch is three buildings, a water loop, an oxygen feed and roughly 2 MW before the first extra plate appears. Bind tailings back into stone rather than letting them pile up."
+})
+
+tip("air-cleanup", {
+  indent = 1,
+  tag = "[item=sn-carbon-capture-tower]",
+  trigger = {type = "research", technology = "sn-smog-precipitation"},
+  title = "Cleaning air you have already dirtied",
+  text = "Scrubbers are the cheap, early answer at 40 pollution a cycle. Two later buildings are far stronger.\n\n" ..
+    "An electrostatic smog precipitator removes 180 per cycle and a direct air capture tower removes 520, the most in the mod. " ..
+    "Neither is free: the tower alone draws 5 MW and consumes activated carbon, clean water and oxygen, and both produce real residue you still have to treat.\n\n" ..
+    "Cleanup is a legitimate strategy, but out-capturing a genuinely filthy factory is more expensive than not making the pollution."
+})
+
 tip("living-network", {
   indent = 1,
   tag = "[item=sn-planetary-beacon]",
