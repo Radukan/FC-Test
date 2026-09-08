@@ -7,6 +7,11 @@ local function player(c)
     character=c,force=c.force,print=function() end}
 end
 function X.init(surface,force)
+  -- Isolate deterministic API probes from Nauvis wildlife/terrain succession.
+  surface=game.create_surface('sn-isolated-crew-recall',{width=1024,height=512,seed=8123,
+    default_enable_all_autoplace_controls=false,
+    autoplace_settings={entity={treat_missing_as_default=false,settings={}},decorative={treat_missing_as_default=false,settings={}}}})
+  surface.peaceful_mode=true
   local startup=game.create_force('sn-startup-sticks-probe')
   assert(startup.recipes['iron-stick'].enabled and startup.recipes['small-electric-pole'].enabled)
   assert(not startup.technologies['logistic-science-pack'].researched)

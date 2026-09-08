@@ -9,6 +9,11 @@ local function operator(c)
     character=c,force=c.force,print=function() end,set_shortcut_toggled=function() end}
 end
 function P.init(surface,force)
+  -- Isolate deterministic API probes from Nauvis wildlife/terrain succession.
+  surface=game.create_surface('sn-isolated-field-planners',{width=512,height=512,seed=8123,
+    default_enable_all_autoplace_controls=false,
+    autoplace_settings={entity={treat_missing_as_default=false,settings={}},decorative={treat_missing_as_default=false,settings={}}}})
+  surface.peaceful_mode=true
   surface.request_to_generate_chunks({220,170},2);surface.force_generate_chunk_requests()
   for _,e in ipairs(surface.find_entities_filtered({area={{216,166},{236,186}},type={'tree','simple-entity','cliff'}})) do e.destroy() end
   local tiles={};for x=216,235 do for y=166,185 do tiles[#tiles+1]={name='dirt-1',position={x,y}} end end

@@ -16,6 +16,11 @@ local function total(inventories,name,quality)
   return n
 end
 function P.init(surface,force)
+  -- Isolate deterministic API probes from Nauvis wildlife/terrain succession.
+  surface=game.create_surface('sn-isolated-field-crew',{width=512,height=512,seed=8123,
+    default_enable_all_autoplace_controls=false,
+    autoplace_settings={entity={treat_missing_as_default=false,settings={}},decorative={treat_missing_as_default=false,settings={}}}})
+  surface.peaceful_mode=true
   D.init()
   surface.request_to_generate_chunks({120,150},2);surface.force_generate_chunk_requests()
   for _,entity in ipairs(surface.find_entities_filtered({area={{116,146},{151,161}},type={'tree','simple-entity','cliff'}})) do entity.destroy() end
@@ -77,7 +82,7 @@ function P.tick()
   end
   if game.tick<1200 then return end
   local ai,bi=p.characters[1].get_main_inventory(),p.characters[2].get_main_inventory()
-  assert(not p.normal.valid and not p.rare.valid and not p.tile.valid,'real ghosts did not get built')
+  assert(not p.normal.valid and not p.rare.valid and not p.tile.valid,'real ghosts incomplete: normal='..tostring(p.normal.valid)..' rare='..tostring(p.rare.valid)..' tile='..tostring(p.tile.valid)..' active='..S.root().field_drones.active)
   assert(p.surface.get_tile({123.5,153.5}).name=='stone-path','tile revival did not place the requested tile')
   local rare=p.surface.find_entities_filtered({position={127.5,154.5},name='iron-chest',quality='rare'})
   assert(#rare==1,'revival lost the requested quality')
