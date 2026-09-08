@@ -68,8 +68,8 @@
       846
     ],
     "files": {
-      "second-nature/graphics/entity/industry/explorer-0-mining_with_tool-1.png": "f919e0ddfd8f19cd0a2623bbc7231874f1d8575bfa78ec2832ce0f73a48558f8",
-      "second-nature/graphics/entity/industry/explorer-0-mining_with_tool-2.png": "aef2095f6901b87695a2f195229df1c0a452cb03b708d44fee5d3be94be82293"
+      "second-nature/graphics/entity/industry/explorer-0-mining_with_tool-1.png": "68e35d2e545c824ce5be8b61200138aedfa1be85fdbf7ac7460ddf6d432b11bf",
+      "second-nature/graphics/entity/industry/explorer-0-mining_with_tool-2.png": "3c24c060d7d2b100ec26917d207d0c66c7afdd3f0c30a19aafce091f58405d1f"
     }
   },
   "explorer-0-running_with_gun": {
@@ -160,8 +160,8 @@
       846
     ],
     "files": {
-      "second-nature/graphics/entity/industry/explorer-1-mining_with_tool-1.png": "9235ab90061cdfd811abbb343950d49c273ef335b8a1e258bee2053d3bc5e5f9",
-      "second-nature/graphics/entity/industry/explorer-1-mining_with_tool-2.png": "fc888eccf6224a56f12273eea4940cda44002c8771e8a3de3545cbb73d6dedf2"
+      "second-nature/graphics/entity/industry/explorer-1-mining_with_tool-1.png": "a900dbe0dec1f94c61c3fb680df92d8347f44a817b4603d51e2ddf94df68c35a",
+      "second-nature/graphics/entity/industry/explorer-1-mining_with_tool-2.png": "06c44f4fda7ac43f3c34176f7a074f3ee930f021ab6555b79b3cb0ed5297b3e1"
     }
   },
   "explorer-1-running_with_gun": {
@@ -252,8 +252,8 @@
       846
     ],
     "files": {
-      "second-nature/graphics/entity/industry/explorer-2-mining_with_tool-1.png": "94e43cc7afcab8396db275b7b8d71048257f6f9a9cb99f8fe1303e3d6338a266",
-      "second-nature/graphics/entity/industry/explorer-2-mining_with_tool-2.png": "020d7840f5d682e967ce7dfda9f6191f80f9dd43fe2ffa17a779f2f6c7912448"
+      "second-nature/graphics/entity/industry/explorer-2-mining_with_tool-1.png": "5b0ab88b6f6e5f8f589fc0078160143e329597d2288e416261452a41fbb080b4",
+      "second-nature/graphics/entity/industry/explorer-2-mining_with_tool-2.png": "3994f1e09891bbdedf413750d547e4e03ac8d3c511cdb0784b9ac41711feee74"
     }
   },
   "explorer-2-running_with_gun": {

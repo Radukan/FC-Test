@@ -2022,14 +2022,14 @@
       {
         "filename": "__second-nature__/graphics/entity/industry/explorer-0-mining_with_tool-1.png",
         "width_in_frames": 10,
-        "height_in_frames": 10,
+        "height_in_frames": 8,
         "x": 0,
         "y": 0
       },
       {
         "filename": "__second-nature__/graphics/entity/industry/explorer-0-mining_with_tool-2.png",
         "width_in_frames": 10,
-        "height_in_frames": 6,
+        "height_in_frames": 8,
         "x": 0,
         "y": 0
       }
@@ -2135,14 +2135,14 @@
       {
         "filename": "__second-nature__/graphics/entity/industry/explorer-1-mining_with_tool-1.png",
         "width_in_frames": 10,
-        "height_in_frames": 10,
+        "height_in_frames": 8,
         "x": 0,
         "y": 0
       },
       {
         "filename": "__second-nature__/graphics/entity/industry/explorer-1-mining_with_tool-2.png",
         "width_in_frames": 10,
-        "height_in_frames": 6,
+        "height_in_frames": 8,
         "x": 0,
         "y": 0
       }
@@ -2248,14 +2248,14 @@
       {
         "filename": "__second-nature__/graphics/entity/industry/explorer-2-mining_with_tool-1.png",
         "width_in_frames": 10,
-        "height_in_frames": 10,
+        "height_in_frames": 8,
         "x": 0,
         "y": 0
       },
       {
         "filename": "__second-nature__/graphics/entity/industry/explorer-2-mining_with_tool-2.png",
         "width_in_frames": 10,
-        "height_in_frames": 6,
+        "height_in_frames": 8,
         "x": 0,
         "y": 0
       }

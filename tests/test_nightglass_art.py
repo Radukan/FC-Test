@@ -37,6 +37,31 @@ def test_hd_atlases_double_texel_density_without_changing_world_scale_or_exceedi
     assert any('stripes' in manifest[name] for name in report)
 
 
+def test_striped_atlases_declare_pages_the_engine_accepts():
+    """The engine rejects a stripe that declares more lines than the animation has
+    directions with "Invalid stripeLine height", and every page must describe exactly
+    the pixels its file contains. Both are checked here so a re-render cannot ship a
+    character the game refuses to load."""
+    manifest=json.loads((ROOT/'docs/art/sprite-manifest.json').read_text())
+    striped=[(name,spec) for name,spec in manifest.items() if 'stripes' in spec]
+    assert striped
+    for name,spec in striped:
+        directions=spec['direction_count']
+        rows_per_direction=spec['frame_count']//spec['line_length']
+        lines=0
+        for stripe in spec['stripes']:
+            height_in_frames=stripe['height_in_frames']
+            assert 0<height_in_frames<=directions,(name,height_in_frames,directions)
+            assert height_in_frames%rows_per_direction==0,(name,height_in_frames)
+            assert stripe['width_in_frames']==spec['line_length'],(name,stripe['width_in_frames'])
+            path=MOD/stripe['filename'].split('__second-nature__/')[1]
+            with Image.open(path) as image:
+                assert image.size==(spec['width']*stripe['width_in_frames'],
+                                    spec['height']*height_in_frames),(name,path.name,image.size)
+            lines+=height_in_frames
+        assert lines==directions*rows_per_direction,(name,lines)
+
+
 def test_power_and_train_atlases_are_original_complete_and_have_all_directions():
     report=json.loads((ROOT/'docs/art/energy-manifest.json').read_text())
     for filename,digest in report['files'].items():assert hashlib.sha256((ROOT/filename).read_bytes()).hexdigest()==digest

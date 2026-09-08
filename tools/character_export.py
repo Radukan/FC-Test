@@ -47,7 +47,10 @@ def export_pose(tier,pose,count,directions,manifest,save,jobs=2):
     width,height=crop[2]-crop[0],crop[3]-crop[1]
     columns=max(n for n in range(1,count+1) if count%n==0 and n*width<=8192)
     rows_per_direction=count//columns
-    per_page=max(1,min(directions,8192//(height*rows_per_direction)))
+    # A stripe may not declare more lines than the animation has directions: the engine
+    # rejects that with "Invalid stripeLine height". Page on whole directions and keep
+    # every page's height_in_frames (number*rows_per_direction) within direction_count.
+    per_page=max(1,min(directions,8192//(height*rows_per_direction),max(1,directions//rows_per_direction)))
     assert height*rows_per_direction<=8192
     name=f'explorer-{tier}-{pose}';folder=MOD/'graphics/entity/industry'
     chunks=[];used=[]
