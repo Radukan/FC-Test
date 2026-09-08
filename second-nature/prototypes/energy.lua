@@ -57,7 +57,10 @@ for index,p in ipairs(E.plants) do
     entity.max_fluid_usage=data.raw["fusion-generator"]["fusion-generator"].max_fluid_usage*3
     entity.effectivity=1;entity.next_upgrade=nil;entity.factoriopedia_simulation=nil
     entity.graphics_set={}
-    for _,d in ipairs({"north","east","south","west"}) do entity.graphics_set[d.."_graphics_set"]={animation=animation(p.name.."-"..d)} end
+    for _,d in ipairs({"north","east","south","west"}) do
+      local native=data.raw["fusion-generator"]["fusion-generator"].graphics_set[d.."_graphics_set"]
+      entity.graphics_set[d.."_graphics_set"]={animation=animation(p.name.."-"..d),fluid_input_graphics=table.deepcopy(native.fluid_input_graphics)}
+    end
   else
     entity.energy_source={type="electric",usage_priority="primary-output",buffer_capacity=p.watts*2 .."J",input_flow_limit="0W",output_flow_limit=p.watts.."W"}
     entity.energy_production="0W";entity.energy_usage="0W";entity.gui_mode="none"

@@ -153,6 +153,8 @@ def test_fuel_and_steam_generation_preserve_energy_accounting_contracts(energy_d
     f=data['fusion-generator']['sn-plasma-generator']
     assert f.input_fluid_box.filter=='fusion-plasma' and f.output_fluid_box.filter=='fluoroketone-hot'
     assert f.energy_source.output_flow_limit=='150000000W' and f.effectivity==1
+    for direction in ('north','east','south','west'):
+        assert len(f.graphics_set[direction+'_graphics_set'].fluid_input_graphics)==len(f.input_fluid_box.pipe_connections)
     assert data.fluid['sn-producer-gas'].fuel_value=='500kJ'
 
 
