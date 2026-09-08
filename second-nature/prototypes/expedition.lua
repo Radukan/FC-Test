@@ -89,6 +89,16 @@ pole.pictures=Art.sprite("field-pole-sheet")
 pole.pictures.direction_count=4;pole.pictures.line_length=4
 pole.icon=H.icon("field-pole");pole.icons=nil;pole.icon_size=64;pole.water_reflection=nil
 pole.localised_name={"entity-name.sn-field-pole"}
+-- Wire attachment points must follow OUR pole art. The inherited vanilla values
+-- put copper at -2.578 while this crossarm sits at -1.9405, which left every
+-- wire visibly floating half a tile above its insulator.
+local PoleGeometry=require("shared.pole_geometry")
+pole.connection_points={}
+for index,entry in ipairs(PoleGeometry["field-pole"]) do
+  pole.connection_points[index]={
+    wire={copper=entry.wire.copper,red=entry.wire.red,green=entry.wire.green},
+    shadow={copper=entry.shadow.copper,red=entry.shadow.red,green=entry.shadow.green}}
+end
 local chest=data.raw.container["wooden-chest"]
 chest.picture=Art.sprite("field-crate-north");chest.icon=H.icon("field-crate");chest.icon_size=64;chest.icons=nil
 chest.localised_name={"entity-name.sn-field-crate"}
