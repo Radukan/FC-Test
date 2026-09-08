@@ -1,0 +1,18 @@
+{
+  "name": "second-nature",
+  "version": "0.8.0",
+  "title": "Second Nature: Planetary Restoration",
+  "author": "Radukan",
+  "homepage": "https://github.com/Radukan/FC-Test",
+  "description": "A Space Age restoration campaign with biological process plants, articulated expedition equipment, reversible habitat recovery and a living-world soundtrack. Industrial systems, solar-shaded habitats and precision logistics support the renewal of five planets.",
+  "factorio_version": "2.0",
+  "dependencies": [
+    "base >= 2.0.77",
+    "space-age >= 2.0.77",
+    "quality >= 2.0.77",
+    "elevated-rails >= 2.0.77"
+  ],
+  "space_travel_required": true,
+  "spoiling_required": true,
+  "freezing_required": true
+}

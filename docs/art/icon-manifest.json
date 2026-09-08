@@ -1,0 +1,587 @@
+{
+  "silica": {
+    "role": "material / mineral",
+    "file": "second-nature/graphics/icons/silica.png",
+    "sha256": "8ca27a1316178860f55b73285488d9404fd42417615daa5d2ed59c8dae7cf18b"
+  },
+  "glass": {
+    "role": "material / mineral",
+    "file": "second-nature/graphics/icons/glass.png",
+    "sha256": "9b45a066305a42313eaa008a0bc4eb0e244a867396df65022591cece0ee15d3c"
+  },
+  "mineral-nutrients": {
+    "role": "material / mineral",
+    "file": "second-nature/graphics/icons/mineral-nutrients.png",
+    "sha256": "008e1336c453bc55e1e83df8eaf613a39536ecaeaa477ada4aea5a4a27634a08"
+  },
+  "microbial-culture": {
+    "role": "material / culture",
+    "file": "second-nature/graphics/icons/microbial-culture.png",
+    "sha256": "1a51c379ed3c156fac157abbbede832ab8e74502a2f58cd47e3288c29e820a11"
+  },
+  "algal-biomass": {
+    "role": "material / leaf",
+    "file": "second-nature/graphics/icons/algal-biomass.png",
+    "sha256": "55653502ce33ec3b3b372e111e83536da0e72003916db01b32e0f03915bd9619"
+  },
+  "compost": {
+    "role": "material / soil",
+    "file": "second-nature/graphics/icons/compost.png",
+    "sha256": "677575dd675b629fe57a92c80c27d4dbb51d5d9facab5f9f20fecab480bda886"
+  },
+  "biochar": {
+    "role": "material / carbon",
+    "file": "second-nature/graphics/icons/biochar.png",
+    "sha256": "3ec19b3c132607aac39a4ee2d44a53b2f97f0dfb7611e7c4367eb34a6ea47a55"
+  },
+  "activated-carbon": {
+    "role": "material / carbon",
+    "file": "second-nature/graphics/icons/activated-carbon.png",
+    "sha256": "2676dd28aeecd92ef4ce14d77dcf76f382ed2541e5dc438316fb567dbbc69b32"
+  },
+  "filter-cartridge": {
+    "role": "material / filter",
+    "file": "second-nature/graphics/icons/filter-cartridge.png",
+    "sha256": "46def2b3fa074243a55025e56810b0e8dff083a0af2b1247042eb6b6b53f7616"
+  },
+  "spent-filter": {
+    "role": "material / waste",
+    "file": "second-nature/graphics/icons/spent-filter.png",
+    "sha256": "fd6df6fa952d30736c33c510b67916c29f3edb137c577f3118021d4938a3322a"
+  },
+  "soil-substrate": {
+    "role": "material / soil",
+    "file": "second-nature/graphics/icons/soil-substrate.png",
+    "sha256": "b8df8ef2c9c0005f9a31968611886561d37bb357c0323aa5d34e9fab71e9592a"
+  },
+  "seed-mix": {
+    "role": "material / seed",
+    "file": "second-nature/graphics/icons/seed-mix.png",
+    "sha256": "9b5286e2f4223eb8d005ea48003f5b686fe77ff27f43d8da0f7d8e93bff65ea9"
+  },
+  "ceramic-membrane": {
+    "role": "material / filter",
+    "file": "second-nature/graphics/icons/ceramic-membrane.png",
+    "sha256": "919cf9fe09cd33b45706ada303276fd80253353ccab5761868dff7702b2f4eb8"
+  },
+  "thermal-buffer": {
+    "role": "material / thermal",
+    "file": "second-nature/graphics/icons/thermal-buffer.png",
+    "sha256": "96d8bc85400adf5490968d3ceefbb7988fe8c16295a55eafacbcd26a83c3d485"
+  },
+  "depleted-thermal-buffer": {
+    "role": "material / waste",
+    "file": "second-nature/graphics/icons/depleted-thermal-buffer.png",
+    "sha256": "fcb19c1ba4b8ef4d21879700f039a603cb12b3f34b399231184e032598c8fe12"
+  },
+  "neutralization-charge": {
+    "role": "material / mineral",
+    "file": "second-nature/graphics/icons/neutralization-charge.png",
+    "sha256": "bd84d982cb322455d659bf3fc40f23129a03f38ddcc9b6010f937ec0a2e94660"
+  },
+  "hazardous-sludge": {
+    "role": "material / waste",
+    "file": "second-nature/graphics/icons/hazardous-sludge.png",
+    "sha256": "90bfcc55f4dc0ef3c2ee7e20eb90f02d12a3c73aa1c42f205770a910d935db85"
+  },
+  "vitrified-waste": {
+    "role": "material / mineral",
+    "file": "second-nature/graphics/icons/vitrified-waste.png",
+    "sha256": "973e9cc54170585f98087dcb4c87612711c4ea2a8cd2c0ac0db3a6d3635555c5"
+  },
+  "biofilm": {
+    "role": "material / culture",
+    "file": "second-nature/graphics/icons/biofilm.png",
+    "sha256": "9c803296928d3ca53072b2798e0d4a398ed4cb8b52b3b98bbe5d0125093a4e74"
+  },
+  "ecological-data": {
+    "role": "material / data",
+    "file": "second-nature/graphics/icons/ecological-data.png",
+    "sha256": "d89dc86f41426eacc8538caaf75a47ad997923abb92b5bed250cebe3b0a1424f"
+  },
+  "climate-data": {
+    "role": "material / data",
+    "file": "second-nature/graphics/icons/climate-data.png",
+    "sha256": "c18a8822773fb9855dd39d05b2d89b90888faee9bb61abe635155bd12e7d6248"
+  },
+  "biosphere-data": {
+    "role": "material / data",
+    "file": "second-nature/graphics/icons/biosphere-data.png",
+    "sha256": "6006aacac9fd8ab37cce3e626a5a34f5f3eaf2ef61a90bb5c327af38caad2c11"
+  },
+  "thermophile-culture": {
+    "role": "material / thermal",
+    "file": "second-nature/graphics/icons/thermophile-culture.png",
+    "sha256": "8dac108a05a6bb1c9fdc44605b623f2075aa433e4fd156aee3c2fd5976d15621"
+  },
+  "heavy-metal-cake": {
+    "role": "material / waste",
+    "file": "second-nature/graphics/icons/heavy-metal-cake.png",
+    "sha256": "715611d4792f24da686d5c5d42af1a05da633965539c0c1f6e494e785f5e7a17"
+  },
+  "holmium-catalyst": {
+    "role": "material / crystal",
+    "file": "second-nature/graphics/icons/holmium-catalyst.png",
+    "sha256": "674df1be26546c691eb7869116184dd71bde2a0b19ebe3b119446cbc7d8995f1"
+  },
+  "symbiotic-culture": {
+    "role": "material / culture",
+    "file": "second-nature/graphics/icons/symbiotic-culture.png",
+    "sha256": "1b13d9e175199bded664a77f4c6a3de3843e18f6cc1c808521dccee2869f4c51"
+  },
+  "biodiversity-matrix": {
+    "role": "material / seed",
+    "file": "second-nature/graphics/icons/biodiversity-matrix.png",
+    "sha256": "94ca295936a5a5c5635137ef9991a2bb32a0eb74f7f05bbd7dc66f4034701b3d"
+  },
+  "gaia-cell": {
+    "role": "material / crystal",
+    "file": "second-nature/graphics/icons/gaia-cell.png",
+    "sha256": "c6fb65af7924530d0ac1110de3a3ac6f1ff9c8868e7f24ec379e8cffd88fcd76"
+  },
+  "ecology-science-pack": {
+    "role": "material / science",
+    "file": "second-nature/graphics/icons/ecology-science-pack.png",
+    "sha256": "835124f3142e5f45c0ef8a560afbf670c307d60522ac78895d7895075c6c84df"
+  },
+  "climate-science-pack": {
+    "role": "material / science",
+    "file": "second-nature/graphics/icons/climate-science-pack.png",
+    "sha256": "ab17baef74689eee5fb1eed9639d1265cf1a5bb2c0238067cb1f637070dcb24a"
+  },
+  "restoration-science-pack": {
+    "role": "material / science",
+    "file": "second-nature/graphics/icons/restoration-science-pack.png",
+    "sha256": "14db8fb2f8d519b22e6355bc51ee0256efdaf30c2a354d5e4fd28d0de58161ab"
+  },
+  "alloy-stock": {
+    "role": "material / mineral",
+    "file": "second-nature/graphics/icons/alloy-stock.png",
+    "sha256": "26cc62115c8e65bba9b11e9ee572382dfc854d4942f93029ae7e79eae738b173"
+  },
+  "clean-water": {
+    "role": "fluid",
+    "file": "second-nature/graphics/icons/clean-water.png",
+    "sha256": "a0b82614f735b9b3c65b23cf1aea783e0aa86b759d5b89305dc023fc1279a35a"
+  },
+  "oxygen": {
+    "role": "fluid",
+    "file": "second-nature/graphics/icons/oxygen.png",
+    "sha256": "421b85248c170069ea0a86cb0cf6b6fb43742cb40de148a828315b1184bda65f"
+  },
+  "hydrogen": {
+    "role": "fluid",
+    "file": "second-nature/graphics/icons/hydrogen.png",
+    "sha256": "807b2d502014d1f114b8a92af01bd096cf2ba3e362b74872d8f9bc17d05426c0"
+  },
+  "electrolyte": {
+    "role": "fluid",
+    "file": "second-nature/graphics/icons/electrolyte.png",
+    "sha256": "5e48a16ce35898a2db59c0e8a6d1215084280f278b7f8b6c14418c0bef1b49ce"
+  },
+  "bioleachate": {
+    "role": "fluid",
+    "file": "second-nature/graphics/icons/bioleachate.png",
+    "sha256": "0775958451d76c4a371e99c3f8ed0d694411b74339f641dd3c9c4a6ee4a186be"
+  },
+  "toxic-effluent": {
+    "role": "fluid",
+    "file": "second-nature/graphics/icons/toxic-effluent.png",
+    "sha256": "3b4b36877a9583abe2fbd0aea621cb8cbeb48aa9d21bd963ab5e177ca067031c"
+  },
+  "producer-gas": {
+    "role": "fluid",
+    "file": "second-nature/graphics/icons/producer-gas.png",
+    "sha256": "6cff2897522a709273ea8ec0fb2754b7f5c99b1cba60fb351cc5c03e38e0da40"
+  },
+  "biogas": {
+    "role": "fluid",
+    "file": "second-nature/graphics/icons/biogas.png",
+    "sha256": "36ea1acc71429e0489ec06348d9eaed7e1bde054320b740e7a6f64c82f9f399c"
+  },
+  "synthetic-gas": {
+    "role": "fluid",
+    "file": "second-nature/graphics/icons/synthetic-gas.png",
+    "sha256": "1d75ae2ab01152fd410e3e43baa411399cb294ff0b4819a5b442c0d97c9dd74b"
+  },
+  "algae-vat": {
+    "role": "process building",
+    "file": "second-nature/graphics/icons/algae-vat.png",
+    "sha256": "021883ead6631212a060e196d7ffd828fb4948b9dbb4cb0d426daeff31314040"
+  },
+  "composter": {
+    "role": "process building",
+    "file": "second-nature/graphics/icons/composter.png",
+    "sha256": "f4077d19043bd4372dd93eed2408c21d14800d42f453be10d627320ddbd3f630"
+  },
+  "hydroponics-bay": {
+    "role": "process building",
+    "file": "second-nature/graphics/icons/hydroponics-bay.png",
+    "sha256": "e3b55ac65f27e3d9dfd7f97d243fdce06b916d13d45148a99439978bdd856da7"
+  },
+  "electrolyzer": {
+    "role": "process building",
+    "file": "second-nature/graphics/icons/electrolyzer.png",
+    "sha256": "5e3468b7d525b31e55718c86b6ebebd75d5c487277b6ee41a488a9c5924c3461"
+  },
+  "reclamation-plant": {
+    "role": "process building",
+    "file": "second-nature/graphics/icons/reclamation-plant.png",
+    "sha256": "ad9bd82f50abaf99436b02ae35fbcac08d2bd4ccbec2c7c5b492d4ae64b6457e"
+  },
+  "materials-kiln": {
+    "role": "process building",
+    "file": "second-nature/graphics/icons/materials-kiln.png",
+    "sha256": "c80c87603d95e3efa957d50367760410c5cded0760e379be4ab458c80aabdb79"
+  },
+  "pyrolyzer": {
+    "role": "process building",
+    "file": "second-nature/graphics/icons/pyrolyzer.png",
+    "sha256": "e482dc2801a6af18d5b3c226db6787e0b53735d60eb14998a90b06df86360f3d"
+  },
+  "air-scrubber": {
+    "role": "process building",
+    "file": "second-nature/graphics/icons/air-scrubber.png",
+    "sha256": "ed3a302f8f5e773892e2bfa8e91ff06f2463631e1a5b421577c27c14769a76e9"
+  },
+  "soil-enricher": {
+    "role": "process building",
+    "file": "second-nature/graphics/icons/soil-enricher.png",
+    "sha256": "1e1069914f28565800b0a33a2f36a313d0fda023cbd7359868cda10d5d062eaa"
+  },
+  "seed-disperser": {
+    "role": "process building",
+    "file": "second-nature/graphics/icons/seed-disperser.png",
+    "sha256": "4f5508b3e7ece7c4e88068f0625e3e049f89ccb5ba4168dc36511feec9d8e82a"
+  },
+  "watershed": {
+    "role": "process building",
+    "file": "second-nature/graphics/icons/watershed.png",
+    "sha256": "20aa52f2331a9820a783df7443c4c79090ce952b0d2e97dd2778f3018f2379d5"
+  },
+  "thermal-exchanger": {
+    "role": "process building",
+    "file": "second-nature/graphics/icons/thermal-exchanger.png",
+    "sha256": "ff9e33c0de1a39bf8f1ecc6b52780735c9766902cf0c5bcbd1ae31d299facbd2"
+  },
+  "detoxifier": {
+    "role": "process building",
+    "file": "second-nature/graphics/icons/detoxifier.png",
+    "sha256": "324b7b9194d6dab27e752a4a0982cce95ba3ca9169a6083cd09771ade5612f3e"
+  },
+  "pheromone-dampener": {
+    "role": "process building",
+    "file": "second-nature/graphics/icons/pheromone-dampener.png",
+    "sha256": "81d8cc0970bf16dd0438c75c1e01c78a9f30b6024fcfd15d0ff1b8c221f38a93"
+  },
+  "forcing-tower": {
+    "role": "process building",
+    "file": "second-nature/graphics/icons/forcing-tower.png",
+    "sha256": "05e33821296ef8374f9afe504848f8664973d028282037797e70a7f2b0447ace"
+  },
+  "basalt-conditioner": {
+    "role": "process building",
+    "file": "second-nature/graphics/icons/basalt-conditioner.png",
+    "sha256": "606fc4558c63d23b07cc43374c14d5697602c7c9106fbf20ef84f6cbb56a21dc"
+  },
+  "fulgoran-reclaimer": {
+    "role": "process building",
+    "file": "second-nature/graphics/icons/fulgoran-reclaimer.png",
+    "sha256": "006b04dd96222a0a8f24f816e76783a230fa68fe81c7c7863e910eab4fea7965"
+  },
+  "spore-tower": {
+    "role": "process building",
+    "file": "second-nature/graphics/icons/spore-tower.png",
+    "sha256": "52d9268dbbec037b9d5e59c5429e58a9b79125af42c8a68fe4484792103749de"
+  },
+  "cryogenic-garden": {
+    "role": "process building",
+    "file": "second-nature/graphics/icons/cryogenic-garden.png",
+    "sha256": "ede597d558cc6aa14d8e2ab38226705a84aa8dc8881e786021e6af9ff0dd5e55"
+  },
+  "sanctuary": {
+    "role": "process building",
+    "file": "second-nature/graphics/icons/sanctuary.png",
+    "sha256": "43932c1d04d8641c021a11bae71b353f66b2b781ca678bc690090773795bd342"
+  },
+  "planetary-beacon": {
+    "role": "process building",
+    "file": "second-nature/graphics/icons/planetary-beacon.png",
+    "sha256": "8600e90112c85210b562717b99aae1a46212e4da6dd322112e98b77f125da1bc"
+  },
+  "ecology-monitor": {
+    "role": "process building",
+    "file": "second-nature/graphics/icons/ecology-monitor.png",
+    "sha256": "e3dd7bffc0d8b2395edc11144f26238933de49327c49fd7a71bdfda26b9f4c62"
+  },
+  "micro-solar": {
+    "role": "early power / photovoltaic",
+    "file": "second-nature/graphics/icons/micro-solar.png",
+    "sha256": "ba175ff5a8b3af0d11f20a1eea0f226c7ff9a6c0620182a636702a9c4516242e"
+  },
+  "burner-set": {
+    "role": "early power / direct-combustion",
+    "file": "second-nature/graphics/icons/burner-set.png",
+    "sha256": "1d2e1fe7ce9d39bc0a8426623a75494dfd9afdc8ffbe0f03cf746e6d6eb500b3"
+  },
+  "wind-turbine": {
+    "role": "early power / wind",
+    "file": "second-nature/graphics/icons/wind-turbine.png",
+    "sha256": "d600f52829b60b88578a9a4575b4a32a54fc0fce14dd938031a0ea5e3e4efe84"
+  },
+  "river-turbine": {
+    "role": "early power / hydro",
+    "file": "second-nature/graphics/icons/river-turbine.png",
+    "sha256": "88904dfc9da37a63cb67ba5daf2936d2b1d217774a60dd4fc3cd00b354eaed75"
+  },
+  "steam-piston": {
+    "role": "early power / low-temperature-steam",
+    "file": "second-nature/graphics/icons/steam-piston.png",
+    "sha256": "310efa42752d3a3beb96bd58ffc50e937a176ea7a8e9763a85e2f606f7faf496"
+  },
+  "producer-gas-engine": {
+    "role": "early power / coal-gasification",
+    "file": "second-nature/graphics/icons/producer-gas-engine.png",
+    "sha256": "8fe422222da5f034ec83c106b938ec153ef31cb8480f1cc85d780845b8773acb"
+  },
+  "biopellet-engine": {
+    "role": "mid power / solid-biomass",
+    "file": "second-nature/graphics/icons/biopellet-engine.png",
+    "sha256": "680bf4429bc13a5da547581ba7a1972706ecd98ba539c65991fe37c65d1d150e"
+  },
+  "geothermal-bore": {
+    "role": "mid power / geothermal",
+    "file": "second-nature/graphics/icons/geothermal-bore.png",
+    "sha256": "cdebe07c0ba7e2bde36f1279068bf5a308c41877b372e26d5bd35a507ac3d892"
+  },
+  "cogenerator": {
+    "role": "mid power / industrial-solid-fuel",
+    "file": "second-nature/graphics/icons/cogenerator.png",
+    "sha256": "248e7f53114a951ec157a2bc468033b61e258ebc1f63293137b559199792798a"
+  },
+  "solar-tower": {
+    "role": "mid power / concentrated-solar",
+    "file": "second-nature/graphics/icons/solar-tower.png",
+    "sha256": "8d6cdfdcd40b33f6f11acd52425b158dd446eae7f581fec3b145466cc05130c8"
+  },
+  "biogas-turbine": {
+    "role": "mid power / anaerobic-gas",
+    "file": "second-nature/graphics/icons/biogas-turbine.png",
+    "sha256": "3b33e20a12dea8210d4d364fb2537d7f1c6c86491678511df43a06413aead92a"
+  },
+  "heat-recovery-turbine": {
+    "role": "mid power / high-temperature-steam",
+    "file": "second-nature/graphics/icons/heat-recovery-turbine.png",
+    "sha256": "d1faf6cdcddbde760694a3579c957b8ff65f30ec350accc8326b8261774172bf"
+  },
+  "photonic-canopy": {
+    "role": "late power / photonic-solar",
+    "file": "second-nature/graphics/icons/photonic-canopy.png",
+    "sha256": "566ea2c33c5f525184564f12683c6bc167f37b1caba12f5c9154d2fab8f47620"
+  },
+  "planetary-thermal-tap": {
+    "role": "late power / deep-crust-thermal",
+    "file": "second-nature/graphics/icons/planetary-thermal-tap.png",
+    "sha256": "ba2db4ed12d0871ec7dbb495be5324714135b9c90c2aab08e79a7373d8442cc1"
+  },
+  "combined-cycle": {
+    "role": "late power / synthetic-gas-combined-cycle",
+    "file": "second-nature/graphics/icons/combined-cycle.png",
+    "sha256": "81441f8010b53b1cd70fe9831b08feb2c57a3212841541b72dc5de14eed6d497"
+  },
+  "biofuel-cell": {
+    "role": "late power / electrochemical-biomass",
+    "file": "second-nature/graphics/icons/biofuel-cell.png",
+    "sha256": "d26cdde7c56143540f68ab6e64cc781b9d2bd0d99dda3189e3f363b9a7a4614d"
+  },
+  "salt-reactor": {
+    "role": "late power / fission-heat",
+    "file": "second-nature/graphics/icons/salt-reactor.png",
+    "sha256": "103946d9d11419ab45b896230bd8eca042dc0e87ee10eeb2fffb89747dbbcd4b"
+  },
+  "plasma-generator": {
+    "role": "late power / fusion-plasma-conversion",
+    "file": "second-nature/graphics/icons/plasma-generator.png",
+    "sha256": "2bd906413a06c6ed370fe41c66cb79d184c677d94b10c1cd289cee2cdbccf2ed"
+  },
+  "sunseed-locomotive": {
+    "role": "solar rolling stock",
+    "file": "second-nature/graphics/icons/sunseed-locomotive.png",
+    "sha256": "7461ca5df7e2e2bdec9e4f1a8dbdd4e4bc7207e7dd6a4fbbdec015b2e7411833"
+  },
+  "heliograph-locomotive": {
+    "role": "solar rolling stock",
+    "file": "second-nature/graphics/icons/heliograph-locomotive.png",
+    "sha256": "ddef9d9264487a2b259ba2877a7de47b0a41de84bc0e52ddcc5eb92a382284c9"
+  },
+  "daybreak-locomotive": {
+    "role": "solar rolling stock",
+    "file": "second-nature/graphics/icons/daybreak-locomotive.png",
+    "sha256": "f5118ef123ab4c167cfaececf6468d45895d0ad053856e92ffcc55890fe7ec0f"
+  },
+  "carbine": {
+    "role": "gun",
+    "file": "second-nature/graphics/icons/carbine.png",
+    "sha256": "c0b8d2e57645654493d580a70988a0157960ba03f9117de13a481abe3d621dda"
+  },
+  "ballistic-magazine": {
+    "role": "ammo",
+    "file": "second-nature/graphics/icons/ballistic-magazine.png",
+    "sha256": "08243f9e07b955ce73ea569a281ba547152e2b619bd02902d30da015c23b2d8d"
+  },
+  "field-dressing": {
+    "role": "capsule",
+    "file": "second-nature/graphics/icons/field-dressing.png",
+    "sha256": "e155b6468313b0236b27135312d4dae09a679cbc120005fe68f689758d3c81ff"
+  },
+  "mycelial-magazine": {
+    "role": "ammo",
+    "file": "second-nature/graphics/icons/mycelial-magazine.png",
+    "sha256": "2a5efc5062068b5eab01fd05a2baf121ea537127aea86c6d0b683a3006cbe207"
+  },
+  "field-armor": {
+    "role": "armor",
+    "file": "second-nature/graphics/icons/field-armor.png",
+    "sha256": "3f255d1de794fe388d013f4b2be90484250476c2f4ff9426c5cbde60d438ef43"
+  },
+  "sentry-turret": {
+    "role": "ammo-turret",
+    "file": "second-nature/graphics/icons/sentry-turret.png",
+    "sha256": "7ed6bb5404a65bff1af32236c77fd0687ab7986a1667c7088d01e86c2b612a52"
+  },
+  "field-barricade": {
+    "role": "wall",
+    "file": "second-nature/graphics/icons/field-barricade.png",
+    "sha256": "da9df6065ca4201426238d31b811eaffe1ae8f9c740a777bf4ee02e705bd75a2"
+  },
+  "induction-rifle": {
+    "role": "gun",
+    "file": "second-nature/graphics/icons/induction-rifle.png",
+    "sha256": "5b45b48861807ff5e2abaa93512aa2a9b4748d9c0548a300c1062f02564b0491"
+  },
+  "induction-cell": {
+    "role": "ammo",
+    "file": "second-nature/graphics/icons/induction-cell.png",
+    "sha256": "55248b26f7f21186fc3e0797e8b171879456aec6cd7cba13ab75729fce6a9f34"
+  },
+  "arc-turret": {
+    "role": "electric-turret",
+    "file": "second-nature/graphics/icons/arc-turret.png",
+    "sha256": "300f859f66f2e8ad788c2c9d7dcfc11363df9464ea168a575fe0d50297fac930"
+  },
+  "composite-wall": {
+    "role": "wall",
+    "file": "second-nature/graphics/icons/composite-wall.png",
+    "sha256": "85a0e00c01714fb67279fc279c190db22b891ae3b180d40d0508ab21462cfd6c"
+  },
+  "expedition-armor": {
+    "role": "armor",
+    "file": "second-nature/graphics/icons/expedition-armor.png",
+    "sha256": "d0481acddb40455cee03c162a5385cd09e6c413c30cd3f3bd2e80951de817632"
+  },
+  "lance-rifle": {
+    "role": "gun",
+    "file": "second-nature/graphics/icons/lance-rifle.png",
+    "sha256": "a4c25e2921aa0e772a0f5c09e9341d12846476a63909a1f916427d9ce95e8889"
+  },
+  "lance-cell": {
+    "role": "ammo",
+    "file": "second-nature/graphics/icons/lance-cell.png",
+    "sha256": "6ba1d9397f46a82cfbb9a3791f34b358229d64648ebacef09896b81dcd6d7c74"
+  },
+  "lance-turret": {
+    "role": "ammo-turret",
+    "file": "second-nature/graphics/icons/lance-turret.png",
+    "sha256": "1dbe5e3e8d9b665472d5931f8113c0531c07fd6957e21f1b4bfe0fd7023e6bdf"
+  },
+  "bastion-armor": {
+    "role": "armor",
+    "file": "second-nature/graphics/icons/bastion-armor.png",
+    "sha256": "fa66c16d27f3ab8f8300cff97a56119e66be7b823ce14ed0d5999477ef70a0f1"
+  },
+  "ecoshield-equipment": {
+    "role": "energy-shield-equipment",
+    "file": "second-nature/graphics/icons/ecoshield-equipment.png",
+    "sha256": "0d61480655f6a431590996e9f4d6b0fc4917e8d70ee37ecfd2f783e59c9153f8"
+  },
+  "vector-inserter": {
+    "role": "inserter",
+    "file": "second-nature/graphics/icons/vector-inserter.png",
+    "sha256": "7692bc838844ef83ec165e263c19b173a05b2f4957dbdb4c6ac22cf7c340f54b"
+  },
+  "canopy-inserter": {
+    "role": "inserter",
+    "file": "second-nature/graphics/icons/canopy-inserter.png",
+    "sha256": "925beded22e33e339fa1374666ca21b78b9f50f774912c76b7f86e02adc57f97"
+  },
+  "vital-belt": {
+    "role": "transport-belt",
+    "file": "second-nature/graphics/icons/vital-belt.png",
+    "sha256": "18ad05093db46835b204a4dd948d28f0805d36be8562455a2bcfa00046467333"
+  },
+  "vital-underground-belt": {
+    "role": "underground-belt",
+    "file": "second-nature/graphics/icons/vital-underground-belt.png",
+    "sha256": "284efdcc6f3baed4e1854df785ecafb1e8bdb913df0204e23f8f2955b01caf3a"
+  },
+  "vital-splitter": {
+    "role": "splitter",
+    "file": "second-nature/graphics/icons/vital-splitter.png",
+    "sha256": "17c7ae429d6c9034a949472b93fcd545045ca8ce81533e6891c9c5ec4e21f9ef"
+  },
+  "jukebox": {
+    "role": "programmable-speaker",
+    "file": "second-nature/graphics/icons/jukebox.png",
+    "sha256": "9f2aa442e658e2d182a15b5efbfc401add01db4d13f12233a0bdcc6e70497ac1"
+  },
+  "field-drone": {
+    "role": "item",
+    "file": "second-nature/graphics/icons/field-drone.png",
+    "sha256": "d39edc3a87d443a09683da252bbcc5029053dd752a548c5bc6c2e0f02bed4ffe"
+  },
+  "field-controller": {
+    "role": "item",
+    "file": "second-nature/graphics/icons/field-controller.png",
+    "sha256": "0e6d8fc178143bd05752e08a0fa5dec4814d79f26326b7479e1c56c85c097ac8"
+  },
+  "biopellet": {
+    "role": "item",
+    "file": "second-nature/graphics/icons/biopellet.png",
+    "sha256": "9d12338d944ff7c43813b5f468bfafc04043f0f05bd70ccdfd097c1ad50f02bc"
+  },
+  "bio-ash": {
+    "role": "item",
+    "file": "second-nature/graphics/icons/bio-ash.png",
+    "sha256": "120d0a024bdf79139b1e8a83c311e6caa8c569bf577816db30441f632b7e89aa"
+  },
+  "field-pole": {
+    "role": "wood-free power pole",
+    "file": "second-nature/graphics/icons/field-pole.png",
+    "sha256": "0cfb85d37b6bf772c68892b0f064d89087b98ca91cbfd7ad8f1283c36fd89ffa"
+  },
+  "field-crate": {
+    "role": "mineral crate",
+    "file": "second-nature/graphics/icons/field-crate.png",
+    "sha256": "3096f0797ca5b43f78558bddd55741dafb543264c3cf4c7f5fed1a6433e3640d"
+  },
+  "lander": {
+    "role": "expedition craft",
+    "file": "second-nature/graphics/icons/lander.png",
+    "sha256": "c70a75f332e755ee7e547619f03387b369c5d5325bdedba9f85704fe03e1ea9b"
+  },
+  "solar-drive-charge": {
+    "role": "internal rail component",
+    "file": "second-nature/graphics/icons/solar-drive-charge.png",
+    "sha256": "079fbcf7a7858c369c6a0d207555b1515fa050ffe788af5548a409ce69da8a56"
+  },
+  "solar-rail-battery": {
+    "role": "internal rail component",
+    "file": "second-nature/graphics/icons/solar-rail-battery.png",
+    "sha256": "191bf4537a57372d9ba4823fec8d46f7b2d8cf9e27900b12ce37610b2997e702"
+  },
+  "solar-rail-panels": {
+    "role": "internal rail component",
+    "file": "second-nature/graphics/icons/solar-rail-panels.png",
+    "sha256": "d1801d2299f6a30c021e4a0b4fa82a586a23a383189884af53cdb45881b2cfcb"
+  }
+}

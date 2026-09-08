@@ -1,0 +1,11 @@
+{
+  "title": "After the Ash",
+  "source": "Original procedural composition; no sampled recordings",
+  "tempo_bpm": 80,
+  "duration_seconds": 96.0,
+  "sample_rate": 32000,
+  "channels": 2,
+  "decoded_peak": 0.43061965703964233,
+  "decoded_rms": 0.09206115276069395,
+  "sha256": "2ec3d2aecda383cdc27df788eb3d99979bc9c1c6ae47abbaa22134acf124fd58"
+}

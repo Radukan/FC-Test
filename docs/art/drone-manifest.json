@@ -1,0 +1,69 @@
+{
+  "specs": {
+    "flying": {
+      "filename": "__second-nature__/graphics/entity/field-drones/flying.png",
+      "width": 176,
+      "height": 192,
+      "frame_count": 8,
+      "line_length": 8,
+      "direction_count": 16,
+      "scale": 0.5714285714285714,
+      "shift": [
+        0,
+        -0.0685714
+      ],
+      "apply_projection": false
+    },
+    "flying-shadow": {
+      "filename": "__second-nature__/graphics/entity/field-drones/flying-shadow.png",
+      "width": 176,
+      "height": 192,
+      "frame_count": 8,
+      "line_length": 8,
+      "direction_count": 16,
+      "scale": 0.5714285714285714,
+      "shift": [
+        0,
+        -0.0685714
+      ],
+      "apply_projection": false
+    },
+    "working": {
+      "filename": "__second-nature__/graphics/entity/field-drones/working.png",
+      "width": 176,
+      "height": 192,
+      "frame_count": 8,
+      "line_length": 8,
+      "direction_count": 16,
+      "scale": 0.5714285714285714,
+      "shift": [
+        0,
+        -0.0685714
+      ],
+      "apply_projection": false
+    },
+    "working-shadow": {
+      "filename": "__second-nature__/graphics/entity/field-drones/working-shadow.png",
+      "width": 176,
+      "height": 192,
+      "frame_count": 8,
+      "line_length": 8,
+      "direction_count": 16,
+      "scale": 0.5714285714285714,
+      "shift": [
+        0,
+        -0.0685714
+      ],
+      "apply_projection": false
+    }
+  },
+  "files": {
+    "second-nature/graphics/entity/field-drones/flying-shadow.png": "ba7317815ae6f07e0ccd00bbc977df7ece341cc19da31c8cbb724fd19dc544bf",
+    "second-nature/graphics/entity/field-drones/flying.png": "0f6c0b1ea79380e9fda29ee3ee960126330127f895dbfa262fed15fdfdf730cf",
+    "second-nature/graphics/entity/field-drones/working-shadow.png": "1fd95be630fedaa38d262935199aacd178534aa23d66fb669e3bf03e4fea7e00",
+    "second-nature/graphics/entity/field-drones/working.png": "f64230315ddeea6d5720725fc6b736389327e78547f82da4aadc7aa4eb2cc914",
+    "second-nature/graphics/technology/field-robotics.png": "4b473de9d92c69cf92b0dc34920fa6e73cfff8ac52eef38348006d76bf4e2b5e",
+    "second-nature/graphics/technology/field-robotics-2.png": "26aae6c26c46a32822d43bb233249064d0416a3432fe07aa889842a515d36cb6",
+    "second-nature/graphics/technology/field-robotics-3.png": "01e16e55bef4f882d602b7146397bf2139939af63beef5dba72a418b609e1373"
+  }
+}

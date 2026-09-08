@@ -1,0 +1,194 @@
+---------------------------------------------------------------------------------------------------
+Version: 0.8.0
+Date: 2026-09-08
+  Fixes:
+    - Enable iron sticks at startup and for existing forces so wood-free power poles do not wait for green science.
+    - Recall paused field drones visibly instead of immediately deleting/refunding them; preserve returning flights when re-enabled.
+    - Move the field-drone control to an upper-left mod button visible only with a carried controller; remove its toolbar shortcut.
+  Art:
+    - Humanize the original adult goth explorer with a sculpted smooth-shaded face/skin, slimmer arms, continuous shoulders and less mechanical clothing.
+    - Use Morticia-inspired adult gothic elegance as a loose styling reference while retaining the original wolf cut, tattoos and covered skirt.
+    - Rebuild item/building icons as distinct high-contrast objects at native Factorio inventory sizes.
+  Power:
+    - Provide six different power systems in each of early, mid and late progression, eighteen total.
+    - Rebalance existing output/costs without expanding occupied footprints, and add shoreline, gas, steam, solar concentration, fuel-cell, fission and plasma options.
+    - Preserve genuine fuel/fluid/heat accounting; share geothermal output regionally while retaining legacy baseline output.
+  Verification:
+    - Add source and native-engine checks for startup access, physical recall, staged power, fluid/coolant/fuel inputs, heat and electrical output.
+---------------------------------------------------------------------------------------------------
+Version: 0.7.0
+Date: 2026-09-08
+  Features:
+    - Add Sunseed, Heliograph and Daybreak solar locomotive tiers with fitted native panels and batteries, no fuel slots, metered traction and reduced night speed/power.
+    - Add Copperleaf micro solar, Trailblazer burner, helical wind, closed-loop biomass, deep geothermal and residue-fired generating options across the progression.
+    - Add renewable biopellets and mineral ash recovery, with real fuel consumption, residue and pollution behavior.
+    - Add the onboard solar energy monitor and power/rail research progression.
+  Character:
+    - Give the adult explorer pale skin, a layered wolf cut, original botanical/circuit tattoos, dark gear and a pleated short skirt over opaque undershorts.
+    - Render character textures at twice the authored resolution while preserving native world scale and motion/grip contracts.
+    - Crop fixed pose padding and split large sheets into texture-safe native stripes; update readers, icons and source previews.
+  Safety:
+    - Account for actual battery joules; reconcile unspent motor credit and preserve stored energy across save/reload and mining.
+    - Reject ordinary fuel and unsupported onboard equipment; do not increase train velocity or replace native schedules.
+    - Add source and real-engine solar/rail/generation probes alongside existing campaign and planner checks.
+---------------------------------------------------------------------------------------------------
+Version: 0.6.2
+Date: 2026-09-07
+  Changes:
+    - Keep inventory-based field drones and their no-power controller; automatically enable newly discovered crews and clearly show Ctrl + Shift + B for pause/resume.
+    - Unlock native blueprint, copy/paste, undo/redo, deconstruction and upgrade planner shortcuts with early field robotics.
+    - Add explicit planner deconstruction with content recovery and native in-place upgrades with exact new/old item accounting.
+    - Add two early field-only tuning researches for reach, speed and work duration.
+    - Update drone positions each tick and render sixteen directional 3D views with separate ground shadows.
+    - Replace oversized spherical chest panels with a reduced, tapered teardrop profile and round the boot outlines and toe caps.
+    - Place the right-hand pickaxe grip at 48% of the shaft, above the left hand at 16%.
+  Compatibility:
+    - Preserve saved manual pauses, existing drone/controller items and in-flight escrow; do not add an armor or power requirement.
+    - Preserve native blueprint configuration and return genuine deconstruction/upgrade items, with quality and inventory safeguards.
+---------------------------------------------------------------------------------------------------
+Version: 0.6.1
+Date: 2026-09-07
+  Features:
+    - Add inexpensive wind-up construction drones and a carried field controller after Automation and 20 red science packs.
+    - Build nearby entity and tile ghosts from reserved personal inventory materials without a logistics network, roboports or an equipment grid.
+    - Support 64 concurrent drones by default, configurable up to 128 per player, with a bounded shared queue and server safety cap.
+    - Add Ctrl + Shift + B and a field-crew monitor for enable, pause and recall.
+  Character:
+    - Add counter-rotating hips and shoulders, lateral weight transfer, independent head bob and stabilization, and smoother foot swing transitions.
+    - Rebuild the mining cycle around anticipation, a fast downstroke, body drive, impact and recovery.
+    - Keep the right palm closer to the pickaxe head and both hands attached; eliminate a degenerate hand frame near horizontal swings.
+    - Add a fuller rounded protective-suit chest profile and bounded, armor-damped secondary motion.
+    - Retain native aiming rows, movement speed, frame counts and actual mining productivity.
+  Safety:
+    - Reserve actual materials and drone items, preserve quality, and reconcile cancellation, failed construction, full inventories and owner transitions.
+    - Leave packed vehicles, loose ground items, repair, deconstruction, upgrades and deliveries to native systems.
+    - Preserve in-flight escrow across save/reload and keep drone shadows on the ground layer.
+    - Add source and official engine probes for material conservation, isolated-network behavior and saved in-flight construction.
+---------------------------------------------------------------------------------------------------
+Version: 0.6.0
+Date: 2026-09-07
+  Character:
+    - Replace linear leg offsets with constant-length two-bone kinematics, planted stance and lifted swing phases.
+    - Add toe roll, weight shift, articulated elbows and visible five-digit gloved hands.
+    - Increase locomotion frames and shorten the visual mining cycle while retaining the pointed tool strike.
+  Buildings:
+    - Introduce distinct industrial-solarpunk process architectures, greenhouse terraces, clarifiers, furnace drums and habitat courts.
+    - Expand complex plants to five-by-five or seven-by-seven footprints with matching placement geometry and fluid ports.
+    - Retain compact prototypes and their old collision/port geometry for existing saves and blueprints.
+    - New inventory placement uses the larger plants; existing factories are not silently expanded or moved.
+  Landing craft:
+    - Rebuild the lander as the tapered Wayfarer shuttle with sloped cockpit glazing, engine pods, stabilizers, landing struts and a cargo ramp.
+    - Add folded solar cells, sealed seed canisters, service hatches and worn industrial hull materials.
+    - Draw the hull and ground shadow once; animate only the fan wells and navigation lights with an exact, cropped overlay.
+    - Refit existing camps by replacing only their render object, preserving collision geometry, cargo and rocket history.
+  Fixes:
+    - Retain complete building cast shadows in all rotations without moving native ground pivots or pipe seams.
+    - Generate current canonical building previews and the missing locomotion review; record source-asset fingerprints.
+    - Correct stale footprint documentation, first-join version text and links to an unpublished release.
+  Compatibility:
+    - Preserve inventories, recipes, research, ecological rates, military systems and audio content.
+    - Graphical-client validation remains distinct from geometry tests and stable headless checks.
+---------------------------------------------------------------------------------------------------
+Version: 0.5.0
+Date: 2026-09-07
+  Features:
+    - Add a voiced landing log followed by We Need a Living World, an original industrial-punk score with spoken female lyrics.
+    - Add an expedition jukebox with native speaker playback, stop controls and protected surface broadcasting.
+    - Add bounded pickup/drop tile controls for every inserter and endgame vector/canopy manipulators.
+    - Add a matched 90-item-per-second transport, underground and splitter family.
+    - Introduce root-binding flechettes, a resonance diffuser and pressure-lance contamination capture.
+  Graphics:
+    - Round machinery housings and replace conventional turret silhouettes with biological/field-control structures.
+    - Use shared native fluid-port coordinates for visible nozzles and remove mismatched inherited stubs.
+    - Reorient the pickaxe so its forged point leads the impact; preserve audited frame margins.
+  Compatibility:
+    - Preserve existing inventories, research, ecology and ordinary ballistic/rail ammunition compatibility.
+    - The opening is one native hero-track recording with voice before music.
+    - The vocal performance is spoken, not sung. Full graphical/audio and multiplayer review remains separate from engine checks.
+---------------------------------------------------------------------------------------------------
+Version: 0.4.0
+Date: 2026-09-07
+  Graphics:
+    - Rebuild explorer aiming with the engine's mirrored armed-pose layout and a shared torso/arm/weapon rig.
+    - Expand character framing and keep one foot anchor across all states; audit tool and shadow bounds.
+    - Add detailed anatomy, fitted protective equipment, articulated hands and facial features.
+    - Rework machinery with chamfered panels, valves, gauges, conduits, bolts, worn surfaces and self-shadowing.
+  Sound:
+    - Add After the Ash, an original instrumental main-menu score with an optional startup setting.
+  Interface:
+    - Rewrite equipment and machinery descriptions around their construction and function.
+    - Remove long dash punctuation from in-game text and repository documentation; add regression checks.
+  Compatibility:
+    - Retain character/controller state, inventories, research, habitat progress and equipment mechanics.
+    - Stable Factorio 2.0 only. Graphical client review remains distinct from headless engine validation.
+---------------------------------------------------------------------------------------------------
+Version: 0.3.0
+Date: 2026-09-07
+  Features:
+    - Original heavy-industrial sprites and working animations for all 22 restoration/production buildings.
+    - Original intact animated expedition lander, permanently protected even after a rocket launch.
+    - Original feminine adult explorer with fully covered expedition gear, armor, tool, movement and armed poses.
+    - Three tiers of new guns, ammo, turrets, barricades and armor; powered personal shields and field dressings.
+    - Four loaded sentries and stronger initial barricades replace the minimal landing perimeter.
+    - No early structural wood dependency: mineral stocks, riveted poles/crates, metal gun stocks and algal seeds.
+    - Time-integrated habitat recovery and pollution stress. Greening and its reversal take sustained time.
+    - Three bounded optimization technologies: +15%, +30%, +45% clean work, capture and supported growth.
+  Balance:
+    - Baseline ecological work/drift now use 30% of the old rapid coefficients; physical capture uses 25%.
+    - Ideal full habitat growth takes about three supported hours; heavy contamination reverses it gradually.
+    - Nauvis stage 5 additionally requires at least 80% surveyed habitat condition.
+    - Mod-grown trees can wither under prolonged pollution; infrastructure and untracked player trees are preserved.
+  Compatibility:
+    - Surviving older landers gain permanent protection. Existing cargo and defenses are not duplicated.
+    - Character graphics are optional at startup; inventories/controllers and vanilla equipment mechanics remain.
+    - Original procedural art is reproducible with the optional art toolchain; no downloaded Wube sprites are bundled.
+    - Alpha: graphical, full-campaign and multiplayer validation remain separate from automated engine smoke tests.
+---------------------------------------------------------------------------------------------------
+Version: 0.2.0
+Date: 2026-09-06
+  Bugfixes:
+    - Namespace all GUI child names: tabs, value, text and state no longer collide with LuaGuiElement members.
+    - Validate GUI names against the stable API in runtime tests; protect dashboard opening from fatal GUI errors.
+    - Do not call crafting-only recipe APIs on the ecology monitor's constant-combinator entity.
+    - Import core utilities explicitly and resolve all modules at control parsing, not from runtime callbacks.
+    - Keep the special default map preset valid and explicitly preserve native nest/worm generation.
+    - Ignore ungenerated/pollution-only chunks when indexing terrain; chunk removal no longer restarts a survey.
+    - Newly detected hotspots immediately block readiness; closing the dashboard cancels pending native confirmation.
+  Features:
+    - Stable Factorio 2.0 only. Experimental builds are no longer developed or published.
+    - Last Landing: one shared cargo lander, two loaded turrets and starter walls per force in new freeplay.
+    - Desolate Nauvis without trees/fish, barren ground, legacy smog and three themed map presets.
+    - Pollution-fed broods: restoration targets replace pollution-driven biter attack recruitment.
+    - Real local pollution suppresses warnings, reduces waves and can send tracked raiders back to their nests.
+    - Worldwide pollution inventory, rolling hotspot survey, local smog overlay and two new circuit signals.
+    - Dirty local air blocks soil/biodiversity gains. Total pollution and hotspots gate planetary completion.
+    - Bounded late-stage Nauvis succession, pollution-damaged grass and reversible water discoloration.
+    - Permanent player choice after full Nauvis restoration: friendly Bloombacks and gardens, or eradication.
+    - Original eight-direction Bloomback animations, bloom gardens and a Last Landing main-menu illustration.
+  Compatibility:
+    - Existing saves retain ecology, machines and terrain: no replacement cargo or retroactive sterilization.
+    - New landing/map-generation experience requires a fresh save. Back up older saves before upgrading.
+    - Alpha: automated validation does not establish a balanced full campaign or graphical/multiplayer certification.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.0
+Date: 2026-09-06
+  Major Features:
+    - Initial alpha of the Second Nature Space Age restoration campaign.
+    - Five persistent planetary ecosystems, five fitness axes, six stages, toxicity and native resistance.
+    - 22 machines, 88 recipes, 20 technologies, 31 materials/science items and six fluids.
+    - Three restoration sciences, integrated vanilla progression and a sustained five-world network victory.
+  Features:
+    - Ecology progresses only through completed production cycles, never passive machine ownership.
+    - Closed filter, water, thermal-buffer and waste loops; optional dirty industrial forcing.
+    - Planet-specific Vulcanus weathering, Fulgoran remediation, Gleban symbiosis and Aquilo gardens.
+    - Enable native pollution layers on all non-spore planets, without introducing arbitrary enemy invasions.
+    - Native nest-based response waves with warnings, grace periods, bounded group sizes and peaceful-mode support.
+    - Safe local terrain restoration, sparse forests, entity-anchored cryogenic garden overlays.
+    - Planetary dashboard, field guide, circuit telemetry, multiplayer force-aware network logistics and read-only remote API.
+    - Original inventory icons, research illustrations and environmental branding; tinted built-in machine animations.
+  Compatibility:
+    - Separate package metadata for Factorio 2.0.77 stable and 2.1.17 experimental.
+    - Adapts recipe categories and science-pack prototype types to the loaded game branch.
+    - Requires Space Age, Quality and Elevated Rails. Intended for a fresh Space Age freeplay save.
+  Info:
+    - Alpha: automated Lua and official source-data tests are provided; real engine and long-form campaign playtesting remain release gates.

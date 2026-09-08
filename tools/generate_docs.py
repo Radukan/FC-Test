@@ -1,0 +1,64 @@
+#!/usr/bin/env python3
+"""Generate the exhaustive content reference and throughput results from live Lua definitions."""
+from catalog import ROOT,load_catalog,load_constants
+from simulate import simulate
+
+def generate():
+    k,c=load_catalog(),load_constants();names={}
+    for group in ('items','fluids','machines'):
+        names.update({'sn-'+x['name']:x['title'] for x in k[group]})
+    def title(name):return names.get(name,name.replace('-',' ').capitalize())
+    def io(entries):return ' + '.join(f"{e[1]:g} {title(e[0])}"+(' [fluid]' if len(e)>2 and e[2]=='fluid' else '') for e in entries)
+    def conditions(r):return ', '.join(([r['planet'].title()] if r.get('planet') else ['Any stock planet'] if r.get('domain') else [])+([f"stage ≥ {r['stage']}"] if r.get('stage') else [])) or 'No ecological restriction'
+    owners={name:t['title'] for t in k['technologies'] for name in t['unlocks']}
+    text=['# Complete content catalog','','Generated from `second-nature/shared/catalog.lua` by `python tools/generate_docs.py`. Do not hand-edit tables.','',
+      f"**{len(k['machines'])} machines · {len(k['recipes'])} recipes · {len(k['technologies'])} technologies · {len(k['items'])} material/science items · {len(k['fluids'])} fluids.**",'',
+      'Times are seconds at crafting speed 1. Fitness effects are percentage points per completed cycle before planetary multipliers and support ceilings. No custom recipe supports productivity. Native recipe quality is disabled for operations and closed/catalytic loops.','',
+      '## Machines','','New construction uses the canonical footprints below. Complex processes occupy 5 x 5 or 7 x 7 tiles; simple stations remain compact. Existing compact entities and their blueprint geometry are preserved, but mining one returns the item for the new larger plant. All crafting machines are electric and require heat on Aquilo.','',
+      '| Machine | New footprint | Legacy footprint | Power | Recipe role | Unlock |','|---|---:|---:|---:|---|---|']
+    for m in k['machines']:
+        role=('Fixed: '+k['by_recipe']['sn-'+m['fixed']]['title']) if m.get('fixed') else ' / '.join(m['categories']) or 'Circuit telemetry'
+        text.append(f"| {m['title']} | {m['footprint']} x {m['footprint']} | {m['previous_footprint']} x {m['previous_footprint']} | {m.get('energy') or 'Passive sensor'} | {role} | {owners[m['name']]} |")
+    text+=['','## Restoration operations','','| Operation | Time | Inputs → Outputs | Ecological effect / cycle | Conditions |','|---|---:|---|---|---|']
+    for r in k['recipes']:
+        if not r.get('operation'):continue
+        fx=[]
+        for axis in c['axes']+['toxicity','pressure','pollution']:
+            value=r['effects'].get(axis)
+            if value is not None:
+                scale=c['pace']['pollution_capture'] if axis=='pollution' and value<0 else (1 if axis=='pollution' else c['pace']['fitness'])
+                fx.append(f'{axis} {value*scale:+g}')
+        text.append(f"| {r['title']} | {r['seconds']} s | {io(r['ingredients'])} → {io(r['results'])} | {'; '.join(fx)} | {conditions(r)} |")
+    text+=['','## Processing recipes','','Recipes tagged **dirty** also emit vanilla pollution/spores and incur explicit toxicity; switching/clearing a dirty retort recipe cannot launder that debt.','',
+      '| Recipe | Time | Inputs | Outputs | Unlock / condition |','|---|---:|---|---|---|']
+    for r in k['recipes']:
+        if r.get('operation') or r.get('machine'):continue
+        where=owners.get(r['name'],'Available from start')
+        if r.get('stage') or r.get('planet'):where+='; '+conditions(r)
+        text.append(f"| {r['title']} | {r['seconds']} s | {io(r['ingredients'])} | {io(r['results'])} | {where} |")
+    text+=['','## Construction recipes','','| Machine | Craft time | Materials |','|---|---:|---|']
+    for r in k['recipes']:
+        if r.get('machine'):text.append(f"| {title('sn-'+r['name'])} | {r['seconds']} s | {io(r['ingredients'])} |")
+    text+=['','## Research','','`Ecology`, `Climate`, and `Restoration` are the new science packs. All other packs are stock Space Age. Numbers are research units, not individual items in the ingredients column.','',
+      '| Technology | Units × time | Science ingredients per unit | Prerequisites |','|---|---:|---|---|']
+    tech_names={'sn-'+t['name']:t['title'] for t in k['technologies']}
+    for t in k['technologies']:
+        science=', '.join(title(p[0]).replace(' science pack','').replace('Science pack','') for p in t['science'])
+        prereqs=', '.join(tech_names.get(p,title(p)) for p in t['prerequisites'])
+        text.append(f"| {t['title']} | {t['count']} × {t['seconds']} s | {science} | {prereqs} |")
+    text+=['','## Materials and fluids','']
+    for group in ('items','fluids'):
+        for x in k[group]:text.append(f"- **{x['title']}** (`sn-{x['name']}`): {x['description']}")
+    (ROOT/'docs/CATALOG.md').write_text('\n'.join(text)+'\n')
+    results=simulate()
+    text=['# Reference-kit simulation','','Generated by `python tools/generate_docs.py` using the **same Lua model** as the mod.','',
+      '> This is a mathematical convergence/balance check, NOT a real-engine test, factory throughput simulation, campaign-duration estimate, or proof of overall playability.','',
+      'Assumptions: all recipe-unlock research already available, but no process-optimization bonus; normal-quality machines at speed 1; unlimited supplied inputs; all outputs removed; no electricity, shipping or combat outages; ambient pollution 0 and no physical pollution inventory (assumed clean/fully surveyed). Excludes the new landing, legacy smog, native decision hold, habitat-maturity gate and terrain sweep duration. Baseline 0.30 ecological pacing is applied. Uses one-minute production batches, native planetary multipliers, stage conditions, support caps and environmental drift.','',
+      'Reference kit per world: **4 scrubbers, 4 heat exchangers, 3 watersheds, 3 soil stations, 3 seed dispersers, 2 detoxifiers and 1 sanctuary**. Add **2 native specialty stations** off Nauvis. Sanctuaries wait until their local stage requirement is met. The kit assumes biodiversity matrices can be imported from an already established production center.','',
+      '| World | Model minutes to stage 5 | Atmosphere | Thermal | Water | Soil | Biodiversity | Toxicity |','|---|---:|---:|---:|---:|---:|---:|---:|']
+    for r in results:text.append('| '+r['planet'].title()+' | '+str(r['minutes'])+' | '+' | '.join(f"{r['values'][axis]:.1f}" for axis in c['axes'])+f" | {r['toxicity']:.1f} |")
+    text+=['','This kit is deliberately not a minimal solution. Once established, use circuit thresholds around 95-97 to reduce operation duty cycles and preserve headroom above the 90-point victory threshold. Actual factories need extra capacity for materials, byproducts, power, heat, transport and defense.','',
+      'The test suite asserts convergence within 180 model minutes on every planet. It does not assert that these minute counts are balanced campaign pacing. That requires playtesting.']
+    (ROOT/'docs/SIMULATION.md').write_text('\n'.join(text)+'\n')
+    print('Generated docs/CATALOG.md and docs/SIMULATION.md')
+if __name__=='__main__':generate()

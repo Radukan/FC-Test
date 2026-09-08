@@ -1,4 +1,4 @@
-![Nightglass - original explorer, solar railway and power sprites](docs/art/nightglass-review.jpg)
+![Nightglass - original explorer, solar railway and power sprites](https://github.com/Radukan/FC-Test/blob/v0.8.0-factorio-2.0/docs/art/nightglass-review.jpg)
 
 # Second Nature · Nightglass Foundry
 ### Stable Factorio 2.0 / Space Age restoration overhaul · v0.8.0 alpha
@@ -46,11 +46,11 @@ The original adult explorer has softer sculpted facial/skin shading, a continuou
 
 Scaling is constrained by genuine fuel, fluid, heat, geography, storage or material demand. Solar/wind nameplates are not continuous output. Geothermal units share regional budgets rather than multiplying free power when stacked; existing 0.7 wells retain their old baseline. Fission needs heat exchangers and turbines, and plasma conversion needs an actual fusion supply/coolant chain. Existing plant footprints are not enlarged in occupied factories.
 
-[Power roster, costs and scaling examples](docs/POWER-ROSTER.md) · [Icon comparison sheet](docs/art/icon-review.jpg) · [Power animation study](docs/art/power-options-preview.gif) · [Explorer movement](docs/art/locomotion-review.gif)
+[Power roster, costs and scaling examples](https://github.com/Radukan/FC-Test/blob/v0.8.0-factorio-2.0/docs/POWER-ROSTER.md) · [Icon comparison sheet](https://github.com/Radukan/FC-Test/blob/v0.8.0-factorio-2.0/docs/art/icon-review.jpg) · [Power animation study](https://github.com/Radukan/FC-Test/blob/v0.8.0-factorio-2.0/docs/art/power-options-preview.gif) · [Explorer movement](https://github.com/Radukan/FC-Test/blob/v0.8.0-factorio-2.0/docs/art/locomotion-review.gif)
 
 ### Solar railway retained
 
-The Sunseed, Heliograph and Daybreak locomotives remain solar-only, with locked onboard panels/batteries and day/night ceilings of 91/48, 147/91 and 194/130 km/h respectively. No ordinary fuel or factory-grid charging is accepted. Empty batteries provide no traction. Open a locomotive's GUI for its onboard energy monitor. See [the solar-energy contract](docs/NIGHTGLASS.md).
+The Sunseed, Heliograph and Daybreak locomotives remain solar-only, with locked onboard panels/batteries and day/night ceilings of 91/48, 147/91 and 194/130 km/h respectively. No ordinary fuel or factory-grid charging is accepted. Empty batteries provide no traction. Open a locomotive's GUI for its onboard energy monitor. See [the solar-energy contract](https://github.com/Radukan/FC-Test/blob/v0.8.0-factorio-2.0/docs/NIGHTGLASS.md).
 
 ## Field Crew 0.6.2: auto-enabled inventory crews and planner tools
 
@@ -66,7 +66,7 @@ Flight positions now update **every tick**, with **16 directional 3D-rendered sp
 
 Packed vehicle construction/upgrades, specialized rail upgrades, repair and requested-module delivery remain outside this barebones crew. Loose items below ghosts are not silently collected: clear or explicitly mark them for deconstruction. Cancellation, permissions, quality, inventory overflow and old in-flight jobs are reconciled without new supply grants.
 
-[Field crew overview](docs/art/field-crew-review.jpg) · [3D drone motion study](docs/art/field-drone-preview.gif) · [Movement](docs/art/locomotion-review.gif) · [Mining grip](docs/art/mining-framing-preview.gif) · [Controls and safeguards](docs/FIELD-CREW.md)
+[Field crew overview](https://github.com/Radukan/FC-Test/blob/v0.8.0-factorio-2.0/docs/art/field-crew-review.jpg) · [3D drone motion study](https://github.com/Radukan/FC-Test/blob/v0.8.0-factorio-2.0/docs/art/field-drone-preview.gif) · [Movement](https://github.com/Radukan/FC-Test/blob/v0.8.0-factorio-2.0/docs/art/locomotion-review.gif) · [Mining grip](https://github.com/Radukan/FC-Test/blob/v0.8.0-factorio-2.0/docs/art/mining-framing-preview.gif) · [Controls and safeguards](https://github.com/Radukan/FC-Test/blob/v0.8.0-factorio-2.0/docs/FIELD-CREW.md)
 
 ## Verdant Works: articulated movement and larger process plants
 
@@ -85,7 +85,7 @@ Process plants have been redesigned as different architectures rather than varia
 
 The new plants keep the same recipe identities, production speed, energy requirements and ecological rates. The increased footprint represents their internal process equipment, not a hidden throughput bonus. Their visible nozzles share the enlarged native fluid-port coordinates. Expanded render canvases retain complete cast shadows in every rotation, with compensated shifts so the ground pivot and pipe seams do not move.
 
-[Building contact sheet](docs/art/ironbound-contact-sheet.jpg) · [Locomotion review](docs/art/locomotion-review.gif) · [Mining review](docs/art/mining-framing-preview.gif)
+[Building contact sheet](https://github.com/Radukan/FC-Test/blob/v0.8.0-factorio-2.0/docs/art/ironbound-contact-sheet.jpg) · [Locomotion review](https://github.com/Radukan/FC-Test/blob/v0.8.0-factorio-2.0/docs/art/locomotion-review.gif) · [Mining review](https://github.com/Radukan/FC-Test/blob/v0.8.0-factorio-2.0/docs/art/mining-framing-preview.gif)
 
 The voiced arrival, jukebox, biological defenses, inserter vector controls and endgame logistics remain. Source-art previews and kinematic tests do not replace graphical-client review of every native animation/movement combination.
 
@@ -99,7 +99,7 @@ Standby fans and navigation lights animate over a single static hull and ground 
 
 The refit preserves the original collision box, all 48 cargo slots, position, entity identity and rocket history. Surviving older landers receive the new art and the same permanent protection. Already removed old hulls are not recreated with free supplies.
 
-[Ship study](docs/art/lander-review.jpg) · [Standby animation](docs/art/lander-standby.gif) · [Continuation audit](docs/CONTINUATION-AUDIT.md)
+[Ship study](https://github.com/Radukan/FC-Test/blob/v0.8.0-factorio-2.0/docs/art/lander-review.jpg) · [Standby animation](https://github.com/Radukan/FC-Test/blob/v0.8.0-factorio-2.0/docs/art/lander-standby.gif) · [Continuation audit](https://github.com/Radukan/FC-Test/blob/v0.8.0-factorio-2.0/docs/CONTINUATION-AUDIT.md)
 
 ### A genuinely wood-free beginning
 
@@ -210,10 +210,10 @@ Recover cargo → steam power → stone/silica/glass → Pioneer biology → nut
 
 ## Testing and development
 
-This is an **alpha**, not a claim of a completed balanced campaign. [Verification ledger](docs/VERIFICATION.md) distinguishes offline/source tests, actual headless checks and outstanding graphical/full-game/multiplayer work. Releases require real stable-engine validation and a re-download/checksum comparison.
+This is an **alpha**, not a claim of a completed balanced campaign. [Verification ledger](https://github.com/Radukan/FC-Test/blob/v0.8.0-factorio-2.0/docs/VERIFICATION.md) distinguishes offline/source tests, actual headless checks and outstanding graphical/full-game/multiplayer work. Releases require real stable-engine validation and a re-download/checksum comparison.
 
-- [Full catalog](docs/CATALOG.md) · [Balance equations](docs/BALANCE.md) · [Model-only timing](docs/SIMULATION.md)
-- [Campaign design](docs/DESIGN.md) · [Development and art regeneration](docs/DEVELOPING.md)
+- [Full catalog](https://github.com/Radukan/FC-Test/blob/v0.8.0-factorio-2.0/docs/CATALOG.md) · [Balance equations](https://github.com/Radukan/FC-Test/blob/v0.8.0-factorio-2.0/docs/BALANCE.md) · [Model-only timing](https://github.com/Radukan/FC-Test/blob/v0.8.0-factorio-2.0/docs/SIMULATION.md)
+- [Campaign design](https://github.com/Radukan/FC-Test/blob/v0.8.0-factorio-2.0/docs/DESIGN.md) · [Development and art regeneration](https://github.com/Radukan/FC-Test/blob/v0.8.0-factorio-2.0/docs/DEVELOPING.md)
 
 `python3 tools/package.py` builds the stable ZIP. The optional art toolchain is in `requirements-art.txt`; generated game binaries/saves/ZIPs stay out of Git.
 
