@@ -10,6 +10,7 @@ Date: 2026-09-08
     - Add a mid-game field laboratory that researches faster and accepts every stock science package.
     - Add three field guide entries covering the clean and dirty industry trade, the concentration line and atmospheric cleanup.
   Fixes:
+    - Clear the inherited sound accents from the mining heads. The deep core drill is built from the big mining drill, which cues a sound off a "drill-animation" layer that our own artwork replaces, and the leftover reference stopped the game from loading.
     - Build every machine to its declared footprint. Nine of the new buildings, the oxygen-blown smelter and deep core drill among them, inherited the bounding box of the vanilla prototype they were copied from while their sprites and pipe openings assumed the larger size, which left fluid ports hanging outside the entity and stopped the game from loading.
     - Split the explorer mining animation into pages the engine accepts. The re-render paged it into a ten line stripe against eight directions, which the game rejected outright with "Invalid stripeLine height" before any save could load.
     - Attach power pole wires to the insulators the pole sprite actually draws. Copper previously used the inherited vanilla attachment at -2.578 while our crossarm sits at -1.9405, so every wire floated about 0.58 tiles above the pole.

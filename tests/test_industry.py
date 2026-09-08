@@ -286,3 +286,36 @@ def test_every_fluid_port_sits_inside_its_entity(stage):
                 assert box[1][1] <= position[1] <= box[2][1], (m['name'], position[1])
                 assert box[1][2] <= position[2] <= box[2][2], (m['name'], position[2])
     assert checked
+
+
+def test_no_sound_accent_points_at_a_missing_working_visualisation(stage):
+    """Sound accents address working visualisations by name. Our drills replace the
+    inherited art, which drops those layers, and an accent left pointing at one that
+    no longer exists is a hard prototype error rather than a silent miss: the big
+    mining drill this machine is copied from cues a sound off "drill-animation".
+    """
+    drills = 0
+    for m in K['machines']:
+        layout = LAYOUTS[m['name']]
+        kind = m.get('entity_type') or 'assembling-machine'
+        proto = stage.raw[kind][layout['entity_name']]
+        if proto is None:
+            continue
+        available = set()
+        for holder in (proto, proto['graphics_set']):
+            if holder is None or holder['working_visualisations'] is None:
+                continue
+            for visualisation in holder['working_visualisations'].values():
+                if visualisation['name'] is not None:
+                    available.add(str(visualisation['name']))
+        sound = proto['working_sound']
+        if sound is not None and sound['sound_accents'] is not None:
+            for accent in sound['sound_accents'].values():
+                target = accent['play_for_working_visualisation']
+                assert target is None or str(target) in available, \
+                    (m['name'], str(target), sorted(available))
+        if kind == 'mining-drill':
+            drills += 1
+            # Our drills draw none of the inherited layers, so no accent may survive.
+            assert sound is None or sound['sound_accents'] is None, m['name']
+    assert drills == 3, drills

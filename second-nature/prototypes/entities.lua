@@ -43,6 +43,14 @@ local function create_machine(x, layout, compact)
     -- layered vanilla structure cannot be filled by our four-way sprites.
     p.graphics_set = {animation = Art.four_way(art_name, true), animation_progress = 1}
     p.sprites = nil
+    p.wet_mining_graphics_set = nil
+    -- Sound accents address working visualisations by name. Replacing the art
+    -- removes those layers, and an accent left pointing at a missing one is a
+    -- prototype error rather than a silent miss.
+    if p.working_sound then
+      p.working_sound.sound_accents = nil
+      for _, entry in ipairs(p.working_sound) do entry.sound_accents = nil end
+    end
   elseif kind == "lab" then
     -- Labs draw a single non-directional animation.
     p.on_animation = Art.animation(art_name .. "-north")
