@@ -1,4 +1,4 @@
-![Nightglass - original explorer, solar railway and power sprites](https://github.com/Radukan/FC-Test/blob/v0.9.0-factorio-2.0/docs/art/nightglass-review.jpg)
+![Nightglass - original explorer, solar railway and power sprites](https://github.com/Radukan/FC-Test/blob/v0.10.0-factorio-2.0/docs/art/nightglass-review.jpg)
 
 # Second Nature · Restoration Record
 ### Stable Factorio 2.0 / Space Age restoration overhaul · v0.9.0 alpha
@@ -26,6 +26,38 @@ Windows: `%APPDATA%\Factorio\mods` · Linux: `~/.factorio/mods` · macOS: `~/Lib
 
 Stable only; experimental 2.1 builds are discontinued. Existing stable saves retain their factories, ecological values and terrain. They do **not** receive another cargo grant or a replacement defense kit. New habitat-readiness rules can temporarily demote an older mature world while its landscape is surveyed/recovered.
 
+## Machine Age 0.10.0
+
+Seventeen new industrial buildings, and a rule they all obey: **none of them is a strict upgrade of a vanilla machine.** Second Nature is meant to sit alongside Factorio's industry, not delete it, so every addition trades something real and a mature factory ends up running stock, clean and dirty machines side by side.
+
+### Two furnace families that disagree
+
+Sealed crucibles, oxygen-blown smelters and an electric arc refinery capture their own flue gas and emit almost nothing, but they smelt more slowly per ore and need an oxygen supply. Coke blast furnaces and reverberatory cupolas are cheap, roughly twice as fast on raw ore, and pour emissions and toxicity into the world the restoration model is scoring. Smelting dirty while you bootstrap is the correct opening. Leaving it that way is what stalls your stages.
+
+Captured flue gas is not free either: catalytic flue treatment turns it into activated carbon and a poisoned mesh you then have to reclaim.
+
+### Ore concentration as a factory project
+
+A wet ore mill grinds ore into pumpable slurry, a froth flotation bank floats the valuable mineral off and drops the rest as tailings, and a dewatering press squeezes froth into dry concentrate while handing most of the water back. Smelted in an oxygen-blown smelter, that returns about **2.8 plates per original ore** against 1.0 for direct smelting.
+
+It is deliberately not a research unlock that quietly doubles your output. It is three buildings, a water loop, an oxygen feed, a solid byproduct and roughly 2 MW before the first extra plate appears.
+
+### Mining and research sidegrades
+
+The electric auger and hydraulic mining head produce **no pollution at all** and never out-mine a stock drill. The deep core drill is genuinely faster and reaches further, and it pays with emissions, 3.5 MW and a seven-tile footprint. The field laboratory researches at 1.6x and draws more than five times a stock lab's power, accepting every science package the stock lab does.
+
+### Cleaning up after yourself
+
+Electrostatic smog precipitation removes 180 pollution a cycle and a direct air capture tower removes 520, the strongest cleanup in the mod. Both consume real catalysts, water and oxygen and leave residue to treat. Cleanup is a legitimate strategy. It is never the cheap one.
+
+### Fixes and art
+
+Power pole wires now attach to the insulators the pole sprite actually draws. Copper had been using the inherited vanilla attachment point, leaving every wire floating about half a tile above the pole.
+
+The explorer has been reduced to a vanilla character height. The body rendered about 1.95 tiles tall, roughly 25 percent oversized next to stock characters and machines, and now stands at 1.58. Her hairline was rebuilt as a continuous lofted scalp shell, because the previous crown began behind the brow and read as balding.
+
+Placeable buildings now carry a baseplate rule in their inventory icon, so they no longer read as interchangeable with loose materials.
+
 ## Restoration Record 0.9.0
 
 Nothing in this release changes a recipe, a research cost, a power rating or an ecological rate. It adds the three things a finished restoration campaign was still missing: a record of what you achieved, a way to learn the mod inside the game, and a factory you can hear.
@@ -38,7 +70,7 @@ The achievement window now tracks the restoration. **Twelve medallions are evalu
 
 These are modded achievements in Factorio's separate modded list, so nothing here touches vanilla or Steam progress. Awards belong to a **force**, not to whoever happened to be online: a planetary medal reaches every force with recorded work on that world, an offline player receives it on joining, and merged forces keep the earlier award time. A **Milestones** tab in the field station greys out what is still locked and shows how long ago the rest was earned.
 
-[Medallion sheet](https://github.com/Radukan/FC-Test/blob/v0.9.0-factorio-2.0/docs/art/achievement-review.jpg) · [Milestones, field guide and soundscape](https://github.com/Radukan/FC-Test/blob/v0.9.0-factorio-2.0/docs/MILESTONES.md)
+[Medallion sheet](https://github.com/Radukan/FC-Test/blob/v0.10.0-factorio-2.0/docs/art/achievement-review.jpg) · [Milestones, field guide and soundscape](https://github.com/Radukan/FC-Test/blob/v0.10.0-factorio-2.0/docs/MILESTONES.md)
 
 ### An in-game field guide
 
@@ -70,11 +102,11 @@ The original adult explorer has softer sculpted facial/skin shading, a continuou
 
 Scaling is constrained by genuine fuel, fluid, heat, geography, storage or material demand. Solar/wind nameplates are not continuous output. Geothermal units share regional budgets rather than multiplying free power when stacked; existing 0.7 wells retain their old baseline. Fission needs heat exchangers and turbines, and plasma conversion needs an actual fusion supply/coolant chain. Existing plant footprints are not enlarged in occupied factories.
 
-[Power roster, costs and scaling examples](https://github.com/Radukan/FC-Test/blob/v0.9.0-factorio-2.0/docs/POWER-ROSTER.md) · [Icon comparison sheet](https://github.com/Radukan/FC-Test/blob/v0.9.0-factorio-2.0/docs/art/icon-review.jpg) · [Power animation study](https://github.com/Radukan/FC-Test/blob/v0.9.0-factorio-2.0/docs/art/power-options-preview.gif) · [Explorer movement](https://github.com/Radukan/FC-Test/blob/v0.9.0-factorio-2.0/docs/art/locomotion-review.gif)
+[Power roster, costs and scaling examples](https://github.com/Radukan/FC-Test/blob/v0.10.0-factorio-2.0/docs/POWER-ROSTER.md) · [Icon comparison sheet](https://github.com/Radukan/FC-Test/blob/v0.10.0-factorio-2.0/docs/art/icon-review.jpg) · [Power animation study](https://github.com/Radukan/FC-Test/blob/v0.10.0-factorio-2.0/docs/art/power-options-preview.gif) · [Explorer movement](https://github.com/Radukan/FC-Test/blob/v0.10.0-factorio-2.0/docs/art/locomotion-review.gif)
 
 ### Solar railway retained
 
-The Sunseed, Heliograph and Daybreak locomotives remain solar-only, with locked onboard panels/batteries and day/night ceilings of 91/48, 147/91 and 194/130 km/h respectively. No ordinary fuel or factory-grid charging is accepted. Empty batteries provide no traction. Open a locomotive's GUI for its onboard energy monitor. See [the solar-energy contract](https://github.com/Radukan/FC-Test/blob/v0.9.0-factorio-2.0/docs/NIGHTGLASS.md).
+The Sunseed, Heliograph and Daybreak locomotives remain solar-only, with locked onboard panels/batteries and day/night ceilings of 91/48, 147/91 and 194/130 km/h respectively. No ordinary fuel or factory-grid charging is accepted. Empty batteries provide no traction. Open a locomotive's GUI for its onboard energy monitor. See [the solar-energy contract](https://github.com/Radukan/FC-Test/blob/v0.10.0-factorio-2.0/docs/NIGHTGLASS.md).
 
 ## Field Crew 0.6.2: auto-enabled inventory crews and planner tools
 
@@ -90,7 +122,7 @@ Flight positions now update **every tick**, with **16 directional 3D-rendered sp
 
 Packed vehicle construction/upgrades, specialized rail upgrades, repair and requested-module delivery remain outside this barebones crew. Loose items below ghosts are not silently collected: clear or explicitly mark them for deconstruction. Cancellation, permissions, quality, inventory overflow and old in-flight jobs are reconciled without new supply grants.
 
-[Field crew overview](https://github.com/Radukan/FC-Test/blob/v0.9.0-factorio-2.0/docs/art/field-crew-review.jpg) · [3D drone motion study](https://github.com/Radukan/FC-Test/blob/v0.9.0-factorio-2.0/docs/art/field-drone-preview.gif) · [Movement](https://github.com/Radukan/FC-Test/blob/v0.9.0-factorio-2.0/docs/art/locomotion-review.gif) · [Mining grip](https://github.com/Radukan/FC-Test/blob/v0.9.0-factorio-2.0/docs/art/mining-framing-preview.gif) · [Controls and safeguards](https://github.com/Radukan/FC-Test/blob/v0.9.0-factorio-2.0/docs/FIELD-CREW.md)
+[Field crew overview](https://github.com/Radukan/FC-Test/blob/v0.10.0-factorio-2.0/docs/art/field-crew-review.jpg) · [3D drone motion study](https://github.com/Radukan/FC-Test/blob/v0.10.0-factorio-2.0/docs/art/field-drone-preview.gif) · [Movement](https://github.com/Radukan/FC-Test/blob/v0.10.0-factorio-2.0/docs/art/locomotion-review.gif) · [Mining grip](https://github.com/Radukan/FC-Test/blob/v0.10.0-factorio-2.0/docs/art/mining-framing-preview.gif) · [Controls and safeguards](https://github.com/Radukan/FC-Test/blob/v0.10.0-factorio-2.0/docs/FIELD-CREW.md)
 
 ## Verdant Works: articulated movement and larger process plants
 
@@ -109,7 +141,7 @@ Process plants have been redesigned as different architectures rather than varia
 
 The new plants keep the same recipe identities, production speed, energy requirements and ecological rates. The increased footprint represents their internal process equipment, not a hidden throughput bonus. Their visible nozzles share the enlarged native fluid-port coordinates. Expanded render canvases retain complete cast shadows in every rotation, with compensated shifts so the ground pivot and pipe seams do not move.
 
-[Building contact sheet](https://github.com/Radukan/FC-Test/blob/v0.9.0-factorio-2.0/docs/art/ironbound-contact-sheet.jpg) · [Locomotion review](https://github.com/Radukan/FC-Test/blob/v0.9.0-factorio-2.0/docs/art/locomotion-review.gif) · [Mining review](https://github.com/Radukan/FC-Test/blob/v0.9.0-factorio-2.0/docs/art/mining-framing-preview.gif)
+[Building contact sheet](https://github.com/Radukan/FC-Test/blob/v0.10.0-factorio-2.0/docs/art/ironbound-contact-sheet.jpg) · [Locomotion review](https://github.com/Radukan/FC-Test/blob/v0.10.0-factorio-2.0/docs/art/locomotion-review.gif) · [Mining review](https://github.com/Radukan/FC-Test/blob/v0.10.0-factorio-2.0/docs/art/mining-framing-preview.gif)
 
 The voiced arrival, jukebox, biological defenses, inserter vector controls and endgame logistics remain. Source-art previews and kinematic tests do not replace graphical-client review of every native animation/movement combination.
 
@@ -123,7 +155,7 @@ Standby fans and navigation lights animate over a single static hull and ground 
 
 The refit preserves the original collision box, all 48 cargo slots, position, entity identity and rocket history. Surviving older landers receive the new art and the same permanent protection. Already removed old hulls are not recreated with free supplies.
 
-[Ship study](https://github.com/Radukan/FC-Test/blob/v0.9.0-factorio-2.0/docs/art/lander-review.jpg) · [Standby animation](https://github.com/Radukan/FC-Test/blob/v0.9.0-factorio-2.0/docs/art/lander-standby.gif) · [Continuation audit](https://github.com/Radukan/FC-Test/blob/v0.9.0-factorio-2.0/docs/CONTINUATION-AUDIT.md)
+[Ship study](https://github.com/Radukan/FC-Test/blob/v0.10.0-factorio-2.0/docs/art/lander-review.jpg) · [Standby animation](https://github.com/Radukan/FC-Test/blob/v0.10.0-factorio-2.0/docs/art/lander-standby.gif) · [Continuation audit](https://github.com/Radukan/FC-Test/blob/v0.10.0-factorio-2.0/docs/CONTINUATION-AUDIT.md)
 
 ### A genuinely wood-free beginning
 
@@ -234,11 +266,11 @@ Recover cargo → steam power → stone/silica/glass → Pioneer biology → nut
 
 ## Testing and development
 
-This is an **alpha**, not a claim of a completed balanced campaign. [Verification ledger](https://github.com/Radukan/FC-Test/blob/v0.9.0-factorio-2.0/docs/VERIFICATION.md) distinguishes offline/source tests, actual headless checks and outstanding graphical/full-game/multiplayer work. Releases require real stable-engine validation and a re-download/checksum comparison.
+This is an **alpha**, not a claim of a completed balanced campaign. [Verification ledger](https://github.com/Radukan/FC-Test/blob/v0.10.0-factorio-2.0/docs/VERIFICATION.md) distinguishes offline/source tests, actual headless checks and outstanding graphical/full-game/multiplayer work. Releases require real stable-engine validation and a re-download/checksum comparison.
 
-- [Full catalog](https://github.com/Radukan/FC-Test/blob/v0.9.0-factorio-2.0/docs/CATALOG.md) · [Balance equations](https://github.com/Radukan/FC-Test/blob/v0.9.0-factorio-2.0/docs/BALANCE.md) · [Model-only timing](https://github.com/Radukan/FC-Test/blob/v0.9.0-factorio-2.0/docs/SIMULATION.md)
-- [Milestones, field guide and soundscape](https://github.com/Radukan/FC-Test/blob/v0.9.0-factorio-2.0/docs/MILESTONES.md) · [Power roster](https://github.com/Radukan/FC-Test/blob/v0.9.0-factorio-2.0/docs/POWER-ROSTER.md)
-- [Campaign design](https://github.com/Radukan/FC-Test/blob/v0.9.0-factorio-2.0/docs/DESIGN.md) · [Development and art regeneration](https://github.com/Radukan/FC-Test/blob/v0.9.0-factorio-2.0/docs/DEVELOPING.md)
+- [Full catalog](https://github.com/Radukan/FC-Test/blob/v0.10.0-factorio-2.0/docs/CATALOG.md) · [Balance equations](https://github.com/Radukan/FC-Test/blob/v0.10.0-factorio-2.0/docs/BALANCE.md) · [Model-only timing](https://github.com/Radukan/FC-Test/blob/v0.10.0-factorio-2.0/docs/SIMULATION.md)
+- [Milestones, field guide and soundscape](https://github.com/Radukan/FC-Test/blob/v0.10.0-factorio-2.0/docs/MILESTONES.md) · [Power roster](https://github.com/Radukan/FC-Test/blob/v0.10.0-factorio-2.0/docs/POWER-ROSTER.md)
+- [Campaign design](https://github.com/Radukan/FC-Test/blob/v0.10.0-factorio-2.0/docs/DESIGN.md) · [Development and art regeneration](https://github.com/Radukan/FC-Test/blob/v0.10.0-factorio-2.0/docs/DEVELOPING.md)
 
 `python3 tools/package.py` builds the stable ZIP. The optional art toolchain is in `requirements-art.txt`; generated game binaries/saves/ZIPs stay out of Git.
 

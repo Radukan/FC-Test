@@ -77,3 +77,19 @@ The explorer is fitted and stylish but fully covered, with armor, movement, tool
 - All runtime dependencies resolve at control parsing; no runtime `require` or `on_load` mutation.
 - GUI children remain namespaced, and permanent-choice confirmation is cleared on closing.
 - Actual stable-engine checks remain mandatory before publishing. Full graphical/campaign/multiplayer balance is still alpha work.
+
+## Industry that argues with itself (0.10)
+
+Most overhaul mods answer "should I keep the vanilla machine?" with a flat no: the modded furnace is simply better, and the stock one becomes dead weight. Second Nature deliberately refuses that. The seventeen buildings added in 0.10 are designed so the honest answer is "it depends", and so a mature factory ends up running stock, clean and dirty machines side by side for different jobs.
+
+Three levers make the choice real:
+
+**Speed against emissions.** A coke blast furnace is about twice as fast per raw ore as a sealed crucible, and it is cheap to build. It also emits 18 pollution a minute against 0.2, and its recipes carry an explicit toxicity effect. The restoration model scores exactly that, so the blast furnace is genuinely the right early answer and genuinely the wrong late one. Nothing forces the switch: the pollution does.
+
+**Throughput against logistics.** Ore concentration returns 2.8 plates per ore instead of 1.0, which is a large prize. It is deliberately gated behind three separate buildings, a water loop, a tailings byproduct and an oxygen feed, so it reads as a factory project rather than a research unlock. A player who does not want that complexity can smelt ore directly forever and never feel punished.
+
+**Capability against cost.** The deep core drill is unambiguously more powerful than a stock drill. It is also seven tiles across, draws 3.5 MW and pollutes. The two green mining heads invert the same trade: no emissions at all, and no speed advantage whatsoever.
+
+The pollution-control buildings follow the same principle in reverse. Direct air capture removes 520 pollution a cycle, thirteen times a scrubber, which makes "clean up after yourself" a viable late strategy. But it costs 5 MW plus a consumable catalyst chain, so out-capturing a filthy factory is measurably more expensive than not dirtying the air in the first place. Cleanup is a legitimate strategy; it is never the cheap one.
+
+Everything here is enforced rather than asserted. `tests/test_industry.py` fails the build if a clean recipe ever becomes faster per unit than its dirty counterpart, if a green mining head out-mines a stock drill, or if a cleanup operation stops consuming real inputs.

@@ -26,6 +26,38 @@ Windows: `%APPDATA%\Factorio\mods` · Linux: `~/.factorio/mods` · macOS: `~/Lib
 
 Stable only; experimental 2.1 builds are discontinued. Existing stable saves retain their factories, ecological values and terrain. They do **not** receive another cargo grant or a replacement defense kit. New habitat-readiness rules can temporarily demote an older mature world while its landscape is surveyed/recovered.
 
+## Machine Age 0.10.0
+
+Seventeen new industrial buildings, and a rule they all obey: **none of them is a strict upgrade of a vanilla machine.** Second Nature is meant to sit alongside Factorio's industry, not delete it, so every addition trades something real and a mature factory ends up running stock, clean and dirty machines side by side.
+
+### Two furnace families that disagree
+
+Sealed crucibles, oxygen-blown smelters and an electric arc refinery capture their own flue gas and emit almost nothing, but they smelt more slowly per ore and need an oxygen supply. Coke blast furnaces and reverberatory cupolas are cheap, roughly twice as fast on raw ore, and pour emissions and toxicity into the world the restoration model is scoring. Smelting dirty while you bootstrap is the correct opening. Leaving it that way is what stalls your stages.
+
+Captured flue gas is not free either: catalytic flue treatment turns it into activated carbon and a poisoned mesh you then have to reclaim.
+
+### Ore concentration as a factory project
+
+A wet ore mill grinds ore into pumpable slurry, a froth flotation bank floats the valuable mineral off and drops the rest as tailings, and a dewatering press squeezes froth into dry concentrate while handing most of the water back. Smelted in an oxygen-blown smelter, that returns about **2.8 plates per original ore** against 1.0 for direct smelting.
+
+It is deliberately not a research unlock that quietly doubles your output. It is three buildings, a water loop, an oxygen feed, a solid byproduct and roughly 2 MW before the first extra plate appears.
+
+### Mining and research sidegrades
+
+The electric auger and hydraulic mining head produce **no pollution at all** and never out-mine a stock drill. The deep core drill is genuinely faster and reaches further, and it pays with emissions, 3.5 MW and a seven-tile footprint. The field laboratory researches at 1.6x and draws more than five times a stock lab's power, accepting every science package the stock lab does.
+
+### Cleaning up after yourself
+
+Electrostatic smog precipitation removes 180 pollution a cycle and a direct air capture tower removes 520, the strongest cleanup in the mod. Both consume real catalysts, water and oxygen and leave residue to treat. Cleanup is a legitimate strategy. It is never the cheap one.
+
+### Fixes and art
+
+Power pole wires now attach to the insulators the pole sprite actually draws. Copper had been using the inherited vanilla attachment point, leaving every wire floating about half a tile above the pole.
+
+The explorer has been reduced to a vanilla character height. The body rendered about 1.95 tiles tall, roughly 25 percent oversized next to stock characters and machines, and now stands at 1.58. Her hairline was rebuilt as a continuous lofted scalp shell, because the previous crown began behind the brow and read as balding.
+
+Placeable buildings now carry a baseplate rule in their inventory icon, so they no longer read as interchangeable with loose materials.
+
 ## Restoration Record 0.9.0
 
 Nothing in this release changes a recipe, a research cost, a power rating or an ecological rate. It adds the three things a finished restoration campaign was still missing: a record of what you achieved, a way to learn the mod inside the game, and a factory you can hear.

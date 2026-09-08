@@ -77,18 +77,18 @@
       "width": 768,
       "height": 864,
       "origin": 0.5092592592592593,
-      "ppu": 160,
+      "ppu": 132,
       "scale": 0.25
     },
     "crop": [
-      264,
-      86,
-      698,
-      776
+      280,
+      146,
+      646,
+      722
     ],
     "files": {
-      "second-nature/graphics/entity/industry/explorer-0-running_with_gun-1.png": "d708e165c4899a8e331e65d04a0852d811a40838e6e3b1b72a07ab761e2fd9f3",
-      "second-nature/graphics/entity/industry/explorer-0-running_with_gun-2.png": "c3a7f7e6222c3efc6a9b5248399317505963f336b4336f4a49cec7ba340169b4"
+      "second-nature/graphics/entity/industry/explorer-0-running_with_gun-1.png": "21510a681af225799cffae8554e88cd08034e3fa80471de95bb9633b9166b1df",
+      "second-nature/graphics/entity/industry/explorer-0-running_with_gun-2.png": "bb8bc261d3bac39d746c5861c9c01c47b1c2dce7ccf3338a5d09506ec622b6b3"
     }
   },
   "explorer-1-idle": {
@@ -96,17 +96,17 @@
       "width": 768,
       "height": 864,
       "origin": 0.5092592592592593,
-      "ppu": 160,
+      "ppu": 132,
       "scale": 0.25
     },
     "crop": [
-      296,
-      166,
-      600,
-      688
+      308,
+      212,
+      566,
+      648
     ],
     "files": {
-      "second-nature/graphics/entity/industry/explorer-1-idle.png": "f17eada299ab54ec82066777eff7e8ba3e03e5cfc601de539c789823aa3daeb8"
+      "second-nature/graphics/entity/industry/explorer-1-idle.png": "c6c73fdaa28b3d74a7d1e9c8d93e1b091b9a308d45f7cefa2d1b16f2d562ec6e"
     }
   },
   "explorer-1-idle_with_gun": {
@@ -114,17 +114,17 @@
       "width": 768,
       "height": 864,
       "origin": 0.5092592592592593,
-      "ppu": 160,
+      "ppu": 132,
       "scale": 0.25
     },
     "crop": [
-      188,
-      86,
-      698,
-      776
+      220,
+      146,
+      646,
+      722
     ],
     "files": {
-      "second-nature/graphics/entity/industry/explorer-1-idle_with_gun.png": "69853cf821e034afc24adcaa6ee1eafbcf8c2d65135676f607e4f318f9154643"
+      "second-nature/graphics/entity/industry/explorer-1-idle_with_gun.png": "1e9c966e87b701252ae2cda43d394f598c6c853d624cd535e0ccd79a80626275"
     }
   },
   "explorer-1-running": {
