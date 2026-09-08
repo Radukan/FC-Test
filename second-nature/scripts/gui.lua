@@ -5,6 +5,8 @@ local Network = require("scripts.network")
 local Pollution = require("scripts.pollution")
 local Natives = require("scripts.natives")
 local Upgrades = require("scripts.upgrades")
+local Achievements = require("scripts.achievements")
+local Milestones = require("shared.achievements")
 local mod_gui = require("mod-gui")
 local G = {}
 local function player_data(player)
@@ -129,6 +131,22 @@ function G.open(player)
   progress.style.color = C.colors.biodiversity
   wrap(network, "timer", "", width - 80, "sn_heading")
   wrap(network, "reason", "", width - 80)
+  local milestones = tab("milestones", {"sn-gui.milestones"})
+  wrap(milestones, "milestone_intro", {"sn-gui.milestone-intro"}, width - 80, "sn_muted")
+  wrap(milestones, "milestone_count", "", width - 80, "sn_heading")
+  for _, entry in ipairs(Milestones.script) do
+    local row = milestones.add({type = "flow", name = "sn_medal_" .. entry.name, direction = "horizontal"})
+    row.style.vertical_align = "center"
+    row.style.horizontal_spacing = 10
+    local badge = row.add({type = "sprite", name = "sn_badge", sprite = "sn-medal-" .. entry.name})
+    badge.style.width, badge.style.height = 40, 40
+    local text = row.add({type = "flow", name = "sn_text", direction = "vertical"})
+    text.style.vertical_spacing = 0
+    wrap(text, "title", {"achievement-name.sn-" .. entry.name}, width - 150, "sn_heading")
+    wrap(text, "detail", {"achievement-description.sn-" .. entry.name}, width - 150, "sn_muted")
+  end
+  separator(milestones)
+  wrap(milestones, "milestone_note", {"sn-gui.milestone-note"}, width - 80, "sn_muted")
   local guide = tab("guide", {"sn-gui.field-guide"})
   local topics = {}
   for i = 1, 6 do topics[i] = {"sn-guide.topic-" .. i} end
@@ -238,6 +256,23 @@ function G.update(player)
     local w = S.by_planet(planet)
     pane["sn_world_" .. planet].sn_state.caption = w and {"sn-gui.world-state", {"sn-stage." .. C.stages[w.stage + 1].name}, format(w.score),
       Network.has_beacon(w, player.force.index) and {"sn-gui.beacon-online"} or {"sn-gui.beacon-offline"}} or {"sn-gui.uncharted"}
+  end
+  local medals = frame.sn_tabs.sn_milestones.sn_content
+  local earned, total = Achievements.count(player.force.index)
+  medals.sn_milestone_count.caption = {"sn-gui.milestone-count", earned, total}
+  for _, entry in ipairs(Milestones.script) do
+    local row = medals["sn_medal_" .. entry.name]
+    local held = Achievements.earned(player.force.index, entry.name)
+    -- Locked medallions stay visible so the goal itself is readable, but they
+    -- are drawn in grey and only show their real elapsed time once earned.
+    row.sn_badge.style.draw_grayscale_picture = not held
+    row.sn_text.sn_title.style.font_color = held and {0.68, 0.9, 0.64} or {0.62, 0.65, 0.62}
+    if held then
+      local at = S.root().achievements.forces[player.force.index][entry.name] or game.tick
+      row.sn_text.sn_detail.caption = {"sn-gui.milestone-when", math.floor((game.tick - at) / 3600)}
+    else
+      row.sn_text.sn_detail.caption = {"achievement-description.sn-" .. entry.name}
+    end
   end
   local network = S.root().networks[player.force.index] or {held = 0}
   pane.sn_progress.value = network.held / C.victory_ticks

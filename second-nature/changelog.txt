@@ -1,4 +1,19 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.9.0
+Date: 2026-09-08
+  Features:
+    - Add nineteen restoration milestones: twelve tracked by the mod and seven the game evaluates on its own.
+    - Add a Milestones tab to the field station showing every medallion, its goal and when your force earned it.
+    - Add eleven Second Nature entries to the in-game tips and tricks window, in their own category.
+  Audio:
+    - Give all sixteen previously silent generating plants a working sound matched to their mechanism.
+    - Scale plant loops with real output, so becalmed turbines, night solar and starved generators fall quiet.
+    - Give the ecology circuit monitor an instrument tick and every carried item a material-appropriate handling sound.
+  Balance:
+    - No recipe, research, output rating or ecological rate changed in this release.
+  Verification:
+    - Add source and native-engine checks for milestone awards, force isolation, offline joins, force merges, tip categories and the working-sound pass.
+---------------------------------------------------------------------------------------------------
 Version: 0.8.0
 Date: 2026-09-08
   Fixes:

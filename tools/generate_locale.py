@@ -8,6 +8,7 @@ from expedition_locale import add_expedition_locale
 from continuance_locale import add_continuance_locale
 from field_drone_locale import add_field_drone_locale
 from energy_locale import add_energy_locale
+from milestone_locale import add_milestone_locale
 
 def generate():
     k,c=load_catalog(),load_constants(); sections=OrderedDict()
@@ -131,6 +132,7 @@ def generate():
     add_continuance_locale(put)
     add_field_drone_locale(put)
     add_energy_locale(put)
+    add_milestone_locale(put)
     put('sn-layout','footprint','Footprint: __1__ x __2__ tiles.')
     put('mod-setting-name','sn-menu-music','Second Nature menu music')
     put('mod-setting-description','sn-menu-music','Play After the Ash, an original atmospheric score for the main menu. Uses the game music-volume setting. Disable to restore the standard menu track.')

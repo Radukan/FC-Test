@@ -1,4 +1,26 @@
-# Verification ledger: Nightglass Foundry 0.8.0 alpha
+# Verification ledger: Restoration Record 0.9.0 alpha
+
+## Current 0.9.0 release
+
+This update adds nineteen restoration milestones, eleven in-game field-guide entries and a working sound on every generating plant. **No recipe, research cost, output rating or ecological rate changed**, so all 0.8.0 balance evidence below still describes the shipped numbers. See [MILESTONES.md](MILESTONES.md) for the medallion list, ownership rules and the audio layer table.
+
+Twelve milestones are evaluated by the mod and unlocked from script; seven are native condition prototypes the engine evaluates on its own. A source test asserts that no script ever tries to unlock a condition-type achievement, because `LuaPlayer.unlock_achievement` silently accepts only the plain `achievement` type. Awards are recorded per force in `storage`, replayed when a player joins, and merged by keeping the earlier of two award times.
+
+**24 new source tests** were added. Twenty-three cover milestone declaration and uniqueness, the script-versus-engine split, reachability of every scripted award from the runtime, prototype/icon existence, condition targets resolving to real prototypes, medallion art distinctness, per-force isolation, offline joins, force merges, the dashboard tab, tip categories that do not collide with stock entries, and the absence of any silent plant or silent carried item. The twenty-fourth asserts that the README bundled inside the ZIP is the repository README with every relative document link rewritten to the immutable release tag, and that each rewritten target exists. **281 local source tests pass.**
+
+Every `working_sound` path points at a stock base or Space Age asset; nothing is copied into the mod. `factorio-data` ships no audio, so `test_every_working_sound_file_is_a_real_upstream_asset` instead requires each exact path string to appear in the pinned 2.0.77 upstream prototype definitions. A misspelled filename cannot ship, but this is a reference check, not proof that the file decodes in a client.
+
+Two native markers were added, `SECOND_NATURE_ENGINE_MILESTONES_OK` and `SECOND_NATURE_ENGINE_AUDIO_OK`, alongside the existing SMOKE, CAMPAIGN_PROBES, LOGISTICS_AUDIO, VERDANT_LAYOUTS, LANDER_REFIT, FIELD_DRONES, FIELD_PLANNERS, SOLAR_RAIL, POWER_OPTIONS, POWER_STAGES and CREW_RECALL markers. They run against a real `LuaForce` and real loaded prototypes in the headless job. The Factorio binary host was unreachable from this sandbox, so the native run for 0.9.0 executes on GitHub's runner; **a native pass is claimed only once that job reports success for this code commit.**
+
+The installable archive contains **602 mod files**, is **113,839,437 bytes**, and passes ZIP CRC and SHA-256 verification. Publishing independently revalidates the final tag and re-downloads both release assets before reporting success.
+
+```text
+449e36818301a4b3d878f37790c1de387b099b768be94c96ddb2210d7ce11beb  second-nature_0.9.0.zip
+```
+
+Not claimed for this release: how the modded achievement window looks on screen, notification timing seen in a graphical client, mixing levels judged by ear on real speakers, tips-and-tricks trigger pacing during an actual playthrough, and interaction with third-party achievement or sound-replacement mods.
+
+## Historical Nightglass 0.8.0 evidence
 
 ## Current 0.8.0 release
 

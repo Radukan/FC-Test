@@ -1,5 +1,6 @@
 local E=require("shared.energy")
 local A=require("shared.energy_art")
+local Audio=require("shared.audio_catalog")
 local H=require("prototypes.helpers")
 local function animation(key)
   local a=table.deepcopy(assert(A[key],key));a.animation_speed=.15;a.direction_count=nil;return a
@@ -68,6 +69,9 @@ for index,p in ipairs(E.plants) do
     for _,d in ipairs({"north","east","south","west"}) do entity.animations[d]=animation(p.name.."-"..d) end
     entity.surface_conditions={{property="pressure",min=300}}
   end
+  -- A generating plant that makes no sound reads as broken. Plants copied from
+  -- an audible base prototype keep the loop they inherited.
+  entity.working_sound=entity.working_sound or Audio.for_plant(p.name)
   data:extend({entity,{type="item",name=n,icon=H.icon(p.name),icon_size=64,stack_size=20,
     subgroup="sn-energy",order=p.stage.."-"..string.format("%02d",index),place_result=n,weight=p.size*20*kg,
     localised_name=entity.localised_name,localised_description=entity.localised_description}})

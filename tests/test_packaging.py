@@ -65,3 +65,18 @@ def test_game_runtime_has_no_network_filesystem_or_legacy_global_dependencies():
 def test_experimental_builds_are_no_longer_published():
     with pytest.raises(ValueError, match='stable'):
         build('2.1')
+
+
+def test_bundled_mod_readme_is_the_repository_readme_with_release_links():
+    import release_readme
+    version=json.loads((MOD/'info.json').read_text())['version']
+    text=(MOD/'README.md').read_text()
+    assert text==release_readme.render(),'second-nature/README.md is stale; run tools/release_readme.py'
+    assert '](docs/' not in text
+    prefix='https://github.com/Radukan/FC-Test/blob/v'+version+'-factorio-2.0/'
+    links=re.findall(r'\]\((https://github\.com/Radukan/FC-Test/blob/[^)]+)\)',text)
+    assert len(links)>=10
+    for link in links:
+        assert link.startswith(prefix),link
+        assert (ROOT/link[len(prefix):]).is_file(),link
+    assert text.replace(prefix,'')==(ROOT/'README.md').read_text()

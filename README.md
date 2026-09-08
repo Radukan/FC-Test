@@ -1,7 +1,7 @@
 ![Nightglass - original explorer, solar railway and power sprites](docs/art/nightglass-review.jpg)
 
-# Second Nature · Nightglass Foundry
-### Stable Factorio 2.0 / Space Age restoration overhaul · v0.8.0 alpha
+# Second Nature · Restoration Record
+### Stable Factorio 2.0 / Space Age restoration overhaul · v0.9.0 alpha
 
 **An intact landing craft. A stripped planet. A factory built to bring life back.**
 
@@ -9,22 +9,46 @@ Nauvis has no natural trees or fish in a fresh campaign. The broods tolerate you
 
 ## Download
 
-### [Second Nature 0.8.0 - stable Factorio 2.0](https://github.com/Radukan/FC-Test/releases/download/v0.8.0-factorio-2.0/second-nature_0.8.0.zip)
+### [Second Nature 0.9.0 - stable Factorio 2.0](https://github.com/Radukan/FC-Test/releases/download/v0.9.0-factorio-2.0/second-nature_0.9.0.zip)
 
-[Release notes](https://github.com/Radukan/FC-Test/releases/tag/v0.8.0-factorio-2.0) · [SHA-256 checksum](https://github.com/Radukan/FC-Test/releases/download/v0.8.0-factorio-2.0/second-nature_0.8.0.zip.sha256)
+[Release notes](https://github.com/Radukan/FC-Test/releases/tag/v0.9.0-factorio-2.0) · [SHA-256 checksum](https://github.com/Radukan/FC-Test/releases/download/v0.9.0-factorio-2.0/second-nature_0.9.0.zip.sha256)
 
-Download **`second-nature_0.8.0.zip`** and put it directly in your Factorio `mods` folder. **Do not extract it.** Back up saves and remove older Second Nature copies first. Use the named mod ZIP, not GitHub's automatic source archive. This private repository requires GitHub sign-in with repository access.
+Download **`second-nature_0.9.0.zip`** and put it directly in your Factorio `mods` folder. **Do not extract it.** Back up saves and remove older Second Nature copies first. Use the named mod ZIP, not GitHub's automatic source archive. This private repository requires GitHub sign-in with repository access.
 
-Nightglass Foundry fixes starter iron sticks and crew controls, humanizes the explorer, rebuilds inventory icons, and supplies six distinct power systems per stage (18 total). The 0.6.x field crews and all prior restoration content remain included. The larger process plants, Wayfarer lander, music, jukebox, defenses and logistics from 0.6.0 remain included.
+This release adds nineteen restoration milestones, an eleven-entry in-game field guide and a working sound on every generating plant, without changing a single recipe, research cost, power rating or ecological rate. The 0.8.0 power roster, explorer art and icons, the 0.6.x field crews and all prior restoration content remain included. The larger process plants, Wayfarer lander, music, jukebox, defenses and logistics from 0.6.0 remain included.
 
 1. Use **Factorio 2.0.77**, **Space Age**, **Quality** and **Elevated Rails**.
-2. Back up saves and replace older Second Nature ZIP/source copies with `second-nature_0.8.0.zip`, still zipped, in the Factorio `mods` folder.
+2. Back up saves and replace older Second Nature ZIP/source copies with `second-nature_0.9.0.zip`, still zipped, in the Factorio `mods` folder.
 3. For the complete opening, start new Space Age freeplay with **Second Nature / Last Landing** and the default mod settings. **Brood Frontier** and **Quiet Reclamation** offer harder/peaceful alternatives.
 4. **Shift + T / leaf:** field station. **Ctrl + Shift + P:** smog. **Shift + I:** inserter vectors. **Ctrl + Shift + J:** jukebox. **Ctrl + Shift + B / upper-left controller button:** field drones.
 
 Windows: `%APPDATA%\Factorio\mods` · Linux: `~/.factorio/mods` · macOS: `~/Library/Application Support/factorio/mods`.
 
 Stable only; experimental 2.1 builds are discontinued. Existing stable saves retain their factories, ecological values and terrain. They do **not** receive another cargo grant or a replacement defense kit. New habitat-readiness rules can temporarily demote an older mature world while its landscape is surveyed/recovered.
+
+## Restoration Record 0.9.0
+
+Nothing in this release changes a recipe, a research cost, a power rating or an ecological rate. It adds the three things a finished restoration campaign was still missing: a record of what you achieved, a way to learn the mod inside the game, and a factory you can hear.
+
+### Nineteen milestones
+
+The achievement window now tracks the restoration. **Twelve medallions are evaluated by the mod**, because the engine knows nothing about succession stages, captured spores or a five-world network hold: first breath, root systems, a living world, new growth, terraformer, deep green, signal restored, common ground, quiet eden, hold the line, field stations and second nature.
+
+**Seven more are native condition prototypes** the game judges by itself: first gust, network nodes, coordination cells, matrix gardener, read the world, no shortcuts, and nightglass grid, which needs 100 GJ inside an hour with no emitting generator on the grid.
+
+These are modded achievements in Factorio's separate modded list, so nothing here touches vanilla or Steam progress. Awards belong to a **force**, not to whoever happened to be online: a planetary medal reaches every force with recorded work on that world, an offline player receives it on joining, and merged forces keep the earlier award time. A **Milestones** tab in the field station greys out what is still locked and shows how long ago the rest was earned.
+
+[Medallion sheet](docs/art/achievement-review.jpg) · [Milestones, field guide and soundscape](docs/MILESTONES.md)
+
+### An in-game field guide
+
+**Eleven entries** were added to the native tips-and-tricks window in their own Second Nature category, covering the briefing, starting from stone instead of wood, your first restoration cycle, byproducts as real inventory, the hotspot survey gate, the two kinds of native pressure, circuit telemetry, the eighteen power systems, the solar railway, field crews without a robot network, and finishing the network. They offer themselves when they become relevant, and no stock Factorio tip is replaced, reordered or hidden.
+
+### The factory has a voice
+
+**Sixteen of the eighteen generating plants used to run silently.** Every one now has a working sound picked by mechanism, so plants that work the same way sound the same way: photovoltaic, wind, hydro, combustion, heavy engine, steam, turbine, gas turbine, deep earth, electro and telemetry layers. Loops scale with real output, so a becalmed turbine, a solar bank at midnight and a starved generator fall quiet instead of droning.
+
+**95 carried items** were missing inventory handling audio and now have move, pick and drop sounds matched to their material family. Every referenced sound is a stock base or Space Age asset; nothing is copied into this mod, and a test proves each path is genuinely used by an upstream prototype.
 
 ## Nightglass Foundry 0.8.0 corrections
 
@@ -213,6 +237,7 @@ Recover cargo → steam power → stone/silica/glass → Pioneer biology → nut
 This is an **alpha**, not a claim of a completed balanced campaign. [Verification ledger](docs/VERIFICATION.md) distinguishes offline/source tests, actual headless checks and outstanding graphical/full-game/multiplayer work. Releases require real stable-engine validation and a re-download/checksum comparison.
 
 - [Full catalog](docs/CATALOG.md) · [Balance equations](docs/BALANCE.md) · [Model-only timing](docs/SIMULATION.md)
+- [Milestones, field guide and soundscape](docs/MILESTONES.md) · [Power roster](docs/POWER-ROSTER.md)
 - [Campaign design](docs/DESIGN.md) · [Development and art regeneration](docs/DEVELOPING.md)
 
 `python3 tools/package.py` builds the stable ZIP. The optional art toolchain is in `requirements-art.txt`; generated game binaries/saves/ZIPs stay out of Git.

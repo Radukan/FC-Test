@@ -1,6 +1,6 @@
 {
   "description": "Current source-art review ledger. These files are not game screenshots or gameplay certification.",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "inputs": {
     "docs/art/lander-render.json": "57e554b1e825f0a390dac910918bfccab853d0a6122ada20f70f78d8b9b3392c",
     "second-nature/graphics/entity/field-drones/flying-shadow.png": "ba7317815ae6f07e0ccd00bbc977df7ece341cc19da31c8cbb724fd19dc544bf",
@@ -114,9 +114,9 @@
     "industrial-animation-preview.gif": "867dfe0b2aa748891e8380575baf08bee32af75ba8aecc1d9171418fd8d04e0c",
     "lander-review.jpg": "72dc4f541bc52a43db7cdbf94cbbf3b1a5ee09cf57cd437df3db4672549f52a3",
     "lander-standby.gif": "d92c72d4c4a57d392280c3b0b25b2c0b9ccbf8bda495487db50fa38ae0c6eb49",
-    "field-crew-review.jpg": "acbce33e3e01aa81934a5796f6748b01d77386fe52067ee2d927ba739af52ade",
+    "field-crew-review.jpg": "e5d7a836fdc922eb1074022884d1e9f1359f25f3247b516044f6d6e98d366c73",
     "field-drone-preview.gif": "456b2525093fc716896ce03d6628c7b435f69ecbef08b33e4ee40b06ba117c3d",
-    "nightglass-review.jpg": "7ea11f9ba39ede1866d26bed714024ae016b1f5f381c6ededf8203e6691b7fa9",
+    "nightglass-review.jpg": "c71403abe717b2820424330232d46fd8a5e5631a2a592d9e9dbb252e757e33dc",
     "power-options-preview.gif": "eeb56b4405b45ef0010a70f2e1212bf8a7c5713367f9868f30ce64b0f721961b"
   },
   "canonical_machines": {

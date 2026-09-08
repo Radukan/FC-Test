@@ -2,6 +2,7 @@ local C = require("shared.constants")
 local S = require("scripts.state")
 local Model = require("shared.model")
 local Pollution = require("scripts.pollution")
+local Achievements = require("scripts.achievements")
 local N = {}
 local native = {}
 for _, name in ipairs(C.native_names) do native[name] = true end
@@ -59,6 +60,9 @@ function N.choose(world, mode, player)
   world.native_queue = surface.find_entities_filtered({name = C.native_names, force = "enemy"})
   table.sort(world.native_queue, function(a, b) return a.unit_number > b.unit_number end)
   world.native_outcome.pending = #world.native_queue
+  -- A planetary decision, credited to everyone who worked toward it.
+  Achievements.award_world(world, mode == "symbiosis" and "common-ground" or "quiet-eden")
+  if player then Achievements.award(player.force, mode == "symbiosis" and "common-ground" or "quiet-eden") end
   game.print({"sn-native.chosen-" .. mode}, {color = C.colors.biodiversity})
   return true
 end

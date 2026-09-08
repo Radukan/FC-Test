@@ -21,7 +21,8 @@ second-nature/
     terrain.lua           protected local gardens and bounded Nauvis succession
     telemetry.lua         eleven first-section combinator signals
     network.lua           force-specific ten-minute victory hold
-    gui.lua               namespaced dashboard, field guide and confirmation UI
+    gui.lua               namespaced dashboard, field guide, milestones and confirmation UI
+    achievements.lua      per-force milestone ledger, joins, merges and awards
   graphics/               original icons, friendly fauna, gardens and menu illustration
   locale/en/              generated English locale
   README.md, changelog.txt, LICENSE
@@ -107,7 +108,7 @@ python3 tools/package.py
 python3 tools/package.py --target 2.0
 ```
 
-Output: `artifacts/factorio-2.0/second-nature_0.6.1.zip` and its `.zip.sha256` sidecar. The canonical mod folder sits directly at the archive root. Deterministic ordering, timestamps, permissions, allowlisted source paths and metadata are tested. `--target 2.1` is rejected.
+Output: `artifacts/factorio-2.0/second-nature_<version>.zip` and its `.zip.sha256` sidecar. The canonical mod folder sits directly at the archive root. Deterministic ordering, timestamps, permissions, allowlisted source paths and metadata are tested. `--target 2.1` is rejected.
 
 Do not commit `.cache`, virtual environments, game binaries, saves, generated release artifacts or ZIP files. They are ignored, and large engine assets are external to the source repository.
 
@@ -231,3 +232,31 @@ OPENBLAS_NUM_THREADS=1 .venv/bin/python tools/generate_energy_assets.py
 ```
 
 The headless benchmark is now 6,000 ticks and additionally requires `SECOND_NATURE_ENGINE_SOLAR_RAIL_OK` and `SECOND_NATURE_ENGINE_POWER_OPTIONS_OK`. These are engine/API/energy checks, not a graphical client or performance certificate.
+
+## Restoration Record / 0.9.0
+
+- `shared/achievements.lua` is the single declaration of all nineteen milestones. `A.script` holds the twelve plain `achievement` prototypes the mod unlocks; `A.engine` holds the seven native condition prototypes. Prototypes, the runtime ledger, the dashboard tab, the locale generator and the tests all read this list. Add a milestone there, never in two places.
+- **Only the plain `achievement` type can be unlocked from a script.** `LuaPlayer.unlock_achievement` accepts nothing else, works only for a local, not-yet-unlocked player, and fails silently otherwise. `test_only_plain_achievements_are_script_unlockable` asserts that no engine milestone name appears in `scripts/achievements.lua`.
+- `scripts/achievements.lua` owns `storage.second_nature.achievements.forces[force_index][name] = tick`. `award` returns true exactly once and pushes the unlock to every connected member; `award_world` credits every force with recorded contributions on that world; `sync` replays the ledger on join and on init; `migrate` keeps the **earlier** award tick when forces merge. Do not award from a per-player context or the record diverges between members.
+- `prototypes/achievements.lua` also registers the nineteen `sn-medal-<name>` sprites. Render them with `tools/generate_achievement_art.py`, which writes `docs/art/achievement-manifest.json` and a review sheet. A test rejects two medallions that are too visually similar; redraw the offender rather than loosening the threshold.
+- `shared/tips.lua` declares the eleven tips-and-tricks entries and their own `sn-restoration` category. Never place an entry in a stock category or reorder stock tips; a test asserts our category holds only our entries.
+- `shared/audio_catalog.lua` maps named mechanism layers onto **stock** base/Space Age sound paths. Nothing is copied into the mod. `factorio-data` ships no audio, so `test_every_working_sound_file_is_a_real_upstream_asset` validates each path by finding that exact string in the pinned upstream prototype definitions. Add a layer there, then reference it by key.
+- `working_sound` lives on `EntityPrototype`, so it is valid on solar panels, electric-energy interfaces, burner generators and constant combinators alike. Plant layers use `match_volume_to_activity` with a 60-tick smoothing window so idle units fall quiet; the telemetry tick deliberately does not.
+- `prototypes/soundscape.lua` runs in **data-updates** and only fills gaps: it never overwrites a `working_sound` or handling sound another stage already set. Item handling audio is keyed by catalog `family` and prototype `kind`.
+- New locale prose belongs in `tools/milestone_locale.py`, wired into `generate_locale.py`. It emits the `[achievement-name]`, `[achievement-description]`, `[tips-and-tricks-item-category-name]`, `[tips-and-tricks-item-name]` and `[tips-and-tricks-item-description]` sections.
+- `tools/catalog.py` exposes `load_module(name)` for any pure-data shared Lua module; use it instead of writing another bespoke loader.
+- The headless run additionally requires `SECOND_NATURE_ENGINE_MILESTONES_OK` and `SECOND_NATURE_ENGINE_AUDIO_OK`, from `tests/engine/milestone_probes.lua`.
+- `second-nature/README.md` is **generated**. It is the repository README with every relative `docs/` link rewritten to the current version's release tag, because the bundled copy is read from a mods folder where relative paths do not resolve. Edit the root README, then run `tools/release_readme.py`. `--check` fails on a stale copy, a packaging test asserts the two agree, and CI runs the check.
+
+A milestone or audio rebuild is:
+
+```sh
+.venv/bin/python tools/generate_achievement_art.py   # only when editing medallions
+.venv/bin/python tools/generate_locale.py
+.venv/bin/python tools/generate_docs.py
+.venv/bin/python tools/generate_presentation_previews.py
+.venv/bin/python -m pytest -q
+.venv/bin/python tools/package.py
+```
+
+Regenerate the presentation previews after **any** version bump: `docs/art/review-manifest.json` records the version, and the review-ledger test fails on a stale one.

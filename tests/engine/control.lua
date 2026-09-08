@@ -8,6 +8,7 @@ local FieldPlannerProbes=require('field_planner_probes')
 local NightglassProbes=require('nightglass_probes')
 local PowerStageProbes=require('power_stages_probes')
 local RecallProbes=require('crew_recall_probes')
+local MilestoneProbes=require('milestone_probes')
 local function build(surface,name,pos)
   return assert(surface.create_entity({name=name,position=pos,force='player',raise_built=true}),name)
 end
@@ -64,6 +65,7 @@ script.on_init(function()
   -- Save creation followed by benchmarking exercises storage LuaObject restoration.
   NightglassProbes.init(surface)
   PowerStageProbes.init(surface)
+  MilestoneProbes.init(surface,force)
   log('SECOND_NATURE_ENGINE_SMOKE_READY')
 end)
 script.on_nth_tick(1,function()
@@ -71,6 +73,7 @@ script.on_nth_tick(1,function()
   PowerStageProbes.tick()
   FieldDroneProbes.tick()
   RecallProbes.tick()
+  MilestoneProbes.tick()
   if storage.drone_probe and storage.drone_probe.finished and not storage.field_planner_probe then
     FieldPlannerProbes.init(storage.worlds.nauvis,game.forces.player)
   end
