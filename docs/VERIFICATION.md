@@ -1,12 +1,18 @@
 # Verification ledger: Nightglass Foundry 0.8.0 alpha
 
-## Current 0.8.0 candidate
+## Current 0.8.0 release
 
 This update fixes starter iron sticks, visible crew recall and controller-only upper-left controls; humanizes the original goth explorer; rebuilds 117 inventory/building icons; and expands power to six distinct systems in each stage. See [POWER-ROSTER.md](POWER-ROSTER.md) for ratings and constraints.
 
 The native harness adds real recall after a mid-flight pause, a fresh force with starter sticks/poles before green science, and native electrical/fuel/fluid/heat output checks for all eighteen systems. Required markers include `SECOND_NATURE_ENGINE_CREW_RECALL_OK` and `SECOND_NATURE_ENGINE_POWER_STAGES_OK`. Existing solar-rail, field-planner and campaign probes remain.
 
-Source tests verify changed controls/accounting, top-left button gating, icon uniqueness/legibility at native size, stage counts, genuine energy inputs and geothermal regional/legacy limits. The source suite contains 257 tests covering the updated contracts; the completed full-suite result is recorded with the local commit. Native stage-power/recall validation remains pending GitHub reconnection and CI. Graphical-client appearance/hotkey behavior and long-run campaign, multiplayer and performance profiling remain unverified.
+Source tests verify changed controls/accounting, top-left button gating, icon uniqueness/legibility at native size, stage counts, genuine energy inputs and geothermal regional/legacy limits. **257 local source tests pass.** [Run 34181849586](https://github.com/Radukan/FC-Test/actions/runs/34181849586), code/test commit `bc050f586c4f692e1606ccdb725c1ac881f9fc58`, passed both source validation and official Factorio 2.0.77 native checks. Native recall, fresh-force iron-stick/pole access, all eighteen power systems, actual electrical output, fuel/fluid/heat/coolant behavior and the previous campaign/rail/planner markers passed. Native electrical production is verified through output-flow counters on the connected pole; controlled crew scenarios are isolated from unrelated map wildlife/obstructions. The fusion body retains the required seven native input connector graphics. Graphical-client appearance/hotkey behavior and long-run campaign, multiplayer and performance profiling remain unverified.
+
+The installable archive contains **576 mod files**, is **113,475,294 bytes**, and passes ZIP CRC and SHA-256 verification. Publishing independently revalidates the final tag and re-downloads both release assets before reporting success.
+
+```text
+31987d868200019b1d940129427fa9bb699a6dd24a2d56b9238547bd72291bb6  second-nature_0.8.0.zip
+```
 
 ## Historical Nightglass 0.7.0 evidence
 
