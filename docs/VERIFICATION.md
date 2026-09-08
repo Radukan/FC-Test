@@ -16,7 +16,11 @@ Two native markers were added, `SECOND_NATURE_ENGINE_MILESTONES_OK` and `SECOND_
 
 The first native run **failed, and the failure was real and useful**: the engine reported `ledger count is wrong`. The mod was correct; the probe was not. The earlier campaign scenario drives the production rocket handler, which legitimately awarded `signal-restored` to the shared player force, so asserting that the force held exactly one award became false the moment milestones were wired into real code paths. The probe was corrected to assert the shared force shows a non-empty, well-formed ledger including that genuine award, and to run its exact-count and merge checks on dedicated forces it creates itself. The assertions were tightened rather than removed.
 
-The installable archive contains **602 mod files**, is **113,839,437 bytes**, and passes ZIP CRC and SHA-256 verification. Publishing independently revalidates the final tag and re-downloads both release assets before reporting success.
+The installable archive contains **602 mod files**, is **113,839,437 bytes**, and passes ZIP CRC and SHA-256 verification. A clean rebuild from an emptied `artifacts/` directory reproduced this checksum exactly, confirming the build is deterministic.
+
+**Release published and verified.** The [0.9.0 prerelease](https://github.com/Radukan/FC-Test/releases/tag/v0.9.0-factorio-2.0) is tagged at commit `679c3e97ecd3b667bb4467396ab9dee8bdaff2b6`, and [publish run 34200248377](https://github.com/Radukan/FC-Test/actions/runs/34200248377) passed all three jobs: source validation, the official 2.0.77 engine job, and publishing. The publisher rebuilt the archive from the tagged source, uploaded it, then **re-downloaded both assets and byte-compared them** against that fresh build; its `sha256sum --check` and both `cmp` comparisons passed on the runner. The published asset sizes (113,839,437 and 90 bytes) match the local build, and every release link in the README resolves to a real published asset.
+
+The sandbox itself cannot reach `release-assets.githubusercontent.com` (`SSL_ERROR_SYSCALL`), the same egress block that prevents downloading the Factorio binary here. The asset re-download comparison is therefore claimed on the strength of the runner's own verification step, **not** a local re-download. Downloads require GitHub sign-in with access to this private repository.
 
 ```text
 449e36818301a4b3d878f37790c1de387b099b768be94c96ddb2210d7ce11beb  second-nature_0.9.0.zip
