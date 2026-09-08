@@ -86,21 +86,25 @@ def test_character_frames_share_a_consistent_foot_anchor():
         for pose in ('idle','idle_with_gun','running','running_with_gun','mining_with_tool'):
             spec=art[f'explorer-{tier}-{pose}']
             view=frame_spec(pose)
-            assert (spec['width'],spec['height'])==(view['width'],view['height'])
+            report=json.loads((ROOT/'docs/art/character-render.json').read_text())[f'explorer-{tier}-{pose}']
+            assert report['view']==view and view['ppu']==160 and spec['scale']==.25
+            crop=report['crop']
+            assert (spec['width'],spec['height'])==(crop[2]-crop[0],crop[3]-crop[1])
             assert spec['apply_projection'] is False
-            world_anchor=spec['height']*view['origin']*spec['scale']+spec['shift'][1]*32
-            assert abs(world_anchor-spec['height']*.5*spec['scale'])<1e-4
+            pivots=(view['width']/2-crop[0],view['height']*view['origin']-crop[1])
+            for axis,size in enumerate((spec['width'],spec['height'])):
+                world=(pivots[axis]-size/2)*spec['scale']+spec['shift'][axis]*32
+                assert abs(world)<1e-4
 
 
 def test_character_asset_alpha_does_not_touch_top_or_sides():
     art=json.loads((ROOT/'docs/art/sprite-manifest.json').read_text())
     for tier in range(3):
         s=art[f'explorer-{tier}-mining_with_tool']
-        image=Image.open(MOD/s['filename'].split('__second-nature__/')[1])
+        from atlas_io import Atlas
+        image=Atlas(s)
         for direction in range(s['direction_count']):
             for frame in range(s['frame_count']):
-                index=direction*s['frame_count']+frame
-                x=index%s['line_length']*s['width'];y=index//s['line_length']*s['height']
-                tile=image.crop((x,y,x+s['width'],y+s['height']))
+                tile=image.frame(direction,frame)
                 alpha=tile.getchannel('A').point(lambda n:255 if n>16 else 0);box=alpha.getbbox()
                 assert box and min(box[0],box[1],s['width']-box[2],s['height']-box[3])>=2,(tier,direction,frame,box)

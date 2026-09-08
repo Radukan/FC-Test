@@ -59,20 +59,8 @@ def character_frame(task):
     return render(model,view['width'],view['height'],ppu=view['ppu'],origin=view['origin'],map_aligned=True)
 
 def animate_character(tier,pose,frames,directions,jobs=2):
-    from concurrent.futures import ProcessPoolExecutor
-    view=character.frame_spec(pose);width,height=view['width'],view['height']
-    columns=10 if frames==20 and width*frames>8192 else frames
-    atlas=Image.new('RGBA',(width*columns,height*math.ceil(frames*directions/columns)))
-    tasks=[(tier,pose,direction,frame,frames) for direction in range(directions) for frame in range(frames)]
-    with ProcessPoolExecutor(max_workers=jobs) as pool:
-        for index,image in enumerate(pool.map(character_frame,tasks,chunksize=1)):
-            atlas.alpha_composite(image,((index%columns)*width,(index//columns)*height))
-            if index==0:preview=image
-    name=f'explorer-{tier}-{pose}'
-    save(atlas,OUT/f'{name}.png')
-    manifest[name]=dict(spec(name,width,height,frames,directions,view['origin']),line_length=columns,apply_projection=False)
-    print('CHARACTER',tier,pose,flush=True)
-    return preview
+    from character_export import export_pose
+    return export_pose(tier,pose,frames,directions,manifest,save,jobs)
 
 
 def corpse(tier):
@@ -155,13 +143,14 @@ def render_all(only=None,jobs=2,poses=None):
         for tier in range(3):
             for pose,frames,count in [('idle',4,8),('idle_with_gun',4,8),('running',gait.RUN_FRAMES,8),('mining_with_tool',gait.MINING_FRAMES,8),('running_with_gun',gait.RUN_FRAMES,18)]:
                 if poses and pose not in poses:continue
-                preview=animate_character(tier,pose,frames,count,jobs)
+                preview,front=animate_character(tier,pose,frames,count,jobs)
                 if pose=='idle':
-                    front=character_frame((tier,pose,4,0,frames))
                     icon(front,'explorer' if tier==0 else f'explorer-{tier}')
                     icon(front,('field-armor','expedition-armor','bastion-armor')[tier])
                     previews.append((f'Explorer / armor {tier}',front))
-            if not poses:preview=animate(f'explorer-{tier}-corpse',lambda t,d:corpse(tier),256,192,frames=2,origin=.5,ppu=70)
+            if not poses:
+                preview=animate(f'explorer-{tier}-corpse',lambda t,d:corpse(tier),512,384,frames=2,origin=.5,ppu=140)
+                manifest[f'explorer-{tier}-corpse']['scale']=.25
             print('EXPLORER',tier,flush=True)
         # Small animated status beacon for the constant combinator, not an invented craft.
     if not only:

@@ -1,7 +1,7 @@
-![Field Crew - original drone and explorer sprites](docs/art/field-crew-review.jpg)
+![Nightglass - original explorer, solar railway and power sprites](docs/art/nightglass-review.jpg)
 
-# Second Nature · Field Crew
-### Stable Factorio 2.0 / Space Age restoration overhaul · v0.6.2 alpha
+# Second Nature · Nightglass
+### Stable Factorio 2.0 / Space Age restoration overhaul · v0.7.0 alpha
 
 **An intact landing craft. A stripped planet. A factory built to bring life back.**
 
@@ -9,22 +9,49 @@ Nauvis has no natural trees or fish in a fresh campaign. The broods tolerate you
 
 ## Download
 
-### [Second Nature 0.6.2 - stable Factorio 2.0](https://github.com/Radukan/FC-Test/releases/download/v0.6.2-factorio-2.0/second-nature_0.6.2.zip)
+### [Second Nature 0.7.0 - stable Factorio 2.0](https://github.com/Radukan/FC-Test/releases/download/v0.7.0-factorio-2.0/second-nature_0.7.0.zip)
 
-[Release notes](https://github.com/Radukan/FC-Test/releases/tag/v0.6.2-factorio-2.0) · [SHA-256 checksum](https://github.com/Radukan/FC-Test/releases/download/v0.6.2-factorio-2.0/second-nature_0.6.2.zip.sha256)
+[Release notes](https://github.com/Radukan/FC-Test/releases/tag/v0.7.0-factorio-2.0) · [SHA-256 checksum](https://github.com/Radukan/FC-Test/releases/download/v0.7.0-factorio-2.0/second-nature_0.7.0.zip.sha256)
 
-Download **`second-nature_0.6.2.zip`** and put it directly in your Factorio `mods` folder. **Do not extract it.** Back up saves and remove older Second Nature copies first. Use the named mod ZIP, not GitHub's automatic source archive. This private repository requires GitHub sign-in with repository access.
+Download **`second-nature_0.7.0.zip`** and put it directly in your Factorio `mods` folder. **Do not extract it.** Back up saves and remove older Second Nature copies first. Use the named mod ZIP, not GitHub's automatic source archive. This private repository requires GitHub sign-in with repository access.
 
-This small-version update makes field crews auto-enabled, adds planner deconstruction/upgrades and early tuning, smooths drone flight, and refines the explorer silhouette and grip. The larger process plants, Wayfarer lander, music, jukebox, defenses and logistics from 0.6.0 remain included.
+Nightglass is a larger content update: an HD goth explorer, three solar-only train tiers and six new power sources. The 0.6.x field crews and all prior restoration content remain included. The larger process plants, Wayfarer lander, music, jukebox, defenses and logistics from 0.6.0 remain included.
 
 1. Use **Factorio 2.0.77**, **Space Age**, **Quality** and **Elevated Rails**.
-2. Back up saves and replace older Second Nature ZIP/source copies with `second-nature_0.6.2.zip`, still zipped, in the Factorio `mods` folder.
+2. Back up saves and replace older Second Nature ZIP/source copies with `second-nature_0.7.0.zip`, still zipped, in the Factorio `mods` folder.
 3. For the complete opening, start new Space Age freeplay with **Second Nature / Last Landing** and the default mod settings. **Brood Frontier** and **Quiet Reclamation** offer harder/peaceful alternatives.
 4. **Shift + T / leaf:** field station. **Ctrl + Shift + P:** smog. **Shift + I:** inserter vectors. **Ctrl + Shift + J:** jukebox. **Ctrl + Shift + B:** field drones.
 
 Windows: `%APPDATA%\Factorio\mods` · Linux: `~/.factorio/mods` · macOS: `~/Library/Application Support/factorio/mods`.
 
 Stable only; experimental 2.1 builds are discontinued. Existing stable saves retain their factories, ecological values and terrain. They do **not** receive another cargo grant or a replacement defense kit. New habitat-readiness rules can temporarily demote an older mature world while its landscape is surveyed/recovered.
+
+## Nightglass 0.7.0: goth explorer, solar rail and power choices
+
+The adult explorer has **pale skin, a layered wolf cut, original tattoos and a short pleated skirt** over opaque undershorts, with dark protective gear and makeup. Her sprites are freshly rendered at **twice the texel density on each axis**, not enlarged from old images. World scale stays unchanged; large atlases are cropped and split into native texture-safe pages.
+
+### Three solar-only locomotive tiers
+
+| Locomotive | Roof panels | Battery | Day / night ceilings |
+|---|---:|---:|---:|
+| **Sunseed solar shunter** | 240 kW | 24 MJ | 91 / 48 km/h |
+| **Heliograph solar locomotive** | 420 kW | 45 MJ | 147 / 91 km/h |
+| **Daybreak solar express** | 600 kW | 72 MJ | 194 / 130 km/h |
+
+All remain slower than a conventional locomotive. Their installed solar equipment charges a locked onboard battery grid. **No ordinary fuel or factory-grid charging is accepted.** Battery energy is metered into actual native traction; there is no free motor-energy grant. Nighttime limits reduce both speed and available motor power. Empty batteries provide no traction, although trains may coast. Daytime station dwell helps recharge.
+
+Open the normal locomotive GUI for an onboard energy monitor. Native schedules, rails, stops and wagons remain in use. The lowest solar limit applies to a consist containing solar locomotives.
+
+### Six new power options
+
+- **Copperleaf solar rack:** early passive solar, 18 kW, no direct emissions.
+- **Trailblazer burner set:** early chemical-fuel generation, 180 kW, polluting.
+- **Helical wind turbine:** variable atmospheric wind, up to 120 kW, no fuel or direct emissions.
+- **Closed-loop biomass engine:** biopellet-powered 500 kW generation, no direct emissions; remove and recycle its ash.
+- **Deep-loop geothermal plant:** steady, planet-dependent clean power, up to 1.5 MW.
+- **Residue-fired cogenerator:** a 3 MW chemical-fuel industrial source with substantial pollution.
+
+[Nightglass overview](docs/art/nightglass-review.jpg) · [Power animation study](docs/art/power-options-preview.gif) · [HD locomotion](docs/art/locomotion-review.gif) · [Design and energy accounting](docs/NIGHTGLASS.md)
 
 ## Field Crew 0.6.2: auto-enabled inventory crews and planner tools
 

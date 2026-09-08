@@ -8,10 +8,11 @@ from industrial_art import Mesh, STEEL, DARK, EDGE, GOLD, COPPER, TEAL, WHITE, a
 import gait
 from character_rig import limb, hand as build_hand
 from body_motion import motion, mining_profile, join_transformed
+import goth_details as goth
 
-SKIN = (184, 130, 103)
-HAIR = (61, 31, 20)
-SUIT = (37, 42, 39)
+SKIN = goth.PALE
+HAIR = goth.HAIR
+SUIT = goth.CLOTH
 
 
 def loft(mesh, rings, color, sides=24):
@@ -79,7 +80,7 @@ def explorer(t=0, pose='idle', tier=0, move_angle=0, aim_angle=0):
     pelvis, torso, head_rig = rig['pelvis'], rig['torso'], rig['head']
     phase, bob = rig['phase'], rig['bob']
     m, shell, waist, skin = Mesh(), Mesh(), Mesh(), Mesh()
-    armor = (119, 111, 88) if tier == 0 else ((104, 111, 99) if tier == 1 else (145, 141, 119))
+    armor = (42, 43, 53) if tier == 0 else ((62, 59, 76) if tier == 1 else (88, 85, 103))
     stride = (math.sin(relative), -math.cos(relative), 0)
     joints, foot_phases, hands, anchors, soles = {}, {}, {}, {}, {}
 
@@ -91,7 +92,10 @@ def explorer(t=0, pose='idle', tier=0, move_angle=0, aim_angle=0):
         stagger = side * .085 if mining else 0
         ankle = add((side * (.19 if mining else .17), stagger, .115 + sample['lift']), mul(stride, sample['along']))
         knee = gait.solve_two_bone(hip, ankle, gait.THIGH, gait.SHIN, pelvis.vector((0, -1, 0)))
-        limb(m, hip, knee, .127, .105, SUIT, 18)
+        limb(m, hip, knee, .127, .105, SKIN, 20)
+        shorts_end=add(hip,mul(gait.sub(knee,hip),.50))
+        limb(m,hip,shorts_end,.135,.125,SUIT,20)
+        if side==1:goth.tattoo(m,hip,knee,.132,.108,side)
         limb(m, knee, ankle, .090, .061, SUIT, 16)
         m.ball(knee, .111, armor, stretch=(.95, 1, .76))
         top = add(add(knee, mul(gait.sub(ankle, knee), .15)), (0, -.046, 0))
@@ -139,6 +143,7 @@ def explorer(t=0, pose='idle', tier=0, move_angle=0, aim_angle=0):
     for side in (-1, 1):
         waist.box((side * .225, .025, 1.10), (.12, .15, .205), DARK, .025)
         waist.tube((side * .238, .016, 1.065), (side * .157, -.077, 1.21), .012, COPPER, 8)
+    skirt_rings=goth.skirt(m,pelvis,joints,phase,tier)
     join_transformed(m, waist, pelvis.point)
     shell.box((0, .19, 1.40), (.31, .16, .47), armor, .05)
     for x in (-.10, .10):
@@ -180,8 +185,10 @@ def explorer(t=0, pose='idle', tier=0, move_angle=0, aim_angle=0):
                      1.10 + bob + (.035 * math.cos(phase * 2) if run else 0))
             forward, hand_back, curl, bend = (0, 0, -1), (0, 1, 0), .26, (side * .17, .8, -.35)
         elbow = gait.solve_two_bone(shoulder, wrist, .38, .35, bend)
-        limb(m, shoulder, elbow, .086, .074, SUIT, 16)
-        limb(m, elbow, wrist, .071, .055, SUIT, 16)
+        limb(m, shoulder, elbow, .086, .074, SKIN, 20)
+        limb(m, elbow, wrist, .071, .055, SKIN, 20)
+        goth.tattoo(m,elbow,wrist,.074,.057,side)
+        goth.tattoo(m,shoulder,elbow,.091,.077,side)
         m.ball(shoulder, .112, armor, stretch=(1.06, .95, .80))
         m.ball(elbow, .077, EDGE, stretch=(1, .8, .8))
         hands[side] = build_hand(m, wrist, forward, hand_back, side, curl)
@@ -232,31 +239,30 @@ def explorer(t=0, pose='idle', tier=0, move_angle=0, aim_angle=0):
     result.hands = {side: {name: rot(p, facing) for name, p in points.items()} for side, points in hands.items()}
     result.aim_angle, result.move_angle, result.pose = facing, move_angle, pose
     result.foot_phases, result.sole_heights, result.motion = foot_phases, soles, rig
-    result.surface_finish = 'cloth'
+    result.surface_finish = 'goth'
+    result.style={'skin':SKIN,'hair':'wolfcut','tattoos':True,'skirt':True,'coverage':'opaque undershorts','skirt_rings':skirt_rings}
     return result
 
 def head_mesh(phase,tier):
     head=Mesh()
-    armor=(119,111,88) if tier==0 else ((104,111,99) if tier==1 else (145,141,119))
-    # Neck, face, shaped hairline, eyes, brow and small facial details.
     head.ball((0,-.006,1.951),.151,SKIN,stretch=(.87,.91,1.18))
     head.ball((0,-.012,1.865),.12,SKIN,stretch=(.86,.82,.82))
-    head.ball((0,.05,1.991),.158,HAIR,stretch=(.97,.82,1.0))
-    # The face remains open; the brow-mounted optics leave the features visible.
-    head.ball((0,-.149,1.946),.028,(196,141,111),stretch=(.55,1,.9))
-    head.box((0,-.135,1.895),(.070,.013,.014),(120,57,49),.005)
+    head.ball((0,-.149,1.946),.028,(229,215,224),stretch=(.55,1,.9))
+    head.box((0,-.135,1.895),(.070,.014,.016),(49,24,46),.005)
     for x in (-.062,.062):
-        head.ball((x,-.127,1.977),.025,(213,197,166),stretch=(1,.35,.58))
-        head.ball((x,-.140,1.978),.012,(38,60,51),stretch=(1,.32,1))
-        head.tube((x-.028,-.119,2.007),(x+.022,-.126,2.012),.009,HAIR,6)
-        head.box((x,-.083,2.081),(.092,.076,.046),DARK,.013)
-        head.box((x,-.126,2.082),(.075,.018,.026),(64,132,137),.008)
-    # Detailed tied hair, not a featureless block helmet.
-    for i in range(7):
-        angle=(i-3)*.19
-        head.tube((.11*math.sin(angle),.155,2.01),(.04+.025*math.sin(phase+i),.255,1.68-i*.006),.017,tuple(v+i*2 for v in HAIR),8)
-    head.ball((0,.164,1.99),.052,GOLD,stretch=(1,.5,.6))
-    for x in (-.137,.137):head.ball((x,.015,1.95),.036,armor)
-    if tier==2:
-        head.box((0,-.118,1.841),(.20,.055,.067),DARK,.015)
+        head.tube((x-.027,-.148,1.989),(x+.027,-.148,1.989),.007,(24,20,30),8)
+        head.ball((x,-.151,1.977),.021,(221,220,218),stretch=(1,.25,.48))
+        head.ball((x,-.158,1.978),.011,(89,111,125),stretch=(1,.25,1))
+        head.tube((x-.028,-.122,2.007),(x+.022,-.129,2.012),.009,HAIR,6)
+        head.tube((x,-.136,1.96),(x+.015,-.135,1.94),.0035,(25,21,32),6)
+    goth.wolfcut(head,phase)
+    for side in (-1,1):
+        head.ball((side*.14,.01,1.948),.025,SKIN)
+        for i in range(10):
+            a=i*math.tau/10;b=(i+1)*math.tau/10
+            head.tube((side*.155,.02+.018*math.cos(a),1.91+.025*math.sin(a)),
+                      (side*.155,.02+.018*math.cos(b),1.91+.025*math.sin(b)),.0045,goth.SILVER,6)
+    head.box((0,0,1.715),(.155,.19,.030),(23,20,28),.008)
+    head.ball((0,-.112,1.674),.015,goth.SILVER,stretch=(.8,.4,1))
+    if tier==2:head.box((0,-.118,1.841),(.20,.055,.060),(39,38,48),.015)
     return head

@@ -11,11 +11,11 @@ ARMED_ROWS=((0,0),(0,1),(0,2),
             (2,0),(2,1),(2,2),(2,3),
             (3,0),(3,1),(3,2),(3,3),
             (4,0),(4,1),(4,2))
-WIDTH=384
-HEIGHT=432
-PIXELS_PER_UNIT=80
-ORIGIN=220/432
-SAFE_MARGIN=10
+WIDTH=768
+HEIGHT=864
+PIXELS_PER_UNIT=160
+ORIGIN=440/864
+SAFE_MARGIN=20
 
 def pose_angles(pose,row):
     if pose=='running_with_gun':
@@ -25,8 +25,8 @@ def pose_angles(pose,row):
     return angle,angle
 
 def frame_spec(pose=None):
-    if pose=='mining_with_tool':return {'width':448,'height':480,'origin':248/480,'ppu':PIXELS_PER_UNIT,'scale':.5}
-    return {'width':WIDTH,'height':HEIGHT,'origin':ORIGIN,'ppu':PIXELS_PER_UNIT,'scale':.5}
+    if pose=='mining_with_tool':return {'width':896,'height':960,'origin':496/960,'ppu':PIXELS_PER_UNIT,'scale':.25}
+    return {'width':WIDTH,'height':HEIGHT,'origin':ORIGIN,'ppu':PIXELS_PER_UNIT,'scale':.25}
 
 def projected(point,pose=None):
     # Character ground axes are authored in screen/map space, not foreshortened twice.

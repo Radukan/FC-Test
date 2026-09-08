@@ -45,7 +45,8 @@ def test_explorer_covers_armor_tool_and_armed_locomotion_variations(expedition_d
     char=expedition_data.raw.character.character
     for variation in char.animations.values():
         for pose in ('idle','idle_with_gun','running','running_with_gun','mining_with_tool'):
-            assert variation[pose].filename.startswith('__second-nature__/')
+            paths=[variation[pose].filename] if variation[pose].filename else [s.filename for s in variation[pose].stripes.values()]
+            assert paths and all(p.startswith('__second-nature__/') for p in paths)
         assert variation.running_with_gun.direction_count==18
         assert variation.running.frame_count==16
         assert variation.flipped_shadow_running_with_gun is None
@@ -186,12 +187,17 @@ def test_all_original_atlases_fit_their_declared_frames_and_texture_bounds():
     manifest=json.loads((ROOT/'docs/art/sprite-manifest.json').read_text())
     assert len(manifest)>=146
     for name,s in manifest.items():
-        path=MOD/s['filename'].split('__second-nature__/')[1]
-        image=Image.open(path)
-        rows=math.ceil(s['frame_count']*s['direction_count']/s['line_length'])
-        assert image.width==s['width']*s['line_length'],name
-        assert image.height==s['height']*rows,name
-        assert max(image.size)<=8192 and image.mode=='RGBA',name
+        from atlas_io import parts,paths
+        entries=parts(s)
+        cells=0
+        for part,path in zip(entries,paths(s)):
+            with Image.open(path) as image:
+                rows=part.get('height_in_frames') or math.ceil(s['frame_count']*s['direction_count']/s['line_length'])
+                assert image.width==s['width']*part['width_in_frames'],name
+                assert image.height==s['height']*rows,name
+                assert max(image.size)<=8192 and image.mode=='RGBA',name
+                cells+=part['width_in_frames']*rows
+        assert cells>=s['frame_count']*s['direction_count']
 
 
 def test_production_working_loops_have_actual_visible_motion_in_every_direction():

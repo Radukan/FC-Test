@@ -1,6 +1,7 @@
 -- Planner jobs for personal, inventory-fed field drones. No logistic network.
 local S=require("scripts.state")
 local Machines=require("scripts.machines")
+local SolarRail=require("scripts.solar_rail")
 local T={}
 local function q(value) return type(value)=="string" and value or (value and value.name or "normal") end
 local function near(a,b) return (a.x-b.x)^2+(a.y-b.y)^2<.0001 end
@@ -101,6 +102,7 @@ function T.perform(rec,ctx)
   if kind=="deconstruct" then
     -- Native mining preserves inventories, item metadata and quality. A partial
     -- unload is returned normally and a later sortie can finish a full chest.
+    SolarRail.flush(e)
     local ok,done=pcall(function() return e.mine({inventory=rec.cargo,force=false,raise_destroyed=true}) end)
     if not ok then log("Second Nature: field deconstruction failed without discarding its cargo.") end
     return ok and done

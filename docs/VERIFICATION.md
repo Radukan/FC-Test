@@ -1,4 +1,16 @@
-# Verification ledger: Field Crew 0.6.2 alpha
+# Verification ledger: Nightglass 0.7.0 alpha
+
+## Current Nightglass candidate
+
+This larger update adds the HD goth explorer, three solar-only locomotive tiers and six power options. See [NIGHTGLASS.md](NIGHTGLASS.md) for the installed-panel/battery design, metered motor credit, night derating, native fuel behavior, planetary power models and remaining client limitations.
+
+The new native engine scenario begins with empty solar batteries at night beside an ordinary powered grid, charges them from actual roof equipment in daylight, drives scheduled trains, checks reduced night limits, then verifies that exhausted batteries receive no hidden traction. A separate labeled test seed exercises saved motor credit. Real generating plants charge native accumulator loads, burn fuel and produce pollution/ash where appropriate.
+
+The required new markers are `SECOND_NATURE_ENGINE_SOLAR_RAIL_OK` and `SECOND_NATURE_ENGINE_POWER_OPTIONS_OK`, in a 6,000-tick run alongside the prior campaign, construction and planner probes. Source tests include energy conservation, locked equipment, fuel rejection, safe speed capping, new research and the doubled-resolution striped sprite contract.
+
+The completed source build passes **246 local tests** with the pinned official 2.0.77 data. The full native-engine energy/rail scenario is pending branch CI; source mocks are not treated as evidence of native traction or generation. No graphical-client playthrough, elevated-rail visual certification, full campaign balance or long-run GPU/UPS/multiplayer result is claimed.
+
+## Historical Field Crew 0.6.2 evidence
 
 ## Current 0.6.2 release
 

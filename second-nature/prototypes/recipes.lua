@@ -21,7 +21,7 @@ for index, x in ipairs(K.recipes) do
     ingredients = ingredients, results = results,
     localised_name = x.machine and {"entity-name.sn-" .. x.name} or {"recipe-name.sn-" .. x.name},
     localised_description = x.effects and {"recipe-description.sn-" .. x.name} or nil,
-    subgroup = x.logistics and "sn-logistics" or x.defense and "sn-defense" or (x.machine and (K.by_machine["sn-" .. x.name].planet and "sn-planetary" or "sn-production") or (x.operation and "sn-operations" or "sn-recovery")),
+    subgroup = x.power and "sn-energy" or x.logistics and "sn-logistics" or x.defense and "sn-defense" or (x.machine and (K.by_machine["sn-" .. x.name].planet and "sn-planetary" or "sn-production") or (x.operation and "sn-operations" or "sn-recovery")),
     order = string.format("%03d", index), main_product = "",
     allow_productivity = false, allow_quality = not x.effects and x.recycle ~= false,
     allow_decomposition = not x.operation, auto_recycle = x.machine or false,

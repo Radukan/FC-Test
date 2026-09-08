@@ -16,9 +16,13 @@ local Jukebox = require("scripts.jukebox")
 local FieldDrones = require("scripts.field_drones")
 local DroneGui = require("scripts.field_drone_gui")
 local DroneConfig = require("shared.field_drones")
+local Power = require("scripts.power")
+local SolarRail = require("scripts.solar_rail")
+local SolarGui = require("scripts.solar_rail_gui")
 local function initialize(fresh)
   State.init()
   FieldDrones.init()
+  Power.init();SolarRail.init()
   Campaign.init(fresh == true)
   -- Reconcile removed prototypes and invalid references before the install-only scan.
   local invalid = {}
@@ -57,16 +61,20 @@ local built = {}
 for _, name in ipairs({"on_built_entity", "on_robot_built_entity", "script_raised_built", "script_raised_revive", "on_space_platform_built_entity"}) do
   if defines.events[name] then built[#built + 1] = defines.events[name] end
 end
-script.on_event(built, function(event) State.register(event.entity or event.created_entity) end)
+script.on_event(built, function(event)
+  local entity=event.entity or event.created_entity
+  State.register(entity);Power.register(entity);SolarRail.register(entity)
+end)
 local removing = {}
 for _, name in ipairs({"on_pre_player_mined_item", "on_robot_pre_mined", "on_entity_died", "script_raised_destroy"}) do
   if defines.events[name] then removing[#removing + 1] = defines.events[name] end
 end
 script.on_event(removing, function(event)
+  if event.name==defines.events.on_pre_player_mined_item or event.name==defines.events.on_robot_pre_mined then SolarRail.flush(event.entity) end
   Machines.flush(event.entity)
   if event.name==defines.events.on_entity_died then FieldDrones.entity_died(event) end
 end)
-script.on_event(defines.events.on_entity_cloned, function(event) State.register(event.destination) end)
+script.on_event(defines.events.on_entity_cloned, function(event) State.register(event.destination);Power.register(event.destination);SolarRail.register(event.destination) end)
 script.on_event(defines.events.on_object_destroyed, function(event)
   local id = State.root().registrations[event.registration_number]
   if id then State.remove(id) end
@@ -122,9 +130,10 @@ script.on_event(defines.events.on_forces_merged, function(event)
   camps[event.source_index] = nil
   Natives.diplomacy()
 end)
-script.on_nth_tick(DroneConfig.step_ticks,FieldDrones.tick)
+script.on_nth_tick(DroneConfig.step_ticks,function() FieldDrones.tick();SolarRail.tick() end)
 script.on_nth_tick(C.poll_ticks, Machines.tick)
 script.on_nth_tick(C.environment_ticks, function()
+  Power.tick()
   local root = State.root()
   Campaign.tick()
   for _, visit in ipairs(Pollution.tick()) do
@@ -162,7 +171,7 @@ script.on_nth_tick(C.gui_ticks, function()
   for _, player in pairs(game.connected_players) do
     Gui.update(player)
     if FieldDrones.introduction(player) then DroneGui.open(player);player.print({"sn-drones.introduction"}) end
-    DroneGui.update(player)
+    DroneGui.update(player);SolarGui.update(player)
     local prefs = State.root().players[player.index]
     if prefs and prefs.air_overlay then Pollution.overlay(player, true) end
   end
@@ -183,7 +192,7 @@ end)
 script.on_event(defines.events.on_gui_click, function(event)
   if not DroneGui.click(event) and not Inserters.click(event) and not Jukebox.click(event) then Gui.click(event) end
 end)
-script.on_event(defines.events.on_gui_opened, function(event) Inserters.opened(event);Jukebox.opened(event) end)
+script.on_event(defines.events.on_gui_opened, function(event) Inserters.opened(event);Jukebox.opened(event);SolarGui.opened(event) end)
 script.on_event({defines.events.on_player_rotated_entity,defines.events.on_entity_settings_pasted}, Inserters.refresh)
 script.on_event("sn-configure-inserter", function(event)
   local player=game.get_player(event.player_index);if player then Inserters.open(player,player.selected,false) end
@@ -206,6 +215,7 @@ script.on_event(defines.events.on_script_trigger_effect, function(event)
 end)
 script.on_event(defines.events.on_gui_selection_state_changed, Gui.selection)
 script.on_event(defines.events.on_gui_closed, function(event)
+  SolarGui.closed(event)
   local player = game.get_player(event.player_index)
   if player and event.element and event.element.valid then
     if event.element.name == "sn_dashboard" then Gui.close(player)

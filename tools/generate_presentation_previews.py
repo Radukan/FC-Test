@@ -12,6 +12,7 @@ import textwrap
 
 from PIL import Image, ImageDraw, ImageFont
 from catalog import ROOT, MOD, load_catalog
+from atlas_io import Atlas, paths as atlas_paths
 
 ART = ROOT / 'docs/art'
 BACKGROUND = (22, 31, 30)
@@ -33,12 +34,16 @@ def font(size=14, bold=False):
 
 def load(name):
     spec = MANIFEST[name]
+    if 'stripes' in spec:
+        for path in atlas_paths(spec):INPUTS[str(path.relative_to(ROOT))]=hashlib.sha256(path.read_bytes()).hexdigest()
+        return Atlas(spec),spec
     path = MOD / spec['filename'].split('__second-nature__/')[1]
     INPUTS[str(path.relative_to(ROOT))] = hashlib.sha256(path.read_bytes()).hexdigest()
     return Image.open(path), spec
 
 
 def tile(image, spec, direction=0, frame=0):
+    if isinstance(image,Atlas):return image.frame(direction,frame)
     index = direction * spec['frame_count'] + frame
     x = index % spec['line_length'] * spec['width']
     y = index // spec['line_length'] * spec['height']
@@ -97,6 +102,8 @@ def lander_frames():
 def contact_sheet(catalog):
     entries = [(m['title'], m['art_name'] + '-north', f"{m['footprint']} x {m['footprint']} tiles")
                for m in catalog['machines']]
+    entries += [(p['title'],p['name']+'-north',f"{p['size']} x {p['size']} / power") for p in catalog.get('energy',{}).get('plants',[])]
+    entries += [(t['title'],t['name'],f"Solar only / {t['battery_joules']/1e6:.0f} MJ") for t in catalog.get('energy',{}).get('trains',[])]
     entries += [
         ('Wayfarer expedition lander', 'lander-still', 'Permanent camp / preserved footprint'),
         ('Rootweaver emplacement', 'sentry-turret-fire', 'Mycelial defense'),
@@ -116,7 +123,7 @@ def contact_sheet(catalog):
     ]
     cw, ch, columns = 300, 310, 4
     sheet = Image.new('RGB', (cw * columns, 110 + ch * math.ceil(len(entries) / columns)), BACKGROUND)
-    header(sheet, 'SECOND NATURE / FIELD CREW', 'Current exported sprites. New-build footprints. Source-art inspection, not game screenshots.')
+    header(sheet, 'SECOND NATURE / NIGHTGLASS', 'Current exported sprites. New-build footprints. Source-art inspection, not game screenshots.')
     d = ImageDraw.Draw(sheet)
     for i, (label, name, caption) in enumerate(entries):
         x, y = i % columns * cw, 100 + i // columns * ch
@@ -201,7 +208,7 @@ def ship_review():
     frames = lander_frames()
     sheet = Image.new('RGB', (1280, 924), BACKGROUND)
     d = ImageDraw.Draw(sheet)
-    d.text((42, 28), 'SECOND NATURE / FIELD CREW', font=font(15, True), fill=ACCENT)
+    d.text((42, 28), 'SECOND NATURE / NIGHTGLASS', font=font(15, True), fill=ACCENT)
     d.text((38, 58), 'WAYFARER', font=font(57, True), fill=CREAM)
     d.text((42, 136), 'An expedition craft. Not a crash site.', font=font(21), fill=MUTED)
     d.line((42, 180, 1238, 180), fill=(65, 82, 65))
@@ -288,6 +295,51 @@ def field_crew_review():
     sheet.save(ART/'field-crew-review.jpg',quality=94,optimize=True)
 
 
+def nightglass_review(catalog):
+    energy=catalog['energy']
+    sheet=Image.new('RGB',(1400,1380),BACKGROUND);d=ImageDraw.Draw(sheet)
+    header(sheet,'NIGHTGLASS / SECOND NATURE '+json.loads((MOD/'info.json').read_text())['version'],
+           'A goth expedition, solar-only rail and six power architectures. Source-art study, not gameplay footage.')
+    d.rounded_rectangle((25,110,375,740),radius=9,fill=PANEL)
+    d.text((45,132),'THE EXPLORER / DOUBLE DETAIL',font=font(16,True),fill=ACCENT)
+    actor,spec=load('explorer-0-idle');fit_sprite(sheet,tile(actor,spec,4,0),(42,166,358,650),trim=True);actor.close()
+    d.text((46,674),'Pale skin / wolf cut / tattoos',font=font(15),fill=CREAM)
+    d.text((46,704),'Pleated skirt / 160 texels per unit',font=font(14),fill=MUTED)
+    for i,t in enumerate(energy['trains']):
+        y=110+i*210
+        d.rounded_rectangle((397,y,1375,y+193),radius=9,fill=PANEL)
+        actor,spec=load(t['name']);fit_sprite(sheet,tile(actor,spec,16,0),(415,y+16,765,y+180),trim=True);actor.close()
+        d.text((790,y+23),t['title'].upper(),font=font(19,True),fill=CREAM)
+        d.text((790,y+67),f"Roof PV: {t['solar_watts']/1000:.0f} kW / battery: {t['battery_joules']/1e6:.0f} MJ",font=font(16),fill=MUTED)
+        d.text((790,y+102),f"Day: {t['day_speed']*216:.0f} km/h / night: {t['night_speed']*216:.0f} km/h",font=font(16),fill=ACCENT)
+        d.text((790,y+141),'No fuel slots. No factory-grid charging.',font=font(14),fill=CREAM)
+    d.text((30,771),'POWER CHOICES / PASSIVE, ACTIVE, CLEAN AND DIRTY',font=font(20,True),fill=CREAM)
+    for i,p in enumerate(energy['plants']):
+        x=25+(i%3)*458;y=814+(i//3)*247
+        d.rounded_rectangle((x,y,x+442,y+232),radius=7,fill=PANEL)
+        image,spec=load(p['name']+'-north');fit_sprite(sheet,tile(image,spec),(x+5,y+10,x+207,y+220),trim=True);image.close()
+        for j,line in enumerate(textwrap.wrap(p['title'],23)):d.text((x+216,y+32+j*24),line,font=font(15,True),fill=CREAM)
+        label='Passive / zero direct emissions' if p['kind']!='burner-generator' else ('Fuel-fired / low emission' if p.get('pollution',0)==0 else 'Fuel-fired / polluting')
+        for j,line in enumerate(textwrap.wrap(label,24)):d.text((x+216,y+105+j*21),line,font=font(13),fill=MUTED)
+        d.text((x+216,y+175),f"{p['watts']/1000:g} kW rated",font=font(16),fill=ACCENT)
+    d.text((30,1334),'Native fuel/electricity and solar equipment. Battery metering and night derating are verified separately in the engine harness.',font=font(13),fill=MUTED)
+    sheet.save(ART/'nightglass-review.jpg',quality=93,optimize=True)
+
+    frames=[]
+    loaded=[(p,*load(p['name']+'-north')) for p in energy['plants']]
+    for f in range(8):
+        board=Image.new('RGB',(1200,760),BACKGROUND)
+        header(board,'NIGHTGLASS / POWER SYSTEMS','Working loops from the actual exported atlases; electricity and fuel behavior require engine validation.')
+        draw=ImageDraw.Draw(board)
+        for i,(p,image,spec) in enumerate(loaded):
+            x=(i%3)*400;y=100+(i//3)*320
+            fit_sprite(board,tile(image,spec,frame=f),(x+5,y+5,x+395,y+260))
+            draw.text((x+15,y+280),p['title'],font=font(16),fill=CREAM)
+        frames.append(board)
+    save_gif(frames,'power-options-preview.gif',100)
+    for _,image,_ in loaded:image.close()
+
+
 def generate():
     global MANIFEST
     INPUTS.clear()
@@ -296,14 +348,17 @@ def generate():
     for key,spec in drone['specs'].items():MANIFEST['field-drone-'+key]=spec
     for key,path,size in [('field-controller-icon','graphics/icons/field-controller.png',64),('field-robotics-card','graphics/technology/field-robotics.png',256)]:
         MANIFEST[key]={'filename':'__second-nature__/'+path,'width':size,'height':size,'frame_count':1,'line_length':1,'direction_count':1}
+    energy_art=json.loads((ART/'energy-manifest.json').read_text())
+    for key,spec in energy_art['specs'].items():MANIFEST[key]=dict(spec,frame_count=spec.get('frame_count',1))
     catalog = load_catalog()
     contact_sheet(catalog)
     character_reviews()
     industrial_review(catalog)
     ship_review()
     field_crew_review()
+    nightglass_review(catalog)
     outputs = ('ironbound-contact-sheet.jpg', 'character-aim-layout.jpg', 'locomotion-review.gif',
-               'mining-framing-preview.gif', 'industrial-animation-preview.gif', 'lander-review.jpg', 'lander-standby.gif', 'field-crew-review.jpg', 'field-drone-preview.gif')
+               'mining-framing-preview.gif', 'industrial-animation-preview.gif', 'lander-review.jpg', 'lander-standby.gif', 'field-crew-review.jpg', 'field-drone-preview.gif','nightglass-review.jpg','power-options-preview.gif')
     report = {
         'description': 'Current source-art review ledger. These files are not game screenshots or gameplay certification.',
         'version': json.loads((MOD / 'info.json').read_text())['version'],

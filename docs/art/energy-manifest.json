@@ -1,0 +1,459 @@
+{
+  "specs": {
+    "micro-solar-north": {
+      "filename": "__second-nature__/graphics/entity/nightglass/micro-solar-north.png",
+      "width": 173,
+      "height": 188,
+      "scale": 0.5,
+      "shift": [
+        0.1640625,
+        -0.078125
+      ],
+      "line_length": 8,
+      "apply_projection": false,
+      "frame_count": 8,
+      "direction_count": 1
+    },
+    "micro-solar-east": {
+      "filename": "__second-nature__/graphics/entity/nightglass/micro-solar-east.png",
+      "width": 169,
+      "height": 205,
+      "scale": 0.5,
+      "shift": [
+        0.1328125,
+        -0.0078125
+      ],
+      "line_length": 8,
+      "apply_projection": false,
+      "frame_count": 8,
+      "direction_count": 1
+    },
+    "micro-solar-south": {
+      "filename": "__second-nature__/graphics/entity/nightglass/micro-solar-south.png",
+      "width": 173,
+      "height": 187,
+      "scale": 0.5,
+      "shift": [
+        0.1640625,
+        0.0859375
+      ],
+      "line_length": 8,
+      "apply_projection": false,
+      "frame_count": 8,
+      "direction_count": 1
+    },
+    "micro-solar-west": {
+      "filename": "__second-nature__/graphics/entity/nightglass/micro-solar-west.png",
+      "width": 161,
+      "height": 205,
+      "scale": 0.5,
+      "shift": [
+        0.0703125,
+        -0.0078125
+      ],
+      "line_length": 8,
+      "apply_projection": false,
+      "frame_count": 8,
+      "direction_count": 1
+    },
+    "burner-set-north": {
+      "filename": "__second-nature__/graphics/entity/nightglass/burner-set-north.png",
+      "width": 174,
+      "height": 211,
+      "scale": 0.5,
+      "shift": [
+        0.171875,
+        -0.0546875
+      ],
+      "line_length": 8,
+      "apply_projection": false,
+      "frame_count": 8,
+      "direction_count": 1
+    },
+    "burner-set-east": {
+      "filename": "__second-nature__/graphics/entity/nightglass/burner-set-east.png",
+      "width": 166,
+      "height": 233,
+      "scale": 0.5,
+      "shift": [
+        0.109375,
+        -0.1953125
+      ],
+      "line_length": 8,
+      "apply_projection": false,
+      "frame_count": 8,
+      "direction_count": 1
+    },
+    "burner-set-south": {
+      "filename": "__second-nature__/graphics/entity/nightglass/burner-set-south.png",
+      "width": 186,
+      "height": 211,
+      "scale": 0.5,
+      "shift": [
+        0.265625,
+        -0.0546875
+      ],
+      "line_length": 8,
+      "apply_projection": false,
+      "frame_count": 8,
+      "direction_count": 1
+    },
+    "burner-set-west": {
+      "filename": "__second-nature__/graphics/entity/nightglass/burner-set-west.png",
+      "width": 166,
+      "height": 228,
+      "scale": 0.5,
+      "shift": [
+        0.109375,
+        0.125
+      ],
+      "line_length": 8,
+      "apply_projection": false,
+      "frame_count": 8,
+      "direction_count": 1
+    },
+    "wind-turbine-north": {
+      "filename": "__second-nature__/graphics/entity/nightglass/wind-turbine-north.png",
+      "width": 274,
+      "height": 386,
+      "scale": 0.5,
+      "shift": [
+        0.46875,
+        -0.109375
+      ],
+      "line_length": 8,
+      "apply_projection": false,
+      "frame_count": 8,
+      "direction_count": 1
+    },
+    "wind-turbine-east": {
+      "filename": "__second-nature__/graphics/entity/nightglass/wind-turbine-east.png",
+      "width": 274,
+      "height": 386,
+      "scale": 0.5,
+      "shift": [
+        0.46875,
+        -0.109375
+      ],
+      "line_length": 8,
+      "apply_projection": false,
+      "frame_count": 8,
+      "direction_count": 1
+    },
+    "wind-turbine-south": {
+      "filename": "__second-nature__/graphics/entity/nightglass/wind-turbine-south.png",
+      "width": 274,
+      "height": 386,
+      "scale": 0.5,
+      "shift": [
+        0.46875,
+        -0.109375
+      ],
+      "line_length": 8,
+      "apply_projection": false,
+      "frame_count": 8,
+      "direction_count": 1
+    },
+    "wind-turbine-west": {
+      "filename": "__second-nature__/graphics/entity/nightglass/wind-turbine-west.png",
+      "width": 274,
+      "height": 386,
+      "scale": 0.5,
+      "shift": [
+        0.46875,
+        -0.109375
+      ],
+      "line_length": 8,
+      "apply_projection": false,
+      "frame_count": 8,
+      "direction_count": 1
+    },
+    "biopellet-engine-north": {
+      "filename": "__second-nature__/graphics/entity/nightglass/biopellet-engine-north.png",
+      "width": 232,
+      "height": 242,
+      "scale": 0.5,
+      "shift": [
+        0.140625,
+        -0.09375
+      ],
+      "line_length": 8,
+      "apply_projection": false,
+      "frame_count": 8,
+      "direction_count": 1
+    },
+    "biopellet-engine-east": {
+      "filename": "__second-nature__/graphics/entity/nightglass/biopellet-engine-east.png",
+      "width": 230,
+      "height": 274,
+      "scale": 0.5,
+      "shift": [
+        0.125,
+        -0.03125
+      ],
+      "line_length": 8,
+      "apply_projection": false,
+      "frame_count": 8,
+      "direction_count": 1
+    },
+    "biopellet-engine-south": {
+      "filename": "__second-nature__/graphics/entity/nightglass/biopellet-engine-south.png",
+      "width": 232,
+      "height": 240,
+      "scale": 0.5,
+      "shift": [
+        0.140625,
+        0.109375
+      ],
+      "line_length": 8,
+      "apply_projection": false,
+      "frame_count": 8,
+      "direction_count": 1
+    },
+    "biopellet-engine-west": {
+      "filename": "__second-nature__/graphics/entity/nightglass/biopellet-engine-west.png",
+      "width": 221,
+      "height": 274,
+      "scale": 0.5,
+      "shift": [
+        0.0546875,
+        -0.03125
+      ],
+      "line_length": 8,
+      "apply_projection": false,
+      "frame_count": 8,
+      "direction_count": 1
+    },
+    "geothermal-bore-north": {
+      "filename": "__second-nature__/graphics/entity/nightglass/geothermal-bore-north.png",
+      "width": 352,
+      "height": 355,
+      "scale": 0.5,
+      "shift": [
+        0.078125,
+        0.0234375
+      ],
+      "line_length": 8,
+      "apply_projection": false,
+      "frame_count": 8,
+      "direction_count": 1
+    },
+    "geothermal-bore-east": {
+      "filename": "__second-nature__/graphics/entity/nightglass/geothermal-bore-east.png",
+      "width": 349,
+      "height": 380,
+      "scale": 0.5,
+      "shift": [
+        0.0546875,
+        -0.109375
+      ],
+      "line_length": 8,
+      "apply_projection": false,
+      "frame_count": 8,
+      "direction_count": 1
+    },
+    "geothermal-bore-south": {
+      "filename": "__second-nature__/graphics/entity/nightglass/geothermal-bore-south.png",
+      "width": 352,
+      "height": 355,
+      "scale": 0.5,
+      "shift": [
+        0.078125,
+        0.0234375
+      ],
+      "line_length": 8,
+      "apply_projection": false,
+      "frame_count": 8,
+      "direction_count": 1
+    },
+    "geothermal-bore-west": {
+      "filename": "__second-nature__/graphics/entity/nightglass/geothermal-bore-west.png",
+      "width": 349,
+      "height": 371,
+      "scale": 0.5,
+      "shift": [
+        0.0546875,
+        0.0703125
+      ],
+      "line_length": 8,
+      "apply_projection": false,
+      "frame_count": 8,
+      "direction_count": 1
+    },
+    "cogenerator-north": {
+      "filename": "__second-nature__/graphics/entity/nightglass/cogenerator-north.png",
+      "width": 315,
+      "height": 361,
+      "scale": 0.5,
+      "shift": [
+        0.2890625,
+        0.1328125
+      ],
+      "line_length": 8,
+      "apply_projection": false,
+      "frame_count": 8,
+      "direction_count": 1
+    },
+    "cogenerator-east": {
+      "filename": "__second-nature__/graphics/entity/nightglass/cogenerator-east.png",
+      "width": 301,
+      "height": 400,
+      "scale": 0.5,
+      "shift": [
+        0.1796875,
+        -0.09375
+      ],
+      "line_length": 8,
+      "apply_projection": false,
+      "frame_count": 8,
+      "direction_count": 1
+    },
+    "cogenerator-south": {
+      "filename": "__second-nature__/graphics/entity/nightglass/cogenerator-south.png",
+      "width": 315,
+      "height": 370,
+      "scale": 0.5,
+      "shift": [
+        0.2890625,
+        -0.25
+      ],
+      "line_length": 8,
+      "apply_projection": false,
+      "frame_count": 8,
+      "direction_count": 1
+    },
+    "cogenerator-west": {
+      "filename": "__second-nature__/graphics/entity/nightglass/cogenerator-west.png",
+      "width": 310,
+      "height": 400,
+      "scale": 0.5,
+      "shift": [
+        0.25,
+        -0.09375
+      ],
+      "line_length": 8,
+      "apply_projection": false,
+      "frame_count": 8,
+      "direction_count": 1
+    },
+    "sunseed-locomotive": {
+      "filename": "__second-nature__/graphics/entity/nightglass/sunseed-locomotive.png",
+      "width": 302,
+      "height": 315,
+      "scale": 0.6666666666666666,
+      "shift": [
+        0.0,
+        -0.28125
+      ],
+      "line_length": 8,
+      "apply_projection": false,
+      "direction_count": 64,
+      "usage": "train"
+    },
+    "sunseed-locomotive-shadow": {
+      "filename": "__second-nature__/graphics/entity/nightglass/sunseed-locomotive-shadow.png",
+      "width": 314,
+      "height": 310,
+      "scale": 0.6666666666666666,
+      "shift": [
+        0.1458333,
+        0.2708333
+      ],
+      "line_length": 8,
+      "apply_projection": false,
+      "direction_count": 64,
+      "usage": "train",
+      "draw_as_shadow": true
+    },
+    "heliograph-locomotive": {
+      "filename": "__second-nature__/graphics/entity/nightglass/heliograph-locomotive.png",
+      "width": 302,
+      "height": 321,
+      "scale": 0.6666666666666666,
+      "shift": [
+        0.0,
+        -0.34375
+      ],
+      "line_length": 8,
+      "apply_projection": false,
+      "direction_count": 64,
+      "usage": "train"
+    },
+    "heliograph-locomotive-shadow": {
+      "filename": "__second-nature__/graphics/entity/nightglass/heliograph-locomotive-shadow.png",
+      "width": 317,
+      "height": 312,
+      "scale": 0.6666666666666666,
+      "shift": [
+        0.1770833,
+        0.375
+      ],
+      "line_length": 8,
+      "apply_projection": false,
+      "direction_count": 64,
+      "usage": "train",
+      "draw_as_shadow": true
+    },
+    "daybreak-locomotive": {
+      "filename": "__second-nature__/graphics/entity/nightglass/daybreak-locomotive.png",
+      "width": 302,
+      "height": 312,
+      "scale": 0.6666666666666666,
+      "shift": [
+        0.0,
+        -0.25
+      ],
+      "line_length": 8,
+      "apply_projection": false,
+      "direction_count": 64,
+      "usage": "train"
+    },
+    "daybreak-locomotive-shadow": {
+      "filename": "__second-nature__/graphics/entity/nightglass/daybreak-locomotive-shadow.png",
+      "width": 314,
+      "height": 308,
+      "scale": 0.6666666666666666,
+      "shift": [
+        0.1458333,
+        0.2916667
+      ],
+      "line_length": 8,
+      "apply_projection": false,
+      "direction_count": 64,
+      "usage": "train",
+      "draw_as_shadow": true
+    }
+  },
+  "files": {
+    "second-nature/graphics/entity/nightglass/micro-solar-north.png": "137c3ab105462efc095f84ebc0efa8b0852a2603f238b6081d5c9482a7dff53b",
+    "second-nature/graphics/entity/nightglass/micro-solar-east.png": "9912724449d78e2509420bfaa9c35d1189a8de0d3ef56b2edf117134dbb155d4",
+    "second-nature/graphics/entity/nightglass/micro-solar-south.png": "d035fbe6a224718a615c718337f7af56296cfe011be4918cd5cc6984f9e34e84",
+    "second-nature/graphics/entity/nightglass/micro-solar-west.png": "0a06a79f0af1b9c0ae9f8502675c3bdf979aa8a79fdb4d5a50146ea3c8eced9d",
+    "second-nature/graphics/entity/nightglass/burner-set-north.png": "dec653d7b2653b6c70981d4af95a3a1d127f710bde81a91fa34fe41999678807",
+    "second-nature/graphics/entity/nightglass/burner-set-east.png": "a34828459a733b3f160196220c8a7c6341999f88a565c538849cb73b140eda54",
+    "second-nature/graphics/entity/nightglass/burner-set-south.png": "e6193ce670ad323a3b07074e716078b87b1fdc76fff480aac0fa13a253ad3250",
+    "second-nature/graphics/entity/nightglass/burner-set-west.png": "160bd09533d37ce6c0cb89ca861d5efd294a6d597427d683e73698d7434ad215",
+    "second-nature/graphics/entity/nightglass/wind-turbine-north.png": "0554616364470a8fc90fe02824d697ad940563e7fab1e511cb67b9d66b02a20b",
+    "second-nature/graphics/entity/nightglass/wind-turbine-east.png": "75091de63b090dfa8891401a48578fde3d8665b4be7a0a31c56537ef7806c7c4",
+    "second-nature/graphics/entity/nightglass/wind-turbine-south.png": "7fc2209834ac22cf3849060644d3fca4bfe4702bee33945982c0fc1c8e9b1ec1",
+    "second-nature/graphics/entity/nightglass/wind-turbine-west.png": "1c36e0878658bfba40e69d33328ea423d00798f90a5cee6eeaca00263646949b",
+    "second-nature/graphics/entity/nightglass/biopellet-engine-north.png": "f48230d70514fcaa4574361d18e2ec5a07864a6962f5d5bfec5392eb7d175fc2",
+    "second-nature/graphics/entity/nightglass/biopellet-engine-east.png": "dfe87266137fca482ffc656c48a4e6062f95d1002a4a9bdf75782e961ec1e802",
+    "second-nature/graphics/entity/nightglass/biopellet-engine-south.png": "2a1c0845f692c1af949ac0f4900a788d3d81cdd256e4d94e50f848b031e3e7ac",
+    "second-nature/graphics/entity/nightglass/biopellet-engine-west.png": "b61c6343e2b3501c949f5cd9a2139f39c846dc95c80e2ab58d4b985fbba7dcd7",
+    "second-nature/graphics/entity/nightglass/geothermal-bore-north.png": "170d52a0e838d2b57dde78613ea67f21e81469d1cf48e7a3dae151142f47df2a",
+    "second-nature/graphics/entity/nightglass/geothermal-bore-east.png": "5026fbfd8c4ad59ff8f0435eec592d560a7d97f5b55db3cea5b13003f8651fd4",
+    "second-nature/graphics/entity/nightglass/geothermal-bore-south.png": "f1cc1a3853439bf4f7f990b28229c92519b45796b330c46ef714e47b9605ef89",
+    "second-nature/graphics/entity/nightglass/geothermal-bore-west.png": "86efd55eab8de5bdddc8c89b795cb79c171050ab3ccf272017074b6220110048",
+    "second-nature/graphics/entity/nightglass/cogenerator-north.png": "380ddf2a2b2c66fa8c3d68c186f3e68e9e06e5d29cb28e4e00fa48c6db4c687e",
+    "second-nature/graphics/entity/nightglass/cogenerator-east.png": "6ab8460649b93c8d741576a0c1c3905dc245163ba1f4f00950e8b77cd368c69f",
+    "second-nature/graphics/entity/nightglass/cogenerator-south.png": "85aa466a662802db103c7970e2d18c683ce85fd3a1cb17a41d71e4627b8efe50",
+    "second-nature/graphics/entity/nightglass/cogenerator-west.png": "9d41986bd431dbd02ecfac589af83e581868b9efd1ddad663e2db53523380558",
+    "second-nature/graphics/entity/nightglass/sunseed-locomotive.png": "bab370bb193541faede3d0f8c7870a1a9143a11650acb9d18ce8eacb7d9fbe46",
+    "second-nature/graphics/entity/nightglass/sunseed-locomotive-shadow.png": "31b5bf85299df3260675df7dc0cda862b03f2af859b8785576c91d10e0b822e1",
+    "second-nature/graphics/entity/nightglass/heliograph-locomotive.png": "ee13bed501fd4b600dd429d174fb0ca1ddfdc201ef07bcbf4313b3fc6a868bf1",
+    "second-nature/graphics/entity/nightglass/heliograph-locomotive-shadow.png": "59c052bdd65254c9738d9320ec7e1b69af6b92872ada2d8fc784dd1a87fe1994",
+    "second-nature/graphics/entity/nightglass/daybreak-locomotive.png": "f9d5e8e834cd1569121f69ed4917b84c4f1970edc859c595efd5eac4f1f6962b",
+    "second-nature/graphics/entity/nightglass/daybreak-locomotive-shadow.png": "44135735529c2bda4a79d0aab5325d738fbdb89aee9476dfbd9cf77f864b7adb"
+  }
+}

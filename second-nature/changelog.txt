@@ -1,4 +1,20 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.7.0
+Date: 2026-09-08
+  Features:
+    - Add Sunseed, Heliograph and Daybreak solar locomotive tiers with fitted native panels and batteries, no fuel slots, metered traction and reduced night speed/power.
+    - Add Copperleaf micro solar, Trailblazer burner, helical wind, closed-loop biomass, deep geothermal and residue-fired generating options across the progression.
+    - Add renewable biopellets and mineral ash recovery, with real fuel consumption, residue and pollution behavior.
+    - Add the onboard solar energy monitor and power/rail research progression.
+  Character:
+    - Give the adult explorer pale skin, a layered wolf cut, original botanical/circuit tattoos, dark gear and a pleated short skirt over opaque undershorts.
+    - Render character textures at twice the authored resolution while preserving native world scale and motion/grip contracts.
+    - Crop fixed pose padding and split large sheets into texture-safe native stripes; update readers, icons and source previews.
+  Safety:
+    - Account for actual battery joules; reconcile unspent motor credit and preserve stored energy across save/reload and mining.
+    - Reject ordinary fuel and unsupported onboard equipment; do not increase train velocity or replace native schedules.
+    - Add source and real-engine solar/rail/generation probes alongside existing campaign and planner checks.
+---------------------------------------------------------------------------------------------------
 Version: 0.6.2
 Date: 2026-09-07
   Changes:

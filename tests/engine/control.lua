@@ -5,6 +5,7 @@ local C=require('__second-nature__/shared/constants')
 local Probes=require('module_probes')
 local FieldDroneProbes=require('field_drone_probes')
 local FieldPlannerProbes=require('field_planner_probes')
+local NightglassProbes=require('nightglass_probes')
 local function build(surface,name,pos)
   return assert(surface.create_entity({name=name,position=pos,force='player',raise_built=true}),name)
 end
@@ -58,9 +59,11 @@ script.on_init(function()
   local absorptions=prototypes.entity['small-biter'].absorptions_to_join_attack
   assert(absorptions and absorptions.pollution>=1e29,'pollution recruitment cost: '..tostring(absorptions and absorptions.pollution))
   -- Save creation followed by benchmarking exercises storage LuaObject restoration.
+  NightglassProbes.init(surface)
   log('SECOND_NATURE_ENGINE_SMOKE_READY')
 end)
 script.on_nth_tick(1,function()
+  NightglassProbes.tick()
   FieldDroneProbes.tick()
   if storage.drone_probe and storage.drone_probe.finished and not storage.field_planner_probe then
     FieldPlannerProbes.init(storage.worlds.nauvis,game.forces.player)
