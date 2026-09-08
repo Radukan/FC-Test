@@ -245,3 +245,44 @@ def test_fluid_port_contract_covers_every_machine():
     ports = json.loads((ROOT / 'docs/art/fluid-ports.json').read_text())
     for m in K['machines']:
         assert m['name'] in ports, m['name']
+
+
+def test_every_machine_is_built_to_its_declared_footprint(stage):
+    """The sprite, the fluid ports and the description all describe the size in
+    machine_layouts, so the bounding box has to match it. Inheriting the base
+    prototype's box instead leaves ports hanging outside the entity, which the
+    engine rejects outright with a PipeConnectionDefinition error."""
+    for m in K['machines']:
+        layout = LAYOUTS[m['name']]
+        kind = m.get('entity_type') or 'assembling-machine'
+        proto = stage.raw[kind][layout['entity_name']]
+        if proto is None:
+            continue
+        size = layout['size']
+        left_top, right_bottom = proto['selection_box'][1], proto['selection_box'][2]
+        assert right_bottom[1] - left_top[1] == size, (m['name'], size)
+        assert right_bottom[2] - left_top[2] == size, (m['name'], size)
+        assert proto['tile_width'] == size and proto['tile_height'] == size, m['name']
+
+
+def test_every_fluid_port_sits_inside_its_entity(stage):
+    """A pipe connection outside the collision box is a hard prototype error."""
+    checked = 0
+    for m in K['machines']:
+        layout = LAYOUTS[m['name']]
+        kind = m.get('entity_type') or 'assembling-machine'
+        proto = stage.raw[kind][layout['entity_name']]
+        if proto is None or proto['fluid_boxes'] is None:
+            continue
+        box = proto['collision_box']
+        for fluid_box in proto['fluid_boxes'].values():
+            if fluid_box['pipe_connections'] is None:
+                continue
+            for connection in fluid_box['pipe_connections'].values():
+                position = connection['position']
+                if position is None:
+                    continue
+                checked += 1
+                assert box[1][1] <= position[1] <= box[2][1], (m['name'], position[1])
+                assert box[1][2] <= position[2] <= box[2][2], (m['name'], position[2])
+    assert checked

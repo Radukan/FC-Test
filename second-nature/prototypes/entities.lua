@@ -23,7 +23,11 @@ local function create_machine(x, layout, compact)
     -- Preserve saved collision/connection geometry. Never enlarge a working factory on load.
     p.hidden, p.hidden_in_factoriopedia = true, true
     p.localised_name = {"", {"entity-name." .. item_name}, " (compact)"}
-  elseif layout.expanded then
+  else
+    -- Every machine is built to its declared footprint, not to whatever the
+    -- inherited base happened to use. The sprites, the fluid ports and the
+    -- description all describe `layout.size`, so the bounding box has to agree:
+    -- a port outside the box is a hard prototype error.
     local half = layout.size / 2
     p.tile_width, p.tile_height = layout.size, layout.size
     p.collision_box = {{-half + .2, -half + .2}, {half - .2, half - .2}}
