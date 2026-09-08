@@ -179,3 +179,36 @@ def test_every_placeable_item_and_mining_result_names_a_real_prototype(stage):
         if result is not None and str(result) not in entities:
             problems.append(f'{kind}/{name}: place_result {result}')
     assert not problems, problems
+
+
+def test_no_recipe_puts_a_fluid_in_an_item_only_category(stage):
+    """The engine refuses a fluid in a hand-craftable category outright: "Recipe is
+    in 'crafting' category but has a non-item ingredient 'lubricant' (fluid)".
+
+    The rule is a property of the category itself, not of the machines that happen
+    to support it: assembler 2 and 3 handle fluids and also accept plain 'crafting',
+    so inferring capability from machines would wrongly clear 'crafting'. These are
+    the vanilla categories a fluid may never appear in.
+    """
+    item_only = {'crafting', 'basic-crafting', 'advanced-crafting', 'smelting',
+                 'centrifuging', 'crushing', 'electronics', 'pressing',
+                 'organic-or-hand-crafting'}
+    problems = []
+    checked = 0
+    for name in stage.raw['recipe']:
+        recipe = stage.raw['recipe'][name]
+        category = str(recipe['category'] or 'crafting')
+        for field in ('ingredients', 'results'):
+            node = recipe[field]
+            if node is None:
+                continue
+            for entry in node.values():
+                if not hasattr(entry, '__getitem__') or entry['type'] is None:
+                    continue
+                if str(entry['type']) != 'fluid':
+                    continue
+                checked += 1
+                if category in item_only:
+                    problems.append(f'{name}: {field} fluid {entry["name"]} in {category!r}')
+    assert checked, 'No fluid recipes found, so this test would pass vacuously.'
+    assert not problems, sorted(set(problems))

@@ -10,6 +10,7 @@ Date: 2026-09-08
     - Add a mid-game field laboratory that researches faster and accepts every stock science package.
     - Add three field guide entries covering the clean and dirty industry trade, the concentration line and atmospheric cleanup.
   Fixes:
+    - Craft the precision assembly kit in a fluid-capable assembler. The recipe takes lubricant but sat in the hand-craftable category, which the game rejects outright; it is still made in a stock assembler, so nothing about the build order changes.
     - Make the deep core drill drop its ore outside its own body. It inherited the output position of the smaller drill it is built from, which on a seven tile machine landed inside the hull where no belt or inserter could reach it.
     - Clear the inherited sound accents from the mining heads. The deep core drill is built from the big mining drill, which cues a sound off a "drill-animation" layer that our own artwork replaces, and the leftover reference stopped the game from loading.
     - Build every machine to its declared footprint. Nine of the new buildings, the oxygen-blown smelter and deep core drill among them, inherited the bounding box of the vanilla prototype they were copied from while their sprites and pipe openings assumed the larger size, which left fluid ports hanging outside the entity and stopped the game from loading.

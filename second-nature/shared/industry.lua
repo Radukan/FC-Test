@@ -151,14 +151,16 @@ machine("field-laboratory", "Field ecology laboratory", "lab", {}, "320kW", 0,
 ------------------------------------------------------------------------------
 -- RECIPES
 ------------------------------------------------------------------------------
--- Materials. Frames and precision kits are plain crafts: the buildings that
--- specialise in them are themselves BUILT from them, so a machine-only recipe
--- would be an unsatisfiable bootstrap.
+-- Materials. Frames and precision kits are made in stock assemblers: the
+-- buildings that specialise in them are themselves BUILT from them, so a
+-- recipe needing one of our machines would be an unsatisfiable bootstrap.
+-- The kit takes lubricant, so it must be crafting-with-fluid rather than
+-- plain crafting; the engine rejects a fluid in a hand-craftable category.
 recipe("refractory-brick", "Fire refractory brick", "sn-kiln", 6,
   {{"stone-brick", 4}, {"sn-silica", 2}, {"sn-vitrified-waste", 1}}, {{"sn-refractory-brick", 4}})
 recipe("machine-frame", "Weld a composite frame", "crafting", 8,
   {{"steel-plate", 6}, {"sn-refractory-brick", 2}, {"concrete", 4}}, {{"sn-machine-frame", 2}})
-recipe("precision-assembly", "Build a precision kit", "crafting", 10,
+recipe("precision-assembly", "Build a precision kit", "crafting-with-fluid", 10,
   {{"iron-gear-wheel", 8}, {"steel-plate", 4}, {"advanced-circuit", 2}, {"lubricant", 20, "fluid"}},
   {{"sn-precision-assembly", 2}})
 recipe("catalyst-mesh", "Weave a catalytic mesh", "sn-precision-assembly", 12,
