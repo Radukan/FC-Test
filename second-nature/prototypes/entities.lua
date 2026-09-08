@@ -100,6 +100,10 @@ local function create_machine(x, layout, compact)
     p.module_slots = 3
     p.allowed_effects = {"consumption","speed","pollution","productivity"}
     p.heating_energy = "100kW"
+    -- Drop mined ore just past the front edge of the actual footprint. The
+    -- inherited vector belongs to the base drill's smaller body, so on a larger
+    -- head it lands inside the machine where no belt or chest can reach it.
+    p.vector_to_place_result = {0, -(layout.size / 2 + .35)}
     -- A dry head has no plumbing; the hydraulic head keeps its base input box.
     if not x.needs_water then p.input_fluid_box = nil end
   elseif kind == "lab" then

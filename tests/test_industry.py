@@ -319,3 +319,21 @@ def test_no_sound_accent_points_at_a_missing_working_visualisation(stage):
             # Our drills draw none of the inherited layers, so no accent may survive.
             assert sound is None or sound['sound_accents'] is None, m['name']
     assert drills == 3, drills
+
+
+def test_mining_heads_drop_ore_outside_their_own_body(stage):
+    """vector_to_place_result is inherited from the base drill, which may have a
+    smaller body than ours. On a larger head the inherited vector lands inside the
+    machine, where no belt or chest can reach the ore."""
+    drills = 0
+    for m in K['machines']:
+        if (m.get('entity_type') or 'assembling-machine') != 'mining-drill':
+            continue
+        layout = LAYOUTS[m['name']]
+        proto = stage.raw['mining-drill'][layout['entity_name']]
+        vector = proto['vector_to_place_result']
+        assert vector is not None, m['name']
+        drills += 1
+        assert abs(vector[2]) > layout['size'] / 2, (m['name'], vector[2], layout['size'])
+        assert vector[1] == 0, m['name']
+    assert drills == 3, drills
