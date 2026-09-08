@@ -27,8 +27,8 @@ function X.init(nauvis)
     s.set_tiles(tiles,true)
     local plant=create(s,'sn-'..def.name,pos);P.register(plant)
     local sink=create(s,'sn-engine-power-load',{pos.x+7,pos.y})
-    create(s,'substation',{pos.x+3,pos.y+5})
-    cases[#cases+1]={entity=plant,sink=sink,definition=def,peak_pollution=0,ash=0,hot=0}
+    local pole=create(s,'substation',{pos.x+3,pos.y+5})
+    cases[#cases+1]={entity=plant,sink=sink,pole=pole,definition=def,peak_pollution=0,ash=0,hot=0}
     stages[def.stage]=stages[def.stage]+1
   end
   assert(stages.early==6 and stages.mid==6 and stages.late==6)
@@ -65,7 +65,7 @@ function X.tick()
       assert(e.temperature>100,'fission produced no real heat')
       assert(e.burner.currently_burning,'fission did not consume fuel')
     else
-      local count=e.electric_network_statistics.get_input_count(e.name)
+      local count=case.pole.electric_network_statistics.get_input_count(e.name)
       assert(count>0,'no native electrical output: '..d.name)
       assert(count<=d.watts*age/60*1.02+d.watts*2,'power exceeded its declared energy envelope: '..d.name)
     end
