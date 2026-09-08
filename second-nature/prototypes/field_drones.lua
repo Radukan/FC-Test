@@ -40,11 +40,7 @@ for key,spec in pairs(A) do
   animations[#animations+1]=legacy
 end
 data:extend(animations)
-data:extend({
-  {type="custom-input",name="sn-toggle-field-drones",key_sequence="CONTROL + SHIFT + B",consuming="none"},
-  {type="shortcut",name="sn-field-drones",action="lua",toggleable=true,
-   icon=H.icon("field-drone"),icon_size=64,small_icon=H.icon("field-drone"),small_icon_size=64,
-   associated_control_input="sn-toggle-field-drones",order="z-sn-e"}})
+data:extend({{type="custom-input",name="sn-toggle-field-drones",key_sequence="CONTROL + SHIFT + B",consuming="none"}})
 
 -- The native shortcuts and their native hotkeys unlock with the early crew.
 for _,name in ipairs(D.planner_shortcuts) do

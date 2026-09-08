@@ -1965,15 +1965,15 @@
     "apply_projection": false
   },
   "explorer-0-idle": {
-    "width": 306,
-    "height": 518,
+    "width": 304,
+    "height": 522,
     "frame_count": 4,
     "direction_count": 8,
     "line_length": 4,
     "scale": 0.25,
     "apply_projection": false,
     "shift": [
-      0.4765625,
+      0.5,
       -0.1015625
     ],
     "filename": "__second-nature__/graphics/entity/industry/explorer-0-idle.png"
@@ -1993,16 +1993,16 @@
     "filename": "__second-nature__/graphics/entity/industry/explorer-0-idle_with_gun.png"
   },
   "explorer-0-running": {
-    "width": 336,
-    "height": 534,
+    "width": 326,
+    "height": 512,
     "frame_count": 16,
     "direction_count": 8,
     "line_length": 16,
     "scale": 0.25,
     "apply_projection": false,
     "shift": [
-      0.421875,
-      -0.1015625
+      0.3828125,
+      -0.09375
     ],
     "filename": "__second-nature__/graphics/entity/industry/explorer-0-running.png"
   },
@@ -2078,15 +2078,15 @@
     ]
   },
   "explorer-1-idle": {
-    "width": 308,
-    "height": 518,
+    "width": 304,
+    "height": 522,
     "frame_count": 4,
     "direction_count": 8,
     "line_length": 4,
     "scale": 0.25,
     "apply_projection": false,
     "shift": [
-      0.484375,
+      0.5,
       -0.1015625
     ],
     "filename": "__second-nature__/graphics/entity/industry/explorer-1-idle.png"
@@ -2106,16 +2106,16 @@
     "filename": "__second-nature__/graphics/entity/industry/explorer-1-idle_with_gun.png"
   },
   "explorer-1-running": {
-    "width": 336,
-    "height": 534,
+    "width": 326,
+    "height": 512,
     "frame_count": 16,
     "direction_count": 8,
     "line_length": 16,
     "scale": 0.25,
     "apply_projection": false,
     "shift": [
-      0.421875,
-      -0.1015625
+      0.3828125,
+      -0.09375
     ],
     "filename": "__second-nature__/graphics/entity/industry/explorer-1-running.png"
   },
@@ -2191,16 +2191,16 @@
     ]
   },
   "explorer-2-idle": {
-    "width": 316,
-    "height": 524,
+    "width": 304,
+    "height": 522,
     "frame_count": 4,
     "direction_count": 8,
     "line_length": 4,
     "scale": 0.25,
     "apply_projection": false,
     "shift": [
-      0.515625,
-      -0.078125
+      0.5,
+      -0.1015625
     ],
     "filename": "__second-nature__/graphics/entity/industry/explorer-2-idle.png"
   },
@@ -2219,16 +2219,16 @@
     "filename": "__second-nature__/graphics/entity/industry/explorer-2-idle_with_gun.png"
   },
   "explorer-2-running": {
-    "width": 336,
-    "height": 534,
+    "width": 326,
+    "height": 512,
     "frame_count": 16,
     "direction_count": 8,
     "line_length": 16,
     "scale": 0.25,
     "apply_projection": false,
     "shift": [
-      0.421875,
-      -0.1015625
+      0.3828125,
+      -0.09375
     ],
     "filename": "__second-nature__/graphics/entity/industry/explorer-2-running.png"
   },

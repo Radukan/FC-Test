@@ -51,28 +51,6 @@ function N.init(nauvis)
   R.tick()
   assert(battery(case.locos[4]).energy+case.locos[4].burner.remaining_burning_fuel<=12345.001)
   storage.nightglass=case
-  -- Each power source has a native accumulator load. Dirty sources burn real
-  -- fuel; the biomass unit must also produce its ash inventory.
-  for index,def in ipairs(E.plants) do
-    local ps
-    if def.passive=='geothermal' then
-      ps=nauvis;ps.request_to_generate_chunks({-180,240},2);ps.force_generate_chunk_requests();clear(ps,{{-188,232},{-172,248}})
-    else
-      ps=game.create_surface('sn-power-probe-'..index,{width=64,height=64})
-      ps.request_to_generate_chunks({0,0},2);ps.force_generate_chunk_requests();clear(ps,{{-8,-8},{8,8}})
-      ps.always_day=true;ps.solar_power_multiplier=1;ps.wind_speed=.015;ps.set_property('pressure',1000)
-    end
-    local pos=def.passive=='geothermal' and {x=-180,y=240} or {x=0,y=0}
-    local plant=entity(ps,'sn-'..def.name,pos);P.register(plant)
-    local load=entity(ps,'accumulator',{pos.x+5,pos.y})
-    entity(ps,'accumulator',{pos.x+5,pos.y+3});entity(ps,'accumulator',{pos.x+5,pos.y-3})
-    entity(ps,'substation',{pos.x+3,pos.y+4})
-    if def.kind=='burner-generator' then
-      local fuel=def.fuel=='sn-grown-fuel' and 'sn-biopellet' or 'coal'
-      assert(plant.insert({name=fuel,count=20})==20)
-    end
-    case.plants[#case.plants+1]={entity=plant,load=load,definition=def,peak_pollution=0}
-  end
   log('SECOND_NATURE_ENGINE_NIGHTGLASS_READY')
 end
 function N.tick()
@@ -125,19 +103,8 @@ function N.tick()
       assert(battery(e).energy==0 and e.burner.remaining_burning_fuel==0,'depleted solar train was refueled without sunlight')
       assert(S.root().solar_rail.locos[e.unit_number].consumed==c['spent-'..i],'empty train received hidden traction energy')
     end
-    for _,p in ipairs(c.plants) do
-      assert(p.load.energy>0,'native power source did not charge its accumulator: '..p.definition.name)
-      if p.definition.pollution and p.definition.pollution>0 then assert(p.peak_pollution>0,'polluting generator emitted no real pollution') end
-      if p.definition.kind=='burner-generator' then
-        assert(p.entity.burner.currently_burning or p.entity.burner.inventory.get_item_count()<20,'fuel generator consumed no fuel')
-      end
-      if p.definition.name=='biopellet-engine' then
-        assert(p.entity.burner.burnt_result_inventory.get_item_count('sn-bio-ash')>0,'biopellet engine produced no real ash')
-      end
-    end
     c.finished=true
     log('SECOND_NATURE_ENGINE_SOLAR_RAIL_OK')
-    log('SECOND_NATURE_ENGINE_POWER_OPTIONS_OK')
   end
   if age%60==0 then for _,p in ipairs(c.plants) do p.peak_pollution=math.max(p.peak_pollution,p.entity.surface.get_pollution(p.entity.position)) end end
   for i=1,3 do

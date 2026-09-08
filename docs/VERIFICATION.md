@@ -1,4 +1,14 @@
-# Verification ledger: Nightglass 0.7.0 alpha
+# Verification ledger: Nightglass Foundry 0.8.0 alpha
+
+## Current 0.8.0 candidate
+
+This update fixes starter iron sticks, visible crew recall and controller-only upper-left controls; humanizes the original goth explorer; rebuilds 117 inventory/building icons; and expands power to six distinct systems in each stage. See [POWER-ROSTER.md](POWER-ROSTER.md) for ratings and constraints.
+
+The native harness adds real recall after a mid-flight pause, a fresh force with starter sticks/poles before green science, and native electrical/fuel/fluid/heat output checks for all eighteen systems. Required markers include `SECOND_NATURE_ENGINE_CREW_RECALL_OK` and `SECOND_NATURE_ENGINE_POWER_STAGES_OK`. Existing solar-rail, field-planner and campaign probes remain.
+
+Source tests verify changed controls/accounting, top-left button gating, icon uniqueness/legibility at native size, stage counts, genuine energy inputs and geothermal regional/legacy limits. The source suite contains 257 tests covering the updated contracts; the completed full-suite result is recorded with the local commit. Native stage-power/recall validation remains pending GitHub reconnection and CI. Graphical-client appearance/hotkey behavior and long-run campaign, multiplayer and performance profiling remain unverified.
+
+## Historical Nightglass 0.7.0 evidence
 
 ## Current Nightglass 0.7.0
 

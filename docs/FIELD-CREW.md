@@ -1,4 +1,4 @@
-# Field Crew / 0.6.2
+# Field Crew / 0.8.0
 
 ## Activation: carry the kit, no armor or power
 
@@ -6,7 +6,7 @@ The 0.6.1 inventory-based drones and field controller are retained, as requested
 
 Research **Field construction robotics** after **Automation**, for **20 red science packs**. Carry a **field controller**, **wind-up drones** and suitable building materials in the **character's main inventory**. New crews are **enabled automatically**. A one-time message and monitor explain the controls.
 
-**Ctrl + Shift + B** pauses/resumes the crew and opens its monitor. The toolbar's drone button is the same control. Hiding the monitor does not disable the crew. Deliberate pauses saved by 0.6.1 are retained; use the key or button to resume such a crew.
+**Ctrl + Shift + B** pauses/resumes the crew and opens its monitor. The controller-only button is in the upper-left mod-button area, not the toolbar. It is removed when the controller leaves the character inventory. Hiding the monitor does not disable the crew. Deliberate pauses saved by 0.6.1 are retained; use the key or button to resume such a crew.
 
 No equipment grid, armor, batteries, charging station or electric power is needed. The drones remain outside all logistic networks; the packed items cannot dock in native roboports or perform logistic deliveries.
 
@@ -20,6 +20,8 @@ The native blueprint, blueprint-book, copy, cut, paste, undo, redo, import-strin
 - Other forces' hardware, occupied/unmineable entities, the protected lander and field drones themselves are not dismantled. Build/deconstruction/upgrade permissions are checked.
 - Packed vehicle construction/upgrades, perishable place-items, specialized rail upgrades, repair and item-request/module delivery remain outside this barebones system. Ordinary rail blueprint construction is supported. Later native robots still have broader capabilities.
 - Loose items beneath a construction ghost are not silently deleted or collected. Clear them or explicitly mark them for deconstruction first.
+
+Pause/resume never remotely despawns a working drone. A paused crew turns around and flies home with its real cargo; inventory items return at arrival. Turning the crew back on does not interrupt that return flight. Death/logout/force or surface transitions still reconcile immediately when a physical return is not safe or possible.
 
 All jobs share claims across operators. Cancellation, moved/removed targets, failed operations, inventory overflow, loss of controller/range, disconnect/death and force/surface transitions reconcile the real cargo. Overflow is spilled rather than deleted. A destroyed drone is lost, but its unspent cargo is recoverable. Existing in-flight 0.6.1 construction jobs keep their escrow; no extra drones or materials are granted.
 

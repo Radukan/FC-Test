@@ -3,15 +3,14 @@
 import hashlib,json,math
 from PIL import Image,ImageDraw
 from lupa.lua52 import LuaRuntime
-from catalog import ROOT,MOD,plain
+from catalog import ROOT,MOD,plain,load_catalog
 from industrial_art import render
 from energy_models import plant,locomotive
 from sprite_bounds import assert_sprite_fits
 
 
 def catalog():
-    lua=LuaRuntime(unpack_returned_tuples=True)
-    return plain(lua.execute((MOD/'shared/energy.lua').read_text()))
+    return load_catalog()['energy']
 
 
 def save(image,path):
@@ -47,8 +46,8 @@ def generate():
             images=[]
             for f in range(8):
                 model=plant(p['name'],f/8)
-                assert_sprite_fits(model,{'width':640,'height':640,'ppu':64,'origin':.5},q*math.pi/2,(p['name'],q,f))
-                images.append(render(model,640,640,ppu=64,origin=.5,angle=q*math.pi/2,map_aligned=True))
+                assert_sprite_fits(model,{'width':1024,'height':1024,'ppu':64,'origin':.5},q*math.pi/2,(p['name'],q,f))
+                images.append(render(model,1024,1024,ppu=64,origin=.5,angle=q*math.pi/2,map_aligned=True))
             key=p['name']+'-'+direction
             specs[key]=cropped_sheet(images,key,8,.5,.5,64)
             specs[key].update(frame_count=8,direction_count=1)
@@ -75,11 +74,15 @@ def generate():
         print('SOLAR RAIL ART',t['name'],flush=True)
     # Fuel and fitted grid-component icons are original model details, not copied stock art.
     from industrial_art import Mesh,STEEL,DARK,COPPER,GOLD
-    for key,color in [('biopellet',(85,121,64)),('bio-ash',(137,130,112)),('solar-rail-panels',(45,82,120)),('solar-rail-battery',(123,133,147)),('solar-drive-charge',(66,135,158))]:
+    for key,color in [('producer-gas',(159,109,55)),('biogas',(76,153,90)),('synthetic-gas',(66,124,165)),('biopellet',(85,121,64)),('bio-ash',(137,130,112)),('solar-rail-panels',(45,82,120)),('solar-rail-battery',(123,133,147)),('solar-drive-charge',(66,135,158))]:
         m=Mesh();m.box((0,0,.25),(.7,.48,.45),color,.1)
         for x in (-.23,0,.23):m.box((x,0,.49),(.05,.42,.035),GOLD,.01)
         image=render(m,128,128,origin=.6);icon(image,MOD/f'graphics/icons/{key}.png')
     mapping={'practical-power':'burner-set','wind-power':'wind-turbine','biomass-power':'biopellet-engine','geothermal-power':'geothermal-bore','industrial-cogeneration':'cogenerator',
+             'river-power':'river-turbine','compact-steam':'steam-piston','producer-gas-power':'producer-gas-engine',
+             'solar-concentration':'solar-tower','biogas-power':'biogas-turbine','heat-recovery-power':'heat-recovery-turbine',
+             'photonic-power':'photonic-canopy','planetary-thermal-power':'planetary-thermal-tap','combined-cycle-power':'combined-cycle',
+             'biofuel-cell-power':'biofuel-cell','modular-fission-power':'salt-reactor','plasma-conversion-power':'plasma-generator',
              'solar-railway':'sunseed-locomotive','solar-railway-2':'heliograph-locomotive','solar-railway-3':'daybreak-locomotive'}
     for name,key in mapping.items():
         card=Image.new('RGBA',(256,256));d=ImageDraw.Draw(card)

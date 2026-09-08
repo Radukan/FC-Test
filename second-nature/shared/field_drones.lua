@@ -9,8 +9,8 @@ local D = {
   planner_shortcuts={"undo","redo","copy","cut","paste","import-string","give-blueprint","give-blueprint-book","give-deconstruction-planner","give-upgrade-planner"}
 }
 D.items = {
-  {kind="item",name="field-drone",title="Wind-up construction drone",description="A spring-driven rotorcraft that builds, dismantles and upgrades nearby planner targets from its operator's inventory. Carry drones, a field controller and materials after research. New crews run automatically; Ctrl + Shift + B pauses or resumes them. No armor, power supply or logistics network is needed."},
-  {kind="item",name="field-controller",title="Field drone controller",description="Carry this with wind-up drones and materials in the character inventory. The crew starts automatically after Field construction robotics. Ctrl + Shift + B opens the monitor and pauses/resumes work. No equipment grid, power or roboport connection is required."}
+  {kind="item",name="field-drone",title="Wind-up construction drone",description="A spring-driven rotorcraft that builds, dismantles and upgrades nearby planner targets from its operator's inventory. Carry drones, a field controller and materials after research. New crews run automatically; The upper-left controller button or Ctrl + Shift + B pauses/resumes them; recalled workers fly back to their operator. No armor, power supply or logistics network is needed."},
+  {kind="item",name="field-controller",title="Field drone controller",description="Carry this with wind-up drones and materials in the character inventory. The crew starts automatically after Field construction robotics. The controller-only button at the upper left, or Ctrl + Shift + B, opens the monitor and pauses/resumes work. No equipment grid, power or roboport connection is required."}
 }
 D.recipes = {
   {name="field-drone",title="Assemble a wind-up construction drone",category="crafting",seconds=2,

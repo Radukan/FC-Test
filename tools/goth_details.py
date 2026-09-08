@@ -70,11 +70,13 @@ def lock(mesh,start,mid,tip,width,color):
 
 
 def wolfcut(mesh,phase):
-    mesh.ball((0,.018,2.077),.135,HAIR,stretch=(1.06,.95,.68))
-    # Uneven, feathered fringe. Eyes remain visible below the fringe.
-    for i in range(7):
-        x=(i-3)*.035
-        lock(mesh,(x,-.055,2.12),(x+.012,-.129,2.07),(x+(.014 if i%2 else -.012),-.151,2.033+(i%3)*.009),.025,HAIR)
+    mesh.ball((0,.060,2.077),.133,HAIR,stretch=(1.02,.87,.65))
+    # Open, side-swept fringe: the face must read at normal game zoom.
+    for side in (-1,1):
+        for i in range(3):
+            lock(mesh,(side*.018,.008+i*.025,2.126),
+                 (side*.112,-.038+i*.02,2.075),
+                 (side*(.146+i*.012),.009+i*.025,1.99-i*.022),.022,HAIR)
     for side in (-1,1):
         for i in range(5):
             lock(mesh,(side*.108,.005+i*.020,2.075),

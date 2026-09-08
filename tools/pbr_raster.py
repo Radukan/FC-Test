@@ -49,18 +49,31 @@ def raster_triangle(p,width,height):
 def render(mesh,width=320,height=None,ppu=64,angle=0,aa=2,origin=.70,map_aligned=False):
     height=height or width;w,h=width*aa,height*aa;scale=ppu*aa
     faces=[]
+    smooth_colors=set(getattr(mesh,"smooth_colors",()))
+    smooth_normals={}
+    camera=np.array([0,math.cos(ELEVATION),math.sin(ELEVATION)])
     for vertices,color,glow in mesh.faces:
         model=np.asarray(vertices,dtype=float);world=rotz(model,angle)
         normal=unit(np.cross(world[1]-world[0],world[2]-world[0]))
-        if np.dot(normal,(0,math.cos(ELEVATION),math.sin(ELEVATION)))<0:normal=-normal
+        if tuple(color) in smooth_colors:
+            for vertex in world:
+                key=(tuple(color),tuple(np.round(vertex,7)))
+                smooth_normals[key]=smooth_normals.get(key,np.zeros(3))+normal
+        if np.dot(normal,camera)<0:normal=-normal
         faces.append((model,world,np.asarray(color)/255,glow,normal))
+    smooth_normals={key:unit(value) for key,value in smooth_normals.items()}
     from raster_kernel import gbuffer,shadow_depth
     tri_world=[];tri_local=[];tri_colors=[];tri_normals=[];tri_glows=[];tri_screen=[]
     for model,world,c,glow,n in faces:
         screen=project(world,w,h,scale,origin,map_aligned)
         for inds in triangles(world):
             ids=list(inds);tri_world.append(world[ids]);tri_local.append(model[ids]);tri_screen.append(screen[ids])
-            tri_colors.append(c);tri_normals.append(n);tri_glows.append(float(bool(glow)))
+            normals=[]
+            color_key=tuple(np.rint(c*255).astype(int))
+            for vertex in world[ids]:
+                value=smooth_normals.get((color_key,tuple(np.round(vertex,7))),n)
+                normals.append(value if np.dot(value,camera)>=0 else -value)
+            tri_colors.append(c);tri_normals.append(normals);tri_glows.append(float(bool(glow)))
     worlds=np.asarray(tri_world);locals=np.asarray(tri_local);screens=np.asarray(tri_screen)
     buffer=gbuffer(screens,worlds,locals,np.asarray(tri_normals),np.asarray(tri_colors),np.asarray(tri_glows),w,h)
     depth=buffer[:,:,0];pos=buffer[:,:,1:4];uv=buffer[:,:,4:7];normals=buffer[:,:,7:10];albedo=buffer[:,:,10:13];emissive=buffer[:,:,13]>0
@@ -86,9 +99,9 @@ def render(mesh,width=320,height=None,ppu=64,angle=0,aa=2,origin=.70,map_aligned
     # Earthy steel, worn paint, oxidized seams and fabric retain each building's colors.
     skin=(color[:,0]>.53)&(color[:,1]>.30)&(color[:,1]<.60)&(color[:,2]<.48)&(color[:,0]>color[:,1]*1.25)
     paint=(np.max(color,axis=1)-np.min(color,axis=1))>.21
-    metal=~skin&~glow
     goth=getattr(mesh,'surface_finish',None)=='goth'
     if goth:skin=skin | ((np.min(color,axis=1)>.65) & ((np.max(color,axis=1)-np.min(color,axis=1))<.16))
+    metal=~skin&~glow
     grime=(.96+.025*coarse) if goth else (.86+.19*coarse+.05*fine)
     color*=np.where(skin, .97+.05*fine, grime)[:,None]
     rust=np.clip((.29-coarse)*1.1,0,.25)*metal*(~paint)

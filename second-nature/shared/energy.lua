@@ -1,25 +1,8 @@
 -- Nightglass power and solar rail definitions. Watts and joules are explicit.
 local E={plants={},trains={},items={},recipes={},technologies={},motor_interval=6}
-E.plants={
- {name="micro-solar",title="Copperleaf solar rack",kind="solar-panel",size=2,watts=18000,health=250,
-  description="A compact copper-backed photovoltaic rack. Passive, emission-free daytime electricity; it does not generate at night.",
-  ingredients={{"iron-plate",4},{"copper-plate",6},{"sn-glass",4}}},
- {name="burner-set",title="Trailblazer burner set",kind="burner-generator",size=2,watts=180000,health=350,pollution=12,efficiency=.65,fuel="chemical",
-  description="A small fuel-fired alternator for remote startup power. Burns chemical fuel, produces real pollution and stops when its fuel runs out.",
-  ingredients={{"iron-plate",12},{"iron-gear-wheel",8},{"copper-cable",12},{"stone-furnace",1}}},
- {name="wind-turbine",title="Helical wind turbine",kind="electric-energy-interface",size=3,watts=120000,health=500,passive="wind",
-  description="A helical atmospheric turbine. Emission-free, variable output depends on local wind and air pressure. It cannot operate in a vacuum.",
-  ingredients={{"steel-plate",12},{"iron-gear-wheel",12},{"electronic-circuit",8},{"copper-cable",20}}},
- {name="biopellet-engine",title="Closed-loop biomass engine",kind="burner-generator",size=3,watts=500000,health=650,pollution=0,efficiency=.9,fuel="sn-grown-fuel",
-  description="A sealed biomass engine with recirculating exhaust treatment. Burns prepared biopellets rather than coal; recover its mineral ash to keep it running. No direct pollution is emitted.",
-  ingredients={{"steel-plate",25},{"engine-unit",8},{"electronic-circuit",15},{"sn-ceramic-membrane",10},{"sn-filter-cartridge",8}}},
- {name="geothermal-bore",title="Deep-loop geothermal plant",kind="electric-energy-interface",size=5,watts=1500000,health=1500,passive="geothermal",
-  description="A deep closed-loop heat exchanger and turbine train. Steady, fuel-free, emission-free output varies with the planet's modeled geothermal resource; space platforms are unsupported.",
-  ingredients={{"steel-plate",80},{"pumpjack",6},{"advanced-circuit",30},{"pipe",80},{"sn-thermal-buffer",20},{"sn-ceramic-membrane",25}}},
- {name="cogenerator",title="Residue-fired cogenerator",kind="burner-generator",size=4,watts=3000000,health=1200,pollution=35,efficiency=.7,fuel="chemical",
-  description="A large fuel-fired industrial generator. High output from chemical fuels, with substantial real pollution and continuous fuel demand. It is a dirty alternative to the deep-loop plant.",
-  ingredients={{"steel-plate",60},{"engine-unit",25},{"advanced-circuit",20},{"sn-thermal-buffer",10},{"pipe",30}}}
-}
+local Power=require("shared.power_catalog")
+E.plants=Power.plants
+E.fluids=Power.fluids
 E.trains={
  {name="sunseed-locomotive",title="Sunseed solar shunter",tier=1,day_speed=.42,night_speed=.22,watts=180000,solar_watts=240000,battery_joules=24000000,night_power=.45,weight=1700,health=1000,
   description="A slow solar shunter with fixed roof panels and a 24 MJ onboard battery. No fuel slots or grid charging. Day limit about 91 km/h; night limit about 48 km/h, falling to unpowered coasting when depleted.",
@@ -51,12 +34,25 @@ local function tech(name,title,pre,packs,count,unlocks,description)
  local science={};for _,p in ipairs(packs) do science[#science+1]={p,1} end
  E.technologies[#E.technologies+1]={name=name,title=title,prerequisites=pre,science=science,count=count,seconds=20,unlocks=unlocks,description=description}
 end
+for _,r in ipairs(Power.recipes) do E.recipes[#E.recipes+1]=r end
 local r,g,b,p,u,e="automation-science-pack","logistic-science-pack","chemical-science-pack","production-science-pack","utility-science-pack","sn-ecology-science-pack"
 tech("practical-power","Practical field power",{"automation"},{r},20,{"micro-solar","burner-set"},"Small, contrasting power systems: clean daytime photovoltaic racks or fuel-fired startup generators.")
 tech("wind-power","Atmospheric wind power",{"sn-practical-power","logistic-science-pack"},{r,g},60,{"wind-turbine"},"Harvest variable atmospheric wind. A passive alternative with no fuel consumption or direct emissions.")
 tech("biomass-power","Closed-loop biomass power",{"sn-composting","sn-practical-power","sn-environmental-monitoring"},{r,g,e},80,{"biopellet","biopellet-engine","ash-recovery"},"Turn cultivated biomass into prepared fuel and recover its mineral residue in a closed-loop generator.")
-tech("geothermal-power","Deep geothermal exchange",{"sn-thermal-engineering","production-science-pack"},{r,g,b,p,e},160,{"geothermal-bore"},"Large closed-loop wells supply steady clean power, with planet-dependent geothermal yield.")
+tech("geothermal-power","Deep geothermal exchange",{"sn-thermal-engineering","advanced-material-processing-2"},{r,g,b,e},200,{"geothermal-bore"},"Large closed-loop wells supply steady clean power, with planet-dependent geothermal yield.")
 tech("industrial-cogeneration","Industrial residue power",{"advanced-oil-processing","sn-thermal-engineering"},{r,g,b,e},150,{"cogenerator"},"A high-output, high-emission chemical-fuel generator for heavy industry. Fuel and pollution remain real costs.")
+tech("river-power","Shoreline mechanics",{"sn-practical-power","logistics"},{r},35,{"river-turbine"},"A fuel-free paddle station trades fuel logistics for a maintained natural-water shoreline.")
+tech("compact-steam","Compact steam engineering",{"sn-practical-power","steel-processing"},{r},40,{"steam-piston"},"Denser piston generation from real 165 C steam; boilers and water remain necessary.")
+tech("producer-gas-power","Coal gasification power",{"oil-processing","sn-practical-power"},{r,g},60,{"producer-gas","producer-gas-engine"},"Gasification and pipe logistics improve fuel handling without inventing energy or removing emissions.")
+tech("solar-concentration","Solar concentration",{"solar-energy","advanced-material-processing-2"},{r,g,b},160,{"solar-tower"},"Concentrated daylight generation with large capital cost and no hidden night output.")
+tech("biogas-power","Anaerobic power",{"sn-biomass-power","chemical-science-pack"},{r,g,b,e},160,{"biogas","biogas-turbine"},"Cultivated gas supports a larger clean power chain at the cost of substantial feedstock throughput.")
+tech("heat-recovery-power","High-pressure power conversion",{"nuclear-power","sn-thermal-engineering"},{r,g,b,e},160,{"heat-recovery-turbine"},"High-flow conversion of externally produced 500 C steam into electricity.")
+tech("photonic-power","Photonic power fields",{"sn-solar-concentration","electromagnetic-plant","utility-science-pack"},{r,g,b,p,u,e},240,{"photonic-canopy"},"Dense solar canopies exchange advanced material cost for fewer generating entities and less occupied land.")
+tech("planetary-thermal-power","Planetary thermal extraction",{"sn-geothermal-power","tungsten-steel","utility-science-pack"},{r,g,b,p,u,e},260,{"planetary-thermal-tap"},"Deep thermal taps increase each region's renewable budget without allowing unlimited stacked bore output.")
+tech("combined-cycle-power","Catalytic combined cycles",{"sn-industrial-cogeneration","production-science-pack","utility-science-pack"},{r,g,b,p,u,e},220,{"synthetic-gas","combined-cycle"},"High-density chemical generation remains bound by fuel calorific value, processing and real pollution.")
+tech("biofuel-cell-power","Solid-oxide biological cells",{"sn-biogas-power","electromagnetic-plant","utility-science-pack"},{r,g,b,p,u,e},220,{"biofuel-cell"},"Electrochemical biogas conversion raises density and efficiency without creating fuel energy.")
+tech("modular-fission-power","Load-following fission",{"nuclear-power","sn-geothermal-power","utility-science-pack"},{r,g,b,p,u,e},220,{"salt-reactor"},"A load-following reactor sacrifices neighbour bonuses for compact, controllable thermal output.")
+tech("plasma-conversion-power","Magnetoplasma conversion",{"fusion-reactor","sn-climate-science"},{r,g,b,p,u,"cryogenic-science-pack",e},300,{"plasma-generator"},"High-throughput conversion of real fusion plasma. Fuel, startup power, coolant and heat rejection remain part of the fusion system.")
 tech("solar-railway","Solar railway",{"railway","solar-energy","electric-energy-accumulators","sn-practical-power"},{r,g},80,{"sunseed-locomotive"},"Power a slow locomotive exclusively from installed roof panels and its onboard battery. Night operation is deliberately derated.")
 tech("solar-railway-2","Solar freight engineering",{"sn-solar-railway","sn-thermal-engineering"},{r,g,b,e},150,{"heliograph-locomotive"},"Improve photovoltaic collection, battery capacity and traction while retaining solar-only power and lower night speeds.")
 tech("solar-railway-3","Advanced solar traction",{"sn-solar-railway-2","production-science-pack","utility-science-pack"},{r,g,b,p,u,e},200,{"daybreak-locomotive"},"Dense solar arrays and a larger onboard store support faster clean rail, but not the speed of a conventional locomotive.")

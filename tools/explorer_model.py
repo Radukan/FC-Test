@@ -97,7 +97,7 @@ def explorer(t=0, pose='idle', tier=0, move_angle=0, aim_angle=0):
         limb(m,hip,shorts_end,.135,.125,SUIT,20)
         if side==1:goth.tattoo(m,hip,knee,.132,.108,side)
         limb(m, knee, ankle, .090, .061, SUIT, 16)
-        m.ball(knee, .111, armor, stretch=(.95, 1, .76))
+        m.ball(knee, .080, armor, stretch=(.95, .78, .72))
         top = add(add(knee, mul(gait.sub(ankle, knee), .15)), (0, -.046, 0))
         bottom = add(add(knee, mul(gait.sub(ankle, knee), .84)), (0, -.046, 0))
         limb(m, top, bottom, .075, .050, armor, 14)
@@ -115,6 +115,9 @@ def explorer(t=0, pose='idle', tier=0, move_angle=0, aim_angle=0):
         for name, point in [('hip', hip), ('knee', knee), ('ankle', ankle), ('toe', add(ankle, (0, -.20, .04)))]:
             joints[name + '-' + str(side)] = point
 
+    # Continuous bare collar/shoulder mantle prevents isolated "ball joints".
+    loft(shell,[(0,0,1.568,.210,.124),(0,0,1.630,.240,.128),
+                (0,0,1.676,.190,.104),(0,0,1.710,.080,.072)],SKIN,36)
     # Smoothly skinned waist-to-thorax fabric, with separately moving rigid gear.
     loft(skin, [(0, .006, 1.00, .215, .12), (0, .006, 1.09, .254, .153),
                 (0, 0, 1.21, .164, .104), (0, 0, 1.36, .171, .115),
@@ -123,6 +126,7 @@ def explorer(t=0, pose='idle', tier=0, move_angle=0, aim_angle=0):
         weight = gait.smooth(max(0, min(1, (point[2] - 1.10) / .40)))
         return add(mul(pelvis.point(point), 1 - weight), mul(torso.point(point), weight))
     join_transformed(m, skin, skinned)
+    shell.face([(-.104,-.137,1.657),(.104,-.137,1.657),(0,-.164,1.534)],SKIN)
     secondary = rig['secondary'] * .45
     for side in (-1, 1):
         center = (side * .108, -.116, 1.438 + secondary)
@@ -135,13 +139,16 @@ def explorer(t=0, pose='idle', tier=0, move_angle=0, aim_angle=0):
         for a, b in zip(points, points[1:]):
             shell.tube(a, b, .019, (117, 78, 38), 8)
         shell.box((side * .145, -.198, 1.34), (.052, .027, .063), EDGE, .009)
-    shell.box((0, -.122, 1.27), (.22, .045, .25), DARK, .035)
-    for i in range(4):
-        shell.box((0, -.150, 1.17 + i * .056), (.14, .016, .018), EDGE, .005)
-    waist.box((0, 0, 1.11), (.43, .30, .09), (92, 69, 43), .045)
-    waist.box((0, -.163, 1.11), (.10, .035, .075), EDGE, .01)
+    # Corset seams/lacing replace the old mechanical abdominal grille.
+    for side in (-1,1):shell.tube((side*.07,-.150,1.19),(side*.075,-.152,1.39),.008,(73,35,51),8)
+    for i in range(5):
+        z=1.20+i*.037
+        shell.tube((-.047,-.161,z),(.047,-.161,z+.028),.0035,goth.SILVER,6)
+        shell.tube((.047,-.161,z),(-.047,-.161,z+.028),.0035,goth.SILVER,6)
+    waist.box((0, 0, 1.11), (.43, .29, .06), (31,24,34), .035)
+    waist.box((0, -.158, 1.11), (.065, .025, .045), goth.SILVER, .008)
     for side in (-1, 1):
-        waist.box((side * .225, .025, 1.10), (.12, .15, .205), DARK, .025)
+        if tier>0:waist.box((side * .225, .035, 1.09), (.10, .125, .15), DARK, .025)
         waist.tube((side * .238, .016, 1.065), (side * .157, -.077, 1.21), .012, COPPER, 8)
     skirt_rings=goth.skirt(m,pelvis,joints,phase,tier)
     join_transformed(m, waist, pelvis.point)
@@ -169,7 +176,7 @@ def explorer(t=0, pose='idle', tier=0, move_angle=0, aim_angle=0):
         grips = {1: (.085, -.385, 1.46 + weapon_bob), -1: (-.034, -.585, 1.455 + weapon_bob)}
 
     for side in (-1, 1):
-        shoulder = torso.point((side * .273, 0, 1.65))
+        shoulder = torso.point((side * .25, 0, 1.65))
         if mining:
             forward = shaft
             wrist = add(grips[side], mul(shaft, -.065))
@@ -185,21 +192,21 @@ def explorer(t=0, pose='idle', tier=0, move_angle=0, aim_angle=0):
                      1.10 + bob + (.035 * math.cos(phase * 2) if run else 0))
             forward, hand_back, curl, bend = (0, 0, -1), (0, 1, 0), .26, (side * .17, .8, -.35)
         elbow = gait.solve_two_bone(shoulder, wrist, .38, .35, bend)
-        limb(m, shoulder, elbow, .086, .074, SKIN, 20)
-        limb(m, elbow, wrist, .071, .055, SKIN, 20)
-        goth.tattoo(m,elbow,wrist,.074,.057,side)
-        goth.tattoo(m,shoulder,elbow,.091,.077,side)
-        m.ball(shoulder, .112, armor, stretch=(1.06, .95, .80))
-        m.ball(elbow, .077, EDGE, stretch=(1, .8, .8))
+        limb(m, shoulder, elbow, .075, .064, SKIN, 24)
+        limb(m, elbow, wrist, .062, .050, SKIN, 24)
+        goth.tattoo(m,elbow,wrist,.065,.052,side)
+        goth.tattoo(m,shoulder,elbow,.080,.067,side)
+        m.ball(shoulder, .066 if tier==0 else .080, SKIN if tier==0 else armor, stretch=(1,.8,.55))
+        m.ball(elbow, .059, SKIN, stretch=(1,.90,.95))
         hands[side] = build_hand(m, wrist, forward, hand_back, side, curl)
         for name, point in [('shoulder', shoulder), ('elbow', elbow), ('wrist', wrist)]:
             joints[name + '-' + str(side)] = point
         if tier > 0:
-            shell.box((side * .30, .012, 1.67), (.16, .255, .135), armor, .035)
-            shell.box((side * .30, -.09, 1.69), (.10, .09, .025), GOLD, .008)
+            shell.box((side * .27, .012, 1.66), (.125, .19, .09), armor, .03)
+            shell.box((side * .27, -.075, 1.67), (.08, .065, .018), goth.SILVER, .006)
         if tier == 2:
-            shell.box((side * .31, .12, 1.64), (.18, .23, .21), armor, .04)
-            shell.box((side * .31, .02, 1.75), (.13, .05, .025), GOLD, .006)
+            shell.box((side * .28, .12, 1.62), (.14, .19, .15), armor, .035)
+            shell.box((side * .28, .03, 1.71), (.10, .045, .02), goth.SILVER, .006)
     join_transformed(m, shell, torso.point)
 
     head = head_mesh(phase, tier)
@@ -240,29 +247,41 @@ def explorer(t=0, pose='idle', tier=0, move_angle=0, aim_angle=0):
     result.aim_angle, result.move_angle, result.pose = facing, move_angle, pose
     result.foot_phases, result.sole_heights, result.motion = foot_phases, soles, rig
     result.surface_finish = 'goth'
+    result.smooth_colors={SKIN,HAIR}
+    result.style_reference='Morticia-inspired adult goth elegance; original face'
     result.style={'skin':SKIN,'hair':'wolfcut','tattoos':True,'skirt':True,'coverage':'opaque undershorts','skirt_rings':skirt_rings}
     return result
 
 def head_mesh(phase,tier):
+    """Original sculpted face: continuous jaw/cheeks, almond eyes and shaped lips."""
     head=Mesh()
-    head.ball((0,-.006,1.951),.151,SKIN,stretch=(.87,.91,1.18))
-    head.ball((0,-.012,1.865),.12,SKIN,stretch=(.86,.82,.82))
-    head.ball((0,-.149,1.946),.028,(229,215,224),stretch=(.55,1,.9))
-    head.box((0,-.135,1.895),(.070,.014,.016),(49,24,46),.005)
-    for x in (-.062,.062):
-        head.tube((x-.027,-.148,1.989),(x+.027,-.148,1.989),.007,(24,20,30),8)
-        head.ball((x,-.151,1.977),.021,(221,220,218),stretch=(1,.25,.48))
-        head.ball((x,-.158,1.978),.011,(89,111,125),stretch=(1,.25,1))
-        head.tube((x-.028,-.122,2.007),(x+.022,-.129,2.012),.009,HAIR,6)
-        head.tube((x,-.136,1.96),(x+.015,-.135,1.94),.0035,(25,21,32),6)
+    loft(head,[(0,-.045,1.785,.052,.051),(0,-.038,1.817,.079,.080),
+               (0,-.015,1.870,.104,.105),(0,0,1.926,.132,.116),
+               (0,.009,1.986,.128,.126),(0,.015,2.044,.117,.116),
+               (0,.020,2.096,.085,.090),(0,.020,2.125,.018,.020)],SKIN,40)
+    rounded_panel(head,(0,-.123,1.922),.023,SKIN,stretch=(.48,.73,1.55))
+    rounded_panel(head,(0,-.143,1.892),.016,SKIN,stretch=(.82,1.05,.73))
+    for side in (-1,1):
+        head.ball((side*.011,-.143,1.882),.0037,(99,78,92),stretch=(1,.4,.5))
+        x=side*.055
+        rounded_panel(head,(x,-.146,1.956),.031,(222,218,220),stretch=(1,.24,.36))
+        head.ball((x-side*.002,-.155,1.955),.0095,(76,91,98),stretch=(1,.30,1))
+        head.ball((x-.004,-.158,1.959),.0038,(240,238,241),stretch=(1,.4,1))
+        head.tube((x-side*.030,-.150,1.964),(x+side*.029,-.150,1.971),.0025,(26,20,30),8)
+        head.tube((x+side*.023,-.147,1.965),(x+side*.040,-.142,1.977),.0035,(26,20,30),6)
+        brow=[(side*.025,-.117,1.988),(side*.056,-.119,2.006),(side*.093,-.096,1.996)]
+        for a,b in zip(brow,brow[1:]):head.tube(a,b,.0046,HAIR,8)
+    # A cupid's bow and a small curved lower lip, not a dark rectangular mouth.
+    head.face([(-.040,-.121,1.865),(-.014,-.126,1.879),(0,-.128,1.874),(.014,-.126,1.879),(.040,-.121,1.865),(0,-.128,1.865)],(127,43,67))
+    rounded_panel(head,(0,-.123,1.858),.034,(133,49,72),stretch=(1,.23,.31))
+    head.tube((-.030,-.130,1.865),(.030,-.130,1.865),.0021,(60,27,43),6)
     goth.wolfcut(head,phase)
     for side in (-1,1):
-        head.ball((side*.14,.01,1.948),.025,SKIN)
+        rounded_panel(head,(side*.13,.011,1.921),.029,SKIN,stretch=(.45,.6,1.25))
         for i in range(10):
             a=i*math.tau/10;b=(i+1)*math.tau/10
-            head.tube((side*.155,.02+.018*math.cos(a),1.91+.025*math.sin(a)),
-                      (side*.155,.02+.018*math.cos(b),1.91+.025*math.sin(b)),.0045,goth.SILVER,6)
-    head.box((0,0,1.715),(.155,.19,.030),(23,20,28),.008)
-    head.ball((0,-.112,1.674),.015,goth.SILVER,stretch=(.8,.4,1))
-    if tier==2:head.box((0,-.118,1.841),(.20,.055,.060),(39,38,48),.015)
+            head.tube((side*.146,.02+.013*math.cos(a),1.884+.022*math.sin(a)),
+                      (side*.146,.02+.013*math.cos(b),1.884+.022*math.sin(b)),.003,goth.SILVER,6)
+    head.ball((0,-.112,1.681),.012,goth.SILVER,stretch=(.8,.4,1))
+    if tier==2:head.box((0,.09,1.825),(.16,.07,.05),(39,38,48),.012)
     return head

@@ -2,7 +2,7 @@
 
 Generated from `second-nature/shared/catalog.lua` by `python tools/generate_docs.py`. Do not hand-edit tables.
 
-**22 machines · 125 recipes · 38 technologies · 32 material/science items · 6 fluids.**
+**22 machines · 140 recipes · 50 technologies · 32 material/science items · 9 fluids.**
 
 Times are seconds at crafting speed 1. Fitness effects are percentage points per completed cycle before planetary multipliers and support ceilings. No custom recipe supports productivity. Native recipe quality is disabled for operations and closed/catalytic loops.
 
@@ -138,17 +138,32 @@ Recipes tagged **dirty** also emit vanilla pollution/spores and incur explicit t
 | Assemble an expedition jukebox | 5 s | 5 Electronic circuit + 10 Iron plate + 10 Copper cable | 1 Sn jukebox | Available from start |
 | Assemble a wind-up construction drone | 2 s | 2 Iron plate + 1 Iron gear wheel + 1 Electronic circuit + 2 Copper cable | 1 Sn field drone | Field construction robotics |
 | Build a field drone controller | 5 s | 8 Iron plate + 6 Iron gear wheel + 5 Electronic circuit + 6 Copper cable | 1 Sn field controller | Field construction robotics |
-| Build Copperleaf solar rack | 10 s | 4 Iron plate + 6 Copper plate + 4 Laboratory glass | 1 Sn micro solar | Practical field power |
-| Build Trailblazer burner set | 10 s | 12 Iron plate + 8 Iron gear wheel + 12 Copper cable + 1 Stone furnace | 1 Sn burner set | Practical field power |
-| Build Helical wind turbine | 15 s | 12 Steel plate + 12 Iron gear wheel + 8 Electronic circuit + 20 Copper cable | 1 Sn wind turbine | Atmospheric wind power |
-| Build Closed-loop biomass engine | 15 s | 25 Steel plate + 8 Engine unit + 15 Electronic circuit + 10 Ceramic membrane + 8 Carbon filter cartridge | 1 Sn biopellet engine | Closed-loop biomass power |
-| Build Deep-loop geothermal plant | 25 s | 80 Steel plate + 6 Pumpjack + 30 Advanced circuit + 80 Pipe + 20 Charged thermal buffer + 25 Ceramic membrane | 1 Sn geothermal bore | Deep geothermal exchange |
-| Build Residue-fired cogenerator | 20 s | 60 Steel plate + 25 Engine unit + 20 Advanced circuit + 10 Charged thermal buffer + 30 Pipe | 1 Sn cogenerator | Industrial residue power |
+| Build Copperleaf photovoltaic bank | 10 s | 20 Iron plate + 25 Copper plate + 20 Laboratory glass + 10 Electronic circuit | 1 Sn micro solar | Practical field power |
+| Build Trailblazer burner alternator | 10 s | 25 Iron plate + 15 Iron gear wheel + 25 Copper cable + 2 Stone furnace | 1 Sn burner set | Practical field power |
+| Build Helical wind turbine | 15 s | 20 Steel plate + 20 Iron gear wheel + 15 Electronic circuit + 30 Copper cable | 1 Sn wind turbine | Atmospheric wind power |
+| Build River paddle station | 15 s | 40 Iron plate + 25 Iron gear wheel + 10 Pipe + 10 Electronic circuit | 1 Sn river turbine | Shoreline mechanics |
+| Build Twin-cylinder steam engine | 15 s | 2 Steam engine + 12 Steel plate + 15 Iron gear wheel | 1 Sn steam piston | Compact steam engineering |
+| Build Producer-gas alternator | 15 s | 20 Steel plate + 6 Engine unit + 20 Pipe + 12 Electronic circuit | 1 Sn producer gas engine | Coal gasification power |
+| Build Closed-loop biomass engine | 15 s | 60 Steel plate + 20 Engine unit + 20 Advanced circuit + 25 Ceramic membrane + 20 Carbon filter cartridge | 1 Sn biopellet engine | Closed-loop biomass power |
+| Build Deep-loop geothermal plant | 25 s | 180 Steel plate + 12 Pumpjack + 80 Advanced circuit + 120 Pipe + 40 Charged thermal buffer + 40 Ceramic membrane | 1 Sn geothermal bore | Deep geothermal exchange |
+| Build Residue-fired cogenerator | 20 s | 150 Steel plate + 50 Engine unit + 60 Advanced circuit + 25 Charged thermal buffer + 60 Pipe | 1 Sn cogenerator | Industrial residue power |
+| Build Heliostat power tower | 35 s | 20 Sn micro solar + 100 Steel plate + 40 Advanced circuit + 120 Laboratory glass + 20 Charged thermal buffer | 1 Sn solar tower | Solar concentration |
+| Build Anaerobic biogas turbine | 25 s | 80 Steel plate + 25 Engine unit + 30 Advanced circuit + 60 Pipe + 30 Engineered biofilm | 1 Sn biogas turbine | Anaerobic power |
+| Build High-pressure recovery turbine | 25 s | 3 Steam turbine + 60 Steel plate + 20 Advanced circuit + 25 Ceramic membrane | 1 Sn heat recovery turbine | High-pressure power conversion |
+| Build Photonic solar canopy | 45 s | 200 Solar panel + 120 Low density structure + 80 Processing unit + 40 Superconductor + 200 Laboratory glass | 1 Sn photonic canopy | Photonic power fields |
+| Build Planetary thermal tap | 45 s | 2 Sn geothermal bore + 150 Tungsten plate + 80 Processing unit + 80 Charged thermal buffer + 80 Ceramic membrane | 1 Sn planetary thermal tap | Planetary thermal extraction |
+| Build Catalytic combined-cycle plant | 35 s | 4 Sn producer gas engine + 250 Steel plate + 80 Processing unit + 80 Engine unit + 150 Pipe + 60 Ceramic membrane | 1 Sn combined cycle | Catalytic combined cycles |
+| Build Solid-oxide biogas cellbank | 30 s | 2 Sn biogas turbine + 60 Processing unit + 30 Superconductor + 120 Ceramic membrane + 60 Engineered biofilm | 1 Sn biofuel cell | Solid-oxide biological cells |
+| Build Lead-cooled modular reactor | 25 s | 2 Nuclear reactor + 50 Heat pipe + 60 Processing unit + 50 Charged thermal buffer + 60 Ceramic membrane | 1 Sn salt reactor | Load-following fission |
+| Build Magnetoplasma generator | 25 s | 3 Fusion generator + 40 Superconductor + 10 Quantum processor + 100 Ceramic membrane | 1 Sn plasma generator | Magnetoplasma conversion |
 | Assemble Sunseed solar shunter | 20 s | 1 Locomotive + 8 Solar panel + 6 Accumulator + 20 Electronic circuit + 20 Laboratory glass | 1 Sn sunseed locomotive | Solar railway |
 | Assemble Heliograph solar locomotive | 40 s | 1 Sn sunseed locomotive + 12 Solar panel + 10 Accumulator + 30 Advanced circuit + 10 Charged thermal buffer | 1 Sn heliograph locomotive | Solar freight engineering |
 | Assemble Daybreak solar express | 60 s | 1 Sn heliograph locomotive + 16 Solar panel + 16 Accumulator + 30 Processing unit + 30 Low density structure + 25 Engineered biofilm | 1 Sn daybreak locomotive | Advanced solar traction |
 | Press a prepared biopellet | 4 s | 6 Algal biomass + 1 Biochar | 1 Sn biopellet | Closed-loop biomass power |
 | Recover ash nutrients | 3 s | 4 Sn bio ash + 2 Stone | 1 Mineral nutrients | Closed-loop biomass power |
+| Gasify coal | 4 s | 4 Coal + 20 Water [fluid] | 24 Producer gas [fluid] | Coal gasification power |
+| Digest cultivated biomass | 8 s | 12 Algal biomass + 2 Living compost + 30 Water [fluid] | 40 Refined biogas [fluid] | Anaerobic power |
+| Refine synthesis gas | 20 s | 8 Solid fuel + 50 Oxygen [fluid] + 20 Water [fluid] | 40 Catalytic synthesis gas [fluid] | Catalytic combined cycles |
 
 ## Construction recipes
 
@@ -216,8 +231,20 @@ Recipes tagged **dirty** also emit vanilla pollution/spores and incur explicit t
 | Practical field power | 20 × 20 s | Automation | Automation |
 | Atmospheric wind power | 60 × 20 s | Automation, Logistic | Practical field power, Logistic science pack |
 | Closed-loop biomass power | 80 × 20 s | Automation, Logistic, Ecology | The living substrate, Practical field power, Field ecology |
-| Deep geothermal exchange | 160 × 20 s | Automation, Logistic, Chemical, Production, Ecology | Climate control, Production science pack |
+| Deep geothermal exchange | 200 × 20 s | Automation, Logistic, Chemical, Ecology | Climate control, Advanced material processing 2 |
 | Industrial residue power | 150 × 20 s | Automation, Logistic, Chemical, Ecology | Advanced oil processing, Climate control |
+| Shoreline mechanics | 35 × 20 s | Automation | Practical field power, Logistics |
+| Compact steam engineering | 40 × 20 s | Automation | Practical field power, Steel processing |
+| Coal gasification power | 60 × 20 s | Automation, Logistic | Oil processing, Practical field power |
+| Solar concentration | 160 × 20 s | Automation, Logistic, Chemical | Solar energy, Advanced material processing 2 |
+| Anaerobic power | 160 × 20 s | Automation, Logistic, Chemical, Ecology | Closed-loop biomass power, Chemical science pack |
+| High-pressure power conversion | 160 × 20 s | Automation, Logistic, Chemical, Ecology | Nuclear power, Climate control |
+| Photonic power fields | 240 × 20 s | Automation, Logistic, Chemical, Production, Utility, Ecology | Solar concentration, Electromagnetic plant, Utility science pack |
+| Planetary thermal extraction | 260 × 20 s | Automation, Logistic, Chemical, Production, Utility, Ecology | Deep geothermal exchange, Tungsten steel, Utility science pack |
+| Catalytic combined cycles | 220 × 20 s | Automation, Logistic, Chemical, Production, Utility, Ecology | Industrial residue power, Production science pack, Utility science pack |
+| Solid-oxide biological cells | 220 × 20 s | Automation, Logistic, Chemical, Production, Utility, Ecology | Anaerobic power, Electromagnetic plant, Utility science pack |
+| Load-following fission | 220 × 20 s | Automation, Logistic, Chemical, Production, Utility, Ecology | Nuclear power, Deep geothermal exchange, Utility science pack |
+| Magnetoplasma conversion | 300 × 20 s | Automation, Logistic, Chemical, Production, Utility, Cryogenic, Ecology | Fusion reactor, Comparative climatology |
 | Solar railway | 80 × 20 s | Automation, Logistic | Railway, Solar energy, Electric energy accumulators, Practical field power |
 | Solar freight engineering | 150 × 20 s | Automation, Logistic, Chemical, Ecology | Solar railway, Climate control |
 | Advanced solar traction | 200 × 20 s | Automation, Logistic, Chemical, Production, Utility, Ecology | Solar freight engineering, Production science pack, Utility science pack |
@@ -262,3 +289,6 @@ Recipes tagged **dirty** also emit vanilla pollution/spores and incur explicit t
 - **Mineral electrolyte** (`sn-electrolyte`): An aqueous mineral electrolyte for selective metal recovery and electrochemical reactions.
 - **Bioleachate** (`sn-bioleachate`): A biologically active solution that releases useful metals from mineral feedstocks.
 - **Toxic effluent** (`sn-toxic-effluent`): Contaminated process liquid containing captured pollutants and dissolved industrial residues.
+- **Producer gas** (`sn-producer-gas`): Coal-derived combustible gas. Its production loses part of the coal's energy and consumes water; used by producer-gas alternators.
+- **Refined biogas** (`sn-biogas`): Combustible gas from cultivated biomass and compost. Used in biological turbines and solid-oxide cellbanks.
+- **Catalytic synthesis gas** (`sn-synthetic-gas`): A processed chemical fuel gas made from solid fuel, oxygen and water. Its declared energy is below that of its fuel feedstock.

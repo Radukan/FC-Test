@@ -24,7 +24,7 @@ for index, x in ipairs(K.fluids) do
   data:extend({{
     type = "fluid", name = "sn-" .. x.name, icon = H.icon(x.name), icon_size = 64,
     subgroup = "sn-fluids", order = string.format("%02d", index), default_temperature = 25,
-    base_color = x.color, flow_color = x.color, auto_barrel = true,
+    base_color = x.color, flow_color = x.color, auto_barrel = true, fuel_value=x.fuel_value,
     localised_name = {"fluid-name.sn-" .. x.name}, localised_description = {"fluid-description.sn-" .. x.name}
   }})
 end

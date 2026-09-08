@@ -26,7 +26,7 @@ def gbuffer(screen,world,local,normals,colors,glows,width,height):
                         for k in range(3):
                             out[y,x,1+k]=wa*world[i,0,k]+wb*world[i,1,k]+wc*world[i,2,k]
                             out[y,x,4+k]=wa*local[i,0,k]+wb*local[i,1,k]+wc*local[i,2,k]
-                            out[y,x,7+k]=normals[i,k]
+                            out[y,x,7+k]=wa*normals[i,0,k]+wb*normals[i,1,k]+wc*normals[i,2,k]
                             out[y,x,10+k]=colors[i,k]
                         out[y,x,13]=glows[i]
                 wa+=stepa;wb+=stepb

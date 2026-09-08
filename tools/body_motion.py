@@ -88,6 +88,7 @@ def motion(t, pose, tier, relative_stride=0):
         torso = Transform((0, 0, 1.10), offset=(0, 0, bob), roll=.006 * math.sin(phase))
         head = Transform((0, 0, 1.77), pitch=.007 * math.sin(phase + .4))
         secondary = .003 * math.sin(phase - .3)
+    head=Transform(head.pivot,head.offset,head.pitch-.09,head.roll,head.yaw)
     secondary *= (1, .35, .10)[tier]
     return {'pelvis': pelvis, 'torso': torso, 'head': head, 'bob': bob,
             'secondary': secondary, 'phase': phase, 'running': running, 'mining': mining}

@@ -17,14 +17,15 @@ def solar(m,x,y,z,w,d,slope=.16):
         m.tube((x-w/2,yy,zz),(x+w/2,yy,zz),.006,(90,128,145),6)
 
 
-def foundation(m,size):
-    m.box((0,0,.12),(size-.14,size-.14,.22),DARK,.12)
+def foundation(m,size,depth=None):
+    depth=depth or size
+    m.box((0,0,.12),(size-.14,depth-.14,.22),DARK,.12)
     for x in (-size*.39,size*.39):
-        for y in (-size*.39,size*.39):m.box((x,y,.16),(.31,.31,.30),STEEL,.09)
-    for side in (-1,1):m.box((side*(size/2-.12),0,.28),(.08,size-.4,.10),EDGE,.02)
+        for y in (-depth*.39,depth*.39):m.box((x,y,.16),(.31,.31,.30),STEEL,.09)
+    for side in (-1,1):m.box((side*(size/2-.12),0,.28),(.08,depth-.4,.10),EDGE,.02)
 
 
-def plant(name,t=0):
+def legacy_plant(name,t=0):
     m=Mesh();sizes={'micro-solar':2,'burner-set':2,'wind-turbine':3,'biopellet-engine':3,'geothermal-bore':5,'cogenerator':4}
     size=sizes[name];foundation(m,size)
     if name=='micro-solar':
@@ -86,6 +87,20 @@ def plant(name,t=0):
         m.box((0,-1.57,.80),(1.02,.24,.83),DARK,.12)
         for i in range(6):m.box((-.39+i*.15,-1.71,.85),(.065,.025,.41),GOLD,.012)
         hose(m,[(-1.56,-1.25,.38),(-1.56,-1.25,1.05),(-1.56,1.34,1.05),(0,1.34,1.05)],.12,COPPER)
+    return m
+
+
+def plant(name,t=0):
+    from catalog import load_catalog
+    from power_models import build,fluid_nozzles
+    definitions={p['name']:p for p in load_catalog()['energy']['plants']}
+    definition=definitions[name]
+    old={'micro-solar','burner-set','wind-turbine','biopellet-engine','geothermal-bore','cogenerator'}
+    if name in old:m=legacy_plant(name,t)
+    else:m=build(name,t,definition['size'],definition.get('width'),definition.get('height'))
+    if definition['kind']=='generator':fluid_nozzles(m,definition.get('height',definition['size']))
+    if definition['kind'] in ('generator','fusion-generator'):
+        level=int(130+60*math.sin(t*TAU));m.ball((.3,.2,1.45),.045,(55,level,140),glow=True)
     return m
 
 

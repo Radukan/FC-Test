@@ -8,13 +8,13 @@
       "scale": 0.25
     },
     "crop": [
-      292,
-      168,
-      598,
-      686
+      296,
+      166,
+      600,
+      688
     ],
     "files": {
-      "second-nature/graphics/entity/industry/explorer-0-idle.png": "3f0134706e41e45c36bfe298156e11e0bd287bb6f9823465804e613495252be0"
+      "second-nature/graphics/entity/industry/explorer-0-idle.png": "4f1cad3e194259765318fd8965ad02e27fd7066e3844ecb64683a6d9640c84e8"
     }
   },
   "explorer-0-idle_with_gun": {
@@ -32,7 +32,7 @@
       776
     ],
     "files": {
-      "second-nature/graphics/entity/industry/explorer-0-idle_with_gun.png": "42172b03d53947070c8e6f32e7b183f08f992b2b0551aace3f3672811a13a35c"
+      "second-nature/graphics/entity/industry/explorer-0-idle_with_gun.png": "d6696aff98ded0719049b961b983cdf9c1fe8225e326af480b90c47dbcdcd07a"
     }
   },
   "explorer-0-running": {
@@ -45,12 +45,12 @@
     },
     "crop": [
       270,
-      160,
-      606,
-      694
+      172,
+      596,
+      684
     ],
     "files": {
-      "second-nature/graphics/entity/industry/explorer-0-running.png": "e6f8943cf02774ffb559e861410e4649d314d9694da91451da1671b71f2f2764"
+      "second-nature/graphics/entity/industry/explorer-0-running.png": "4216297e87d13ab5acaed26b60cbe0870a04415bfaad4337168c5216cc547944"
     }
   },
   "explorer-0-mining_with_tool": {
@@ -68,8 +68,8 @@
       916
     ],
     "files": {
-      "second-nature/graphics/entity/industry/explorer-0-mining_with_tool-1.png": "041336bcec968b2ff400de50d34f5a42c64cc2e24702eeb46ba9147dc610fbc3",
-      "second-nature/graphics/entity/industry/explorer-0-mining_with_tool-2.png": "bf9292650f6990170f2b5698f1e04d025245322e0100034881363e6f81210fa4"
+      "second-nature/graphics/entity/industry/explorer-0-mining_with_tool-1.png": "6cc2c638c807c4ac8605f97e40ce2ca2d90b857d0c9b167505a19e2ff299f57a",
+      "second-nature/graphics/entity/industry/explorer-0-mining_with_tool-2.png": "8f9493d56f70c34da87f54f58201d25face36080b74545d59803f0f11770e0ed"
     }
   },
   "explorer-0-running_with_gun": {
@@ -87,8 +87,8 @@
       776
     ],
     "files": {
-      "second-nature/graphics/entity/industry/explorer-0-running_with_gun-1.png": "8e6037795d432c726216a85686bb43f5754d3eeac2d009e808b5d43068857545",
-      "second-nature/graphics/entity/industry/explorer-0-running_with_gun-2.png": "80613c3b9eed30e93ef3de90ad6127f99c32686879920ef0aa4ee380c5f2d49b"
+      "second-nature/graphics/entity/industry/explorer-0-running_with_gun-1.png": "d708e165c4899a8e331e65d04a0852d811a40838e6e3b1b72a07ab761e2fd9f3",
+      "second-nature/graphics/entity/industry/explorer-0-running_with_gun-2.png": "c3a7f7e6222c3efc6a9b5248399317505963f336b4336f4a49cec7ba340169b4"
     }
   },
   "explorer-1-idle": {
@@ -100,13 +100,13 @@
       "scale": 0.25
     },
     "crop": [
-      292,
-      168,
+      296,
+      166,
       600,
-      686
+      688
     ],
     "files": {
-      "second-nature/graphics/entity/industry/explorer-1-idle.png": "81e8efdf0502e59ac91e58d459282ab6d7176691a7a551e7f767c35564adbe26"
+      "second-nature/graphics/entity/industry/explorer-1-idle.png": "f17eada299ab54ec82066777eff7e8ba3e03e5cfc601de539c789823aa3daeb8"
     }
   },
   "explorer-1-idle_with_gun": {
@@ -124,7 +124,7 @@
       776
     ],
     "files": {
-      "second-nature/graphics/entity/industry/explorer-1-idle_with_gun.png": "97364218126305e9631a1a70717d218aa0df22e9f8567ccf30be4ff6497ca1cf"
+      "second-nature/graphics/entity/industry/explorer-1-idle_with_gun.png": "69853cf821e034afc24adcaa6ee1eafbcf8c2d65135676f607e4f318f9154643"
     }
   },
   "explorer-1-running": {
@@ -137,12 +137,12 @@
     },
     "crop": [
       270,
-      160,
-      606,
-      694
+      172,
+      596,
+      684
     ],
     "files": {
-      "second-nature/graphics/entity/industry/explorer-1-running.png": "32beda80d701b7638ab9a178f99921c06ee675e7b652eefa9008127c34612e8c"
+      "second-nature/graphics/entity/industry/explorer-1-running.png": "f4058f071cee942d7f37ddc3053f96853b0570ad3fb8ae3451764cc0e4531d28"
     }
   },
   "explorer-1-mining_with_tool": {
@@ -160,8 +160,8 @@
       916
     ],
     "files": {
-      "second-nature/graphics/entity/industry/explorer-1-mining_with_tool-1.png": "2c256b9380d1ae8fcb1df216946a2055ce02e9fc211c844beca1ec8524be0a82",
-      "second-nature/graphics/entity/industry/explorer-1-mining_with_tool-2.png": "813d57027a2ef871983d37577814c4b25335e5caa116f7687819614ef24392d0"
+      "second-nature/graphics/entity/industry/explorer-1-mining_with_tool-1.png": "c90510975a9ee34ac41d4cef543ad922a0f764560aa306c620e2d80fc2e9e907",
+      "second-nature/graphics/entity/industry/explorer-1-mining_with_tool-2.png": "3b73d01d1e899509aa762b0f35d4b9eb901b41050197cb1a32ae489ea513cc72"
     }
   },
   "explorer-1-running_with_gun": {
@@ -179,8 +179,8 @@
       776
     ],
     "files": {
-      "second-nature/graphics/entity/industry/explorer-1-running_with_gun-1.png": "c14a77c6f781050c0f382b27873ea2761699f1f474b8be8b59c334e90f0e4478",
-      "second-nature/graphics/entity/industry/explorer-1-running_with_gun-2.png": "f809bfef038a1dc998c27a958a7689d8213b62069d40599632eacc5d3af28f2e"
+      "second-nature/graphics/entity/industry/explorer-1-running_with_gun-1.png": "4580c9273ab3d205905718ff7c6e7f7b8efde2caadfef47246d2c803d8f90f1e",
+      "second-nature/graphics/entity/industry/explorer-1-running_with_gun-2.png": "6f418b745dddcfaf9f5bfa8b42c8c0f0ebe61649f8c48500dd139c04e2f7b712"
     }
   },
   "explorer-2-idle": {
@@ -192,13 +192,13 @@
       "scale": 0.25
     },
     "crop": [
-      292,
-      168,
-      608,
-      692
+      296,
+      166,
+      600,
+      688
     ],
     "files": {
-      "second-nature/graphics/entity/industry/explorer-2-idle.png": "7dd3b5c0116a297d742615aed313631f0cee1b354675ebeb592dd9079ebc3294"
+      "second-nature/graphics/entity/industry/explorer-2-idle.png": "c563b853d7d8c6114b2c04fa3caf3768e8850eca903c2a92605915dd1440de84"
     }
   },
   "explorer-2-idle_with_gun": {
@@ -216,7 +216,7 @@
       776
     ],
     "files": {
-      "second-nature/graphics/entity/industry/explorer-2-idle_with_gun.png": "75b9e0d633f1f88a4b9e4db7a50299202710cf13407f702862aa95e275ca1065"
+      "second-nature/graphics/entity/industry/explorer-2-idle_with_gun.png": "69500009de03b99cbccc644c37b9a6fde4bdfedf7da87685accdd3786432b518"
     }
   },
   "explorer-2-running": {
@@ -229,12 +229,12 @@
     },
     "crop": [
       270,
-      160,
-      606,
-      694
+      172,
+      596,
+      684
     ],
     "files": {
-      "second-nature/graphics/entity/industry/explorer-2-running.png": "383c5a880ddaa755cde4a13671c46e2c1a441c6ac3b11eb72677f29dbedb16f2"
+      "second-nature/graphics/entity/industry/explorer-2-running.png": "cdc96bdafeb63570867710f78d4b4698860839ed624e7828fe80c22652eea618"
     }
   },
   "explorer-2-mining_with_tool": {
@@ -252,8 +252,8 @@
       916
     ],
     "files": {
-      "second-nature/graphics/entity/industry/explorer-2-mining_with_tool-1.png": "3795ed33870c30712092aa382da2b78364026c2165a0d4f7e4e8be11bc275e82",
-      "second-nature/graphics/entity/industry/explorer-2-mining_with_tool-2.png": "7263df698e81225da117bf1c7723e7d27229035713143380168bc53e52cfa1e7"
+      "second-nature/graphics/entity/industry/explorer-2-mining_with_tool-1.png": "4d6679b70cca1b5acad5c318b13b94ea7ad7fc5e35cb729047ab32472a4e05c9",
+      "second-nature/graphics/entity/industry/explorer-2-mining_with_tool-2.png": "d93e99d733f1a537abc5f68a6d33aa654495380b52ac5cbbb5c350e1920fe8f6"
     }
   },
   "explorer-2-running_with_gun": {
@@ -271,8 +271,8 @@
       776
     ],
     "files": {
-      "second-nature/graphics/entity/industry/explorer-2-running_with_gun-1.png": "0538a9c1bf876ee269a942b6a53b8937855081b6336a1bc8a3240eac315bae02",
-      "second-nature/graphics/entity/industry/explorer-2-running_with_gun-2.png": "a44a7093e76b409303dd68d06f01160f3550e0ce88d2cd5ec28551277fcd2b89"
+      "second-nature/graphics/entity/industry/explorer-2-running_with_gun-1.png": "c5cb8fb9b0015bf8c7a09488e8c7526b9d5eaa4aade75a46ff273f7594fdaf0f",
+      "second-nature/graphics/entity/industry/explorer-2-running_with_gun-2.png": "d330abfe34884bfa5bb32b8935e5cb625f234dbab720be17a08a387456223315"
     }
   }
 }

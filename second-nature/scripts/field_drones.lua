@@ -151,6 +151,23 @@ function D.cancel(index)
   o.pending={};o.pending_keys={};o.head=1
   for _,id in ipairs(ids(o.workers)) do local rec=root().workers[id];if rec then finish(rec,player) end end
 end
+function D.recall(index)
+  local o=root() and root().owners[index];if not o then return end
+  o.pending={};o.pending_keys={};o.head=1
+  for _,id in ipairs(ids(o.workers)) do
+    local rec=root().workers[id]
+    if rec then
+      rec.stage="returning";rec.ready=nil;rec.recalled=true
+      if root().claims[rec.key]==id then root().claims[rec.key]=nil end
+      if rec.entity and rec.entity.valid then animation(rec,false) end
+    end
+  end
+end
+function D.has_controller(player)
+  local c=player and player.character
+  local inv=c and c.valid and c.get_main_inventory()
+  return inv and inv.valid and carried(inv,C.controller)~=nil or false
+end
 function D.remove_player(index)
   D.cancel(index);root().owners[index]=nil
 end
@@ -171,9 +188,8 @@ function D.set_enabled(player,enabled)
   if enabled then
     local ctx,reason=context(player,true)
     if not ctx then o.reason=reason;player.print({"sn-drones."..reason});return false end
-  else D.cancel(player.index) end
+  else D.recall(player.index) end
   o.explicit_choice=true;o.enabled=enabled;o.reason=enabled and "waiting" or "off"
-  player.set_shortcut_toggled("sn-field-drones",enabled)
   return true
 end
 function D.toggle(player)
@@ -222,22 +238,29 @@ end
 function D.step_player(player,index)
   index=index or (player and player.index)
   local o=index and root().owners[index];if not o then return end
-  if not o.enabled then
-    if o.active>0 then D.cancel(index) end
-    o.reason="off";return
-  end
+  if o.active==0 and not o.enabled then o.reason="off";return end
   if o.active==0 and game.tick%C.scan_ticks~=0 then return end
   local ctx,reason=context(player)
-  if not ctx then
-    if o.active>0 then D.cancel(index) end
-    o.reason=reason;return
+  local doing_work=o.enabled and ctx~=nil
+  if not doing_work then
+    if o.active>0 then D.recall(index) end
+    local c=player and player.connected and player.character
+    if not (c and c.valid and c.type=="character") then
+      if o.active>0 then D.cancel(index) end
+      o.reason=o.enabled and reason or "off";return
+    end
+    ctx={character=c,position=c.position,surface=c.surface,force=c.force,speed=D.capabilities(c.force).speed}
   end
   local limit=D.limit(player)
+  local allowed=0
   for _,id in ipairs(ids(o.workers)) do
     local rec=root().workers[id]
+    if rec.stage~="returning" then
+      allowed=allowed+1
+      if allowed>limit or game.tick-rec.started>C.lifetime_ticks then rec.stage="returning";rec.recalled=true end
+    end
     if not (rec.entity and rec.entity.valid) then lost(rec)
-    elseif rec.force_index~=ctx.force.index or rec.surface.index~=ctx.surface.index or game.tick-rec.started>C.lifetime_ticks then finish(rec,player)
-    elseif o.active>limit then finish(rec,player)
+    elseif rec.force_index~=ctx.force.index or rec.surface.index~=ctx.surface.index then finish(rec,player)
     else
       animation(rec,rec.stage=="working")
       if rec.stage~="returning" and not Tasks.valid(rec,ctx) then rec.stage="returning" end
@@ -259,6 +282,7 @@ function D.step_player(player,index)
       end
     end
   end
+  if not doing_work then o.reason=o.active>0 and "returning" or (o.enabled and reason or "off");return end
   o.reason=o.active>0 and "working" or "waiting"
   if o.active>=limit or root().active>=C.global_limit then return end
   if not carried(ctx.inventory,C.item) then o.reason="no-drones";return end
@@ -311,7 +335,7 @@ function D.tick()
     for _,player in pairs(game.connected_players) do
       local tech=player.force.technologies[C.technology]
       if tech and tech.researched and not root().owners[player.index] then
-        owner(player.index);player.set_shortcut_toggled("sn-field-drones",true)
+        owner(player.index)
       end
     end
   end

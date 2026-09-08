@@ -337,6 +337,7 @@ local Energy = require("shared.energy")
 for _,x in ipairs(Energy.items) do K.expedition[#K.expedition+1]=x end
 for _,x in ipairs(Energy.recipes) do K.recipes[#K.recipes+1]=x end
 for _,x in ipairs(Energy.technologies) do K.technologies[#K.technologies+1]=x end
+for _,x in ipairs(Energy.fluids or {}) do K.fluids[#K.fluids+1]=x end
 K.energy=Energy
 local Layouts = require("shared.machine_layouts")
 K.by_recipe, K.by_machine = {}, {}

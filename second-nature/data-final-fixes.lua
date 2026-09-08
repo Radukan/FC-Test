@@ -52,3 +52,8 @@ end
 if settings.startup["sn-inserter-vectors"].value then
   for _, inserter in pairs(data.raw.inserter) do inserter.allow_custom_vectors = true end
 end
+
+-- Wood-free startup poles use iron sticks; this must not wait for green science.
+local sticks=assert(data.raw.recipe["iron-stick"],"Second Nature requires iron-stick")
+sticks.enabled=true
+sticks.hide_from_player_crafting=false

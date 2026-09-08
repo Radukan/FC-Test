@@ -3,11 +3,15 @@
 def add_field_drone_locale(put):
     entries={
         'title':'Field construction crew',
-        'introduction':'[Second Nature] Your inventory-fed field crew is enabled. Ctrl + Shift + B pauses/resumes it and opens this monitor. No armor or power supply is needed. Use the normal blueprint, deconstruction and upgrade planners.',
+        'introduction':'[Second Nature] Your inventory-fed field crew is enabled. Use the upper-left controller button or Ctrl + Shift + B to pause/resume. Workers visibly fly home on recall. No armor or power supply is needed. Use the normal blueprint, deconstruction and upgrade planners.',
         'tuning-1':'Field drones: reach 22 tiles, flight 2.52 tiles/second, work cycle 1.25 seconds.',
         'tuning-2':'Field drones: reach 26 tiles, flight 3 tiles/second, work cycle 1 second.',
-        'stats':'Active: __1__/__2__   Packed: __3__\nBuilt: __4__   Removed: __5__   Upgraded: __6__',
-        'help':'AUTO-ENABLED with the researched kit in your inventory. Ctrl + Shift + B: pause/resume and open this monitor. Carry a controller, drones and materials. Use blueprints, copy/paste, deconstruction and upgrade planners. Research tunes reach and speed.',
+        'stats':'Out: __1__/__2__   Packed: __3__\nBuilt: __4__   Removed: __5__   Upgraded: __6__',
+        'help':'AUTO-ENABLED with the researched kit in your inventory. Upper-left controller button or Ctrl + Shift + B: pause/resume. Recalled workers fly back instead of disappearing. Carry a controller, drones and materials. Use blueprints, copy/paste, deconstruction and upgrade planners. Research tunes reach and speed.',
+        'returning':'The crew is flying back to you. Drones and cargo return to inventory only when they arrive.',
+        'enabled-label':'Enabled', 'paused-label':'Paused / returning',
+        'button-help':'Field crew: click or press Ctrl + Shift + B to pause/resume. Pausing recalls workers visibly.',
+        'button-state':'Field crew: __1__ | __2__ drones out. Click or Ctrl + Shift + B to pause/resume. This button is shown only while carrying the controller.',
         'pause':'Pause + recall', 'enable':'Enable crew', 'hide':'Hide',
         'hide-help':'Hide this monitor. An enabled crew keeps working.',
         'off':'Field drones are paused. All reserved supplies have been returned.',

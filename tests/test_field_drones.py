@@ -129,7 +129,7 @@ def test_inventory_overflow_spills_exact_reserved_quality_instead_of_losing_it(d
       local p=mock.drone_player(1,1,1,'rare');local g=mock.ghost(p,'stone-wall',{x=5,y=2},'rare')
       enable(p);mock.drone_steps(30)
       p.inventory.insert({name='iron-plate',count=8000})
-      D.set_enabled(p,false)
+      D.set_enabled(p,false);assert(S.root().field_drones.active==1);mock.drone_steps(60)
       assert(mock.spill_count('sn-field-drone','rare')==1 and mock.spill_count('stone-wall','rare')==1)
       assert(S.root().field_drones.active==0 and #mock.revivals==0)
     ''')
@@ -217,8 +217,9 @@ def test_dense_blueprint_uses_a_large_crew_but_dispatch_work_is_bounded(drone_lu
       mock.drone_steps(42)
       assert(S.root().field_drones.active==64,'queue should support a full large crew')
       settings.get_player_settings=function() return {['sn-field-drone-limit']={value=1}} end
-      mock.drone_steps(6);assert(S.root().field_drones.active==1)
-      D.set_enabled(p,false)
+      mock.drone_steps(6);assert(S.root().field_drones.active>1)
+      local working=0;for _,r in pairs(S.root().field_drones.workers) do if r.stage~='returning' then working=working+1 end end;assert(working<=1)
+      D.set_enabled(p,false);mock.drone_steps(600)
       assert(p.inventory.get_item_count('sn-field-drone')==100 and p.inventory.get_item_count('stone-wall')==100)
     ''')
 
@@ -233,7 +234,8 @@ def test_gui_toggle_is_namespaced_and_closing_it_does_not_recall_the_crew(drone_
       mock.event('on_gui_click',{player_index=1,element=close})
       assert(not p.gui.left.sn_field_drones and D.status(p).enabled and S.root().field_drones.active==1)
       mock.handlers['sn-toggle-field-drones']({player_index=1})
-      assert(p.gui.left.sn_field_drones and not D.status(p).enabled and S.root().field_drones.active==0)
+      assert(p.gui.left.sn_field_drones and not D.status(p).enabled and S.root().field_drones.active==1)
+      mock.drone_steps(60);assert(S.root().field_drones.active==0)
     ''')
 
 
@@ -258,7 +260,8 @@ def test_return_restores_both_render_layers_after_a_render_clear(drone_lua):
       local old_body,old_shadow=rec.visual,rec.shadow
       rendering.clear();mock.drone_steps(3)
       assert(not old_body.valid and not old_shadow.valid and rec.visual.valid and rec.shadow.valid)
-      D.set_enabled(p,false);assert(not rec.visual.valid and not rec.shadow.valid and not rec.cargo.valid)
+      D.set_enabled(p,false);assert(rec.visual.valid and rec.shadow.valid and rec.cargo.valid)
+      mock.drone_steps(60);assert(not rec.visual.valid and not rec.shadow.valid and not rec.cargo.valid)
     ''')
 
 
@@ -381,3 +384,38 @@ def test_movement_updates_each_tick_and_selects_a_3d_facing(drone_lua):
       end
       assert(rec.heading and rec.heading>0 and rec.visual.animation:find('flight-'))
     ''')
+
+
+def test_toggling_off_sends_workers_home_before_items_are_returned(drone_lua):
+    drone_lua.execute('''
+      local p=mock.drone_player(1);mock.ghost(p,'stone-wall',{x=8,y=2})
+      enable(p);mock.drone_steps(130);local _,rec=next(S.root().field_drones.workers)
+      local x=rec.entity.position.x;assert(x>2)
+      D.set_enabled(p,false)
+      assert(rec.entity.valid and rec.entity.position.x==x and rec.stage=='returning')
+      assert(p.inventory.get_item_count('sn-field-drone')==0 and rec.cargo.valid)
+      mock.drone_steps(20);assert(rec.entity.valid and rec.entity.position.x<x)
+      D.set_enabled(p,true);assert(rec.entity.valid and rec.stage=='returning')
+      D.set_enabled(p,false);mock.drone_steps(300)
+      assert(not rec.entity.valid and not rec.cargo.valid and p.inventory.get_item_count('sn-field-drone')==1)
+      assert(p.inventory.get_item_count('stone-wall')==1 and #mock.revivals==0)
+    ''')
+
+
+def test_upper_left_button_exists_only_with_a_carried_controller(drone_lua):
+    drone_lua.execute('''
+      local G=require('scripts.field_drone_gui');local p=mock.drone_player(1)
+      G.sync_button(p);assert(p.gui.top.sn_field_drone_button)
+      assert(p.gui.top.sn_field_drone_button.sprite==nil or p.gui.top.sn_field_drone_button.type=='sprite-button')
+      p.inventory.remove({name='sn-field-controller',count=1})
+      mock.event('on_player_main_inventory_changed',{player_index=1})
+      assert(not p.gui.top.sn_field_drone_button and not p.gui.left.sn_field_drones)
+      p.inventory.insert({name='sn-field-controller',count=1})
+      mock.event('on_player_main_inventory_changed',{player_index=1})
+      assert(p.gui.top.sn_field_drone_button)
+    ''')
+
+
+def test_drone_control_is_not_a_toolbar_shortcut(drone_data):
+    assert drone_data.raw.shortcut['sn-field-drones'] is None
+    assert drone_data.raw['custom-input']['sn-toggle-field-drones'].key_sequence=='CONTROL + SHIFT + B'

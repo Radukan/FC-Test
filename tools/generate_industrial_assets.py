@@ -146,7 +146,6 @@ def render_all(only=None,jobs=2,poses=None):
                 preview,front=animate_character(tier,pose,frames,count,jobs)
                 if pose=='idle':
                     icon(front,'explorer' if tier==0 else f'explorer-{tier}')
-                    icon(front,('field-armor','expedition-armor','bastion-armor')[tier])
                     previews.append((f'Explorer / armor {tier}',front))
             if not poses:
                 preview=animate(f'explorer-{tier}-corpse',lambda t,d:corpse(tier),512,384,frames=2,origin=.5,ppu=140)

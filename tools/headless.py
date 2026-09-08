@@ -42,7 +42,7 @@ def run(binary:Path):
             print('::error title=Factorio engine failure::'+summary)
             raise SystemExit(f'Factorio {label} failed ({result.returncode}); see {root/(label+".log")}')
         outputs.append(result.stdout)
-    if not all(marker in '\n'.join(outputs) for marker in ('SECOND_NATURE_ENGINE_SMOKE_OK','SECOND_NATURE_ENGINE_CAMPAIGN_PROBES_OK','SECOND_NATURE_ENGINE_LOGISTICS_AUDIO_OK','SECOND_NATURE_ENGINE_VERDANT_LAYOUTS_OK','SECOND_NATURE_ENGINE_LANDER_REFIT_OK','SECOND_NATURE_ENGINE_FIELD_DRONES_OK','SECOND_NATURE_ENGINE_FIELD_PLANNERS_OK','SECOND_NATURE_ENGINE_SOLAR_RAIL_OK','SECOND_NATURE_ENGINE_POWER_OPTIONS_OK')):
+    if not all(marker in '\n'.join(outputs) for marker in ('SECOND_NATURE_ENGINE_SMOKE_OK','SECOND_NATURE_ENGINE_CAMPAIGN_PROBES_OK','SECOND_NATURE_ENGINE_LOGISTICS_AUDIO_OK','SECOND_NATURE_ENGINE_VERDANT_LAYOUTS_OK','SECOND_NATURE_ENGINE_LANDER_REFIT_OK','SECOND_NATURE_ENGINE_FIELD_DRONES_OK','SECOND_NATURE_ENGINE_FIELD_PLANNERS_OK','SECOND_NATURE_ENGINE_SOLAR_RAIL_OK','SECOND_NATURE_ENGINE_POWER_OPTIONS_OK','SECOND_NATURE_ENGINE_POWER_STAGES_OK','SECOND_NATURE_ENGINE_CREW_RECALL_OK')):
         raise SystemExit('Engine exited without the smoke-test success marker. This is NOT a pass. Inspect '+str(root))
     print(f'ENGINE VALIDATION PASSED: Factorio {version}. Logs: {root}')
 if __name__=='__main__':

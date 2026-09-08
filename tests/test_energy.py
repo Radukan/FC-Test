@@ -20,12 +20,12 @@ def energy_lua(game_lua):
 
 
 def test_six_power_options_cover_passive_active_clean_and_polluting(energy_data):
-    e=load_catalog()['energy'];assert len(e['plants'])>=5
+    e=load_catalog()['energy'];assert len(e['plants'])==18
     assert sum(p['kind']=='burner-generator' for p in e['plants'])==3
-    assert sum(p.get('pollution',0)>0 for p in e['plants'])==2
+    assert sum(p.get('pollution',0)>0 for p in e['plants'])==4
     for p in e['plants']:
         entity=energy_data.raw[p['kind']]['sn-'+p['name']]
-        assert entity and entity.tile_width==p['size']
+        assert entity and entity.tile_width==p.get('width',p['size'])
         assert energy_data.raw.item[entity.name].place_result==entity.name
         if p['kind']=='burner-generator':
             assert entity.burner.emissions_per_minute.pollution==p['pollution']
@@ -120,11 +120,63 @@ def test_wind_and_geothermal_outputs_are_bounded_and_never_power_airless_platfor
       local s=game.surfaces[1];local wind=mock.entity('sn-wind-turbine',s,{x=0,y=0},nil,true)
       local geo=mock.entity('sn-geothermal-bore',s,{x=100,y=0},nil,true)
       P.register(wind);P.register(geo)
-      assert(geo.power_production==1200000/60)
+      assert(geo.power_production==6400000/60)
       local lo,hi=1e30,0
-      for tick=0,10000,120 do local w=P.output(wind,tick);assert(w>=0 and w<=120000);lo=math.min(lo,w);hi=math.max(hi,w) end
-      assert(hi-lo>40000)
+      for tick=0,10000,120 do local w=P.output(wind,tick);assert(w>=0 and w<=400000);lo=math.min(lo,w);hi=math.max(hi,w) end
+      assert(hi-lo>100000)
       s.wind_speed=0;assert(P.output(wind,0)==0)
       s.platform={};assert(P.output(geo,0)==0)
       s.platform=nil;s.properties.pressure=0;assert(P.output(wind,0)==0)
+    ''')
+
+
+def test_six_distinct_systems_exist_in_each_stage_with_meaningful_ratings():
+    plants=load_catalog()['energy']['plants']
+    for stage,minimum in [('early',120000),('mid',1800000),('late',12000000)]:
+        entries=[p for p in plants if p['stage']==stage]
+        assert len(entries)==6 and len({p['mechanism'] for p in entries})==6
+        assert min(p['watts'] for p in entries)>=minimum
+        assert any(p['kind']=='solar-panel' for p in entries)
+    assert any(p['kind']=='reactor' for p in plants)
+    assert any(p['kind']=='fusion-generator' for p in plants)
+
+
+def test_fuel_and_steam_generation_preserve_energy_accounting_contracts(energy_data):
+    data=energy_data.raw
+    for p in load_catalog()['energy']['plants']:
+        if p['kind']=='generator':
+            e=data.generator['sn-'+p['name']]
+            assert e.fluid_box.filter==p['fluid'] and e.effectivity<=1
+            assert e.scale_fluid_usage is True and e.destroy_non_fuel_fluid is False
+            assert len(e.fluid_box.pipe_connections)==2
+    r=data.reactor['sn-salt-reactor'];assert r.consumption=='80000000W' and r.neighbour_bonus==0 and r.scale_energy_usage
+    f=data['fusion-generator']['sn-plasma-generator']
+    assert f.input_fluid_box.filter=='fusion-plasma' and f.output_fluid_box.filter=='fluoroketone-hot'
+    assert f.energy_source.output_flow_limit=='150000000W' and f.effectivity==1
+    assert data.fluid['sn-producer-gas'].fuel_value=='500kJ'
+
+
+def test_geothermal_regions_share_output_and_preserve_legacy_baselines(energy_lua):
+    energy_lua.execute('''
+      local s=game.surfaces[1]
+      local a=mock.entity('sn-geothermal-bore',s,{x=100,y=4},nil,true)
+      local b=mock.entity('sn-geothermal-bore',s,{x=110,y=4},nil,true)
+      P.register(a);P.register(b);P.tick()
+      assert(a.power_production==3200000/60 and b.power_production==3200000/60)
+      local late=mock.entity('sn-planetary-thermal-tap',s,{x=115,y=16},nil,true)
+      P.register(late);P.tick()
+      assert(math.abs((a.power_production+b.power_production+late.power_production)*60-24000000)<.01)
+      S.root().power_sources.version=nil
+      P.init()
+      assert(S.root().power_sources.legacy[a.unit_number] and a.power_production>=1200000/60)
+    ''')
+
+
+def test_river_power_stops_when_its_required_water_is_removed(energy_lua):
+    energy_lua.execute('''
+      local s=game.surfaces[1];local e=mock.entity('sn-river-turbine',s,{x=0,y=0},nil,true)
+      s.find_tiles_filtered=function(spec) assert(spec.radius==4);return {{},{},{},{}} end
+      assert(P.output(e,0)==350000)
+      s.find_tiles_filtered=function() return {} end
+      assert(P.output(e,60)==0)
     ''')

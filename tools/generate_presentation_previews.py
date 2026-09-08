@@ -296,45 +296,52 @@ def field_crew_review():
 
 
 def nightglass_review(catalog):
-    energy=catalog['energy']
-    sheet=Image.new('RGB',(1400,1380),BACKGROUND);d=ImageDraw.Draw(sheet)
-    header(sheet,'NIGHTGLASS / SECOND NATURE '+json.loads((MOD/'info.json').read_text())['version'],
-           'A goth expedition, solar-only rail and six power architectures. Source-art study, not gameplay footage.')
-    d.rounded_rectangle((25,110,375,740),radius=9,fill=PANEL)
-    d.text((45,132),'THE EXPLORER / DOUBLE DETAIL',font=font(16,True),fill=ACCENT)
-    actor,spec=load('explorer-0-idle');fit_sprite(sheet,tile(actor,spec,4,0),(42,166,358,650),trim=True);actor.close()
-    d.text((46,674),'Pale skin / wolf cut / tattoos',font=font(15),fill=CREAM)
-    d.text((46,704),'Pleated skirt / 160 texels per unit',font=font(14),fill=MUTED)
-    for i,t in enumerate(energy['trains']):
-        y=110+i*210
-        d.rounded_rectangle((397,y,1375,y+193),radius=9,fill=PANEL)
-        actor,spec=load(t['name']);fit_sprite(sheet,tile(actor,spec,16,0),(415,y+16,765,y+180),trim=True);actor.close()
-        d.text((790,y+23),t['title'].upper(),font=font(19,True),fill=CREAM)
-        d.text((790,y+67),f"Roof PV: {t['solar_watts']/1000:.0f} kW / battery: {t['battery_joules']/1e6:.0f} MJ",font=font(16),fill=MUTED)
-        d.text((790,y+102),f"Day: {t['day_speed']*216:.0f} km/h / night: {t['night_speed']*216:.0f} km/h",font=font(16),fill=ACCENT)
-        d.text((790,y+141),'No fuel slots. No factory-grid charging.',font=font(14),fill=CREAM)
-    d.text((30,771),'POWER CHOICES / PASSIVE, ACTIVE, CLEAN AND DIRTY',font=font(20,True),fill=CREAM)
-    for i,p in enumerate(energy['plants']):
-        x=25+(i%3)*458;y=814+(i//3)*247
-        d.rounded_rectangle((x,y,x+442,y+232),radius=7,fill=PANEL)
-        image,spec=load(p['name']+'-north');fit_sprite(sheet,tile(image,spec),(x+5,y+10,x+207,y+220),trim=True);image.close()
-        for j,line in enumerate(textwrap.wrap(p['title'],23)):d.text((x+216,y+32+j*24),line,font=font(15,True),fill=CREAM)
-        label='Passive / zero direct emissions' if p['kind']!='burner-generator' else ('Fuel-fired / low emission' if p.get('pollution',0)==0 else 'Fuel-fired / polluting')
-        for j,line in enumerate(textwrap.wrap(label,24)):d.text((x+216,y+105+j*21),line,font=font(13),fill=MUTED)
-        d.text((x+216,y+175),f"{p['watts']/1000:g} kW rated",font=font(16),fill=ACCENT)
-    d.text((30,1334),'Native fuel/electricity and solar equipment. Battery metering and night derating are verified separately in the engine harness.',font=font(13),fill=MUTED)
+    energy=catalog['energy'];stages=('early','mid','late')
+    sheet=Image.new('RGB',(1500,1240),BACKGROUND);d=ImageDraw.Draw(sheet)
+    header(sheet,'NIGHTGLASS FOUNDRY / SECOND NATURE '+json.loads((MOD/'info.json').read_text())['version'],
+           'Humanized explorer, readable inventory icons, visible crew recall and six power systems per stage. Source-art review, not gameplay.')
+    for i in range(3):d.rounded_rectangle((24+i*494,112,496+i*494,641),radius=8,fill=PANEL)
+    d.text((44,132),'A HUMAN GOTH EXPLORER',font=font(18,True),fill=ACCENT)
+    actor,spec=load('explorer-0-idle');fit_sprite(sheet,tile(actor,spec,4,0),(65,166,460,567),trim=True);actor.close()
+    d.text((44,587),'Softer face, skin and shoulder contours',font=font(15),fill=CREAM)
+    d.text((44,612),'Original adult design / Morticia-inspired styling',font=font(13),fill=MUTED)
+    d.text((538,132),'DISTINCT INVENTORY OBJECTS',font=font(18,True),fill=ACCENT)
+    names=('silica','glass','biochar','activated-carbon','filter-cartridge','spent-filter','ceramic-membrane','biofilm',
+           'field-pole','field-crate','field-armor','bastion-armor','vector-inserter','canopy-inserter','biogas','hydrogen')
+    for i,name in enumerate(names):
+        path=MOD/f'graphics/icons/{name}.png';INPUTS[str(path.relative_to(ROOT))]=hashlib.sha256(path.read_bytes()).hexdigest()
+        im=Image.open(path);x=560+(i%4)*106;y=186+(i//4)*91;sheet.paste(im,(x,y),im);im.close()
+    d.text((538,587),'Native 64 px art, reviewed again at 32 px',font=font(15),fill=CREAM)
+    d.text((538,612),'Different shapes, contrast and purposeful color',font=font(13),fill=MUTED)
+    d.text((1032,132),'CONTROL + RECALL',font=font(18,True),fill=ACCENT)
+    path=MOD/'graphics/icons/field-controller.png';im=Image.open(path);sheet.paste(im,(1216,206),im);im.close()
+    for j,line in enumerate(['Upper-left mod-button area','Visible only with a carried controller','Click or Ctrl + Shift + B','Pausing makes workers fly home','No instant remote refund/despawn']):
+        d.text((1032,315+j*43),line,font=font(15),fill=CREAM)
+    d.text((1032,587),'Iron sticks and power poles are starter crafts',font=font(14),fill=ACCENT)
+    d.text((30,674),'18 POWER SYSTEMS / SIX DIFFERENT OPTIONS IN EACH STAGE',font=font(22,True),fill=CREAM)
+    for col,stage in enumerate(stages):
+        x=24+col*494;d.text((x+18,720),stage.upper(),font=font(17,True),fill=ACCENT)
+        for row,p in enumerate(x for x in energy['plants'] if x['stage']==stage):
+            y=758+row*72
+            path=MOD/f'graphics/icons/{p["name"]}.png';INPUTS[str(path.relative_to(ROOT))]=hashlib.sha256(path.read_bytes()).hexdigest()
+            with Image.open(path) as im:sheet.paste(im,(x+7,y-6),im)
+            label=p['title']
+            for j,line in enumerate(textwrap.wrap(label,34)):d.text((x+83,y+2+j*20),line,font=font(14,True),fill=CREAM)
+            rating=f"{p['watts']/1000000:g} MW" if p['watts']>=1000000 else f"{p['watts']/1000:g} kW"
+            if p.get('heat'):rating+=' thermal'
+            d.text((x+83,y+43),rating+' / '+p['mechanism'],font=font(11),fill=MUTED)
+    d.text((30,1206),'Ratings are constrained by sunlight, wind, shoreline, regional heat, fuel or supplied thermal/plasma energy. No source creates free fuel.',font=font(13),fill=MUTED)
     sheet.save(ART/'nightglass-review.jpg',quality=93,optimize=True)
 
-    frames=[]
-    loaded=[(p,*load(p['name']+'-north')) for p in energy['plants']]
+    frames=[];loaded=[(p,*load(p['name']+'-north')) for p in energy['plants']]
     for f in range(8):
-        board=Image.new('RGB',(1200,760),BACKGROUND)
-        header(board,'NIGHTGLASS / POWER SYSTEMS','Working loops from the actual exported atlases; electricity and fuel behavior require engine validation.')
+        board=Image.new('RGB',(1800,1030),BACKGROUND)
+        header(board,'POWER ARCHITECTURES / EARLY, MID, LATE','Six distinct systems per row. Source animation study; operational rates are checked by the engine harness.')
         draw=ImageDraw.Draw(board)
         for i,(p,image,spec) in enumerate(loaded):
-            x=(i%3)*400;y=100+(i//3)*320
-            fit_sprite(board,tile(image,spec,frame=f),(x+5,y+5,x+395,y+260))
-            draw.text((x+15,y+280),p['title'],font=font(16),fill=CREAM)
+            x=(i%6)*300;y=100+(i//6)*305
+            fit_sprite(board,tile(image,spec,frame=f),(x+7,y+3,x+293,y+247))
+            for j,line in enumerate(textwrap.wrap(p['title'],30)):draw.text((x+14,y+250+j*19),line,font=font(12,True),fill=CREAM)
         frames.append(board)
     save_gif(frames,'power-options-preview.gif',100)
     for _,image,_ in loaded:image.close()

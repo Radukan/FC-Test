@@ -1,4 +1,21 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.8.0
+Date: 2026-09-08
+  Fixes:
+    - Enable iron sticks at startup and for existing forces so wood-free power poles do not wait for green science.
+    - Recall paused field drones visibly instead of immediately deleting/refunding them; preserve returning flights when re-enabled.
+    - Move the field-drone control to an upper-left mod button visible only with a carried controller; remove its toolbar shortcut.
+  Art:
+    - Humanize the original adult goth explorer with a sculpted smooth-shaded face/skin, slimmer arms, continuous shoulders and less mechanical clothing.
+    - Use Morticia-inspired adult gothic elegance as a loose styling reference while retaining the original wolf cut, tattoos and covered skirt.
+    - Rebuild item/building icons as distinct high-contrast objects at native Factorio inventory sizes.
+  Power:
+    - Provide six different power systems in each of early, mid and late progression, eighteen total.
+    - Rebalance existing output/costs without expanding occupied footprints, and add shoreline, gas, steam, solar concentration, fuel-cell, fission and plasma options.
+    - Preserve genuine fuel/fluid/heat accounting; share geothermal output regionally while retaining legacy baseline output.
+  Verification:
+    - Add source and native-engine checks for startup access, physical recall, staged power, fluid/coolant/fuel inputs, heat and electrical output.
+---------------------------------------------------------------------------------------------------
 Version: 0.7.0
 Date: 2026-09-08
   Features:
