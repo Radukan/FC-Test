@@ -145,7 +145,7 @@ machine("carbon-capture-tower", "Direct air capture tower", "chemical-plant", {"
 -- RESEARCH. A mid-game lab that is a genuine sidegrade.
 ------------------------------------------------------------------------------
 machine("field-laboratory", "Field ecology laboratory", "lab", {}, "320kW", 0,
-  "A mid-game laboratory that researches faster than a stock lab while drawing far more power. It accepts every science package the stock lab does.",
+  "A laboratory that researches faster than a stock lab while drawing far more power. It accepts every science package the stock lab does.",
   {entity_type = "lab", color = "biodiversity", researching_speed = 1.6})
 
 ------------------------------------------------------------------------------
@@ -313,7 +313,7 @@ tech("specialised-assembly", "Specialised assembly", {"sn-refractories", "advanc
   "Three assembly cells that each do one thing better than a general assembler, and other things worse.")
 tech("field-laboratory", "Field laboratory", {"sn-environmental-monitoring", "sn-refractories"}, {r, g, E}, 120,
   {"field-laboratory"},
-  "A faster mid-game laboratory. It draws far more power than a stock lab and accepts every package a stock lab does.")
+  "A faster laboratory. It draws far more power than a stock lab and accepts every package a stock lab does.")
 tech("smog-precipitation", "Electrostatic precipitation", {"sn-atmospheric-engineering", "sn-oxygen-smelting"}, {r, g, b, E}, 200,
   {"smog-precipitator", "smog-precipitation"},
   "Strip particulates straight out of the open air over a wide radius, at a genuine cost in power and consumables.")

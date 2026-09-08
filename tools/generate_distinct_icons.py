@@ -19,7 +19,15 @@ ACCENTS={
  'detoxifier':(155,124,169),'pheromone-dampener':(151,129,184),'forcing-tower':(173,107,74),
  'basalt-conditioner':(166,135,106),'fulgoran-reclaimer':(173,119,115),'spore-tower':(126,174,124),
  'cryogenic-garden':(159,188,195),'sanctuary':(148,173,113),'planetary-beacon':(178,194,188),
- 'ecology-monitor':(117,154,171)}
+ 'ecology-monitor':(117,154,171),
+ # Industry expansion. Clean smelting reads cool, dirty smelting hot, the
+ # concentration line earthy, mining ochre and air handling pale blue.
+ 'crucible-furnace':(151,171,183),'oxy-smelter':(124,166,196),'arc-refinery':(138,176,201),
+ 'blast-furnace':(184,111,72),'cupola-furnace':(176,120,83),
+ 'biopolymer-assembler':(120,172,124),'precision-assembler':(146,158,178),'foundry-press':(180,128,88),
+ 'ore-mill':(158,138,104),'flotation-cell':(170,164,126),'dewatering-press':(140,158,150),
+ 'electric-auger':(134,166,132),'hydraulic-miner':(118,158,178),'deep-core-drill':(166,146,110),
+ 'smog-precipitator':(126,164,184),'carbon-capture-tower':(146,180,192),'field-laboratory':(124,170,150)}
 
 
 def upper_model(model,accent=None):

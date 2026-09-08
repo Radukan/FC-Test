@@ -3,6 +3,7 @@ from PIL import Image
 from catalog import ROOT,MOD,load_catalog
 from atlas_io import Atlas,paths
 from explorer_model import explorer
+from character_layout import PIXELS_PER_UNIT
 import goth_details
 
 
@@ -23,7 +24,8 @@ def test_hd_atlases_double_texel_density_without_changing_world_scale_or_exceedi
     assert len(report)==15
     for name,entry in report.items():
         spec=manifest[name];view=entry['view']
-        assert view['ppu']==160 and spec['scale']==.25 and view['ppu']*spec['scale']==40
+        assert view['ppu']==PIXELS_PER_UNIT and spec['scale']==.25
+        assert view['ppu']*spec['scale']==PIXELS_PER_UNIT*.25
         assert view['width'] in (768,896) and view['height'] in (864,960)
         for filename,digest in entry['files'].items():
             assert hashlib.sha256((ROOT/filename).read_bytes()).hexdigest()==digest

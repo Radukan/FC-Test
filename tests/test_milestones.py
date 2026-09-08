@@ -144,7 +144,8 @@ def test_no_generating_plant_or_working_building_is_silent(stage):
     """A machine that visibly runs but makes no sound reads as broken."""
     catalog = load_catalog()
     kinds = ('assembling-machine', 'solar-panel', 'electric-energy-interface', 'burner-generator',
-             'generator', 'reactor', 'fusion-generator', 'constant-combinator')
+             'generator', 'reactor', 'fusion-generator', 'constant-combinator',
+             'mining-drill', 'lab')
 
     def find(name):
         for kind in kinds:

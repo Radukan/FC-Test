@@ -1,6 +1,6 @@
 {
   "description": "Current source-art review ledger. These files are not game screenshots or gameplay certification.",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "inputs": {
     "docs/art/lander-render.json": "57e554b1e825f0a390dac910918bfccab853d0a6122ada20f70f78d8b9b3392c",
     "second-nature/graphics/entity/field-drones/flying-shadow.png": "ba7317815ae6f07e0ccd00bbc977df7ece341cc19da31c8cbb724fd19dc544bf",
@@ -9,39 +9,56 @@
     "second-nature/graphics/entity/field-drones/working.png": "f64230315ddeea6d5720725fc6b736389327e78547f82da4aadc7aa4eb2cc914",
     "second-nature/graphics/entity/industry/air-scrubber-north.png": "c37935db168021917e8bd3bc54f25208e586d7c3ab7c5adf981126d6c44135f7",
     "second-nature/graphics/entity/industry/algae-vat-plant-north.png": "c740391f7d861195bb5af8738e22319cc42fb269969836ba511ed0c127c3f758",
+    "second-nature/graphics/entity/industry/arc-refinery-north.png": "b462c31b2921cc1aed38b544a1eda0a73f4048b8446464a58fa8f342bb6f875b",
     "second-nature/graphics/entity/industry/arc-turret-fire.png": "ed5029ae8a74d598d2d14b5108f44839c926f975bcd43aaf18ec20095943861f",
     "second-nature/graphics/entity/industry/basalt-conditioner-plant-north.png": "87c9c9b47d0eeb09aa89be979024e2b0df77829b233e79d7ce41a82a47c16dc6",
+    "second-nature/graphics/entity/industry/biopolymer-assembler-north.png": "9ca24afa6308b74b5070777b700a2dd92f8923125558b81eb6c5e1b7320db094",
+    "second-nature/graphics/entity/industry/blast-furnace-north.png": "2571c310ddf54c8d2fe7a0b77403025c7c28e010d67db73205c712f5659c957f",
     "second-nature/graphics/entity/industry/canopy-inserter-north.png": "3efaf2d26af611ee482c935f237d442491cfc1c79b90d7300596b87a32598072",
+    "second-nature/graphics/entity/industry/carbon-capture-tower-north.png": "d27ab448d5d1dc5c27aca11fe939deecb8ee0dac8b351cd4195c286c1f8d28ec",
     "second-nature/graphics/entity/industry/composter-north.png": "9e2a695594f06dd32704fcdadf72bdf93984f050210362d4450bcaed4ff07b93",
+    "second-nature/graphics/entity/industry/crucible-furnace-north.png": "08edc5c65f82596d699477b74576276603551db46d9ef6b4ea135ebd50136c58",
     "second-nature/graphics/entity/industry/cryogenic-garden-plant-north.png": "f3e371d0de3cc5d9191c9d9aafd26931c9195cebf2e7a52d58e09d50d333faab",
+    "second-nature/graphics/entity/industry/cupola-furnace-north.png": "eac4cd924951de223f389793171b99eb43f76992f86ebd250368042f26b0c11a",
+    "second-nature/graphics/entity/industry/deep-core-drill-north.png": "42cc872edaf3b8bce9bd47a91c3afe02c7965847813a1980b9036a4d350c7377",
     "second-nature/graphics/entity/industry/detoxifier-plant-north.png": "c20bf0eeed71c7d58722176799abfd3056d8ef756fef42256f3ee0a49283cbcc",
+    "second-nature/graphics/entity/industry/dewatering-press-north.png": "7eade32390edc72a0c10286220bdfe910f51ad20a08d5c09d12a9b0d22595ff5",
     "second-nature/graphics/entity/industry/ecology-monitor-north.png": "6239ef8a49b7e426e5775eef2b2a9930d17711172112df8e67f7aa8083c433d7",
+    "second-nature/graphics/entity/industry/electric-auger-north.png": "9292b3dc0e47a343383759fe069eeedff8b49ec2a1bde586f6ed1332468d7580",
     "second-nature/graphics/entity/industry/electrolyzer-plant-north.png": "76c21418bd8128efa4b2af5026ccd6ef2531378974cf03a36c6cfc21d624f484",
-    "second-nature/graphics/entity/industry/explorer-0-idle.png": "4f1cad3e194259765318fd8965ad02e27fd7066e3844ecb64683a6d9640c84e8",
-    "second-nature/graphics/entity/industry/explorer-0-mining_with_tool-1.png": "6cc2c638c807c4ac8605f97e40ce2ca2d90b857d0c9b167505a19e2ff299f57a",
-    "second-nature/graphics/entity/industry/explorer-0-mining_with_tool-2.png": "8f9493d56f70c34da87f54f58201d25face36080b74545d59803f0f11770e0ed",
-    "second-nature/graphics/entity/industry/explorer-0-running.png": "4216297e87d13ab5acaed26b60cbe0870a04415bfaad4337168c5216cc547944",
-    "second-nature/graphics/entity/industry/explorer-0-running_with_gun-1.png": "d708e165c4899a8e331e65d04a0852d811a40838e6e3b1b72a07ab761e2fd9f3",
-    "second-nature/graphics/entity/industry/explorer-0-running_with_gun-2.png": "c3a7f7e6222c3efc6a9b5248399317505963f336b4336f4a49cec7ba340169b4",
-    "second-nature/graphics/entity/industry/explorer-1-idle.png": "f17eada299ab54ec82066777eff7e8ba3e03e5cfc601de539c789823aa3daeb8",
-    "second-nature/graphics/entity/industry/explorer-2-idle.png": "c563b853d7d8c6114b2c04fa3caf3768e8850eca903c2a92605915dd1440de84",
+    "second-nature/graphics/entity/industry/explorer-0-idle.png": "b4df946d74c4e7fec5d603df1950e64d773047426d843f87528d272e9cf5d348",
+    "second-nature/graphics/entity/industry/explorer-0-mining_with_tool-1.png": "f919e0ddfd8f19cd0a2623bbc7231874f1d8575bfa78ec2832ce0f73a48558f8",
+    "second-nature/graphics/entity/industry/explorer-0-mining_with_tool-2.png": "aef2095f6901b87695a2f195229df1c0a452cb03b708d44fee5d3be94be82293",
+    "second-nature/graphics/entity/industry/explorer-0-running.png": "3da50bb9ab0f7c837116b8ec6b32a89b15e9c181cb78518db55e06aaa6834c6d",
+    "second-nature/graphics/entity/industry/explorer-0-running_with_gun-1.png": "21510a681af225799cffae8554e88cd08034e3fa80471de95bb9633b9166b1df",
+    "second-nature/graphics/entity/industry/explorer-0-running_with_gun-2.png": "bb8bc261d3bac39d746c5861c9c01c47b1c2dce7ccf3338a5d09506ec622b6b3",
+    "second-nature/graphics/entity/industry/explorer-1-idle.png": "c6c73fdaa28b3d74a7d1e9c8d93e1b091b9a308d45f7cefa2d1b16f2d562ec6e",
+    "second-nature/graphics/entity/industry/explorer-2-idle.png": "b65851def0626b8697fb4660d8997aeca58e6b97376baf98a199096e9c8d2c13",
     "second-nature/graphics/entity/industry/field-crate-north.png": "0654c9ac6f2452cf63bdc29f691aa3da25e6b43cf78e481fc92c87acc7af5c68",
+    "second-nature/graphics/entity/industry/field-laboratory-north.png": "60a47e200fa723b5d9adade4670deae13b4daf508485624f672aa19b297e6e11",
     "second-nature/graphics/entity/industry/field-pole-north.png": "6e1ec07b9ff8f6729ca9d67041f8c46bf1a701277cbf1ec86e15caa599f08f0a",
+    "second-nature/graphics/entity/industry/flotation-cell-north.png": "7ea06b85b79091cddc3ff773db34ca7b7722e624ff9f08760a0419cdd6c4ca57",
     "second-nature/graphics/entity/industry/forcing-tower-north.png": "7cec30f8215a88b86e0975ac6f79729237cc20ad2e1831c6c9e851aefb03b5a5",
+    "second-nature/graphics/entity/industry/foundry-press-north.png": "d4d09f92095df2b69fa8140a98b0349c7474925e5c20b6a7c53a24f519b7a81a",
     "second-nature/graphics/entity/industry/fulgoran-reclaimer-plant-north.png": "33734cac6714a6a59969892a98e603226fb9640eb0dee9df3559423ec67d0d5a",
+    "second-nature/graphics/entity/industry/hydraulic-miner-north.png": "6b80ce93a814209952843989eaa3c3369ac4f299bee9a821dfca0836493f8eff",
     "second-nature/graphics/entity/industry/hydroponics-bay-plant-north.png": "0cccbcc28b1e6535a67462e728801006d96a4485275d4e5fe7c17e8268a2e08e",
     "second-nature/graphics/entity/industry/jukebox-north.png": "2e73080c31c6f2c37dfba4d3135e4c8fa63fe895c53b6e4cd410b402920b7481",
     "second-nature/graphics/entity/industry/lance-turret-fire.png": "a20292c0b0eed9bfa8adc386b76688527238de4f49a4d177708bed3cf6bc830c",
     "second-nature/graphics/entity/industry/lander-still.png": "820d0477c7e42611cb83e75f9fc832a98fb31d609e249eb1fece3b714a243471",
     "second-nature/graphics/entity/industry/lander.png": "c4573f547839f5236796d9fe0c37c77b3e596bd9c0a7ca4d320cdb1ecfaf7b23",
     "second-nature/graphics/entity/industry/materials-kiln-plant-north.png": "270b7a31d58b3848e052b44629de2be6942e720fe8e0d722df06ac4be54a29a7",
+    "second-nature/graphics/entity/industry/ore-mill-north.png": "82143a0865bfb88e5949d8cbc3ff92b03f9366015ee70f938497050e65fc4fdd",
+    "second-nature/graphics/entity/industry/oxy-smelter-north.png": "0a7ce248c7db1afc94654f343f921ebfab393d23843d128a9116142f27024b30",
     "second-nature/graphics/entity/industry/pheromone-dampener-north.png": "623ce9158ca6e1b8bcd049d58e571c6578277dd97c68d77efdff761e6830a3dc",
     "second-nature/graphics/entity/industry/planetary-beacon-plant-north.png": "531198710f4f54eb67d9cf4eae5d2b1750692106b2eedfa3ca704b80d163b8f2",
+    "second-nature/graphics/entity/industry/precision-assembler-north.png": "d0f2a0a10f4d6657586a530a16fe84f704c591431aec814b483eb4b000dafe97",
     "second-nature/graphics/entity/industry/pyrolyzer-north.png": "1b306c8044a4a53e9aa642e6ab567eeed181454af295330d08d735b9d4f941cc",
     "second-nature/graphics/entity/industry/reclamation-plant-plant-north.png": "b65dce1a8fb6cedfdc9cc297343ec2b7ec4f2650f109dbab553829ed34bd1b4f",
     "second-nature/graphics/entity/industry/sanctuary-plant-north.png": "33ffe01d1e96367c87888b67f9c116c3ac69fde020a8d6dff3e0e7233eeca789",
     "second-nature/graphics/entity/industry/seed-disperser-north.png": "7e3c0d53697b55d0595af6122b891ac45e3c9040f57840a433f406c507066bb8",
     "second-nature/graphics/entity/industry/sentry-turret-fire.png": "b5d1b311116ea2046f5394f71ff151c69739714508a032d88d098a4d9894477b",
+    "second-nature/graphics/entity/industry/smog-precipitator-north.png": "31b8da5af7ae66f4bdd977aeb797303dfe8fa5d534d193289a15ac979bf2d071",
     "second-nature/graphics/entity/industry/soil-enricher-north.png": "1453d5557dc3ee202d52be491e05d4c9ab15cd2ce4b72ef0e25e26138606ccb8",
     "second-nature/graphics/entity/industry/spore-tower-plant-north.png": "bb251eee345fc3cc297cba7a9c13c70fc30318fd9e6985d88146a2c292967ba6",
     "second-nature/graphics/entity/industry/thermal-exchanger-plant-north.png": "6689e3ae43ec256451a749c174d42a5c26e26129622a3f31ada1f5e136e65d33",
@@ -73,50 +90,50 @@
     "second-nature/graphics/icons/bastion-armor.png": "fa66c16d27f3ab8f8300cff97a56119e66be7b823ce14ed0d5999477ef70a0f1",
     "second-nature/graphics/icons/biochar.png": "3ec19b3c132607aac39a4ee2d44a53b2f97f0dfb7611e7c4367eb34a6ea47a55",
     "second-nature/graphics/icons/biofilm.png": "9c803296928d3ca53072b2798e0d4a398ed4cb8b52b3b98bbe5d0125093a4e74",
-    "second-nature/graphics/icons/biofuel-cell.png": "d26cdde7c56143540f68ab6e64cc781b9d2bd0d99dda3189e3f363b9a7a4614d",
-    "second-nature/graphics/icons/biogas-turbine.png": "3b33e20a12dea8210d4d364fb2537d7f1c6c86491678511df43a06413aead92a",
+    "second-nature/graphics/icons/biofuel-cell.png": "a117dd85c2c7a3553f0fb7c02418524be1f0fc1c3b9c37589d3b6aab19f8c3a3",
+    "second-nature/graphics/icons/biogas-turbine.png": "c62344ceae0e608990fef775ad92c76ee311853ee3627b4894240f4e492c4ac4",
     "second-nature/graphics/icons/biogas.png": "36ea1acc71429e0489ec06348d9eaed7e1bde054320b740e7a6f64c82f9f399c",
-    "second-nature/graphics/icons/biopellet-engine.png": "680bf4429bc13a5da547581ba7a1972706ecd98ba539c65991fe37c65d1d150e",
-    "second-nature/graphics/icons/burner-set.png": "1d2e1fe7ce9d39bc0a8426623a75494dfd9afdc8ffbe0f03cf746e6d6eb500b3",
-    "second-nature/graphics/icons/canopy-inserter.png": "925beded22e33e339fa1374666ca21b78b9f50f774912c76b7f86e02adc57f97",
+    "second-nature/graphics/icons/biopellet-engine.png": "611f88d0245e5672ddeda5fe6a5e2c7276d85a59b5773f197fa7e43519bb096c",
+    "second-nature/graphics/icons/burner-set.png": "6787fefbce324236554ef06d76287fc3d712bddf9dfd93bbcce70fdd3601f858",
+    "second-nature/graphics/icons/canopy-inserter.png": "65277562569b058c74d4ff0c5922860df0705caad4aa2450e315babdf3bb136a",
     "second-nature/graphics/icons/ceramic-membrane.png": "919cf9fe09cd33b45706ada303276fd80253353ccab5761868dff7702b2f4eb8",
-    "second-nature/graphics/icons/cogenerator.png": "248e7f53114a951ec157a2bc468033b61e258ebc1f63293137b559199792798a",
-    "second-nature/graphics/icons/combined-cycle.png": "81441f8010b53b1cd70fe9831b08feb2c57a3212841541b72dc5de14eed6d497",
+    "second-nature/graphics/icons/cogenerator.png": "54477f0b7ed1b5db00fa590b6fa83870eefb00c95f2ae21e919a75eaa5fe75e9",
+    "second-nature/graphics/icons/combined-cycle.png": "4d83748585e9efc1d7341311cd3253f82d660b7d1c15577c85e35c8310974385",
     "second-nature/graphics/icons/field-armor.png": "3f255d1de794fe388d013f4b2be90484250476c2f4ff9426c5cbde60d438ef43",
     "second-nature/graphics/icons/field-controller.png": "0e6d8fc178143bd05752e08a0fa5dec4814d79f26326b7479e1c56c85c097ac8",
-    "second-nature/graphics/icons/field-crate.png": "3096f0797ca5b43f78558bddd55741dafb543264c3cf4c7f5fed1a6433e3640d",
-    "second-nature/graphics/icons/field-pole.png": "0cfb85d37b6bf772c68892b0f064d89087b98ca91cbfd7ad8f1283c36fd89ffa",
+    "second-nature/graphics/icons/field-crate.png": "22cb236891d3593851f18bcc63d0e644dd76ccfb9b030b52ce9fa70b634ca21c",
+    "second-nature/graphics/icons/field-pole.png": "f9ff91d8505271bbcba4e39469346804994033b62f17d090f85ea1ad6ec3942b",
     "second-nature/graphics/icons/filter-cartridge.png": "46def2b3fa074243a55025e56810b0e8dff083a0af2b1247042eb6b6b53f7616",
-    "second-nature/graphics/icons/geothermal-bore.png": "cdebe07c0ba7e2bde36f1279068bf5a308c41877b372e26d5bd35a507ac3d892",
+    "second-nature/graphics/icons/geothermal-bore.png": "8fbd7f608690f03cf1a0ab5599aa3278ad46358130fd924dac4153cf89bacb06",
     "second-nature/graphics/icons/glass.png": "9b45a066305a42313eaa008a0bc4eb0e244a867396df65022591cece0ee15d3c",
-    "second-nature/graphics/icons/heat-recovery-turbine.png": "d1faf6cdcddbde760694a3579c957b8ff65f30ec350accc8326b8261774172bf",
+    "second-nature/graphics/icons/heat-recovery-turbine.png": "b5a496993693daf3fd57808fc30314f826957a838b4d2968abc0c5011edbd367",
     "second-nature/graphics/icons/hydrogen.png": "807b2d502014d1f114b8a92af01bd096cf2ba3e362b74872d8f9bc17d05426c0",
-    "second-nature/graphics/icons/micro-solar.png": "ba175ff5a8b3af0d11f20a1eea0f226c7ff9a6c0620182a636702a9c4516242e",
-    "second-nature/graphics/icons/photonic-canopy.png": "566ea2c33c5f525184564f12683c6bc167f37b1caba12f5c9154d2fab8f47620",
-    "second-nature/graphics/icons/planetary-thermal-tap.png": "ba2db4ed12d0871ec7dbb495be5324714135b9c90c2aab08e79a7373d8442cc1",
-    "second-nature/graphics/icons/plasma-generator.png": "2bd906413a06c6ed370fe41c66cb79d184c677d94b10c1cd289cee2cdbccf2ed",
-    "second-nature/graphics/icons/producer-gas-engine.png": "8fe422222da5f034ec83c106b938ec153ef31cb8480f1cc85d780845b8773acb",
-    "second-nature/graphics/icons/river-turbine.png": "88904dfc9da37a63cb67ba5daf2936d2b1d217774a60dd4fc3cd00b354eaed75",
-    "second-nature/graphics/icons/salt-reactor.png": "103946d9d11419ab45b896230bd8eca042dc0e87ee10eeb2fffb89747dbbcd4b",
+    "second-nature/graphics/icons/micro-solar.png": "97538871be49dbd29e879144fa565f18ff0a73e37324070789c2a0ffe7058a96",
+    "second-nature/graphics/icons/photonic-canopy.png": "4448b8d5a038e00e83b86f3aeaa0ba46f1379618ec677152615a3f790fb7d717",
+    "second-nature/graphics/icons/planetary-thermal-tap.png": "f2621aac4938d5a6f41c96af41bbc8c98f6579d8929a008c3a42ab10c82641cb",
+    "second-nature/graphics/icons/plasma-generator.png": "6509b9d2b4b7f8958305f0ff18a859e5bc179eb586ee371c588d6a295b7144c7",
+    "second-nature/graphics/icons/producer-gas-engine.png": "16875c2dcab57f34f121ca31adf81d9a5570da95883dd9ac1505f57fbf3340f0",
+    "second-nature/graphics/icons/river-turbine.png": "31626bff1070d100e879d9098312966433f04090a397a0c1a0bf9c5a14fd2194",
+    "second-nature/graphics/icons/salt-reactor.png": "1a84cdb1b3627995e4fd30e7e8f34bacc4e187abc43c24054c80048577b5ccf6",
     "second-nature/graphics/icons/silica.png": "8ca27a1316178860f55b73285488d9404fd42417615daa5d2ed59c8dae7cf18b",
-    "second-nature/graphics/icons/solar-tower.png": "8d6cdfdcd40b33f6f11acd52425b158dd446eae7f581fec3b145466cc05130c8",
+    "second-nature/graphics/icons/solar-tower.png": "90a15a2eff2e4facda0c2f74cd4e58846180bc2218ceea556e79e1e470d01185",
     "second-nature/graphics/icons/spent-filter.png": "fd6df6fa952d30736c33c510b67916c29f3edb137c577f3118021d4938a3322a",
-    "second-nature/graphics/icons/steam-piston.png": "310efa42752d3a3beb96bd58ffc50e937a176ea7a8e9763a85e2f606f7faf496",
-    "second-nature/graphics/icons/vector-inserter.png": "7692bc838844ef83ec165e263c19b173a05b2f4957dbdb4c6ac22cf7c340f54b",
-    "second-nature/graphics/icons/wind-turbine.png": "d600f52829b60b88578a9a4575b4a32a54fc0fce14dd938031a0ea5e3e4efe84",
+    "second-nature/graphics/icons/steam-piston.png": "2502afed15edf34442500623f63a8d192ddaadd6b1b0adaade80bc1900358d12",
+    "second-nature/graphics/icons/vector-inserter.png": "16e9c22f4e727537f8a024069e0c1c6237aa5cd091bf0ccea1e4834d619e136a",
+    "second-nature/graphics/icons/wind-turbine.png": "199b9ad57b3bc24de5eb2fe7672512cd4799fea425f84d008aa4f24ed811d92f",
     "second-nature/graphics/technology/field-robotics.png": "4b473de9d92c69cf92b0dc34920fa6e73cfff8ac52eef38348006d76bf4e2b5e"
   },
   "outputs": {
-    "ironbound-contact-sheet.jpg": "88a308022cc0eefc40653e64c4b3a3e25d8bec07a8d8a78d1460347177f07cc2",
-    "character-aim-layout.jpg": "9380a44c6de2b724ed11b592d84b13cb08c7a81aabfb04008d5408f5625c5759",
-    "locomotion-review.gif": "51f0eed06284c6b97b31a8ced79b4c960b6e46ac0db5ec5daaf3b7a90cba28dc",
-    "mining-framing-preview.gif": "6c934a8b07e903aed8768a31b2d03ba91f6b70335e8dc756323743d11b126472",
+    "ironbound-contact-sheet.jpg": "a32381c6c741fc22208d7361f4eb1f3bd2006069ce2ed794c939dc9e5fc90b2e",
+    "character-aim-layout.jpg": "b75eb9158cdfb10ce2deeccadc4c155813edbf68c1ed92c771249bc7df6d0cff",
+    "locomotion-review.gif": "3f2485d6c3e4f02a9c860b43340b55170a0eb96de998c120f7097c59eb3a3671",
+    "mining-framing-preview.gif": "9e6ff01690583da69d3dae669e4eaa9256f949f073b4fa7cf3b44c4bb0c159f4",
     "industrial-animation-preview.gif": "867dfe0b2aa748891e8380575baf08bee32af75ba8aecc1d9171418fd8d04e0c",
     "lander-review.jpg": "72dc4f541bc52a43db7cdbf94cbbf3b1a5ee09cf57cd437df3db4672549f52a3",
     "lander-standby.gif": "d92c72d4c4a57d392280c3b0b25b2c0b9ccbf8bda495487db50fa38ae0c6eb49",
-    "field-crew-review.jpg": "e5d7a836fdc922eb1074022884d1e9f1359f25f3247b516044f6d6e98d366c73",
+    "field-crew-review.jpg": "ff1371c662da30277565ab1518a992fd962e67acfc98aee6e1f3d4ef9176719f",
     "field-drone-preview.gif": "456b2525093fc716896ce03d6628c7b435f69ecbef08b33e4ee40b06ba117c3d",
-    "nightglass-review.jpg": "c71403abe717b2820424330232d46fd8a5e5631a2a592d9e9dbb252e757e33dc",
+    "nightglass-review.jpg": "4069cdcf174cf6425410f6b363137ee1adbae044baa2ba8ba20a87c0ede544b2",
     "power-options-preview.gif": "eeb56b4405b45ef0010a70f2e1212bf8a7c5713367f9868f30ce64b0f721961b"
   },
   "canonical_machines": {
@@ -207,6 +224,74 @@
     "ecology-monitor": {
       "art_name": "ecology-monitor",
       "footprint": 1
+    },
+    "crucible-furnace": {
+      "art_name": "crucible-furnace",
+      "footprint": 3
+    },
+    "oxy-smelter": {
+      "art_name": "oxy-smelter",
+      "footprint": 5
+    },
+    "arc-refinery": {
+      "art_name": "arc-refinery",
+      "footprint": 5
+    },
+    "blast-furnace": {
+      "art_name": "blast-furnace",
+      "footprint": 5
+    },
+    "cupola-furnace": {
+      "art_name": "cupola-furnace",
+      "footprint": 3
+    },
+    "biopolymer-assembler": {
+      "art_name": "biopolymer-assembler",
+      "footprint": 3
+    },
+    "precision-assembler": {
+      "art_name": "precision-assembler",
+      "footprint": 3
+    },
+    "foundry-press": {
+      "art_name": "foundry-press",
+      "footprint": 5
+    },
+    "ore-mill": {
+      "art_name": "ore-mill",
+      "footprint": 5
+    },
+    "flotation-cell": {
+      "art_name": "flotation-cell",
+      "footprint": 5
+    },
+    "dewatering-press": {
+      "art_name": "dewatering-press",
+      "footprint": 3
+    },
+    "electric-auger": {
+      "art_name": "electric-auger",
+      "footprint": 3
+    },
+    "hydraulic-miner": {
+      "art_name": "hydraulic-miner",
+      "footprint": 3
+    },
+    "deep-core-drill": {
+      "art_name": "deep-core-drill",
+      "footprint": 7
+    },
+    "smog-precipitator": {
+      "art_name": "smog-precipitator",
+      "footprint": 5
+    },
+    "carbon-capture-tower": {
+      "art_name": "carbon-capture-tower",
+      "footprint": 7
+    },
+    "field-laboratory": {
+      "art_name": "field-laboratory",
+      "footprint": 3
     }
   }
 }

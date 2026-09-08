@@ -32,6 +32,7 @@ local families = {
   data = inventory("science", .6), leaf = inventory("wood", .7),
   soil = inventory("brick", .5), seed = inventory("wood", .7),
   filter = inventory("mechanical", .7), thermal = inventory("steam", .6),
+  mechanical = inventory("mechanical", .75),
   waste = inventory("metal-barrel", .5), science = inventory("science", .6),
   -- Placeable and carried equipment, keyed by prototype kind.
   machine = inventory("metal-large", .7), fluid = inventory("metal-barrel", .5),

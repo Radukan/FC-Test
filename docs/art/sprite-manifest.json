@@ -1965,100 +1965,100 @@
     "apply_projection": false
   },
   "explorer-0-idle": {
-    "width": 304,
-    "height": 522,
+    "width": 258,
+    "height": 436,
     "frame_count": 4,
     "direction_count": 8,
     "line_length": 4,
     "scale": 0.25,
     "apply_projection": false,
     "shift": [
-      0.5,
-      -0.1015625
+      0.4140625,
+      -0.078125
     ],
     "filename": "__second-nature__/graphics/entity/industry/explorer-0-idle.png"
   },
   "explorer-0-idle_with_gun": {
-    "width": 510,
-    "height": 690,
+    "width": 426,
+    "height": 576,
     "frame_count": 4,
     "direction_count": 8,
     "line_length": 4,
     "scale": 0.25,
     "apply_projection": false,
     "shift": [
-      0.4609375,
-      -0.0703125
+      0.3828125,
+      -0.046875
     ],
     "filename": "__second-nature__/graphics/entity/industry/explorer-0-idle_with_gun.png"
   },
   "explorer-0-running": {
-    "width": 326,
-    "height": 512,
+    "width": 276,
+    "height": 428,
     "frame_count": 16,
     "direction_count": 8,
     "line_length": 16,
     "scale": 0.25,
     "apply_projection": false,
     "shift": [
-      0.3828125,
-      -0.09375
+      0.3125,
+      -0.078125
     ],
     "filename": "__second-nature__/graphics/entity/industry/explorer-0-running.png"
   },
   "explorer-0-mining_with_tool": {
-    "width": 656,
-    "height": 868,
+    "width": 548,
+    "height": 720,
     "frame_count": 20,
     "direction_count": 8,
     "line_length": 10,
     "scale": 0.25,
     "apply_projection": false,
     "shift": [
-      0.5,
-      -0.109375
+      0.421875,
+      -0.078125
     ],
     "stripes": [
       {
         "filename": "__second-nature__/graphics/entity/industry/explorer-0-mining_with_tool-1.png",
         "width_in_frames": 10,
-        "height_in_frames": 8,
+        "height_in_frames": 10,
         "x": 0,
         "y": 0
       },
       {
         "filename": "__second-nature__/graphics/entity/industry/explorer-0-mining_with_tool-2.png",
         "width_in_frames": 10,
-        "height_in_frames": 8,
+        "height_in_frames": 6,
         "x": 0,
         "y": 0
       }
     ]
   },
   "explorer-0-running_with_gun": {
-    "width": 434,
-    "height": 690,
+    "width": 366,
+    "height": 576,
     "frame_count": 16,
     "direction_count": 18,
     "line_length": 16,
     "scale": 0.25,
     "apply_projection": false,
     "shift": [
-      0.7578125,
-      -0.0703125
+      0.6171875,
+      -0.046875
     ],
     "stripes": [
       {
         "filename": "__second-nature__/graphics/entity/industry/explorer-0-running_with_gun-1.png",
         "width_in_frames": 16,
-        "height_in_frames": 11,
+        "height_in_frames": 14,
         "x": 0,
         "y": 0
       },
       {
         "filename": "__second-nature__/graphics/entity/industry/explorer-0-running_with_gun-2.png",
         "width_in_frames": 16,
-        "height_in_frames": 7,
+        "height_in_frames": 4,
         "x": 0,
         "y": 0
       }
@@ -2078,100 +2078,100 @@
     ]
   },
   "explorer-1-idle": {
-    "width": 304,
-    "height": 522,
+    "width": 258,
+    "height": 436,
     "frame_count": 4,
     "direction_count": 8,
     "line_length": 4,
     "scale": 0.25,
     "apply_projection": false,
     "shift": [
-      0.5,
-      -0.1015625
+      0.4140625,
+      -0.078125
     ],
     "filename": "__second-nature__/graphics/entity/industry/explorer-1-idle.png"
   },
   "explorer-1-idle_with_gun": {
-    "width": 510,
-    "height": 690,
+    "width": 426,
+    "height": 576,
     "frame_count": 4,
     "direction_count": 8,
     "line_length": 4,
     "scale": 0.25,
     "apply_projection": false,
     "shift": [
-      0.4609375,
-      -0.0703125
+      0.3828125,
+      -0.046875
     ],
     "filename": "__second-nature__/graphics/entity/industry/explorer-1-idle_with_gun.png"
   },
   "explorer-1-running": {
-    "width": 326,
-    "height": 512,
+    "width": 276,
+    "height": 428,
     "frame_count": 16,
     "direction_count": 8,
     "line_length": 16,
     "scale": 0.25,
     "apply_projection": false,
     "shift": [
-      0.3828125,
-      -0.09375
+      0.3125,
+      -0.078125
     ],
     "filename": "__second-nature__/graphics/entity/industry/explorer-1-running.png"
   },
   "explorer-1-mining_with_tool": {
-    "width": 656,
-    "height": 868,
+    "width": 548,
+    "height": 720,
     "frame_count": 20,
     "direction_count": 8,
     "line_length": 10,
     "scale": 0.25,
     "apply_projection": false,
     "shift": [
-      0.5,
-      -0.109375
+      0.421875,
+      -0.078125
     ],
     "stripes": [
       {
         "filename": "__second-nature__/graphics/entity/industry/explorer-1-mining_with_tool-1.png",
         "width_in_frames": 10,
-        "height_in_frames": 8,
+        "height_in_frames": 10,
         "x": 0,
         "y": 0
       },
       {
         "filename": "__second-nature__/graphics/entity/industry/explorer-1-mining_with_tool-2.png",
         "width_in_frames": 10,
-        "height_in_frames": 8,
+        "height_in_frames": 6,
         "x": 0,
         "y": 0
       }
     ]
   },
   "explorer-1-running_with_gun": {
-    "width": 434,
-    "height": 690,
+    "width": 366,
+    "height": 576,
     "frame_count": 16,
     "direction_count": 18,
     "line_length": 16,
     "scale": 0.25,
     "apply_projection": false,
     "shift": [
-      0.7578125,
-      -0.0703125
+      0.6171875,
+      -0.046875
     ],
     "stripes": [
       {
         "filename": "__second-nature__/graphics/entity/industry/explorer-1-running_with_gun-1.png",
         "width_in_frames": 16,
-        "height_in_frames": 11,
+        "height_in_frames": 14,
         "x": 0,
         "y": 0
       },
       {
         "filename": "__second-nature__/graphics/entity/industry/explorer-1-running_with_gun-2.png",
         "width_in_frames": 16,
-        "height_in_frames": 7,
+        "height_in_frames": 4,
         "x": 0,
         "y": 0
       }
@@ -2191,100 +2191,100 @@
     ]
   },
   "explorer-2-idle": {
-    "width": 304,
-    "height": 522,
+    "width": 258,
+    "height": 436,
     "frame_count": 4,
     "direction_count": 8,
     "line_length": 4,
     "scale": 0.25,
     "apply_projection": false,
     "shift": [
-      0.5,
-      -0.1015625
+      0.4140625,
+      -0.078125
     ],
     "filename": "__second-nature__/graphics/entity/industry/explorer-2-idle.png"
   },
   "explorer-2-idle_with_gun": {
-    "width": 510,
-    "height": 690,
+    "width": 426,
+    "height": 576,
     "frame_count": 4,
     "direction_count": 8,
     "line_length": 4,
     "scale": 0.25,
     "apply_projection": false,
     "shift": [
-      0.4609375,
-      -0.0703125
+      0.3828125,
+      -0.046875
     ],
     "filename": "__second-nature__/graphics/entity/industry/explorer-2-idle_with_gun.png"
   },
   "explorer-2-running": {
-    "width": 326,
-    "height": 512,
+    "width": 276,
+    "height": 428,
     "frame_count": 16,
     "direction_count": 8,
     "line_length": 16,
     "scale": 0.25,
     "apply_projection": false,
     "shift": [
-      0.3828125,
-      -0.09375
+      0.3125,
+      -0.078125
     ],
     "filename": "__second-nature__/graphics/entity/industry/explorer-2-running.png"
   },
   "explorer-2-mining_with_tool": {
-    "width": 656,
-    "height": 868,
+    "width": 548,
+    "height": 720,
     "frame_count": 20,
     "direction_count": 8,
     "line_length": 10,
     "scale": 0.25,
     "apply_projection": false,
     "shift": [
-      0.5,
-      -0.109375
+      0.421875,
+      -0.078125
     ],
     "stripes": [
       {
         "filename": "__second-nature__/graphics/entity/industry/explorer-2-mining_with_tool-1.png",
         "width_in_frames": 10,
-        "height_in_frames": 8,
+        "height_in_frames": 10,
         "x": 0,
         "y": 0
       },
       {
         "filename": "__second-nature__/graphics/entity/industry/explorer-2-mining_with_tool-2.png",
         "width_in_frames": 10,
-        "height_in_frames": 8,
+        "height_in_frames": 6,
         "x": 0,
         "y": 0
       }
     ]
   },
   "explorer-2-running_with_gun": {
-    "width": 434,
-    "height": 690,
+    "width": 366,
+    "height": 576,
     "frame_count": 16,
     "direction_count": 18,
     "line_length": 16,
     "scale": 0.25,
     "apply_projection": false,
     "shift": [
-      0.7578125,
-      -0.0703125
+      0.6171875,
+      -0.046875
     ],
     "stripes": [
       {
         "filename": "__second-nature__/graphics/entity/industry/explorer-2-running_with_gun-1.png",
         "width_in_frames": 16,
-        "height_in_frames": 11,
+        "height_in_frames": 14,
         "x": 0,
         "y": 0
       },
       {
         "filename": "__second-nature__/graphics/entity/industry/explorer-2-running_with_gun-2.png",
         "width_in_frames": 16,
-        "height_in_frames": 7,
+        "height_in_frames": 4,
         "x": 0,
         "y": 0
       }
@@ -3097,6 +3097,958 @@
     "shift": [
       0,
       -0.7
+    ],
+    "apply_projection": false
+  },
+  "crucible-furnace-north": {
+    "filename": "__second-nature__/graphics/entity/industry/crucible-furnace-north.png",
+    "width": 320,
+    "height": 384,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      0.0
+    ],
+    "apply_projection": false
+  },
+  "crucible-furnace-east": {
+    "filename": "__second-nature__/graphics/entity/industry/crucible-furnace-east.png",
+    "width": 320,
+    "height": 384,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      0.0
+    ],
+    "apply_projection": false
+  },
+  "crucible-furnace-south": {
+    "filename": "__second-nature__/graphics/entity/industry/crucible-furnace-south.png",
+    "width": 320,
+    "height": 384,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      0.0
+    ],
+    "apply_projection": false
+  },
+  "crucible-furnace-west": {
+    "filename": "__second-nature__/graphics/entity/industry/crucible-furnace-west.png",
+    "width": 320,
+    "height": 384,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      0.0
+    ],
+    "apply_projection": false
+  },
+  "oxy-smelter-north": {
+    "filename": "__second-nature__/graphics/entity/industry/oxy-smelter-north.png",
+    "width": 448,
+    "height": 512,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.2
+    ],
+    "apply_projection": false
+  },
+  "oxy-smelter-east": {
+    "filename": "__second-nature__/graphics/entity/industry/oxy-smelter-east.png",
+    "width": 448,
+    "height": 512,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.2
+    ],
+    "apply_projection": false
+  },
+  "oxy-smelter-south": {
+    "filename": "__second-nature__/graphics/entity/industry/oxy-smelter-south.png",
+    "width": 448,
+    "height": 512,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.2
+    ],
+    "apply_projection": false
+  },
+  "oxy-smelter-west": {
+    "filename": "__second-nature__/graphics/entity/industry/oxy-smelter-west.png",
+    "width": 448,
+    "height": 512,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.2
+    ],
+    "apply_projection": false
+  },
+  "arc-refinery-north": {
+    "filename": "__second-nature__/graphics/entity/industry/arc-refinery-north.png",
+    "width": 448,
+    "height": 512,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.2
+    ],
+    "apply_projection": false
+  },
+  "arc-refinery-east": {
+    "filename": "__second-nature__/graphics/entity/industry/arc-refinery-east.png",
+    "width": 448,
+    "height": 512,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.2
+    ],
+    "apply_projection": false
+  },
+  "arc-refinery-south": {
+    "filename": "__second-nature__/graphics/entity/industry/arc-refinery-south.png",
+    "width": 448,
+    "height": 512,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.2
+    ],
+    "apply_projection": false
+  },
+  "arc-refinery-west": {
+    "filename": "__second-nature__/graphics/entity/industry/arc-refinery-west.png",
+    "width": 448,
+    "height": 512,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.2
+    ],
+    "apply_projection": false
+  },
+  "blast-furnace-north": {
+    "filename": "__second-nature__/graphics/entity/industry/blast-furnace-north.png",
+    "width": 448,
+    "height": 512,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.2
+    ],
+    "apply_projection": false
+  },
+  "blast-furnace-east": {
+    "filename": "__second-nature__/graphics/entity/industry/blast-furnace-east.png",
+    "width": 448,
+    "height": 512,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.2
+    ],
+    "apply_projection": false
+  },
+  "blast-furnace-south": {
+    "filename": "__second-nature__/graphics/entity/industry/blast-furnace-south.png",
+    "width": 448,
+    "height": 512,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.2
+    ],
+    "apply_projection": false
+  },
+  "blast-furnace-west": {
+    "filename": "__second-nature__/graphics/entity/industry/blast-furnace-west.png",
+    "width": 448,
+    "height": 512,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.2
+    ],
+    "apply_projection": false
+  },
+  "cupola-furnace-north": {
+    "filename": "__second-nature__/graphics/entity/industry/cupola-furnace-north.png",
+    "width": 320,
+    "height": 384,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      0.0
+    ],
+    "apply_projection": false
+  },
+  "cupola-furnace-east": {
+    "filename": "__second-nature__/graphics/entity/industry/cupola-furnace-east.png",
+    "width": 320,
+    "height": 384,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      0.0
+    ],
+    "apply_projection": false
+  },
+  "cupola-furnace-south": {
+    "filename": "__second-nature__/graphics/entity/industry/cupola-furnace-south.png",
+    "width": 320,
+    "height": 384,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      0.0
+    ],
+    "apply_projection": false
+  },
+  "cupola-furnace-west": {
+    "filename": "__second-nature__/graphics/entity/industry/cupola-furnace-west.png",
+    "width": 320,
+    "height": 384,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      0.0
+    ],
+    "apply_projection": false
+  },
+  "biopolymer-assembler-north": {
+    "filename": "__second-nature__/graphics/entity/industry/biopolymer-assembler-north.png",
+    "width": 320,
+    "height": 384,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      0.0
+    ],
+    "apply_projection": false
+  },
+  "biopolymer-assembler-east": {
+    "filename": "__second-nature__/graphics/entity/industry/biopolymer-assembler-east.png",
+    "width": 320,
+    "height": 384,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      0.0
+    ],
+    "apply_projection": false
+  },
+  "biopolymer-assembler-south": {
+    "filename": "__second-nature__/graphics/entity/industry/biopolymer-assembler-south.png",
+    "width": 320,
+    "height": 384,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      0.0
+    ],
+    "apply_projection": false
+  },
+  "biopolymer-assembler-west": {
+    "filename": "__second-nature__/graphics/entity/industry/biopolymer-assembler-west.png",
+    "width": 320,
+    "height": 384,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      0.0
+    ],
+    "apply_projection": false
+  },
+  "precision-assembler-north": {
+    "filename": "__second-nature__/graphics/entity/industry/precision-assembler-north.png",
+    "width": 320,
+    "height": 384,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      0.0
+    ],
+    "apply_projection": false
+  },
+  "precision-assembler-east": {
+    "filename": "__second-nature__/graphics/entity/industry/precision-assembler-east.png",
+    "width": 320,
+    "height": 384,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      0.0
+    ],
+    "apply_projection": false
+  },
+  "precision-assembler-south": {
+    "filename": "__second-nature__/graphics/entity/industry/precision-assembler-south.png",
+    "width": 320,
+    "height": 384,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      0.0
+    ],
+    "apply_projection": false
+  },
+  "precision-assembler-west": {
+    "filename": "__second-nature__/graphics/entity/industry/precision-assembler-west.png",
+    "width": 320,
+    "height": 384,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      0.0
+    ],
+    "apply_projection": false
+  },
+  "foundry-press-north": {
+    "filename": "__second-nature__/graphics/entity/industry/foundry-press-north.png",
+    "width": 448,
+    "height": 512,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.2
+    ],
+    "apply_projection": false
+  },
+  "foundry-press-east": {
+    "filename": "__second-nature__/graphics/entity/industry/foundry-press-east.png",
+    "width": 448,
+    "height": 512,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.2
+    ],
+    "apply_projection": false
+  },
+  "foundry-press-south": {
+    "filename": "__second-nature__/graphics/entity/industry/foundry-press-south.png",
+    "width": 448,
+    "height": 512,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.2
+    ],
+    "apply_projection": false
+  },
+  "foundry-press-west": {
+    "filename": "__second-nature__/graphics/entity/industry/foundry-press-west.png",
+    "width": 448,
+    "height": 512,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.2
+    ],
+    "apply_projection": false
+  },
+  "ore-mill-north": {
+    "filename": "__second-nature__/graphics/entity/industry/ore-mill-north.png",
+    "width": 448,
+    "height": 512,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.2
+    ],
+    "apply_projection": false
+  },
+  "ore-mill-east": {
+    "filename": "__second-nature__/graphics/entity/industry/ore-mill-east.png",
+    "width": 448,
+    "height": 512,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.2
+    ],
+    "apply_projection": false
+  },
+  "ore-mill-south": {
+    "filename": "__second-nature__/graphics/entity/industry/ore-mill-south.png",
+    "width": 448,
+    "height": 512,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.2
+    ],
+    "apply_projection": false
+  },
+  "ore-mill-west": {
+    "filename": "__second-nature__/graphics/entity/industry/ore-mill-west.png",
+    "width": 448,
+    "height": 512,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.2
+    ],
+    "apply_projection": false
+  },
+  "flotation-cell-north": {
+    "filename": "__second-nature__/graphics/entity/industry/flotation-cell-north.png",
+    "width": 448,
+    "height": 512,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.2
+    ],
+    "apply_projection": false
+  },
+  "flotation-cell-east": {
+    "filename": "__second-nature__/graphics/entity/industry/flotation-cell-east.png",
+    "width": 448,
+    "height": 512,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.2
+    ],
+    "apply_projection": false
+  },
+  "flotation-cell-south": {
+    "filename": "__second-nature__/graphics/entity/industry/flotation-cell-south.png",
+    "width": 448,
+    "height": 512,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.2
+    ],
+    "apply_projection": false
+  },
+  "flotation-cell-west": {
+    "filename": "__second-nature__/graphics/entity/industry/flotation-cell-west.png",
+    "width": 448,
+    "height": 512,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.2
+    ],
+    "apply_projection": false
+  },
+  "dewatering-press-north": {
+    "filename": "__second-nature__/graphics/entity/industry/dewatering-press-north.png",
+    "width": 320,
+    "height": 384,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      0.0
+    ],
+    "apply_projection": false
+  },
+  "dewatering-press-east": {
+    "filename": "__second-nature__/graphics/entity/industry/dewatering-press-east.png",
+    "width": 320,
+    "height": 384,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      0.0
+    ],
+    "apply_projection": false
+  },
+  "dewatering-press-south": {
+    "filename": "__second-nature__/graphics/entity/industry/dewatering-press-south.png",
+    "width": 320,
+    "height": 384,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      0.0
+    ],
+    "apply_projection": false
+  },
+  "dewatering-press-west": {
+    "filename": "__second-nature__/graphics/entity/industry/dewatering-press-west.png",
+    "width": 320,
+    "height": 384,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      0.0
+    ],
+    "apply_projection": false
+  },
+  "electric-auger-north": {
+    "filename": "__second-nature__/graphics/entity/industry/electric-auger-north.png",
+    "width": 320,
+    "height": 384,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      0.0
+    ],
+    "apply_projection": false
+  },
+  "electric-auger-east": {
+    "filename": "__second-nature__/graphics/entity/industry/electric-auger-east.png",
+    "width": 320,
+    "height": 384,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      0.0
+    ],
+    "apply_projection": false
+  },
+  "electric-auger-south": {
+    "filename": "__second-nature__/graphics/entity/industry/electric-auger-south.png",
+    "width": 320,
+    "height": 384,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      0.0
+    ],
+    "apply_projection": false
+  },
+  "electric-auger-west": {
+    "filename": "__second-nature__/graphics/entity/industry/electric-auger-west.png",
+    "width": 320,
+    "height": 384,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      0.0
+    ],
+    "apply_projection": false
+  },
+  "hydraulic-miner-north": {
+    "filename": "__second-nature__/graphics/entity/industry/hydraulic-miner-north.png",
+    "width": 320,
+    "height": 384,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      0.0
+    ],
+    "apply_projection": false
+  },
+  "hydraulic-miner-east": {
+    "filename": "__second-nature__/graphics/entity/industry/hydraulic-miner-east.png",
+    "width": 320,
+    "height": 384,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      0.0
+    ],
+    "apply_projection": false
+  },
+  "hydraulic-miner-south": {
+    "filename": "__second-nature__/graphics/entity/industry/hydraulic-miner-south.png",
+    "width": 320,
+    "height": 384,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      0.0
+    ],
+    "apply_projection": false
+  },
+  "hydraulic-miner-west": {
+    "filename": "__second-nature__/graphics/entity/industry/hydraulic-miner-west.png",
+    "width": 320,
+    "height": 384,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      0.0
+    ],
+    "apply_projection": false
+  },
+  "deep-core-drill-north": {
+    "filename": "__second-nature__/graphics/entity/industry/deep-core-drill-north.png",
+    "width": 640,
+    "height": 640,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "deep-core-drill-east": {
+    "filename": "__second-nature__/graphics/entity/industry/deep-core-drill-east.png",
+    "width": 640,
+    "height": 640,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "deep-core-drill-south": {
+    "filename": "__second-nature__/graphics/entity/industry/deep-core-drill-south.png",
+    "width": 640,
+    "height": 640,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "deep-core-drill-west": {
+    "filename": "__second-nature__/graphics/entity/industry/deep-core-drill-west.png",
+    "width": 640,
+    "height": 640,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "smog-precipitator-north": {
+    "filename": "__second-nature__/graphics/entity/industry/smog-precipitator-north.png",
+    "width": 448,
+    "height": 512,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.2
+    ],
+    "apply_projection": false
+  },
+  "smog-precipitator-east": {
+    "filename": "__second-nature__/graphics/entity/industry/smog-precipitator-east.png",
+    "width": 448,
+    "height": 512,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.2
+    ],
+    "apply_projection": false
+  },
+  "smog-precipitator-south": {
+    "filename": "__second-nature__/graphics/entity/industry/smog-precipitator-south.png",
+    "width": 448,
+    "height": 512,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.2
+    ],
+    "apply_projection": false
+  },
+  "smog-precipitator-west": {
+    "filename": "__second-nature__/graphics/entity/industry/smog-precipitator-west.png",
+    "width": 448,
+    "height": 512,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.2
+    ],
+    "apply_projection": false
+  },
+  "carbon-capture-tower-north": {
+    "filename": "__second-nature__/graphics/entity/industry/carbon-capture-tower-north.png",
+    "width": 640,
+    "height": 640,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "carbon-capture-tower-east": {
+    "filename": "__second-nature__/graphics/entity/industry/carbon-capture-tower-east.png",
+    "width": 640,
+    "height": 640,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "carbon-capture-tower-south": {
+    "filename": "__second-nature__/graphics/entity/industry/carbon-capture-tower-south.png",
+    "width": 640,
+    "height": 640,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "carbon-capture-tower-west": {
+    "filename": "__second-nature__/graphics/entity/industry/carbon-capture-tower-west.png",
+    "width": 640,
+    "height": 640,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      -0.7
+    ],
+    "apply_projection": false
+  },
+  "field-laboratory-north": {
+    "filename": "__second-nature__/graphics/entity/industry/field-laboratory-north.png",
+    "width": 320,
+    "height": 384,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      0.0
+    ],
+    "apply_projection": false
+  },
+  "field-laboratory-east": {
+    "filename": "__second-nature__/graphics/entity/industry/field-laboratory-east.png",
+    "width": 320,
+    "height": 384,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      0.0
+    ],
+    "apply_projection": false
+  },
+  "field-laboratory-south": {
+    "filename": "__second-nature__/graphics/entity/industry/field-laboratory-south.png",
+    "width": 320,
+    "height": 384,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      0.0
+    ],
+    "apply_projection": false
+  },
+  "field-laboratory-west": {
+    "filename": "__second-nature__/graphics/entity/industry/field-laboratory-west.png",
+    "width": 320,
+    "height": 384,
+    "frame_count": 8,
+    "line_length": 8,
+    "direction_count": 1,
+    "scale": 0.5,
+    "shift": [
+      0,
+      0.0
     ],
     "apply_projection": false
   }
