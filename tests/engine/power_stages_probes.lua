@@ -66,8 +66,9 @@ function X.tick()
       assert(e.temperature>100,'fission produced no real heat')
       assert(e.burner.currently_burning,'fission did not consume fuel')
     else
-      local count=case.pole.electric_network_statistics.get_input_count(e.name)
-      assert(count>0,'power diagnostics '..d.name..' in='..count..' out='..case.pole.electric_network_statistics.get_output_count(e.name)..' accumulator='..case.accumulator.energy..' sink='..case.sink.energy..' plant-net='..tostring(e.electric_network_id)..' pole-net='..tostring(case.pole.electric_network_id)..' sink-net='..tostring(case.sink.electric_network_id))
+      -- Electric network producers are output flows; the native counter is joules.
+      local count=case.pole.electric_network_statistics.get_output_count(e.name)
+      assert(count>0,'no native electrical generation: '..d.name)
       assert(count<=d.watts*age/60*1.02+d.watts*2,'power exceeded its declared energy envelope: '..d.name)
     end
     if d.pollution and d.pollution>0 then assert(case.peak_pollution>0,'no real emissions: '..d.name) end
