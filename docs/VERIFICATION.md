@@ -1,6 +1,6 @@
 # Verification ledger: Nightglass 0.7.0 alpha
 
-## Current Nightglass candidate
+## Current Nightglass 0.7.0
 
 This larger update adds the HD goth explorer, three solar-only locomotive tiers and six power options. See [NIGHTGLASS.md](NIGHTGLASS.md) for the installed-panel/battery design, metered motor credit, night derating, native fuel behavior, planetary power models and remaining client limitations.
 
@@ -8,7 +8,13 @@ The new native engine scenario begins with empty solar batteries at night beside
 
 The required new markers are `SECOND_NATURE_ENGINE_SOLAR_RAIL_OK` and `SECOND_NATURE_ENGINE_POWER_OPTIONS_OK`, in a 6,000-tick run alongside the prior campaign, construction and planner probes. Source tests include energy conservation, locked equipment, fuel rejection, safe speed capping, new research and the doubled-resolution striped sprite contract.
 
-The completed source build passes **246 local tests** with the pinned official 2.0.77 data. The full native-engine energy/rail scenario is pending branch CI; source mocks are not treated as evidence of native traction or generation. No graphical-client playthrough, elevated-rail visual certification, full campaign balance or long-run GPU/UPS/multiplayer result is claimed.
+The completed source build passes **246 local tests** with the pinned official 2.0.77 data. **Official engine: PASS.** [Run 34173627767](https://github.com/Radukan/FC-Test/actions/runs/34173627767), code/test commit `4b84f66ac137cd270c99a2822a0d744cb0b0a581`, passed the source job and the official 2.0.77 create/reload/6,000-tick job. Real panel charging, native scheduled traction, reduced night limits, empty-battery rejection, fuel/pollution/ash and accumulator output all passed. The first run exposed an invalid reverse test route for single-ended locomotives; the rerun uses a valid forward night route, rather than bypassing the energy assertions. No graphical-client playthrough, elevated-rail visual certification, full campaign balance or long-run GPU/UPS/multiplayer result is claimed.
+
+The installable archive contains **500 mod files**, is **100,635,307 bytes**, and passes ZIP CRC and SHA-256 verification. The release publisher revalidates the final tagged source and re-downloads its assets before reporting success.
+
+```text
+3fb4558a44d9cf74bf68e6d617b3172321503c69ccae6e74ac0174b95e69e22c  second-nature_0.7.0.zip
+```
 
 ## Historical Field Crew 0.6.2 evidence
 

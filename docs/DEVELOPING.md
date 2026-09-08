@@ -207,3 +207,27 @@ The user retained the scripted, inventory-fed drones after clarifying activation
 `field_drone_tasks.lua` owns construction, explicit planner deconstruction and upgrade accounting. The native `mine` and `apply_upgrade` APIs preserve real contents/configuration. Connected underground upgrades reserve the possible pair and reconcile actual results. Avoid manually synthesizing chest contents, wiping item quality or losing old upgrade items. `field_planner_probes.lua` tests these APIs on real engine entities after the saved-flight probe. The benchmark is 3,300 ticks and requires `SECOND_NATURE_ENGINE_FIELD_PLANNERS_OK`.
 
 Drone art has 16 directional rows, each containing 8 animation frames. Runtime animation prototypes select a row by `y`; the 0.6.1 names remain as compatibility aliases. Position updates are per tick. Regenerate with `generate_drone_assets.py`, then refresh presentation previews. Character chest/boot/grip changes require a complete explorer export, not only the running rows.
+
+## Nightglass / 0.7.0
+
+- `shared/energy.lua` declares six generating plants and three solar rail tiers, their research, recipes, watts, battery joules and day/night speed limits.
+- `prototypes/energy.lua` uses native solar/fuel generators and output-only interfaces for weather/geothermal sources. Do not put burner emissions on the output electric energy source; Factorio ignores them there.
+- `prototypes/solar_rail.lua` creates locked solar/battery grids and zero-slot, private-category traction burners. `scripts/solar_rail.lua` transfers only actually withdrawn battery joules, refunds unused credit, clears foreign fuel and only lowers excessive velocity. Do not replace this with unconditional fuel grants or scripted acceleration.
+- `scripts/power.lua` updates interface generation in native runtime energy units (joules per tick). Other generation/fuel/ash behavior stays native.
+- `tests/engine/nightglass_probes.lua` starts solar units empty at night, charges via actual sunlight, drives valid forward rail targets by native schedules, checks night limits, then drains storage to check the no-hidden-power case. A separate, labeled seed checks saved motor credit. Single-ended locomotives need a valid forward automatic route; do not mistake an impossible reverse route for an energy failure.
+- `tools/goth_details.py` authors the outfit, wolf cut and ink. `character_export.py` renders at 160 texels/unit, applies fixed pose crops with compensated pivots, and exports native stripes below the 8192-pixel file limit. `atlas_io.py` reads those pages without allocating one enormous image.
+- `tools/generate_energy_assets.py` owns `shared/energy_art.lua` and the dedicated Nightglass art manifest. The generic research-card generator deliberately leaves its cards alone.
+
+A targeted rebuild is:
+
+```sh
+OPENBLAS_NUM_THREADS=1 .venv/bin/python tools/generate_industrial_assets.py --only explorer --jobs 2
+OPENBLAS_NUM_THREADS=1 .venv/bin/python tools/generate_energy_assets.py
+.venv/bin/python tools/generate_locale.py
+.venv/bin/python tools/generate_docs.py
+.venv/bin/python tools/generate_presentation_previews.py
+.venv/bin/python -m pytest -q
+.venv/bin/python tools/package.py
+```
+
+The headless benchmark is now 6,000 ticks and additionally requires `SECOND_NATURE_ENGINE_SOLAR_RAIL_OK` and `SECOND_NATURE_ENGINE_POWER_OPTIONS_OK`. These are engine/API/energy checks, not a graphical client or performance certificate.
