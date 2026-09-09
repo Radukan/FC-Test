@@ -30,3 +30,6 @@
 - **Branch:** `arena/01a07c4e-fc-test`. This session cannot push directly to `main`; a pull request targets `main` for review and merge.
 
 This report does not substitute guessed token counts, file sizes, lines changed or tool calls for actual usage telemetry. Exact model/token accounting, if available, must come from the platform's own usage records.
+
+### Why the first download did not load
+Factorio expects a ZIP whose internal folder is named exactly after the mod (`second-nature_0.12.0`). GitHub's automatic `archive/refs/tags/...` ZIP uses the repo name (`FC-Test-...`) as the root folder, so Factorio never finds `info.json`. The correct ZIP must be built with `python3 tools/package.py` (see `artifacts/factorio-2.0/second-nature_0.12.0.zip`). It contains 275 files, includes all new fantasy graphics and the Restoration Nexus prototype, and loads correctly.
