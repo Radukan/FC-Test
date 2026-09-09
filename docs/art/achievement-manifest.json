@@ -1,0 +1,97 @@
+{
+  "first-breath": {
+    "kind": "script",
+    "file": "second-nature/graphics/achievement/first-breath.png",
+    "sha256": "2e586edc10f5929bec19dc075a8e3bfa73b8444dc1b8ba05f42b0e557d31adec"
+  },
+  "root-systems": {
+    "kind": "script",
+    "file": "second-nature/graphics/achievement/root-systems.png",
+    "sha256": "4a3f2f864df7b79ab4e9c4b39ea3bd28a502afb0f3c59adaca1c5d236f2bdd86"
+  },
+  "a-living-world": {
+    "kind": "script",
+    "file": "second-nature/graphics/achievement/a-living-world.png",
+    "sha256": "da43883e109d7e7d658849872850fa2623cc9d161ce992a1fa29311b75ba17da"
+  },
+  "new-growth": {
+    "kind": "script",
+    "file": "second-nature/graphics/achievement/new-growth.png",
+    "sha256": "973f52bc8f2d1c2a0d4a9e4ef6bd7eb10ff19f16a8b4b95346507d5a4e81e3c4"
+  },
+  "terraformer": {
+    "kind": "script",
+    "file": "second-nature/graphics/achievement/terraformer.png",
+    "sha256": "f92ef8ebac7a4436150a18ccea01cc6840bd1c9d4384b21cbb118d96ca00c319"
+  },
+  "deep-green": {
+    "kind": "script",
+    "file": "second-nature/graphics/achievement/deep-green.png",
+    "sha256": "13595f0c1b68b0703468b9254f2515fb7d31c7ebf64da6055c73243602456370"
+  },
+  "signal-restored": {
+    "kind": "script",
+    "file": "second-nature/graphics/achievement/signal-restored.png",
+    "sha256": "0145c41f2fd5e94898547babf97e8ab5e846346c38cff278fda2b7e78a4c98ea"
+  },
+  "common-ground": {
+    "kind": "script",
+    "file": "second-nature/graphics/achievement/common-ground.png",
+    "sha256": "34383bd2b3ae09ee090f04de0253e5b5ef3aa2ad10b5876937d0994b8978b8eb"
+  },
+  "quiet-eden": {
+    "kind": "script",
+    "file": "second-nature/graphics/achievement/quiet-eden.png",
+    "sha256": "1f11659f580286df033db76af74579a36a591e98b2605276b8eef8eb0dfc3bed"
+  },
+  "hold-the-line": {
+    "kind": "script",
+    "file": "second-nature/graphics/achievement/hold-the-line.png",
+    "sha256": "c98cc0e4ba4d810fc5bd2c5a6f17e9221c67fe5777d7ecd6a54695b5ac529d83"
+  },
+  "field-stations": {
+    "kind": "script",
+    "file": "second-nature/graphics/achievement/field-stations.png",
+    "sha256": "e91d0f4a1be460915fa868ca390f5f95f981a5cc73b008d3b822952f835a8ff5"
+  },
+  "second-nature": {
+    "kind": "script",
+    "file": "second-nature/graphics/achievement/second-nature.png",
+    "sha256": "da0d201aa8a943fa6ccfcbb22eaad6a2952f41b71dc8965a50310ae76fde2baa"
+  },
+  "first-gust": {
+    "kind": "use-entity-in-energy-production-achievement",
+    "file": "second-nature/graphics/achievement/first-gust.png",
+    "sha256": "64c03000ea111ea5e515f52a86c20c525639da465ab9036fd81e7af266c7bf6c"
+  },
+  "network-nodes": {
+    "kind": "build-entity-achievement",
+    "file": "second-nature/graphics/achievement/network-nodes.png",
+    "sha256": "1ba38ba0d8d3f248218a79b24f7943f7670ccf2ea398af388c64c4f61d1f94a4"
+  },
+  "coordination-cells": {
+    "kind": "produce-achievement",
+    "file": "second-nature/graphics/achievement/coordination-cells.png",
+    "sha256": "68b4fd3b6295902e57628eeabc7e0b22833e39f4366d11f76475c5c1609e4d4d"
+  },
+  "matrix-gardener": {
+    "kind": "produce-achievement",
+    "file": "second-nature/graphics/achievement/matrix-gardener.png",
+    "sha256": "23308fe2b8df5ab2e2ae2a3613d0157e622777a4e7a8d2cdbea9740a18adc4a1"
+  },
+  "read-the-world": {
+    "kind": "research-with-science-pack-achievement",
+    "file": "second-nature/graphics/achievement/read-the-world.png",
+    "sha256": "e6c7824302568b1a1de6eb8d4ce5c3c70c223e20d037b2662b2c079be86d50b7"
+  },
+  "no-shortcuts": {
+    "kind": "dont-build-entity-achievement",
+    "file": "second-nature/graphics/achievement/no-shortcuts.png",
+    "sha256": "4b93462934ec4da567b4570c6391e8e8127f2133b23621fcf9d35d1880273f7c"
+  },
+  "nightglass-grid": {
+    "kind": "dont-use-entity-in-energy-production-achievement",
+    "file": "second-nature/graphics/achievement/nightglass-grid.png",
+    "sha256": "3611b4eb7e5585777fef4e18d9644321ed37fbeebee58f55e54eaff03bc167e5"
+  }
+}

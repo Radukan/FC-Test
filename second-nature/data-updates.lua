@@ -27,3 +27,4 @@ if settings.startup["sn-overhaul-progression"].value then
   prerequisite("utility-science-pack", "sn-reforestation")
   prerequisite("rocket-silo", "sn-closed-loops")
 end
+require("prototypes.soundscape")

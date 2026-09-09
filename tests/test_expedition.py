@@ -31,8 +31,13 @@ def test_all_introduced_building_primary_art_is_original(expedition_data):
     data=expedition_data.raw
     for machine in load_catalog()['machines']:
         entity=data[machine.get('entity_type','assembling-machine')][machine['entity_name']]
-        paths=list(filenames(entity.graphics_set or entity.sprites))
-        assert paths and all(path.startswith('__second-nature__/graphics/entity/industry/') for path in paths)
+        # Labs hold their art in on/off_animation rather than graphics_set or
+        # sprites, so check every place a machine can legally carry artwork.
+        paths=[]
+        for node in (entity.graphics_set,entity.sprites,entity.on_animation,entity.off_animation):
+            paths+=list(filenames(node))
+        assert paths, machine['name']
+        assert all(path.startswith('__second-nature__/graphics/entity/industry/') for path in paths), machine['name']
     for kind,name in [('ammo-turret','sn-sentry-turret'),('electric-turret','sn-arc-turret'),('ammo-turret','sn-lance-turret')]:
         p=data[kind][name]
         assert p.attacking_animation.frame_count==4 and p.attacking_animation.direction_count==64

@@ -199,7 +199,13 @@ def generate():
         'thermal-engineering':'thermal-exchanger','closed-loops':'reclamation-plant','clean-chemistry':'electrolyzer',
         'planetary-ecology':'ecology-monitor','vulcanus-restoration':'basalt-conditioner','fulgora-remediation':'fulgoran-reclaimer',
         'gleba-symbiosis':'spore-tower','habitat-engineering':'sanctuary','climate-science':'thermal-exchanger','aquilo-habitats':'cryogenic-garden',
-        'planetary-coordination':'planetary-beacon','living-worlds':'planetary-beacon','ecological-research':'sanctuary'
+        'planetary-coordination':'planetary-beacon','living-worlds':'planetary-beacon','ecological-research':'sanctuary',
+        # Industry expansion: each technology shows the building it unlocks.
+        'refractories':'materials-kiln','clean-smelting':'crucible-furnace','dirty-smelting':'blast-furnace',
+        'ore-concentration':'ore-mill','oxygen-smelting':'oxy-smelter','arc-metallurgy':'arc-refinery',
+        'green-mining':'electric-auger','deep-extraction':'deep-core-drill',
+        'specialised-assembly':'precision-assembler','field-laboratory':'field-laboratory',
+        'smog-precipitation':'smog-precipitator','direct-air-capture':'carbon-capture-tower'
     }
     bymachine={m['name']:m for m in k['machines']}
     for index,t in enumerate(k['technologies']):

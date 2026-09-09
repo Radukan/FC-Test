@@ -453,8 +453,8 @@ def logistics(name,t=0):
     return m
 
 
-def explorer(t=0,pose='idle',tier=0,move_angle=0,aim_offset=0,aim_angle=None):
-    from explorer_model import explorer as build
+def warden(t=0,pose='idle',tier=0,move_angle=0,aim_offset=0,aim_angle=None):
+    from warden_model import warden as build
     return build(t,pose,tier,move_angle,move_angle+aim_offset if aim_angle is None else aim_angle)
 
 

@@ -69,7 +69,7 @@ game.get_player=function(index) return game.players[index] end
 game.reset_game_state=function() mock.reset_count=(mock.reset_count or 0)+1 end
 game.set_game_state=function(state) mock.victory=state end
 function mock.force(index,name)
-  local f={index=index,name=name,technologies={['sn-living-worlds']={researched=false}},cease_fire=false,friend=false}
+  local f={index=index,name=name,valid=true,players={},technologies={['sn-living-worlds']={researched=false}},cease_fire=false,friend=false}
   f.print=function(m) mock.messages[#mock.messages+1]=m end
   f.friends={};f.ceases={}
   local function key(other) return type(other)=='table' and other.name or other end
@@ -186,13 +186,17 @@ function mock.gui(spec,parent)
   return g
 end
 package.preload['mod-gui']=function() return {button_style='slot_button',get_button_flow=function(p) return p.gui.top end} end
-function mock.player(index)
-  local p={index=index,force=mock.player_force,surface=game.surfaces[1],display_resolution={width=1920,height=1080},display_scale=1,
+function mock.player(index,force)
+  local p={index=index,force=force or mock.player_force,surface=game.surfaces[1],display_resolution={width=1920,height=1080},display_scale=1,
     position={x=0,y=0},controller_type=defines.controllers.character,gui={screen=mock.gui({type='screen'}),top=mock.gui({type='flow'}),left=mock.gui({type='flow'}),relative=mock.gui({type='flow'})},admin=true}
   p.set_shortcut_toggled=function(name,value) p.shortcut_toggled=value end
   p.set_controller=function(spec) p.controller_type=spec.type;p.cutscene=spec end
   p.exit_cutscene=function() p.controller_type=defines.controllers.character end
   p.print=function(m) mock.messages[#mock.messages+1]=m end
-  game.players[index]=p;return p
+  p.valid=true;p.connected=true;p.achievements={}
+  p.unlock_achievement=function(achievement) p.achievements[achievement]=true end
+  -- Real LuaForce exposes its members; the milestone ledger reads that list.
+  game.players[index]=p;p.force.players[#p.force.players+1]=p
+  return p
 end
 mock.surface('nauvis',1)

@@ -53,7 +53,7 @@ def animate(name,maker,width=320,height=None,frames=8,directions=1,origin=.7,ppu
 def character_frame(task):
     tier,pose,direction,frame,frames=task
     move,aim=character.pose_angles(pose,direction)
-    model=explorer(frame/frames,pose,tier,move_angle=move,aim_angle=aim)
+    model=warden(frame/frames,pose,tier,move_angle=move,aim_angle=aim)
     character.assert_frame_fits(model,(tier,pose,direction,frame))
     view=character.frame_spec(pose)
     return render(model,view['width'],view['height'],ppu=view['ppu'],origin=view['origin'],map_aligned=True)
@@ -64,7 +64,7 @@ def animate_character(tier,pose,frames,directions,jobs=2):
 
 
 def corpse(tier):
-    m=explorer(0,'idle',tier,move_angle=math.pi/2)
+    m=warden(0,'idle',tier,move_angle=math.pi/2)
     result=Mesh()
     # Lie on the ground, preserving armor appearance and actual corpse inventory.
     for vertices,c,g in m.faces:
@@ -139,18 +139,18 @@ def render_all(only=None,jobs=2,poses=None):
                 points=[(x+48+math.cos(a+j*.24)*r,48+math.sin(a+j*.24)*r*.62) for j,r in enumerate((4,13,22,29,35))]
                 draw.line(points,fill=(98,176,98,180),width=3)
         save(sticker,OUT/'root-binding.png')
-    if not only or 'explorer' in only:
+    if not only or 'warden' in only:
         for tier in range(3):
             for pose,frames,count in [('idle',4,8),('idle_with_gun',4,8),('running',gait.RUN_FRAMES,8),('mining_with_tool',gait.MINING_FRAMES,8),('running_with_gun',gait.RUN_FRAMES,18)]:
                 if poses and pose not in poses:continue
                 preview,front=animate_character(tier,pose,frames,count,jobs)
                 if pose=='idle':
-                    icon(front,'explorer' if tier==0 else f'explorer-{tier}')
-                    previews.append((f'Explorer / armor {tier}',front))
+                    icon(front,'warden' if tier==0 else f'warden-{tier}')
+                    previews.append((f'Warden / armor {tier}',front))
             if not poses:
-                preview=animate(f'explorer-{tier}-corpse',lambda t,d:corpse(tier),512,384,frames=2,origin=.5,ppu=140)
-                manifest[f'explorer-{tier}-corpse']['scale']=.25
-            print('EXPLORER',tier,flush=True)
+                preview=animate(f'warden-{tier}-corpse',lambda t,d:corpse(tier),512,384,frames=2,origin=.5,ppu=140)
+                manifest[f'warden-{tier}-corpse']['scale']=.25
+            print('WARDEN',tier,flush=True)
         # Small animated status beacon for the constant combinator, not an invented craft.
     if not only:
         overlay=Image.new('RGBA',(32*8,32))
@@ -160,7 +160,7 @@ def render_all(only=None,jobs=2,poses=None):
         save(overlay,OUT/'status-light.png');manifest['status-light']=spec('status-light',32,frames=8,origin=.5)
         # Weapon/armor icons use original procedural geometry, never cloned stock icons.
         for name,tier in [('carbine',0),('induction-rifle',1),('lance-rifle',2),('field-armor',0),('expedition-armor',1),('bastion-armor',2)]:
-            if 'armor' in name:im=render(explorer(0,'idle',tier,move_angle=math.pi),character.WIDTH,character.HEIGHT,ppu=character.PIXELS_PER_UNIT,origin=character.ORIGIN,map_aligned=True)
+            if 'armor' in name:im=render(warden(0,'idle',tier,move_angle=math.pi),character.WIDTH,character.HEIGHT,ppu=character.PIXELS_PER_UNIT,origin=character.ORIGIN,map_aligned=True)
             else:
                 model=Mesh();model.box((0,0,.2),(.28,1.25,.25),STEEL)
                 model.box((0,.6,.2),(.38,.55,.31),GOLD if tier==0 else (TEAL if tier==1 else WHITE))

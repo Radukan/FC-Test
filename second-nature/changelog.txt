@@ -1,4 +1,67 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.11.0
+Date: 2026-09-09
+  Features:
+    - Replace the player character with the Restoration Warden: a sealed field worker in a hooded work parka, full-face respirator with cheek filters, a lit visor band and a back hopper of graded seed stock. The previous explorer model, rig and artwork are removed entirely.
+    - Give each armour tier its own appearance rather than a recolour. Field gear is olive drab with oxidised copper fittings, expedition gear is slate green with teal and adds a pauldron and a second canister, and bastion gear is cold blue-grey with pale cyan, both shoulder plates, upper plating, a reinforced hood crown and a helmet lamp.
+    - Light the warden's visor so the character stays readable on unlit night terrain and its facing is clear at normal zoom.
+  Optimization:
+    - Cut the download from 114.1 MB to 68.7 MB, a 40 percent reduction, with no change to any sprite's resolution, frame count or turret direction count.
+    - Quantise sprite colour while copying every alpha channel back verbatim, so antialiased silhouettes and cast shadows are bit-identical and only unseeable colour precision is spent. Measured error on visible pixels is under 1.2 of 255.
+    - Run a lossless oxipng pass over every shipped image, guarded so a file is only rewritten when the result is genuinely smaller and still true RGBA.
+    - Author the new character for size: ten flat tones per tier, broad uninterrupted panels and a rasterizer finish that omits the fine surface grain that is invisible at character scale but very expensive to encode. The warden renders in roughly half the geometry of the model it replaces.
+  Changes:
+    - Rename the character sprite keys from explorer to warden. The startup toggle is unchanged and still restores the vanilla or another mod's character appearance without touching inventories or controllers.
+    - Keep the skeleton, poses, frame counts, eighteen row armed layout, pickaxe grip contract and 1.58 tile height exactly as they were, so locomotion, aiming and mining behave identically.
+---------------------------------------------------------------------------------------------------
+Version: 0.10.0
+Date: 2026-09-08
+  Features:
+    - Add seventeen industrial buildings that complement vanilla rather than replacing it: five furnaces, three assembly cells, a three-stage ore concentration line, three mining heads, two air-cleanup buildings and a field laboratory.
+    - Add a full ore multiplication chain: wet milling to slurry, froth flotation to concentrate and tailings, and dewatering back to dry concentrate and reusable process water.
+    - Add sealed and oxygen-blown smelting that captures flue gas, plus catalytic flue treatment that turns it into activated carbon.
+    - Add coke blast and cupola furnaces: cheap, fast and heavily polluting alternatives that the restoration model fully accounts for.
+    - Add electrostatic smog precipitation and direct air capture, the two strongest cleanup operations in the mod.
+    - Add a mid-game field laboratory that researches faster and accepts every stock science package.
+    - Add three field guide entries covering the clean and dirty industry trade, the concentration line and atmospheric cleanup.
+  Fixes:
+    - Craft the precision assembly kit in a fluid-capable assembler. The recipe takes lubricant but sat in the hand-craftable category, which the game rejects outright; it is still made in a stock assembler, so nothing about the build order changes.
+    - Make the deep core drill drop its ore outside its own body. It inherited the output position of the smaller drill it is built from, which on a seven tile machine landed inside the hull where no belt or inserter could reach it.
+    - Clear the inherited sound accents from the mining heads. The deep core drill is built from the big mining drill, which cues a sound off a "drill-animation" layer that our own artwork replaces, and the leftover reference stopped the game from loading.
+    - Build every machine to its declared footprint. Nine of the new buildings, the oxygen-blown smelter and deep core drill among them, inherited the bounding box of the vanilla prototype they were copied from while their sprites and pipe openings assumed the larger size, which left fluid ports hanging outside the entity and stopped the game from loading.
+    - Split the explorer mining animation into pages the engine accepts. The re-render paged it into a ten line stripe against eight directions, which the game rejected outright with "Invalid stripeLine height" before any save could load.
+    - Attach power pole wires to the insulators the pole sprite actually draws. Copper previously used the inherited vanilla attachment at -2.578 while our crossarm sits at -1.9405, so every wire floated about 0.58 tiles above the pole.
+  Balance:
+    - Every clean machine is slower per unit of raw output than its dirty counterpart, so low emissions remain a real trade rather than a free upgrade.
+    - Green mining heads mine no faster than a stock drill; the wide-radius deep core drill is fast but emits and occupies seven tiles.
+    - Ore concentration costs three separate buildings, real water logistics and oxygen before it pays back more metal per ore.
+  Art:
+    - Reduce the explorer to a vanilla character height. The body rendered about 1.95 tiles tall, roughly 25 percent oversized next to stock characters and machines; it now stands at 1.58 tiles.
+    - Rebuild the explorer hairline as a continuous lofted scalp shell. The previous crown began behind the brow and read as balding, and the crown and nape now close cleanly.
+    - Add seventeen original procedural building models with distinct mechanisms: tilting converters, arc electrodes, rotating ball mills, aerated flotation cells, filter presses, derricks and sorbent contactors.
+    - Mark placeable buildings in the inventory with a baseplate rule so they read differently from loose materials.
+  Audio:
+    - Give the new furnaces, mills, presses, drills and laboratory their own working sounds instead of a shared assembler loop.
+  Verification:
+    - Add pole wire checks covering copper height, per-rotation signal separation, shadow offsets and generator reproducibility.
+    - Add industry checks covering save-compatible footprints, the complement-not-replace balance contract, fluid port sufficiency, technology reachability and sprite canvas fit.
+    - Add a character height regression test so the explorer cannot silently drift out of the vanilla range again.
+---------------------------------------------------------------------------------------------------
+Version: 0.9.0
+Date: 2026-09-08
+  Features:
+    - Add nineteen restoration milestones: twelve tracked by the mod and seven the game evaluates on its own.
+    - Add a Milestones tab to the field station showing every medallion, its goal and when your force earned it.
+    - Add eleven Second Nature entries to the in-game tips and tricks window, in their own category.
+  Audio:
+    - Give all sixteen previously silent generating plants a working sound matched to their mechanism.
+    - Scale plant loops with real output, so becalmed turbines, night solar and starved generators fall quiet.
+    - Give the ecology circuit monitor an instrument tick and every carried item a material-appropriate handling sound.
+  Balance:
+    - No recipe, research, output rating or ecological rate changed in this release.
+  Verification:
+    - Add source and native-engine checks for milestone awards, force isolation, offline joins, force merges, tip categories and the working-sound pass.
+---------------------------------------------------------------------------------------------------
 Version: 0.8.0
 Date: 2026-09-08
   Fixes:

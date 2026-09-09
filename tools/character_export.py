@@ -1,4 +1,4 @@
-"""Render true 2x-detail explorer frames, trim common padding and tile safe pages.
+"""Render warden frames at 2x detail, trim common padding and tile safe pages.
 
 Each pose has a fixed crop and compensated native pivot. Stripes keep every
 input texture below 8192 pixels without downscaling or losing native directions.
@@ -12,14 +12,14 @@ from PIL import Image
 from catalog import ROOT,MOD
 from character_layout import frame_spec,pose_angles,assert_frame_fits
 from industrial_art import render
-from explorer_model import explorer
+from warden_model import warden
 
 CACHE=ROOT/'.cache/character-hd'
 
 
 def frame(task):
     tier,pose,direction,index,count=task
-    move,aim=pose_angles(pose,direction);m=explorer(index/count,pose,tier,move,aim)
+    move,aim=pose_angles(pose,direction);m=warden(index/count,pose,tier,move,aim)
     assert_frame_fits(m,(tier,pose,direction,index))
     view=frame_spec(pose)
     im=render(m,view['width'],view['height'],ppu=view['ppu'],origin=view['origin'],map_aligned=True)
@@ -47,9 +47,12 @@ def export_pose(tier,pose,count,directions,manifest,save,jobs=2):
     width,height=crop[2]-crop[0],crop[3]-crop[1]
     columns=max(n for n in range(1,count+1) if count%n==0 and n*width<=8192)
     rows_per_direction=count//columns
-    per_page=max(1,min(directions,8192//(height*rows_per_direction)))
+    # A stripe may not declare more lines than the animation has directions: the engine
+    # rejects that with "Invalid stripeLine height". Page on whole directions and keep
+    # every page's height_in_frames (number*rows_per_direction) within direction_count.
+    per_page=max(1,min(directions,8192//(height*rows_per_direction),max(1,directions//rows_per_direction)))
     assert height*rows_per_direction<=8192
-    name=f'explorer-{tier}-{pose}';folder=MOD/'graphics/entity/industry'
+    name=f'warden-{tier}-{pose}';folder=MOD/'graphics/entity/industry'
     chunks=[];used=[]
     for page,start in enumerate(range(0,directions,per_page)):
         number=min(per_page,directions-start);rows=number*rows_per_direction

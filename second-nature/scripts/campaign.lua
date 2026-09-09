@@ -3,6 +3,7 @@ local S = require("scripts.state")
 local P = require("scripts.pollution")
 local Artwork = require("scripts.artwork")
 local Jukebox = require("scripts.jukebox")
+local Achievements = require("scripts.achievements")
 local Campaign = {}
 local function configure_freeplay()
   local api = remote.interfaces.freeplay
@@ -126,6 +127,7 @@ function Campaign.rocket(event)
   if camp and not camp.rocket_launched then
     camp.rocket_launched = true
     if camp.ship and camp.ship.valid then camp.ship.minable, camp.ship.destructible = false, false end
+    Achievements.award(rocket.force, "signal-restored")
     rocket.force.print({"sn-campaign.orbit-restored"}, {color = C.colors.atmosphere})
   end
 end

@@ -339,6 +339,16 @@ for _,x in ipairs(Energy.recipes) do K.recipes[#K.recipes+1]=x end
 for _,x in ipairs(Energy.technologies) do K.technologies[#K.technologies+1]=x end
 for _,x in ipairs(Energy.fluids or {}) do K.fluids[#K.fluids+1]=x end
 K.energy=Energy
+-- Industry expansion: furnaces, assembly cells, ore concentration, mining,
+-- pollution control and the field laboratory. Appended after the core content
+-- so the restoration chain keeps its existing item/technology ordering.
+local Industry = require("shared.industry")
+for _,x in ipairs(Industry.items) do K.items[#K.items+1]=x end
+for _,x in ipairs(Industry.fluids) do K.fluids[#K.fluids+1]=x end
+for _,x in ipairs(Industry.machines) do K.machines[#K.machines+1]=x end
+for _,x in ipairs(Industry.recipes) do K.recipes[#K.recipes+1]=x end
+for _,x in ipairs(Industry.technologies) do K.technologies[#K.technologies+1]=x end
+K.industry=Industry
 local Layouts = require("shared.machine_layouts")
 K.by_recipe, K.by_machine = {}, {}
 for _, r in ipairs(K.recipes) do K.by_recipe["sn-" .. r.name] = r end

@@ -18,9 +18,13 @@ def load_catalog():
     return plain(lua.eval('require("shared.catalog")'))
 
 def load_constants():
+    return load_module("shared.constants")
+
+def load_module(name):
+    """Read any pure-data shared Lua module (no game globals) as plain Python."""
     lua = LuaRuntime(unpack_returned_tuples=True)
     lua.globals().package.path = str(MOD / "?.lua") + ";" + lua.globals().package.path
-    return plain(lua.eval('require("shared.constants")'))
+    return plain(lua.eval(f'require("{name}")'))
 
 if __name__ == "__main__":
     import json

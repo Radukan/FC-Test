@@ -23,7 +23,11 @@ local function create_machine(x, layout, compact)
     -- Preserve saved collision/connection geometry. Never enlarge a working factory on load.
     p.hidden, p.hidden_in_factoriopedia = true, true
     p.localised_name = {"", {"entity-name." .. item_name}, " (compact)"}
-  elseif layout.expanded then
+  else
+    -- Every machine is built to its declared footprint, not to whatever the
+    -- inherited base happened to use. The sprites, the fluid ports and the
+    -- description all describe `layout.size`, so the bounding box has to agree:
+    -- a port outside the box is a hard prototype error.
     local half = layout.size / 2
     p.tile_width, p.tile_height = layout.size, layout.size
     p.collision_box = {{-half + .2, -half + .2}, {half - .2, half - .2}}
@@ -34,11 +38,43 @@ local function create_machine(x, layout, compact)
   end
   local art_name = compact and x.name or layout.art_name
   if kind == "assembling-machine" then p.graphics_set = {animation = Art.four_way(art_name, true)}
+  elseif kind == "mining-drill" then
+    -- Drills take a directional animation inside graphics_set. The inherited
+    -- layered vanilla structure cannot be filled by our four-way sprites.
+    p.graphics_set = {animation = Art.four_way(art_name, true), animation_progress = 1}
+    p.sprites = nil
+    p.wet_mining_graphics_set = nil
+    -- Sound accents address working visualisations by name. Replacing the art
+    -- removes those layers, and an accent left pointing at a missing one is a
+    -- prototype error rather than a silent miss.
+    if p.working_sound then
+      p.working_sound.sound_accents = nil
+      for _, entry in ipairs(p.working_sound) do entry.sound_accents = nil end
+    end
+  elseif kind == "lab" then
+    -- Labs draw a single non-directional animation.
+    p.on_animation = Art.animation(art_name .. "-north")
+    p.off_animation = Art.sprite(art_name .. "-north")
+    p.sprites = nil
   else p.sprites = Art.four_way(art_name, false) end
   if kind == "assembling-machine" then
     for _, box in ipairs(p.fluid_boxes or {}) do box.pipe_picture = nil end
-    for _, port in ipairs((compact and CompactPorts or Ports)[x.name] or {}) do
+    -- Some inherited bases carry fewer fluid boxes than the machine needs.
+    -- Grow the list from a copy of the first box so every declared port has a
+    -- real box to attach to.
+    local ports = (compact and CompactPorts or Ports)[x.name] or {}
+    if #ports > #(p.fluid_boxes or {}) then
+      p.fluid_boxes = p.fluid_boxes or {}
+      local template = assert(p.fluid_boxes[1], "Cannot add fluid boxes to " .. x.name .. ": base has none")
+      for index = #p.fluid_boxes + 1, #ports do
+        local box = table.deepcopy(template)
+        box.pipe_picture = nil
+        p.fluid_boxes[index] = box
+      end
+    end
+    for _, port in ipairs(ports) do
       local box = assert(p.fluid_boxes[port.box], "Missing fluid box for " .. x.name)
+      box.production_type = port.flow
       box.pipe_connections = {{position = table.deepcopy(port.position), direction = port.direction, flow_direction = port.flow}}
     end
     p.crafting_categories = {}
@@ -55,6 +91,29 @@ local function create_machine(x, layout, compact)
     p.fixed_recipe = x.fixed and "sn-" .. x.fixed or nil
     if x.fixed then p.surface_conditions = H.conditions({domain=true,planet=x.planet}) end
     p.production_health_effect = nil
+  elseif kind == "mining-drill" then
+    p.mining_speed = x.mining_speed
+    p.resource_searching_radius = x.mining_radius
+    p.energy_usage = x.energy
+    p.energy_source = {type="electric",usage_priority="secondary-input",
+      emissions_per_minute={pollution=x.pollution,spores=x.pollution}}
+    p.module_slots = 3
+    p.allowed_effects = {"consumption","speed","pollution","productivity"}
+    p.heating_energy = "100kW"
+    -- Drop mined ore just past the front edge of the actual footprint. The
+    -- inherited vector belongs to the base drill's smaller body, so on a larger
+    -- head it lands inside the machine where no belt or chest can reach it.
+    p.vector_to_place_result = {0, -(layout.size / 2 + .35)}
+    -- A dry head has no plumbing; the hydraulic head keeps its base input box.
+    if not x.needs_water then p.input_fluid_box = nil end
+  elseif kind == "lab" then
+    p.researching_speed = x.researching_speed
+    p.energy_usage = x.energy
+    p.energy_source = {type="electric",usage_priority="secondary-input",
+      emissions_per_minute={pollution=x.pollution,spores=x.pollution}}
+    p.module_slots = 3
+    p.allowed_effects = {"consumption","speed","pollution"}
+    p.heating_energy = "100kW"
   end
   return p
 end

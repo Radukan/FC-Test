@@ -117,9 +117,9 @@ def contact_sheet(catalog):
         ('Expedition jukebox', 'jukebox-north', 'Local archive playback'),
         ('Wind-up construction drone', 'field-drone-flying', 'Inventory-fed / no network'),
         ('Field drone controller', 'field-controller-icon', 'Auto-enabled / Ctrl + Shift + B'),
-        ('Explorer / field gear', 'explorer-0-idle', 'Authored adult character'),
-        ('Explorer / modular gear', 'explorer-1-idle', 'Articulated rig'),
-        ('Explorer / bastion gear', 'explorer-2-idle', 'Third armor appearance'),
+        ('Warden / field gear', 'warden-0-idle', 'Sealed restoration warden'),
+        ('Warden / modular gear', 'warden-1-idle', 'Articulated rig'),
+        ('Warden / bastion gear', 'warden-2-idle', 'Third armor appearance'),
     ]
     cw, ch, columns = 300, 310, 4
     sheet = Image.new('RGB', (cw * columns, 110 + ch * math.ceil(len(entries) / columns)), BACKGROUND)
@@ -129,7 +129,7 @@ def contact_sheet(catalog):
         x, y = i % columns * cw, 100 + i // columns * ch
         d.rounded_rectangle((x + 10, y + 8, x + cw - 10, y + ch - 8), radius=7, fill=PANEL)
         source, spec = load(name)
-        frame = tile(source, spec, direction=4 if name.startswith('explorer') else 0)
+        frame = tile(source, spec, direction=4 if name.startswith('warden') else 0)
         fit_sprite(sheet, frame, (x + 18, y + 18, x + cw - 18, y + 242), trim=True)
         source.close()
         d.text((x + 22, y + 253), label, font=font(13, True), fill=CREAM)
@@ -141,7 +141,7 @@ def character_reviews():
     from character_layout import ARMED_ROWS
     from gait import MINING_SPEED
     directions = ('N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW')
-    image, spec = load('explorer-0-running_with_gun')
+    image, spec = load('warden-0-running_with_gun')
     contact = Image.new('RGB', (6 * 220, 3 * 305 + 105), BACKGROUND)
     header(contact, 'ARMED LOCOMOTION / 18 NATIVE ROWS', 'Aim and stride are independent; the engine mirrors the remaining facings. Full fixed-pivot frames.')
     d = ImageDraw.Draw(contact)
@@ -151,7 +151,7 @@ def character_reviews():
         d.text((x + 12, y + 268), f'Row {row}: aim {directions[aim]} / stride {directions[stride]}', font=font(11), fill=CREAM)
     contact.save(ART / 'character-aim-layout.jpg', quality=92, optimize=True)
 
-    running, rspec = load('explorer-0-running')
+    running, rspec = load('warden-0-running')
     frames = []
     for f in range(rspec['frame_count']):
         sheet = Image.new('RGB', (4 * 310, 474), BACKGROUND)
@@ -168,7 +168,7 @@ def character_reviews():
     image.close()
     running.close()
 
-    source, spec = load('explorer-0-mining_with_tool')
+    source, spec = load('warden-0-mining_with_tool')
     frames = []
     for f in range(spec['frame_count']):
         sheet = Image.new('RGB', (4 * 310, 492), BACKGROUND)
@@ -267,18 +267,18 @@ def field_crew_review():
     for image in (source, shadow, working, work_shadow):image.close()
 
     sheet=Image.new('RGB',(1200,870),BACKGROUND)
-    header(sheet,'FIELD CREW / SECOND NATURE '+json.loads((MOD/'info.json').read_text())['version'],'Auto-enabled inventory crews, planner work, directional 3D drone sprites and a refined explorer silhouette.')
+    header(sheet,'FIELD CREW / SECOND NATURE '+json.loads((MOD/'info.json').read_text())['version'],'Auto-enabled inventory crews, planner work, directional 3D drone sprites and a sealed warden silhouette.')
     d=ImageDraw.Draw(sheet)
     for i in range(3):
         d.rounded_rectangle((22+i*395,110,392+i*395,775),radius=9,fill=PANEL)
     tech, ts=load('field-robotics-card')
     fit_sprite(sheet,tile(tech,ts),(62,175,350,490))
     tech.close()
-    running, rs=load('explorer-0-running')
+    running, rs=load('warden-0-running')
     for i,frame in enumerate((4,12)):
         fit_sprite(sheet,tile(running,rs,4,frame),(430+i*165,184,580+i*165,493),trim=True)
     running.close()
-    mining, ms=load('explorer-0-mining_with_tool')
+    mining, ms=load('warden-0-mining_with_tool')
     for i,frame in enumerate((5,10)):
         fit_sprite(sheet,tile(mining,ms,2,frame),(825+i*165,172,975+i*165,505),trim=True)
     mining.close()
@@ -299,10 +299,10 @@ def nightglass_review(catalog):
     energy=catalog['energy'];stages=('early','mid','late')
     sheet=Image.new('RGB',(1500,1240),BACKGROUND);d=ImageDraw.Draw(sheet)
     header(sheet,'NIGHTGLASS FOUNDRY / SECOND NATURE '+json.loads((MOD/'info.json').read_text())['version'],
-           'Humanized explorer, readable inventory icons, visible crew recall and six power systems per stage. Source-art review, not gameplay.')
+           'Sealed restoration warden, readable inventory icons, visible crew recall and six power systems per stage. Source-art review, not gameplay.')
     for i in range(3):d.rounded_rectangle((24+i*494,112,496+i*494,641),radius=8,fill=PANEL)
     d.text((44,132),'A HUMAN GOTH EXPLORER',font=font(18,True),fill=ACCENT)
-    actor,spec=load('explorer-0-idle');fit_sprite(sheet,tile(actor,spec,4,0),(65,166,460,567),trim=True);actor.close()
+    actor,spec=load('warden-0-idle');fit_sprite(sheet,tile(actor,spec,4,0),(65,166,460,567),trim=True);actor.close()
     d.text((44,587),'Softer face, skin and shoulder contours',font=font(15),fill=CREAM)
     d.text((44,612),'Original adult design / Morticia-inspired styling',font=font(13),fill=MUTED)
     d.text((538,132),'DISTINCT INVENTORY OBJECTS',font=font(18,True),fill=ACCENT)

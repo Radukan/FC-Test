@@ -178,3 +178,59 @@ The last ten minutes verify a real production system. A beacon takes 60 seconds 
 Each world must satisfy all thresholds **simultaneously**. Ecological fitness is shared by all forces, but research, eligible beacons and held time are force-specific.
 
 For a mathematical scale check, see [the reference kit](SIMULATION.md). Its supplied-kit model convergence is **not** an estimated campaign duration. Research, supply-chain construction, planetary travel, defense and power are deliberately excluded from that test.
+
+## Industry expansion: the complement contract (0.10)
+
+Canonical data: [`shared/industry.lua`](../second-nature/shared/industry.lua). Enforced by [`tests/test_industry.py`](../tests/test_industry.py).
+
+Seventeen buildings were added in 0.10. The governing rule is that **none of them is a strict upgrade of a vanilla machine**, so removing your stock furnaces, drills and assemblers is never the automatically correct play. Each family pays for what it gives.
+
+### Furnaces
+
+| Building | Route | Output per cycle | Emissions/min | Needs |
+|---|---|---|---:|---|
+| Sealed crucible furnace | clean | 2 plate / 6 s | 0.2 | oxygen |
+| Oxygen-blown smelter | clean, concentrate | 7 plate / 8 s (concentrate) | 0.4 | oxygen, 1.6 MW |
+| Electric arc refinery | clean, concentrate, alloy | 3 steel / 10 s | 0.5 | oxygen, refractory, 3.2 MW |
+| Coke blast furnace | dirty | 6 plate / 3 s | 18 | coal |
+| Reverberatory cupola | dirty, alloy | 3 steel / 5 s | 26 | coal |
+
+Clean smelting is deliberately slower per plate than the blast route in every pairing, and the dirty recipes additionally carry an `emissions` multiplier of 6-9 plus a positive `toxicity` effect. Cheap metal is available; it just shows up in the restoration score.
+
+### Ore concentration
+
+Ore multiplication is a **line**, not a switch:
+
+```
+5 iron ore + 50 water   --[wet ore mill]-->      50 ore slurry
+50 slurry + 1 biofilm   --[flotation bank]-->    40 froth + 2 tailings
+40 froth                --[dewatering press]-->  4 concentrate + 25 water
+2 concentrate + oxygen  --[oxy-smelter]-->       7 iron plate
+```
+
+1.25 raw ore becomes one concentrate, and two concentrate yields seven plates: **2.8 plates per raw ore** against 1.0 for direct sealed smelting and 1.5 for the blast furnace. Paying for it takes three separate buildings, a water loop, an oxygen supply and roughly 2 MW before the first extra plate appears. Tailings are a real solid byproduct; binding them back into stone costs a kiln cycle.
+
+### Mining
+
+| Head | Mining speed | Emissions | Radius | Footprint |
+|---|---:|---:|---:|---:|
+| Electric auger | 0.35 | 0 | 2.49 | 3x3 |
+| Hydraulic mining head | 0.5 | 0 | 2.49 | 3x3 |
+| Stock electric drill | 0.5 | yes | 2.49 | 3x3 |
+| Deep core drill | 2.6 | 4/min | 3.99 | 7x7 |
+
+The two green heads never beat a stock drill on throughput: the auger is markedly slower and the hydraulic head merely matches it. They beat it on air quality. The deep core drill is genuinely faster, and it pays with emissions, 3.5 MW and a seven-tile footprint.
+
+### Pollution control
+
+| Operation | Pollution per cycle | Cycle | Consumes |
+|---|---:|---:|---|
+| Atmospheric scrubbing | -40 | 10 s | filter cartridge, water |
+| Electrostatic precipitation | -180 | 12 s | catalytic mesh, clean water |
+| Direct air capture | -520 | 20 s | activated carbon, clean water, oxygen |
+
+Direct air capture is the strongest cleanup in the mod at 5 MW plus a consumable catalyst chain. Both new operations are `domain`-gated fixed-recipe machines, so they cannot be productivity-farmed and they only earn on completed cycles.
+
+### Research
+
+The field laboratory researches at 1.6x against the stock lab's 1.0, drawing 320 kW instead of 60 kW, and it accepts every package the stock lab does. It is a power-for-time trade available in the mid game, not a replacement tier.

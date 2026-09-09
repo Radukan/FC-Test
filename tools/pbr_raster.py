@@ -99,28 +99,34 @@ def render(mesh,width=320,height=None,ppu=64,angle=0,aa=2,origin=.70,map_aligned
     # Earthy steel, worn paint, oxidized seams and fabric retain each building's colors.
     skin=(color[:,0]>.53)&(color[:,1]>.30)&(color[:,1]<.60)&(color[:,2]<.48)&(color[:,0]>color[:,1]*1.25)
     paint=(np.max(color,axis=1)-np.min(color,axis=1))>.21
-    goth=getattr(mesh,'surface_finish',None)=='goth'
-    if goth:skin=skin | ((np.min(color,axis=1)>.65) & ((np.max(color,axis=1)-np.min(color,axis=1))<.16))
+    finish=getattr(mesh,'surface_finish',None)
+    # Sealed field gear: broad low-frequency soiling only. High-frequency speckle
+    # is what defeats PNG's row predictors, so it is deliberately omitted here.
+    field=finish=='field'
+    if field:skin=np.zeros(len(color),dtype=bool)
     metal=~skin&~glow
-    grime=(.96+.025*coarse) if goth else (.86+.19*coarse+.05*fine)
+    grime=(.94+.06*coarse) if field else (.86+.19*coarse+.05*fine)
     color*=np.where(skin, .97+.05*fine, grime)[:,None]
-    rust=np.clip((.29-coarse)*1.1,0,.25)*metal*(~paint)
+    rust=np.clip((.29-coarse)*1.1,0,.25)*metal*(~paint)*(0 if field else 1)
     color=color*(1-rust[:,None])+np.array([.33,.18,.075])*rust[:,None]
-    scratches=np.clip((fine-.78)*.18,0,.045)*metal*(0.15 if goth else 1)
+    scratches=np.clip((fine-.78)*.18,0,.045)*metal*(0 if field else 1)
     color+=scratches[:,None]
     # Low-amplitude procedural normals add grain without moving the texture through time.
     bump=np.column_stack((np.sin(surface[:,0]*89+surface[:,2]*21),np.sin(surface[:,1]*83+surface[:,2]*31),np.zeros(len(surface))))
-    if getattr(mesh, 'surface_finish', None) in ('hull', 'cloth', 'goth'):
+    if finish in ('hull', 'cloth'):
         # Non-periodic, model-anchored cast-metal grain; avoid a woven/checker
         # pattern on the shuttle's broad ceramic and painted hull surfaces.
         bump=np.column_stack((noise(surface+np.array([7.1,2.3,4.7]),32)-.5,
                               noise(surface+np.array([1.9,8.2,3.6]),32)-.5,
                               noise(surface+np.array([4.6,1.7,9.2]),32)-.5))
     bump-=normal*np.sum(normal*bump,axis=1)[:,None]
-    normal+=bump*np.where(skin,.006 if goth else .012,.025 if goth else .065)[:,None];normal/=np.maximum(1e-6,np.linalg.norm(normal,axis=1))[:,None]
+    if field:bump[:]=0
+    normal+=bump*np.where(skin,.012,.065)[:,None];normal/=np.maximum(1e-6,np.linalg.norm(normal,axis=1))[:,None]
     ndl=np.clip(normal@light,0,1);half=unit(light+unit((0,math.cos(ELEVATION),math.sin(ELEVATION))))
     spec=np.clip(normal@half,0,1)**np.where(paint,32,48)
-    brightness=.40+ndl*visibility*1.00
+    # Characters are read against dark terrain at small size; the sealed-gear
+    # finish lifts ambient slightly so the silhouette never crushes to black.
+    brightness=(.52+ndl*visibility*.88) if field else (.40+ndl*visibility*1.00)
     shaded=color*brightness[:,None]*np.array([1.02,.99,.93])
     shaded+=spec[:,None]*visibility[:,None]*np.where(skin,.07,.22)[:,None]
     shaded=np.where(glow[:,None],color*1.12,shaded)

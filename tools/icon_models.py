@@ -143,6 +143,57 @@ def item(name):
     elif name=='bio-ash':
         m.cyl(0,0,.04,.36,.12,(128,143,150),20)
         for i in range(7):a=i*TAU/7;m.ball((.19*math.cos(a),.17*math.sin(a),.19),.12,(202,202,181),stretch=(1,1,.6))
+    elif name=='ore-concentrate':
+        # A dense heap of dark upgraded fines, distinct from raw lumpy ore.
+        m.cyl(0,0,.03,.38,.10,(74,66,58),20)
+        for i in range(9):
+            a=i*TAU/9;r=.13+.10*(i%3)
+            m.ball((r*math.cos(a),r*math.sin(a)*.8,.14+.05*(i%2)),.13,(96,84,66),stretch=(1,1,.62))
+        m.ball((0,0,.24),.16,(122,106,80),stretch=(1,1,.55))
+        for i in range(4):
+            a=i*TAU/4+.6;m.ball((.15*math.cos(a),.13*math.sin(a),.30),.04,(178,157,108))
+    elif name=='mineral-tailings':
+        # Pale, washed-out waste rock in a low containment ring.
+        m.cyl(0,0,.02,.40,.07,(88,86,80),20);m.ring((0,0,.09),.40,.03,SILVER)
+        for i in range(7):
+            a=i*TAU/7;m.ball((.17*math.cos(a),.15*math.sin(a),.13),.13,(150,146,132),stretch=(1,1,.5))
+        m.ball((0,0,.20),.14,(171,167,152),stretch=(1,1,.42))
+    elif name=='refractory-brick':
+        # A stacked course of pale firebrick, clearly masonry not metal.
+        for i,(x,y,z) in enumerate(((-.16,-.06,.06),(.17,.05,.06),(0,0,.28))):
+            m.box((x,y,z),(.46,.30,.20),(196,166,124) if i!=2 else (208,180,138),.02)
+            m.box((x,y-.152,z),(.40,.012,.14),(163,131,92),.01)
+    elif name=='catalyst-mesh':
+        # A woven precious-metal screen in a frame.
+        m.box((0,0,.06),(.68,.60,.05),SILVER,.02)
+        for i in range(7):
+            t=-.26+i*.087
+            m.tube((t,-.26,.11),(t,.26,.11),.014,(214,177,96),6)
+            m.tube((-.26,t,.13),(.26,t,.13),.014,(196,158,84),6)
+        m.ring((0,0,.15),.31,.028,COPPER)
+    elif name=='spent-catalyst-mesh':
+        # The same screen, buckled and discoloured.
+        m.box((0,0,.06),(.68,.60,.05),(96,92,88),.02)
+        for i in range(7):
+            t=-.26+i*.087;sag=.02*math.sin(i*1.4)
+            m.tube((t,-.26,.10+sag),(t,.26,.11-sag),.013,(126,110,74),6)
+            m.tube((-.26,t,.12+sag),(.26,t,.12-sag),.013,(104,92,66),6)
+        m.ball((.14,-.10,.17),.09,(118,86,60),stretch=(1,1,.5))
+    elif name=='machine-frame':
+        # An open welded chassis: four posts and a top rail.
+        for x in (-.24,.24):
+            for y in (-.20,.20):m.cyl(x,y,.04,.055,.44,SILVER,8)
+        m.box((0,0,.50),(.62,.54,.07),(138,148,152),.02)
+        m.box((0,0,.10),(.62,.54,.06),(112,120,124),.02)
+        for x in (-.24,.24):m.tube((x,-.20,.30),(x,.20,.30),.022,COPPER,6)
+    elif name=='precision-assembly':
+        # A bearing race and matched guides on a dark mounting plate.
+        m.box((0,0,.05),(.66,.58,.08),INK,.03)
+        m.ring((0,0,.16),.24,.05,SILVER)
+        for i in range(8):
+            a=i*TAU/8;m.ball((.24*math.cos(a),.24*math.sin(a),.16),.045,CREAM)
+        m.cyl(0,0,.12,.09,.22,COPPER,12)
+        for x in (-.28,.28):m.box((x,0,.14),(.06,.44,.05),(150,160,164),.01)
     else:raise KeyError(name)
     return m
 
@@ -172,6 +223,22 @@ def fluid(name):
         points=[(-.27,0,.18),(0,0,.49),(.28,0,.25)]
         for a,b in zip(points,points[1:]):m.tube(a,b,.039,SILVER,10)
         for p in points:m.ball(p,.14,(92,153,193))
+    elif name=='ore-slurry':
+        # Opaque milled rock suspended in water: a swirl, not a clean liquid.
+        flask(m,0,0,0,(140,120,96),True,1)
+        for i in range(5):
+            a=i*TAU/5;m.ball((.12*math.cos(a),.12*math.sin(a),.34+.04*(i%2)),.055,(108,92,72))
+    elif name=='flotation-froth':
+        # A pale bubbling head sitting on a darker liquid.
+        flask(m,0,0,0,(150,140,104),False,.92)
+        for x,y,z,r in ((-.14,.02,.50,.13),(.10,-.04,.55,.15),(.02,.10,.62,.10)):
+            m.ball((x,y,z),r,(216,210,180))
+    elif name=='smelter-flue-gas':
+        # A dirty rising plume with visible particulate.
+        for x,z,r in ((-.14,.20,.18),(.10,.42,.22),(-.05,.66,.15)):
+            m.ball((x,0,z),r,(122,114,104))
+        for i in range(5):
+            a=i*TAU/5;m.ball((.20*math.cos(a),.10,.30+.14*(i%3)),.035,(74,68,62))
     else:raise KeyError(name)
     return m
 

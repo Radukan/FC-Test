@@ -1,278 +1,278 @@
 {
-  "explorer-0-idle": {
+  "warden-0-idle": {
     "view": {
       "width": 768,
       "height": 864,
       "origin": 0.5092592592592593,
-      "ppu": 160,
+      "ppu": 132,
       "scale": 0.25
     },
     "crop": [
-      296,
-      166,
-      600,
-      688
+      308,
+      228,
+      554,
+      632
     ],
     "files": {
-      "second-nature/graphics/entity/industry/explorer-0-idle.png": "4f1cad3e194259765318fd8965ad02e27fd7066e3844ecb64683a6d9640c84e8"
+      "second-nature/graphics/entity/industry/warden-0-idle.png": "b812b93020b845aa63d2c9c55ba46e45f3416990af6178ab9fbc90b0627c9f4d"
     }
   },
-  "explorer-0-idle_with_gun": {
+  "warden-0-idle_with_gun": {
     "view": {
       "width": 768,
       "height": 864,
       "origin": 0.5092592592592593,
-      "ppu": 160,
+      "ppu": 132,
       "scale": 0.25
     },
     "crop": [
-      188,
-      86,
-      698,
-      776
+      220,
+      146,
+      646,
+      722
     ],
     "files": {
-      "second-nature/graphics/entity/industry/explorer-0-idle_with_gun.png": "d6696aff98ded0719049b961b983cdf9c1fe8225e326af480b90c47dbcdcd07a"
+      "second-nature/graphics/entity/industry/warden-0-idle_with_gun.png": "f290f915f565ea84063aaecd37a107ec07043e8b287bff74ed5642e3d28f78ea"
     }
   },
-  "explorer-0-running": {
+  "warden-0-running": {
     "view": {
       "width": 768,
       "height": 864,
       "origin": 0.5092592592592593,
-      "ppu": 160,
+      "ppu": 132,
       "scale": 0.25
     },
     "crop": [
-      270,
-      172,
-      596,
-      684
+      288,
+      220,
+      562,
+      640
     ],
     "files": {
-      "second-nature/graphics/entity/industry/explorer-0-running.png": "4216297e87d13ab5acaed26b60cbe0870a04415bfaad4337168c5216cc547944"
+      "second-nature/graphics/entity/industry/warden-0-running.png": "17981ef59b319d089d6de89df32a78a75ab1d77c7d8a68bb2bc7271af2ed93f7"
     }
   },
-  "explorer-0-mining_with_tool": {
+  "warden-0-mining_with_tool": {
     "view": {
       "width": 896,
       "height": 960,
       "origin": 0.5166666666666667,
-      "ppu": 160,
+      "ppu": 132,
       "scale": 0.25
     },
     "crop": [
-      184,
-      48,
-      840,
-      916
+      228,
+      126,
+      776,
+      846
     ],
     "files": {
-      "second-nature/graphics/entity/industry/explorer-0-mining_with_tool-1.png": "6cc2c638c807c4ac8605f97e40ce2ca2d90b857d0c9b167505a19e2ff299f57a",
-      "second-nature/graphics/entity/industry/explorer-0-mining_with_tool-2.png": "8f9493d56f70c34da87f54f58201d25face36080b74545d59803f0f11770e0ed"
+      "second-nature/graphics/entity/industry/warden-0-mining_with_tool-1.png": "dd13a7875ee89a205c5d684e751fd9c18fb27bd6c4b1f5c724e68763e1521e14",
+      "second-nature/graphics/entity/industry/warden-0-mining_with_tool-2.png": "3388644e9bd9fcf59216ff4be0b0541ab47f649a2e22a9852ad2e16e22948995"
     }
   },
-  "explorer-0-running_with_gun": {
+  "warden-0-running_with_gun": {
     "view": {
       "width": 768,
       "height": 864,
       "origin": 0.5092592592592593,
-      "ppu": 160,
+      "ppu": 132,
       "scale": 0.25
     },
     "crop": [
-      264,
-      86,
-      698,
-      776
+      282,
+      146,
+      646,
+      722
     ],
     "files": {
-      "second-nature/graphics/entity/industry/explorer-0-running_with_gun-1.png": "d708e165c4899a8e331e65d04a0852d811a40838e6e3b1b72a07ab761e2fd9f3",
-      "second-nature/graphics/entity/industry/explorer-0-running_with_gun-2.png": "c3a7f7e6222c3efc6a9b5248399317505963f336b4336f4a49cec7ba340169b4"
+      "second-nature/graphics/entity/industry/warden-0-running_with_gun-1.png": "7f68e26aebbf22ded9bc334cc16b5397f1ee144a44f00cddd539ff70aef03672",
+      "second-nature/graphics/entity/industry/warden-0-running_with_gun-2.png": "7187cedb02b202768f685a88d36ff371e1b24eb3d008e5ec6b7a5c631c4dc010"
     }
   },
-  "explorer-1-idle": {
+  "warden-1-idle": {
     "view": {
       "width": 768,
       "height": 864,
       "origin": 0.5092592592592593,
-      "ppu": 160,
+      "ppu": 132,
       "scale": 0.25
     },
     "crop": [
-      296,
-      166,
-      600,
-      688
+      308,
+      228,
+      558,
+      636
     ],
     "files": {
-      "second-nature/graphics/entity/industry/explorer-1-idle.png": "f17eada299ab54ec82066777eff7e8ba3e03e5cfc601de539c789823aa3daeb8"
+      "second-nature/graphics/entity/industry/warden-1-idle.png": "91841a905a79730caa59badf923bf2f885fa191bc76a5b98f1e608d4f5ff97ba"
     }
   },
-  "explorer-1-idle_with_gun": {
+  "warden-1-idle_with_gun": {
     "view": {
       "width": 768,
       "height": 864,
       "origin": 0.5092592592592593,
-      "ppu": 160,
+      "ppu": 132,
       "scale": 0.25
     },
     "crop": [
-      188,
-      86,
-      698,
-      776
+      220,
+      146,
+      646,
+      722
     ],
     "files": {
-      "second-nature/graphics/entity/industry/explorer-1-idle_with_gun.png": "69853cf821e034afc24adcaa6ee1eafbcf8c2d65135676f607e4f318f9154643"
+      "second-nature/graphics/entity/industry/warden-1-idle_with_gun.png": "04a722f909bcfa6bb5ceb4ee840e21e8c36a91309db64db7d560d2e8f1d7812f"
     }
   },
-  "explorer-1-running": {
+  "warden-1-running": {
     "view": {
       "width": 768,
       "height": 864,
       "origin": 0.5092592592592593,
-      "ppu": 160,
+      "ppu": 132,
       "scale": 0.25
     },
     "crop": [
-      270,
-      172,
-      596,
-      684
+      288,
+      220,
+      562,
+      640
     ],
     "files": {
-      "second-nature/graphics/entity/industry/explorer-1-running.png": "f4058f071cee942d7f37ddc3053f96853b0570ad3fb8ae3451764cc0e4531d28"
+      "second-nature/graphics/entity/industry/warden-1-running.png": "58e70c8fea8d02b0394d237689e4d1b7950fdb12aee6c30ac06e0fecd30717ed"
     }
   },
-  "explorer-1-mining_with_tool": {
+  "warden-1-mining_with_tool": {
     "view": {
       "width": 896,
       "height": 960,
       "origin": 0.5166666666666667,
-      "ppu": 160,
+      "ppu": 132,
       "scale": 0.25
     },
     "crop": [
-      184,
-      48,
-      840,
-      916
+      228,
+      126,
+      776,
+      846
     ],
     "files": {
-      "second-nature/graphics/entity/industry/explorer-1-mining_with_tool-1.png": "c90510975a9ee34ac41d4cef543ad922a0f764560aa306c620e2d80fc2e9e907",
-      "second-nature/graphics/entity/industry/explorer-1-mining_with_tool-2.png": "3b73d01d1e899509aa762b0f35d4b9eb901b41050197cb1a32ae489ea513cc72"
+      "second-nature/graphics/entity/industry/warden-1-mining_with_tool-1.png": "bc111898ccb7015d136ab5550d42b98fdb3a95cb601cbeeeb97812af90576c4c",
+      "second-nature/graphics/entity/industry/warden-1-mining_with_tool-2.png": "9bb064ca39c19008e029ed5b6da6b9c79346b810e73b813f2565862e24e1fd35"
     }
   },
-  "explorer-1-running_with_gun": {
+  "warden-1-running_with_gun": {
     "view": {
       "width": 768,
       "height": 864,
       "origin": 0.5092592592592593,
-      "ppu": 160,
+      "ppu": 132,
       "scale": 0.25
     },
     "crop": [
-      264,
-      86,
-      698,
-      776
+      282,
+      146,
+      646,
+      722
     ],
     "files": {
-      "second-nature/graphics/entity/industry/explorer-1-running_with_gun-1.png": "4580c9273ab3d205905718ff7c6e7f7b8efde2caadfef47246d2c803d8f90f1e",
-      "second-nature/graphics/entity/industry/explorer-1-running_with_gun-2.png": "6f418b745dddcfaf9f5bfa8b42c8c0f0ebe61649f8c48500dd139c04e2f7b712"
+      "second-nature/graphics/entity/industry/warden-1-running_with_gun-1.png": "5287def03b93028ed9d5c89bbf75200be7e35b1ed67b7b7854377ab3e2abe5c6",
+      "second-nature/graphics/entity/industry/warden-1-running_with_gun-2.png": "0a6d33baa8619133c1926529d4a764aeb73d5bb015e390da084fb17183b9ba4d"
     }
   },
-  "explorer-2-idle": {
+  "warden-2-idle": {
     "view": {
       "width": 768,
       "height": 864,
       "origin": 0.5092592592592593,
-      "ppu": 160,
+      "ppu": 132,
       "scale": 0.25
     },
     "crop": [
-      296,
-      166,
-      600,
-      688
+      308,
+      224,
+      562,
+      640
     ],
     "files": {
-      "second-nature/graphics/entity/industry/explorer-2-idle.png": "c563b853d7d8c6114b2c04fa3caf3768e8850eca903c2a92605915dd1440de84"
+      "second-nature/graphics/entity/industry/warden-2-idle.png": "41d194e8bc73e9d845b9ad8e8bd5107dba774b714518537b49c8b3d27d60392f"
     }
   },
-  "explorer-2-idle_with_gun": {
+  "warden-2-idle_with_gun": {
     "view": {
       "width": 768,
       "height": 864,
       "origin": 0.5092592592592593,
-      "ppu": 160,
+      "ppu": 132,
       "scale": 0.25
     },
     "crop": [
-      188,
-      86,
-      698,
-      776
+      220,
+      146,
+      646,
+      722
     ],
     "files": {
-      "second-nature/graphics/entity/industry/explorer-2-idle_with_gun.png": "69500009de03b99cbccc644c37b9a6fde4bdfedf7da87685accdd3786432b518"
+      "second-nature/graphics/entity/industry/warden-2-idle_with_gun.png": "af9f1a22fe77818dd77e5865afab0b88fa688f72fe157ca51ae31eeb414d5afe"
     }
   },
-  "explorer-2-running": {
+  "warden-2-running": {
     "view": {
       "width": 768,
       "height": 864,
       "origin": 0.5092592592592593,
-      "ppu": 160,
+      "ppu": 132,
       "scale": 0.25
     },
     "crop": [
-      270,
-      172,
-      596,
-      684
+      288,
+      220,
+      562,
+      640
     ],
     "files": {
-      "second-nature/graphics/entity/industry/explorer-2-running.png": "cdc96bdafeb63570867710f78d4b4698860839ed624e7828fe80c22652eea618"
+      "second-nature/graphics/entity/industry/warden-2-running.png": "4cb01f7024aeb165b5f66bc0f348b4940d587a66ce6d7cc16ea6b5c07272b6ff"
     }
   },
-  "explorer-2-mining_with_tool": {
+  "warden-2-mining_with_tool": {
     "view": {
       "width": 896,
       "height": 960,
       "origin": 0.5166666666666667,
-      "ppu": 160,
+      "ppu": 132,
       "scale": 0.25
     },
     "crop": [
-      184,
-      48,
-      840,
-      916
+      228,
+      126,
+      776,
+      846
     ],
     "files": {
-      "second-nature/graphics/entity/industry/explorer-2-mining_with_tool-1.png": "4d6679b70cca1b5acad5c318b13b94ea7ad7fc5e35cb729047ab32472a4e05c9",
-      "second-nature/graphics/entity/industry/explorer-2-mining_with_tool-2.png": "d93e99d733f1a537abc5f68a6d33aa654495380b52ac5cbbb5c350e1920fe8f6"
+      "second-nature/graphics/entity/industry/warden-2-mining_with_tool-1.png": "3ffb2797dbd37485df156dd7d3c75396b753512c450034deeaef77a8ae5e92eb",
+      "second-nature/graphics/entity/industry/warden-2-mining_with_tool-2.png": "7bca44b63cb2a094ca67404a3770368e05c33b2df5bdc8c2e99eb62f6a993b16"
     }
   },
-  "explorer-2-running_with_gun": {
+  "warden-2-running_with_gun": {
     "view": {
       "width": 768,
       "height": 864,
       "origin": 0.5092592592592593,
-      "ppu": 160,
+      "ppu": 132,
       "scale": 0.25
     },
     "crop": [
-      264,
-      86,
-      698,
-      776
+      282,
+      146,
+      646,
+      722
     ],
     "files": {
-      "second-nature/graphics/entity/industry/explorer-2-running_with_gun-1.png": "c5cb8fb9b0015bf8c7a09488e8c7526b9d5eaa4aade75a46ff273f7594fdaf0f",
-      "second-nature/graphics/entity/industry/explorer-2-running_with_gun-2.png": "d330abfe34884bfa5bb32b8935e5cb625f234dbab720be17a08a387456223315"
+      "second-nature/graphics/entity/industry/warden-2-running_with_gun-1.png": "bff8e9621768fdafeb083385730dbda9dcda81858c7cf484caa321928be8b72b",
+      "second-nature/graphics/entity/industry/warden-2-running_with_gun-2.png": "1ad3b263ab6313b7e2478407a2d02c488069d48c374652b99a225aa3c12ac42a"
     }
   }
 }

@@ -2,7 +2,7 @@
 
 Generated from `second-nature/shared/catalog.lua` by `python tools/generate_docs.py`. Do not hand-edit tables.
 
-**22 machines · 140 recipes · 50 technologies · 32 material/science items · 9 fluids.**
+**39 machines · 182 recipes · 62 technologies · 39 material/science items · 12 fluids.**
 
 Times are seconds at crafting speed 1. Fitness effects are percentage points per completed cycle before planetary multipliers and support ceilings. No custom recipe supports productivity. Native recipe quality is disabled for operations and closed/catalytic loops.
 
@@ -34,6 +34,23 @@ New construction uses the canonical footprints below. Complex processes occupy 5
 | Biodiversity sanctuary | 7 x 7 | 3 x 3 | 2.2MW | Fixed: Establish a biodiversity sanctuary | Many worlds, one biosphere |
 | Gaia planetary beacon | 7 x 7 | 5 x 5 | 5MW | Fixed: Coordinate the living-world network | The Gaia network |
 | Ecology circuit monitor | 1 x 1 | 1 x 1 | Passive sensor | Circuit telemetry | Field ecology |
+| Sealed crucible furnace | 3 x 3 | 3 x 3 | 480kW | clean-smelting | Sealed smelting |
+| Oxygen-blown smelter | 5 x 5 | 5 x 5 | 1.6MW | clean-smelting / concentrate-smelting | Oxygen-blown metallurgy |
+| Electric arc refinery | 5 x 5 | 5 x 5 | 3.2MW | clean-smelting / concentrate-smelting / alloying | Electric arc metallurgy |
+| Coke blast furnace | 5 x 5 | 5 x 5 | 300kW | dirty-smelting / concentrate-smelting | Coke blast smelting |
+| Reverberatory cupola | 3 x 3 | 3 x 3 | 220kW | dirty-smelting / alloying | Coke blast smelting |
+| Biopolymer assembler | 3 x 3 | 3 x 3 | 420kW | bio-assembly | Specialised assembly |
+| Precision assembly cell | 3 x 3 | 3 x 3 | 900kW | precision-assembly | Specialised assembly |
+| Hydraulic foundry press | 5 x 5 | 5 x 5 | 1.4MW | heavy-assembly | Specialised assembly |
+| Wet ore mill | 5 x 5 | 5 x 5 | 700kW | milling | Ore concentration |
+| Froth flotation bank | 5 x 5 | 5 x 5 | 850kW | flotation | Ore concentration |
+| Dewatering press | 3 x 3 | 3 x 3 | 500kW | dewatering | Ore concentration |
+| Electric auger drill | 3 x 3 | 3 x 3 | 420kW | Circuit telemetry | Low-impact extraction |
+| Hydraulic mining head | 3 x 3 | 3 x 3 | 1.1MW | Circuit telemetry | Low-impact extraction |
+| Deep core drill | 7 x 7 | 7 x 7 | 3.5MW | Circuit telemetry | Deep core extraction |
+| Electrostatic smog precipitator | 5 x 5 | 5 x 5 | 2.4MW | Fixed: Precipitate airborne smog | Electrostatic precipitation |
+| Direct air capture tower | 7 x 7 | 7 x 7 | 5MW | Fixed: Direct atmospheric capture | Direct air capture |
+| Field ecology laboratory | 3 x 3 | 3 x 3 | 320kW | Circuit telemetry | Field laboratory |
 
 ## Restoration operations
 
@@ -53,6 +70,8 @@ New construction uses the canonical footprints below. Complex processes occupy 5
 | Cultivate sheltered thaw zones | 15 s | 1 Charged thermal buffer + 10 Ice + 30 Ammonia [fluid] → 80 Water [fluid] + 1 Depleted thermal buffer + 2 Biosphere samples | temperature +0.15; water +0.096; biodiversity +0.015; toxicity -0.0105 | Aquilo |
 | Establish a biodiversity sanctuary | 20 s | 1 Biodiversity matrix + 5 Mineral nutrients + 100 Purified water [fluid] → 2 Biosphere samples | water +0.012; soil +0.024; biodiversity +0.126; toxicity -0.021; pollution -5 | Any stock planet, stage ≥ 2 |
 | Coordinate the living-world network | 60 s | 1 Gaia coordination cell + 50 Purified water [fluid] → 2 Restoration science pack | atmosphere +0.015; temperature +0.015; water +0.015; soil +0.015; biodiversity +0.015; toxicity -0.0075 | Any stock planet, stage ≥ 4 |
+| Precipitate airborne smog | 12 s | 1 Catalytic mesh + 50 Purified water [fluid] → 2 Hazardous sludge + 1 Climate samples + 1 Spent catalytic mesh | atmosphere +0.03; toxicity -0.015; pollution -45 | Any stock planet |
+| Direct atmospheric capture | 20 s | 4 Activated carbon + 100 Purified water [fluid] + 20 Oxygen [fluid] → 2 Biochar + 3 Climate samples | atmosphere +0.066; toxicity -0.03; pollution -130 | Any stock planet |
 
 ## Processing recipes
 
@@ -164,6 +183,29 @@ Recipes tagged **dirty** also emit vanilla pollution/spores and incur explicit t
 | Gasify coal | 4 s | 4 Coal + 20 Water [fluid] | 24 Producer gas [fluid] | Coal gasification power |
 | Digest cultivated biomass | 8 s | 12 Algal biomass + 2 Living compost + 30 Water [fluid] | 40 Refined biogas [fluid] | Anaerobic power |
 | Refine synthesis gas | 20 s | 8 Solid fuel + 50 Oxygen [fluid] + 20 Water [fluid] | 40 Catalytic synthesis gas [fluid] | Catalytic combined cycles |
+| Fire refractory brick | 6 s | 4 Stone brick + 2 Silica + 1 Vitrified aggregate | 4 Refractory brick | Refractory materials |
+| Weld a composite frame | 8 s | 6 Steel plate + 2 Refractory brick + 4 Concrete | 2 Composite machine frame | Refractory materials |
+| Build a precision kit | 10 s | 8 Iron gear wheel + 4 Steel plate + 2 Advanced circuit + 20 Lubricant [fluid] | 2 Precision assembly kit | Specialised assembly |
+| Weave a catalytic mesh | 12 s | 4 Copper plate + 1 Holmium biocatalyst + 2 Ceramic membrane | 2 Catalytic mesh | Oxygen-blown metallurgy |
+| Recover a poisoned catalyst | 10 s | 2 Spent catalytic mesh + 30 Mineral electrolyte [fluid] | 1 Holmium biocatalyst + 4 Copper plate | Oxygen-blown metallurgy |
+| Mill iron ore | 3 s | 5 Iron ore + 50 Water [fluid] | 50 Ore slurry [fluid] | Ore concentration |
+| Mill copper ore | 3 s | 5 Copper ore + 50 Water [fluid] | 50 Ore slurry [fluid] | Ore concentration |
+| Froth flotation | 4 s | 50 Ore slurry [fluid] + 1 Engineered biofilm | 40 Flotation froth [fluid] + 2 Mineral tailings | Ore concentration |
+| Dewater concentrate | 3 s | 40 Flotation froth [fluid] | 4 Ore concentrate + 25 Water [fluid] | Ore concentration |
+| Bind mineral tailings | 8 s | 4 Mineral tailings + 1 Living compost | 5 Stone | Ore concentration |
+| Sealed iron smelting | 6 s | 2 Iron ore + 10 Oxygen [fluid] | 2 Iron plate + 10 Smelter flue gas [fluid] | Sealed smelting |
+| Sealed copper smelting | 6 s | 2 Copper ore + 10 Oxygen [fluid] | 2 Copper plate + 10 Smelter flue gas [fluid] | Sealed smelting |
+| Smelt iron concentrate | 8 s | 2 Ore concentrate + 20 Oxygen [fluid] | 7 Iron plate + 20 Smelter flue gas [fluid] | Oxygen-blown metallurgy |
+| Smelt copper concentrate | 8 s | 2 Ore concentrate + 20 Oxygen [fluid] | 7 Copper plate + 20 Smelter flue gas [fluid] | Oxygen-blown metallurgy |
+| Blast-furnace iron [dirty] | 3 s | 4 Iron ore + 2 Coal | 6 Iron plate | Coke blast smelting |
+| Blast-furnace copper [dirty] | 3 s | 4 Copper ore + 2 Coal | 6 Copper plate | Coke blast smelting |
+| Remelt scrap and tailings [dirty] | 5 s | 4 Mineral tailings + 2 Coal | 2 Iron plate + 2 Copper plate + 1 Hazardous sludge | Coke blast smelting |
+| Arc-furnace steel | 10 s | 5 Iron plate + 30 Oxygen [fluid] + 1 Refractory brick | 3 Steel plate | Electric arc metallurgy |
+| Cupola steel [dirty] | 5 s | 6 Iron plate + 3 Coal | 3 Steel plate | Coke blast smelting |
+| Catalytic flue treatment | 8 s | 100 Smelter flue gas [fluid] + 1 Catalytic mesh | 2 Activated carbon + 1 Spent catalytic mesh | Oxygen-blown metallurgy |
+| Press a heavy frame [dirty] | 6 s | 8 Steel plate + 2 Refractory brick | 3 Composite machine frame | Specialised assembly |
+| Press structural girders [dirty] | 8 s | 10 Steel plate + 5 Concrete | 2 Low density structure | Specialised assembly |
+| Assemble membrane cartridges | 6 s | 2 Ceramic membrane + 2 Engineered biofilm + 20 Purified water [fluid] | 4 Carbon filter cartridge | Specialised assembly |
 
 ## Construction recipes
 
@@ -191,6 +233,23 @@ Recipes tagged **dirty** also emit vanilla pollution/spores and incur explicit t
 | Cryogenic garden | 20 s | 1 Cryogenic plant + 20 Lithium plate + 10 Biodiversity matrix + 20 Charged thermal buffer |
 | Biodiversity sanctuary | 20 s | 1 Biochamber + 30 Processing unit + 20 Biodiversity matrix + 40 Laboratory glass |
 | Gaia planetary beacon | 30 s | 1 Cryogenic plant + 20 Quantum processor + 30 Superconductor + 30 Biodiversity matrix + 30 Charged thermal buffer |
+| Sealed crucible furnace | 6 s | 12 Steel plate + 10 Refractory brick + 8 Electronic circuit |
+| Oxygen-blown smelter | 10 s | 2 Composite machine frame + 20 Refractory brick + 10 Advanced circuit + 10 Pipe |
+| Electric arc refinery | 15 s | 4 Composite machine frame + 30 Refractory brick + 12 Processing unit + 40 Copper cable |
+| Coke blast furnace | 8 s | 20 Steel plate + 30 Stone brick + 15 Iron gear wheel |
+| Reverberatory cupola | 6 s | 14 Steel plate + 24 Stone brick + 8 Pipe |
+| Biopolymer assembler | 8 s | 1 Composite machine frame + 15 Engineered biofilm + 20 Laboratory glass + 10 Electronic circuit |
+| Precision assembly cell | 12 s | 2 Composite machine frame + 4 Precision assembly kit + 8 Processing unit |
+| Hydraulic foundry press | 12 s | 3 Composite machine frame + 30 Steel plate + 12 Refractory brick + 8 Advanced circuit |
+| Wet ore mill | 10 s | 2 Composite machine frame + 20 Steel plate + 25 Iron gear wheel + 12 Pipe |
+| Froth flotation bank | 10 s | 2 Composite machine frame + 24 Laboratory glass + 16 Pipe + 6 Advanced circuit |
+| Dewatering press | 8 s | 1 Composite machine frame + 16 Steel plate + 8 Ceramic membrane + 8 Pipe |
+| Electric auger drill | 5 s | 10 Steel plate + 12 Iron gear wheel + 6 Electronic circuit |
+| Hydraulic mining head | 8 s | 1 Composite machine frame + 16 Steel plate + 10 Pipe + 6 Advanced circuit |
+| Deep core drill | 20 s | 4 Composite machine frame + 4 Precision assembly kit + 10 Processing unit + 20 Tungsten plate |
+| Electrostatic smog precipitator | 15 s | 3 Composite machine frame + 4 Catalytic mesh + 10 Processing unit + 30 Laboratory glass |
+| Direct air capture tower | 25 s | 6 Composite machine frame + 10 Catalytic mesh + 20 Processing unit + 20 Ceramic membrane |
+| Field ecology laboratory | 12 s | 1 Composite machine frame + 20 Laboratory glass + 10 Advanced circuit + 10 Ecological samples |
 
 ## Research
 
@@ -248,6 +307,18 @@ Recipes tagged **dirty** also emit vanilla pollution/spores and incur explicit t
 | Solar railway | 80 × 20 s | Automation, Logistic | Railway, Solar energy, Electric energy accumulators, Practical field power |
 | Solar freight engineering | 150 × 20 s | Automation, Logistic, Chemical, Ecology | Solar railway, Climate control |
 | Advanced solar traction | 200 × 20 s | Automation, Logistic, Chemical, Production, Utility, Ecology | Solar freight engineering, Production science pack, Utility science pack |
+| Refractory materials | 60 × 30 s | Automation, Logistic | Nothing left behind, Steel processing |
+| Sealed smelting | 90 × 30 s | Automation, Logistic, Ecology | Refractory materials, Climate control |
+| Coke blast smelting | 70 × 30 s | Automation, Logistic | Refractory materials |
+| Ore concentration | 120 × 30 s | Automation, Logistic, Chemical | Refractory materials, Fluid handling |
+| Oxygen-blown metallurgy | 160 × 30 s | Automation, Logistic, Chemical, Ecology | Sealed smelting, Ore concentration |
+| Electric arc metallurgy | 220 × 30 s | Automation, Logistic, Chemical, Production, Ecology | Oxygen-blown metallurgy, Production science pack |
+| Low-impact extraction | 70 × 30 s | Automation, Logistic | Field ecology, Electronics |
+| Deep core extraction | 250 × 30 s | Automation, Logistic, Chemical, Production, Utility | Low-impact extraction, Electric arc metallurgy, Utility science pack |
+| Specialised assembly | 140 × 30 s | Automation, Logistic, Chemical | Refractory materials, Advanced circuit |
+| Field laboratory | 120 × 30 s | Automation, Logistic, Ecology | Field ecology, Refractory materials |
+| Electrostatic precipitation | 200 × 30 s | Automation, Logistic, Chemical, Ecology | Atmospheric engineering, Oxygen-blown metallurgy |
+| Direct air capture | 300 × 30 s | Automation, Logistic, Chemical, Production, Utility, Ecology | Electrostatic precipitation, Electric arc metallurgy, Utility science pack |
 
 ## Materials and fluids
 
@@ -283,6 +354,13 @@ Recipes tagged **dirty** also emit vanilla pollution/spores and incur explicit t
 - **Climate science pack** (`sn-climate-science-pack`): A research package combining climate measurements with specialized planetary cultures.
 - **Restoration science pack** (`sn-restoration-science-pack`): A research package produced from the operating data of a coordinated living-world network.
 - **Mineral-composite stock** (`sn-alloy-stock`): An iron-reinforced mineral composite used for structural frames, storage casings and firearm stocks.
+- **Ore concentrate** (`sn-ore-concentrate`): Upgraded ore with most of its gangue removed. Smelts into substantially more metal than the raw rock.
+- **Mineral tailings** (`sn-mineral-tailings`): The stripped rock fraction left by concentration. Inert once bound, a soil contaminant if simply dumped.
+- **Refractory brick** (`sn-refractory-brick`): A high-alumina brick that survives sustained furnace heat. Structural material for kilns and smelters.
+- **Catalytic mesh** (`sn-catalyst-mesh`): A precious-metal mesh that converts furnace flue gas into inert products. Degrades slowly with use.
+- **Spent catalytic mesh** (`sn-spent-catalyst-mesh`): A poisoned catalyst mesh. Its metal content is recoverable through reclamation.
+- **Composite machine frame** (`sn-machine-frame`): A rigid mineral-composite chassis used by Second Nature's heavier production buildings.
+- **Precision assembly kit** (`sn-precision-assembly`): Matched bearings, guides and drives for high-tolerance automated assembly.
 - **Purified water** (`sn-clean-water`): High-purity water for sensitive biological cultures, thermal circuits and chemical processing.
 - **Oxygen** (`sn-oxygen`): Concentrated oxygen for clean metallurgy, nutrient preparation and oxidation reactions.
 - **Hydrogen** (`sn-hydrogen`): A light reducing gas used in metallurgy and synthetic fuel production.
@@ -292,3 +370,6 @@ Recipes tagged **dirty** also emit vanilla pollution/spores and incur explicit t
 - **Producer gas** (`sn-producer-gas`): Coal-derived combustible gas. Its production loses part of the coal's energy and consumes water; used by producer-gas alternators.
 - **Refined biogas** (`sn-biogas`): Combustible gas from cultivated biomass and compost. Used in biological turbines and solid-oxide cellbanks.
 - **Catalytic synthesis gas** (`sn-synthetic-gas`): A processed chemical fuel gas made from solid fuel, oxygen and water. Its declared energy is below that of its fuel feedstock.
+- **Ore slurry** (`sn-ore-slurry`): Finely milled ore suspended in water. An intermediate stage of wet concentration, not a finished product.
+- **Flotation froth** (`sn-flotation-froth`): Mineral-bearing froth skimmed from a flotation cell. Carries the valuable fraction of a slurry charge.
+- **Smelter flue gas** (`sn-smelter-flue-gas`): Hot particulate-laden exhaust drawn off a sealed furnace. Treat it or vent it; venting has consequences.

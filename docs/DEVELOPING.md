@@ -21,7 +21,8 @@ second-nature/
     terrain.lua           protected local gardens and bounded Nauvis succession
     telemetry.lua         eleven first-section combinator signals
     network.lua           force-specific ten-minute victory hold
-    gui.lua               namespaced dashboard, field guide and confirmation UI
+    gui.lua               namespaced dashboard, field guide, milestones and confirmation UI
+    achievements.lua      per-force milestone ledger, joins, merges and awards
   graphics/               original icons, friendly fauna, gardens and menu illustration
   locale/en/              generated English locale
   README.md, changelog.txt, LICENSE
@@ -107,7 +108,7 @@ python3 tools/package.py
 python3 tools/package.py --target 2.0
 ```
 
-Output: `artifacts/factorio-2.0/second-nature_0.6.1.zip` and its `.zip.sha256` sidecar. The canonical mod folder sits directly at the archive root. Deterministic ordering, timestamps, permissions, allowlisted source paths and metadata are tested. `--target 2.1` is rejected.
+Output: `artifacts/factorio-2.0/second-nature_<version>.zip` and its `.zip.sha256` sidecar. The canonical mod folder sits directly at the archive root. Deterministic ordering, timestamps, permissions, allowlisted source paths and metadata are tested. `--target 2.1` is rejected.
 
 Do not commit `.cache`, virtual environments, game binaries, saves, generated release artifacts or ZIP files. They are ignored, and large engine assets are external to the source repository.
 
@@ -147,7 +148,7 @@ Commit generated game assets and the source used to build them together. Do not 
 ## Presentation authoring and regression checks (0.4)
 
 - `tools/character_layout.py` defines the paired 18-row armed layout, common foot pivot and safe framing envelope. Never replace this with a full-circle modulo table.
-- `tools/explorer_model.py` attaches torso, head, arms and firearm to one aiming rig. Stride is independent. Mining grips share the actual tool shaft.
+- `tools/warden_model.py` attaches torso, head, arms and firearm to one aiming rig. Stride is independent. Mining grips share the actual tool shaft. The model is authored from a ten-tone flat palette with `surface_finish='field'`, which keeps the sprites compressible.
 - `tools/pbr_raster.py` and `tools/raster_kernel.py` add compiled depth rasterization, self-shadow maps, model-space wear and material lighting. Numba is an optional offline-art dependency, not a game/CI runtime dependency.
 - Exported character frames set `apply_projection=false` because their ground axes are already map-aligned. The canvas includes body, tool and shadow margins; the Lua shift compensates the common pivot.
 - `tools/compose_menu_music.py` synthesizes an original score in small blocks and writes a stereo Vorbis file. No recorded sample or borrowed tune is used. Run with `OPENBLAS_NUM_THREADS=1` for a predictable memory budget.
@@ -194,9 +195,9 @@ Use small patch increments for focused fixes and additions after 0.6.0 (0.6.1, 0
 
 Field Crew uses `shared/field_drones.lua` for its research, recipes and bounds; `scripts/field_drones.lua` for inventory escrow, claims and movement; and `scripts/field_drone_gui.lua` for the monitor. No logistics network is created. `tests/drone_fixture.lua` models inventory accounting; `tests/engine/field_drone_probes.lua` exercises actual entities and inventories across save/reload.
 
-`tools/body_motion.py` separates pelvis, thorax and head transforms. Mining hands use a stable perpendicular basis and actual shaft grips. `tools/generate_industrial_assets.py --only explorer --jobs 2` renders the character; `--poses running running_with_gun` can limit a focused animation export. Parallel workers do not write the global manifest independently. Run the presentation preview generator after all affected poses finish.
+`tools/body_motion.py` separates pelvis, thorax and head transforms. Mining hands use a stable perpendicular basis and actual shaft grips. `tools/generate_industrial_assets.py --only warden --jobs 2` renders the character; `--poses running running_with_gun` can limit a focused animation export. Parallel workers do not write the global manifest independently. Run the presentation preview generator after all affected poses finish.
 
-`tools/generate_drone_assets.py` owns the separate drone manifest and emits body/shadow layers, icons and the field robotics research card. These can be authored independently of the large explorer atlases. The drone shadow is drawn on the ground layer rather than over the player's head or machine roofs.
+`tools/generate_drone_assets.py` owns the separate drone manifest and emits body/shadow layers, icons and the field robotics research card. These can be authored independently of the large warden atlases. The drone shadow is drawn on the ground layer rather than over the player's head or machine roofs.
 
 The current agent report is [AGENT-REPORT.md](AGENT-REPORT.md). Exact model/token telemetry is not available from the coding tools and must not be guessed.
 
@@ -206,7 +207,7 @@ The user retained the scripted, inventory-fed drones after clarifying activation
 
 `field_drone_tasks.lua` owns construction, explicit planner deconstruction and upgrade accounting. The native `mine` and `apply_upgrade` APIs preserve real contents/configuration. Connected underground upgrades reserve the possible pair and reconcile actual results. Avoid manually synthesizing chest contents, wiping item quality or losing old upgrade items. `field_planner_probes.lua` tests these APIs on real engine entities after the saved-flight probe. The benchmark is 3,300 ticks and requires `SECOND_NATURE_ENGINE_FIELD_PLANNERS_OK`.
 
-Drone art has 16 directional rows, each containing 8 animation frames. Runtime animation prototypes select a row by `y`; the 0.6.1 names remain as compatibility aliases. Position updates are per tick. Regenerate with `generate_drone_assets.py`, then refresh presentation previews. Character chest/boot/grip changes require a complete explorer export, not only the running rows.
+Drone art has 16 directional rows, each containing 8 animation frames. Runtime animation prototypes select a row by `y`; the 0.6.1 names remain as compatibility aliases. Position updates are per tick. Regenerate with `generate_drone_assets.py`, then refresh presentation previews. Character boot/grip/palette changes require a complete warden export, not only the running rows.
 
 ## Nightglass / 0.7.0
 
@@ -221,7 +222,7 @@ Drone art has 16 directional rows, each containing 8 animation frames. Runtime a
 A targeted rebuild is:
 
 ```sh
-OPENBLAS_NUM_THREADS=1 .venv/bin/python tools/generate_industrial_assets.py --only explorer --jobs 2
+OPENBLAS_NUM_THREADS=1 .venv/bin/python tools/generate_industrial_assets.py --only warden --jobs 2
 OPENBLAS_NUM_THREADS=1 .venv/bin/python tools/generate_energy_assets.py
 .venv/bin/python tools/generate_locale.py
 .venv/bin/python tools/generate_docs.py
@@ -231,3 +232,31 @@ OPENBLAS_NUM_THREADS=1 .venv/bin/python tools/generate_energy_assets.py
 ```
 
 The headless benchmark is now 6,000 ticks and additionally requires `SECOND_NATURE_ENGINE_SOLAR_RAIL_OK` and `SECOND_NATURE_ENGINE_POWER_OPTIONS_OK`. These are engine/API/energy checks, not a graphical client or performance certificate.
+
+## Restoration Record / 0.9.0
+
+- `shared/achievements.lua` is the single declaration of all nineteen milestones. `A.script` holds the twelve plain `achievement` prototypes the mod unlocks; `A.engine` holds the seven native condition prototypes. Prototypes, the runtime ledger, the dashboard tab, the locale generator and the tests all read this list. Add a milestone there, never in two places.
+- **Only the plain `achievement` type can be unlocked from a script.** `LuaPlayer.unlock_achievement` accepts nothing else, works only for a local, not-yet-unlocked player, and fails silently otherwise. `test_only_plain_achievements_are_script_unlockable` asserts that no engine milestone name appears in `scripts/achievements.lua`.
+- `scripts/achievements.lua` owns `storage.second_nature.achievements.forces[force_index][name] = tick`. `award` returns true exactly once and pushes the unlock to every connected member; `award_world` credits every force with recorded contributions on that world; `sync` replays the ledger on join and on init; `migrate` keeps the **earlier** award tick when forces merge. Do not award from a per-player context or the record diverges between members.
+- `prototypes/achievements.lua` also registers the nineteen `sn-medal-<name>` sprites. Render them with `tools/generate_achievement_art.py`, which writes `docs/art/achievement-manifest.json` and a review sheet. A test rejects two medallions that are too visually similar; redraw the offender rather than loosening the threshold.
+- `shared/tips.lua` declares the eleven tips-and-tricks entries and their own `sn-restoration` category. Never place an entry in a stock category or reorder stock tips; a test asserts our category holds only our entries.
+- `shared/audio_catalog.lua` maps named mechanism layers onto **stock** base/Space Age sound paths. Nothing is copied into the mod. `factorio-data` ships no audio, so `test_every_working_sound_file_is_a_real_upstream_asset` validates each path by finding that exact string in the pinned upstream prototype definitions. Add a layer there, then reference it by key.
+- `working_sound` lives on `EntityPrototype`, so it is valid on solar panels, electric-energy interfaces, burner generators and constant combinators alike. Plant layers use `match_volume_to_activity` with a 60-tick smoothing window so idle units fall quiet; the telemetry tick deliberately does not.
+- `prototypes/soundscape.lua` runs in **data-updates** and only fills gaps: it never overwrites a `working_sound` or handling sound another stage already set. Item handling audio is keyed by catalog `family` and prototype `kind`.
+- New locale prose belongs in `tools/milestone_locale.py`, wired into `generate_locale.py`. It emits the `[achievement-name]`, `[achievement-description]`, `[tips-and-tricks-item-category-name]`, `[tips-and-tricks-item-name]` and `[tips-and-tricks-item-description]` sections.
+- `tools/catalog.py` exposes `load_module(name)` for any pure-data shared Lua module; use it instead of writing another bespoke loader.
+- The headless run additionally requires `SECOND_NATURE_ENGINE_MILESTONES_OK` and `SECOND_NATURE_ENGINE_AUDIO_OK`, from `tests/engine/milestone_probes.lua`.
+- `second-nature/README.md` is **generated**. It is the repository README with every relative `docs/` link rewritten to the current version's release tag, because the bundled copy is read from a mods folder where relative paths do not resolve. Edit the root README, then run `tools/release_readme.py`. `--check` fails on a stale copy, a packaging test asserts the two agree, and CI runs the check.
+
+A milestone or audio rebuild is:
+
+```sh
+.venv/bin/python tools/generate_achievement_art.py   # only when editing medallions
+.venv/bin/python tools/generate_locale.py
+.venv/bin/python tools/generate_docs.py
+.venv/bin/python tools/generate_presentation_previews.py
+.venv/bin/python -m pytest -q
+.venv/bin/python tools/package.py
+```
+
+Regenerate the presentation previews after **any** version bump: `docs/art/review-manifest.json` records the version, and the review-ledger test fails on a stale one.

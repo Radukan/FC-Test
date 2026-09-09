@@ -89,6 +89,16 @@ pole.pictures=Art.sprite("field-pole-sheet")
 pole.pictures.direction_count=4;pole.pictures.line_length=4
 pole.icon=H.icon("field-pole");pole.icons=nil;pole.icon_size=64;pole.water_reflection=nil
 pole.localised_name={"entity-name.sn-field-pole"}
+-- Wire attachment points must follow OUR pole art. The inherited vanilla values
+-- put copper at -2.578 while this crossarm sits at -1.9405, which left every
+-- wire visibly floating half a tile above its insulator.
+local PoleGeometry=require("shared.pole_geometry")
+pole.connection_points={}
+for index,entry in ipairs(PoleGeometry["field-pole"]) do
+  pole.connection_points[index]={
+    wire={copper=entry.wire.copper,red=entry.wire.red,green=entry.wire.green},
+    shadow={copper=entry.shadow.copper,red=entry.shadow.red,green=entry.shadow.green}}
+end
 local chest=data.raw.container["wooden-chest"]
 chest.picture=Art.sprite("field-crate-north");chest.icon=H.icon("field-crate");chest.icon_size=64;chest.icons=nil
 chest.localised_name={"entity-name.sn-field-crate"}
@@ -100,22 +110,22 @@ end
 
 if settings.startup["sn-expedition-character"].value then
   local character=data.raw.character.character
-  character.icon=H.icon("explorer");character.icon_size=64
+  character.icon=H.icon("warden");character.icon_size=64
   character.running_sound_animation_positions={1,9}
   character.distance_per_frame=0.088205645161
   for index,variation in ipairs(character.animations) do
     local tier=math.min(index-1,2)
     for _,pose in ipairs({"idle","idle_with_gun","running","running_with_gun","mining_with_tool"}) do
-      variation[pose]=Art.animation("explorer-"..tier.."-"..pose,pose=="mining_with_tool" and .26 or (pose:find("running") and .6 or .15))
+      variation[pose]=Art.animation("warden-"..tier.."-"..pose,pose=="mining_with_tool" and .26 or (pose:find("running") and .6 or .15))
     end
     variation.flipped_shadow_running_with_gun=nil
     variation.mining_with_tool_particles_animation_positions={11}
     if variation.take_off or variation.landing then
-      variation.take_off=Art.animation("explorer-2-idle");variation.landing=Art.animation("explorer-2-idle")
-      variation.idle_in_air=Art.animation("explorer-2-idle")
-      variation.idle_with_gun_in_air=Art.animation("explorer-2-idle_with_gun")
-      variation.flying=Art.animation("explorer-2-running")
-      variation.flying_with_gun=Art.animation("explorer-2-running_with_gun")
+      variation.take_off=Art.animation("warden-2-idle");variation.landing=Art.animation("warden-2-idle")
+      variation.idle_in_air=Art.animation("warden-2-idle")
+      variation.idle_with_gun_in_air=Art.animation("warden-2-idle_with_gun")
+      variation.flying=Art.animation("warden-2-running")
+      variation.flying_with_gun=Art.animation("warden-2-running_with_gun")
     end
   end
   H.append(character.animations[2].armors,"sn-expedition-armor")
@@ -123,7 +133,7 @@ if settings.startup["sn-expedition-character"].value then
   local corpse=data.raw["character-corpse"]["character-corpse"]
   corpse.pictures={}
   for i=0,2 do
-    local picture=Art.animation("explorer-"..i.."-corpse");picture.direction_count=nil
+    local picture=Art.animation("warden-"..i.."-corpse");picture.direction_count=nil
     corpse.pictures[#corpse.pictures+1]=picture
   end
   corpse.water_reflection=nil

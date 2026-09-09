@@ -20,6 +20,8 @@ local function process(rec, world)
     if not (rec.status_light and rec.status_light.valid) then rec.status_light = Artwork.monitor(entity) end
     return
   end
+  -- Drills and laboratories produce no recipe cycles and earn no restoration.
+  if rec.inert then return end
   local recipe_name = S.recipe(entity)
   local produced = entity.products_finished
   local raw_cycles = math.max(0, produced - rec.produced)

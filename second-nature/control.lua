@@ -19,6 +19,7 @@ local DroneConfig = require("shared.field_drones")
 local Power = require("scripts.power")
 local SolarRail = require("scripts.solar_rail")
 local SolarGui = require("scripts.solar_rail_gui")
+local Achievements = require("scripts.achievements")
 local function starter_recipes(force)
   local recipe=force and force.recipes and force.recipes["iron-stick"]
   if recipe then recipe.enabled=true end
@@ -55,6 +56,7 @@ local function initialize(fresh)
     if player.gui.screen.sn_dashboard then Gui.close(player) end
     Gui.welcome(player)
     Inserters.close(player);Jukebox.close(player);DroneGui.sync_button(player)
+    Achievements.sync(player)
   end
   State.root().last_environment_tick = game.tick
 end
@@ -122,6 +124,7 @@ end)
 script.on_event(defines.events.on_forces_merged, function(event)
   for _,player in pairs(game.players) do FieldDrones.cancel(player.index) end
   Network.merge(event.source_index, event.destination.index)
+  Achievements.migrate(event.source_index, event.destination)
   Upgrades.refresh(event.destination);starter_recipes(event.destination)
   local camps = State.root().campaign.camps
   local source, destination = camps[event.source_index], camps[event.destination.index]
@@ -166,9 +169,11 @@ script.on_nth_tick(C.environment_ticks, function()
         end
         Natives.tick(world)
         Resistance.tick(world, surface)
+        Achievements.world_tick(world)
       end
     end
   end
+  Achievements.network_tick()
   Network.tick(elapsed)
 end)
 script.on_nth_tick(C.gui_ticks, function()
@@ -182,7 +187,11 @@ script.on_nth_tick(C.gui_ticks, function()
 end)
 script.on_event({defines.events.on_player_created, defines.events.on_player_joined_game}, function(event)
   local player = game.get_player(event.player_index)
-  if player then State.world(player.surface); Gui.welcome(player); Campaign.arrive(player);DroneGui.sync_button(player) end
+  if player then
+    State.world(player.surface); Gui.welcome(player); Campaign.arrive(player);DroneGui.sync_button(player)
+    -- A milestone earned by this force while the player was away still shows up.
+    Achievements.sync(player)
+  end
 end)
 script.on_event({defines.events.on_pre_player_died,defines.events.on_player_left_game,defines.events.on_player_changed_surface,defines.events.on_player_controller_changed,defines.events.on_player_changed_force}, function(event)
   FieldDrones.cancel(event.player_index)

@@ -291,5 +291,320 @@ def machine(name,t=0):
         m.box((0,.387,.73),(.66,.045,.33),DARK,.09)
         for i in range(5):m.box((-.23+i*.115,.416,.62+.09*(1+math.sin(t*TAU+i))/2),(.045,.018,.08+.09*(1+math.sin(t*TAU+i))),TEAL,.008)
         m.cyl(.27,-.15,.87,.026,.42,EDGE,8)
+    else:return industry_machine(m,name,t)
+    return finishing(m,name,t)
+
+
+def kiln_shell(m,x,y,z,r,length,hot,t,c=STEEL):
+    """A refractory-lined drum with a glowing charge door on its south face."""
+    horizontal_drum(m,x,y,z,r,length,c)
+    for i in range(6):
+        m.box((x-length*.34+i*length*.135,y-r-.02,z),(length*.055,.07,r*1.25),DARK,.02)
+    m.box((x,y-r*.92,z),(length*.34,.09,r*.72),DARK,.09)
+    m.box((x,y-r*.96,z),(length*.26,.03,r*.50),color(hot,1+.26*math.sin(t*TAU)),.07)
+
+
+def electrode(m,x,y,z,h,t,c=COPPER):
+    m.cyl(x,y,z,.085,h,c,12)
+    m.ball((x,y,z+h+.05),.13,color(TEAL,1+.30*math.sin(t*TAU+x)),glow=True)
+
+
+def stack(m,x,y,base,h,r=.30,c=DARK):
+    m.cyl(x,y,base,r,h,c,20)
+    m.cyl(x,y,base+h,r*1.18,.10,EDGE,20)
+    for i in range(3):m.ring((x,y,base+h*(.30+i*.26)),r+.02,.035,COPPER)
+
+
+def industry_machine(m,name,t=0):
+    """Industry expansion: furnaces, assembly cells, concentration, mining, air."""
+    if name=='crucible-furnace':
+        # A squat sealed pot with a lifting lid and a captured-gas offtake.
+        m.cyl(0,.05,.40,.74,.92,STEEL,28)
+        m.ring((0,.05,1.30),.78,.06,COPPER)
+        m.cyl(0,.05,1.32,.62,.20,EDGE,24)
+        m.ball((0,.05,1.52),.60,STEEL,stretch=(1,1,.30))
+        m.box((0,-.72,.86),(.56,.08,.44),DARK,.10)
+        m.box((0,-.76,.86),(.40,.03,.30),color(RED,1+.24*math.sin(t*TAU)),.07)
+        stack(m,.86,.72,.44,1.32,.19)
+        hose(m,[(0,.05,1.66),(.86,.05,1.66),(.86,.72,1.60)],.055,COPPER)
+        for x in (-.88,.88):m.box((x,-.30,.62),(.15,.62,.40),EDGE,.06)
+        gauge(m,-.80,.60,.86,.12,t*.2)
+    elif name=='oxy-smelter':
+        # A tilting converter vessel with an oxygen lance and a gas hood.
+        m.cyl(-.55,.10,.40,1.02,.36,DARK,32)
+        vessel=Mesh()
+        vessel.cyl(0,0,0,.86,1.52,STEEL,28)
+        vessel.ball((0,0,1.52),.86,STEEL,stretch=(1,1,.36))
+        vessel.cyl(0,0,1.72,.30,.34,EDGE,20)
+        for z in (.22,.78,1.34):vessel.ring((0,0,z),.89,.055,COPPER)
+        vessel.box((0,-.82,.78),(.52,.10,.62),DARK,.10)
+        vessel.box((0,-.86,.78),(.38,.03,.44),color(RED,1+.22*math.sin(t*TAU)),.08)
+        m.join(vessel,.10*math.sin(t*TAU),(-.55,.10,.76))
+        m.tube((-.55,.10,2.72),(-.55,.10,2.16+.16*math.sin(t*TAU)),.075,EDGE,12)
+        m.box((-.55,.10,2.80),(.44,.44,.20),STEEL,.06)
+        for x in (-1.72,.62):m.tube((x,1.40,.46),(x,1.40,2.80),.070,STEEL,10)
+        m.tube((-1.72,1.40,2.80),(.62,1.40,2.80),.070,STEEL,10)
+        vertical_vessel(m,1.55,-.90,.42,1.28,BLUE)
+        hose(m,[(1.55,-.90,1.94),(1.55,.10,1.94),(-.55,.10,2.62)],.060,BLUE)
+        stack(m,1.62,1.42,.44,1.42,.26)
+        for i in range(6):m.box((-1.90+i*.30,-1.88,.66),(.14,.52,.46),EDGE,.05)
+    elif name=='arc-refinery':
+        # Three graphite electrodes over a wide hearth, with a bus gantry.
+        m.cyl(0,.15,.40,1.46,.74,STEEL,36)
+        m.ring((0,.15,1.16),1.50,.075,COPPER)
+        m.cyl(0,.15,1.16,1.30,.10,DARK,32)
+        for i in range(3):
+            a=i*TAU/3+t*.05
+            electrode(m,.62*math.cos(a),.15+.62*math.sin(a),1.20,1.62,t)
+        m.ball((0,.15,1.30),.55,color(GOLD,1+.30*math.sin(t*TAU)),stretch=(1,1,.22),glow=True)
+        for x in (-1.78,1.78):
+            m.tube((x,-1.70,.46),(x,-1.70,3.10),.085,STEEL,10)
+            m.tube((x,-1.70,3.10),(x,1.30,3.10),.085,STEEL,10)
+        for i in range(3):
+            a=i*TAU/3
+            hose(m,[(-1.78,-1.70,2.94),(.62*math.cos(a),.15+.62*math.sin(a),2.94),(.62*math.cos(a),.15+.62*math.sin(a),2.86)],.090,COPPER)
+        for y in (-1.10,.30,1.60):m.box((-2.02,y,.74),(.42,.86,.62),EDGE,.14)
+        vertical_vessel(m,1.72,1.42,.34,.96,BLUE)
+        stack(m,1.80,-1.30,.44,1.60,.24)
+    elif name=='blast-furnace':
+        # A tall stove-and-shaft pair, soot-dark, with a slag runner.
+        m.cyl(-.80,.20,.40,1.06,1.82,DARK,30)
+        m.cyl(-.80,.20,2.22,.72,.44,DARK,24)
+        for z in (.86,1.40,1.94):m.ring((-.80,.20,z),1.10,.075,COPPER)
+        m.box((-.80,-.90,.92),(.70,.12,.66),DARK,.12)
+        m.box((-.80,-.96,.92),(.52,.03,.46),color(RED,1+.28*math.sin(t*TAU)),.09)
+        for y in (-.95,.55,1.85):vertical_vessel(m,1.42,y,.40,1.24,DARK)
+        arched_pipe(m,(-.80,.20,2.66),(1.42,.55,1.82),.42,.11,COPPER)
+        for y in (-.95,1.85):hose(m,[(1.42,y,1.76),(1.42,.55,1.76)],.075,COPPER)
+        m.box((-.10,-1.90,.60),(2.30,.36,.24),DARK,.10)
+        m.box((-.10,-1.90,.70),(2.06,.24,.05),color(GOLD,1+.30*math.sin(t*TAU)),.06)
+        m.cyl(1.62,-1.90,.44,.44,.62,STEEL,20)
+        stack(m,-1.92,1.62,.44,1.54,.30)
+    elif name=='cupola-furnace':
+        # A brick cupola with a charging ramp and an open slag door.
+        m.cyl(-.18,.08,.40,.72,1.66,DARK,26)
+        m.cyl(-.18,.08,2.06,.50,.44,DARK,20)
+        for z in (.72,1.20,1.68):m.ring((-.18,.08,z),.76,.055,COPPER)
+        m.box((-.18,-.66,.72),(.54,.10,.50),DARK,.10)
+        m.box((-.18,-.71,.72),(.40,.03,.34),color(RED,1+.30*math.sin(t*TAU)),.08)
+        ramp=.20+.55*((t*2)%1)
+        m.box((.86,.72,.52),(.36,1.44,.10),EDGE,.04)
+        m.box((.86,.10+ramp*1.1,.66+ramp*1.3),(.30,.30,.26),STEEL,.05)
+        stack(m,.88,-.62,.44,1.42,.22)
+        hose(m,[(-.18,.08,2.44),(.88,.08,2.44),(.88,-.62,1.80)],.060,DARK)
+        for x in (-.94,.94):m.box((x,.30,.60),(.12,.44,.36),EDGE,.05)
+    elif name=='biopolymer-assembler':
+        # A humid glass cell: culture trays, a gantry arm and a misting loop.
+        m.box((0,.10,.86),(1.66,1.62,.94),GLASS,.20)
+        m.box((0,.10,1.38),(1.74,1.70,.07),EDGE,.22)
+        for j in range(2):
+            for i in range(3):
+                m.box((-.50+i*.50,-.34+j*.72,.62+j*.34),(.40,.52,.06),SAGE,.03)
+                m.plant(-.50+i*.50,-.34+j*.72,.66+j*.34,.34)
+        arm=Mesh()
+        arm.box((0,0,1.24),(1.30,.10,.07),WHITE,.02)
+        arm.box((.34,0,1.14),(.16,.20,.16),COPPER,.03)
+        m.join(arm,.5*math.sin(t*TAU),(0,.10,0))
+        for x in (-.80,.80):
+            hose(m,[(x,-.86,.52),(x,-.86,1.46),(x*.4,.10,1.52)],.040,TEAL)
+        m.ball((0,.10,1.52),.10,color(TEAL,1+.22*math.sin(t*TAU)),glow=True)
+        solar_awning(m,0,1.14,1.66,1.30,.46)
+    elif name=='precision-assembler':
+        # A granite isolation table under a clean hood, with a fine spindle.
+        m.box((0,.05,.66),(1.44,1.30,.54),DARK,.10)
+        m.box((0,.05,.96),(1.28,1.16,.06),EDGE,.06)
+        for x in (-.62,.62):
+            for y in (-.56,.56):m.cyl(x,.05+y,.40,.11,.28,STEEL,10)
+        gantry=Mesh()
+        gantry.box((0,0,1.72),(1.24,.14,.12),STEEL,.03)
+        sx=.42*math.sin(t*TAU)
+        gantry.box((sx,0,1.58),(.22,.22,.22),EDGE,.04)
+        gantry.tube((sx,0,1.50),(sx,0,1.14),.045,COPPER,10)
+        gantry.ball((sx,0,1.10),.05,color(WHITE,1.3),glow=True)
+        m.join(gantry,0,(0,.05,0))
+        for x in (-.72,.72):
+            m.tube((x,-.62,.94),(x,-.62,1.78),.055,STEEL,10)
+            m.tube((x,.72,.94),(x,.72,1.78),.055,STEEL,10)
+        m.box((0,.05,1.86),(1.50,1.36,.07),GLASS,.16)
+        cabinet(m,-.98,-.72,.70,.70,.40+.16*math.sin(t*TAU))
+        gauge(m,.94,-.62,.92,.11,t*.25)
+    elif name=='foundry-press':
+        # A four-column hydraulic press with a heavy crown and a die table.
+        m.box((0,.10,.72),(2.30,1.90,.66),DARK,.18)
+        for x in (-.92,.92):
+            for y in (-.76,.76):m.cyl(x,.10+y,1.05,.16,1.74,STEEL,14)
+        m.box((0,.10,2.92),(2.34,1.86,.44),STEEL,.14)
+        stroke=.34*(1-abs(2*((t*2)%1)-1))
+        m.box((0,.10,2.20-stroke),(1.74,1.44,.42),EDGE,.10)
+        m.box((0,.10,1.20),(1.82,1.50,.16),DARK,.08)
+        m.box((0,.10,1.30),(1.30,1.06,.05),color(RED,1+.30*math.sin(t*TAU)),.06)
+        for x in (-1.30,1.30):
+            hose(m,[(x,-1.06,.90),(x,-1.06,2.80),(x*.6,.10,2.94)],.075,COPPER)
+        vertical_vessel(m,1.74,-1.44,.32,.92,EDGE)
+        for i in range(5):m.box((-1.00+i*.50,-1.86,.68),(.22,.30,.44),GOLD if i%2 else EDGE,.05)
+        stack(m,-1.80,1.60,.44,1.30,.22)
+    elif name=='ore-mill':
+        # A rotating ball mill on trunnions with a feed chute and a slurry sump.
+        drum=Mesh()
+        drum.tube((-1.24,0,0),(1.24,0,0),.90,STEEL,30)
+        for i in range(10):
+            a=i*TAU/10
+            drum.tube((-1.20,.92*math.cos(a),.92*math.sin(a)),(1.20,.92*math.cos(a),.92*math.sin(a)),.055,EDGE,8)
+        for xx in (-.78,0,.78):drum.tube((xx-.05,0,0),(xx+.05,0,0),.96,COPPER,26)
+        m.join(drum,t*TAU,(0,.20,1.42))
+        for x in (-1.44,1.44):
+            m.cyl(x,.20,.62,.34,.80,DARK,16)
+            m.box((x,.20,.52),(.52,.90,.28),EDGE,.08)
+        m.box((-1.86,-1.10,1.68),(.62,.56,.72),EDGE,.10)
+        arched_pipe(m,(-1.86,-1.10,2.00),(-1.30,.20,2.10),.34,.10,STEEL)
+        m.cyl(1.52,-1.44,.42,.56,.44,DARK,20)
+        m.cyl(1.52,-1.44,.84,.48,.03,(96,86,70),20)
+        m.cyl(0,-1.86,.42,.30,.66,STEEL,14);fan(m,0,-1.86,1.08,.28,t)
+        m.box((-1.92,1.44,.68),(.52,.72,.46),EDGE,.10)
+    elif name=='flotation-cell':
+        # A bank of aerated cells with impeller shafts and froth launders.
+        for i in range(4):
+            x=-1.44+i*.96
+            m.cyl(x,.30,.40,.44,1.18,EDGE,20)
+            m.cyl(x,.30,1.50,.40,.05,(184,178,148),20)
+            m.ring((x,.30,1.56),.46,.045,COPPER)
+            for j in range(3):
+                ph=(t+i*.17+j*.33)%1
+                m.ball((x+.18*math.cos(j*2.1),.30+.18*math.sin(j*2.1),1.56+ph*.30),.055+ph*.05,(214,208,178))
+            m.tube((x,.30,1.62),(x,.30,2.18),.055,STEEL,10)
+            m.box((x,.30,2.24),(.28,.28,.18),DARK,.04)
+        m.box((0,-.52,1.42),(3.42,.34,.20),STEEL,.08)
+        m.box((0,-.52,1.50),(3.20,.24,.04),(196,190,160),.06)
+        m.box((0,1.42,.86),(3.30,.42,.62),EDGE,.14)
+        for x in (-1.44,-.48,.48,1.44):m.tube((x,1.42,1.10),(x,.30,1.10),.045,TEAL,8)
+        m.cyl(1.86,-1.36,.42,.34,.72,STEEL,14);fan(m,1.86,-1.36,1.14,.30,t)
+        vertical_vessel(m,-1.90,-1.30,.28,.78,GREEN)
+    elif name=='dewatering-press':
+        # A filter-plate press that squeezes, plus a returned-water manifold.
+        m.box((0,.10,.94),(1.86,1.10,.86),EDGE,.14)
+        gap=.05+.05*math.sin(t*TAU)
+        for i in range(7):
+            m.box((-.66+i*(.22+gap*.1),.10,1.00),(.13,.98,.78),STEEL,.03)
+        m.box((-.98,.10,.98),(.20,1.14,.94),DARK,.05)
+        m.box((.98,.10,.98),(.20,1.14,.94),DARK,.05)
+        m.tube((.98,.10,.98),(1.42,.10,.98),.10,COPPER,12)
+        m.cyl(1.52,.10,.72,.24,.52,STEEL,14)
+        m.box((0,.10,.50),(1.60,.90,.10),DARK,.04)
+        for i in range(4):
+            ph=(t+i*.25)%1
+            m.box((-.48+i*.32,.10,.56-ph*.14),(.14,.30,.10*(1-ph)),(120,104,80),.02)
+        m.tube((-1.02,-.72,.62),(1.02,-.72,.62),.075,TEAL,12)
+        for x in (-.60,0,.60):m.tube((x,-.72,.62),(x,-.94,.44),.040,EDGE,8)
+        gauge(m,-.94,.76,1.10,.11,t*.3)
+    elif name=='electric-auger':
+        # A slim mast with a single slow helical auger and a discharge chute.
+        m.cyl(0,.10,.40,.52,.44,STEEL,20)
+        m.cyl(0,.10,.84,.20,1.62,EDGE,16)
+        helix=Mesh()
+        for i in range(22):
+            a=i*TAU/7;z=.90+i*.068
+            helix.box((.30*math.cos(a),.30*math.sin(a),z),(.22,.22,.05),COPPER,.01)
+        m.join(helix,t*TAU,(0,.10,0))
+        m.box((0,.10,2.50),(.66,.62,.30),STEEL,.08)
+        m.box((.78,-.66,1.02),(.34,.34,1.14),EDGE,.06)
+        arched_pipe(m,(0,.10,2.44),(.78,-.66,1.62),.24,.075,STEEL)
+        for x in (-.86,.86):m.box((x,.60,.58),(.14,.42,.36),EDGE,.05)
+        m.ball((0,.10,2.68),.09,color(TEAL,1+.20*math.sin(t*TAU)),glow=True)
+    elif name=='hydraulic-miner':
+        # A water-jet cutting head on a swinging boom, with a slurry return.
+        m.cyl(0,.20,.40,.62,.52,STEEL,22)
+        m.cyl(0,.20,.92,.26,.74,DARK,16)
+        boom=Mesh()
+        boom.tube((0,0,1.62),(1.18,0,1.28),.10,STEEL,12)
+        boom.cyl(1.18,0,1.04,.20,.30,EDGE,14)
+        boom.tube((1.18,0,1.04),(1.18,0,.74),.07,COPPER,10)
+        for j in range(3):
+            ph=(t+j*.33)%1
+            boom.ball((1.18,0,.72-ph*.28),.05*(1-ph*.5),color(TEAL,1.2),glow=True)
+        m.join(boom,.45*math.sin(t*TAU),(0,.20,0))
+        vertical_vessel(m,-.88,-.74,.28,.82,BLUE)
+        hose(m,[(-.88,-.74,1.46),(-.88,.20,1.46),(0,.20,1.62)],.055,BLUE)
+        m.cyl(.86,.98,.42,.34,.46,DARK,16)
+        m.cyl(.86,.98,.88,.29,.03,(96,86,70),16)
+        for x in (-.94,.94):m.box((x,-.30,.58),(.12,.40,.34),EDGE,.05)
+    elif name=='deep-core-drill':
+        # A derrick over a wide rotary table, with a pipe rack and mud pumps.
+        m.cyl(0,.20,.40,1.84,.62,DARK,36)
+        m.ring((0,.20,1.02),1.88,.08,COPPER)
+        table=Mesh()
+        table.cyl(0,0,1.02,1.10,.16,STEEL,28)
+        for i in range(8):
+            a=i*TAU/8
+            table.box((.82*math.cos(a),.82*math.sin(a),1.14),(.30,.30,.10),EDGE,.03)
+        m.join(table,t*TAU,(0,.20,0))
+        for i in range(4):
+            a=i*TAU/4+.785
+            x,y=1.52*math.cos(a),.20+1.52*math.sin(a)
+            m.tube((x,y,1.02),(x*.18,.20+(y-.20)*.18,4.30),.085,STEEL,10)
+            for k in range(4):
+                z=1.30+k*.74;f=1-(z-1.02)/3.28*.82
+                m.tube((x*f,.20+(y-.20)*f,z),(x*f*.92,.20+(y-.20)*f*.92,z+.36),.045,EDGE,8)
+        m.box((0,.20,4.36),(.86,.86,.24),STEEL,.06)
+        m.tube((0,.20,4.30),(0,.20,1.28+.16*math.sin(t*TAU)),.11,COPPER,14)
+        for i in range(5):m.tube((-1.60+i*.10,-2.20,.78),(-1.60+i*.10,1.60,.78),.075,EDGE,8)
+        for y in (-1.10,.40):m.box((2.10,y,.80),(.62,.90,.66),EDGE,.14)
+        m.cyl(-2.16,1.70,.42,.40,.70,STEEL,16);fan(m,-2.16,1.70,1.12,.34,t)
+        m.ball((0,.20,4.54),.13,color(GOLD,1+.22*math.sin(t*TAU)),glow=True)
+    elif name=='smog-precipitator':
+        # Wide intake louvres, a charged plate stack and a hopper for residue.
+        m.box((0,-1.44,1.24),(3.30,.44,1.60),EDGE,.16)
+        for i in range(9):
+            m.box((-1.40+i*.35,-1.44,1.24),(.20,.52,1.44),DARK,.03)
+        m.box((0,.20,1.30),(3.10,2.06,1.76),STEEL,.24)
+        for i in range(7):
+            x=-1.20+i*.40
+            m.box((x,.20,1.36),(.10,1.82,1.60),EDGE,.02)
+            m.ball((x,.20,2.30),.07,color(BLUE,1+.34*math.sin(t*TAU+i*.7)),glow=True)
+        for x in (-1.56,1.56):m.tube((x,-.80,2.24),(x,1.20,2.24),.075,COPPER,10)
+        m.tube((-1.56,1.20,2.24),(1.56,1.20,2.24),.075,COPPER,10)
+        m.box((0,1.64,.80),(2.20,.60,.62),DARK,.16)
+        for i in range(4):
+            ph=(t+i*.25)%1
+            m.ball((-.72+i*.48,1.64,1.14-ph*.30),.055,(88,80,72))
+        stack(m,-1.86,-1.70,.44,1.44,.24)
+        cabinet(m,1.90,-1.74,.74,.80,.42+.14*math.sin(t*TAU))
+    elif name=='carbon-capture-tower':
+        # Three tall sorbent contactors, a regenerator and induced-draft fans.
+        for i,(x,y) in enumerate(((-1.56,-.60),(0,1.20),(1.56,-.60))):
+            m.cyl(x,y,.40,.80,2.28,EDGE,26)
+            for z in (.94,1.56,2.18,2.62):m.ring((x,y,z),.84,.065,COPPER)
+            m.cyl(x,y,1.26,.82,.42,GLASS,26)
+            m.ball((x,y,2.68),.80,STEEL,stretch=(1,1,.32))
+            m.cyl(x,y,2.88,.28,.34,DARK,16)
+            for j in range(3):
+                ph=(t+i*.2+j*.33)%1
+                m.ball((x,y,3.22+ph*.34),.11*(1-ph*.6),color(WHITE,1.1),glow=True)
+        arched_pipe(m,(-1.56,-.60,1.84),(0,1.20,1.84),.42,.10,COPPER)
+        arched_pipe(m,(0,1.20,1.84),(1.56,-.60,1.84),.42,.10,COPPER)
+        horizontal_drum(m,0,-2.20,1.20,.72,2.60,STEEL)
+        m.box((0,-2.20,1.22),(.70,.10,.60),DARK,.10)
+        m.box((0,-2.26,1.22),(.52,.03,.42),color(RED,1+.24*math.sin(t*TAU)),.08)
+        for x in (-1.20,1.20):hose(m,[(x,-2.20,1.94),(x,-.60,1.94),(x*1.38,-.60,2.10)],.085,COPPER)
+        m.cyl(2.16,2.04,.42,.56,.82,STEEL,20);fan(m,2.16,2.04,1.24,.50,t)
+        m.cyl(-2.16,2.04,.42,.56,.82,STEEL,20);fan(m,-2.16,2.04,1.24,.50,t)
+        for y in (-1.62,.18):m.box((2.36,y,.80),(.44,.82,.66),EDGE,.14)
+        bed(m,0,2.70,.52,2.10,.54,.48,True)
+    elif name=='field-laboratory':
+        # A field station: instrument bench, sample racks and a small canopy.
+        m.box((0,.30,.90),(1.90,1.44,.98),STEEL,.20)
+        m.box((0,.30,1.42),(1.98,1.52,.08),EDGE,.22)
+        for i in range(4):
+            x=-.66+i*.44
+            m.box((x,-.20,1.02),(.30,.34,.68),GLASS,.05)
+            m.ball((x,-.20,1.42),.055,color(TEAL,1+.32*math.sin(t*TAU+i*.9)),glow=True)
+        m.box((0,.94,1.06),(1.56,.50,.30),DARK,.07)
+        head=Mesh()
+        head.box((.50*math.sin(t*TAU),0,1.34),(.24,.30,.20),COPPER,.04)
+        m.join(head,0,(0,.94,0))
+        for x in (-.86,.86):m.tube((x,.30,1.48),(x,.30,2.10),.05,STEEL,10)
+        solar_awning(m,0,.30,2.14,1.80,1.10)
+        vertical_vessel(m,1.16,-.92,.26,.62,BLUE)
+        hose(m,[(1.16,-.92,1.26),(.40,-.92,1.26),(.40,.30,1.34)],.042,TEAL)
+        cabinet(m,-1.14,-.94,.72,.66,.38+.14*math.sin(t*TAU))
     else:raise KeyError(name)
     return finishing(m,name,t)

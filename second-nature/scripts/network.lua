@@ -1,6 +1,7 @@
 local C = require("shared.constants")
 local Model = require("shared.model")
 local S = require("scripts.state")
+local Achievements = require("scripts.achievements")
 local N = {}
 function N.has_beacon(world, force_index)
   if not world then return false end
@@ -54,6 +55,7 @@ function N.tick(ticks)
       end
       if network.held >= C.victory_ticks then
         network.won = true
+        Achievements.award(force, "second-nature")
         force.print({"sn-message.victory"}, {color = C.colors.biodiversity})
         game.reset_game_state()
         game.set_game_state({game_finished = true, player_won = true, can_continue = true, victorious_force = force})

@@ -2,6 +2,7 @@ local C = require("shared.constants")
 local K = require("shared.catalog")
 local S = require("scripts.state")
 local P = require("scripts.pollution")
+local Achievements = require("scripts.achievements")
 local R = {}
 local function calm(world, surface, position)
   return world.planet == "nauvis" and P.calm(surface, position) or 0
@@ -10,7 +11,16 @@ local function distance2(a, b) return (a.x - b.x)^2 + (a.y - b.y)^2 end
 local function cleanup(world)
   for i = #world.groups, 1, -1 do
     local entry = world.groups[i]
-    if not entry.group.valid or game.tick - entry.created > 15 * 60 * 60 then
+    local expired = game.tick - entry.created > 15 * 60 * 60
+    if not entry.group.valid or expired then
+      -- A wave that ran out of members while its target still stands was beaten.
+      -- Timeouts and sedated retreats are not victories and are not credited.
+      local rec = entry.target and S.root().machines[entry.target]
+      if not expired and not entry.retreated and not entry.group.valid
+        and rec and rec.entity.valid and entry.force_index then
+        local force = game.forces[entry.force_index]
+        if force and force.valid then Achievements.award(force, "hold-the-line") end
+      end
       if entry.group.valid then entry.group.destroy() end -- Release survivors to normal AI; do not delete enemies.
       table.remove(world.groups, i)
     end
@@ -100,7 +110,8 @@ local function dispatch(world, surface)
   if recruited > 0 then
     group.set_command({type = defines.command.attack, target = rec.entity, distraction = defines.distraction.none})
     group.start_moving()
-    world.groups[#world.groups + 1] = {group = group, created = game.tick, target = rec.id, nest_position = {x = nest.position.x, y = nest.position.y}}
+    world.groups[#world.groups + 1] = {group = group, created = game.tick, target = rec.id,
+      force_index = rec.entity.force.index, nest_position = {x = nest.position.x, y = nest.position.y}}
     rec.entity.force.print({"sn-message.raid", {"space-location-name." .. world.planet}, recruited}, {color = C.colors.pressure})
   else group.destroy() end
   world.pressure = math.max(0, world.pressure - 22)

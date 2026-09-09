@@ -19,7 +19,15 @@ ACCENTS={
  'detoxifier':(155,124,169),'pheromone-dampener':(151,129,184),'forcing-tower':(173,107,74),
  'basalt-conditioner':(166,135,106),'fulgoran-reclaimer':(173,119,115),'spore-tower':(126,174,124),
  'cryogenic-garden':(159,188,195),'sanctuary':(148,173,113),'planetary-beacon':(178,194,188),
- 'ecology-monitor':(117,154,171)}
+ 'ecology-monitor':(117,154,171),
+ # Industry expansion. Clean smelting reads cool, dirty smelting hot, the
+ # concentration line earthy, mining ochre and air handling pale blue.
+ 'crucible-furnace':(151,171,183),'oxy-smelter':(124,166,196),'arc-refinery':(138,176,201),
+ 'blast-furnace':(184,111,72),'cupola-furnace':(176,120,83),
+ 'biopolymer-assembler':(120,172,124),'precision-assembler':(146,158,178),'foundry-press':(180,128,88),
+ 'ore-mill':(158,138,104),'flotation-cell':(170,164,126),'dewatering-press':(140,158,150),
+ 'electric-auger':(134,166,132),'hydraulic-miner':(118,158,178),'deep-core-drill':(166,146,110),
+ 'smog-precipitator':(126,164,184),'carbon-capture-tower':(146,180,192),'field-laboratory':(124,170,150)}
 
 
 def upper_model(model,accent=None):
@@ -29,6 +37,19 @@ def upper_model(model,accent=None):
         if accent and c in (STEEL,WHITE):c=tuple(round(.40*a+.60*b) for a,b in zip(c,accent))
         out.face(vertices,c,glow)
     return out if out.faces else model
+
+
+def placeable_marker(icon,accent=(196,214,190)):
+    """Mark icons whose item places a building.
+
+    Loose materials and placeable buildings were visually interchangeable in the
+    inventory. A thin baseplate rule with three footing ticks, drawn in the
+    bottom margin, distinguishes them without covering the artwork.
+    """
+    icon=icon.copy();d=ImageDraw.Draw(icon)
+    d.line((13,59,50,59),fill=accent+(220,),width=2)
+    for x in (16,31,46):d.line((x,56,x,62),fill=accent+(190,),width=2)
+    return icon
 
 
 def render_icon(model,angle=math.pi*.78):
@@ -90,6 +111,18 @@ def generate():
         if name=='solar-rail-panels':
             from energy_models import solar
             solar(models[name],0,0,.18,.72,.60,.12)
+    # Which icons carry the placeable rule: anything whose item builds an entity.
+    placeable=set()
+    for x in k['machines']:placeable.add(x['name'])
+    for x in k['energy']['plants']:placeable.add(x['name'])
+    for x in k['energy']['trains']:placeable.add(x['name'])
+    for x in k['expedition']:
+        if x['kind'] in ('ammo-turret','electric-turret','wall','inserter','transport-belt',
+                         'underground-belt','splitter','container'):
+            placeable.add(x['name'])
+    placeable.update({'field-pole','field-crate','jukebox','lander'})
+    placeable-={'solar-drive-charge','solar-rail-battery','solar-rail-panels'}
+
     outputs={}
     for name,model in models.items():
         angle=-math.pi/5 if roles[name]=="process building" or " power / " in roles[name] else math.pi*.78
@@ -99,8 +132,10 @@ def generate():
             d=ImageDraw.Draw(icon)
             if name=='solar-drive-charge':d.polygon([(24,18),(38,18),(31,30),(41,30),(24,49),(29,34),(20,34)],fill=(229,187,92,255))
             elif name=='solar-rail-battery':d.rectangle((26,24,36,40),fill=(166,193,167,255))
+        if name in placeable:icon=placeable_marker(icon)
         path=MOD/f'graphics/icons/{name}.png';icon.save(path,optimize=True)
-        outputs[name]={'role':roles[name],'file':str(path.relative_to(ROOT)),'sha256':hashlib.sha256(path.read_bytes()).hexdigest()}
+        outputs[name]={'role':roles[name],'placeable':name in placeable,
+                       'file':str(path.relative_to(ROOT)),'sha256':hashlib.sha256(path.read_bytes()).hexdigest()}
     # Close-ups at both inventory resolutions make confusing pairs visible.
     names=sorted(outputs);cw,ch,cols=210,136,6
     sheet=Image.new('RGB',(cw*cols,80+ch*math.ceil(len(names)/cols)),(32,38,35));d=ImageDraw.Draw(sheet)

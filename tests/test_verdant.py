@@ -11,12 +11,12 @@ def verdant_data():
     return DataStage(path)
 
 def test_ik_keeps_leg_bones_constant_while_knees_bend_and_feet_lift():
-    from explorer_model import explorer
+    from warden_model import warden
     from gait import length,sub,THIGH,SHIN,knee_flexion
     for direction in (0,math.pi/2,math.pi,3*math.pi/2):
         flex=[];ankle=[]
         for frame in range(32):
-            m=explorer(frame/32,'running',0,direction,direction)
+            m=warden(frame/32,'running',0,direction,direction)
             for side in (-1,1):
                 hip=m.joints['hip-'+str(side)];knee=m.joints['knee-'+str(side)];foot=m.joints['ankle-'+str(side)]
                 assert abs(length(sub(hip,knee))-THIGH)<1e-6
@@ -36,10 +36,10 @@ def test_stance_foot_motion_matches_the_authored_root_speed():
         assert a['lift']==0 and b['lift']==0
 
 def test_visible_gloves_have_four_articulated_fingers_and_a_thumb():
-    from explorer_model import explorer
+    from warden_model import warden
     from gait import length,sub
     for pose in ('idle','running','idle_with_gun','mining_with_tool'):
-        mesh=explorer(.25,pose,0,math.pi/2,math.pi/2)
+        mesh=warden(.25,pose,0,math.pi/2,math.pi/2)
         assert len(mesh.hands)==2
         for hand in mesh.hands.values():
             for finger in range(4):

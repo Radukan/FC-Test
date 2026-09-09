@@ -2,19 +2,24 @@ import hashlib,json
 from PIL import Image
 from catalog import ROOT,MOD,load_catalog
 from atlas_io import Atlas,paths
-from explorer_model import explorer
-import goth_details
+from warden_model import warden
+from character_layout import PIXELS_PER_UNIT
 
 
-def test_goth_style_uses_pale_skin_ink_wolfcut_and_a_covered_pleated_skirt():
-    m=explorer(.25,'running',0)
-    assert m.style['skin']==goth_details.PALE
-    assert m.style['hair']=='wolfcut' and m.style['tattoos'] and m.style['skirt']
-    assert m.style['coverage']=='opaque undershorts'
-    assert sum(c==goth_details.INK for _,c,_ in m.faces)>100
-    assert sum(c==goth_details.PALE for _,c,_ in m.faces)>100
-    assert len(m.style['skirt_rings'][-1])==32
-    assert min(p[2] for p in m.style['skirt_rings'][-1])>.70
+def test_warden_reads_as_sealed_field_gear_with_a_lit_visor_and_seed_pack():
+    """The signature silhouette is hood + respirator + back hopper, and the
+    visor is emissive so the character stays legible on unlit night terrain."""
+    import warden_model
+    m=warden(.25,'running',0)
+    c=m.palette
+    assert m.style['pack']=='seed hopper' and m.style['suit']=='sealed'
+    assert sum(1 for _,col,_ in m.faces if col==c['parka'])>100
+    assert sum(1 for _,col,_ in m.faces if col==c['suit'])>100
+    assert any(glow for _,_,glow in m.faces)
+    assert sum(1 for _,col,glow in m.faces if glow and col==c['glass'])>20
+    # Each armour tier must be visually distinct, not a recolour of one tone.
+    assert len({warden_model.palette(t)['parka'] for t in range(3)})==3
+    assert len({warden_model.palette(t)['plate'] for t in range(3)})==3
 
 
 def test_hd_atlases_double_texel_density_without_changing_world_scale_or_exceeding_texture_limits():
@@ -23,7 +28,8 @@ def test_hd_atlases_double_texel_density_without_changing_world_scale_or_exceedi
     assert len(report)==15
     for name,entry in report.items():
         spec=manifest[name];view=entry['view']
-        assert view['ppu']==160 and spec['scale']==.25 and view['ppu']*spec['scale']==40
+        assert view['ppu']==PIXELS_PER_UNIT and spec['scale']==.25
+        assert view['ppu']*spec['scale']==PIXELS_PER_UNIT*.25
         assert view['width'] in (768,896) and view['height'] in (864,960)
         for filename,digest in entry['files'].items():
             assert hashlib.sha256((ROOT/filename).read_bytes()).hexdigest()==digest
@@ -33,6 +39,31 @@ def test_hd_atlases_double_texel_density_without_changing_world_scale_or_exceedi
         assert atlas.frame(spec['direction_count']-1,spec['frame_count']-1).getbbox()
         atlas.close()
     assert any('stripes' in manifest[name] for name in report)
+
+
+def test_striped_atlases_declare_pages_the_engine_accepts():
+    """The engine rejects a stripe that declares more lines than the animation has
+    directions with "Invalid stripeLine height", and every page must describe exactly
+    the pixels its file contains. Both are checked here so a re-render cannot ship a
+    character the game refuses to load."""
+    manifest=json.loads((ROOT/'docs/art/sprite-manifest.json').read_text())
+    striped=[(name,spec) for name,spec in manifest.items() if 'stripes' in spec]
+    assert striped
+    for name,spec in striped:
+        directions=spec['direction_count']
+        rows_per_direction=spec['frame_count']//spec['line_length']
+        lines=0
+        for stripe in spec['stripes']:
+            height_in_frames=stripe['height_in_frames']
+            assert 0<height_in_frames<=directions,(name,height_in_frames,directions)
+            assert height_in_frames%rows_per_direction==0,(name,height_in_frames)
+            assert stripe['width_in_frames']==spec['line_length'],(name,stripe['width_in_frames'])
+            path=MOD/stripe['filename'].split('__second-nature__/')[1]
+            with Image.open(path) as image:
+                assert image.size==(spec['width']*stripe['width_in_frames'],
+                                    spec['height']*height_in_frames),(name,path.name,image.size)
+            lines+=height_in_frames
+        assert lines==directions*rows_per_direction,(name,lines)
 
 
 def test_power_and_train_atlases_are_original_complete_and_have_all_directions():

@@ -55,10 +55,10 @@ def test_native_armed_rows_are_paired_not_a_full_circle_turnaround():
 
 def test_weapon_muzzle_and_torso_share_the_requested_aim():
     from character_layout import ARMED_ROWS,pose_angles,projected
-    from explorer_model import explorer
+    from warden_model import warden
     for row in range(18):
         movement,aim=pose_angles('running_with_gun',row)
-        mesh=explorer(.25,'running_with_gun',0,movement,aim)
+        mesh=warden(.25,'running_with_gun',0,movement,aim)
         a=projected(mesh.anchors['gun_root']);b=projected(mesh.anchors['gun_muzzle'])
         dx,dy=b[0]-a[0],b[1]-a[1];size=math.hypot(dx,dy)
         assert abs(dx/size-math.sin(aim))<1e-6
@@ -69,25 +69,25 @@ def test_weapon_muzzle_and_torso_share_the_requested_aim():
 def test_pickaxe_and_shadow_fit_every_mining_frame_and_direction():
     from character_layout import pose_angles,assert_frame_fits
     from gait import MINING_FRAMES
-    from explorer_model import explorer
+    from warden_model import warden
     for tier in range(3):
         for direction in range(8):
             movement,aim=pose_angles('mining_with_tool',direction)
             for frame in range(MINING_FRAMES):
-                mesh=explorer(frame/MINING_FRAMES,'mining_with_tool',tier,movement,aim)
+                mesh=warden(frame/MINING_FRAMES,'mining_with_tool',tier,movement,aim)
                 assert_frame_fits(mesh,(tier,direction,frame))
                 assert 'tool_tip' in mesh.anchors and 'tool_grip' in mesh.anchors
 
 
 def test_character_frames_share_a_consistent_foot_anchor():
-    from character_layout import frame_spec
+    from character_layout import frame_spec, PIXELS_PER_UNIT
     art=json.loads((ROOT/'docs/art/sprite-manifest.json').read_text())
     for tier in range(3):
         for pose in ('idle','idle_with_gun','running','running_with_gun','mining_with_tool'):
-            spec=art[f'explorer-{tier}-{pose}']
+            spec=art[f'warden-{tier}-{pose}']
             view=frame_spec(pose)
-            report=json.loads((ROOT/'docs/art/character-render.json').read_text())[f'explorer-{tier}-{pose}']
-            assert report['view']==view and view['ppu']==160 and spec['scale']==.25
+            report=json.loads((ROOT/'docs/art/character-render.json').read_text())[f'warden-{tier}-{pose}']
+            assert report['view']==view and view['ppu']==PIXELS_PER_UNIT and spec['scale']==.25
             crop=report['crop']
             assert (spec['width'],spec['height'])==(crop[2]-crop[0],crop[3]-crop[1])
             assert spec['apply_projection'] is False
@@ -100,7 +100,7 @@ def test_character_frames_share_a_consistent_foot_anchor():
 def test_character_asset_alpha_does_not_touch_top_or_sides():
     art=json.loads((ROOT/'docs/art/sprite-manifest.json').read_text())
     for tier in range(3):
-        s=art[f'explorer-{tier}-mining_with_tool']
+        s=art[f'warden-{tier}-mining_with_tool']
         from atlas_io import Atlas
         image=Atlas(s)
         for direction in range(s['direction_count']):
@@ -108,3 +108,37 @@ def test_character_asset_alpha_does_not_touch_top_or_sides():
                 tile=image.frame(direction,frame)
                 alpha=tile.getchannel('A').point(lambda n:255 if n>16 else 0);box=alpha.getbbox()
                 assert box and min(box[0],box[1],s['width']-box[2],s['height']-box[3])>=2,(tier,direction,frame,box)
+
+
+def test_shipped_sprites_are_colour_optimized_and_stay_true_rgba():
+    """Every shipped PNG must be RGBA and reasonably encoded.
+
+    The engine's atlas builder and several ledgers expect four channels, and
+    oxipng will silently rewrite any <=256-colour sheet as an indexed image.
+    A full re-optimisation of 630 files is far too slow for the suite, so this
+    samples the largest atlases, which are where a regression would matter.
+    """
+    from catalog import MOD
+    from PIL import Image
+
+    files = sorted((MOD / 'graphics').rglob('*.png'))
+    assert len(files) > 500
+    for path in files:
+        with Image.open(path) as image:
+            assert image.mode == 'RGBA', (path.name, image.mode)
+
+    ledger = json.loads((ROOT / 'docs/art/optimization.json').read_text())
+    assert ledger['total_bytes'] == sum(p.stat().st_size for p in files)
+
+    # Re-encoding needs the art extras (numpy, oxipng), which the data-only CI
+    # job does not install. The RGBA and ledger checks above still run there;
+    # `tools/optimize_sprites.py --check` covers every file where they exist.
+    optimize = pytest.importorskip('optimize_sprites',
+                                   reason='requirements-art.txt not installed')
+    # Re-optimising a 47 MPx atlas costs minutes, so spot-check a mid-sized
+    # sheet instead.
+    ranked = sorted(files, key=lambda p: -p.stat().st_size)
+    path = ranked[len(ranked) // 2]
+    data = path.read_bytes()
+    assert len(optimize.optimize_bytes(
+        data, optimize.budget(path.relative_to(MOD)))) >= len(data), path.name

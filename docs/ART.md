@@ -34,7 +34,7 @@ The former armed export used arbitrary full-circle row indexing and rotated the 
 
 Ground axes in the character render are already aligned to map/screen axes, so the exported animation disables a second projection correction. A fixed foot pivot is shared by every character state. The expanded canvas is checked against all model vertices and the projected shadow, including the full overhead mining arc.
 
-The explorer remains an adult in fitted protective gear. The model adds a shaped silhouette, curved armor, harnesses, gloves/fingers, facial details and hair. Armor inventory and controller behavior are unchanged.
+The character is the sealed restoration warden: hooded work parka, full-face respirator with cheek filters, an emissive visor band and a back seed hopper. Nothing renders bare skin, because the warden works in a poisoned atmosphere. Armor inventory and controller behavior are unchanged.
 
 Authoring tests verify row structure, muzzle vectors, model bounds, frame alpha and pivot alignment. A graphical client is still needed to review every native strafe/backpedal/Mech transition and assess appearance at gameplay zoom. Headless prototype loading cannot certify that subjective result.
 
