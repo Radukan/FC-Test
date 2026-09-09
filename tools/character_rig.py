@@ -14,9 +14,9 @@ def limb(mesh,a,b,ra,rb,color,sides=16):
     for a,b in zip(rings,rings[1:]):
         for i in range(sides):j=(i+1)%sides;mesh.face((a[i],a[j],b[j],b[i]),color)
 
-def hand(mesh,wrist,forward=(0,0,-1),back=(0,1,0),side=1,curl=.25):
+def hand(mesh,wrist,forward=(0,0,-1),back=(0,1,0),side=1,curl=.25,colors=None):
     forward=unit(forward);back=unit(sub(back,mul(forward,dot(back,forward))));across=unit(cross(forward,back))
-    leather=(38,32,45);knuckle=(109,111,125);seam=(21,18,27)
+    leather,knuckle,seam=colors or ((38,32,45),(109,111,125),(21,18,27))
     def p(x,y,z):return add(wrist,add(mul(across,x),add(mul(forward,y),mul(back,z))))
     # Palm and cuff have real width/thickness; the digits are not hidden in a black sphere.
     corners=[p(x,y,z) for z in (-.027,.027) for y in (0,.125) for x in (-.064,.064)]

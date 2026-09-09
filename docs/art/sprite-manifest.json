@@ -1964,345 +1964,6 @@
     ],
     "apply_projection": false
   },
-  "explorer-0-idle": {
-    "width": 258,
-    "height": 436,
-    "frame_count": 4,
-    "direction_count": 8,
-    "line_length": 4,
-    "scale": 0.25,
-    "apply_projection": false,
-    "shift": [
-      0.4140625,
-      -0.078125
-    ],
-    "filename": "__second-nature__/graphics/entity/industry/explorer-0-idle.png"
-  },
-  "explorer-0-idle_with_gun": {
-    "width": 426,
-    "height": 576,
-    "frame_count": 4,
-    "direction_count": 8,
-    "line_length": 4,
-    "scale": 0.25,
-    "apply_projection": false,
-    "shift": [
-      0.3828125,
-      -0.046875
-    ],
-    "filename": "__second-nature__/graphics/entity/industry/explorer-0-idle_with_gun.png"
-  },
-  "explorer-0-running": {
-    "width": 276,
-    "height": 428,
-    "frame_count": 16,
-    "direction_count": 8,
-    "line_length": 16,
-    "scale": 0.25,
-    "apply_projection": false,
-    "shift": [
-      0.3125,
-      -0.078125
-    ],
-    "filename": "__second-nature__/graphics/entity/industry/explorer-0-running.png"
-  },
-  "explorer-0-mining_with_tool": {
-    "width": 548,
-    "height": 720,
-    "frame_count": 20,
-    "direction_count": 8,
-    "line_length": 10,
-    "scale": 0.25,
-    "apply_projection": false,
-    "shift": [
-      0.421875,
-      -0.078125
-    ],
-    "stripes": [
-      {
-        "filename": "__second-nature__/graphics/entity/industry/explorer-0-mining_with_tool-1.png",
-        "width_in_frames": 10,
-        "height_in_frames": 8,
-        "x": 0,
-        "y": 0
-      },
-      {
-        "filename": "__second-nature__/graphics/entity/industry/explorer-0-mining_with_tool-2.png",
-        "width_in_frames": 10,
-        "height_in_frames": 8,
-        "x": 0,
-        "y": 0
-      }
-    ]
-  },
-  "explorer-0-running_with_gun": {
-    "width": 366,
-    "height": 576,
-    "frame_count": 16,
-    "direction_count": 18,
-    "line_length": 16,
-    "scale": 0.25,
-    "apply_projection": false,
-    "shift": [
-      0.6171875,
-      -0.046875
-    ],
-    "stripes": [
-      {
-        "filename": "__second-nature__/graphics/entity/industry/explorer-0-running_with_gun-1.png",
-        "width_in_frames": 16,
-        "height_in_frames": 14,
-        "x": 0,
-        "y": 0
-      },
-      {
-        "filename": "__second-nature__/graphics/entity/industry/explorer-0-running_with_gun-2.png",
-        "width_in_frames": 16,
-        "height_in_frames": 4,
-        "x": 0,
-        "y": 0
-      }
-    ]
-  },
-  "explorer-0-corpse": {
-    "filename": "__second-nature__/graphics/entity/industry/explorer-0-corpse.png",
-    "width": 512,
-    "height": 384,
-    "frame_count": 2,
-    "line_length": 2,
-    "direction_count": 1,
-    "scale": 0.25,
-    "shift": [
-      0,
-      0.0
-    ]
-  },
-  "explorer-1-idle": {
-    "width": 258,
-    "height": 436,
-    "frame_count": 4,
-    "direction_count": 8,
-    "line_length": 4,
-    "scale": 0.25,
-    "apply_projection": false,
-    "shift": [
-      0.4140625,
-      -0.078125
-    ],
-    "filename": "__second-nature__/graphics/entity/industry/explorer-1-idle.png"
-  },
-  "explorer-1-idle_with_gun": {
-    "width": 426,
-    "height": 576,
-    "frame_count": 4,
-    "direction_count": 8,
-    "line_length": 4,
-    "scale": 0.25,
-    "apply_projection": false,
-    "shift": [
-      0.3828125,
-      -0.046875
-    ],
-    "filename": "__second-nature__/graphics/entity/industry/explorer-1-idle_with_gun.png"
-  },
-  "explorer-1-running": {
-    "width": 276,
-    "height": 428,
-    "frame_count": 16,
-    "direction_count": 8,
-    "line_length": 16,
-    "scale": 0.25,
-    "apply_projection": false,
-    "shift": [
-      0.3125,
-      -0.078125
-    ],
-    "filename": "__second-nature__/graphics/entity/industry/explorer-1-running.png"
-  },
-  "explorer-1-mining_with_tool": {
-    "width": 548,
-    "height": 720,
-    "frame_count": 20,
-    "direction_count": 8,
-    "line_length": 10,
-    "scale": 0.25,
-    "apply_projection": false,
-    "shift": [
-      0.421875,
-      -0.078125
-    ],
-    "stripes": [
-      {
-        "filename": "__second-nature__/graphics/entity/industry/explorer-1-mining_with_tool-1.png",
-        "width_in_frames": 10,
-        "height_in_frames": 8,
-        "x": 0,
-        "y": 0
-      },
-      {
-        "filename": "__second-nature__/graphics/entity/industry/explorer-1-mining_with_tool-2.png",
-        "width_in_frames": 10,
-        "height_in_frames": 8,
-        "x": 0,
-        "y": 0
-      }
-    ]
-  },
-  "explorer-1-running_with_gun": {
-    "width": 366,
-    "height": 576,
-    "frame_count": 16,
-    "direction_count": 18,
-    "line_length": 16,
-    "scale": 0.25,
-    "apply_projection": false,
-    "shift": [
-      0.6171875,
-      -0.046875
-    ],
-    "stripes": [
-      {
-        "filename": "__second-nature__/graphics/entity/industry/explorer-1-running_with_gun-1.png",
-        "width_in_frames": 16,
-        "height_in_frames": 14,
-        "x": 0,
-        "y": 0
-      },
-      {
-        "filename": "__second-nature__/graphics/entity/industry/explorer-1-running_with_gun-2.png",
-        "width_in_frames": 16,
-        "height_in_frames": 4,
-        "x": 0,
-        "y": 0
-      }
-    ]
-  },
-  "explorer-1-corpse": {
-    "filename": "__second-nature__/graphics/entity/industry/explorer-1-corpse.png",
-    "width": 512,
-    "height": 384,
-    "frame_count": 2,
-    "line_length": 2,
-    "direction_count": 1,
-    "scale": 0.25,
-    "shift": [
-      0,
-      0.0
-    ]
-  },
-  "explorer-2-idle": {
-    "width": 258,
-    "height": 436,
-    "frame_count": 4,
-    "direction_count": 8,
-    "line_length": 4,
-    "scale": 0.25,
-    "apply_projection": false,
-    "shift": [
-      0.4140625,
-      -0.078125
-    ],
-    "filename": "__second-nature__/graphics/entity/industry/explorer-2-idle.png"
-  },
-  "explorer-2-idle_with_gun": {
-    "width": 426,
-    "height": 576,
-    "frame_count": 4,
-    "direction_count": 8,
-    "line_length": 4,
-    "scale": 0.25,
-    "apply_projection": false,
-    "shift": [
-      0.3828125,
-      -0.046875
-    ],
-    "filename": "__second-nature__/graphics/entity/industry/explorer-2-idle_with_gun.png"
-  },
-  "explorer-2-running": {
-    "width": 276,
-    "height": 428,
-    "frame_count": 16,
-    "direction_count": 8,
-    "line_length": 16,
-    "scale": 0.25,
-    "apply_projection": false,
-    "shift": [
-      0.3125,
-      -0.078125
-    ],
-    "filename": "__second-nature__/graphics/entity/industry/explorer-2-running.png"
-  },
-  "explorer-2-mining_with_tool": {
-    "width": 548,
-    "height": 720,
-    "frame_count": 20,
-    "direction_count": 8,
-    "line_length": 10,
-    "scale": 0.25,
-    "apply_projection": false,
-    "shift": [
-      0.421875,
-      -0.078125
-    ],
-    "stripes": [
-      {
-        "filename": "__second-nature__/graphics/entity/industry/explorer-2-mining_with_tool-1.png",
-        "width_in_frames": 10,
-        "height_in_frames": 8,
-        "x": 0,
-        "y": 0
-      },
-      {
-        "filename": "__second-nature__/graphics/entity/industry/explorer-2-mining_with_tool-2.png",
-        "width_in_frames": 10,
-        "height_in_frames": 8,
-        "x": 0,
-        "y": 0
-      }
-    ]
-  },
-  "explorer-2-running_with_gun": {
-    "width": 366,
-    "height": 576,
-    "frame_count": 16,
-    "direction_count": 18,
-    "line_length": 16,
-    "scale": 0.25,
-    "apply_projection": false,
-    "shift": [
-      0.6171875,
-      -0.046875
-    ],
-    "stripes": [
-      {
-        "filename": "__second-nature__/graphics/entity/industry/explorer-2-running_with_gun-1.png",
-        "width_in_frames": 16,
-        "height_in_frames": 14,
-        "x": 0,
-        "y": 0
-      },
-      {
-        "filename": "__second-nature__/graphics/entity/industry/explorer-2-running_with_gun-2.png",
-        "width_in_frames": 16,
-        "height_in_frames": 4,
-        "x": 0,
-        "y": 0
-      }
-    ]
-  },
-  "explorer-2-corpse": {
-    "filename": "__second-nature__/graphics/entity/industry/explorer-2-corpse.png",
-    "width": 512,
-    "height": 384,
-    "frame_count": 2,
-    "line_length": 2,
-    "direction_count": 1,
-    "scale": 0.25,
-    "shift": [
-      0,
-      0.0
-    ]
-  },
   "status-light": {
     "filename": "__second-nature__/graphics/entity/industry/status-light.png",
     "width": 32,
@@ -4051,5 +3712,344 @@
       0.0
     ],
     "apply_projection": false
+  },
+  "warden-0-idle": {
+    "width": 246,
+    "height": 404,
+    "frame_count": 4,
+    "direction_count": 8,
+    "line_length": 4,
+    "scale": 0.25,
+    "apply_projection": false,
+    "shift": [
+      0.3671875,
+      -0.078125
+    ],
+    "filename": "__second-nature__/graphics/entity/industry/warden-0-idle.png"
+  },
+  "warden-0-idle_with_gun": {
+    "width": 426,
+    "height": 576,
+    "frame_count": 4,
+    "direction_count": 8,
+    "line_length": 4,
+    "scale": 0.25,
+    "apply_projection": false,
+    "shift": [
+      0.3828125,
+      -0.046875
+    ],
+    "filename": "__second-nature__/graphics/entity/industry/warden-0-idle_with_gun.png"
+  },
+  "warden-0-running": {
+    "width": 274,
+    "height": 420,
+    "frame_count": 16,
+    "direction_count": 8,
+    "line_length": 16,
+    "scale": 0.25,
+    "apply_projection": false,
+    "shift": [
+      0.3203125,
+      -0.078125
+    ],
+    "filename": "__second-nature__/graphics/entity/industry/warden-0-running.png"
+  },
+  "warden-0-mining_with_tool": {
+    "width": 548,
+    "height": 720,
+    "frame_count": 20,
+    "direction_count": 8,
+    "line_length": 10,
+    "scale": 0.25,
+    "apply_projection": false,
+    "shift": [
+      0.421875,
+      -0.078125
+    ],
+    "stripes": [
+      {
+        "filename": "__second-nature__/graphics/entity/industry/warden-0-mining_with_tool-1.png",
+        "width_in_frames": 10,
+        "height_in_frames": 8,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "filename": "__second-nature__/graphics/entity/industry/warden-0-mining_with_tool-2.png",
+        "width_in_frames": 10,
+        "height_in_frames": 8,
+        "x": 0,
+        "y": 0
+      }
+    ]
+  },
+  "warden-0-running_with_gun": {
+    "width": 364,
+    "height": 576,
+    "frame_count": 16,
+    "direction_count": 18,
+    "line_length": 16,
+    "scale": 0.25,
+    "apply_projection": false,
+    "shift": [
+      0.625,
+      -0.046875
+    ],
+    "stripes": [
+      {
+        "filename": "__second-nature__/graphics/entity/industry/warden-0-running_with_gun-1.png",
+        "width_in_frames": 16,
+        "height_in_frames": 14,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "filename": "__second-nature__/graphics/entity/industry/warden-0-running_with_gun-2.png",
+        "width_in_frames": 16,
+        "height_in_frames": 4,
+        "x": 0,
+        "y": 0
+      }
+    ]
+  },
+  "warden-0-corpse": {
+    "filename": "__second-nature__/graphics/entity/industry/warden-0-corpse.png",
+    "width": 512,
+    "height": 384,
+    "frame_count": 2,
+    "line_length": 2,
+    "direction_count": 1,
+    "scale": 0.25,
+    "shift": [
+      0,
+      0.0
+    ]
+  },
+  "warden-1-idle": {
+    "width": 250,
+    "height": 408,
+    "frame_count": 4,
+    "direction_count": 8,
+    "line_length": 4,
+    "scale": 0.25,
+    "apply_projection": false,
+    "shift": [
+      0.3828125,
+      -0.0625
+    ],
+    "filename": "__second-nature__/graphics/entity/industry/warden-1-idle.png"
+  },
+  "warden-1-idle_with_gun": {
+    "width": 426,
+    "height": 576,
+    "frame_count": 4,
+    "direction_count": 8,
+    "line_length": 4,
+    "scale": 0.25,
+    "apply_projection": false,
+    "shift": [
+      0.3828125,
+      -0.046875
+    ],
+    "filename": "__second-nature__/graphics/entity/industry/warden-1-idle_with_gun.png"
+  },
+  "warden-1-running": {
+    "width": 274,
+    "height": 420,
+    "frame_count": 16,
+    "direction_count": 8,
+    "line_length": 16,
+    "scale": 0.25,
+    "apply_projection": false,
+    "shift": [
+      0.3203125,
+      -0.078125
+    ],
+    "filename": "__second-nature__/graphics/entity/industry/warden-1-running.png"
+  },
+  "warden-1-mining_with_tool": {
+    "width": 548,
+    "height": 720,
+    "frame_count": 20,
+    "direction_count": 8,
+    "line_length": 10,
+    "scale": 0.25,
+    "apply_projection": false,
+    "shift": [
+      0.421875,
+      -0.078125
+    ],
+    "stripes": [
+      {
+        "filename": "__second-nature__/graphics/entity/industry/warden-1-mining_with_tool-1.png",
+        "width_in_frames": 10,
+        "height_in_frames": 8,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "filename": "__second-nature__/graphics/entity/industry/warden-1-mining_with_tool-2.png",
+        "width_in_frames": 10,
+        "height_in_frames": 8,
+        "x": 0,
+        "y": 0
+      }
+    ]
+  },
+  "warden-1-running_with_gun": {
+    "width": 364,
+    "height": 576,
+    "frame_count": 16,
+    "direction_count": 18,
+    "line_length": 16,
+    "scale": 0.25,
+    "apply_projection": false,
+    "shift": [
+      0.625,
+      -0.046875
+    ],
+    "stripes": [
+      {
+        "filename": "__second-nature__/graphics/entity/industry/warden-1-running_with_gun-1.png",
+        "width_in_frames": 16,
+        "height_in_frames": 14,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "filename": "__second-nature__/graphics/entity/industry/warden-1-running_with_gun-2.png",
+        "width_in_frames": 16,
+        "height_in_frames": 4,
+        "x": 0,
+        "y": 0
+      }
+    ]
+  },
+  "warden-1-corpse": {
+    "filename": "__second-nature__/graphics/entity/industry/warden-1-corpse.png",
+    "width": 512,
+    "height": 384,
+    "frame_count": 2,
+    "line_length": 2,
+    "direction_count": 1,
+    "scale": 0.25,
+    "shift": [
+      0,
+      0.0
+    ]
+  },
+  "warden-2-idle": {
+    "width": 254,
+    "height": 416,
+    "frame_count": 4,
+    "direction_count": 8,
+    "line_length": 4,
+    "scale": 0.25,
+    "apply_projection": false,
+    "shift": [
+      0.3984375,
+      -0.0625
+    ],
+    "filename": "__second-nature__/graphics/entity/industry/warden-2-idle.png"
+  },
+  "warden-2-idle_with_gun": {
+    "width": 426,
+    "height": 576,
+    "frame_count": 4,
+    "direction_count": 8,
+    "line_length": 4,
+    "scale": 0.25,
+    "apply_projection": false,
+    "shift": [
+      0.3828125,
+      -0.046875
+    ],
+    "filename": "__second-nature__/graphics/entity/industry/warden-2-idle_with_gun.png"
+  },
+  "warden-2-running": {
+    "width": 274,
+    "height": 420,
+    "frame_count": 16,
+    "direction_count": 8,
+    "line_length": 16,
+    "scale": 0.25,
+    "apply_projection": false,
+    "shift": [
+      0.3203125,
+      -0.078125
+    ],
+    "filename": "__second-nature__/graphics/entity/industry/warden-2-running.png"
+  },
+  "warden-2-mining_with_tool": {
+    "width": 548,
+    "height": 720,
+    "frame_count": 20,
+    "direction_count": 8,
+    "line_length": 10,
+    "scale": 0.25,
+    "apply_projection": false,
+    "shift": [
+      0.421875,
+      -0.078125
+    ],
+    "stripes": [
+      {
+        "filename": "__second-nature__/graphics/entity/industry/warden-2-mining_with_tool-1.png",
+        "width_in_frames": 10,
+        "height_in_frames": 8,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "filename": "__second-nature__/graphics/entity/industry/warden-2-mining_with_tool-2.png",
+        "width_in_frames": 10,
+        "height_in_frames": 8,
+        "x": 0,
+        "y": 0
+      }
+    ]
+  },
+  "warden-2-running_with_gun": {
+    "width": 364,
+    "height": 576,
+    "frame_count": 16,
+    "direction_count": 18,
+    "line_length": 16,
+    "scale": 0.25,
+    "apply_projection": false,
+    "shift": [
+      0.625,
+      -0.046875
+    ],
+    "stripes": [
+      {
+        "filename": "__second-nature__/graphics/entity/industry/warden-2-running_with_gun-1.png",
+        "width_in_frames": 16,
+        "height_in_frames": 14,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "filename": "__second-nature__/graphics/entity/industry/warden-2-running_with_gun-2.png",
+        "width_in_frames": 16,
+        "height_in_frames": 4,
+        "x": 0,
+        "y": 0
+      }
+    ]
+  },
+  "warden-2-corpse": {
+    "filename": "__second-nature__/graphics/entity/industry/warden-2-corpse.png",
+    "width": 512,
+    "height": 384,
+    "frame_count": 2,
+    "line_length": 2,
+    "direction_count": 1,
+    "scale": 0.25,
+    "shift": [
+      0,
+      0.0
+    ]
   }
 }

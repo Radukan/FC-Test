@@ -5,10 +5,10 @@ def add_expedition_locale(put):
       'entity-name':{'sn-lander':'Wayfarer expedition lander','sn-field-pole':'Riveted power pole','sn-field-crate':'Mineral-frame equipment crate'},
       'entity-description':{'sn-lander':'A riveted expedition shuttle with a pressurized flight deck, twin atmospheric engine pods, sealed seed canisters and folded solar cells. Hydraulic struts support its protected cargo hold and boarding ramp. Its propulsion cannot reach orbit.'},
       'ammo-category-name':{'sn-induction':'Induction cells'},
-      'mod-setting-name':{'sn-expedition-character':'Industrial expedition explorer'},
+      'mod-setting-name':{'sn-expedition-character':'Restoration warden character'},
       'mod-setting-description':{
         'sn-desolate-start':'New freeplay begins with an intact protected craft, shared cargo, four loaded sentries and riveted barricades. Initial Nauvis has no natural trees/fish. Existing saves are not sterilized or given replacement supplies.',
-        'sn-expedition-character':'Original feminine adult explorer with a fitted, fully covered industrial suit, armor variations and animated movement/tool/weapon poses. Turn off to keep the vanilla or another mod’s character appearance. This changes graphics, not character inventories/controllers.',
+        'sn-expedition-character':'Replaces the player character with the sealed restoration warden: hooded work parka, full-face respirator, lit visor and a back seed hopper, with three armour appearances and animated movement, tool and weapon poses. Turn off to keep the vanilla or another mod’s character appearance. This changes graphics, not character inventories/controllers.',
         'sn-restoration-speed':'Scales ecological work and environmental drift. Base 0.3 rates are 30% of the old rapid coefficients; pollution capture is separately 25%. Process-optimization research adds at most 45% to clean work/capture and supported terrain recovery. Does not accelerate recipes, raid timers or the ten-minute victory hold.',
         'sn-living-terrain':'Render slow, time-integrated succession: sparse pioneer patches → grassland → lush ground, with gradual reversal under sustained smog. Habitat condition still simulates if visuals are off. Only mod-grown trees are removed by the new withering tracker; infrastructure, ore, paving, crop soils and Aquilo support remain protected.'},
       'sn-expedition':{

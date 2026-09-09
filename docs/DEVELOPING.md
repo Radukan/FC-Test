@@ -148,7 +148,7 @@ Commit generated game assets and the source used to build them together. Do not 
 ## Presentation authoring and regression checks (0.4)
 
 - `tools/character_layout.py` defines the paired 18-row armed layout, common foot pivot and safe framing envelope. Never replace this with a full-circle modulo table.
-- `tools/explorer_model.py` attaches torso, head, arms and firearm to one aiming rig. Stride is independent. Mining grips share the actual tool shaft.
+- `tools/warden_model.py` attaches torso, head, arms and firearm to one aiming rig. Stride is independent. Mining grips share the actual tool shaft. The model is authored from a ten-tone flat palette with `surface_finish='field'`, which keeps the sprites compressible.
 - `tools/pbr_raster.py` and `tools/raster_kernel.py` add compiled depth rasterization, self-shadow maps, model-space wear and material lighting. Numba is an optional offline-art dependency, not a game/CI runtime dependency.
 - Exported character frames set `apply_projection=false` because their ground axes are already map-aligned. The canvas includes body, tool and shadow margins; the Lua shift compensates the common pivot.
 - `tools/compose_menu_music.py` synthesizes an original score in small blocks and writes a stereo Vorbis file. No recorded sample or borrowed tune is used. Run with `OPENBLAS_NUM_THREADS=1` for a predictable memory budget.
@@ -195,9 +195,9 @@ Use small patch increments for focused fixes and additions after 0.6.0 (0.6.1, 0
 
 Field Crew uses `shared/field_drones.lua` for its research, recipes and bounds; `scripts/field_drones.lua` for inventory escrow, claims and movement; and `scripts/field_drone_gui.lua` for the monitor. No logistics network is created. `tests/drone_fixture.lua` models inventory accounting; `tests/engine/field_drone_probes.lua` exercises actual entities and inventories across save/reload.
 
-`tools/body_motion.py` separates pelvis, thorax and head transforms. Mining hands use a stable perpendicular basis and actual shaft grips. `tools/generate_industrial_assets.py --only explorer --jobs 2` renders the character; `--poses running running_with_gun` can limit a focused animation export. Parallel workers do not write the global manifest independently. Run the presentation preview generator after all affected poses finish.
+`tools/body_motion.py` separates pelvis, thorax and head transforms. Mining hands use a stable perpendicular basis and actual shaft grips. `tools/generate_industrial_assets.py --only warden --jobs 2` renders the character; `--poses running running_with_gun` can limit a focused animation export. Parallel workers do not write the global manifest independently. Run the presentation preview generator after all affected poses finish.
 
-`tools/generate_drone_assets.py` owns the separate drone manifest and emits body/shadow layers, icons and the field robotics research card. These can be authored independently of the large explorer atlases. The drone shadow is drawn on the ground layer rather than over the player's head or machine roofs.
+`tools/generate_drone_assets.py` owns the separate drone manifest and emits body/shadow layers, icons and the field robotics research card. These can be authored independently of the large warden atlases. The drone shadow is drawn on the ground layer rather than over the player's head or machine roofs.
 
 The current agent report is [AGENT-REPORT.md](AGENT-REPORT.md). Exact model/token telemetry is not available from the coding tools and must not be guessed.
 
@@ -207,7 +207,7 @@ The user retained the scripted, inventory-fed drones after clarifying activation
 
 `field_drone_tasks.lua` owns construction, explicit planner deconstruction and upgrade accounting. The native `mine` and `apply_upgrade` APIs preserve real contents/configuration. Connected underground upgrades reserve the possible pair and reconcile actual results. Avoid manually synthesizing chest contents, wiping item quality or losing old upgrade items. `field_planner_probes.lua` tests these APIs on real engine entities after the saved-flight probe. The benchmark is 3,300 ticks and requires `SECOND_NATURE_ENGINE_FIELD_PLANNERS_OK`.
 
-Drone art has 16 directional rows, each containing 8 animation frames. Runtime animation prototypes select a row by `y`; the 0.6.1 names remain as compatibility aliases. Position updates are per tick. Regenerate with `generate_drone_assets.py`, then refresh presentation previews. Character chest/boot/grip changes require a complete explorer export, not only the running rows.
+Drone art has 16 directional rows, each containing 8 animation frames. Runtime animation prototypes select a row by `y`; the 0.6.1 names remain as compatibility aliases. Position updates are per tick. Regenerate with `generate_drone_assets.py`, then refresh presentation previews. Character boot/grip/palette changes require a complete warden export, not only the running rows.
 
 ## Nightglass / 0.7.0
 
@@ -222,7 +222,7 @@ Drone art has 16 directional rows, each containing 8 animation frames. Runtime a
 A targeted rebuild is:
 
 ```sh
-OPENBLAS_NUM_THREADS=1 .venv/bin/python tools/generate_industrial_assets.py --only explorer --jobs 2
+OPENBLAS_NUM_THREADS=1 .venv/bin/python tools/generate_industrial_assets.py --only warden --jobs 2
 OPENBLAS_NUM_THREADS=1 .venv/bin/python tools/generate_energy_assets.py
 .venv/bin/python tools/generate_locale.py
 .venv/bin/python tools/generate_docs.py

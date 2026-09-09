@@ -115,9 +115,9 @@ def test_fluid_port_art_and_prototypes_use_one_coordinate_contract(advanced_data
 
 def test_point_not_flat_head_leads_the_mining_impact():
     import math
-    from explorer_model import explorer
+    from warden_model import warden
     for facing in range(8):
-        m=explorer(.5,'mining_with_tool',0,facing*math.pi/4,facing*math.pi/4)
+        m=warden(.5,'mining_with_tool',0,facing*math.pi/4,facing*math.pi/4)
         tip=m.anchors['tool_tip'];neck=m.anchors['tool_neck']
         assert tip[2]<neck[2] and tip[2]<.3
         assert sum((a-b)**2 for a,b in zip(tip,neck))>.04

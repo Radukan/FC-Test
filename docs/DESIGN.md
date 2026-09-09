@@ -60,11 +60,11 @@ The five-world beacon network remains the separate sustained logistics victory. 
 
 ## Visual direction
 
-The chosen direction is **heavy industrial**: dark steel, mineral composites, rivets, hazard panels, copper systems and contained biological color. All 22 production/restoration/monitor buildings have original authored primary graphics. Working loops, 64-direction turret sets, connected wall pieces, an animated intact lander and an adult feminine expedition explorer form one coherent set.
+The chosen direction is **heavy industrial**: dark steel, mineral composites, rivets, hazard panels, copper systems and contained biological color. All 22 production/restoration/monitor buildings have original authored primary graphics. Working loops, 64-direction turret sets, connected wall pieces, an animated intact lander and the sealed restoration warden form one coherent set.
 
 Sprites are generated from original procedural mesh geometry with depth-aware CPU rasterization, directional lighting and antialiasing. No downloaded Wube model or building sprite is redistributed. Existing collision, ports, wires, sounds, projectiles and inventory mechanics are reused. Walls/static crates need no fictitious moving mechanism; the monitor uses an animated status indicator.
 
-The explorer is fitted and stylish but fully covered, with armor, movement, tool, weapon and corpse variants. A startup toggle preserves vanilla/another character appearance. The engine's character/controller/inventory mechanics remain intact. Armed locomotion and exact in-client port/alignment fidelity remain graphical review tasks, not claims made from headless tests.
+The warden is fully sealed, with armor, movement, tool, weapon and corpse variants. A startup toggle preserves vanilla/another character appearance. The engine's character/controller/inventory mechanics remain intact. Armed locomotion and exact in-client port/alignment fidelity remain graphical review tasks, not claims made from headless tests.
 
 ## Safety and performance
 

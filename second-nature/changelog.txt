@@ -1,4 +1,19 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.11.0
+Date: 2026-09-09
+  Features:
+    - Replace the player character with the Restoration Warden: a sealed field worker in a hooded work parka, full-face respirator with cheek filters, a lit visor band and a back hopper of graded seed stock. The previous explorer model, rig and artwork are removed entirely.
+    - Give each armour tier its own appearance rather than a recolour. Field gear is olive drab with oxidised copper fittings, expedition gear is slate green with teal and adds a pauldron and a second canister, and bastion gear is cold blue-grey with pale cyan, both shoulder plates, upper plating, a reinforced hood crown and a helmet lamp.
+    - Light the warden's visor so the character stays readable on unlit night terrain and its facing is clear at normal zoom.
+  Optimization:
+    - Cut the download from 114.1 MB to 68.7 MB, a 40 percent reduction, with no change to any sprite's resolution, frame count or turret direction count.
+    - Quantise sprite colour while copying every alpha channel back verbatim, so antialiased silhouettes and cast shadows are bit-identical and only unseeable colour precision is spent. Measured error on visible pixels is under 1.2 of 255.
+    - Run a lossless oxipng pass over every shipped image, guarded so a file is only rewritten when the result is genuinely smaller and still true RGBA.
+    - Author the new character for size: ten flat tones per tier, broad uninterrupted panels and a rasterizer finish that omits the fine surface grain that is invisible at character scale but very expensive to encode. The warden renders in roughly half the geometry of the model it replaces.
+  Changes:
+    - Rename the character sprite keys from explorer to warden. The startup toggle is unchanged and still restores the vanilla or another mod's character appearance without touching inventories or controllers.
+    - Keep the skeleton, poses, frame counts, eighteen row armed layout, pickaxe grip contract and 1.58 tile height exactly as they were, so locomotion, aiming and mining behave identically.
+---------------------------------------------------------------------------------------------------
 Version: 0.10.0
 Date: 2026-09-08
   Features:
