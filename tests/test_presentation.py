@@ -130,10 +130,15 @@ def test_shipped_sprites_are_colour_optimized_and_stay_true_rgba():
     ledger = json.loads((ROOT / 'docs/art/optimization.json').read_text())
     assert ledger['total_bytes'] == sum(p.stat().st_size for p in files)
 
+    # Re-encoding needs the art extras (numpy, oxipng), which the data-only CI
+    # job does not install. The RGBA and ledger checks above still run there;
+    # `tools/optimize_sprites.py --check` covers every file where they exist.
+    optimize = pytest.importorskip('optimize_sprites',
+                                   reason='requirements-art.txt not installed')
     # Re-optimising a 47 MPx atlas costs minutes, so spot-check a mid-sized
-    # sheet instead; `tools/optimize_sprites.py --check` covers all of them.
-    from optimize_sprites import budget, optimize_bytes
+    # sheet instead.
     ranked = sorted(files, key=lambda p: -p.stat().st_size)
     path = ranked[len(ranked) // 2]
     data = path.read_bytes()
-    assert len(optimize_bytes(data, budget(path.relative_to(MOD)))) >= len(data), path.name
+    assert len(optimize.optimize_bytes(
+        data, optimize.budget(path.relative_to(MOD)))) >= len(data), path.name
