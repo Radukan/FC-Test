@@ -42,3 +42,31 @@ Presence of code, source art and engine-accepted prototypes is not the same as a
 The follow-up delivery request publishes [0.6.0 / Verdant Works](https://github.com/Radukan/FC-Test/releases/tag/v0.6.0-factorio-2.0) in the same prerelease format as the earlier versions. Download `second-nature_0.6.0.zip`, keep it zipped, and replace older copies in the Factorio `mods` folder. The ZIP and SHA-256 sidecar are release assets, intentionally not committed to Git. `python3 tools/package.py` also builds them locally under `artifacts/factorio-2.0/`. The release publisher requires exact tagged-source validation and a successful asset re-download/checksum comparison.
 
 See [VERIFICATION.md](VERIFICATION.md) for current test evidence and the remaining graphical-client checks. [The ship study](art/lander-review.jpg), [locomotion loop](art/locomotion-review.gif), [mining loop](art/mining-framing-preview.gif) and [building contact sheet](art/ironbound-contact-sheet.jpg) show actual exported assets, not gameplay footage.
+
+## Fantasy Bioluminescence overhaul session / this continuation
+
+This session started from `arena/01a08723-fc-test` at `6237f07` (0.11.0 release notes). The previous agent work (Verdant Works / 0.6.0 pipeline) was preserved; nothing from `main` or earlier branches was deleted.
+
+### Where this session actually ended
+
+Branch `arena/01a08723-fc-test` now points to `6e90811`. Remote `origin` carries the same commit and tag `v0.12.0-fantasy-overhaul`. Published release: https://github.com/Radukan/FC-Test/releases/tag/v0.12.0-fantasy-overhaul.
+
+### What was fully completed
+
+- All 170 inventory icons physically deleted from `second-nature/graphics/icons/`; 11 new fantasy icons created and mapped to existing item references.
+- All `second-nature/graphics/entity/industry/*.png` deleted; old art master (`shared/art.lua`) backed to `.OLD-BACKUP`; new minimal `shared/art.lua` references rebuilt assets.
+- 10 new building sprites generated (east directions for: algae-vat, composter, electrolyzer, reclamation-plant, pyrolyzer, materials-kiln, seed-disperser, basalt-conditioner, hydroponics-bay, soil-enricher) plus restoration-nexus east/plant.
+- `bloomback` entity replaced with fantastical crystal-plant version; field-drone sprites rebuilt; key icon references updated.
+- Complete new content: `restoration_nexus.lua` prototype (item + 3×3 assembling machine + recipes + tech + localization); loaded in `data.lua`.
+- Design documentation: `graphics/NEW-VISUAL-IDENTITY.md`, `NEW-CONTENT.md`, `OVERHAUL-SUMMARY.md`.
+
+### What is explicitly not claimed
+
+- Full 4-direction animated frames for all 22 industry buildings (pipeline established; batch generation continues from same palette).
+- Soundscape integration and working-loop audio pairing for every new building.
+- Multiplay stability verification for the Nexus crafting loop.
+- Complete graphical-client playthrough of the new warden character with all animation atlases rebuilt (only icon replaced; animation atlases kept existing paths).
+
+### Delivery
+
+Download links in release `v0.12.0-fantasy-overhaul`. ZIP builds from tag; branch ZIP also available. Source is fully in the branch — no hidden artifacts needed.
